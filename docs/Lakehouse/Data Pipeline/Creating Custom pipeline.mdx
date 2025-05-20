@@ -1,0 +1,41 @@
+---
+sidebar_position: 2
+tags: [Pipeline]
+---
+Open image-20250505-095927.png
+
+1.  On the DataGOL Home page, from the left navigation panel, click Lakehouse > Pipelines.
+    
+2.  In the Pipelines page, from the upper right corner, click + New Pipeline button.
+    
+3.  Select Custom for tailored data extraction with user-defined queries.
+    
+4.  Provide a name for the Output table.
+    
+5.  Define your data with precision by creating custom queries to suit your specific needs. You have the flexibility to view your datasources, add queries, format your queries and also run, format, and test your queries.
+    
+6.  Open image-20250505-130231.png
+    
+7.  From the Destination drop-down, select a destination for the pipeline to specify where the processed data will be delivered. You can also select the + New Warehouse button to create a new destination for the pipeline.
+    
+8.  From the Settings dropdown, customize the pipeline parameters specifically for your needs.
+    
+
+-   The Format field is populated with the format that is selected for the source. You cannot change the format after the pipeline is created.
+    
+-   Choose the query engine to execute the data transformations and processing within your pipeline. This can be either Spark or Athena. You cannot change the query engine after the pipeline is created
+    
+-   The frequency at which a data pipeline runs is determined by the chosen replication method. This dictates how and when the system executes the pipeline to replicate data. There are a few key methods:
+    
+
+-   Manual (On-Demand): With this method, the pipeline only runs when a user explicitly initiates it. It requires manual intervention each time data replication is needed. If no manual trigger occurs, the pipeline remains inactive.
+    
+-   Cron: This method allows for highly specific scheduling using cron expressions. You can define precise times, days of the week, and even specific minutes or seconds for the pipeline to run automatically. For example, a cron expression could be set to run the pipeline every Sunday and Thursday at a particular time.
+    
+-   Scheduled: This method offers predefined intervals for automatic pipeline execution. Users can typically select options like running the pipeline every hour, every 3 hours, daily, weekly, monthly, or yearly. Once a schedule is set and submitted, the pipeline will automatically run at the specified frequency, regardless of the system's status at that exact moment.
+    
+
+10.  Optionally, you can select the Would you like to run this pipeline immediately? checkbox, to run the pipeline immediately after the creation.
+    
+11.  Click Submit.
+    

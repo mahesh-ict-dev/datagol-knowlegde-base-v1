@@ -1,0 +1,49 @@
+---
+sidebar_position: 3
+tags: [Pipelines]
+---
+
+Open image-20250424-105531.png
+
+1.  On the DataGOL Home page, from the left navigation panel, click Lakehouse > Pipelines.
+    
+2.  In the Pipelines page, from the upper right corner, click + New Pipeline button.
+    
+3.  Select Dedup to transfer data from one warehouse to another.
+    
+4.  From the Source dropdown list, select a source for the pipeline to define where the data will originate. The streams corresponding to the selected source are listed.  
+    In dedupe pipeline, each stream has a predefined custom query. You have the flexibility to edit the query based on your data and requirements.
+    
+5.  From the Sync mode column, set the sync mode for the streams. Only Full-Refresh and Full-Refresh Append sync modes are supported. Refer [Sync modes](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Understanding-Sync-modes)  for more information.
+    
+6.  From the Destination drop-down, select a destination for the pipeline to specify where the processed data will be delivered. You can also select the + New Warehouse button to create a new destination for the pipeline.
+    
+7.  Open image-20250511-144223.png
+    
+8.  From the Settings dropdown, customize the pipeline parameters specifically for your needs.  
+      
+      
+    
+9.  Open image-20250511-161534.png
+    
+
+-   Select the Format, if it is not pre-populated already. This can be either Parquet or Iceberg. You cannot change the format after the pipeline is created.
+    
+-   Choose the query engine to execute the data transformations and processing within your pipeline. This can be either Spark or Athena. You cannot change the query engine after the pipeline is created.
+    
+-   The frequency at which a data pipeline runs is determined by the chosen replication method. This dictates how and when the system executes the pipeline to replicate data. There are a few key methods:
+    
+
+-   Manual (On-Demand): With this method, the pipeline only runs when a user explicitly initiates it. It requires manual intervention each time data replication is needed. If no manual trigger occurs, the pipeline remains inactive.
+    
+-   Cron: This method allows for highly specific scheduling using cron expressions. You can define precise times, days of the week, and even specific minutes or seconds for the pipeline to run automatically. For example, a cron expression could be set to run the pipeline every Sunday and Thursday at a particular time.
+    
+-   Scheduled: This method offers predefined intervals for automatic pipeline execution. Users can typically select options like running the pipeline every hour, every 3 hours, daily, weekly, monthly, or yearly. Once a schedule is set and submitted, the pipeline will automatically run at the specified frequency, regardless of the system's status at that exact moment.
+    
+
+11.  Optionally, you can select the Would you like to run this pipeline immediately? checkbox, to run the pipeline immediately after the creation.
+    
+12.  Click Submit.
+    
+
+When the source and destination of the pipeline is S3, then the Athena Query engine is recommended. In the remaining cases Spark is recommended.

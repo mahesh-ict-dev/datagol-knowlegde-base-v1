@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+tags: [Lakehouse, Connector, Pipeline, Orchestrations]
+---
+
+Orchestration in DataGOL allows you to define and manage the execution order of multiple pipelines. This is crucial when you have dependencies between pipelines, where one pipeline needs to complete successfully before another can begin. Without orchestration, scheduling pipelines to run independently might lead to failures or unexpected results if a dependent pipeline runs before its required data is ready.
+
+Orchestration ensures a controlled and sequential execution of your data pipelines, less prone to undesirable data, and guarantees data availability for downstream processes like reporting and analysis.
+
+Open image-20250505-132400.png
+
+### Creating Orchestrations
+
+1.  On the DataGOL Home page, from the left navigation panel, click Lakehouse > Orchestration.
+    
+2.  In the Orchestrations page, from the upper right corner, click + New Orchestration button.
+    
+3.  Open image-20250505-130650.png
+    
+4.  Provide a name for your orchestration.
+    
+5.  Add Pipelines. Click + New Pipeline button or simply drag and drop existing pipelines from the list onto the orchestration canvas.
+    
+6.  Open image-20250508-101905.png
+    
+7.  Define the flow. Connect the pipelines in the desired execution order. You can drag from the output of one pipeline to the input of the next.
+    
+8.  Open image-20250511-162759.png
+    
+9.  After arranging, you can click the Format icon from the upper right corner. This provides a clear visual representation of your orchestration flow.
+    
+10.  From the upper right corner, click the View info icon to get a detailed view of the orchestration.  
+    Your changes are automatically saved and updated.
+    

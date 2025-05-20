@@ -1,0 +1,26 @@
+---
+sidebar_position : 11
+tags : [Workspace, Workbooks]
+---
+
+### Switching the storage provider for a workbook
+
+1.  Ensure your workbook has been published with the copy option. Typically when the workbook is initially published via the copy option, it gets stored in the warehouse, and the default data provider is Spark.
+    
+2.  Open the published workbook. From the Settings select Storage and Provider settings.
+    
+3.  Open image-20250513-083725.png
+    
+4.  In the Storage Type Settings box, select the service provider you want as the data provider and click Save.  
+    By default it is Spark, you can change it to JDBC or Athena.
+    
+
+-   Athena supports querying data if that data is stored in S3.
+    
+-   JDBC is a standard for accessing data if that data is stored in a database (DB).
+    
+-   Spark supports processing data if that data is stored in S3 or a database (DB).  
+    Now the newly selected service provider will be used as the data provider for that workbook. You can then work with your data, add functions, and alter queries, leveraging the service provider’s capabilities.
+    
+
+JDBC provides quicker data access because it directly queries the database. Spark's performance can be slower, particularly for the first request, due to the time needed to initialize its processing infrastructure (cold start). Furthermore, Spark's dynamic scaling, which adjusts resources based on data volume, can introduce delays during both the allocation and deallocation of resources.

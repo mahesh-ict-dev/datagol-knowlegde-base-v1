@@ -1,0 +1,33 @@
+---
+sidebar_position: 9
+tags: [Lakehouse, Connector, Pipeline, Orchestrations]
+---
+
+### Updating the orchestration settings
+
+1.  On the DataGOL Home page, from the left navigation panel, click Lakehouse > Orchestration.
+    
+2.  In the Orchestrations page, click the link of an orchestration.
+    
+3.  Click Settings and update the following:
+    
+4.  Open image-20250512-062043.png
+    
+
+-   Orchestration Name: Provide a unique name for the orchestration.
+    
+-   Replication method: Set how often the data must sync to the destination. You can configure any of the following:
+    
+
+-   Manual (On-Demand): With this method, the orchestration only runs when a user explicitly initiates it. It requires manual intervention each time data replication is needed.
+    
+-   Cron: This method allows for highly specific scheduling using cron expressions. You can define precise times, days of the week, and even specific minutes or seconds for the pipeline to run automatically. For example, a cron expression could be set to run the pipeline every Sunday and Thursday at a particular time.
+    
+-   Scheduled: This method offers predefined intervals for automatic orchestration runs. You can select options like running the orchestration every hour, every 3 hours, daily, weekly, monthly, or yearly.
+    
+
+-   Default parameters: Specify the default parameters that will be used for all the runs of this orchestration. This option is only visible if your orchestration contains parametrized pipelines.
+    
+
+6.  Click Save changes.
+    

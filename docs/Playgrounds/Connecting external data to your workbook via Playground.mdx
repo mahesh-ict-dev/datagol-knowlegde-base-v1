@@ -1,0 +1,66 @@
+
+---
+sidebar_position: 4
+tags: [Playground, Sql]
+---
+
+The Playground helps you connect and analyze data from different sources—like combining employee data from MySQL with department info from Excel.
+
+To connect external data to workbooks via Playground, do the following:
+
+1.  Identify the Workbook table name:
+    
+
+-   Navigate to the workbook page.
+    
+-   Click the more options icon next to a workbook. The table name is revealed at the end of the dropdown. Click the adjacent copy icon to copy the table name.
+    
+-   Open image-20250512-073420.png
+    
+-   Carefully copy this table name. For instance, it might look something like table_a1b2c3d4.
+    
+
+3.  Construct your query in the playground:
+    
+
+-   Open the Playground interface.
+    
+-   Write your query to join or integrate the external data with your workbook data.
+    
+-   Reference your workbook data using the following convention: app_connection.`<your_copied_table_name>.`  
+    Example: To join your MySQL employees table with the workbook table table_a1b2c3d4 on a common department_id column, your query might look like this:
+    
+``` 
+SQL Query Looks like
+
+SELECT
+e.employee_name,
+d.department_name
+FROM
+your_mysql_connection.employees e
+JOIN
+app_connection.table_a1b2c3d4 d ON e.department_id = d.dept_id;
+
+```
+
+
+-   Replace `your_mysql_connection` with the actual name of your MySQL connection configured in the platform.
+    
+-   Adjust the column names (employee_name, department_name, department_id, dept_id) to match your specific data structures.
+    
+
+3.  Execute Your Query:
+    
+
+-   Once your query is constructed, execute it within the Playground environment.
+    
+
+5.  Visualize and utilize the combined data:
+    
+
+-   The Playground will display the results of your combined dataset.
+    
+-   From here, you can visualize the joined data, create new views or tables within your workbook, or further analyze the integrated information.
+    
+
+

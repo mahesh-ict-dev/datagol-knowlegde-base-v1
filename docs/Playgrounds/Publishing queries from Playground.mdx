@@ -1,0 +1,28 @@
+
+
+If you want to use the query results in a workbook for further analysis or reporting, you can publish the results to a workspace. Once published, the results are available in a workbook from you can further visualize and analze the data.
+
+1.  On the Home page, from the left navigation panel, click Playground and [create a query](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Creating-queries-in-playground).
+    
+2.  Click Publish from the upper right corner of the page. The Publish to Workspace box is displayed.
+    
+3.  Open image-20250511-185653.png
+    
+4.  Enter the following details:
+    
+5.  Open image-20250511-185744.png
+    
+
+-   From the Workspace drop down select the workspace where you want to publish the query. You can publish a query only to an [existing workspace](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Creating-workspace) where you have owner, creator, or editor permissions.
+    
+-   In Workbook Name, enter a name for your workbook.
+    
+-   Optionally, In the Workbook description, provide a brief description for the workbook.
+    
+-   Select any one of the Data Provider: Spark or JDBC. Spark is selected by default. JDBC can be used only for PostgreSQL.
+    
+-   Turn on the toggle to specify if you want to create a pipeline and maintain a copy of the data within our system, or pull data directly from the source each time. For the JDBC provider copy options is not available.
+    
+
+7.  Click Publish. The query results will be published to a workbook in the selected workspace. In the backend a custom pipeline is created which runs once every 24 hrs and this table data is stored in S3 by default.
+    
