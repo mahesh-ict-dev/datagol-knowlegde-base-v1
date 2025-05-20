@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdg_knowlege_base=self.webpackChunkdg_knowlege_base||[]).push([[3235],{4971:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/datagol-knowlegde-base-v1/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

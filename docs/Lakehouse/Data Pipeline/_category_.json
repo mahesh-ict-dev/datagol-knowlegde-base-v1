@@ -1,8 +1,0 @@
-{
-  "label": "Data Pipeline",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Understand the importannce of Lakehouse and its concepts."
-  }
-}

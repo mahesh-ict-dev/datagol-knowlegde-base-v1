@@ -1,0 +1,1622 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Lakehouse/Datasources" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Datasources | My Site</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/docs/Lakehouse/Datasources"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Datasources | My Site"><meta data-rh="true" name="description" content="From the Data Source section you can connect to a wide range of data platforms. This module supports integration with popular services such as MySQL, MS SQL Server, DB2, and Postgres databases through a user-friendly authentication and authorization workflow."><meta data-rh="true" property="og:description" content="From the Data Source section you can connect to a wide range of data platforms. This module supports integration with popular services such as MySQL, MS SQL Server, DB2, and Postgres databases through a user-friendly authentication and authorization workflow."><link data-rh="true" rel="icon" href="/datagol-knowlegde-base-v1/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/docs/Lakehouse/Datasources"><link data-rh="true" rel="alternate" href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/docs/Lakehouse/Datasources" hreflang="en"><link data-rh="true" rel="alternate" href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/docs/Lakehouse/Datasources" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/datagol-knowlegde-base-v1/blog/rss.xml" title="My Site RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/datagol-knowlegde-base-v1/blog/atom.xml" title="My Site Atom Feed"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.37c45219.css">
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.11befe9c.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.d6ad32ed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/datagol-knowlegde-base-v1/img/logo.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/datagol-knowlegde-base-v1/"><div class="navbar__logo"><img src="/datagol-knowlegde-base-v1/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/datagol-knowlegde-base-v1/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">My Site</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/datagol-knowlegde-base-v1/docs/intro">Knowledge Base</a><a class="navbar__item navbar__link" href="/datagol-knowlegde-base-v1/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/datagol-knowlegde-base-v1/docs/intro">knowledge Base DataGOL</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/getting-started">Getting Started</a><button aria-label="Expand sidebar category &#x27;Getting Started&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/datagol-knowlegde-base-v1/docs/category/lakehouse">Lakehouse</a><button aria-label="Collapse sidebar category &#x27;Lakehouse&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Datasources">Datasources</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Lakehouse workflow/">Lakehouse workflow</a><button aria-label="Expand sidebar category &#x27;Lakehouse workflow&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/datagol-knowlegde-base-v1/docs/category/data-pipeline">Data Pipeline</a><button aria-label="Expand sidebar category &#x27;Data Pipeline&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/datagol-knowlegde-base-v1/docs/category/orchestrations">Orchestrations</a><button aria-label="Expand sidebar category &#x27;Orchestrations&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Schema change detection">Schema change detection</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Jobs">Jobs</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/tutorial---basics">Tutorial - Basics</a><button aria-label="Expand sidebar category &#x27;Tutorial - Basics&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/tutorial---extras">Tutorial - Extras</a><button aria-label="Expand sidebar category &#x27;Tutorial - Extras&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/playgrounds">Playgrounds</a><button aria-label="Expand sidebar category &#x27;Playgrounds&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/workbooks-">Workbooks </a><button aria-label="Expand sidebar category &#x27;Workbooks &#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/datagol-knowlegde-base-v1/docs/category/workspaces-">Workspaces </a><button aria-label="Expand sidebar category &#x27;Workspaces &#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/datagol-knowlegde-base-v1/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/datagol-knowlegde-base-v1/docs/category/lakehouse"><span itemprop="name">Lakehouse</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Datasources</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Datasources</h1></header><p>From the <strong>Data Source</strong> section you can connect to a wide range of data platforms. This module supports integration with popular services such as MySQL, MS SQL Server, DB2, and Postgres databases through a user-friendly authentication and authorization workflow.</p>
+<p>You can integrate a new data source into the Lakehouse seamlessly by following these detailed steps. This guide will help you add a new database and manage its content effectively.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-data-sources">Adding data sources<a href="#adding-data-sources" class="hash-link" aria-label="Direct link to Adding data sources" title="Direct link to Adding data sources">​</a></h3>
+<p>Only an Account admin or Lakehouse admin can add data source.</p>
+<p>Do the following to add a datasource.</p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+<p>Open image-20250505-070559.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/e755f58f-772a-4c18-8991-92b452653287" alt="image-20250505-070559.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Choose a database provider from the list, for example, <strong>MySQL</strong>.</p>
+<p>Open image-20250511-072035.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/8e2d4035-4f80-4d4a-a9d6-1650b9d2ae94" alt="image-20250511-072035.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following Datasources. Click the required datasource link from the following for integration details:</p>
+<ul>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-S3-data-source" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-S3-data-source">S3 Datasource</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Microsoft-SQL-or-PostgreSQL-as-a-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Microsoft-SQL-or-PostgreSQL-as-a-datasource">PostgreSQL or Microsoft SQL</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Folder-as-a-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Folder-as-a-datasource">Folder</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-HubSpot-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-HubSpot-as-datasource">Hubspot</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MariaDB-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MariaDB-as-datasource">MariaDB</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Salesforce-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Salesforce-as-datasource">Salesforce</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Snowflake-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Snowflake-as-datasource">Snowflake</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MongoDB-Atlas-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MongoDB-Atlas-datasource">MongoDB Atlas</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-as-datasource">Netsuite</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-Reporting-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-Reporting-as-datasource">Netsuite Reporting</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-JDBC-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-JDBC-as-datasource">NetSuite-JDBC</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Pipedrive-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Pipedrive-as-datasource">Pipedrive</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Amplitude-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Amplitude-as-datasource">Amplitude</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--ChargeBee-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--ChargeBee-as-datasource">ChargeBee</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Shopify-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Shopify-as-datasource">Shopify</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Monday-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Monday-as-datasource">Monday</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--DB2-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--DB2-as-datasource">DB2</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Quickbooks-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Quickbooks-as-datasource">Quickbooks</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SurveyMonkey-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SurveyMonkey-as-datasource">Surveymonkey</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Cvent-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Cvent-as-datasource">Cvent</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--SFTP-Bulk-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--SFTP-Bulk-as-datasource">SFTP Bulk</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SAP-HANA--as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SAP-HANA--as-datasource">SAP HANA</a></p>
+</li>
+<li>
+<p><a href="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Azure-File-as-datasource" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Azure-File-as-datasource">Azure File</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data within that data source.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-s3-data-source">Adding S3 data source<a href="#adding-s3-data-source" class="hash-link" aria-label="Direct link to Adding S3 data source" title="Direct link to Adding S3 data source">​</a></h3>
+<p>The Spark environment, at the company level, allows for only one set of S3 access credentials to be configured at any given time. Consequently, Spark can be set up to access data from either DataGOL&#x27;s S3 account or a single, specific client&#x27;s S3 account.</p>
+<p>Simultaneous access to data residing in multiple, different S3 accounts (like DataGOL&#x27;s <em>and</em> a client&#x27;s at the same time) is NOT supported with the current configuration.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-s3-data-source"><strong>Prerequisite for adding S3 data source</strong><a href="#prerequisite-for-adding-s3-data-source" class="hash-link" aria-label="Direct link to prerequisite-for-adding-s3-data-source" title="Direct link to prerequisite-for-adding-s3-data-source">​</a></h4>
+<p>Before you add a S3 datasource, ensure to add the following beforehand from the Company section of the Home page.</p>
+<ul>
+<li>
+<p>AWS Access Keys</p>
+</li>
+<li>
+<p>AWS Secret Key</p>
+</li>
+<li>
+<p>Region</p>
+</li>
+<li>
+<p>Root Directory</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>On the <strong>Home</strong> page of DataGOL, from the left navigation panel, click <strong>Company</strong>.</p>
+</li>
+<li>
+<p>Click the <strong>Keys</strong> tab.</p>
+</li>
+<li>
+<p>In the <strong>AWS Settings</strong> box, click the edit <img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/46395012-bf51-4d76-b199-f10fa9746295" alt="image-20250314-100532.png" class="img_ev3q"> button and specify the following details:</p>
+<ul>
+<li>
+<p><strong>AWS Access Keys</strong></p>
+</li>
+<li>
+<p><strong>AWS Secret Key</strong></p>
+</li>
+<li>
+<p><strong>Region</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>In the <strong>Root Directory</strong> text box, specify the root directory.</p>
+</li>
+</ol>
+<p>s3 is available only in Amazon AWS infrastructure. S3 is not available as part of Microsoft Azure.</p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add S3 data source and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-072605.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/504dd191-f10a-4bd9-a283-f43d22583262" alt="image-20250511-072605.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Click <strong>Submit</strong>.</p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>File Format</p>
+<p>Specify any of the following file format:</p>
+<ul>
+<li>
+<p>CSV</p>
+</li>
+<li>
+<p>Parquet</p>
+</li>
+<li>
+<p>JSON</p>
+</li>
+<li>
+<p>Delta (Coming soon)</p>
+</li>
+</ul>
+<p>Path to S3 bucket</p>
+<p>Specify the path of the S3 bucket where the files exist.</p>
+<p>If file is present in <strong>s3a://catalog/db/source/test.csv</strong> then path will be <strong>“catalog/db”</strong></p>
+<p>For example: s3a://catalog/db/</p>
+<p>Separator</p>
+<p>Specify the separator character.</p>
+<p>Header</p>
+<p>Toggle to indicate if the first row of your CSV contains column headers.</p>
+<p>Infer Schema</p>
+<p>Toggle to automatically determine the data type of each column in your data.</p>
+<p>Compression</p>
+<p>Select the file compression mode from any of the following options: <strong>Uncompressed</strong>, <strong>gzip</strong>, <strong>lzo</strong>, <strong>brotli</strong>, <strong>lz4</strong>, and <strong>zstd</strong>.</p>
+<p>Null Value</p>
+<p>A set of case-sensitive strings that should be interpreted as null values. For example, if the value &#x27;NA&#x27; should be interpreted as null, enter &#x27;NA&#x27; in this field.</p>
+<p><strong>Limitations</strong>: We can have only one s3 account at company Level, As in Spark we can give only one Credentials while configuring.</p>
+<p>s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only one.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-microsoft-sql-or-postgresql-as-a-datasource">Adding Microsoft SQL or PostgreSQL as a datasource<a href="#adding-microsoft-sql-or-postgresql-as-a-datasource" class="hash-link" aria-label="Direct link to Adding Microsoft SQL or PostgreSQL as a datasource" title="Direct link to Adding Microsoft SQL or PostgreSQL as a datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Microsoft SQL or PostgreSQL and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+</li>
+</ol>
+<p>Open image-20250506-175842.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/bf2d7b47-48e9-46ef-806d-dfcacbe21991" alt="image-20250506-175842.png" class="img_ev3q"></p>
+<p>Open image-20250511-112352.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/7e00ca6a-acc6-4885-ada7-9a1e945a708f" alt="image-20250511-112352.png" class="img_ev3q"></p>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Database</p>
+<p>Specify the name of the existing database that you want to connect.</p>
+<p>Host name</p>
+<p>Specify the hostname or IP address of the server wherein the database is located.</p>
+<p>Port name</p>
+<p>Enter the port number used by the database server.</p>
+<p>Schema</p>
+<p>Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (“<strong>public</strong>” for Postgres and “<strong>dbo</strong>” for Microsoft SQL)</p>
+<p>Properties</p>
+<p>Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.</p>
+<p>Case Sensitive</p>
+<p>Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions.</p>
+<ul>
+<li>
+<p><strong>Schema:</strong> Specify the schema name for your Postgres or Microsoft SQL connection. If left blank, the default schema will be used (“public” for postgres and “dbo” for Microsoft SQL )</p>
+</li>
+<li>
+<p><strong>Case Sensitive:</strong> Specify whether your Postgres or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-folder-as-a-datasource">Adding Folder as a datasource<a href="#adding-folder-as-a-datasource" class="hash-link" aria-label="Direct link to Adding Folder as a datasource" title="Direct link to Adding Folder as a datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add folder and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-072755.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/e2ae40bf-2b02-4684-ae0d-8d5d2902ee28" alt="image-20250511-072755.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>File Format</p>
+<p>Specify any of the following file format:</p>
+<ul>
+<li>
+<p>CSV</p>
+</li>
+<li>
+<p>Parquet</p>
+</li>
+<li>
+<p>JSON</p>
+</li>
+<li>
+<p>Excel</p>
+</li>
+</ul>
+<p>Separator</p>
+<p>Specify the separator character.</p>
+<p>Header</p>
+<p>Toggle to indicate if the first row of your CSV contains column headers. This field is displayed only when the file format is CSV.</p>
+<p>Infer Schema</p>
+<p>Toggle to automatically determine the data type of each column in your data. This field is displayed only when the file format is CSV.</p>
+<p>Compression</p>
+<p>Select the file compression mode from any of the following options: <strong>Uncompressed</strong>, <strong>gzip</strong>, <strong>lzo</strong>, <strong>brotli</strong>, <strong>lz4</strong>, and <strong>zstd</strong>.</p>
+<p>Null Value</p>
+<p>A set of case-sensitive strings that should be interpreted as null values. For example, if the value &#x27;NA&#x27; should be interpreted as null, enter &#x27;NA&#x27; in this field.</p>
+<p>After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table&#x27;s data.</p>
+<p>Open att_195_for_220692503.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/10beeb5d-90b6-4cf1-930b-90416af5212d" alt="" class="img_ev3q"></p>
+<p>To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The <strong>Files</strong> tab will provide you with the necessary options.</p>
+<p>Open att_224_for_220692503.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/0ab2b3f9-fab3-47e1-a73f-f381847a013b" alt="" class="img_ev3q"></p>
+<ul>
+<li>
+<p>Adding files of different schemas in the same folder is not supported.</p>
+</li>
+<li>
+<p>Multi tab excel files are not supported in this release.</p>
+</li>
+<li>
+<p>Folder names cannot be only numbers. Validation is yet to be added.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-hubspot-as-datasource">Adding HubSpot as datasource<a href="#adding-hubspot-as-datasource" class="hash-link" aria-label="Direct link to Adding HubSpot as datasource" title="Direct link to Adding HubSpot as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-hubspot"><strong>Prerequisite for adding HubSpot</strong><a href="#prerequisite-for-adding-hubspot" class="hash-link" aria-label="Direct link to prerequisite-for-adding-hubspot" title="Direct link to prerequisite-for-adding-hubspot">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Access Token</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your HubSpot account <a href="https://app.hubspot.com/login/legacy?hubs_signup-url=knowledge.hubspot.com%2Faccount-management%2Fwhy-can-t-i-log-into-hubspot&amp;hubs_signup-cta=cta_button&amp;hsCtaTracking=d82c5d82-821c-4c0d-86f5-6c34dced0e6d%7C16494015-d90f-47fc-adc3-593e2e1bdfa0" target="_blank" rel="noopener noreferrer" title="https://app.hubspot.com/login/legacy?hubs_signup-url=knowledge.hubspot.com%2Faccount-management%2Fwhy-can-t-i-log-into-hubspot&amp;hubs_signup-cta=cta_button&amp;hsCtaTracking=d82c5d82-821c-4c0d-86f5-6c34dced0e6d%7C16494015-d90f-47fc-adc3-593e2e1bdfa0">Hubspot Login</a></p>
+</li>
+<li>
+<p>Set up Hubspot for Airbyte Open Source: Private app setup (Recommended): If you are authenticating via a Private App, you will need to use your access token to set up the connector. Refer to the <a href="https://developers.hubspot.com/docs/api/private-apps" target="_blank" rel="noopener noreferrer" title="https://developers.hubspot.com/docs/api/private-apps">official HubSpot documentation</a> for a detailed guide.</p>
+</li>
+<li>
+<p>After private app setup is complete In your HubSpot account, click the <strong>settings icon</strong> in the main navigation bar.</p>
+</li>
+<li>
+<p>In the left sidebar menu, navigate to <strong>Integrations</strong> &gt; <strong>Private apps</strong>.</p>
+</li>
+<li>
+<p>Click the <strong>name</strong> of your app.</p>
+</li>
+<li>
+<p>Click the <strong>Auth</strong> tab and then click <strong>Show token</strong> to reveal your access token.</p>
+</li>
+<li>
+<p>Click <strong>Copy</strong> to copy the token to your clipboard.</p>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add HubSpot and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+</li>
+</ol>
+<p>Open image-20250511-080246.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/82380bb0-007e-4c7c-9553-f8012b7d621f" alt="image-20250511-080246.png" class="img_ev3q"></p>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Access token</p>
+<p>Specify the HubSpot access token.</p>
+<p>Start Date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-mariadb-as-datasource">Adding MariaDB as datasource<a href="#adding-mariadb-as-datasource" class="hash-link" aria-label="Direct link to Adding MariaDB as datasource" title="Direct link to Adding MariaDB as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add MariaDB and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Database name</p>
+<p>Specify the name of the existing database you want to connect to.</p>
+<p>Hostname</p>
+<p>Provide the hostname or IP address of the server where the database resides.</p>
+<p>Port</p>
+<p>Enter the port number used by the database server.</p>
+<p>Username/Password</p>
+<p>Provide the credentials to access the database server.</p>
+<p>Properties</p>
+<p>Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-salesforce-as-datasource">Adding Salesforce as datasource<a href="#adding-salesforce-as-datasource" class="hash-link" aria-label="Direct link to Adding Salesforce as datasource" title="Direct link to Adding Salesforce as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prequisites-for-adding-salesforce"><strong>Prequisites for adding Salesforce</strong><a href="#prequisites-for-adding-salesforce" class="hash-link" aria-label="Direct link to prequisites-for-adding-salesforce" title="Direct link to prequisites-for-adding-salesforce">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Client ID</p>
+</li>
+<li>
+<p>Client Secret</p>
+</li>
+<li>
+<p>Refresh Token</p>
+</li>
+<li>
+<p>Domain: eg <a href="http://salesforce.your-domain.com/" target="_blank" rel="noopener noreferrer" title="http://salesforce.your-domain.com/"><strong>salesforce.your-domain.com</strong></a></p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>To obtain these credentials, follow <a href="https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b" target="_blank" rel="noopener noreferrer" title="https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b">this walkthrough</a> with the following modifications:</p>
+<ol>
+<li>
+<p>If your Salesforce URL is not in the <code>X.salesforce.com</code> format, use your Salesforce domain name. For example, if your Salesforce URL is <code>awesomecompany.force.com</code> then use that instead of <code>awesomecompany.salesforce.com</code>.</p>
+</li>
+<li>
+<p>Use the user credentials when logging in to generate OAuth tokens.</p>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Salesforce and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-085826.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/e601d18d-41cd-4478-80f8-2b6a290dc224" alt="image-20250511-085826.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the Salesforce connection.</p>
+<p>Client ID/Client secret</p>
+<p>Enter your Salesforce developer application&#x27;s Client ID and Secret</p>
+<p>Refresh Token</p>
+<p>Enter your application&#x27;s <a href="https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm" target="_blank" rel="noopener noreferrer" title="https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm">Salesforce Refresh Token</a> used for Airbyte to access your Salesforce account.</p>
+<p>Domain</p>
+<p>The Domain for your Salesforce account, e.g. <a href="http://datagol.salesforce.com/" target="_blank" rel="noopener noreferrer" title="http://datagol.salesforce.com">datagol.salesforce.com</a>, <a href="http://salesforce.your-domain.com/" target="_blank" rel="noopener noreferrer" title="http://salesforce.your-domain.com">salesforce.your-domain.com</a></p>
+<p>Start Date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-snowflake-as-datasource">Adding Snowflake as datasource<a href="#adding-snowflake-as-datasource" class="hash-link" aria-label="Direct link to Adding Snowflake as datasource" title="Direct link to Adding Snowflake as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Snowflake and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-112121.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/5dee6a3d-27eb-46a0-a654-44db662b7b76" alt="image-20250511-112121.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for this connection. This will help you identify it later.</p>
+<p>Database Name</p>
+<p>Specify the name of the existing database you want to connect to.</p>
+<p>Schema Name</p>
+<p>Specify the schema name for your connection.</p>
+<p>Hostname</p>
+<p>Provide the hostname or IP address of the server where the database resides.</p>
+<p>Port</p>
+<p>Enter the port number used by the database server.</p>
+<p>Username/Password</p>
+<p>Provide the credentials to access the database server</p>
+<p>Properties</p>
+<p>Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-mongodb-atlas-datasource">Adding MongoDB Atlas datasource<a href="#adding-mongodb-atlas-datasource" class="hash-link" aria-label="Direct link to Adding MongoDB Atlas datasource" title="Direct link to Adding MongoDB Atlas datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add MongoDB Atlas and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111912.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/d33a472f-9fc8-4876-9984-e6fc928775db" alt="image-20250511-111912.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for this connection. This will help you identify it later.</p>
+<p>Database Name</p>
+<p>Specify the name of the existing database you want to connect to.</p>
+<p>Schema Name</p>
+<p>Specify the schema name for your connection.</p>
+<p>Hostname</p>
+<p>Provide the hostname or IP address of the server where the database resides.</p>
+<p>Port</p>
+<p>Enter the port number used by the database server.</p>
+<p>Username/Password</p>
+<p>Provide the credentials to access the database server</p>
+<p>Properties</p>
+<p>Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-netsuite-as-datasource">Adding NetSuite as datasource<a href="#adding-netsuite-as-datasource" class="hash-link" aria-label="Direct link to Adding NetSuite as datasource" title="Direct link to Adding NetSuite as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prequisites-for-adding-netsuite"><strong>Prequisites for adding NetSuite</strong><a href="#prequisites-for-adding-netsuite" class="hash-link" aria-label="Direct link to prequisites-for-adding-netsuite" title="Direct link to prequisites-for-adding-netsuite">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Realm ID</p>
+</li>
+<li>
+<p>Consumer Key</p>
+</li>
+<li>
+<p>Consumer Secret</p>
+</li>
+<li>
+<p>Token Key</p>
+</li>
+<li>
+<p>Token Secret</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+<li>
+<p>Window in Days (Default: 30 days)</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<p><strong>1. Create NetSuite account</strong></p>
+<ol>
+<li>
+<p>Create <a href="https://system.netsuite.com/pages/customerlogin.jsp?country=US" target="_blank" rel="noopener noreferrer" title="https://system.netsuite.com/pages/customerlogin.jsp?country=US">account</a> on Oracle NetSuite</p>
+</li>
+<li>
+<p>Confirm your Email</p>
+</li>
+</ol>
+<p><strong>2. Setup NetSuite account</strong></p>
+<p><strong>a. Obtain Realm info</strong></p>
+<ol>
+<li>
+<p>Login into your NetSuite <a href="https://system.netsuite.com/pages/customerlogin.jsp?country=US" target="_blank" rel="noopener noreferrer" title="https://system.netsuite.com/pages/customerlogin.jsp?country=US">account</a></p>
+</li>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Company</strong> » <strong>Company Information</strong></p>
+</li>
+<li>
+<p>Copy your Account ID (Realm). It should look like <strong>1234567</strong> for the <code>Production</code> env. or <strong>1234567_SB2</strong></p>
+<ul>
+<li>for a <code>Sandbox</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>b. Enable features</strong></p>
+<ol>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Company</strong> » <strong>Enable Features</strong></p>
+</li>
+<li>
+<p>Click on <strong>SuiteCloud</strong> tab</p>
+</li>
+<li>
+<p>Scroll down to <strong>SuiteScript</strong> section</p>
+</li>
+<li>
+<p>Enable checkbox for <code>CLIENT SUITESCRIPT</code> and <code>SERVER SUITESCRIPT</code></p>
+</li>
+<li>
+<p>Scroll down to <strong>Manage Authentication</strong> section</p>
+</li>
+<li>
+<p>Enable checkbox <code>TOKEN-BASED AUTHENTICATION</code></p>
+</li>
+<li>
+<p>Scroll down to <strong>SuiteTalk (Web Services)</strong></p>
+</li>
+<li>
+<p>Enable checkbox <code>REST WEB SERVISES</code></p>
+</li>
+<li>
+<p>Save the changes</p>
+</li>
+</ol>
+<p><strong>c. Create Integration (obtain Consumer Key and Consumer Secret)</strong></p>
+<ol>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Integration</strong> » <strong>Manage Integrations</strong> » <strong>New</strong></p>
+</li>
+<li>
+<p>Fill the <strong>Name</strong> field (we recommend to put <code>airbyte-rest-integration</code> for a name)</p>
+</li>
+<li>
+<p>Make sure the <strong>State</strong> is <code>enabled</code></p>
+</li>
+<li>
+<p>Enable checkbox <code>Token-Based Authentication</code> in <strong>Authentication</strong> section</p>
+</li>
+<li>
+<p>Save changes</p>
+</li>
+<li>
+<p>After that, <strong>Consumer Key</strong> and <strong>Consumer Secret</strong> will be showed once (copy them to the safe place)</p>
+</li>
+</ol>
+<p><strong>d. Setup Role</strong></p>
+<ol>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Users/Roles</strong> » <strong>Manage Roles</strong> » <strong>New</strong></p>
+</li>
+<li>
+<p>Fill the <strong>Name</strong> field (we recommend to put <code>airbyte-integration-role</code> for a name)</p>
+</li>
+<li>
+<p>Scroll down to <strong>Permissions</strong> tab</p>
+</li>
+<li>
+<p>(REQUIRED) Click on <code>Transactions</code> and manually <code>add</code> all the dropdown entities with either <code>full</code> or <code>view</code> access level.</p>
+</li>
+<li>
+<p>(REQUIRED) Click <code>Reports</code> and manually <code>add</code> all the dropdown entities with either <code>full</code> or <code>view</code> access level.</p>
+</li>
+<li>
+<p>(REQUIRED) Click <code>Lists</code> and manually <code>add</code> all the dropdown entities with either <code>full</code> or <code>view</code> access level.</p>
+</li>
+<li>
+<p>(REQUIRED) Click on <code>Setup</code> and manually <code>add</code> all the dropdown entities with either <code>full</code> or <code>view</code> access level.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Make sure you&#x27;ve done all <code>REQUIRED</code> steps correctly, to avoid sync issues in the future.</p>
+</li>
+<li>
+<p>Please edit these params again when you <code>rename</code> or <code>customise</code> any <code>Object</code> in NetSuite for <code>airbyte-integration-role</code> to reflect such changes.</p>
+</li>
+</ul>
+<p><strong>e. Setup User</strong></p>
+<ol>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Users/Roles</strong> » <strong>Manage Users</strong></p>
+</li>
+<li>
+<p>In column <code>Name</code> click on the user’s name you want to give access to the <code>airbyte-integration-role</code></p>
+</li>
+<li>
+<p>Then click on <strong>Edit</strong> button under the user’s name</p>
+</li>
+<li>
+<p>Scroll down to <strong>Access</strong> tab at the bottom</p>
+</li>
+<li>
+<p>Select from dropdown list the <code>airbyte-integration-role</code> role which you created in step 2.4</p>
+</li>
+<li>
+<p>Save changes</p>
+</li>
+</ol>
+<p><strong>f. Create Access Token for role</strong></p>
+<ol>
+<li>
+<p>Go to <strong>Setup</strong> » <strong>Users/Roles</strong> » <strong>Access Tokens</strong> » <strong>New</strong></p>
+</li>
+<li>
+<p>Select an <strong>Application Name</strong></p>
+</li>
+<li>
+<p>Under <strong>User</strong> select the user you assigned the <code>airbyte-integration-role</code> in the step <strong>2.4</strong></p>
+</li>
+<li>
+<p>Inside <strong>Role</strong> select the one you gave to the user in the step <strong>2.5</strong></p>
+</li>
+<li>
+<p>Under <strong>Token Name</strong> you can give a descriptive name to the Token you are creating (we recommend to put <code>airbyte-rest-integration-token</code> for a name)</p>
+</li>
+<li>
+<p>Save changes. After that, <strong>Token ID</strong> and <strong>Token Secret</strong> will be showed once (copy them to the safe place)</p>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add NetSuite and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111639.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/9773cfc2-e171-4047-b60c-65a09e12a0e4" alt="image-20250511-111639.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for this connection. This will help you identify it later.</p>
+<p>Realm (Account ID) </p>
+<p>Netsuite realm e.g. 2344535 for <code>production</code> or 2344535_SB1, as for the <code>sandbox</code></p>
+<p>Consumer Key </p>
+<p>Consumer key associated with your integration <strong>key associated with your integration</strong></p>
+<p>Consumer Secret </p>
+<p>Consumer secret associated with your integration</p>
+<p>Token Key (Token ID) </p>
+<p>Access token key</p>
+<p>Token Secret *</p>
+<p>Access token secret</p>
+<p>Start Date *</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.</p>
+<p>Window in Days </p>
+<p>The amount of days used to query the data with date chunks. Set smaller value, if you have lots of data.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-netsuite-reporting-as-datasource">Adding NetSuite Reporting as datasource<a href="#adding-netsuite-reporting-as-datasource" class="hash-link" aria-label="Direct link to Adding NetSuite Reporting as datasource" title="Direct link to Adding NetSuite Reporting as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add NetSuite Reporting and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111558.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/91bf00cc-3caa-42f0-a187-0388ac9d4c36" alt="image-20250511-111558.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Consumer Key</p>
+<p>Specify the Consumer Key for authentication</p>
+<p>Token Key / Secret</p>
+<p>Specify the Token key and secret for authenticating the access.</p>
+<p>Start Date</p>
+<p>Specify the date from which to begin replicating extracting data.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-netsuite-jdbc-as-datasource">Adding NetSuite-JDBC as datasource<a href="#adding-netsuite-jdbc-as-datasource" class="hash-link" aria-label="Direct link to Adding NetSuite-JDBC as datasource" title="Direct link to Adding NetSuite-JDBC as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add NetSuite-JDBC and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111519.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/24fc4a39-c90c-4d9f-ab96-2852089082c5" alt="image-20250511-111519.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Account ID</p>
+<p>Specify the account ID.</p>
+<p>Role ID</p>
+<p>Specify the role ID.</p>
+<p>Username/password</p>
+<p>Provide the credentials for the account.</p>
+<p>Hostname</p>
+<p>Specify the host address of the database server.</p>
+<p>Port</p>
+<p>Specify the port number of the database server.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-pipedrive-as-datasource">Adding Pipedrive as datasource<a href="#adding-pipedrive-as-datasource" class="hash-link" aria-label="Direct link to Adding Pipedrive as datasource" title="Direct link to Adding Pipedrive as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-pipedrive"><strong>Prerequisite for adding Pipedrive</strong><a href="#prerequisite-for-adding-pipedrive" class="hash-link" aria-label="Direct link to prerequisite-for-adding-pipedrive" title="Direct link to prerequisite-for-adding-pipedrive">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>API Token</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your <a href="https://app.pipedrive.com/auth/login" target="_blank" rel="noopener noreferrer" title="https://app.pipedrive.com/auth/login">Pipedrive account</a>.</p>
+</li>
+<li>
+<p>Enable API Token: If you do not see API next to the <code>Your companies</code> section, it is due to the permission sets handled by the company&#x27;s admin. The company&#x27;s admin can give you access to your API token by enabling it for you from the settings in Pipedrive web app.</p>
+<p>For more information, access <a href="https://pipedrive.readme.io/docs/enabling-api-for-company-users" target="_blank" rel="noopener noreferrer" title="https://pipedrive.readme.io/docs/enabling-api-for-company-users">enabling API for company users</a>.</p>
+</li>
+<li>
+<p>Find the API token:</p>
+<p>You can get the API token manually from the Pipedrive web app by going to account name (on the top right) &gt; <strong>Company settings</strong> &gt; <strong>Personal preferences</strong> &gt; <strong>API</strong>.</p>
+<p>See <a href="https://pipedrive.readme.io/docs/how-to-find-the-api-token" target="_blank" rel="noopener noreferrer" title="https://pipedrive.readme.io/docs/how-to-find-the-api-token">How to find the API Token</a> for detailed information.</p>
+</li>
+<li>
+<p>You can get the API token manually from the Pipedrive web app by going to <em>account name (on the top right)  &gt; <strong>Company settings</strong> &gt; <strong>Personal preferences</strong> &gt; <strong>API</strong></em> or by clicking <a href="https://app.pipedrive.com/settings/api" target="_blank" rel="noopener noreferrer" title="https://app.pipedrive.com/settings/api">here</a> (in case you have multiple companies open at the same time, this link will redirect you to the API token of the last opened company).</p>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Pipedrive and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-095929.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/5110b22a-298c-49cf-8dfe-a975d47ca114" alt="image-20250511-095929.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>API Token </p>
+<p>The Pipedrive API Token. This is a mandatory field.</p>
+<p>Start Date </p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. This is a mandatory field.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-amplitude-as-datasource">Adding Amplitude as datasource<a href="#adding-amplitude-as-datasource" class="hash-link" aria-label="Direct link to Adding Amplitude as datasource" title="Direct link to Adding Amplitude as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prequisites-for-adding-amplitude"><strong>Prequisites for adding Amplitude</strong><a href="#prequisites-for-adding-amplitude" class="hash-link" aria-label="Direct link to prequisites-for-adding-amplitude" title="Direct link to prequisites-for-adding-amplitude">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>API Key</p>
+</li>
+<li>
+<p>Secret Key</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following to</p>
+<ol>
+<li>
+<p>Log on to your <a href="https://amplitude.com/" target="_blank" rel="noopener noreferrer" title="https://amplitude.com/">Amplitude account</a>.</p>
+</li>
+<li>
+<p>Navigate to <strong>Settings</strong> &gt; <strong>Organization</strong> <strong>Settings</strong> <em>&gt;</em> <strong>Projects</strong> and click the name of the project you want to view or edit. This opens the <strong>General</strong> tab, where you will find the following information about your project:</p>
+<ul>
+<li>
+<p>API Key</p>
+</li>
+<li>
+<p>Secret Key</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Create a project first, if you don’t have one already. Refer to <a href="https://amplitude.com/docs/get-started/create-project" target="_blank" rel="noopener noreferrer" title="https://amplitude.com/docs/get-started/create-project">Create a project in Amplitude</a>.</p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Amplitude and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-100205.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/83052dcb-86a5-41bb-a55d-441691c59ba6" alt="image-20250511-100205.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>API Key</p>
+<p>Amplitude API Key. See the docs for more information on how to generate this key.</p>
+<p>Secret Key </p>
+<p>Amplitude Secret Key.</p>
+<p>Start Date </p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-chargebee-as-datasource">Adding ChargeBee as datasource<a href="#adding-chargebee-as-datasource" class="hash-link" aria-label="Direct link to Adding ChargeBee as datasource" title="Direct link to Adding ChargeBee as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prequisites-for-adding-chargebee"><strong>Prequisites for adding Chargebee</strong><a href="#prequisites-for-adding-chargebee" class="hash-link" aria-label="Direct link to prequisites-for-adding-chargebee" title="Direct link to prequisites-for-adding-chargebee">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>API key</p>
+</li>
+<li>
+<p>Site</p>
+</li>
+<li>
+<p>Start date</p>
+</li>
+</ul>
+<p>Do the following to</p>
+<ol>
+<li>
+<p>Log on to your <a href="https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&amp;gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE" target="_blank" rel="noopener noreferrer" title="https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&amp;gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE">Chargebee account</a>.</p>
+</li>
+<li>
+<p>To create and configure the API keys, select <strong>Settings</strong> &gt; <strong>Configure Chargebee</strong> &gt; <strong>API Keys and Webhooks</strong></p>
+</li>
+<li>
+<p>Click on the <strong>API Keys</strong> tab. Any existing API keys are listed.</p>
+</li>
+</ol>
+<p>Open image-20250112-214950.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/f8c50730-6167-418a-a334-70f9dbeab8cc" alt="image-20250112-214950.png" class="img_ev3q"></p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Chargebee and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-100812.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/8164e60d-9296-4c51-81dd-e8fd103e13f8" alt="image-20250511-100812.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>API Key</p>
+<p>ChargeBee API Key.</p>
+<p>Site</p>
+<p>The site prefix for your chargeBee instance.</p>
+<p>Start Date </p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-shopify-as-datasource">Adding Shopify as datasource<a href="#adding-shopify-as-datasource" class="hash-link" aria-label="Direct link to Adding Shopify as datasource" title="Direct link to Adding Shopify as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-shopify"><strong>Prerequisite for adding Shopify</strong><a href="#prerequisite-for-adding-shopify" class="hash-link" aria-label="Direct link to prerequisite-for-adding-shopify" title="Direct link to prerequisite-for-adding-shopify">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Shopify Store</p>
+</li>
+<li>
+<p>API password</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your <a href="https://www.shopify.com/" target="_blank" rel="noopener noreferrer" title="https://www.shopify.com/">Shopify account</a>.</p>
+</li>
+<li>
+<p>Once logged in, your store name is often part of the URL in your browser&#x27;s address bar. For example:</p>
+<p><code>https://your-store-name.myshopify.com/admin</code></p>
+</li>
+<li>
+<p>In the dashboard, navigate to <strong>Settings</strong> &gt; <strong>App and sales channels</strong> &gt; <strong>Develop apps</strong> &gt; <strong>Create an app</strong>.</p>
+</li>
+<li>
+<p>Select a name for your new app.</p>
+</li>
+<li>
+<p>Select <strong>Configure Admin API scopes</strong>.</p>
+</li>
+<li>
+<p>Grant access to the <a href="http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app" target="_blank" rel="noopener noreferrer" title="http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app">following list of scopes</a>. Only select scopes prefixed with <code>read_</code>, not <code>write_</code> (e.g. <code>read_locations</code>,<code>read_price_rules</code>, etc ).</p>
+</li>
+<li>
+<p>Click <strong>Install app</strong> to give this app access to your data.</p>
+</li>
+<li>
+<p>Once installed, go to <strong>API Credentials</strong> to copy the <strong>Admin API Access Token</strong>. You are now ready to set up the source in Airbyte.</p>
+</li>
+</ol>
+<p>Refer <a href="https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password" target="_blank" rel="noopener noreferrer" title="https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password">Where can I get Shopify API password</a> <a href="https://youtu.be/-v_FbEvRD98" target="_blank" rel="noopener noreferrer" title="https://youtu.be/-v_FbEvRD98">How to get the Shopify API password</a></p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Shopify and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-101024.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/33548c16-c2e3-45c7-adda-a54cdb01bfc4" alt="image-20250511-101024.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Shopify Store </p>
+<p>The name of your Shopify store found in the URL.</p>
+<p>Authorization Method </p>
+<p>The authorization method to use to retrieve data from Shopify.</p>
+<p>API Password </p>
+<p>The API Password for your private application in the <code>Shopify</code> store</p>
+<p>Start Date </p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-monday-as-datasource">Adding Monday as datasource<a href="#adding-monday-as-datasource" class="hash-link" aria-label="Direct link to Adding Monday as datasource" title="Direct link to Adding Monday as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-monday"><strong>Prerequisite for adding Monday</strong><a href="#prerequisite-for-adding-monday" class="hash-link" aria-label="Direct link to prerequisite-for-adding-monday" title="Direct link to prerequisite-for-adding-monday">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>API Token</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your <a href="http://monday.com/" target="_blank" rel="noopener noreferrer" title="http://monday.com">monday account</a>.</p>
+</li>
+<li>
+<p><strong>Admin tab</strong><br>
+<!-- -->If you are an <strong>admin</strong> user on your <a href="http://monday.com/" target="_blank" rel="noopener noreferrer" title="http://monday.com/">monday.com</a> account, follow these steps to access your API token:</p>
+<ol>
+<li>
+<p>Log into your <a href="http://monday.com/" target="_blank" rel="noopener noreferrer" title="http://monday.com/">monday.com</a> account.</p>
+</li>
+<li>
+<p>Click on your avatar/profile picture in the top right corner.</p>
+</li>
+<li>
+<p>Select <strong>Administration</strong> &gt; <strong>Connections</strong> &gt; <strong>API</strong>.</p>
+</li>
+<li>
+<p>Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Developer tab</strong><br>
+<!-- -->If you are a <strong>member user</strong> or an <strong>admin</strong> on your <a href="http://monday.com/" target="_blank" rel="noopener noreferrer" title="http://monday.com/">monday.com</a> account, follow these steps to access your API token:</p>
+<ol>
+<li>
+<p>Log into your <a href="http://monday.com/" target="_blank" rel="noopener noreferrer" title="http://monday.com/">monday.com</a> account.</p>
+</li>
+<li>
+<p>Click on your profile picture in the top right corner.</p>
+</li>
+<li>
+<p>Select <strong>Developers</strong>. This will open the <em>Developer Center</em> in another tab.</p>
+</li>
+<li>
+<p>Click <strong>My Access Tokens</strong> &gt; <strong>Show</strong>.</p>
+</li>
+<li>
+<p>Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Monday and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-101736.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/241a0992-0300-467c-8366-b2a1519f320d" alt="image-20250511-101736.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Authorization Method </p>
+<p>The authorization method to use to retrieve data from Monday.</p>
+<p>API Token </p>
+<p>API Token for making authenticated requests.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-db2-as-datasource">Adding DB2 as datasource<a href="#adding-db2-as-datasource" class="hash-link" aria-label="Direct link to Adding DB2 as datasource" title="Direct link to Adding DB2 as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add DB2 and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111410.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/c48ab3c4-72c4-43c4-b20a-bf488d9c1afb" alt="image-20250511-111410.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name </p>
+<p>Enter a unique name for the connection.</p>
+<p>Database Name </p>
+<p>Specify the name of the existing database you want to connect to.</p>
+<p>Host Name </p>
+<p>Specify the host address of the database server.</p>
+<p>Port </p>
+<p>Specify the port number of the database server.</p>
+<p>Username / Password </p>
+<p>Provide the credentials for the account.</p>
+<p>Properties</p>
+<p>Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-quickbooks-as-datasource">Adding Quickbooks as datasource<a href="#adding-quickbooks-as-datasource" class="hash-link" aria-label="Direct link to Adding Quickbooks as datasource" title="Direct link to Adding Quickbooks as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-quickbooks"><strong>Prerequisite for adding Quickbooks</strong><a href="#prerequisite-for-adding-quickbooks" class="hash-link" aria-label="Direct link to prerequisite-for-adding-quickbooks" title="Direct link to prerequisite-for-adding-quickbooks">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Access Token</p>
+</li>
+<li>
+<p>Client ID</p>
+</li>
+<li>
+<p>Client Secret</p>
+</li>
+<li>
+<p>Realm ID</p>
+</li>
+<li>
+<p>Refresh Token</p>
+</li>
+<li>
+<p>Token Expiry Date</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<p><strong>Set up QuickBooks</strong></p>
+<ol>
+<li>
+<p>Create an <a href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank" rel="noopener noreferrer" title="https://developer.intuit.com/app/developer/qbo/docs/get-started">Intuit Developer account</a></p>
+</li>
+<li>
+<p>Create a workspace and then create an application by filing the required details in the form.</p>
+<p>0:00  /  1:00</p>
+<p>1x</p>
+</li>
+<li>
+<p>Obtain credentials. The easiest way to get these credentials is by using Quickbook&#x27;s <a href="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground" target="_blank" rel="noopener noreferrer" title="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground">OAuth 2.0 playground</a></p>
+<p>0:00  /  0:48</p>
+<p>1x</p>
+</li>
+</ol>
+<p><strong>Note:</strong></p>
+<ul>
+<li>
+<p>Access token expires every 60 min/hour and a new access token is automatically fetched by Airbyte using the refresh token. A Refresh token is valid for 101 days but expires every 24 hrs. A new Refresh token is automatically generated using the old refresh token and will be updated. After every 101 days a new refresh token has to be fetched from the <a href="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground" target="_blank" rel="noopener noreferrer" title="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground">2.0 playground</a>.</p>
+</li>
+<li>
+<p>Quickbooks connector works only for Quickbooks online account. It doesn’t work for Quickbooks Desktop Account. If you are using a Quickbooks Desktop Account please migrate your account to Quickbooks online. Refer <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US" target="_blank" rel="noopener noreferrer" title="https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US">Migrate to Quickbooks online from desktop</a></p>
+</li>
+</ul>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Quickbooks and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-103419.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/2a79dcac-389e-4717-88c0-a202157990ee" alt="image-20250511-103419.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name </p>
+<p>Enter a unique name for the connection.</p>
+<p>Auth Type </p>
+<p>Specify the authentication type.</p>
+<p>Access Token</p>
+<p>Specify the Quickbooks access token.</p>
+<p>Client ID </p>
+<p>Identifies which app is making the request. Obtain this value from the Keys tab on the app profile via My Apps on the developer site. There are two versions of this key: development and production.</p>
+<p>Realm ID</p>
+<p>Labeled Company ID. The Make API Calls panel is populated with the realm id and the current access token.</p>
+<p>Client secret</p>
+<p>Obtain this value from the <strong>Keys</strong> tab on the app profile via <strong>My Apps</strong> on the developer site. There are two versions of this key: development and production.</p>
+<p>Refresh Token</p>
+<p>Specify a  token that can be used when refreshing the access token.</p>
+<p>Token Expiry Date</p>
+<p>Specify the expiry date of the token.</p>
+<p>Start Date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<p>Sandbox</p>
+<p>Use the toggle to specify whether to use the sandbox or production environment.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-surveymonkey-as-datasource">Adding SurveyMonkey as datasource<a href="#adding-surveymonkey-as-datasource" class="hash-link" aria-label="Direct link to Adding SurveyMonkey as datasource" title="Direct link to Adding SurveyMonkey as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-surveymonkey"><strong>Prerequisite for adding SurveyMonkey</strong><a href="#prerequisite-for-adding-surveymonkey" class="hash-link" aria-label="Direct link to prerequisite-for-adding-surveymonkey" title="Direct link to prerequisite-for-adding-surveymonkey">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Access Token</p>
+</li>
+<li>
+<p>Origin datacenter of the survey monkey account (Default: USA)</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your survey monkey account <a href="https://www.surveymonkey.com/mp/sign-in/" target="_blank" rel="noopener noreferrer" title="https://www.surveymonkey.com/mp/sign-in/">Survey Monkey Login</a></p>
+</li>
+<li>
+<p>Create an app.</p>
+</li>
+<li>
+<p>After creating an app, navigate to the created app settings, and check the credentials section for the access token. Ensure to have a higher daily API limit to read data without any issues.</p>
+</li>
+</ol>
+<p>0:00  /  0:26</p>
+<p>1x</p>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add SurveyMonkey and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-104259.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/9b381d3d-06a5-4b1b-a625-21d1337bc7b7" alt="image-20250511-104259.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name </p>
+<p>Enter a unique name for the connection.</p>
+<p>Access Token</p>
+<p>Specify the SurveyMonkey access token.</p>
+<p>Start Date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<p>Origin datacenter of the SurveyMonkey account</p>
+<p>Depending on the originating datacenter of the SurveyMonkey account, the API access URL may be different.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-cvent-as-datasource">Adding Cvent as datasource<a href="#adding-cvent-as-datasource" class="hash-link" aria-label="Direct link to Adding Cvent as datasource" title="Direct link to Adding Cvent as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-cvent"><strong>Prerequisite for adding Cvent</strong><a href="#prerequisite-for-adding-cvent" class="hash-link" aria-label="Direct link to prerequisite-for-adding-cvent" title="Direct link to prerequisite-for-adding-cvent">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Client ID</p>
+</li>
+<li>
+<p>Client Secret</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to your <a href="https://www.cvent.com/" target="_blank" rel="noopener noreferrer" title="https://www.cvent.com">Cvent account</a> and go to <strong>Abstracts</strong> &gt; <strong>Users</strong> &gt; <strong>Login</strong>.</p>
+</li>
+<li>
+<p>Access the Cvent Developer Portal:</p>
+<ul>
+<li>Visit Cvent’s <strong>Developer Portal</strong>. You can typically access it by searching for &quot;Cvent Developer Portal&quot; or by navigating directly to <a href="http://developer.cvent.com/" target="_blank" rel="noopener noreferrer" title="http://developer.cvent.com/">developer.cvent.com</a>.</li>
+</ul>
+</li>
+<li>
+<p>Create a New Application:</p>
+<ul>
+<li>
+<p>Once you are logged into the Developer Portal, look for an option to create a new application.</p>
+</li>
+<li>
+<p>You&#x27;ll need to provide some details about your application, such as:</p>
+<ul>
+<li>
+<p>Name of the application.</p>
+</li>
+<li>
+<p>Description of the application.</p>
+</li>
+<li>
+<p>Redirect URL (if applicable).</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Get Your Client ID and Client Secret:</p>
+<ul>
+<li>
+<p>After registering your application, you will be provided with:</p>
+<ul>
+<li>
+<p><strong>Client ID</strong>: A unique identifier for your application.</p>
+</li>
+<li>
+<p><strong>Client Secret</strong>: A secret key that is used for securely authenticating API requests on behalf of your app.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Cvent and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111305.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/b8220566-a221-4683-a6e5-6f34444c532b" alt="image-20250511-111305.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name </p>
+<p>Enter a unique name for the connection.</p>
+<p>Client ID </p>
+<p>A unique identifier for your application.</p>
+<p>Client secret</p>
+<p>A secret key that is used for securely authenticating API requests on behalf of your app.</p>
+<p>Start Date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-sftp-bulk-as-datasource">Adding SFTP Bulk as datasource<a href="#adding-sftp-bulk-as-datasource" class="hash-link" aria-label="Direct link to Adding SFTP Bulk as datasource" title="Direct link to Adding SFTP Bulk as datasource">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisite-for-adding-sftp-bulk"><strong>Prerequisite for adding SFTP Bulk</strong><a href="#prerequisite-for-adding-sftp-bulk" class="hash-link" aria-label="Direct link to prerequisite-for-adding-sftp-bulk" title="Direct link to prerequisite-for-adding-sftp-bulk">​</a></h4>
+<p>The following connector information is required from the client:</p>
+<ul>
+<li>
+<p>Username</p>
+</li>
+<li>
+<p>Password</p>
+</li>
+<li>
+<p>Host</p>
+</li>
+<li>
+<p>Port</p>
+</li>
+<li>
+<p>File Type</p>
+</li>
+<li>
+<p>Stream Name</p>
+</li>
+<li>
+<p>Folder Path</p>
+</li>
+<li>
+<p>CSV Separator</p>
+</li>
+<li>
+<p>Start Date</p>
+</li>
+</ul>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Login to a SFTP server using your credentials.</p>
+</li>
+<li>
+<p>Create a folder in the server and drop your files there.</p>
+</li>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add SFTP Bulk and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-111209.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/719dfe85-ae7b-43b3-9eb3-16b1e9c97ea6" alt="image-20250511-111209.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>File Type</p>
+<p>Currently, only CSV files are supported.</p>
+<p>Username / Password</p>
+<p>Specify the client credentials.</p>
+<p>Host Address</p>
+<p>Specify the SFTP server address.</p>
+<p>Port</p>
+<p>Specify the port number of the SFTP server.</p>
+<p>Stream Name</p>
+<p>Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names.</p>
+<p>Sync modes (incremental/full refresh) are configured at the <em>stream</em> level, not at the pipeline level.</p>
+<p>Folder Path</p>
+<p>Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., <code>/home/Ubuntu/SFTP/credit</code>). Ensure this path is accurate.</p>
+<p>Start Date</p>
+<p>Specify the date from which to begin replicating data. This allows for historical data selection.</p>
+<p>CSV separator</p>
+<p>Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-sap-hana-as-datasource">Adding SAP HANA as datasource<a href="#adding-sap-hana-as-datasource" class="hash-link" aria-label="Direct link to Adding SAP HANA as datasource" title="Direct link to Adding SAP HANA as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add SAP HANA and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-110627.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/efeb49aa-a31a-4b0a-aad4-1dfda8fa3de1" alt="image-20250511-110627.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection Name</p>
+<p>Enter a unique name for the connection.</p>
+<p>Database Name</p>
+<p>Specify the name of the existing data that you want to connect.</p>
+<p>Schema Name</p>
+<p>Specify the schema name.</p>
+<p>Hostname</p>
+<p>Provide the hostname of the server where the database resides.</p>
+<p>Port</p>
+<p>Specify the port number used by the database server.</p>
+<p>Username/Password</p>
+<p>Specify the credentials to access the server.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="adding-azure-file-as-datasource">Adding Azure File as datasource<a href="#adding-azure-file-as-datasource" class="hash-link" aria-label="Direct link to Adding Azure File as datasource" title="Direct link to Adding Azure File as datasource">​</a></h3>
+<ol>
+<li>
+<p>From the left navigation panel, click <strong>Lakehouse</strong> and then click <strong>Datasource</strong>.</p>
+</li>
+<li>
+<p>From the upper right corner of the page, click the <strong>+ New Database</strong> button to start the process of adding a new database.</p>
+</li>
+<li>
+<p>Specify the following details to add Azure File and then click <strong>Submit</strong>. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.</p>
+<p>Open image-20250511-110915.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/83a9954a-f7a1-430c-b513-f30948471832" alt="image-20250511-110915.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p><strong>Field</strong></p>
+<p><strong>Description</strong></p>
+<p>Connection name</p>
+<p>Enter a unique name for the connection.</p>
+<p>File Format</p>
+<p>Specify any of the following file format:</p>
+<ul>
+<li>
+<p><strong>CSV</strong></p>
+</li>
+<li>
+<p><strong>Parquet</strong></p>
+</li>
+<li>
+<p><strong>JSON</strong></p>
+</li>
+</ul>
+<p>Path to Azure container</p>
+<p>Path of the Azure Blob where the files exist. For example: <a href="mailto:containername@storageaccountname.dfs.core.windows.net" target="_blank" rel="noopener noreferrer" title="mailto:containername@storageaccountname.dfs.core.windows.net">containername@storageaccountname.dfs.core.windows.net</a>/path</p>
+<p>Separator</p>
+<p>Specify the separator character to separate the data. For example: “,”</p>
+<p>Header</p>
+<p>Toggle to indicate if the first row of your CSV contains column headers.</p>
+<p>Infer Schema</p>
+<p>Toggle to automatically determine the data type of each column in your data.</p>
+<p>Multiline</p>
+<p>Toggle to format the JSON output across multiple lines.</p>
+<p>Compression</p>
+<p>Select the file compression mode.</p>
+<p>Start date</p>
+<p>Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="viewing-the-created-data-source"><strong>Viewing the created data source</strong><a href="#viewing-the-created-data-source" class="hash-link" aria-label="Direct link to viewing-the-created-data-source" title="Direct link to viewing-the-created-data-source">​</a></h3>
+<ol>
+<li>
+<p>From the DataGOL <strong>Home</strong> page, left navigation panel, select <strong>Lakehouse</strong> &gt; <strong>Datasource</strong>.</p>
+<p>Open image-20250507-094141.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/7937daf0-3b4e-4bac-abfe-a5d377d6d329" alt="image-20250507-094141.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Select the provider that you chose during the setup and then the click the newly created datasources from the list. The following tabs are shown in the corresponding datasource page.</p>
+<ol>
+<li>
+<p><strong>Summary</strong><br>
+<!-- -->The <strong>Summary</strong> tab serves as a central point for managing your added data source. Here, you can:</p>
+<ul>
+<li>
+<p><strong>Describe:</strong> Add or modify a description for the data source for easy identification and context.</p>
+</li>
+<li>
+<p><strong>Configure:</strong> Edit the initial settings you established when adding the datasource.</p>
+</li>
+<li>
+<p><strong>Trace:</strong> View the data lineage to understand the datasource&#x27;s origins and transformations. Refer to <a href="https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Data-Source-Lineage" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Data-Source-Lineage">Data source lineage</a></p>
+</li>
+</ul>
+<p>Open image-20250507-101452.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/a1e6faab-5226-4d40-a8d0-02e12e39e1c8" alt="image-20250507-101452.png" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>Tables</strong>: The <strong>Tables</strong> tab provides a comprehensive view of the tables within your chosen datasource. Here&#x27;s what you can do:</p>
+<ul>
+<li>
+<p><strong>Browse tables:</strong> See a list of all tables in the datasource.</p>
+</li>
+<li>
+<p><strong>Access table information:</strong> Click on a table name to open the Table Info page, where you can find:</p>
+<ul>
+<li>
+<p><strong>Qualified name:</strong> The full, unique identifier of the table.</p>
+</li>
+<li>
+<p><strong>Partition details:</strong> Information about how the table is partitioned, if applicable.</p>
+</li>
+<li>
+<p><strong>Column details:</strong> A breakdown of each column, including its name and data type.</p>
+</li>
+<li>
+<p><strong>Column count:</strong> The total number of columns in the table.</p>
+</li>
+<li>
+<p><strong>Creation timestamp:</strong> The date and time the table was created.</p>
+</li>
+<li>
+<p><strong>Owner:</strong> The user or role that owns the table.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilize more options:</strong> Click the more options icon for a specific table to:</p>
+<ul>
+<li>
+<p><strong>View table info:</strong> Directly access the detailed information page for that table.</p>
+</li>
+<li>
+<p><strong>Copy link:</strong> Obtain a shareable link to the table for easy referencing.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Open image-20250511-122810.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/16d02648-f075-4812-83a1-f4cca48411a6" alt="image-20250511-122810.png" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>ER diagram:</strong> An ER diagram visually maps out a database&#x27;s table structure, showing individual tables and how they relate to one another. This provides a clear and concise model of data organization and connections within the system.</p>
+<p>Open image-20250511-123907.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/39ad3273-5bd9-4c9d-a3c8-aae812feeb9c" alt="image-20250511-123907.png" class="img_ev3q"></p>
+<p>Clicking a table in the ER diagram reveals its detailed structure. Additionally, selecting the table name link provides further in-depth information about that specific table</p>
+</li>
+<li>
+<p><strong>Schema changes:</strong> The <strong>Schema Changes</strong> tab tracks modifications to the database structure, detailing additions like new tables and their timestamps. Clicking <strong>View Details</strong> shows comprehensive change information and a corresponding ER diagram, if available. Use <strong>Mark as Verified</strong> to confirm these changes.</p>
+<p>Open image-20250511-124514.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/490f6c86-1abf-47ae-ad26-d2ae12a62079" alt="image-20250511-124514.png" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>Table Info</strong>: Clicking a table link on the Summary tab opens the Table Info page, which displays the table&#x27;s overview. From here, you can also navigate directly to the table&#x27;s data source details. This page allows you to edit the table&#x27;s name and description, select a classification, and even delete the table.</p>
+</li>
+<li>
+<p><strong>Column Info</strong>: On the <strong>Tables</strong> tab, clicking a table link navigates you to the <strong>Column Info</strong> tab, displaying column metadata and editable settings.<br>
+<!-- -->You can classify individual columns by clicking the edit icon in the Classifications column. Similarly, edit icons in the Description column allow you to provide descriptions for each column.<br>
+<!-- -->Additionally, the <strong>AI Generate</strong> button can be used to automatically generate column metadata. Refer to <a href="https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Generating-the-column-metadata-catalog-with-AI" target="_blank" rel="noopener noreferrer" title="https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Generating-the-column-metadata-catalog-with-AI">Generating the column metadata catalog with AI</a></p>
+</li>
+<li>
+<p><strong>Data</strong>: The <strong>Data</strong> tab offers a glimpse into your table&#x27;s contents, showcasing the first 100 rows for immediate review.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="generating-the-column-metadata-catalog-with-ai">Generating the column metadata catalog with AI<a href="#generating-the-column-metadata-catalog-with-ai" class="hash-link" aria-label="Direct link to Generating the column metadata catalog with AI" title="Direct link to Generating the column metadata catalog with AI">​</a></h3>
+<ol>
+<li>
+<p>Navigate to the data source page for which you want to AI generate the metadata catalog.</p>
+</li>
+<li>
+<p>Go to the <strong>Tables</strong> tab and click the link of the specific table you wish to catalog.</p>
+<p>Open image-20250507-103150.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/84827db9-c31a-4feb-b56d-e4921adc3462" alt="image-20250507-103150.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>In the <strong>Table Info</strong> page, click the <strong>Column</strong> <strong>info</strong> tab.</p>
+</li>
+<li>
+<p>Click the <strong>AI generate</strong> button. The AI will then generate the metadata catalog for the selected table.</p>
+<p>Open image-20250507-104429.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/e99f70fe-d98e-438d-979a-081095acff84" alt="image-20250507-104429.png" class="img_ev3q"></p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="designating-a-partition-column">Designating a partition column<a href="#designating-a-partition-column" class="hash-link" aria-label="Direct link to Designating a partition column" title="Direct link to Designating a partition column">​</a></h3>
+<ol>
+<li>
+<p>Navigate to the data source page for which you want to AI generate the metadata catalog.</p>
+</li>
+<li>
+<p>Go to the <strong>Tables</strong> tab and click the link of the specific table you wish to catalog.</p>
+</li>
+<li>
+<p>In the <strong>Table Info</strong> page, click the <strong>Column</strong> <strong>info</strong> tab.</p>
+</li>
+<li>
+<p>From the extreme right click the more options icon corresponding to a column and select the <strong>Make partition column</strong> option. This option is available only for columns with following data types: <strong>int</strong>, <strong>bigint</strong>, <strong>timestamp</strong>, <strong>long,</strong> and <strong>date</strong>.</p>
+<p>Open image-20250511-132102.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/1ac819ff-64a9-4ab6-9f76-0466fca78539" alt="image-20250511-132102.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>In the <strong>Partition Column Settings</strong> box, select the Enable checkbox. You can also click <strong>Advance Settings</strong> and specify the partition size.</p>
+<p>Open image-20250511-134329.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/fc8477e8-99e0-4522-9374-5dc7f3e9bdf1" alt="image-20250511-134329.png" class="img_ev3q"></p>
+<p>The column that is specified as the partition column is ticked in the listed.</p>
+<p>Open image-20250511-134600.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/6f7e373a-fb2e-4160-a835-b5200c35b57b" alt="image-20250511-134600.png" class="img_ev3q"></p>
+</li>
+</ol>
+<p>The designated column will be used as the partition column by Apache Spark while processing datasets. Only a single column can be used as a Partition Column. (This setting is available only for RDBMS datasources). The default partition size is 50K.</p>
+<p>A warning is displayed if you attempt to change the partition column since this action can impact the pipeline and retrieval efficiency.</p>
+<p>Open image-20250511-134755.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/89ab2a25-b2bb-44af-80c1-aa1516496db5" alt="image-20250511-134755.png" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="managing-data-sources">Managing Data Sources<a href="#managing-data-sources" class="hash-link" aria-label="Direct link to Managing Data Sources" title="Direct link to Managing Data Sources">​</a></h3>
+<ul>
+<li>
+<p>Data sources can be sorted by creation date, displaying either the latest or oldest entries.</p>
+<p>Open image-20250511-141933.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/ed1dc27d-7d92-40f6-8a9f-39c2c914a2fa" alt="image-20250511-141933.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Data sources can be filtered according to the provider (e.g., MySQL) and the owner.</p>
+<p>Open image-20250511-142432.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/4489b5ef-416a-41da-bdf8-db37346ea2dc" alt="image-20250511-142432.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Data sources can be displayed in either a list view or a box view, according to user preference.</p>
+<p>Open image-20250511-142552.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/e3b9e52f-ce30-4e2b-b149-d2bf62f7e680" alt="image-20250511-142552.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>A specific data source can be located by entering the initial characters of its name into a search function.</p>
+<p>Open image-20250511-143153.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/ecc04db6-0d75-4266-ac71-6480248b81f2" alt="image-20250511-143153.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>Within the box view, the schema for a data source can be fetched/updated by clicking the <strong>sync now</strong> icon.</p>
+<p>Open image-20250511-142929.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/c4b072a8-0402-47f5-a1a0-b2d3c7e2861b" alt="image-20250511-142929.png" class="img_ev3q"></p>
+</li>
+<li>
+<p>The more options icon in the box view provides access to functionalities such as editing data source settings, viewing data lineage, and deleting the data source.</p>
+<p>Open image-20250511-143112.png</p>
+<p><img decoding="async" loading="lazy" src="blob:https://saasxl.atlassian.net/54098028-28b4-42f2-947c-b6d3d51963bc" alt="image-20250511-143112.png" class="img_ev3q"></p>
+</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/datagol-knowlegde-base-v1/docs/tags/lakehouse">Lakehouse</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/datagol-knowlegde-base-v1/docs/tags/connector">Connector</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Lakehouse/Datasources.mdx" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/category/lakehouse"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Lakehouse</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Lakehouse workflow/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Lakehouse workflow</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-data-sources" class="table-of-contents__link toc-highlight">Adding data sources</a></li><li><a href="#adding-s3-data-source" class="table-of-contents__link toc-highlight">Adding S3 data source</a></li><li><a href="#adding-microsoft-sql-or-postgresql-as-a-datasource" class="table-of-contents__link toc-highlight">Adding Microsoft SQL or PostgreSQL as a datasource</a></li><li><a href="#adding-folder-as-a-datasource" class="table-of-contents__link toc-highlight">Adding Folder as a datasource</a></li><li><a href="#adding-hubspot-as-datasource" class="table-of-contents__link toc-highlight">Adding HubSpot as datasource</a></li><li><a href="#adding-mariadb-as-datasource" class="table-of-contents__link toc-highlight">Adding MariaDB as datasource</a></li><li><a href="#adding-salesforce-as-datasource" class="table-of-contents__link toc-highlight">Adding Salesforce as datasource</a></li><li><a href="#adding-snowflake-as-datasource" class="table-of-contents__link toc-highlight">Adding Snowflake as datasource</a></li><li><a href="#adding-mongodb-atlas-datasource" class="table-of-contents__link toc-highlight">Adding MongoDB Atlas datasource</a></li><li><a href="#adding-netsuite-as-datasource" class="table-of-contents__link toc-highlight">Adding NetSuite as datasource</a></li><li><a href="#adding-netsuite-reporting-as-datasource" class="table-of-contents__link toc-highlight">Adding NetSuite Reporting as datasource</a></li><li><a href="#adding-netsuite-jdbc-as-datasource" class="table-of-contents__link toc-highlight">Adding NetSuite-JDBC as datasource</a></li><li><a href="#adding-pipedrive-as-datasource" class="table-of-contents__link toc-highlight">Adding Pipedrive as datasource</a></li><li><a href="#adding-amplitude-as-datasource" class="table-of-contents__link toc-highlight">Adding Amplitude as datasource</a></li><li><a href="#adding-chargebee-as-datasource" class="table-of-contents__link toc-highlight">Adding ChargeBee as datasource</a></li><li><a href="#adding-shopify-as-datasource" class="table-of-contents__link toc-highlight">Adding Shopify as datasource</a></li><li><a href="#adding-monday-as-datasource" class="table-of-contents__link toc-highlight">Adding Monday as datasource</a></li><li><a href="#adding-db2-as-datasource" class="table-of-contents__link toc-highlight">Adding DB2 as datasource</a></li><li><a href="#adding-quickbooks-as-datasource" class="table-of-contents__link toc-highlight">Adding Quickbooks as datasource</a></li><li><a href="#adding-surveymonkey-as-datasource" class="table-of-contents__link toc-highlight">Adding SurveyMonkey as datasource</a></li><li><a href="#adding-cvent-as-datasource" class="table-of-contents__link toc-highlight">Adding Cvent as datasource</a></li><li><a href="#adding-sftp-bulk-as-datasource" class="table-of-contents__link toc-highlight">Adding SFTP Bulk as datasource</a></li><li><a href="#adding-sap-hana-as-datasource" class="table-of-contents__link toc-highlight">Adding SAP HANA as datasource</a></li><li><a href="#adding-azure-file-as-datasource" class="table-of-contents__link toc-highlight">Adding Azure File as datasource</a></li><li><a href="#viewing-the-created-data-source" class="table-of-contents__link toc-highlight"><strong>Viewing the created data source</strong></a></li><li><a href="#generating-the-column-metadata-catalog-with-ai" class="table-of-contents__link toc-highlight">Generating the column metadata catalog with AI</a></li><li><a href="#designating-a-partition-column" class="table-of-contents__link toc-highlight">Designating a partition column</a></li><li><a href="#managing-data-sources" class="table-of-contents__link toc-highlight">Managing Data Sources</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/datagol-knowlegde-base-v1/docs/intro">Knowledge Base</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/datagol-knowlegde-base-v1/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
