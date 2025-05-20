@@ -88,7 +88,7 @@ const config = {
             position: 'left',
             label: 'Knowledge Base',
           },
-          {to: '/release', label: 'Release', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -129,8 +129,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Release',
-                to: '/Release',
+                label: 'Blog',
+                to: '/blog',
               },
               {
                 label: 'GitHub',
@@ -146,6 +146,14 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
+    plugins: [
+      [
+        require.resolve("@easyops-cn/docusaurus-search-local"),
+        {
+          hashed: true,
+        },
+      ],
+    ],
 };
 
 export default config;
