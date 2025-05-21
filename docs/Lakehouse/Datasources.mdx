@@ -9,7 +9,11 @@ You can integrate a new data source into the Lakehouse seamlessly by following t
 
 ### Adding data sources
 
+:::tip [NOTE]
+
 Only an Account admin or Lakehouse admin can add data source.
+
+:::
 
 Do the following to add a datasource.
 
@@ -79,12 +83,15 @@ Do the following to add a datasource.
     
 
 ### Adding S3 data source  
+:::danger Caution
 
 The Spark environment, at the company level, allows for only one set of S3 access credentials to be configured at any given time. Consequently, Spark can be set up to access data from either DataGOL's S3 account or a single, specific client's S3 account.
 
 Simultaneous access to data residing in multiple, different S3 accounts (like DataGOL's _and_ a client's at the same time) is NOT supported with the current configuration.
 
-#### **Prerequisite for adding S3 data source**
+:::
+
+:::info Prerequisite for adding S3 data source
 
 Before you add a S3 datasource, ensure to add the following beforehand from the Company section of the Home page.
 
@@ -113,9 +120,13 @@ Do the following:
         
 4.  In the **Root Directory** text box, specify the root directory.
     
+:::
+
+:::tip NOTE
 
 s3 is available only in Amazon AWS infrastructure. S3 is not available as part of Microsoft Azure.
 
+:::
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
@@ -178,7 +189,10 @@ Null Value
 
 A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field.
 
-**Limitations**: We can have only one s3 account at company Level, As in Spark we can give only one Credentials while configuring.
+:::info  **Limitations** 
+
+We can have only one s3 account at company Level, As in Spark we can give only one Credentials while configuring.
+:::
 
 s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only one.
 
