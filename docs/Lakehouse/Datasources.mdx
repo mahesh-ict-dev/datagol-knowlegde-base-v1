@@ -143,12 +143,14 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 | **Field**             | **Description**                                                                                                                                       |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Connection name**   | Enter a unique name for the connection.                                                                                                              |
-| **File Format**       | Specify any of the following file formats:`• CSV • Parquet• JSON `• Delta *(Coming soon)*                                                 |
-| **Path to S3 bucket** | Specify the path of the S3 bucket where the files exist. `Example`: If file is present in `s3a://catalog/db/source/test.csv` then path will be `catalog/db`. `Example format: `s3a://catalog/db/` |
+| **File Format**       | Specify any of the following file formats: `CSV`, `Parquet`, `JSON`, `Delta` (Coming soon)                                                           |
+| **Path to S3 bucket** | Specify the path of the S3 bucket where the files exist.                                                                                             |
+|                       | Example: If file is present in `s3a://catalog/db/source/test.csv` then path will be `catalog/db`.                                                   |
+|                       | Example format: `s3a://catalog/db/`                                                                                                                  |
 | **Separator**         | Specify the separator character.                                                                                                                     |
 | **Header**            | Toggle to indicate if the first row of your CSV contains column headers.                                                                             |
 | **Infer Schema**      | Toggle to automatically determine the data type of each column in your data.                                                                         |
-| **Compression**       | Select the file compression mode from the following options:`• Uncompressed • gzip • lzo • brotli • lz4 • zstd `                     |
+| **Compression**       | Select the file compression mode from the following options: `Uncompressed`, `gzip`, `lzo`, `brotli`, `lz4`, `zstd`                                 |
 | **Null Value**        | *(No description provided)*                                                                                                                           |
 
 

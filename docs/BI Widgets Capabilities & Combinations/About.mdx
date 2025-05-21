@@ -1,0 +1,191 @@
+---
+sidebar_position : 1
+tags : [BI, visualization, charts]
+---
+
+This guide outlines the data visualization possibilities within our BI tool. Understand how to combine your data columns with different widgets to uncover insights. This guide will help a business user understand what visualizations they can expect to be suggested and how their data (Dimensions, Metrics, Date Times) will generally be used if they pick that suggestion.
+# Core data column types
+| Column type | Description |
+| --- | --- |
+| D (Dimension/Attribute) | Categorical data used for grouping or labeling. Examples: Product Name, Region, Status. Includes text and single-select fields. |
+| M (Metric/Measure) | Numerical data that can be aggregated. Examples: Sales, Quantity, Profit. Includes numbers, currency, and percentages. |
+| DTT (Date Time - Truncated) | Date or timestamp data grouped to a specific time unit (e.g., Year, Month, Day). Useful for seeing trends over distinct periods. |
+| DTP (Date Time - Part) | Extracts a specific part of a date (e.g., Month of Year, Day of Week, Hour). Useful for analyzing cyclical patterns. |
+See:
+- [Bar chart ](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%F0%9F%93%8A-Bar-chart)
+- [KPI (Key Performance Indicator) widget](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%94%A2-KPI-(Key-Performance-Indicator)-widget)
+- [Line/Area/Scatter Chart](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%93%88-Line%2FArea%2FScatter-chart)
+- [Pie/Donut/Funnel Chart](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%E2%AD%95-Pie%2FDonut%2FFunnel-chart)
+- [Table Widget](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%93%9C-Table-Widget)
+- [Pivot Table Widget](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%94%84-Pivot-table-widget)
+- [Packed Bubble Chart](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#Packed-Bubble-chart)
+- [Treemap](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#Treemap)
+- [Boxplot](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#Boxplot)
+# 📊 Bar chart
+Purpose:
+Ideal for comparing values across different categories or tracking changes over discrete time periods.
+## Data combinations and user achievements for Bar chart
+- 1 Dimension, 1 Metric (1D 1M)Achieve:Compare a metric's value across different categories (e.g., sales per product). Identify top/bottom performers.Key Capabilities:Visualize magnitude differences, apply percentage stacking to see contribution to total, drill down for details.![image-20250514-135855.png](/img/413433857/413433961.png?width=362)
+- Achieve:Compare a metric's value across different categories (e.g., sales per product). Identify top/bottom performers.
+- Key Capabilities:Visualize magnitude differences, apply percentage stacking to see contribution to total, drill down for details.![image-20250514-135855.png](/img/413433857/413433961.png?width=362)
+- 1 Metric, 1 Date Time (Truncated) (1M 1DTT)Achieve:Track a single metric's trend over time (e.g., monthly revenue). Spot increases, decreases, or plateaus.Key Capabilities:Observe performance over selected time periods, change metric aggregation (sum, average, count), drill down.![image-20250514-140137.png](/img/413433857/413433958.png?width=362)
+- Achieve:Track a single metric's trend over time (e.g., monthly revenue). Spot increases, decreases, or plateaus.
+- Key Capabilities:Observe performance over selected time periods, change metric aggregation (sum, average, count), drill down.![image-20250514-140137.png](/img/413433857/413433958.png?width=362)
+- 1 Metric, 1 Date Time (Part) (1M 1DTP)Achieve:Analyze a metric based on recurring date parts (e.g., average sales by day of the week across multiple weeks). Identify cyclical patterns.Key Capabilities:See performance by specific time segments (hour, day of week, month of year), change metric aggregation, drill down.![image-20250514-140330.png](/img/413433857/413433955.png?width=370)
+- Achieve:Analyze a metric based on recurring date parts (e.g., average sales by day of the week across multiple weeks). Identify cyclical patterns.
+- Key Capabilities:See performance by specific time segments (hour, day of week, month of year), change metric aggregation, drill down.![image-20250514-140330.png](/img/413433857/413433955.png?width=370)
+- Multiple Metrics, 1 Date Time (Truncated) (MM 1DTT)Achieve:Compare trends of several different metrics over the same time periods (e.g., compare sales and profit growth month-over-month).Key Capabilities:Visualize multiple metric trends simultaneously, change chart type for individual metrics (e.g., one bar, one line), merge axes for comparison, drill down.![image-20250514-141017.png](/img/413433857/413433952.png?width=372)
+- Achieve:Compare trends of several different metrics over the same time periods (e.g., compare sales and profit growth month-over-month).
+- Key Capabilities:Visualize multiple metric trends simultaneously, change chart type for individual metrics (e.g., one bar, one line), merge axes for comparison, drill down.![image-20250514-141017.png](/img/413433857/413433952.png?width=372)
+- Multiple Metrics, 1 Date Time (Part) (MM 1DTP)Achieve:Compare multiple metrics based on recurring date parts (e.g., units sold vs. site visits by hour of day).Key Capabilities:Analyze correlations between metrics across time segments, change chart type for individual metrics, merge axes, drill down.![image-20250514-141132.png](/img/413433857/413433949.png?width=400)
+- Achieve:Compare multiple metrics based on recurring date parts (e.g., units sold vs. site visits by hour of day).
+- Key Capabilities:Analyze correlations between metrics across time segments, change chart type for individual metrics, merge axes, drill down.![image-20250514-141132.png](/img/413433857/413433949.png?width=400)
+- 1 Metric, 1 Date Time (Truncated), 1 Date Time (Part) (1M 1DTT 1DTP)Achieve:Perform a two-level time analysis (e.g., sales per quarter, further broken down by month of the year).Key Capabilities:Group by a primary time unit and then sub-group by a date part, apply stacking (normal/percent).![image-20250514-141428.png](/img/413433857/413433946.png?width=418)
+- Achieve:Perform a two-level time analysis (e.g., sales per quarter, further broken down by month of the year).
+- Key Capabilities:Group by a primary time unit and then sub-group by a date part, apply stacking (normal/percent).![image-20250514-141428.png](/img/413433857/413433946.png?width=418)
+- 1 Dimension, 1 Date Time (Truncated), 1 Metric (1D 1DTT 1M)Achieve:See how a metric performs for different categories over time (e.g., sales by region, per quarter).Key Capabilities:Group by dimension and then by time (or vice-versa), apply percentage stacking, drill down.![image-20250514-141550.png](/img/413433857/413433943.png?width=430)
+- Achieve:See how a metric performs for different categories over time (e.g., sales by region, per quarter).
+- Key Capabilities:Group by dimension and then by time (or vice-versa), apply percentage stacking, drill down.![image-20250514-141550.png](/img/413433857/413433943.png?width=430)
+- 1 Dimension, 1 Date Time (Part), 1 Metric (1D 1DTP 1M)Achieve:Analyze a metric for different categories based on recurring date parts (e.g., website traffic by source, per day of the week).Key Capabilities:Group by dimension and then by date part (or vice-versa), apply percentage stacking, drill down.![image-20250514-142157.png](/img/413433857/413433940.png?width=436)
+- Achieve:Analyze a metric for different categories based on recurring date parts (e.g., website traffic by source, per day of the week).
+- Key Capabilities:Group by dimension and then by date part (or vice-versa), apply percentage stacking, drill down.![image-20250514-142157.png](/img/413433857/413433940.png?width=436)
+- 2 Dimensions, 1 Metric (2D 1M)Achieve:Compare a metric across two different categorical groupings (e.g., sales by product category, further broken down by customer segment).Key Capabilities:Create stacked or grouped bars based on a second dimension, apply percentage stacking, drill down.![image-20250514-142540.png](/img/413433857/413433937.png?width=446)
+- Achieve:Compare a metric across two different categorical groupings (e.g., sales by product category, further broken down by customer segment).
+- Key Capabilities:Create stacked or grouped bars based on a second dimension, apply percentage stacking, drill down.![image-20250514-142540.png](/img/413433857/413433937.png?width=446)
+- Multiple Metrics, 1 Dimension (MM 1D)Achieve:Compare several different metrics for each category in a dimension (e.g., for each product, show sales, profit, and quantity sold).Key Capabilities:Visualize multiple performance aspects per category, merge axes, change chart types for individual metrics, drill down.![image-20250514-145408.png](/img/413433857/413433934.png?width=450)
+- Achieve:Compare several different metrics for each category in a dimension (e.g., for each product, show sales, profit, and quantity sold).
+- Key Capabilities:Visualize multiple performance aspects per category, merge axes, change chart types for individual metrics, drill down.![image-20250514-145408.png](/img/413433857/413433934.png?width=450)
+# 🔢 KPI (Key Performance Indicator) widget
+Purpose:
+To display a single, crucial metric, often with a comparison or trend indication.
+## Data Combinations & User Achievements for KPI widget
+- 1 Metric (1M)Achieve:Display a single, important aggregated value (e.g., total current sales).Key Capabilities:Highlight a key performance figure, change metric aggregation.![image-20250514-153105.png](/img/413433857/413433928.png?width=329)
+- Achieve:Display a single, important aggregated value (e.g., total current sales).
+- Key Capabilities:Highlight a key performance figure, change metric aggregation.![image-20250514-153105.png](/img/413433857/413433928.png?width=329)
+- 1 Metric, 1 Date Time (Truncated) (1M 1DTT)Achieve:Show a key metric's value in context of a time period, potentially showing change or trend (e.g., current month's revenue vs. last month).Key Capabilities:View metric for a selected time bucket (monthly, yearly, etc.), apply filters.![image-20250514-153212.png](/img/413433857/413433925.png?width=375)
+- Achieve:Show a key metric's value in context of a time period, potentially showing change or trend (e.g., current month's revenue vs. last month).
+- Key Capabilities:View metric for a selected time bucket (monthly, yearly, etc.), apply filters.![image-20250514-153212.png](/img/413433857/413433925.png?width=375)
+# 📈 Line/Area/Scatter chart
+Purpose:
+- Line/Area:Visualizing trends over continuous data (especially time). Area charts emphasize volume or magnitude over time.
+- Scatter:Showing relationships and distributions between two or three numerical variables.
+## Data combinations  and user achievements for Line/Area/Scatter chart
+- 1 Dimension, 1 Metric (1D 1M)Achieve:Plot a metric against distinct, ordered categories to see progression or comparison (e.g., customer satisfaction score by survey version).Key Capabilities:Visualize trends across categorical stages, drill down.
+- Achieve:Plot a metric against distinct, ordered categories to see progression or comparison (e.g., customer satisfaction score by survey version).
+- Key Capabilities:Visualize trends across categorical stages, drill down.
+- 1 Metric, 1 Date Time (Truncated) (1M 1DTT)Achieve:Classic trend analysis showing a metric's performance over time (e.g., daily website visitors).Key Capabilities:Identify trends, seasonality, anomalies over time, change metric aggregation, drill down.
+- Achieve:Classic trend analysis showing a metric's performance over time (e.g., daily website visitors).
+- Key Capabilities:Identify trends, seasonality, anomalies over time, change metric aggregation, drill down.
+- 1 Metric, 1 Date Time (Part) (1M 1DTP)Achieve:Analyze metric patterns based on recurring date parts (e.g., average transaction value by hour of day).Key Capabilities:Spot cyclical behavior, change metric aggregation, drill down.
+- Achieve:Analyze metric patterns based on recurring date parts (e.g., average transaction value by hour of day).
+- Key Capabilities:Spot cyclical behavior, change metric aggregation, drill down.
+- Multiple Metrics, 1 Date Time (Truncated) (MM 1DTT)Achieve:Compare the trends of multiple metrics over the same time periods (e.g., stock price vs. trading volume).Key Capabilities:Correlate metric movements, change chart type per metric, drill down.
+- Achieve:Compare the trends of multiple metrics over the same time periods (e.g., stock price vs. trading volume).
+- Key Capabilities:Correlate metric movements, change chart type per metric, drill down.
+- Multiple Metrics, 1 Date Time (Part) (MM 1DTP)Achieve:Compare multiple metrics based on recurring date parts (e.g., number of errors vs. system load by hour).Key Capabilities:Analyze relationships across cyclical time segments, change chart type per metric, drill down.
+- Achieve:Compare multiple metrics based on recurring date parts (e.g., number of errors vs. system load by hour).
+- Key Capabilities:Analyze relationships across cyclical time segments, change chart type per metric, drill down.
+- 1 Metric, 1 Date Time (Part), 1 Date Time (Truncated) (1M 1DTP 1DTT)Achieve:Analyze a metric with one time aspect on the axis and another for series grouping (e.g., daily sales trend, with separate lines for each month of the year).Key Capabilities:Explore complex time-based interactions, drill down.
+- Achieve:Analyze a metric with one time aspect on the axis and another for series grouping (e.g., daily sales trend, with separate lines for each month of the year).
+- Key Capabilities:Explore complex time-based interactions, drill down.
+- 1 Metric, 1 Date Time (Truncated), 1 Dimension (1M 1DTT 1D)Achieve:Track a metric's trend over time, with separate lines/series for each category in a dimension (e.g., monthly sales trends for different product lines).Key Capabilities:Compare trends across categories, drill down.
+- Achieve:Track a metric's trend over time, with separate lines/series for each category in a dimension (e.g., monthly sales trends for different product lines).
+- Key Capabilities:Compare trends across categories, drill down.
+- 1 Metric, 1 Date Time (Part), 1 Dimension (1M 1DTP 1D)Achieve:Analyze a metric based on a date part, with separate lines/series for categories (e.g., average call duration by day of week, for different support teams).Key Capabilities:Compare cyclical patterns across categories, drill down.
+- Achieve:Analyze a metric based on a date part, with separate lines/series for categories (e.g., average call duration by day of week, for different support teams).
+- Key Capabilities:Compare cyclical patterns across categories, drill down.
+- 1 Metric, 2 Dimensions (1M 2D)Achieve:Plot a metric with one dimension on the axis and another for creating separate series/lines (e.g., project completion rate by phase, with separate lines for different project managers).Key Capabilities:Explore multi-dimensional relationships, drill down.
+- Achieve:Plot a metric with one dimension on the axis and another for creating separate series/lines (e.g., project completion rate by phase, with separate lines for different project managers).
+- Key Capabilities:Explore multi-dimensional relationships, drill down.
+- Multiple Metrics, 1 Dimension (MM 1D)Achieve:Plot multiple metrics against categories of a single dimension (e.g., for each marketing campaign, plot cost, clicks, and conversions).Key Capabilities:Compare performance of different metrics across categories, merge Y-axes, drill down.
+- Achieve:Plot multiple metrics against categories of a single dimension (e.g., for each marketing campaign, plot cost, clicks, and conversions).
+- Key Capabilities:Compare performance of different metrics across categories, merge Y-axes, drill down.
+- Scatter Plot Specific: 2 Metrics (2M) (Potentially +1D or +1M for color/size)Achieve:Identify correlation or distribution patterns between two numerical variables (e.g., advertising spend vs. sales). A third dimension or metric can add more context through point color or size.Key Capabilities:Visualize relationships, detect outliers, cluster data points.
+- Achieve:Identify correlation or distribution patterns between two numerical variables (e.g., advertising spend vs. sales). A third dimension or metric can add more context through point color or size.
+- Key Capabilities:Visualize relationships, detect outliers, cluster data points.
+# ⭕ Pie/Donut/Funnel chart
+Purpose:
+- Pie/Donut:Showing proportions of a whole.
+- Funnel:Representing stages in a process and drop-offs.
+## Data combinations  and user achievements for Pie/Donut/Funnel chart
+- 1 Dimension, 1 Metric (1D 1M)Achieve:Understand the contribution of each category to a total (e.g., market share by company for Pie/Donut; lead conversion rate at each sales stage for Funnel).Key Capabilities:Visualize part-to-whole relationships, drill down.
+- Achieve:Understand the contribution of each category to a total (e.g., market share by company for Pie/Donut; lead conversion rate at each sales stage for Funnel).
+- Key Capabilities:Visualize part-to-whole relationships, drill down.
+- 1 Date Time (Part), 1 Metric (1DTP 1M)Achieve:Show how a metric is proportionally distributed across different date parts (e.g., percentage of sales by quarter of the year).Key Capabilities:Analyze proportional distribution over cyclical time segments, drill down.
+- Achieve:Show how a metric is proportionally distributed across different date parts (e.g., percentage of sales by quarter of the year).
+- Key Capabilities:Analyze proportional distribution over cyclical time segments, drill down.
+# 📜 Table Widget
+Purpose:
+Displaying detailed data in a structured row-and-column format for lookups and precise comparisons.
+## Data combinations  and user achievements for Table widget
+- 1 Dimension, 1 Metric (1D 1M)Achieve:View a list of categories with their corresponding metric values.Key Capabilities:Simple data lookup, sorting.
+- Achieve:View a list of categories with their corresponding metric values.
+- Key Capabilities:Simple data lookup, sorting.
+- 1 Date Time (Truncated), 1 Metric (1DTT 1M)Achieve:See a metric's value for each defined time period.Key Capabilities:Time-based data lookup, sorting.
+- Achieve:See a metric's value for each defined time period.
+- Key Capabilities:Time-based data lookup, sorting.
+- Multiple Dimensions, Multiple Metrics (MD MM)Achieve:Create a comprehensive data view with various attributes and measures.Key Capabilities:Detailed data exploration, reorder columns, sort by multiple columns.
+- Achieve:Create a comprehensive data view with various attributes and measures.
+- Key Capabilities:Detailed data exploration, reorder columns, sort by multiple columns.
+- Multiple Dimensions, Multiple Metrics, Multiple Date Time fields (MD MM MDT)Achieve:Build a highly detailed report combining categorical, numerical, and various time-based data.Key Capabilities:Comprehensive reporting, column reordering, sorting, unit conversion display.
+- Achieve:Build a highly detailed report combining categorical, numerical, and various time-based data.
+- Key Capabilities:Comprehensive reporting, column reordering, sorting, unit conversion display.
+# 🔄 Pivot table widget
+Purpose:
+Dynamically reorganize and summarize data for multi-dimensional analysis. Users can "pivot" dimensions between rows and columns.
+Common user achievements (across combinations):
+- Explore data from multiple perspectives by dragging and dropping fields into rows, columns, and values.
+- Summarize large datasets into a compact, meaningful format.
+- Identify trends and patterns across intersecting dimensions.
+- Analyze data with totals and subtotals for rows and columns.
+- Visually enhance data understanding with HeatMap mode.
+## Data combinations for Pivot table widget
+- 2 Metrics, 1 Dimension (2M 1D)Achieve:Analyze two metrics for each category of a dimension (e.g., for each product, show total sales and average profit margin).
+- Achieve:Analyze two metrics for each category of a dimension (e.g., for each product, show total sales and average profit margin).
+- 2 Dimensions, 1 Metric (2D 1M / 1M 2D)Achieve:Create a cross-tabulation showing a metric at the intersection of two dimensions (e.g., sales by region and product category).
+- Achieve:Create a cross-tabulation showing a metric at the intersection of two dimensions (e.g., sales by region and product category).
+- 2 Metrics, 1 Date Time (Part) (2M 1DTP)Achieve:Analyze two metrics based on a recurring date part (e.g., average order value and number of orders by day of the week).
+- Achieve:Analyze two metrics based on a recurring date part (e.g., average order value and number of orders by day of the week).
+- 2 Metrics, 1 Date Time (Truncated) (2M 1DTT)Achieve:Compare two metrics over specific time periods (e.g., marketing spend vs. new customers acquired, per month).
+- Achieve:Compare two metrics over specific time periods (e.g., marketing spend vs. new customers acquired, per month).
+- 2 Metrics, 1 Date Time (Truncated), 1 Date Time (Part) (2M 1DTT 1DTP)Achieve:Perform complex time-based analysis of two metrics, using both truncated periods and date parts for rows/columns.
+- Achieve:Perform complex time-based analysis of two metrics, using both truncated periods and date parts for rows/columns.
+- Multiple Metrics, Multiple Dimensions, Multiple Date Time fields (MM MD MDT)Achieve:Build highly flexible and custom summary reports by arranging any combination of available fields into rows, columns, and aggregated values.
+- Achieve:Build highly flexible and custom summary reports by arranging any combination of available fields into rows, columns, and aggregated values.
+- 1 Date Time (Part), 1 Metric (1DTP 1M)
+Achieve:
+Summarize a metric based on different parts of a date (e.g., total units sold for each month of the year, across all years).
+# Packed Bubble chart
+- Purpose:Displays data as a cluster of circles, where circle size and/or color represent metrics/dimensions.
+- Achieve:Compare relative values or concentrations quickly, identify dominant categories. Good for showing many values without axes.
+# Treemap
+- Purpose:Visualizes hierarchical data as a set of nested rectangles. Size and color can represent different metrics.
+- Achieve:Understand part-to-whole relationships within a hierarchy (e.g., sales by product category, then sub-category, then product).
+# Boxplot
+- Purpose:Shows the distribution of numerical data through quartiles, median, and outliers.
+- Achieve:Compare distributions of a metric across different categories (e.g., compare salary distributions across different departments). Identify spread, skewness, and outliers.
+# BI auto-visualization: Quick reference guide
+This guide helps you understand what types of charts and widgets will be suggested based on the data columns you select, and how your data is typically arranged in those visualizations automatically.
+## Data column key
+- D:Dimension (e.g., Product Category, Region, Text)
+- M:Metric (e.g., Sales, Quantity, Numeric Value)
+- DT:Date Time (e.g., Order Date, Event Timestamp)
+
+| If You Select This Data...                                                                 | Suggested Widget/Chart Types              | How Your Data is Typically Used (If you pick this type)                                                                                                                                             |
+|--------------------------------------------------------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1+ Metric (M)                                                                              | KPI, Gauge, Metrics                       | KPI/Gauge/Metrics: Your `M` is used as the main value. If `DT` is also selected, `DT` provides the time context.                                                                                   |
+| 1+ Dimension (D) or 1+ Date Time (DT)                                                      | Bar, Line, Area, Scatter, Packed Bubble   | If `DT` is present: `DT` is placed on the X-axis, and `M` on the Y-axis. If `D` is also present, it is used for grouping or series. If only `D` is selected: the first `D` is on the X-axis, `M` on the Y-axis, and the second `D` is used for grouping. |
+| 1+ Dimension (D)                                                                           | Pie, Donut, Funnel                        | Pie/Donut/Funnel: `D` defines slices or segments, while `M` determines the size or value of each slice.                                                                                             |
+| 1+ Dimension (D) and 1+ Metric (M)                                                         | Treemap, Boxplot                          | Treemap: `D` is used for the hierarchy or rectangles, and `M` for the size or color. Boxplot: `D` is on the X-axis, and `M` shows the distribution on the Y-axis.                                   |
+| Date Time (DT) and 4+ Metrics (M) (or Open, High, Low, Close Metrics)                      | OHLC, Candlestick                         | OHLC/Candlestick: `DT` is used on the X-axis (time), and the selected metrics map to Open, High, Low, and Close values.                                                                            |
+| 2+ Dimensions (D) (or specific From/To Dimensions)                                         | Sankey, Dependency Wheel                  | Sankey/Dependency Wheel: The first `D` is treated as the source, the second `D` as the target, and `M` represents the flow or link value.                                                           |
+| Geographic Dimension(s) (e.g., Country, State, Lat/Long)                                   | Geo Map                                   | Geo Map: Geographic `D` values determine locations. `M` is often used for marker or region size and color.                                                                                         |
+| 1+ Dimension (D) or 1+ Date Time (DT) and 1+ Metric (M) (allowed for pivot table)          | Pivot Table                               | Pivot Table: `D` and/or `DT` are used for rows and columns, and `M` is used for summarized values. Configuration is flexible.                                                                     |
+| Any Combination of Columns                                                                 | Table                                     | Table: Displays all selected columns as-is, without transformation.                                                                                                                                |
+
+
+## General notes for auto-configuration
+- "First" Column:When multiple columns of the same type are selected (e.g., two Metrics), the system often picks the "first" one by default for a primary role.
+- Default Metric:If you select Dimensions or Date Times but no Metrics for some charts, a default Metric (like "Count of Rows") might be automatically used for the Y-axis.
+- Flexibility:This is a guide toautomatic suggestions and initial setup. You can always customize the widget further once it's created!
+- Availability:Some advanced or specialized chart types may only be suggested if your data very specifically matches their requirements (e.g., stock data for Candlestick charts). Widgets/charts listed as "NOT_SUPPORTED" in the underlying code won't be auto-suggested or available.
