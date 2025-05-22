@@ -22,14 +22,10 @@ Do the following to add a datasource.
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
     ![sample](/img/image-20250505-070559.png)
-    
-    ![image-20250505-070559.png](blob:https://saasxl.atlassian.net/e755f58f-772a-4c18-8991-92b452653287)
-    
+        
 3.  Choose a database provider from the list, for example, **MySQL**.
     
-    Open image-20250511-072035.png
-    
-    ![image-20250511-072035.png](blob:https://saasxl.atlassian.net/8e2d4035-4f80-4d4a-a9d6-1650b9d2ae94)
+    ![Choose Database example MySQL](/img/image-20250511-072035.png)
     
 4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following Datasources. Click the required datasource link from the following for integration details:
     
@@ -133,15 +129,13 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
     
 3.  Specify the following details to add S3 data source and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-072605.png
-    
-    ![image-20250511-072605.png](blob:https://saasxl.atlassian.net/504dd191-f10a-4bd9-a283-f43d22583262)
+    ![Add s3 File CSV](/img/image-20250511-072605.png)
     
 4.  Click **Submit**.
     
 
 | **Field**             | **Description**                                                                                                                                       |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Connection name**   | Enter a unique name for the connection.                                                                                                              |
 | **File Format**       | Specify any of the following file formats: `CSV`, `Parquet`, `JSON`, `Delta` (Coming soon)                                                           |
 | **Path to S3 bucket** | Specify the path of the S3 bucket where the files exist.                                                                                             |
@@ -168,52 +162,20 @@ s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only o
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Microsoft SQL or PostgreSQL and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
 
-Open image-20250506-175842.png
+|        MySQL    | PostgreSQL  |
+|:-------------------------:|:-------------------------:|
+|[Add MySQL](/img/image-20250506-175842.png)| [Add PostgreSQL](/img/image-20250511-112352.png)|
 
-![image-20250506-175842.png](blob:https://saasxl.atlassian.net/bf2d7b47-48e9-46ef-806d-dfcacbe21991)
-
-Open image-20250511-112352.png
-
-![image-20250511-112352.png](blob:https://saasxl.atlassian.net/7e00ca6a-acc6-4885-ada7-9a1e945a708f)
-
-**Field**
-
-**Description**
-
-Connection name
-
-Enter a unique name for the connection.
-
-Database
-
-Specify the name of the existing database that you want to connect.
-
-Host name
-
-Specify the hostname or IP address of the server wherein the database is located.
-
-Port name
-
-Enter the port number used by the database server.
-
-Schema
-
-Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (“**public**” for Postgres and “**dbo**” for Microsoft SQL)
-
-Properties
-
-Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.
-
-Case Sensitive
-
-Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions.
-
--   **Schema:** Specify the schema name for your Postgres or Microsoft SQL connection. If left blank, the default schema will be used (“public” for postgres and “dbo” for Microsoft SQL )
-    
--   **Case Sensitive:** Specify whether your Postgres or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions.
-    
+| Field | Description |
+|:---|:---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Database** | Specify the name of the existing database that you want to connect. |
+| **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
+| **Port name** | Enter the port number used by the database server. |
+| **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+| **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |     
 
 ### Adding Folder as a datasource
 
@@ -223,63 +185,25 @@ Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sens
     
 3.  Specify the following details to add folder and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-072755.png
-    
-    ![image-20250511-072755.png](blob:https://saasxl.atlassian.net/e2ae40bf-2b02-4684-ae0d-8d5d2902ee28)
-    
+    ![Add folder](/img/image-20250511-072755.png)
 
-**Field**
-
-**Description**
-
-Connection name
-
-Enter a unique name for the connection.
-
-File Format
-
-Specify any of the following file format:
-
--   CSV
-    
--   Parquet
-    
--   JSON
-    
--   Excel
-    
-
-Separator
-
-Specify the separator character.
-
-Header
-
-Toggle to indicate if the first row of your CSV contains column headers. This field is displayed only when the file format is CSV.
-
-Infer Schema
-
-Toggle to automatically determine the data type of each column in your data. This field is displayed only when the file format is CSV.
-
-Compression
-
-Select the file compression mode from any of the following options: **Uncompressed**, **gzip**, **lzo**, **brotli**, **lz4**, and **zstd**.
-
-Null Value
-
-A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field.
+| Field | Description |
+|:---|:---|
+| **Connection name** | Enter a unique name for the connection. |
+| **File Format** | Specify any of the following file formats:<ul><li>CSV<li>Parquet<li>JSON<li>Excel</li></ul>|
+| **Separator** | Specify the separator character. |
+| **Header** | Toggle to indicate if the first row of your CSV contains column headers. This field is displayed only when the file format is CSV. |
+| **Infer Schema** | Toggle to automatically determine the data type of each column in your data. This field is displayed only when the file format is CSV. |
+| **Compression** | Select the file compression mode from any of the following options: **Uncompressed**, **gzip**, **lzo**, **brotli**, **lz4**, and **zstd**. |
+| **Null Value** | A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field. |
 
 After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table's data.
 
-Open att_195_for_220692503.png
-
-![](blob:https://saasxl.atlassian.net/10beeb5d-90b6-4cf1-930b-90416af5212d)
+![Define-unique-data-table](/img/image-att_195_for_220692503.png)
 
 To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The **Files** tab will provide you with the necessary options.
 
-Open att_224_for_220692503.png
-
-![](blob:https://saasxl.atlassian.net/0ab2b3f9-fab3-47e1-a73f-f381847a013b)
+![sample](/img/image-att_224_for_220692503.png)
 
 :::tip NOTE
 
@@ -325,27 +249,12 @@ Do the following:
     
 3.  Specify the following details to add HubSpot and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-
-Open image-20250511-080246.png
-
-![image-20250511-080246.png](blob:https://saasxl.atlassian.net/82380bb0-007e-4c7c-9553-f8012b7d621f)
-
-**Field**
-
-**Description**
-
-Connection name
-
-Enter a unique name for the connection.
-
-Access token
-
-Specify the HubSpot access token.
-
-Start Date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
-
+![sample](/img/image-20250511-080246.png)
+| Field | Description |
+|---|---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Access token** | Specify the HubSpot access token. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
 ### Adding MariaDB as datasource
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
