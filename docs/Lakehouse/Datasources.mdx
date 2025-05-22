@@ -21,7 +21,7 @@ Do the following to add a datasource.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-    ![sample](/img/image-20250505-070559.png)
+    ![Add-datasource](/img/image-20250505-070559.png)
         
 3.  Choose a database provider from the list, for example, **MySQL**.
     
@@ -147,7 +147,6 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 | **Compression**       | Select the file compression mode from the following options: `Uncompressed`, `gzip`, `lzo`, `brotli`, `lz4`, `zstd`                                 |
 | **Null Value**        | *(No description provided)*                                                                                                                           |
 
-
 :::info  **Limitations** 
 
 We can have only one s3 account at company Level, As in Spark we can give only one Credentials while configuring.
@@ -165,7 +164,7 @@ s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only o
 
 |        MySQL    | PostgreSQL  |
 |:-------------------------:|:-------------------------:|
-|[Add MySQL](/img/image-20250506-175842.png)| [Add PostgreSQL](/img/image-20250511-112352.png)|
+|![Add MySQL](/img/image-20250506-175842.png)| ![Add PostgreSQL](/img/image-20250511-112352.png)|
 
 | Field | Description |
 |:---|:---|
@@ -175,7 +174,9 @@ s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only o
 | **Port name** | Enter the port number used by the database server. |
 | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
 | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-| **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |     
+| **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+
+5.  Click **Submit**. 
 
 ### Adding Folder as a datasource
 
@@ -197,13 +198,15 @@ s3 can be off DataGOL s3 account or the Clients s3 Account, But it can be only o
 | **Compression** | Select the file compression mode from any of the following options: **Uncompressed**, **gzip**, **lzo**, **brotli**, **lz4**, and **zstd**. |
 | **Null Value** | A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field. |
 
+5.  Click **Submit**. 
+
 After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table's data.
 
 ![Define-unique-data-table](/img/image-att_195_for_220692503.png)
 
 To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The **Files** tab will provide you with the necessary options.
 
-![sample](/img/image-att_224_for_220692503.png)
+![Define-unique-data-table1](/img/image-att_224_for_220692503.png)
 
 :::tip NOTE
 
@@ -249,12 +252,16 @@ Do the following:
     
 3.  Specify the following details to add HubSpot and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-![sample](/img/image-20250511-080246.png)
+![Add_Hubspot](/img/image-20250511-080246.png)
+
 | Field | Description |
 |---|---|
 | **Connection name** | Enter a unique name for the connection. |
 | **Access token** | Specify the HubSpot access token. |
 | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+
+4.  Click **Submit**. 
+
 ### Adding MariaDB as datasource
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -263,38 +270,20 @@ Do the following:
     
 3.  Specify the following details to add MariaDB and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
+| Field | Description |
+|---|---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Database name** | Specify the name of the existing database you want to connect to. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
-**Field**
-
-**Description**
-
-Connection name
-
-Enter a unique name for the connection.
-
-Database name
-
-Specify the name of the existing database you want to connect to.
-
-Hostname
-
-Provide the hostname or IP address of the server where the database resides.
-
-Port
-
-Enter the port number used by the database server.
-
-Username/Password
-
-Provide the credentials to access the database server.
-
-Properties
-
-Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.
+4.  Click **Submit**. 
 
 ### Adding Salesforce as datasource
 
-#### **Prequisites for adding Salesforce**
+:::info **Prequisites for adding Salesforce**
 
 The following connector information is required from the client:
 
@@ -314,6 +303,7 @@ To obtain these credentials, follow [this walkthrough](https://medium.com/@bpmme
 1.  If your Salesforce URL is not in the `X.salesforce.com` format, use your Salesforce domain name. For example, if your Salesforce URL is `awesomecompany.force.com` then use that instead of `awesomecompany.salesforce.com`.
     
 2.  Use the user credentials when logging in to generate OAuth tokens.
+:::
     
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -322,34 +312,17 @@ To obtain these credentials, follow [this walkthrough](https://medium.com/@bpmme
     
 3.  Specify the following details to add Salesforce and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-085826.png
-    
-    ![image-20250511-085826.png](blob:https://saasxl.atlassian.net/e601d18d-41cd-4478-80f8-2b6a290dc224)
-    
+    ![Add_Salesforce](/img/image-20250511-085826.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection name** | Enter a unique name for the Salesforce connection. |
+| **Client ID/Client secret** | Enter your Salesforce developer application's Client ID and Secret. |
+| **Refresh Token** | Enter your application's [Salesforce Refresh Token](https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm) used for Airbyte to access your Salesforce account. |
+| **Domain** | The Domain for your Salesforce account, e.g. [datagol.salesforce.com](http://datagol.salesforce.com/), [salesforce.your-domain.com](http://salesforce.your-domain.com/) |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |    
 
-**Description**
-
-Connection name
-
-Enter a unique name for the Salesforce connection.
-
-Client ID/Client secret
-
-Enter your Salesforce developer application's Client ID and Secret
-
-Refresh Token
-
-Enter your application's [Salesforce Refresh Token](https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm "https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm") used for Airbyte to access your Salesforce account.
-
-Domain
-
-The Domain for your Salesforce account, e.g. [datagol.salesforce.com](http://datagol.salesforce.com/ "http://datagol.salesforce.com"), [salesforce.your-domain.com](http://salesforce.your-domain.com/ "http://salesforce.your-domain.com")
-
-Start Date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
+4.  Click **Submit**. 
 
 ### Adding Snowflake as datasource
 
@@ -359,42 +332,19 @@ Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated
     
 3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-112121.png
-    
-    ![image-20250511-112121.png](blob:https://saasxl.atlassian.net/5dee6a3d-27eb-46a0-a654-44db662b7b76)
-    
+   ![Add_Snowflake](/img/image-20250511-112121.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+| **Database Name** | Specify the name of the existing database you want to connect to. |
+| **Schema Name** | Specify the schema name for your connection. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
-**Description**
-
-Connection Name
-
-Enter a unique name for this connection. This will help you identify it later.
-
-Database Name
-
-Specify the name of the existing database you want to connect to.
-
-Schema Name
-
-Specify the schema name for your connection.
-
-Hostname
-
-Provide the hostname or IP address of the server where the database resides.
-
-Port
-
-Enter the port number used by the database server.
-
-Username/Password
-
-Provide the credentials to access the database server
-
-Properties
-
-Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.
+4.  Click **Submit**. 
 
 ### Adding MongoDB Atlas datasource
 
@@ -403,48 +353,24 @@ Specify additional settings by entering key/value pairs. Each pair represents a 
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add MongoDB Atlas and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
-      
     
-    Open image-20250511-111912.png
-    
-    ![image-20250511-111912.png](blob:https://saasxl.atlassian.net/d33a472f-9fc8-4876-9984-e6fc928775db)
-    
+   ![Add_MongoDB](/img/image-20250511-111912.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+| **Database Name** | Specify the name of the existing database you want to connect to. |
+| **Schema Name** | Specify the schema name for your connection. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
-**Description**
-
-Connection Name
-
-Enter a unique name for this connection. This will help you identify it later.
-
-Database Name
-
-Specify the name of the existing database you want to connect to.
-
-Schema Name
-
-Specify the schema name for your connection.
-
-Hostname
-
-Provide the hostname or IP address of the server where the database resides.
-
-Port
-
-Enter the port number used by the database server.
-
-Username/Password
-
-Provide the credentials to access the database server
-
-Properties
-
-Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.
+4.  Click **Submit**. 
 
 ### Adding NetSuite as datasource
 
-#### **Prequisites for adding NetSuite**
+:::info **Prequisites for adding NetSuite**
 
 The following connector information is required from the client:
 
@@ -467,9 +393,9 @@ Do the following:
 
 **1. Create NetSuite account**
 
-1.  Create [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US") on Oracle NetSuite
+1.  Create [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US") on Oracle NetSuite.
     
-2.  Confirm your Email
+2.  Confirm your Email.
     
 
 **2. Setup NetSuite account**
@@ -478,56 +404,53 @@ Do the following:
 
 1.  Login into your NetSuite [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US")
     
-2.  Go to **Setup** » **Company** » **Company Information**
+2.  Go to **Setup** » **Company** » **Company Information**.
     
-3.  Copy your Account ID (Realm). It should look like **1234567** for the `Production` env. or **1234567_SB2**
-    
-    -   for a `Sandbox`
-        
+3.  Copy your Account ID (Realm). It should look like **1234567** for the `Production` env. or **1234567_SB2** for a `Sandbox`.      
 
 **b. Enable features**
 
-1.  Go to **Setup** » **Company** » **Enable Features**
+1.  Go to **Setup** » **Company** » **Enable Features**.
     
-2.  Click on **SuiteCloud** tab
+2.  Click on **SuiteCloud** tab.
     
-3.  Scroll down to **SuiteScript** section
+3.  Scroll down to **SuiteScript** section.
     
-4.  Enable checkbox for `CLIENT SUITESCRIPT` and `SERVER SUITESCRIPT`
+4.  Enable checkbox for `CLIENT SUITESCRIPT` and `SERVER SUITESCRIPT`.
     
-5.  Scroll down to **Manage Authentication** section
+5.  Scroll down to **Manage Authentication** section.
     
-6.  Enable checkbox `TOKEN-BASED AUTHENTICATION`
+6.  Enable checkbox `TOKEN-BASED AUTHENTICATION`.
     
-7.  Scroll down to **SuiteTalk (Web Services)**
+7.  Scroll down to **SuiteTalk (Web Services)**.
     
-8.  Enable checkbox `REST WEB SERVISES`
+8.  Enable checkbox `REST WEB SERVISES`.
     
-9.  Save the changes
+9.  Save the changes.
     
 
 **c. Create Integration (obtain Consumer Key and Consumer Secret)**
 
-1.  Go to **Setup** » **Integration** » **Manage Integrations** » **New**
+1.  Go to **Setup** » **Integration** » **Manage Integrations** » **New**.
     
-2.  Fill the **Name** field (we recommend to put `airbyte-rest-integration` for a name)
+2.  Fill the **Name** field (we recommend to put `airbyte-rest-integration` for a name).
     
-3.  Make sure the **State** is `enabled`
+3.  Make sure the **State** is `enabled`.
     
-4.  Enable checkbox `Token-Based Authentication` in **Authentication** section
+4.  Enable checkbox `Token-Based Authentication` in **Authentication** section.
     
-5.  Save changes
+5.  Save changes.
     
-6.  After that, **Consumer Key** and **Consumer Secret** will be showed once (copy them to the safe place)
+6.  After that, **Consumer Key** and **Consumer Secret** will be showed once (copy them to the safe place).
     
 
 **d. Setup Role**
 
-1.  Go to **Setup** » **Users/Roles** » **Manage Roles** » **New**
+1.  Go to **Setup** » **Users/Roles** » **Manage Roles** » **New**.
     
-2.  Fill the **Name** field (we recommend to put `airbyte-integration-role` for a name)
+2.  Fill the **Name** field (we recommend to put `airbyte-integration-role` for a name).
     
-3.  Scroll down to **Permissions** tab
+3.  Scroll down to **Permissions** tab.
     
 4.  (REQUIRED) Click on `Transactions` and manually `add` all the dropdown entities with either `full` or `view` access level.
     
@@ -538,87 +461,62 @@ Do the following:
 7.  (REQUIRED) Click on `Setup` and manually `add` all the dropdown entities with either `full` or `view` access level.
     
 
--   Make sure you've done all `REQUIRED` steps correctly, to avoid sync issues in the future.
+-   Make sure you have done all the `REQUIRED` steps correctly, to avoid sync issues in the future.
     
--   Please edit these params again when you `rename` or `customise` any `Object` in NetSuite for `airbyte-integration-role` to reflect such changes.
+-   Edit these parameters again when you `rename` or `customise` any `Object` in NetSuite for `airbyte-integration-role` to reflect such changes.
     
 
 **e. Setup User**
 
-1.  Go to **Setup** » **Users/Roles** » **Manage Users**
+1.  Go to **Setup** » **Users/Roles** » **Manage Users**.
     
-2.  In column `Name` click on the user’s name you want to give access to the `airbyte-integration-role`
+2.  In column `Name` click on the user’s name you want to give access to the `airbyte-integration-role`.
     
-3.  Then click on **Edit** button under the user’s name
+3.  Then click on **Edit** button under the user’s name.
     
-4.  Scroll down to **Access** tab at the bottom
+4.  Scroll down to **Access** tab at the bottom.
     
-5.  Select from dropdown list the `airbyte-integration-role` role which you created in step 2.4
+5.  Select from dropdown list the `airbyte-integration-role` role which you created in step 2.4.
     
-6.  Save changes
+6.  Save changes.
     
 
 **f. Create Access Token for role**
 
-1.  Go to **Setup** » **Users/Roles** » **Access Tokens** » **New**
+1.  Go to **Setup** » **Users/Roles** » **Access Tokens** » **New**.
     
-2.  Select an **Application Name**
+2.  Select an **Application Name**.
     
-3.  Under **User** select the user you assigned the `airbyte-integration-role` in the step **2.4**
+3.  Under **User** select the user you assigned the `airbyte-integration-role` in the step **2.4**.
     
-4.  Inside **Role** select the one you gave to the user in the step **2.5**
+4.  Inside **Role** select the one you gave to the user in the step **2.5**.
     
-5.  Under **Token Name** you can give a descriptive name to the Token you are creating (we recommend to put `airbyte-rest-integration-token` for a name)
+5.  Under **Token Name** you can give a descriptive name to the Token you are creating (we recommend to put `airbyte-rest-integration-token` for a name).
     
-6.  Save changes. After that, **Token ID** and **Token Secret** will be showed once (copy them to the safe place)
-    
+6.  Save changes. After that, **Token ID** and **Token Secret** will be showed once (copy them to the safe place).
 
+:::
+    
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add NetSuite and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111639.png
+    ![Add_NetSuite](/img/image-20250511-111639.png)
     
-    ![image-20250511-111639.png](blob:https://saasxl.atlassian.net/9773cfc2-e171-4047-b60c-65a09e12a0e4)
-    
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+| **Realm (Account ID)** | Netsuite realm e.g. 2344535 for `production` or 2344535_SB1, as for the `sandbox` |
+| **Consumer Key** | Consumer key associated with your integration |
+| **Consumer Secret** | Consumer secret associated with your integration |
+| **Token Key (Token ID)** | Access token key |
+| **Token Secret*** | Access token secret |
+| **Start Date*** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
+| **Window in Days** | The amount of days used to query the data with date chunks. Set smaller value, if you have lots of data. |
 
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for this connection. This will help you identify it later.
-
-Realm (Account ID) 
-
-Netsuite realm e.g. 2344535 for `production` or 2344535_SB1, as for the `sandbox`
-
-Consumer Key 
-
-Consumer key associated with your integration **key associated with your integration**
-
-Consumer Secret 
-
-Consumer secret associated with your integration
-
-Token Key (Token ID) 
-
-Access token key
-
-Token Secret *
-
-Access token secret
-
-Start Date *
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.
-
-Window in Days 
-
-The amount of days used to query the data with date chunks. Set smaller value, if you have lots of data.
+4.  Click **Submit**. 
 
 ### Adding NetSuite Reporting as datasource
 
@@ -628,30 +526,15 @@ The amount of days used to query the data with date chunks. Set smaller value, i
     
 3.  Specify the following details to add NetSuite Reporting and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111558.png
-    
-    ![image-20250511-111558.png](blob:https://saasxl.atlassian.net/91bf00cc-3caa-42f0-a187-0388ac9d4c36)
-    
+    ![Add_Netsuite_Reporting](/img/image-20250511-111558.png)
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Consumer Key** | Specify the Consumer Key for authentication. |
+| **Token Key / Secret** | Specify the Token key and secret for authenticating the access. |
+| **Start Date** | Specify the date from which to begin replicating extracting data. |
 
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-Consumer Key
-
-Specify the Consumer Key for authentication
-
-Token Key / Secret
-
-Specify the Token key and secret for authenticating the access.
-
-Start Date
-
-Specify the date from which to begin replicating extracting data.
+4.  Click **Submit**. 
 
 ### Adding NetSuite-JDBC as datasource
 
@@ -661,49 +544,28 @@ Specify the date from which to begin replicating extracting data.
     
 3.  Specify the following details to add NetSuite-JDBC and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111519.png
-    
-    ![image-20250511-111519.png](blob:https://saasxl.atlassian.net/24fc4a39-c90c-4d9f-ab96-2852089082c5)
-    
+    ![NetSuite-JDBC](/img/image-20250511-111519.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Account ID** | Specify the account ID. |
+| **Role ID** | Specify the role ID. |
+| **Username/password** | Provide the credentials for the account. |
+| **Hostname** | Specify the host address of the database server. |
+| **Port** | Specify the port number of the database server. |
 
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-Account ID
-
-Specify the account ID.
-
-Role ID
-
-Specify the role ID.
-
-Username/password
-
-Provide the credentials for the account.
-
-Hostname
-
-Specify the host address of the database server.
-
-Port
-
-Specify the port number of the database server.
+4.  Click **Submit**. 
 
 ### Adding Pipedrive as datasource
 
-#### **Prerequisite for adding Pipedrive**
+:::info **Prerequisite for adding Pipedrive**
 
 The following connector information is required from the client:
 
 -   API Token
     
 -   Start Date
-    
 
 Do the following:
 
@@ -720,7 +582,9 @@ Do the following:
     See [How to find the API Token](https://pipedrive.readme.io/docs/how-to-find-the-api-token "https://pipedrive.readme.io/docs/how-to-find-the-api-token") for detailed information.
     
 4.  You can get the API token manually from the Pipedrive web app by going to _account name (on the top right)  > **Company settings** > **Personal preferences** > **API**_ or by clicking [here](https://app.pipedrive.com/settings/api "https://app.pipedrive.com/settings/api") (in case you have multiple companies open at the same time, this link will redirect you to the API token of the last opened company).
-    
+
+:::
+
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -728,30 +592,19 @@ Do the following:
     
 3.  Specify the following details to add Pipedrive and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-095929.png
+    ![Add_Pipedrive](/img/image-20250511-095929.png)
     
-    ![image-20250511-095929.png](blob:https://saasxl.atlassian.net/5110b22a-298c-49cf-8dfe-a975d47ca114)
-    
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **API Token** | The Pipedrive API Token. This is a mandatory field. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. This is a mandatory field. |  
 
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-API Token 
-
-The Pipedrive API Token. This is a mandatory field.
-
-Start Date 
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. This is a mandatory field.
+4.  Click **Submit**. 
 
 ### Adding Amplitude as datasource
 
-#### **Prequisites for adding Amplitude**
+:::info **Prequisites for adding Amplitude**
 
 The following connector information is required from the client:
 
@@ -762,7 +615,7 @@ The following connector information is required from the client:
 -   Start Date
     
 
-Do the following to
+Do the following:
 
 1.  Log on to your [Amplitude account](https://amplitude.com/ "https://amplitude.com/").
     
@@ -775,40 +628,28 @@ Do the following to
 
 Create a project first, if you don’t have one already. Refer to [Create a project in Amplitude](https://amplitude.com/docs/get-started/create-project "https://amplitude.com/docs/get-started/create-project").
 
+:::
+
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Amplitude and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-100205.png
+    ![Add_Amplitude](/img/image-20250511-100205.png)
     
-    ![image-20250511-100205.png](blob:https://saasxl.atlassian.net/83052dcb-86a5-41bb-a55d-441691c59ba6)
-    
+ Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **API Key** | Amplitude API Key. See the docs for more information on how to generate this key. |
+| **Secret Key** | Amplitude Secret Key. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
 
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-API Key
-
-Amplitude API Key. See the docs for more information on how to generate this key.
-
-Secret Key 
-
-Amplitude Secret Key.
-
-Start Date 
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.
+4.  Click **Submit**. 
 
 ### Adding ChargeBee as datasource
 
-#### **Prequisites for adding Chargebee**
+:::info **Prequisites for adding Chargebee**
 
 The following connector information is required from the client:
 
@@ -826,11 +667,9 @@ Do the following to
 2.  To create and configure the API keys, select **Settings** > **Configure Chargebee** > **API Keys and Webhooks**
     
 3.  Click on the **API Keys** tab. Any existing API keys are listed.
-    
 
-Open image-20250112-214950.png
-
-![image-20250112-214950.png](blob:https://saasxl.atlassian.net/f8c50730-6167-418a-a334-70f9dbeab8cc)
+    ![Chargebee](/img/image-20250112-214950.png)
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -838,34 +677,20 @@ Open image-20250112-214950.png
     
 3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-100812.png
-    
-    ![image-20250511-100812.png](blob:https://saasxl.atlassian.net/8164e60d-9296-4c51-81dd-e8fd103e13f8)
-    
+    ![Add_Chargebee](/img/image-20250511-100812.png) 
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **API Key** | ChargeBee API Key. |
+| **Site** | The site prefix for your ChargeBee instance. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |    
 
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-API Key
-
-ChargeBee API Key.
-
-Site
-
-The site prefix for your chargeBee instance.
-
-Start Date 
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.
+4.  Click **Submit**. 
 
 ### Adding Shopify as datasource
 
-#### **Prerequisite for adding Shopify**
+:::info **Prerequisite for adding Shopify**
 
 The following connector information is required from the client:
 
@@ -898,6 +723,7 @@ Do the following:
     
 
 Refer [Where can I get Shopify API password](https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password "https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password") [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -905,38 +731,21 @@ Refer [Where can I get Shopify API password](https://www.shopping-cart-migration
     
 3.  Specify the following details to add Shopify and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-101024.png
-    
-    ![image-20250511-101024.png](blob:https://saasxl.atlassian.net/33548c16-c2e3-45c7-adda-a54cdb01bfc4)
-    
+    ![Add_Shopify](/img/image-20250511-101024.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Shopify Store** | The name of your Shopify store found in the URL. |
+| **Authorization Method** | The authorization method to use to retrieve data from Shopify. |
+| **API Password** | The API Password for your private application in the `Shopify` store. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
 
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-Shopify Store 
-
-The name of your Shopify store found in the URL.
-
-Authorization Method 
-
-The authorization method to use to retrieve data from Shopify.
-
-API Password 
-
-The API Password for your private application in the `Shopify` store
-
-Start Date 
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date.
+4.  Click **Submit**. 
 
 ### Adding Monday as datasource
 
-#### **Prerequisite for adding Monday**
+:::info **Prerequisite for adding Monday**
 
 The following connector information is required from the client:
 
@@ -970,7 +779,7 @@ Do the following:
     4.  Click **My Access Tokens** > **Show**.
         
     5.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
-        
+:::        
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -978,26 +787,15 @@ Do the following:
     
 3.  Specify the following details to add Monday and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-101736.png
-    
-    ![image-20250511-101736.png](blob:https://saasxl.atlassian.net/241a0992-0300-467c-8366-b2a1519f320d)
-    
+    ![Add_Monday](/img/image-20250511-101736.png)
+        
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Authorization Method** | The authorization method to use to retrieve data from Monday. |
+| **API Token** | API Token for making authenticated requests. |
 
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-Authorization Method 
-
-The authorization method to use to retrieve data from Monday.
-
-API Token 
-
-API Token for making authenticated requests.
+4.  Click **Submit**. 
 
 ### Adding DB2 as datasource
 
@@ -1007,42 +805,22 @@ API Token for making authenticated requests.
     
 3.  Specify the following details to add DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111410.png
-    
-    ![image-20250511-111410.png](blob:https://saasxl.atlassian.net/c48ab3c4-72c4-43c4-b20a-bf488d9c1afb)
-    
+    ![Add_DB2](/img/image-20250511-111410.png)
 
-**Field**
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Database Name** | Specify the name of the existing database you want to connect to. |
+| **Host Name** | Specify the host address of the database server. |
+| **Port** | Specify the port number of the database server. |
+| **Username / Password** | Provide the credentials for the account. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
-**Description**
-
-Connection Name 
-
-Enter a unique name for the connection.
-
-Database Name 
-
-Specify the name of the existing database you want to connect to.
-
-Host Name 
-
-Specify the host address of the database server.
-
-Port 
-
-Specify the port number of the database server.
-
-Username / Password 
-
-Provide the credentials for the account.
-
-Properties
-
-Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value.
+4.  Click **Submit**. 
 
 ### Adding Quickbooks as datasource
 
-#### **Prerequisite for adding Quickbooks**
+:::info **Prerequisite for adding Quickbooks**
 
 The following connector information is required from the client:
 
@@ -1093,58 +871,25 @@ Do the following:
     
 3.  Specify the following details to add Quickbooks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-103419.png
-    
-    ![image-20250511-103419.png](blob:https://saasxl.atlassian.net/2a79dcac-389e-4717-88c0-a202157990ee)
-    
+   ![sample](/img/image-20250511-103419.png) 
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Auth Type** | Specify the authentication type. |
+| **Access Token** | Specify the Quickbooks access token. |
+| **Client ID** | Identifies which app is making the request. Obtain this value from the Keys tab on the app profile via My Apps on the developer site. There are two versions of this key: development and production. |
+| **Realm ID** | Labeled Company ID. The Make API Calls panel is populated with the realm id and the current access token. |
+| **Client secret** | Obtain this value from the **Keys** tab on the app profile via **My Apps** on the developer site. There are two versions of this key: development and production. |
+| **Refresh Token** | Specify a token that can be used when refreshing the access token. |
+| **Token Expiry Date** | Specify the expiry date of the token. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+| **Sandbox** | Use the toggle to specify whether to use the sandbox or production environment. |
 
-**Field**
-
-**Description**
-
-Connection Name 
-
-Enter a unique name for the connection.
-
-Auth Type 
-
-Specify the authentication type.
-
-Access Token
-
-Specify the Quickbooks access token.
-
-Client ID 
-
-Identifies which app is making the request. Obtain this value from the Keys tab on the app profile via My Apps on the developer site. There are two versions of this key: development and production.
-
-Realm ID
-
-Labeled Company ID. The Make API Calls panel is populated with the realm id and the current access token.
-
-Client secret
-
-Obtain this value from the **Keys** tab on the app profile via **My Apps** on the developer site. There are two versions of this key: development and production.
-
-Refresh Token
-
-Specify a  token that can be used when refreshing the access token.
-
-Token Expiry Date
-
-Specify the expiry date of the token.
-
-Start Date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
-
-Sandbox
-
-Use the toggle to specify whether to use the sandbox or production environment.
+4.  Click **Submit**. 
 
 ### Adding SurveyMonkey as datasource
 
-#### **Prerequisite for adding SurveyMonkey**
+:::info **Prerequisite for adding SurveyMonkey**
 
 The following connector information is required from the client:
 
@@ -1167,6 +912,7 @@ Do the following:
 0:00  /  0:26
 
 1x
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -1174,34 +920,20 @@ Do the following:
     
 3.  Specify the following details to add SurveyMonkey and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-104259.png
+    ![Add_SurveyMonkey](/img/image-20250511-104259.png)
     
-    ![image-20250511-104259.png](blob:https://saasxl.atlassian.net/9b381d3d-06a5-4b1b-a625-21d1337bc7b7)
-    
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Access Token** | Specify the SurveyMonkey access token. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+| **Origin datacenter of the SurveyMonkey account** | Depending on the originating datacenter of the SurveyMonkey account, the API access URL may be different. |
 
-**Field**
-
-**Description**
-
-Connection Name 
-
-Enter a unique name for the connection.
-
-Access Token
-
-Specify the SurveyMonkey access token.
-
-Start Date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
-
-Origin datacenter of the SurveyMonkey account
-
-Depending on the originating datacenter of the SurveyMonkey account, the API access URL may be different.
+4.  Click **Submit**. 
 
 ### Adding Cvent as datasource
 
-#### **Prerequisite for adding Cvent**
+:::info **Prerequisite for adding Cvent**
 
 The following connector information is required from the client:
 
@@ -1237,42 +969,26 @@ Do the following:
         -   **Client ID**: A unique identifier for your application.
             
         -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
+:::
             
-
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Cvent and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111305.png
+   ![Add_Cvent](/img/image-20250511-111305.png)  
+
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Client ID** | A unique identifier for your application. |
+| **Client secret** | A secret key that is used for securely authenticating API requests on behalf of your app. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
     
-    ![image-20250511-111305.png](blob:https://saasxl.atlassian.net/b8220566-a221-4683-a6e5-6f34444c532b)
-    
-
-**Field**
-
-**Description**
-
-Connection Name 
-
-Enter a unique name for the connection.
-
-Client ID 
-
-A unique identifier for your application.
-
-Client secret
-
-A secret key that is used for securely authenticating API requests on behalf of your app.
-
-Start Date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
-
 ### Adding SFTP Bulk as datasource
 
-#### **Prerequisite for adding SFTP Bulk**
+:::info **Prerequisite for adding SFTP Bulk**
 
 The following connector information is required from the client:
 
@@ -1308,53 +1024,21 @@ Do the following:
     
 3.  Specify the following details to add SFTP Bulk and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-111209.png
+   ![Add_SFTP_Hulk](/img/image-20250511-111209.png)
+
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **File Type** | Currently, only CSV files are supported. |
+| **Username / Password** | Specify the client credentials. |
+| **Host Address** | Specify the SFTP server address. |
+| **Port** | Specify the port number of the SFTP server. |
+| **Stream Name** | Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names. Sync modes (incremental/full refresh) are configured at the _stream_ level, not at the pipeline level. |
+| **Folder Path** | Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., `/home/Ubuntu/SFTP/credit`). Ensure this path is accurate. |
+| **Start Date** | Specify the date from which to begin replicating data. This allows for historical data selection. |
+| **CSV separator** | Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured. |
+4.  Click **Submit**. 
     
-    ![image-20250511-111209.png](blob:https://saasxl.atlassian.net/719dfe85-ae7b-43b3-9eb3-16b1e9c97ea6)
-    
-
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-File Type
-
-Currently, only CSV files are supported.
-
-Username / Password
-
-Specify the client credentials.
-
-Host Address
-
-Specify the SFTP server address.
-
-Port
-
-Specify the port number of the SFTP server.
-
-Stream Name
-
-Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names.
-
-Sync modes (incremental/full refresh) are configured at the _stream_ level, not at the pipeline level.
-
-Folder Path
-
-Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., `/home/Ubuntu/SFTP/credit`). Ensure this path is accurate.
-
-Start Date
-
-Specify the date from which to begin replicating data. This allows for historical data selection.
-
-CSV separator
-
-Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured.
-
 ### Adding SAP HANA as datasource
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -1363,39 +1047,17 @@ Specify the delimiter used in the CSV files (comma is the default). Other separa
     
 3.  Specify the following details to add SAP HANA and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-110627.png
+    ![Add_SAP_HANA](/img/image-20250511-110627.png) 
+
+| Field | Description |
+|---|---|
+| **Connection Name** | Enter a unique name for the connection. |
+| **Database Name** | Specify the name of the existing data that you want to connect. |
+| **Schema Name** | Specify the schema name. |
+| **Hostname** | Provide the hostname of the server where the database resides. |
+| **Port** | Specify the port number used by the database server. |
+| **Username/Password** | Specify the credentials to access the server. |
     
-    ![image-20250511-110627.png](blob:https://saasxl.atlassian.net/efeb49aa-a31a-4b0a-aad4-1dfda8fa3de1)
-    
-
-**Field**
-
-**Description**
-
-Connection Name
-
-Enter a unique name for the connection.
-
-Database Name
-
-Specify the name of the existing data that you want to connect.
-
-Schema Name
-
-Specify the schema name.
-
-Hostname
-
-Provide the hostname of the server where the database resides.
-
-Port
-
-Specify the port number used by the database server.
-
-Username/Password
-
-Specify the credentials to access the server.
-
 ### Adding Azure File as datasource
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -1404,57 +1066,19 @@ Specify the credentials to access the server.
     
 3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    Open image-20250511-110915.png
-    
-    ![image-20250511-110915.png](blob:https://saasxl.atlassian.net/83a9954a-f7a1-430c-b513-f30948471832)
-    
+    ![Add_SAP_HANA](/img/image-20250511-110915.png)  
 
-**Field**
-
-**Description**
-
-Connection name
-
-Enter a unique name for the connection.
-
-File Format
-
-Specify any of the following file format:
-
--   **CSV**
-    
--   **Parquet**
-    
--   **JSON**
-    
-
-Path to Azure container
-
-Path of the Azure Blob where the files exist. For example: [containername@storageaccountname.dfs.core.windows.net](mailto:containername@storageaccountname.dfs.core.windows.net "mailto:containername@storageaccountname.dfs.core.windows.net")/path
-
-Separator
-
-Specify the separator character to separate the data. For example: “,”
-
-Header
-
-Toggle to indicate if the first row of your CSV contains column headers.
-
-Infer Schema
-
-Toggle to automatically determine the data type of each column in your data.
-
-Multiline
-
-Toggle to format the JSON output across multiple lines.
-
-Compression
-
-Select the file compression mode.
-
-Start date
-
-Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years.
+| Field | Description |
+|---|---|
+| **Connection name** | Enter a unique name for the connection. |
+| **File Format** | Specify any of the following file formats:<br>- **CSV**<br>- **Parquet**<br>- **JSON** |
+| **Path to Azure container** | Path of the Azure Blob where the files exist. For example: [containername@storageaccountname.dfs.core.windows.net](mailto:containername@storageaccountname.dfs.core.windows.net)/path |
+| **Separator** | Specify the separator character to separate the data. For example: “,” |
+| **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
+| **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
+| **Multiline** | Toggle to format the JSON output across multiple lines. |
+| **Compression** | Select the file compression mode. |
+| **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
 
 ### **Viewing the created data source**
 
