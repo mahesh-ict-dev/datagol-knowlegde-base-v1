@@ -136,6 +136,7 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 
 | **Field**             | **Description**                                                                                                                                       |
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Connection name**   | Enter a unique name for the connection.                                                                                                              |
 | **File Format**       | Specify any of the following file formats: `CSV`, `Parquet`, `JSON`, `Delta` (Coming soon)                                                           |
 | **Path to S3 bucket** | Specify the path of the S3 bucket where the files exist.                                                                                             |
@@ -282,9 +283,20 @@ Do the following:
 | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
 4.  Click **Submit**. 
+| Field | Description |
+|---|---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Database name** | Specify the name of the existing database you want to connect to. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
 
 ### Adding Salesforce as datasource
 
+:::info **Prequisites for adding Salesforce**
 :::info **Prequisites for adding Salesforce**
 
 The following connector information is required from the client:
@@ -373,6 +385,7 @@ To obtain these credentials, follow [this walkthrough](https://medium.com/@bpmme
 ### Adding NetSuite as datasource
 
 :::info **Prequisites for adding NetSuite**
+:::info **Prequisites for adding NetSuite**
 
 The following connector information is required from the client:
 
@@ -396,7 +409,9 @@ Do the following:
 **1. Create NetSuite account**
 
 1.  Create [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US") on Oracle NetSuite.
+1.  Create [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US") on Oracle NetSuite.
     
+2.  Confirm your Email.
 2.  Confirm your Email.
     
 
@@ -407,51 +422,71 @@ Do the following:
 1.  Login into your NetSuite [account](https://system.netsuite.com/pages/customerlogin.jsp?country=US "https://system.netsuite.com/pages/customerlogin.jsp?country=US")
     
 2.  Go to **Setup** » **Company** » **Company Information**.
+2.  Go to **Setup** » **Company** » **Company Information**.
     
+3.  Copy your Account ID (Realm). It should look like **1234567** for the `Production` env. or **1234567_SB2** for a `Sandbox`.      
 3.  Copy your Account ID (Realm). It should look like **1234567** for the `Production` env. or **1234567_SB2** for a `Sandbox`.      
 
 **b. Enable features**
 
 1.  Go to **Setup** » **Company** » **Enable Features**.
+1.  Go to **Setup** » **Company** » **Enable Features**.
     
+2.  Click on **SuiteCloud** tab.
 2.  Click on **SuiteCloud** tab.
     
 3.  Scroll down to **SuiteScript** section.
+3.  Scroll down to **SuiteScript** section.
     
+4.  Enable checkbox for `CLIENT SUITESCRIPT` and `SERVER SUITESCRIPT`.
 4.  Enable checkbox for `CLIENT SUITESCRIPT` and `SERVER SUITESCRIPT`.
     
 5.  Scroll down to **Manage Authentication** section.
+5.  Scroll down to **Manage Authentication** section.
     
+6.  Enable checkbox `TOKEN-BASED AUTHENTICATION`.
 6.  Enable checkbox `TOKEN-BASED AUTHENTICATION`.
     
 7.  Scroll down to **SuiteTalk (Web Services)**.
+7.  Scroll down to **SuiteTalk (Web Services)**.
     
 8.  Enable checkbox `REST WEB SERVISES`.
+8.  Enable checkbox `REST WEB SERVISES`.
     
+9.  Save the changes.
 9.  Save the changes.
     
 
 **c. Create Integration (obtain Consumer Key and Consumer Secret)**
 
 1.  Go to **Setup** » **Integration** » **Manage Integrations** » **New**.
+1.  Go to **Setup** » **Integration** » **Manage Integrations** » **New**.
     
+2.  Fill the **Name** field (we recommend to put `airbyte-rest-integration` for a name).
 2.  Fill the **Name** field (we recommend to put `airbyte-rest-integration` for a name).
     
 3.  Make sure the **State** is `enabled`.
+3.  Make sure the **State** is `enabled`.
     
+4.  Enable checkbox `Token-Based Authentication` in **Authentication** section.
 4.  Enable checkbox `Token-Based Authentication` in **Authentication** section.
     
 5.  Save changes.
+5.  Save changes.
     
+6.  After that, **Consumer Key** and **Consumer Secret** will be showed once (copy them to the safe place).
 6.  After that, **Consumer Key** and **Consumer Secret** will be showed once (copy them to the safe place).
     
 
 **d. Setup Role**
 
 1.  Go to **Setup** » **Users/Roles** » **Manage Roles** » **New**.
+1.  Go to **Setup** » **Users/Roles** » **Manage Roles** » **New**.
     
 2.  Fill the **Name** field (we recommend to put `airbyte-integration-role` for a name).
+2.  Fill the **Name** field (we recommend to put `airbyte-integration-role` for a name).
     
+3.  Scroll down to **Permissions** tab.
 3.  Scroll down to **Permissions** tab.
     
 4.  (REQUIRED) Click on `Transactions` and manually `add` all the dropdown entities with either `full` or `view` access level.
@@ -464,36 +499,53 @@ Do the following:
     
 
 -   Make sure you have done all the `REQUIRED` steps correctly, to avoid sync issues in the future.
+-   Make sure you have done all the `REQUIRED` steps correctly, to avoid sync issues in the future.
     
+-   Edit these parameters again when you `rename` or `customise` any `Object` in NetSuite for `airbyte-integration-role` to reflect such changes.
 -   Edit these parameters again when you `rename` or `customise` any `Object` in NetSuite for `airbyte-integration-role` to reflect such changes.
     
 
 **e. Setup User**
 
 1.  Go to **Setup** » **Users/Roles** » **Manage Users**.
+1.  Go to **Setup** » **Users/Roles** » **Manage Users**.
     
+2.  In column `Name` click on the user’s name you want to give access to the `airbyte-integration-role`.
 2.  In column `Name` click on the user’s name you want to give access to the `airbyte-integration-role`.
     
 3.  Then click on **Edit** button under the user’s name.
+3.  Then click on **Edit** button under the user’s name.
     
+4.  Scroll down to **Access** tab at the bottom.
 4.  Scroll down to **Access** tab at the bottom.
     
 5.  Select from dropdown list the `airbyte-integration-role` role which you created in step 2.4.
+5.  Select from dropdown list the `airbyte-integration-role` role which you created in step 2.4.
     
+6.  Save changes.
 6.  Save changes.
     
 
 **f. Create Access Token for role**
 
 1.  Go to **Setup** » **Users/Roles** » **Access Tokens** » **New**.
+1.  Go to **Setup** » **Users/Roles** » **Access Tokens** » **New**.
     
+2.  Select an **Application Name**.
 2.  Select an **Application Name**.
     
 3.  Under **User** select the user you assigned the `airbyte-integration-role` in the step **2.4**.
+3.  Under **User** select the user you assigned the `airbyte-integration-role` in the step **2.4**.
     
+4.  Inside **Role** select the one you gave to the user in the step **2.5**.
 4.  Inside **Role** select the one you gave to the user in the step **2.5**.
     
 5.  Under **Token Name** you can give a descriptive name to the Token you are creating (we recommend to put `airbyte-rest-integration-token` for a name).
+5.  Under **Token Name** you can give a descriptive name to the Token you are creating (we recommend to put `airbyte-rest-integration-token` for a name).
+    
+6.  Save changes. After that, **Token ID** and **Token Secret** will be showed once (copy them to the safe place).
+
+:::
     
 6.  Save changes. After that, **Token ID** and **Token Secret** will be showed once (copy them to the safe place).
 
@@ -562,6 +614,7 @@ Do the following:
 ### Adding Pipedrive as datasource
 
 :::info **Prerequisite for adding Pipedrive**
+:::info **Prerequisite for adding Pipedrive**
 
 The following connector information is required from the client:
 
@@ -588,6 +641,9 @@ Do the following:
 :::
 
 
+:::
+
+
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
@@ -607,6 +663,7 @@ Do the following:
 ### Adding Amplitude as datasource
 
 :::info **Prequisites for adding Amplitude**
+:::info **Prequisites for adding Amplitude**
 
 The following connector information is required from the client:
 
@@ -617,6 +674,7 @@ The following connector information is required from the client:
 -   Start Date
     
 
+Do the following:
 Do the following:
 
 1.  Log on to your [Amplitude account](https://amplitude.com/ "https://amplitude.com/").
@@ -629,6 +687,8 @@ Do the following:
         
 
 Create a project first, if you don’t have one already. Refer to [Create a project in Amplitude](https://amplitude.com/docs/get-started/create-project "https://amplitude.com/docs/get-started/create-project").
+
+:::
 
 :::
 
@@ -651,6 +711,7 @@ Create a project first, if you don’t have one already. Refer to [Create a proj
 
 ### Adding ChargeBee as datasource
 
+:::info **Prequisites for adding Chargebee**
 :::info **Prequisites for adding Chargebee**
 
 The following connector information is required from the client:
@@ -693,6 +754,7 @@ Do the following to
 ### Adding Shopify as datasource
 
 :::info **Prerequisite for adding Shopify**
+:::info **Prerequisite for adding Shopify**
 
 The following connector information is required from the client:
 
@@ -726,6 +788,7 @@ Do the following:
 
 Refer [Where can I get Shopify API password](https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password "https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password") [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
 :::
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -747,6 +810,7 @@ Refer [Where can I get Shopify API password](https://www.shopping-cart-migration
 
 ### Adding Monday as datasource
 
+:::info **Prerequisite for adding Monday**
 :::info **Prerequisite for adding Monday**
 
 The following connector information is required from the client:
@@ -781,6 +845,7 @@ Do the following:
     4.  Click **My Access Tokens** > **Show**.
         
     5.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
+:::        
 :::        
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -822,6 +887,7 @@ Do the following:
 
 ### Adding Quickbooks as datasource
 
+:::info **Prerequisite for adding Quickbooks**
 :::info **Prerequisite for adding Quickbooks**
 
 The following connector information is required from the client:
@@ -892,6 +958,7 @@ Do the following:
 ### Adding SurveyMonkey as datasource
 
 :::info **Prerequisite for adding SurveyMonkey**
+:::info **Prerequisite for adding SurveyMonkey**
 
 The following connector information is required from the client:
 
@@ -915,6 +982,7 @@ Do the following:
 
 1x
 :::
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -935,6 +1003,7 @@ Do the following:
 
 ### Adding Cvent as datasource
 
+:::info **Prerequisite for adding Cvent**
 :::info **Prerequisite for adding Cvent**
 
 The following connector information is required from the client:
@@ -973,6 +1042,8 @@ Do the following:
         -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
 :::
             
+:::
+            
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
@@ -990,6 +1061,7 @@ Do the following:
     
 ### Adding SFTP Bulk as datasource
 
+:::info **Prerequisite for adding SFTP Bulk**
 :::info **Prerequisite for adding SFTP Bulk**
 
 The following connector information is required from the client:
