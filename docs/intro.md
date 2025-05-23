@@ -4,8 +4,11 @@ sidebar_position: 1
 
 # knowledge Base DataGOL
 
+:::info Lets Party
+
 Let's discover **DataGOL in less than 5 minutes**.
 
+:::
 
 # DataGOL Overview
 
