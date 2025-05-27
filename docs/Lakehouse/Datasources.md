@@ -29,51 +29,29 @@ Do the following to add a datasource.
     
 4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following Datasources. Click the required datasource link from the following for integration details:
     
-    -   [S3 Datasource](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-S3-data-source "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-S3-data-source")
-        
-    -   [PostgreSQL or Microsoft SQL](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Microsoft-SQL-or-PostgreSQL-as-a-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Microsoft-SQL-or-PostgreSQL-as-a-datasource")
-        
-    -   [Folder](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Folder-as-a-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Folder-as-a-datasource")
-        
-    -   [Hubspot](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-HubSpot-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-HubSpot-as-datasource")
-        
-    -   [MariaDB](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MariaDB-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MariaDB-as-datasource")
-        
-    -   [Salesforce](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Salesforce-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Salesforce-as-datasource")
-        
-    -   [Snowflake](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Snowflake-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Snowflake-as-datasource")
-        
-    -   [MongoDB Atlas](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MongoDB-Atlas-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-MongoDB-Atlas-datasource")
-        
-    -   [Netsuite](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-as-datasource")
-        
-    -   [Netsuite Reporting](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-Reporting-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-Reporting-as-datasource")
-        
-    -   [NetSuite-JDBC](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-JDBC-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-NetSuite-JDBC-as-datasource")
-        
-    -   [Pipedrive](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Pipedrive-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Pipedrive-as-datasource")
-        
-    -   [Amplitude](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Amplitude-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Amplitude-as-datasource")
-        
-    -   [ChargeBee](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--ChargeBee-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--ChargeBee-as-datasource")
-        
-    -   [Shopify](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Shopify-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Shopify-as-datasource")
-        
-    -   [Monday](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Monday-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Monday-as-datasource")
-        
-    -   [DB2](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--DB2-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--DB2-as-datasource")
-        
-    -   [Quickbooks](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Quickbooks-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Quickbooks-as-datasource")
-        
-    -   [Surveymonkey](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SurveyMonkey-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SurveyMonkey-as-datasource")
-        
-    -   [Cvent](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Cvent-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Cvent-as-datasource")
-        
-    -   [SFTP Bulk](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--SFTP-Bulk-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding--SFTP-Bulk-as-datasource")
-        
-    -   [SAP HANA](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SAP-HANA--as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-SAP-HANA--as-datasource")
-        
-    -   [Azure File](https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Azure-File-as-datasource "https://saasxl.atlassian.net/wiki/external/MzQ4ZGQ4YjJjNzAyNDZlMjk2ZWNmYWU2YTA1ODU1MWI#Adding-Azure-File-as-datasource")
+    -   [S3 Datasource](#adding-s3-data-source)
+    -   [PostgreSQL or Microsoft SQL](#adding-microsoft-sql-or-postgresql-as-a-datasource)
+    -   [Folder](#adding-folder-as-a-datasource)
+    -   [Hubspot](#adding-hubspot-as-datasource)
+    -   [MariaDB](#adding-mariadb-as-datasource)
+    -   [Salesforce](#adding-salesforce-as-datasource)
+    -   [Snowflake](#adding-snowflake-as-datasource)
+    -   [MongoDB Atlas](#adding-mongodb-atlas-datasource)
+    -   [Netsuite](#adding-netsuite-as-datasource)
+    -   [Netsuite Reporting](#adding-netsuite-reporting-as-datasource)
+    -   [NetSuite-JDBC](#adding-netsuite-jdbc-as-datasource)
+    -   [Pipedrive](#adding-pipedrive-as-datasource)
+    -   [Amplitude](#adding-amplitude-as-datasource)
+    -   [ChargeBee](#adding-chargebee-as-datasource)
+    -   [Shopify](#adding-shopify-as-datasource)
+    -   [Monday](#adding-monday-as-datasource)
+    -   [DB2](#adding-db2-as-datasource)
+    -   [Quickbooks](#adding-quickbooks-as-datasource)
+    -   [Surveymonkey](#adding-surveymonkey-as-datasource)
+    -   [Cvent](#adding-cvent-as-datasource)
+    -   [SFTP Bulk](#adding-sftp-bulk-as-datasource)
+    -   [SAP HANA](#adding-sap-hana-as-datasource)
+    -   [Azure File](#adding-azure-file-as-datasource)
         
 5.  Click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data within that data source.
     
@@ -297,7 +275,6 @@ Do the following:
 ### Adding Salesforce as datasource
 
 :::info **Prequisites for adding Salesforce**
-:::info **Prequisites for adding Salesforce**
 
 The following connector information is required from the client:
 
@@ -317,9 +294,7 @@ To obtain these credentials, follow [this walkthrough](https://medium.com/@bpmme
 1.  If your Salesforce URL is not in the `X.salesforce.com` format, use your Salesforce domain name. For example, if your Salesforce URL is `awesomecompany.force.com` then use that instead of `awesomecompany.salesforce.com`.
     
 2.  Use the user credentials when logging in to generate OAuth tokens.
-:::
     
-
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
@@ -384,7 +359,6 @@ To obtain these credentials, follow [this walkthrough](https://medium.com/@bpmme
 
 ### Adding NetSuite as datasource
 
-:::info **Prequisites for adding NetSuite**
 :::info **Prequisites for adding NetSuite**
 
 The following connector information is required from the client:
@@ -888,7 +862,6 @@ Do the following:
 ### Adding Quickbooks as datasource
 
 :::info **Prerequisite for adding Quickbooks**
-:::info **Prerequisite for adding Quickbooks**
 
 The following connector information is required from the client:
 
@@ -931,7 +904,7 @@ Do the following:
 -   Access token expires every 60 min/hour and a new access token is automatically fetched by Airbyte using the refresh token. A Refresh token is valid for 101 days but expires every 24 hrs. A new Refresh token is automatically generated using the old refresh token and will be updated. After every 101 days a new refresh token has to be fetched from the [2.0 playground](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground").
     
 -   Quickbooks connector works only for Quickbooks online account. It doesn’t work for Quickbooks Desktop Account. If you are using a Quickbooks Desktop Account please migrate your account to Quickbooks online. Refer [Migrate to Quickbooks online from desktop](https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US "https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US")
-    
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
@@ -958,7 +931,6 @@ Do the following:
 ### Adding SurveyMonkey as datasource
 
 :::info **Prerequisite for adding SurveyMonkey**
-:::info **Prerequisite for adding SurveyMonkey**
 
 The following connector information is required from the client:
 
@@ -977,11 +949,6 @@ Do the following:
     
 3.  After creating an app, navigate to the created app settings, and check the credentials section for the access token. Ensure to have a higher daily API limit to read data without any issues.
     
-
-0:00  /  0:26
-
-1x
-:::
 :::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
@@ -1003,7 +970,6 @@ Do the following:
 
 ### Adding Cvent as datasource
 
-:::info **Prerequisite for adding Cvent**
 :::info **Prerequisite for adding Cvent**
 
 The following connector information is required from the client:
@@ -1041,9 +1007,7 @@ Do the following:
             
         -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
 :::
-            
-:::
-            
+
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
@@ -1061,7 +1025,6 @@ Do the following:
     
 ### Adding SFTP Bulk as datasource
 
-:::info **Prerequisite for adding SFTP Bulk**
 :::info **Prerequisite for adding SFTP Bulk**
 
 The following connector information is required from the client:
@@ -1090,7 +1053,7 @@ Do the following:
 1.  Login to a SFTP server using your credentials.
     
 2.  Create a folder in the server and drop your files there.
-    
+:::
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
     
