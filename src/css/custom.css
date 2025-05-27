@@ -36,5 +36,17 @@ img {
   padding: 2px;              /* Optional: space between image and border */
   box-sizing: border-box;    /* Ensures border is included in image size */
 }
+/*
+a {
+  font-style: italic;
+}
 
-/* ...existing code... */
+.italic-link {
+  font-style: italic;
+}
+/* 
+If you want to make only certain links italic, add a class in your Markdown using MDX/HTML:
+
+<a href="#your-link" class="italic-link">Your Link</a>
+<a href="#your-link" class="italic-link">Your Link</a>
+*/
