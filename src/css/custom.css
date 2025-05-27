@@ -28,3 +28,13 @@
   --ifm-color-primary-lightest: #e6dcfb;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Add a border to all images */
+img {
+  border: 2px solid #7635DC; /* Use your primary color or any color you prefer */
+  border-radius: 6px;        /* Optional: rounded corners */
+  padding: 2px;              /* Optional: space between image and border */
+  box-sizing: border-box;    /* Ensures border is included in image size */
+}
+
+/* ...existing code... */
