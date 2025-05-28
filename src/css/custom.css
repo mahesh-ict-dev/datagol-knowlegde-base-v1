@@ -29,13 +29,25 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* Add a border to all images */
+/* Add a border to all images
 img {
-  border: 2px solid #7635DC; /* Use your primary color or any color you prefer */
-  border-radius: 6px;        /* Optional: rounded corners */
-  padding: 2px;              /* Optional: space between image and border */
-  box-sizing: border-box;    /* Ensures border is included in image size */
+  border: 2px solid #7635DC; /* Use your primary color or any color you prefer 
+  border-radius: 6px;        /* Optional: rounded corners 
+  padding: 2px;              /* Optional: space between image and border 
+  box-sizing: border-box;    /* Ensures border is included in image size 
+} 
+*/ 
+
+img {
+  border: 2px solid #7635DC;
+  border-radius: 6px;
+  padding: 2px;
+  box-sizing: border-box;
+  max-width: 100%;      /* Ensures images never exceed their container */
+  height: auto;         /* Maintains aspect ratio */
+  display: block;       /* Removes inline spacing below images */
 }
+
 /*
 a {
   font-style: italic;
