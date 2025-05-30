@@ -15,8 +15,6 @@ To connect external data to workbooks via Playground, do the following:
         
         ![connecting external data to your workbook via playground](/img/playground/image-20250512-073420.png)
         
-        ![image-20250512-073420.png](blob:https://saasxl.atlassian.net/4bc09e6c-4ecd-480f-abae-587d6257dbc6)
-        
     3.  Carefully copy this table name. For instance, it might look something like `table_a1b2c3d4`.
         
 2.  **Construct your query in the playground:**
@@ -25,23 +23,25 @@ To connect external data to workbooks via Playground, do the following:
         
     2.  Write your query to join or integrate the external data with your workbook data.
         
-    3.  Reference your workbook data using the following convention: `app_connection.<your_copied_table_name>`.  
+    3.  Reference your workbook data using the following convention: 
+        ```
+        app_connection.<your_copied_table_name>
+        ```
         **Example:** To join your MySQL `employees` table with the workbook table `table_a1b2c3d4` on a common `department_id` column, your query might look like this:
         
-        `SQL`
-        
-        `SELECT e.employee_name, d.department_name FROM your_mysql_connection.employees e JOIN app_connection.table_a1b2c3d4 d ON e.department_id = d.dept_id;`
-        
+        ```
+        SELECT e.employee_name, d.department_name FROM your_mysql_connection.employees e JOIN app_connection.table_a1b2c3d4 d ON e.department_id = d.dept_id;
+        ```        
     4.  Replace `your_mysql_connection` with the actual name of your MySQL connection configured in the platform.
         
     5.  Adjust the column names (`employee_name`, `department_name`, `department_id`, `dept_id`) to match your specific data structures.
         
 3.  **Execute Your Query:**
     
-    -   Once your query is constructed, execute it within the Playground environment.
+    -   Once your query is constructed, execute it within the **Playground** environment.
         
 4.  **Visualize and utilize the combined data:**
     
-    -   The Playground will display the results of your combined dataset.
+    -   The **Playground** will display the results of your combined dataset.
         
     -   From here, you can visualize the joined data, create new views or tables within your workbook, or further analyze the integrated information.
