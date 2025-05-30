@@ -1,0 +1,176 @@
+---
+sidebar_position: 5
+tags: [Visualizer, Dashboards, Widgets]
+---
+
+DataGOL offers a flexible way to visualize your data through configurable widgets. When you configure a widget, you're essentially defining what data is displayed and how it's presented visually. This involves selecting the specific columns for the x and y axis, deciding if the y-axis should display cumulative values, and choosing from a range of technical indicators to overlay. You also fine-tune the aesthetic details like numeric notations and chart label colors during configuration.
+
+On the other hand, setting the widgets focuses on the overall structure and orientation of the chart. This is where you decide if multiple series should be stacked, whether to display the x and y axes labels, and if the chart should be rendered horizontally or vertically. Essentially, configuration deals with the data content and its immediate visual attributes, while settings govern the broader layout and presentation style of the widget.
+
+### Configuring and setting KPI widget
+
+**To configure KPI widget do the following:**
+
+1.  From the right side of the widget generation page, click the **Update Widget Column Configurations** icon.
+    
+    Open image-20250503-170512.png
+    
+    ![image-20250503-170512.png](blob:https://saasxl.atlassian.net/81cc3e50-da44-4cc0-bced-f3e5f8babadc#media-blob-url=true&id=210551dc-3ad6-4e3c-bba2-23a7e094feec&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fpng&name=image-20250503-170512.png&size=12214&width=285&height=39&alt=image-20250503-170512.png)
+    
+2.  Configure any of the following:
+    
+    Open image-20250503-174701.png
+    
+    ![image-20250503-174701.png](blob:https://saasxl.atlassian.net/fe8a2bda-3390-4476-b077-323e25b6bd0d#media-blob-url=true&id=ece29248-8ee1-4181-ac7b-c98e58b9e477&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fpng&name=image-20250503-174701.png&size=94150&width=304&height=603&alt=image-20250503-174701.png)
+    
+
+| Items           | Description                                                                                             |
+| :-------------- | :------------------------------------------------------------------------------------------------------ |
+| **Time axis** | Click the field and change the title of the Time axis.                                                  |
+| **Number** | Click the field and you can change the following: <br /> *   Change the title. <br /> *  Set the comparison criteria to either previous period or current period. Refer Setting period comparison for KPI widget for more details.  |
+| **Not Visualized** | Drag and drop items in this section into the Number section to view the KPI in the canvas region.       |
+
+To set the KPI widget, do the following:
+
+1.  From the right side of the widget generation page, click the **Update settings** icon.
+    
+    Open image-20250503-170524.png
+    
+    ![image-20250503-170524.png](blob:https://saasxl.atlassian.net/e4685dbb-4295-48b5-a71c-df08f61e7bc4#media-blob-url=true&id=6998d8c5-5da2-4124-94ae-bf81718e7a7a&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fpng&name=image-20250503-170524.png&size=12361&width=168&height=55&alt=image-20250503-170524.png)
+    
+2.  Set the following:
+    
+
+**Item**
+
+**Description**
+
+**General**
+
+Set general details.
+
+Title
+
+Edit the title of the chart.
+
+Subtitle
+
+Edit the subtitle of the chart
+
+Help message
+
+Type the message that appears when you hover over the help icon.
+
+**Number**
+
+Set the details of the displayed KPI.
+
+Numeric Notation
+
+Select how numerical values are displayed:
+
+-   **Auto:** The system automatically determines the most appropriate notation (standard, thousands, millions) based on the magnitude of the data.
+    
+-   **Thousands (K):** Displays values in thousands, abbreviated with K (e.g., 10,000 becomes 10K).
+    
+-   **Millions (M):** Displays values in millions, abbreviated with M (e.g., 1,000,000 becomes 1M).
+    
+
+Decimal Points
+
+Specify the number of digits to display after the decimal point.
+
+Show Date
+
+Displays the date corresponding to the selected KPI period in the KPI widget.
+
+**Indicator**
+
+Set the details of the KPI trend comparison results.
+
+Numeric notation
+
+Select how numerical values are displayed:
+
+-   **Auto:** The system automatically determines the most appropriate notation (standard, thousands, millions) based on the magnitude of the data.
+    
+-   **Thousands (K):** Displays values in thousands, abbreviated with K (e.g., 10,000 becomes 10K).
+    
+-   **Millions (M):** Displays values in millions, abbreviated with M (e.g., 1,000,000 becomes 1M)."
+    
+
+Decimal points
+
+Specify the number of digits to display after the decimal point.
+
+Show Date
+
+Displays the date corresponding to the KPI comparison results period.
+
+Positive color
+
+Specify the color to display if the KPI is trending positively.
+
+Negative color
+
+Specify the color to display if the KPI is trending negatitvely.
+
+**Spark line**
+
+Select the check box to enable the Spark line or the Area chart that displays in the KPI widget.
+
+Positive color
+
+Specify the color to display if the KPI is trending positively on the Spark line
+
+Negative color
+
+Specify the color to display if the KPI is trending negatively on the Spark line.
+
+**Linked reports**
+
+Set the details of the dashboard reports, you want to view from this widget.
+
+Linked report URL
+
+Paste the URL of the dashboard that you want to view from this widget.
+
+Open in New tab
+
+Specify, if you want to view the linked report in a different tab.
+
+#### Setting period comparison for KPI widgets
+
+Period comparison in KPI widgets allows you to analyze data trends by comparing current and previous timeframes (e.g., month-to-month, quarter-to-quarter, year-to-year). DataGOL displays the current and previous period's metric value and the percentage change, enabling quick identification of performance fluctuations, seasonal trends, and the impact of various factors. For instance, a sales manager can compare this month's revenue to last month's, or a financial analyst can assess year-over-year growth. Highlighting these changes helps users identify issues or adjust strategies based on performance.
+
+To perform KPI period comparison, do the following:
+
+1.  Select the specific metric in the workbook that you wish to analyze. This could be sales revenue, customer acquisition cost, website traffic, or any other relevant key performance indicator and create a visualization.
+    
+2.  Apply a date filter to specify the period you want to analyze (e.g., Last Month, Last Quarter, Last Year). The KPI is displayed.
+    
+    Open select metric and date filter.gif
+    
+    ![select metric and date filter.gif](blob:https://saasxl.atlassian.net/1df5d0cd-4772-4a8d-8990-ab49d5e71e5d#media-blob-url=true&id=18dac00b-56eb-4b0c-8dc8-0996e6766696&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fgif&name=select%20metric%20and%20date%20filter.gif&size=3601394&width=1456&height=782&alt=select%20metric%20and%20date%20filter.gif)
+    
+3.  In the KPI configuration settings, click the metric and then the **Comparison Criteria** option and select the desired comparison period:
+    
+    -   **Previous Period**: Compares the selected period with the immediately preceding period of the same duration (e.g., this month vs. last month, this year vs. last year).
+        
+    -   **Year period**: Compares the selected year with the previous year.  
+        The system will display the metric's value for the selected period and the comparison period, along with the percentage change.
+        
+        Open yoy1.gif
+        
+        ![yoy1.gif](blob:https://saasxl.atlassian.net/f0022dca-cac0-460f-ae5c-973267ee9e62#media-blob-url=true&id=a25bcb86-8aab-4b76-9e74-253fb01837d8&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fgif&name=yoy1.gif&size=5220577&width=1456&height=714&alt=yoy1.gif)
+        
+
+**Relative Date for Date Filtering**
+
+When you set the date filter, the **Relative Date** option allows you to set the base date to reference the period used for analysis, especially when dealing with incomplete data for the current period.
+
+Open image-20250324-180253.png
+
+![image-20250324-180253.png](blob:https://saasxl.atlassian.net/538bf2f7-4d46-4a09-b07d-775451661184#media-blob-url=true&id=24be3559-ae47-4fae-832b-8085d93fb7d4&collection=contentId-413106180&contextId=413106180&mimeType=image%2Fpng&name=image-20250324-180253.png&size=348711&width=922&height=791&alt=image-20250324-180253.png)
+
+By specifying a relative date, such as March 1, 2025, you establish a consistent reference point for period calculations. Consequently, when applying a **Last Month** filter, the analysis will focus on the complete preceding month, in this case, February, 2025.
