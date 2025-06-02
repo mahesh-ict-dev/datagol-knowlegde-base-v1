@@ -1,0 +1,33 @@
+---
+sidebar_position: 9
+tags: [Visualizer, Dashboards, Widgets]
+slug: dependent-filters
+---
+
+By default, page-level filters operate with a dependency hierarchy. Consider a scenario with "Country," "State," and "City" filters. With this dependency structure, upon selecting a specific country in the first filter, the subsequent "State" filter will dynamically display only the states within that chosen country.
+
+Similarly, upon selecting a particular state, the "City" filter will then present only the cities located within that selected state in its dropdown menu.
+
+When using single-select dropdown filters, the available options in the subsequent filters will dynamically update based on the selection made in the preceding filter.
+
+When a user selects an option in a single-select dropdown filter, the system automatically filters the data and updates the available options in any subsequent single-select dropdown filters that are dependent on the initial selection. This ensures that users only see options that are valid within the context of their current filter choices.
+
+For example, a dashboard exists with filters for **Date Range**, **Hotel Code**, and **Payment Type**.
+
+1.  You first select a **Date Range** (e.g., "Last Month").
+    
+2.  The **Hotel Code** filter then _only_ shows hotel codes that had transactions within that last month.
+    
+3.  Finally, if you select a specific **Hotel Code**, the **Payment Type** filter will _only_ display payment types used at that particular hotel during the last month.
+    
+
+In this case, **Hotel Code** and **Payment Type** are dependent filters because their available options change based on the selection in the primary **Date Range** filter.  
+This enhancement presents the following benefits:
+
+-   **Improved data exploration:** Users will only see relevant filter options based on their current selections, making it easier to narrow down data and identify key insights.
+    
+-   **Reduced confusion:** Eliminates the display of irrelevant or invalid filter combinations, preventing user confusion and potential errors.
+    
+-   **Streamlined workflow:** Simplifies the filtering process by guiding users through logical selection steps.
+    
+-   **Cleaner interface:** Presents a more organized and contextually aware filtering panel.
