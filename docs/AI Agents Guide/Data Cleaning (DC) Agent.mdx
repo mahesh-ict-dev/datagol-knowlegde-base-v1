@@ -1,0 +1,63 @@
+---
+sidebar_position : 7
+tags : [AI, AI Agents,]
+slug : data-cleaning-agent-DCA-agent
+---
+
+
+The DC agent helps users to clean and organize their data within a workbook. This includes tasks like deduplication, normalization, data imputation, and filtering.
+
+### **Key Features:**
+
+-   **Deduplication:** Identifies and removes duplicate records based on selected columns.
+    
+-   **Normalization:** Restructures data into multiple related tables to improve data organization and reduce redundancy.
+    
+-   **Data imputation:** Fills in missing values (NAs) with user-specified values.
+    
+-   **Filtering:** Allows users to filter data based on specific criteria.
+    
+-   **Conversational interaction:** Users can interact with the agent using natural language commands (e.g., "help me dedup").
+    
+-   **Data analysis:** Provides an overview of the data, including the number of rows and columns, unique values, and missing values.
+    
+-   **Downloadable output:** Users can download the cleaned data.
+    
+-   **Reset functionality:** Allows users to reset the agent's context and revert to the original data.
+    
+
+**How to Use the Data Cleaning Agent**
+
+1.  Select the DC Agent from the available AI agents.
+    
+2.  Choose the Excel or CSV file that you want to clean.
+    
+3.  Use natural language commands to perform data cleaning operations. For example:
+    
+    -   "help me dedup" to start the deduplication process.
+        
+    -   "fill 999 999 999" to fill missing phone numbers with that value.
+        
+    -   "show me records with agent name Henry Madlin" to filter data.
+        
+    -   "help me normalize" to normalize the data.
+        
+4.  Review the cleaned data and download it using the provided button.
+    
+5.  If you want to start over or clean the data differently, use the **code** command to revert to the original data.
+    
+
+-   The DC agent is configurable by an administrator. If you cannot view the agent, contact your admin to enable it.
+    
+-   The agent's context changes as you perform cleaning operations. Use the **reset** command to revert to the original data if needed.
+    
+-   The original workbook remains intact, even after cleaning operations.
+    
+
+### **Example Usage**
+|**Tranformation Type**|**User Query Example**|
+|:-----|:-------|
+|**Deduplication**|_"help me dedup using agent name, policy number"_|
+|**Data Imputation**|_"fill missing phone numbers with 999-999-9999"_|
+|**Filtering**|_"show me records where agent name is John Doe"_|
+|**Normalization**|_“help me normalize the data”_|
