@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# knowledge Base DataGOL
+# Knowledge Base DataGOL
 
 :::tip 
 
