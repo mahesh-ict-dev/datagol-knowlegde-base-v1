@@ -1,0 +1,112 @@
+---
+title: Workbook API Reference
+slug: workbook-api-reference
+tags: [API, Workbook, Curl]
+---
+
+
+## Overview
+
+This document describes how to use the REST API interface to retrieve and post data into a **DataGOL Workbook**.
+
+![Overview](/img/image_1_1.png)
+
+---
+
+## 1. Create a Service Account
+
+A service account is required to obtain a token for authentication when making API calls.
+
+### Steps:
+
+- Navigate to **Team** under the **Account** section
+- Click on the **Service Account** tab
+- Create a new service account
+- Copy the generated token
+
+---
+
+### Navigation to Service Accounts
+
+Navigate to the **Team** section and click on the **Service Accounts** tab, then click the **+ Service Account** button.
+
+![Service Account Tab](/img/image_1_2.png)
+
+---
+
+### Creating the Service Account
+
+Fill in the service account details in the creation form.
+
+![Service Account Form](/img/image_1_3.png)
+
+---
+
+### Copying the Generated Token
+
+After successful creation, **copy the generated token** for use in API requests.
+
+![Copy Token](/img/image_1_4.png)
+
+---
+
+## 2. Get Workbook Data
+
+### Obtaining the API Request
+
+- Navigate to the target workbook
+- Go to **Settings**
+- Select **Copy as cURL**
+
+> The copied `cURL` command can be executed as-is with the bearer token.  
+> Replace it with a **service account token** for long-lived authentication.
+
+![Workbook cURL Copy](/img/image_2_1.png)
+
+---
+
+### API Request Example
+
+```bash
+curl --location 'https://be.datagol.ai/noCo/api/v2/workspaces/03d079b8-ddbf-4752-926a-8700c4be056c/tables/77b75932-a6f3-405a-aade-fc4bff973858/data/external' \
+--header 'x-auth-token: {your-service-token}' \
+--header 'Content-Type: application/json' \
+--data '{
+    "requestPageDetails": {
+        "pageNumber": 1,
+        "pageSize": 500
+    }
+}'
+```
+
+---
+
+## 3. Insert Data into a Workbook
+
+Data can be inserted into a workbook using the workspace ID and workbook ID, specifying column names and values in key-value pairs.
+
+---
+
+### API Request Example
+
+```bash
+curl --location 'https://be.datagol.ai/noCo/api/v2/workspaces/03d079b8-ddbf-4752-926a-8700c4be056c/tables/77b75932-a6f3-405a-aade-fc4bff973858/rows' \
+--header 'Accept: */*' \
+--header 'x-auth-token: 5e25ba66c58dd6306fff6800303616ebd0363f1f57b3f6ccaac273b192d0fc4f' \
+--data '{
+    "position": 0,
+    "cellValues": {
+        "name": "John",
+        "notes": "This is a post test",
+        "status": "TRUE",
+        "assignee": "DOE"
+    }
+}'
+```
+
+---
+
+### Request Parameters
+
+- `position`: Specifies the position where the new row should be inserted (e.g., `0` for the beginning)
+- `cellValues`: Object containing column names as keys and their corresponding values
