@@ -48,9 +48,11 @@ img {
   display: block;       /* Removes inline spacing below images */
 }
 
-/*
+/* Italicize all links */
 a {
-  font-style: italic;
+  font-style: normal; /* Default style for links */
+  color: var(--ifm-color-primary); /* Use the primary color for links */
+  text-decoration: none; /* Remove underline from links */  
 }
 
 .italic-link {
