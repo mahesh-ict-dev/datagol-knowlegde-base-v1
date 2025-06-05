@@ -1,0 +1,185 @@
+---
+sidebar_position : 2
+tags: [Lineage]
+slug: formula-reference
+---
+## **String Functions**
+
+## **Basic String Operations**
+
+-   Length - Returns the number of characters in a string
+    
+    -   Syntax: `length(column)`
+        
+    -   Example: `length('Hello')` returns `5`
+        
+-   Concatenation - Combines two or more strings
+    
+    -   Syntax: `concat(column1, column2)`
+        
+    -   Example: `concat('Hello', ' World')` returns `'Hello World'`
+        
+
+## **Case Manipulation**
+
+-   Lower Case - Converts string to lowercase
+    
+    -   Syntax: `lower(column)`
+        
+    -   Example: `lower('HELLO')` returns `'hello'`
+        
+-   Upper Case - Converts string to uppercase
+    
+    -   Syntax: `upper(column)`
+        
+    -   Example: `upper('hello')` returns `'HELLO'`
+        
+-   Proper Case - Capitalizes first letter of each word
+    
+    -   Syntax: `initcap(column)`
+        
+    -   Example: `initcap('hello world')` returns `'Hello World'`
+        
+
+## **String Trimming**
+
+-   Left Trim - Removes leading spaces
+    
+    -   Syntax: `ltrim(column)`
+        
+    -   Example: `ltrim(' Hello')` returns `'Hello'`
+        
+-   Right Trim - Removes trailing spaces
+    
+    -   Syntax: `rtrim(column)`
+        
+    -   Example: `rtrim('Hello ')` returns `'Hello'`
+        
+-   Pattern Trimming
+    
+    -   Leading: `trim(leading 'pattern' from column)`
+        
+        -   Example: `trim(leading 'H' from 'Hello')` returns `'ello'`
+            
+    -   Trailing: `trim(trailing 'pattern' from column)`
+        
+        -   Example: `trim(trailing 'o' from 'Hello')` returns `'Hell'`
+            
+    -   Both Sides: `trim(both 'pattern' from column)`
+        
+        -   Example: `trim(both 'H' from 'HelloH')` returns `'ello'`
+            
+
+## **String Extraction**
+
+-   Substring - Extracts parts of a string
+    
+    -   Left: `LEFT(column, integer)`
+        
+        -   Example: `LEFT('Hello', 2)` returns `'He'`
+            
+    -   Right: `RIGHT(column, integer)`
+        
+        -   Example: `RIGHT('Hello', 2)` returns `'lo'`
+            
+-   Split String - Splits string by delimiter and returns specified part
+    
+    -   Syntax: `split_part(string, delimiter, token)`
+        
+    -   Example: `split_part('apple,banana,cherry', ',', 2)` returns `'banana'`
+        
+
+# **Mathematical Functions**
+
+## **Basic Operations**
+
+-   Round - Rounds number to specified decimal places
+    
+    -   Syntax: `round(column, decimals)`
+        
+    -   Example: `round(123.456, 2)` returns `123.46`
+        
+-   Basic Arithmetic - Standard mathematical operators
+    
+    -   Operators: `+ - * / %`
+        
+    -   Example: `10 + 5` returns `15`
+        
+
+## **Advanced Mathematics**
+
+-   Absolute Value - Returns positive value
+    
+    -   Syntax: `abs(column)`
+        
+    -   Example: `abs(-10)` returns `10`
+        
+-   Square Root - Calculates square root
+    
+    -   Syntax: `sqrt(column)`
+        
+    -   Example: `sqrt(16)` returns `4`
+        
+-   Modulus - Returns remainder of division
+    
+    -   Syntax: `Mod(column1, column2)`
+        
+    -   Example: `mod(10, 3)` returns `1`
+        
+-   Ceiling and Floor
+    
+    -   Ceiling: `ceil(column)`
+        
+        -   Example: `ceil(4.2)` returns `5`
+            
+    -   Floor: `floor(column)`
+        
+        -   Example: `floor(4.8)` returns `4`
+            
+-   Pi Function - Returns value of π
+    
+    -   Syntax: `pi()`
+        
+    -   Example: `pi()` returns `3.141593`
+        
+
+# **Date and Time Functions**
+
+-   Current Date/Time - Returns current timestamp
+    
+    -   Syntax: `current_timestamp`
+        
+    -   Example: `current_timestamp` returns `'2025-01-31 12:34:56'`
+        
+-   Date Truncation - Truncates date to specified unit
+    
+    -   Syntax: `date_trunc('unit', column)`
+        
+    -   Example: `date_trunc('year', '2025-01-31')` returns `'2025-01-01'`
+        
+-   Date Addition - Adds days to date
+    
+    -   Syntax: `date_add(datecolumn, days)`
+        
+    -   Example: `date_add('2025-01-31', 5)` returns `'2025-02-05'`
+        
+-   Date Difference - Calculates difference between dates
+    
+    -   Syntax: `datediff('unit', date1, date2)`
+        
+    -   Example: `datediff('MONTH', '2025-01-31', '2025-03-31')` returns `2`
+        
+
+# **Conditional Functions**
+
+-   Coalesce - Returns first non-null value
+    
+    -   Syntax: `coalesce(column, default_value)`
+        
+    -   Example: `coalesce(NULL, 'default')` returns `'default'`
+        
+-   Null Check - Tests if value is null
+    
+    -   Syntax: `isnull(input_value)`
+        
+    -   Example: `isnull(NULL)` returns `TRUE`
