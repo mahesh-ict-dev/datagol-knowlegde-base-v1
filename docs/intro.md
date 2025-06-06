@@ -2,38 +2,25 @@
 sidebar_position: 1
 ---
 
-# DataGOL Documentation
+# Introduction
 
-:::tip 
-
-Let's discover **DataGOL in less than 5 minutes**.
-
-:::
+Let's discover **DataGOL**.
 
 ---
 
 ## Key Features
 
-### 🔗 Connect
+### 🔗 [Connect](/docs/Lakehouse/Data%20Sources/adding-data-sources)
 Gather data from any source.
 
-### 🔄 ETL, Pipelines, and Orchestration
+### 🔄 [ETL, Pipelines, and Orchestration](/docs/Lakehouse/lakehouse-workflow)
 Easily orchestrate data ingestion, transformation, and data movement.
 
-### 📝 Annotate
-Securely store all your data.
-
-### 🗂️ Organize
-Clean and harmonize data.
-
-### 📤 Share
-Visualize data wherever you desire.
-
-### 🤝 Collaborate
+### 🤝 [Collaborate](/docs/Workspaces/about-workspace)
 Connect with your team with no hassle.
 
-### 📊 Visualize
+### 📊 [Visualize](/docs/Visualizer/about-visualizer)
 Create BI visualizations.
 
-### 🤖 Personal Assistant
+### 🤖 [Personal Assistant](/docs/AI%20Agents%20/about-AI-agents)
 Use AI as your personal assistant.

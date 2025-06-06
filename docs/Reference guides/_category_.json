@@ -1,0 +1,8 @@
+{
+  "label": "Reference guides",
+  "description": "Explore various reference guides that can be integrated with our system.",  
+  "position": 5,
+  "link": {
+    "type": "generated-index"
+  }
+}

@@ -38,15 +38,6 @@ img {
 } 
 */ 
 
-img {
-  border: 2px solid #7635DC;
-  border-radius: 6px;
-  padding: 2px;
-  box-sizing: border-box;
-  max-width: 100%;      /* Ensures images never exceed their container */
-  height: auto;         /* Maintains aspect ratio */
-  display: block;       /* Removes inline spacing below images */
-}
 
 /* Italicize all links */
 
