@@ -78,17 +78,17 @@ const config = {
       // Replace with your project's social card
       //image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Home',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: 'img/logo.svg',
-        // },
+        // title: 'Home',
+         logo: {
+           alt: 'My Site Logo',
+           src: 'img/logo.svg',
+         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Knowledge Base',
+            label: 'Documentation',
           },
          // {to: '/blog', label: 'Blog', position: 'left'},
           // {
