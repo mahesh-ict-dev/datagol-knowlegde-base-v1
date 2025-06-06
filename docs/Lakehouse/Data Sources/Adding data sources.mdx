@@ -1,17 +1,13 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 tags: [Lakehouse, Connector]
+slug: adding-data-sources
 ---
 
-From the **Data Source** section you can connect to a wide range of data platforms. This module supports integration with popular services such as MySQL, MS SQL Server, DB2, and Postgres databases through a user-friendly authentication and authorization workflow.
-
-You can integrate a new data source into the Lakehouse seamlessly by following these detailed steps. This guide will help you add a new database and manage its content effectively.
-
-### Adding data sources
 
 :::tip [NOTE]
 
-Only an Account admin or Lakehouse admin can add data source.
+Only an Account admin or Lakehouse admin can add data sources.
 
 :::
 
@@ -1066,135 +1062,3 @@ To add SFTP Bulk as datasource, do the following:
 
 4.  Click **Submit**. 
 
-### **Viewing the created data source**
-
-1.  From the DataGOL **Home** page, left navigation panel, select **Lakehouse** > **Datasource**.
-    
-    ![select-datasource](/img/image-20250507-094141.png)
-
-    
-2.  Select the provider that you chose during the setup and then the click the newly created datasources from the list. The following tabs are shown in the corresponding datasource page.
-    
-    1.  **Summary**: The **Summary** tab serves as a central point for managing your added data source. 
-         ![Summary](/img/image-20250507-101452.png)
-        
-        Here, you can:
-        
-        -   **Describe:** Add or modify a description for the data source for easy identification and context.
-            
-        -   **Configure:** Edit the initial settings you established when adding the datasource.
-            
-        -   **Trace:** View the data lineage to understand the datasource's origins and transformations. Refer to [Data source lineage](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Data-Source-Lineage "https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Data-Source-Lineage")
-        
-    2.  **Tables**: The **Tables** tab provides a comprehensive view of the tables within your chosen datasource. 
-        ![Tables](/img/image-20250511-122810.png)
-        
-        Here's what you can:
-        
-        -   **Browse tables:** See a list of all tables in the datasource.
-            
-        -   **Access table information:** Click on a table name to open the Table Info page, where you can find:
-            
-            -   **Qualified name:** The full, unique identifier of the table.
-                
-            -   **Partition details:** Information about how the table is partitioned, if applicable.
-                
-            -   **Column details:** A breakdown of each column, including its name and data type.
-                
-            -   **Column count:** The total number of columns in the table.
-                
-            -   **Creation timestamp:** The date and time the table was created.
-                
-            -   **Owner:** The user or role that owns the table.
-                
-        -   **Utilize more options:** Click the more options icon for a specific table to:
-            
-            -   **View table info:** Directly access the detailed information page for that table.
-                
-            -   **Copy link:** Obtain a shareable link to the table for easy referencing.
-                
-    3.  **ER diagram:** An ER diagram visually maps out a database's table structure, showing individual tables and how they relate to one another. This provides a clear and concise model of data organization and connections within the system.  
-        ![ER-diagram](/img/image-20250511-123907.png)
-        
-        In the ER diagram, click any table to reveal its detailed structure. Additionally, selecting the table name link provides further in-depth information about that specific table
-        
-    4.  **Schema changes:** The **Schema Changes** tab tracks modifications to the database structure, detailing additions like new tables and their timestamps. Clicking **View Details** shows comprehensive change information and a corresponding ER diagram, if available. Use **Mark as Verified** to confirm these changes.
-        
-        ![Schema-changes](/img/image-20250511-124514.png)
-        
-    5.  **Table Info**: Clicking a table link on the **Summary** tab opens the **Table Info** page, which displays the table's overview. From here, you can also navigate directly to the table's data source details. This page allows you to edit the table's name and description, select a classification, and even delete the table.
-        
-    6.  **Column Info**: On the **Tables** tab, clicking a table link navigates you to the **Column Info** tab, displaying column metadata and editable settings.  
-        You can classify individual columns by clicking the edit icon in the Classifications column. Similarly, edit icons in the Description column allow you to provide descriptions for each column.  
-        Additionally, the **AI Generate** button can be used to automatically generate column metadata. Refer to [Generating the column metadata catalog with AI](#generating-the-column-metadata-catalog-with-ai).
-    7.  **Data**: The **Data** tab offers a glimpse into your table's contents, showcasing the first 100 rows for immediate review.
-        
-
-### Generating the column metadata catalog with AI
-
-1.  Navigate to the data source page for which you want to AI generate the metadata catalog.
-    
-2.  Go to the **Tables** tab and click the link of the specific table you wish to catalog.  
-    ![generate-column-metadata](/img/image-20250507-103150.png)
-    
-3.  In the **Table Info** page, click the **Column** **info** tab.
-    
-4.  Click the **AI generate** button. The AI will then generate the metadata catalog for the selected table.
-    ![generate-column-metadata1](/img/image-20250507-104429.png)
-
-### Designating a partition column
-
-1.  Navigate to the data source page for which you want to AI generate the metadata catalog.
-    
-2.  Go to the **Tables** tab and click the link of the specific table you wish to catalog.
-    
-3.  In the **Table Info** page, click the **Column** **info** tab.
-    
-4.  From the extreme right click the more options icon corresponding to a column and select the **Make partition column** option. This option is available only for columns with following data types: **int**, **bigint**, **timestamp**, **long,** and **date**.
-    
-     ![designating-partition-column](/img/image-20250511-132102.png)
-    
-5.  In the **Partition Column Settings** box, select the Enable checkbox. You can also click **Advance Settings** and specify the partition size.
-    
-    ![designating-partition-column1](/img/image-20250511-134329.png)
-    
-    The column that is specified as the partition column is ticked in the listed.
-    
-    ![designating-partition-column2](/img/image-20250511-134600.png)
-
-    The designated column will be used as the partition column by Apache Spark while processing datasets. Only a single column can be used as a Partition Column. The default partition size is 50K.
-    :::info
-    This setting is available only for RDBMS datasources
-    :::
-
-    :::warning 
-    If you attempt to change the partition column, a warning is displayed, since this action can impact the pipeline and retrieval efficiency.
-    :::
-
-    ![designating-partition-column3](/img/image-20250511-134755.png)
-
-### Managing Data Sources
-
--   Data sources can be sorted by creation date, displaying either the latest or oldest entries.
-    
-    ![managing-data-sources](/img/image-20250511-141933.png)
-    
--   Data sources can be filtered according to the provider (e.g., MySQL) and the owner.
-    
-    ![managing-data-sources1](/img/image-20250511-142432.png)
-    
--   Data sources can be displayed in either a list view or a box view, according to user preference.
-    
-    ![dmanaging-data-sources2](/img/image-20250511-142552.png)
-
--   A specific data source can be located by entering the initial characters of its name into a search function.
-    
-    ![managing-data-sources3](/img/image-20250511-143153.png)
-    
--   Within the box view, the schema for a data source can be fetched/updated by clicking the **sync now** icon.
-    
-    ![managing-data-sources4](/img/image-20250511-142929.png)
-
--   The more options icon in the box view provides access to functionalities such as editing data source settings, viewing data lineage, and deleting the data source.
-    
-    ![managing-data-sources5](/img/image-20250511-143112.png)
