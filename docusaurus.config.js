@@ -41,6 +41,7 @@ const config = {
 
   // Performance Optimizations
   future: {
+    v4: true, 
     experimental_faster: true, // Enable faster build times
   },
 
