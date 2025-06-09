@@ -11,7 +11,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DataGOL Documentation',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Knowledge Base',
+  // Set the title for the homepage
+
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -37,6 +39,27 @@ const config = {
     locales: ['en'],
   },
 
+  // Performance Optimizations
+  future: {
+    experimental_faster: true, // Enable faster build times
+  },
+
+  // // Webpack optimizations
+  // webpack: {
+  //   jsLoader: (isServer) => ({
+  //     loader: require.resolve('swc-loader'),
+  //     options: {
+  //       jsc: {
+  //         parser: {
+  //           syntax: 'typescript',
+  //           tsx: true,
+  //         },
+  //         target: 'es2017',
+  //       },
+  //     },
+  //   }),
+  // },
+
   presets: [
     [
       'classic',
@@ -44,11 +67,13 @@ const config = {
       ({
         docs: {
           routeBasePath: '/docs', // Serve the docs at the site's root
-          sidebarPath: './sidebars.js'
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-         // editUrl:
-         //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: './sidebars.js',
+          // Performance optimizations for docs
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: false,
+          breadcrumbs: true,
+          // Disable heavy features if not needed
+          editUrl: undefined, // Disable edit links for better performance
         },
         // blog: {
         //   showReadingTime: true,
@@ -68,6 +93,23 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        // Performance optimizations for sitemap
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+            return items.filter((item) => !item.url.includes('/page/'));
+          },
+        },
+        // Google Analytics (optional - add your tracking ID)
+        gtag: {
+          trackingID: 'G-XXXXXXXXXX', // Replace with your Google Analytics ID
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
@@ -75,13 +117,40 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      //image: 'img/docusaurus-social-card.jpg',
+      // SEO Configuration
+      metadata: [
+        {name: 'keywords', content: 'DataGOL, documentation, knowledge base, API, developer tools'},
+        {name: 'description', content: 'DataGOL comprehensive documentation and knowledge base for developers and users'},
+        {name: 'author', content: 'DataGOL Team'},
+        {name: 'robots', content: 'index, follow'},
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:site', content: '@DataGOL'}, // Update with your Twitter handle
+        {property: 'og:type', content: 'website'},
+        {property: 'og:site_name', content: 'DataGOL Documentation'},
+        // Performance-related meta tags
+        {name: 'google-site-verification', content: 'your-google-verification-code'}, // Add your verification code
+        {'http-equiv': 'x-dns-prefetch-control', content: 'on'},
+      ],
+      
+      // Default social sharing image
+      image: 'img/datagol-social-card.jpg', // Add your 1200x630px social card image
+      
+      // Performance optimization: Disable color mode toggle if not needed
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false, // Set to true to disable dark mode for better performance
+        respectPrefersColorScheme: true,
+      },
+      
       navbar: {
         // title: 'Home',
          logo: {
-           alt: 'My Site Logo',
+           alt: 'DataGOL Logo',
            src: 'img/logo.svg',
+           // Performance: Add srcDark for dark mode
+           srcDark: 'img/logo-dark.svg', // Optional: different logo for dark mode
+           href: '/', // Make logo clickable
+           target: '_self',
          },
         items: [
           {
@@ -90,6 +159,11 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
+          // Performance: Add search bar
+          {
+            type: 'search',
+            position: 'right',
+          },
          // {to: '/blog', label: 'Blog', position: 'left'},
           // {
           //   href: 'https://github.com/facebook/docusaurus',
@@ -97,65 +171,210 @@ const config = {
           //   position: 'right',
           // },
         ],
+        hideOnScroll: false, // Set to true to hide navbar on scroll for better UX
       },
       footer: {
         style: 'dark',
         links: [
           {
-          //  title: 'Docs',
-            // items: [
-            //   {
-            //    // label: 'Knowledge Base',
-            //    // to: '/docs/intro',
-            //   },
-            // ],
+            title: 'Product',
+            items: [
+              {
+                label: 'DataGOL App',
+                href: 'https://app.datagol.ai',
+              },
+              {
+                label: 'Documentation',
+                to: '/docs/intro',
+              },
+            ],
           },
-          // {
-          //   title: 'Community',
-          //   items: [
-          //     {
-          //       label: 'Stack Overflow',
-          //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-          //     },
-          //     {
-          //       label: 'Discord',
-          //       href: 'https://discordapp.com/invite/docusaurus',
-          //     },
-          //     {
-          //       label: 'X',
-          //       href: 'https://x.com/docusaurus',
-          //     },
-          //   ],
-          // },
-          // {
-          //   title: 'More',
-          //   items: [
-          //     {
-          //       label: 'Blog',
-          //       to: '/blog',
-          //     },
-          //     {
-          //       label: 'GitHub',
-          //       href: 'https://github.com/facebook/docusaurus',
-          //     },
-          //   ],
-          // },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/DataGOL',
+              },
+              {
+                label: 'X',
+                href: 'https://x.com/DataGOL',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://youtube.com/@DataGOL',
+              },
+              {
+                label: 'LinkedIn',
+                href: 'https://linkedin.com/company/datagol',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/DataGOL',
+              },
+              {
+                label: 'Support',
+                href: 'mailto:support@datagol.ai',
+              },
+            ],
+          },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DataGOL`,
+        copyright: `Copyright © ${new Date().getFullYear()} DataGOL. All rights reserved.`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        // Performance: Only include languages you actually use
+        additionalLanguages: ['bash', 'json', 'python', 'javascript', 'typescript'],
+      },
+      
+      // Additional SEO head tags with performance optimizations
+      headTags: [
+        {
+          tagName: 'meta',
+          attributes: {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1.0',
+          },
+        },
+        {
+          tagName: 'meta',
+          attributes: {
+            property: 'og:image',
+            content: 'https://docs.datagol.ai/img/datagol-social-card.jpg',
+          },
+        },
+        {
+          tagName: 'meta',
+          attributes: {
+            name: 'theme-color',
+            content: '#2e8555',
+          },
+        },
+        {
+          tagName: 'link',
+          attributes: {
+            rel: 'canonical',
+            href: 'https://docs.datagol.ai',
+          },
+        },
+        // Performance optimizations
+        {
+          tagName: 'link',
+          attributes: {
+            rel: 'preconnect',
+            href: 'https://fonts.googleapis.com',
+          },
+        },
+        {
+          tagName: 'link',
+          attributes: {
+            rel: 'preconnect',
+            href: 'https://fonts.gstatic.com',
+            crossorigin: 'anonymous',
+          },
+        },
+        {
+          tagName: 'link',
+          attributes: {
+            rel: 'dns-prefetch',
+            href: 'https://www.google-analytics.com',
+          },
+        },
+        // Service Worker for caching (optional)
+        {
+          tagName: 'link',
+          attributes: {
+            rel: 'manifest',
+            href: '/manifest.json',
+          },
+        },
+      ],
+      
+      // Performance: Configure table of contents
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
       },
     }),
+    
     plugins: [
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
           hashed: true,
+          indexDocs: true,
+          indexBlog: false,
+          indexPages: true,
+          docsRouteBasePath: '/docs',
+          language: ['en'],
+          // Performance optimizations for search
+          searchResultLimits: 8,
+          searchResultContextMaxLength: 50,
+          explicitSearchResultPath: true,
+        },
+      ],
+      
+      // Sitemap plugin (now configured in presets for better performance)
+      
+      // Performance: PWA Plugin (optional - for offline support)
+      [
+        '@docusaurus/plugin-pwa',
+        {
+          debug: false,
+          offlineModeActivationStrategies: [
+            'appInstalled',
+            'standalone',
+            'queryString',
+          ],
+          pwaHead: [
+            {
+              tagName: 'link',
+              rel: 'icon',
+              href: '/img/logo.png',
+            },
+            {
+              tagName: 'link',
+              rel: 'manifest',
+              href: '/manifest.json',
+            },
+            {
+              tagName: 'meta',
+              name: 'theme-color',
+              content: '#2e8555',
+            },
+            {
+              tagName: 'meta',
+              name: 'apple-mobile-web-app-capable',
+              content: 'yes',
+            },
+            {
+              tagName: 'meta',
+              name: 'apple-mobile-web-app-status-bar-style',
+              content: '#2e8555',
+            },
+          ],
+        },
+      ],
+      
+      // Performance: Ideal Image Plugin for optimized images
+      [
+        '@docusaurus/plugin-ideal-image',
+        {
+          quality: 70,
+          max: 1030,
+          min: 640,
+          steps: 2,
+          disableInDev: false,
         },
       ],
     ],
+    
 };
 
 export default config;
