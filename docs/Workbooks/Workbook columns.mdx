@@ -1,0 +1,517 @@
+---
+sidebar_position : 27
+tags : [Workspace, Workbooks]
+slug: workbook-columns
+---
+
+Workbooks offer a rich set of column types designed to capture and manage your data effectively. By strategically choosing these column types, you can structure your data precisely to meet your specific requirements, ensuring accuracy, consistency, and enhanced functionality within your workbooks. The following column types are included in workbooks:
+
+-   **Textual data:** Use **Single Line Text** for short entries and **Long Text** for detailed notes and rich content (including HTML).
+    
+-   **Boolean and categorical Choices:** Implement **Checkbox** for simple yes/no tracking, **Multi-Select** for choosing multiple predefined options, and **Single Select** for selecting one option from a list.
+    
+-   **Date and contact information:** Capture dates easily with the **Date** column (featuring a calendar picker), store **Phone Numbers** in a dedicated format, and manage **Email** addresses with specific validation.
+    
+-   **Web and numeric values:** Record website addresses with the **URL** type (including validation), store numerical data (integers and decimals) in the **Number** column, and represent monetary values with the **Currency** type (supporting various currencies like USD, EUR, INR). Display values as **Percentages** for clear interpretation.
+    
+-   **Dynamic and connected data:** Create dynamically calculated values using **Formula** columns. Attach relevant files with **Attachment** columns (offering previews for common formats). Establish relationships with other workbooks by referencing values through **Link / Lookup** columns.
+    
+-   **AI-powered content generation:** Leverage the **AI Generate** column to automatically create content (like email drafts or text summaries) based on the row's context.
+    
+
+### Adding a column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+   ![Workbook columns1](/img/image-20250501-120615.png)
+
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select any of the following column type from the list:
+    
+    -   **Single Line Text:** For concise text entries.
+        
+    -   **Long Text:** Ideal for detailed notes, HTML markups, and rich text.
+        
+    -   **Checkbox:** A simple toggle for binary status tracking.
+        
+    -   **Multiple Select:** Enables the selection of multiple options from a predefined list.
+        
+    -   **Single Select:** Allows choosing one option from a predefined list.
+        
+    -   **Date:** For storing and selecting dates with an intuitive calendar.
+        
+    -   **Phone Number:** Dedicated input for telephone numbers.
+        
+    -   **Email:** Specifically designed for storing email addresses.
+        
+    -   **URL:** For entering and validating website links.
+        
+    -   **Number:** Stores numeric values, including both integers and decimals.
+        
+    -   **Currency:** Formats numbers as monetary values in various currencies (USD, EUR, GBP, JPY, CHF, INR).
+        
+    -   **Percentage:** Displays numerical values as percentages.
+        
+    -   **Formula/Agentic formula:** Calculates values dynamically based on defined expressions.
+        
+    -   **User**:
+        
+    -   **Button**:
+        
+    -   **Attachment:** Facilitates file uploads with previews for common image and document formats.
+        
+    -   **Link / Lookup:** Enables referencing values from other workbooks, fostering relationships between datasets.
+        
+    -   **AI Generate:** Leverages artificial intelligence to generate content based on the context of a row, such as drafting emails or summarizing text. Refer to [Creating an AI Generate column](#creating-ai-generate-column).
+        
+6.  From Style select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating Single line text column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Single line text** from the list.
+    
+    ![Workbook columns1](/img/image-20250501-122352.png)
+    
+6.  Optionally provide a short description.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+### Creating **Link** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Link** from the list.
+    
+    ![Workbook columns1](/img/image-20250501-123945.png) 
+    
+6.  From the **Child Workbook** dropdown select the workbook that you want to link from the current workbook.
+    
+7.  From **Allow linking to multiple records** dropdown, specify, if you want to link to multiple records in the workbook.
+    
+8.  You can specify join conditions in the **Auto Join Condition** text box.
+    
+9.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+10.  Click **Create**.
+    
+
+### Creating **Lookup** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Lookup** from the list.
+    
+     ![Workbook columns1](/img/image-20250501-125945.png) Open 
+    
+6.  From the **Select lookup source** dropdown, choose the source for lookup.
+    
+7.  From the **Select the field you want to lookup**, choose the field that you want to lookup. Optionally, you can provide a description.
+    
+8.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+9.  Click **Create**.
+    
+
+### Creating **Long Text** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Long Text** from the list.
+    
+6.  Turn on the toggle for enabling rich text formatting. Optionally, you can provide a description.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+### Creating **Checkbox** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Checkbox** from the list. Optionally, you can provide a description.
+    
+6.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating **Multiple Select** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Multiple Select** from the list.
+    
+6.  Click **+Add option** and specify the options. Optionally, you can provide a description.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+### Creating **Single Select** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Single Select** from the list.
+    
+6.  Click **+Add option** and specify the options. Optionally, you can provide a description.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+-   The **Auto** option automatically detects unique options within a column.
+    
+-   You can define display names if enums are stored in DB.
+    
+
+### Creating **Date** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Date** from the list.
+    
+6.  Select a date format. Switch the toggle on to include time. Optionally, you can provide a description.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+### Creating **Email** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Email** from the list. Optionally, you can provide a description.
+    
+6.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating **URL** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **URL** from the list. Optionally, you can provide a description.
+    
+6.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating **Phone Number** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Phone Number** from the list. Optionally, you can provide a description.
+    
+6.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating **Number** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **Single line text** from the list.
+    
+6.  From Style select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+7.  Click **Create**.
+    
+
+### Creating **User** column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **User** from the list.
+    
+6.  Turn the toggle on to add multiple users in a row.
+    
+7.  From **Style** select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+8.  Click **Create**.
+    
+
+### Creating **AI Generate** column
+
+AI Generate is a feature that allows you to create a new column in a workbook and populate it with AI-generated content based on a prompt. This prompt can reference other columns in the same workbook, allowing the AI to generate content that is specific to each row. You can also enable web access to allow the AI to gather information from the internet to inform its generation.
+
+The AI Generate feature leverages AI to perform tasks like research, summarization, or content creation that is contextually relevant to the data within their workbook, using prompts that can dynamically adapt to each row's information.
+
+Do the following to create an AI Generate column
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Navigate to the last empty column towards the right and then click **+** from the header.
+    
+4.  Enter a unique name for the column. This name will be displayed in the header.
+    
+5.  Select **AI Generate** from the list.
+    
+    ![Workbook columns1](/img/image-20250508-083300.png) 
+    
+6.  Write a prompt that instructs the AI on what kind of information to generate. This prompt can include placeholders (indicated by curly braces `{}`) that reference existing columns in the workbook. For example, the prompt could be **“**_**Research on**_ `{company name}`  _**which has website**_ `{company website}` _**and identify the company founder and company motives.**_**"**  
+    
+    ![Workbook columns1](/img/image-20250508-091819.png) 
+    
+7.  Turn the **Web Access** toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).
+    
+8.  From Style select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+    
+9.  Click **Create**.
+    
+10.  Click the AI Generate icon to view the results of your query in each row.
+    
+    ![Workbook columns1](/img/image-20250508-091241.png) 
+      
+    Once the prompt is set, the AI processes each row in the workbook.  
+    For each row, it replaces the placeholders in the prompt with the corresponding values from the specified columns. It then uses the prompt (and web access, if enabled) to generate the requested information. The generated content appears in the new **AI Generate** column for each row.
+    
+     ![Workbook columns1](/img/image-20250508-090807.png)  
+
+**Example:**
+
+Create an **AI Generate** column called **Credit Card Type Information** and write the following prompt:
+
+_**"Provide some details about**_ `{credit_card_type}` _**and their business trends.**_
+
+Also enables the web access.
+
+![Workbook columns1](/img/image-20250508-091909.png)   
+
+When this AI Generate column is applied to rows containing company names and websites, the AI uses this information to search the web and populate the **Credit Card Type Information** column with details. The placeholder `{credit_card_type}` is dynamically replaced with the values from the respective row for each company being processed.
+
+![Workbook columns1](/img/image-20250508-092335.png)   
+
+The same prompt applied to a different credit card, yields different results based on the information the AI finds online for that specific company.
+
+### Creating Formula column
+
+Workbooks support formulas, enabling sophisticated data analysis directly within their respective interfaces. This feature enhances data analysis capabilities, providing greater flexibility and control over data insights.
+
+A formula column is a type of column you create within a workbook by applying a formula to one or more existing columns within the workbook. This formula can involve various mathematical operations, logical comparisons, text manipulations, date calculations, and more.
+
+Formula columns empower you to go beyond the raw data and create the specific information you need to answer your analytical questions effectively within the familiar environment of a workbook. They provide a powerful way to transform, enrich, and derive insights from your data without modifying the original source.
+
+-   Only users with **Creator** or **Editor** permissions for the workspace can add a formula column.
+    
+-   Formula columns are visually distinguished and marked with an indicator. A tool tip is shown when you hover over the formula, which displays the details of the formula.
+    
+-   In formula addition, static workbooks exclusively use Spark functions, while dynamic workbooks utilize JDBC functions.
+    
+
+#### Adding Formula in Workbook
+
+1.  Open a workbook and click + in the last column to add a new column.
+    
+2.  In the box, provide a unique name for the column and select **Formula** column type.
+    
+3.  In the **Formula** field, specify the formula. Refer the [Formula handbook](/docs/Reference%20guides/formula-reference) for more details or you can AI generate the formula.
+    
+
+-   When you type a formula in the **Formula** field, a pop-up is displayed with examples that demonstrate the syntax and usage.
+    
+    ![Workbook columns1](/img/image-20250129-135336.png)  
+    
+-   The **Validate** option allows you to check the correctness of the entered formula before creating the column. If errors are detected, the system displays appropriate error messages.  
+    Detailed error logs are also available, providing you with insights into the specific issues encountered and enabling further investigation.
+    
+     ![Workbook columns1](/img/image-20250129-134917.png)  
+    
+-   Even if the user chooses to bypass the **Validate** option, the system performs a background validation.If any potential errors are detected during this background check, a warning message is shown, which provides all the details of the potential issue.
+    
+
+4.  In the **Description** box, provide a description for the formula.
+    
+5.  Click **Create**. A timeline icon displays the in-progress status during Formula column creation.
+    
+     ![Workbook columns1](/img/image-20250129-141352.png) 
+    
+    Formula columns are indicated with an icon of formula in the header.
+    
+    ![Workbook columns1](/img/image-20250129-140117.png) 
+    
+    Tooltips are added to **Formula** column headers to easily refer to the underlying formula that is used to calculate the column's values.
+    
+     ![Workbook columns1](/img/image-20250129-141120.png)  
+
+#### Generating formula with AI assist
+
+You can leverage the AI-assisted formula generation feature to describe your desired formula logic in natural language, prompting the system to generate the corresponding formula. AI-assisted formula creation significantly streamlines the process of building calculated columns within workbooks. This eliminates the need for users to possess deep SQL expertise.
+
+Furthermore, you can verify the compatibility of the generated formula with the specific data source, such as JDBC or Spark.
+
+-   A **separate dialog box** provides a dedicated space for users to describe their desired formula logic using natural language. The system generates the corresponding formula directly within the same dialog box, allowing for immediate validation.
+    
+-   A **Use this** button enables users to insert the validated formula directly into the column, eliminating the need for manual copying and pasting.
+    
+-   Users receive **immediate output** confirming successful query validation within the dialog box.
+    
+-   This combination of AI-powered formula generation and enhanced validation simplifies the workflow, accelerates formula creation, and reduces the likelihood of errors, making the feature more accessible to a wider range of users.
+    
+
+1.  Open a workbook and click + in the last column to add a new column.
+    
+2.  In the box, provide a unique name for the column and select **Formula** column type.
+    
+3.  Click **Ask AI**. AI Assistant dialog box opens separately.
+    
+    ![Workbook columns1](/img/image-20250508-094357.png) 
+    
+4.  Enter the prompt for generating formula in natural language.
+    
+5.  Click **Validate** to validate the formula.
+    
+6.  Click **Use this** button. The formula is added.
+
+     ![Workbook columns1](/img/image-20250508-095152.png) 
+ 
+### Create Button column
+
+You can directly generate Jira tickets from the workbooks using the **Button** data type. This feature allows for column mapping to Jira fields, and supports both individual and bulk issue creation, streamlining workflows and enhancing traceability. To create Jira tickets directly from the workbook, do the following:
+
+1.  [Create a Jira connector](#create-jira-connector).
+    
+2.  In a workbook, click + to add a column.
+    
+3.  Specify a column name and select **Button** data type.
+    
+4.  In the **Action** dropdown, select **Create Jira Ticket** and then click to **Setup Configuration**.
+    
+    ![Workbook columns1](/img/image-20250224-181238.png)  
+    
+5.  In the **Action configuration** box, specify the following. The Jira fields are auto-populated.
+    
+    -   Connector: Select the connector that you use to get the Jira credentials
+        
+    -   Project: The project in the Jira.
+        
+    -   Issue Type: The issue type.
+        
+        ![Workbook columns1](/img/image-20250224-181529.png) 
+        
+6.  Click **Save**.
+    
+7.  From the column configuration, select **Create Jira ticket** and then select the rows for which you need to create the Jira tickets. Click the button in any row to create a single Jira ticket, or select multiple rows and click to create tickets in bulk.
+    
+
+#### Create Jira connector
+
+Creating Jira connectors is prerequisite to creating Jira tickets from workbook data.
+
+To create a Jira connector, do the following:
+
+1.  From the **Home** page, left navigation panel, click **Connectors**.
+    
+2.  Click **New Connector**.
+    
+3.  Click the Jira icon and then click **Next**.
+    
+4.  Enter the following details:
+    
+    -   Provide a name for the connector.
+        
+    -   Enter the Jira username and password.
+        
+    -   Enter your Jira base URL.
+        
+5.  Click **Submit.**

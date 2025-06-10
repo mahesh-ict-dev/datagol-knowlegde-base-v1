@@ -13,9 +13,9 @@ slug: creating-standard-pipeline-link
     
 3.  Select **Standard** to directly replicate the source data without modifications.
     
-4.  From the **Source** dropdown list, select a source for the pipeline to define where the data will originate. The streams corresponding to the selected source are listed.
+4.  From the **Source** drop-down list, select a source for the pipeline to define where the data will originate. The streams corresponding to the selected source are listed.
     
-5.  From the **Sync mode** column, set the sync mode for the streams. Refer [Sync modes](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Sync-modes "https://saasxl.atlassian.net/wiki/spaces/documentation/pages/220692503/DataGOL+Documentation#Sync-modes") for more information.
+5.  From the **Sync mode** column, set the sync mode for the streams. Refer [Sync modes](pipeline-sync-modes) for more information.
     
     ![sample](/img/image-20250505-092158.png) 
     
@@ -42,7 +42,7 @@ slug: creating-standard-pipeline-link
 Apache Iceberg format is supported for data ingestion from MySQL, MS SQL Server, and PostgreSQL, and data delivery to S3. Currently, **Iceberg** sync modes that is **Incremental|merge** and **Fullrefresh|Merge** are supported in standard pipelines.
 :::
 
-8.  From the **Settings** dropdown, customize the pipeline parameters specifically for your needs.
+8.  From the **Settings** drop-down, customize the pipeline parameters specifically for your needs.
     
     -   The **Format** field is populated with the format that is selected for the source.
         

@@ -1,0 +1,42 @@
+---
+sidebar_position : 24
+tags : [Workspace, Workbooks]
+slug: email-campaign
+---
+
+You can now create email campaigns from Workbooks by selecting a view (master or filtered) and a recipient column (email or user). The view filters the recipients, sending the email only to a subset of members in the email or user column, rather than all of them.  
+The email content can be personalized using variables corresponding to columns in the selected view. Moreover, you can preview the email and also send a test email to the users in your workspace.
+
+To create an email campaign do the following:
+
+1.  Go to **Workspaces** and select a workbook.
+2.  From the upper right side, click **Actions** and select **Create Email Campaign**.
+    ![Create Email Campaign](/img/image-20250131-115230.png)
+
+In the **Create Email Campaign** box, do the following:
+
+* Select a view. This can be the master view or a filtered view.
+    ![Select a view](/img/image-20250508-053058.png)
+
+* In the **Select Recipient** box. You can choose either a user column or an email column as the recipient source. If a user column is selected and it contains multiple users in a single cell, each user will receive the email individually.
+* In the **Draft Email** box, you can create the email with the email subject and matter.
+    ![Draft Email Box](/img/image-20250508-044647.png)
+
+* Click **Preview** button to get a quick preview of the email.
+* Click **Send Test** button to send a test email to yourself. DataGOL recommends sending a test email to yourself first. The test email will include a preview banner (attach image) to help you verify the content before sending it to others.
+    ![Preview Banner](/img/image-20250508-042436.png)
+
+* Click **Continue to Compose**.
+* In the **Create Email Campaign** box, type the email subject and body.
+    You can dynamically include values from your workbook by referencing column names using the `column_name` notation. This ensures that personalized data from your workbook is seamlessly inserted into the email.
+    You can also preview or send a test email.
+* Click **Review Campaign** to validate the details of the email. The Email preview page is displayed. From here too, you can click the button to send a test email to your email address.
+* Select the **I confirm I want to send this campaign** option and then click **Send Campaign**. The emails are sent to the intended recipients.
+
+:::info [Limitations]
+
+* There's a limit of 250 emails that can be sent at a time.
+* Certain column types such as attachments and link are currently excluded from variable selection.
+* Currently, email templates are not supported, so each email must be composed individually. We are working on adding this enhancement in the future. Attachments and link/join columns are also not supported
+* Emails are not tracked currently. We are working on adding email tracking to prevent duplicate sends in a future update.
+:::

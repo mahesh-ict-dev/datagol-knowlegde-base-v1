@@ -1,0 +1,69 @@
+---
+sidebar_position : 25
+tags : [Workspace, Workbooks]
+slug : data-grouping
+---
+
+Grouping workbook data against a chosen column offers a powerful way to reorganize and understand your information from different angles. Instead of just seeing a flat list of entries, you can create a hierarchical view where rows with the same value in your selected column are brought together. This aggregation allows you to analyze trends, summaries, and patterns specific to those groups.
+
+To ensure optimized performance, only datasets with **less than 10,000** records is allowed for Data Grouping.
+
+Data Grouping allows you to dynamically organize your information based on a chosen common attribute, transforming lengthy lists into easily navigable, hierarchical structures. You can group up to three columns at a time. Grouping a column reveals summary rows for each group, making it easier to analyze patterns and totals within sections of the data.
+
+For numeric columns, the following aggregation options are supported:
+
+-   Average, Sum, Standard Variation, Range
+    
+-   Minimum, Maximum, Median
+    
+-   Count, Unique Count
+    
+-   Most Frequent, Least Frequent
+    
+-   Percent Filled, Percent Empty, Percent Unique
+    
+
+For non-numeric columns, a limited set of aggregations is available:
+
+-   Most Frequent, Least Frequent
+    
+-   Percent Filled, Percent Empty
+    
+-   Percent Unique
+    
+
+Once an aggregation is selected, it is automatically applied to each group under that column, allowing users to see consistent summaries at the group level.
+
+:::tip [NOTE]
+DataGOL recommends **to group by columns that have distinct or categorical values** (such as status, department, or region) to ensure meaningful groupings.
+:::
+
+For example, suppose your **Sale Workbook** has the following columns:
+
+-   **Sales Region:** (e.g., North, South, East, West)
+    
+-   **Sales:** (the monetary value of each sale)
+    
+-   **Profits:** (the profit margin for each sale)
+    
+-   **Transaction Date:** (the date the sale occurred)
+    
+
+Now, if you choose to group by **Sales Region**, the workbook's display would transform. Instead of showing individual sales records in a long list, you would see something like this:
+
+| Sales Region | Sales | Profits | Transaction dates |
+| :----------- | :---- | :------ | :---------------- |
+| North Region | \$XX,XXX | \$YY,YYY | DD/MM/YY, DD/MM/YY |
+| Southern Region | \$AA,SS | \$BB,BBB | DD/MM/YY, DD/MM/YY |
+| Western Region | \$CC,AA | \$CC,BBB | DD/MM/YY, DD/MM/YY |
+| Eastern Region | \$DD,AA | \$CC,BBB | DD/MM/YY, DD/MM/YY |
+
+### Grouping the workbook data
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Click the **Group** button from the top right. The **Add group** box is displayed.
+    
+4.  Select a column from the current workbook to group the data and click **Save**. The workbook data is now re-organized and grouped around the selected column.
