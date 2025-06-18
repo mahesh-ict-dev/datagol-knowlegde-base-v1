@@ -16,12 +16,6 @@ A time series plot or Spark line is also displayed in the KPI widget in DataGOL 
 
 ![KPI widget timeseries](/img/sparkline.gif)
 
-Also see:
-
--   [Configuring and setting KPI widget](configuring-and-setting-widget/#kpi-widget-configuration-and-setting)
-    
--   [KPI widget capabilities and combinations](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%94%A2-KPI-(Key-Performance-Indicator)-widget "https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%5BinlineExtension%5D%F0%9F%94%A2-KPI-(Key-Performance-Indicator)-widget")
-    
 
 ### Bar
 
@@ -29,12 +23,6 @@ A bar chart uses rectangular bars of varying heights or lengths to represent the
 
 ![Bar widget](/img/image-20250503-100531.png)
 
-Also see:
-
--   [Configuring and setting Bar chart](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/392527873/Data+visualization+guide#Configuring-and-setting-Bar-chart-widget "https://saasxl.atlassian.net/wiki/spaces/documentation/pages/392527873/Data+visualization+guide#Configuring-and-setting-Bar-chart-widget")
-    
--   [Bar chart capabilities and combinations](https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%F0%9F%93%8A-Bar-chart "https://saasxl.atlassian.net/wiki/spaces/documentation/pages/402685965/BI+widget+capabilities+and+chart+combinations#%F0%9F%93%8A-Bar-chart")
-    
 
 ### Line
 
@@ -108,3 +96,8 @@ Pivot tables are powerful data summarization and analysis tools that allow you t
 A tree view in a pivot table allows you to display hierarchical data in a collapsible, tree-like structure within the row or column labels, making it easier to navigate and analyze different levels of categorization. This enables you to drill down into specific branches of the hierarchy to examine the underlying data or collapse levels for a high-level summary.
 
 ![Pivot Tables with Tree view widget](/img/pivottable-treeview.gif)
+
+Also see:
+
+-   [Configuring and setting widgets](configuring-setting-widgets)
+-   [Widgets: Capabilities and combinations](bi-widgets-capabilities-combinations)
