@@ -20,7 +20,7 @@ slug: viewing-the-created-data-source
             
         -   **Configure:** Edit the initial settings you established when adding the datasource.
             
-        -   **Trace:** View the data lineage to understand the datasource's origins and transformations. Refer to [Data source lineage]((/docs/category/Data-Lineage))
+        -   **Trace:** View the data lineage to understand the datasource's origins and transformations. Refer to [Data source lineage](/docs/Data%20Lineage/about-data-lineage)
         
     2.  **Tables**: The **Tables** tab provides a comprehensive view of the tables within your chosen datasource. 
         ![Tables](/img/image-20250511-122810.png)

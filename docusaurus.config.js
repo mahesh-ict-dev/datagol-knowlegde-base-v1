@@ -166,73 +166,76 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
+          //{to: 'https://app.datagol.ai', label: 'Visit DataGOL', position: 'right'},
+          {to: 'https://www.datagol.ai/contact', label: 'Get demo', position: 'right'},
+          //  {
+          //    href: 'https://app.datagol.ai',
+          //    label: 'DataGOL',
+          //    position: 'right',
+          //  },
           // Performance: Add search bar
           {
             type: 'search',
             position: 'right',
-          },
-         // {to: '/blog', label: 'Blog', position: 'left'},
-          // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
+          }
+          
+          
         ],
         hideOnScroll: false, // Set to true to hide navbar on scroll for better UX
       },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Product',
-            items: [
-              {
-                label: 'DataGOL App',
-                href: 'https://app.datagol.ai',
-              },
-              {
-                label: 'Documentation',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/DataGOL',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/DataGOL',
-              },
-              {
-                label: 'YouTube',
-                href: 'https://youtube.com/@DataGOL',
-              },
-              {
-                label: 'LinkedIn',
-                href: 'https://linkedin.com/company/datagol',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/DataGOL',
-              },
-              {
-                label: 'Support',
-                href: 'mailto:support@datagol.ai',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} DataGOL. All rights reserved.`,
-      },
+      // footer: {
+      //   style: 'dark',
+      //   links: [
+      //     {
+      //       title: 'Product',
+      //       items: [
+      //         {
+      //           label: 'DataGOL App',
+      //           href: 'https://app.datagol.ai',
+      //         },
+      //         {
+      //           label: 'Documentation',
+      //           to: '/docs/intro',
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       title: 'Community',
+      //       items: [
+      //         {
+      //           label: 'Twitter',
+      //           href: 'https://twitter.com/DataGOL',
+      //         },
+      //         {
+      //           label: 'X',
+      //           href: 'https://x.com/DataGOL',
+      //         },
+      //         {
+      //           label: 'YouTube',
+      //           href: 'https://youtube.com/@DataGOL',
+      //         },
+      //         {
+      //           label: 'LinkedIn',
+      //           href: 'https://linkedin.com/company/datagol',
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       title: 'More',
+      //       items: [
+      //         {
+      //           label: 'GitHub',
+      //           href: 'https://github.com/DataGOL',
+      //         },
+      //         {
+      //           label: 'Support',
+      //           href: 'mailto:support@datagol.ai',
+      //         },
+      //       ],
+      //     },
+      //   ],
+      //   copyright: `Copyright © ${new Date().getFullYear()} DataGOL. All rights reserved.`,
+      // },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,

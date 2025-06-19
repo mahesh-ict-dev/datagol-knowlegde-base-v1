@@ -923,7 +923,7 @@ Do the following:
     
 2.  Access the Cvent Developer portal:
     
-    -   Visit Cvent’s **Developer Portal**. You can typically access it by searching for "Cvent Developer Portal" or by navigating directly to [developer.cvent.com](http://developer.cvent.com/ "http://developer.cvent.com/").
+    -   Visit Cvent’s **Developer Portal**. You can typically access it by searching for "Cvent Developer Portal" or by navigating directly to [developers cvent portal](https://developers.cvent.com/ "https://developers.cvent.com/")
         
 3.  Create a New Application:
     
