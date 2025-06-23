@@ -155,7 +155,7 @@ const config = {
            alt: 'DataGOL Logo',
            src: 'img/logo.svg',
            // Performance: Add srcDark for dark mode
-           srcDark: 'img/logo-dark.svg', // Optional: different logo for dark mode
+          // srcDark: 'img/dark_v1.svg', // Optional: different logo for dark mode
            href: '/', // Make logo clickable
            target: '_self',
          },
