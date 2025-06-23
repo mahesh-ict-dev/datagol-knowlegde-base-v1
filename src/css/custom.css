@@ -88,6 +88,11 @@ img {
   border-radius: 1px;
   padding: 0.5px;
   box-sizing: border-box;
+  height: auto;
+  width: auto;
+  max-width: 80%;
+  max-height: 80%;
+  align-content: left;
 }
 
 /* Italicize all links */
