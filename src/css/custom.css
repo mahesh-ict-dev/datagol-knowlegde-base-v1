@@ -4,8 +4,14 @@
  * work well for content-centric websites.
  */
 
+/* Import Google Fonts - Inter + JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
   --ifm-color-primary: #7635DC;
   --ifm-color-primary-dark: #6a2fc6;
   --ifm-color-primary-darker: #5f2ab3;
@@ -15,6 +21,47 @@
   --ifm-color-primary-lightest: #a57ff1;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+/* Navigation */
+.navbar__title {
+  font-weight: 600;
+}
+
+.navbar__link {
+  font-weight: 500;
+}
+
+/* Sidebar */
+.menu__link {
+  font-weight: 400;
+}
+
+.menu__link--active {
+  font-weight: 600;
+}
+
+/* Code blocks */
+code {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 400;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -29,34 +76,38 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* Add a border to all images
-img {
-  border: 2px solid #7635DC; /* Use your primary color or any color you prefer 
-  border-radius: 6px;        /* Optional: rounded corners 
-  padding: 2px;              /* Optional: space between image and border 
-  box-sizing: border-box;    /* Ensures border is included in image size 
-} 
-*/ 
+/* Apply border to all images except those inside the navbar */
+.navbar img {
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
 
+img {
+  border: 1px solid #e6ddf4;
+  border-radius: 1px;
+  padding: 0.5px;
+  box-sizing: border-box;
+}
 
 /* Italicize all links */
-
 a {
   font-style: normal; /* Default style for links */
   color: var(--ifm-color-primary); /* Use the primary color for links */
   text-decoration: none; /* Remove underline from links */  
 } 
 
-
 .italic-link {
   font-style: italic;
 }
+
 /* 
 If you want to make only certain links italic, add a class in your Markdown using MDX/HTML:
 
 <a href="#your-link" class="italic-link">Your Link</a>
 <a href="#your-link" class="italic-link">Your Link</a>
 */
+
 .header-twitter-link:before {
   content: '';
   width: 24px;

@@ -304,6 +304,13 @@ const config = {
             href: '/manifest.json',
           },
         },
+          {
+        tagName: 'link',
+        attributes: {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap',
+        },
+  },
       ],
       
       // Performance: Configure table of contents
