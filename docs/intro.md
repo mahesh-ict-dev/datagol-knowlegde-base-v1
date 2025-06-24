@@ -30,7 +30,7 @@ Connect with your team with no hassle from Workspaces.
 
 ------
 
-### 📊 [Visualize](/docs/Visualizer/about-visualizer)
+### 📊 [Visualize](</docs/BI and Visualizer/about-visualizer>)
 Create BI visualizations.
 
 ------
