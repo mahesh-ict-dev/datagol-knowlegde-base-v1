@@ -167,7 +167,7 @@ const config = {
             label: 'Documentation',
           },
           //{to: 'https://app.datagol.ai', label: 'Visit DataGOL', position: 'right'},
-          {to: 'https://www.datagol.ai/contact', label: 'Get demo', position: 'right'},
+          {to: 'https://www.datagol.ai/', label: 'Visit DataGOL', position: 'right'},
           //  {
           //    href: 'https://app.datagol.ai',
           //    label: 'DataGOL',

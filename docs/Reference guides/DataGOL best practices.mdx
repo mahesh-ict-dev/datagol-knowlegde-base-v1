@@ -63,13 +63,14 @@ If your files are stored at:
 Then you should specify the path to share as:
 `bucket/folder_1/`
 
-In this case, `table_name (folder)` will be treated as the table name. All files inside `table_name` will be appended together based on a common schema.
+In this case, `table_name (folder) will be treated as the table name. All files inside `table_name` will be appended together based on a common schema.
 
 :::tip [Note] 
 Make sure that the files within the folder have a consistent schema to avoid ingestion issues.
 :::
 
-![s3-datasource](/img/best-practices/S3-data-source.png)
+	![s3-datasource](/img/best-practices/S3-data-source.png)
+	![s3-datasource](/img/best-practices/S3-data-source.png)
 
 ### Folder as data source
 
@@ -561,7 +562,7 @@ You can create formula columns directly using the functions supported by the dat
 -   If the workbook uses a JDBC connection, only JDBC-compatible functions can be used.
     
 Creating Formula Column on Workbooks:
-![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support.png)  
+![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support.png)  `
   
 #### In BI (Visualizer)
 
@@ -579,7 +580,7 @@ Always check the workbook’s data provider before writing formula logic in BI o
 Your_workspace > your workbook > Settings > Storage and Provider Settings
 
 Creating formula column on BI:
-![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support-1.png)  
+![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support-1.png)  `
 
 # Playground
 
@@ -630,7 +631,7 @@ Driver failure caused by an out-of-memory error, resulting in query or job failu
 ## Kyuubi down/No active Kyuubi
 
 **Scenario:**
--	Error message: `Unable to read HiveServer2 configs from zookeeper" (Zookeeper Hides Client Exception)`
+-	Error message: `Unable to read HiveServer2 configs from zookeeper" (Zookeeper Hides Client Exception)
 -	Playground Queries or Pipeline jobs failures.
 
 **Root cause analysis:**
