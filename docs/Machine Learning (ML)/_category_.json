@@ -1,8 +1,0 @@
-{
-  "label": "Machine Learning (ML)",
-  "description": "Explore various Machine Learning tools that can be integrated with our system.",  
-  "position": 5,
-  "link": {
-    "type": "generated-index"
-  }
-}
