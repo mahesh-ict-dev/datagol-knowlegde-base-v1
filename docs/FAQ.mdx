@@ -4,217 +4,135 @@ slug: datagol-faq
 ---
 
 ## Agents
-
 ### What SQL dialect and functions are supported?
-
 Spark SQL is the default dialect.
 
-Key Points:
-
+**Key Points:**
 -   Supports Spark functions (coalesce, cast, case, etc.).  
-      
-    
 -   SQL Copilot can assist with query suggestions.  
       
-## AS OF Time Travel
+## AS-OF time travel
+### How to enable **AS-OF** time travel?
 
-### How to enable "As-Of" Time Travel?
+Requires: Parameterized orchestration.
 
-Feature:
-
--   Pass a historical date in views or workbook queries.  
-      
-    
--   View the dataset as it existed at that point in time.
-    
-
-Requires: Parameterized Orchestration.
+To enable **AS-OF** time travel, do the following:
+1. Pass a historical date in views or workbook queries.  
+2. View the dataset as it existed at that point in time.
 
 ## BI and Visualizer 
 
 ### How does the BI dashboard layer operate in DataGOL?
-
 Dashboards are built on top of workbooks using a Visualizer. They support:
+-   [KPIs, Line chart, Bar chart, Donut chart, Pivot tables,](</docs/BI and Visualizer/Widgets/Widget types.mdx>) etc.   
+-   [Drill-downs](</docs/BI and Visualizer/Drill Down.mdx>), [Filters](</docs/BI and Visualizer/Filters/About filters.mdx>), and exploration mode.  
 
--   KPIs, Line, Bar, Donut charts, Pivot tables, etc.  
-      
-    
--   Drill-downs, filters, and exploration mode.  
-      
+**Key Points:**
 
-Key Points:
-
--   Widgets use formulas and parameters.  
-      
-    
--   Widget-level filters override page-level filters.  
-      
-    
+-   Widgets use [formulas and parameters](</docs/BI and Visualizer/Creating formulas and parameters in Visualizer.mdx>).   
+-   Widget-level filters override page-level filters.      
 -   Drill-downs can be column-based or widget-defined.  
       
 
- ## Data Sources
-
+## Data Sources
 ### How does DataGOL handle deleted records in source systems like SAP?
+Deleted records are handled using **Full Refresh Merge** with Iceberg, which compares snapshots to detect deletions.
 
-Deleted records are handled using Full Refresh Merge with Iceberg, which compares snapshots to detect deletions.
-
-Key Points:
+**Key Points:**
 -   CDC pipelines are not directly supported in DataGOL.  
-     
-    
 -   Full refresh merge provides a reliable internal alternative.  
       
 ### Can DataGOL integrate with existing warehouses like Redshift or Snowflake?
-
-
 Yes. Connections are defined in the Data Sources layer. Both source and target warehouses must be configured.
 
-Key Points:
-
+**Key Points:**
 -   Destination must be explicitly selected when creating pipelines.  
-      
-    
 -   DataGOL supports two roles:
-    
-
 -   ETL Only: It acts as a transformation layer—pulls data from sources, the user is able to process it (joins, filters, cleans, etc.), and write it into your warehouse.  
-      
-    
 -   Full Warehouse: It stores data within its own internal open-format storage (e.g., Parquet or Iceberg), and also runs queries and dashboards from there.  
-
-### Is it possible to join data from multiple sources (e.g., S3 + Redshift)?
-
-
-Yes, through custom pipelines. Sources must be added under datasources, and joins can be written in Spark SQL.
-
-Key Points:
-
--   Ensure all sources are enabled and configured.  
-
 
 ### How should we name data sources and warehouses?
 
-Best Practice:
-
--   Format: `<ProductName>_<Environment>_<DB|Warehouse>`  
-      
-    
+**Best Practice:**
+-   Format: 
+    ```
+    <ProductName>_<Environment>_<DB|Warehouse>
+    ```  
 -   For S3, replace DB with S3.  
-      
 
-Example:
-
--   `app_prod_db, app_stage_wh`
-      
-    
+**Example:**
+```
+app_prod_db, app_stage_wh
+```
 
 This naming helps differentiate between DB, warehouse, and S3 sources clearly and ensures uniqueness for use-case-driven design.
 
 ### How are S3 data sources structured?
+**S3 Path Format:**
 
-S3 Path Format:
-
--   `<bucket>/<base_folder>/<table_name>/<files>`
+```
+<bucket>/<base_folder>/<table_name>/<files>
+```
+The `table_name` folder becomes the table name in DataGOL.
       
-    
--   The `table_name` folder becomes the table name in DataGOL.  
-      
-    
+:::tip [Important]
+Give the path up to the base folder. DataGOL processes each subfolder (e.g., table_name) as an individual table.
+::: 
 
-Important:
-
--   Give the path up to the base folder. DataGOL will treat every subfolder (e.g., table_name) as a separate table.  
-      
-    
-
-Schema Tips:
-
+**Schema Tips:**
 -   Keep data types and column names consistent.  
-      
-    
--   Only CSV is supported unless a new folder data source is created for another format.  
-      
-    
+-   Only CSV is supported, unless a new folder data source is created for an alternative format.
 
 ### How to onboard 3rd party connectors (PostHog, HubSpot, etc.)?
-
-Steps:
-
+Do the following to onboard 3rd party connectors:
 1.  Request whitelisting via Slack.  
-      
-    
-2.  Once whitelisted, configure the data source.  
-      
-    
-3.  Create a pipeline from it.  
-      
-    
+2.  Once whitelisted, configure the data source.
+3.  Create a pipeline from the data source.     
 
-Special Case: Some APIs (e.g., PostHog) send entire record updates rather than diffs — deduplication pipelines are needed to retain only the latest rows.
+:::info [Special case]
+Some APIs (e.g., PostHog) send entire record updates rather than diffs — deduplication pipelines are needed to retain only the latest rows.
+:::
 
 ### What is partitioning, and when to use it?
-
-Use Case:
-
+**Use Case:**
 -   Large datasets that can benefit from parallelism in Spark.  
-      
-    
 
-How:
-
+**How:**
 -   Choose a partition column (integer/date).  
-      
-    
 -   Set partition size (default: 50).  
-      
-    
 -   Spark executes parallel tasks for faster syncs.  
-      
-    
 
-Not Applicable: For REST-based APIs (e.g., HubSpot, Jira, Zendesk).
+**Not Applicable:** For REST-based APIs (e.g., HubSpot, Jira, Zendesk).
 
-### Should we copy data into DataGOL or query directly from the source?
-
-Copy use case:
-
+### Should I copy data into DataGOL or query directly from the source?
+**Copy use case:**
 -   When downstream orchestration, time travel, or dedup is required. 
     
-
-Direct query use case:
-
+**Direct query use case:**
 -   For real-time dashboards or when querying cost-heavy external sources (e.g., Snowflake, BigQuery).
 
-### What formats are supported for Folder DataSource?
+### What formats are supported for Folder data source?
 
-Supported:
-
+**Supported:**
 -   Excel, Parquet, CSV, and JSON.
 
 ### What happens during data source sync failure?
 
-Common Reasons:
-
+**Common Reasons:**
 -   Incorrect S3 path.  
-      
-    
 
-Action:
-
+**Action:**
 -   Check sync logs.  
-      
-    
 -   Contact the DataGOL team via Slack.
 
-### Can we join data from multiple sources?
+### Can I join data from multiple sources?
+Yes, you can! You can join data from various sources (for example, S3 and Redshift) by using custom pipelines.
 
-Yes.
+Here's how it works:
 
--   Use custom pipelines.  
-      
-    
--   Join different sources and push a unified result into a single warehouse.
+-   First, make sure all your data sources are added and configured under [Lakehouse > Data Sources](/).
+-   Then, you can write your joins in Spark SQL within a custom pipeline to combine the data and push a unified result into a single warehouse.  
+
 
 ## Lakehouse
 
@@ -225,46 +143,32 @@ Yes.
 | **Admin** | Full access to create/delete data sources, pipelines, and orchestrations. | 
 | **Member** | Can view all, but only edit pipelines/orchestrations if explicitly invited. |
 
-Governance:
+**Governance:**
 
 -   Producers (data team) control access to workspaces.  
-      
-    
 -   Consumers (business teams) collaborate in their own workbooks.
-
 
 ## Pipeline
 
 ### What are the available pipeline types in DataGOL, and when should each be used?
 DataGOL supports three pipeline types:
--   Standard Pipelines: Used for straightforward replication of source tables with sync modes.  
-     
-    
--   Custom Pipelines: Designed for SQL-based transformations like joins, format changes, or business logic.  
+-   **Standard Pipelines:** Used for straightforward replication of source tables with sync modes.  
+-   **Custom Pipelines:** Designed for SQL-based transformations like joins, format changes, or business logic.  
+-   **Dedupe Pipelines:** Remove duplicate records when systems (e.g., Salesforce) retain updated rows as separate entries.  
       
-    
--   Dedupe Pipelines: Remove duplicate records when systems (e.g., Salesforce) retain updated rows as separate entries.  
-      
-
 Key Points:
 
--   Standard: Good for raw replication with minimal transformation.  
-      
-    
--   Custom: Required when transforming time formats, handling nulls, or merging sources.  
-      
-    
--   Dedupe: Best suited for systems that log updates as new records; used to identify and retain only the latest version of each record by removing duplicates.  
+-   **Standard:** Good for raw replication with minimal transformation.  
+-   **Custom:** Required when transforming time formats, handling nulls, or merging sources.  
+-   **Dedupe:** Best suited for systems that log updates as new records; used to identify and retain only the latest version of each record by removing duplicates.  
 
 ### Can users transform data types, nulls, or time formats in standard pipelines?
 
 No, such transformations require custom pipelines where SQL queries can be written to clean and reformat data.
 
-Key Points:
+**Key Points:**
 
 -   Use Playground for SQL transformations.  
-      
-    
 -   Handles complex transformations, including cross-table joins, data type casting, and format normalization. 
 
 ### What are the different sync modes?
@@ -277,152 +181,100 @@ Key Points:
 | **Full Refresh Merge** | Performs an upsert operation (inserting new records or updating existing ones) based on a unique key, effectively updating a target table. | Requires an Iceberg destination.                                                                                                   |
 
 ### When and how should we use dedup pipelines?
-
-Use Case:
+**Use Case:**
 
 -   Third-party sources that resend full record updates.  
-      
-    
 -   Append modes where duplication is expected.  
-      
-    
 
-Setup:
+**Setup:**
 
 -   Source: Warehouse with duplicates.  
-      
-    
 -   Destination: Cleaned warehouse.  
       
-    
-
 Custom SQL logic can be applied for each stream to retain the latest records.
-
-  
 
 ### What sync modes are supported in standard pipelines?
 
-Available sync modes include:
+**Available sync modes include:**
 
--   Full Refresh Override  
-      
-    
+-   Full Refresh Override    
 -   Full Refresh Append  
-      
-    
 -   Incremental Append  
-      
-    
 -   Incremental Merge
-    
 -   Full Refresh Merge
-    
 
-Key Points:
+**Key Points:**
 
 -   Incremental Append is optimal for performance and requires a cursor field.  
-      
-    
 -   Full Refresh Merge is useful for detecting deletes via Iceberg snapshot comparison.  
 
 
 ### What are the destination formats and query engines supported by DataGOL?
 
-Supported formats:
+**Supported formats:**
 
 -   Parquet (default)  
-      
-    
 -   Iceberg (for snapshot & merge functionality)  
       
-    
-
-Query Engines:
+**Query Engines:**
 
 -   Spark SQL (default)  
-      
-    
 -   Athena (alternative)  
-      
-    
 -   JDBC (Although not explicitly available, it is not recommended for large volumes.)  
-      
-    
 
-Key Points:
+**Key Points:**
 
--   Parquet/Iceberg are disabled if using SQL dbs as destination.  
-      
-    
+-   Parquet/Iceberg are disabled if using SQL dbs as destination.      
 -   Choose Athena or Spark based on scaling and partitioning needs.  
       
  ### Where can users inspect and debug pipeline execution?
 
 -   Jobs Page: Shows execution status, time, and logs.  
-      
-    
 -   Streams Page: Displays selected source tables.  
-      
-    
 -   Revisions Tab: Tracks config changes.  
       
-    
-
-Key Points:
+**Key Points:**
 
 -   Supports immediate runs and scheduled/cron executions.  
-      
-    
 -   Each revision preserves historical config.  
 
 ### Intermediate Views vs Intermediate Warehouses – Which is better for performance?
 
-Recommendation:
+**Recommendation:**
 
--   Create a multi-layered data model:  
-      
-    
-
--   Bronze: Raw data.  
-      
-    
+Create a multi-layered data model:  
+-   Bronze: Raw data.     
 -   Silver: Cleaned, transformed.  
-      
-    
 -   Gold: Final semantic view.  
       
     
+:::tip [Note]
 
-Note: Avoid deeply nested CTEs. Instead, break logic into multiple views using pipelines — more performant and maintainable.
+Avoid deeply nested CTEs. Instead, break logic into multiple views using pipelines — more performant and maintainable.
+:::
 
 ### How to update the cursor field in an incremental pipeline?
 
-Workaround:
+**Workaround:**
 
 1.  Go to the pipeline.  
-      
-    
-2.  Remove the stream.  
-      
-    
-
-Re-add it from the stream settings with the new cursor field.
+2.  Remove the stream. 
+3.  Re-add it from the stream settings with the new cursor field.
       
 
 ### How to manage large APIs like HubSpot if pipelines timeout?
 
-Solutions:
+**Solutions:**
 
--   Reduce the number of streams per pipeline.  
-      
-    
+-   Reduce the number of streams per pipeline.   
 -   Use incremental fetches with modifiedAt or updatedAt fields.  
-      
-    
 -   If the HubSpot connector does not support this, segment the workload across multiple data sources.
 
 ### Parquet vs Iceberg – When to use what?
-Format | Use Case | | :-------- | :--------------------------------- | | **Parquet** | Efficient analytics, low overhead. | | **Iceberg** | Required for time travel/versioning. |
+Format | Use Case | 
+| :-------- | :--------------------------------- | 
+| **Parquet** | Efficient analytics, low overhead. | 
+| **Iceberg** | Required for time travel/versioning. |
 
 :::tip
 Usage of Parquet or Iceberg depends on the actual use case.
@@ -435,18 +287,17 @@ Usage of Parquet or Iceberg depends on the actual use case.
 
 Using the Playground, users write SQL (Spark SQL dialect) to clean, join, and transform data.
 
-Key Points:
+**Key Points:**
 
 - The Playground acts as the editor to perform transformations (like data type changes) in Spark SQL.
-    
 -   Queries can be saved as views and then published to the workspace as workbooks.   
 
 ## Schema changes
 ### What happens if the schema changes downstream?
-Impact Areas:
+**Impact Areas:**
 Workbooks and dashboards may break.
 
-Solution:
+**Solution:**
 Use the Impact Analysis feature to identify affected widgets, views, and dashboards.
 Use Playground to test the query and update the workbook schema.
 
@@ -457,68 +308,47 @@ Use Playground to test the query and update the workbook schema.
 
 Workbooks are saved queries or views from the Playground. They act as the golden data layer for dashboards.
 
-Key Points:
+**Key Points:**
 
--   Can be published to workspaces.  
-      
-    
--   Support filterable, downloadable, API-accessible data.  
+-   Can be published to workspaces.     
+-   Supports API-accessible data, which can be filtered and downloaded.  
        
-
 ### How is access and sharing managed across workspaces and workbooks?
 
 Workspaces support role-based sharing:
 
 -   Creator: Full control.  
-      
-    
 -   Editor: Edit access but cannot delete.  
-      
-    
 -   Viewer/Guest: Read-only; guest can't download data.  
       
-    
-
-Key Points:
+**Key Points:**
 
 -   Workbooks and dashboards adhere to these roles.  
-      
-    
 -   Delete protection available at workbook levels. When enabled, it makes the workspace delete protected.  
       
-    
-
 ### Can workbook data be accessed via API?  
 Yes, via a CURL command using service accounts.
 
-Key Points:
+**Key Points:**
 
--   Data is returned in paginated JSON.  
-      
-    
+-   Data is returned in paginated JSON.         
 -   Default rows: 0–500 (configurable).  
 
 ### Can users import external data into workbooks?
 
 Yes, via Excel or CSV import.
 
-Key Points:
+**Key Points:**
 
 -   Supports creating a new workbook as well as Excel/CSV imports.  
-      
-    
 -   Ensure well defined, clean structure of workbooks for better BI compatibility.  
-      
-      
 
 ### Can filters be propagated across widgets or pages?
 Yes, but linking filters across visuals (like dynamic filters) is not yet supported.
 
-Key Points:
+**Key Points:**
 
 -   Page-level filters can be configured to include/exclude widgets.  
-      
-    
 -   Column-based linking across workbooks is supported via BI query joins.  
       
    
@@ -528,28 +358,13 @@ Users drag and drop fields from loaded workbooks, configure visual properties, a
 Key Points:
 
 -   No widget limits per dashboard.  
-      
-    
 -   Widgets can be duplicated, sorted, and grouped.  
-      
-    
 -   Export to PDF is not yet supported, but on the roadmap.  
-      
-    
 
 ### What are the future enhancements in DataGOL?
 
 Planned features include:
-
 -   Graphical query builder  
-      
-    
 -   PDF export of dashboards  
-      
-    
 -   Improved dynamic titles in widgets  
-      
-    
 -   Filter linking across visuals
-
-
