@@ -1,0 +1,323 @@
+---
+sidebar_position: 8
+tags: [formulas, apache spark]
+slug: datagol-apache-sparx-formula
+---
+
+## Overview
+
+This document provides a comprehensive reference for Apache Spark formulas supported in DataGOL. These formulas enable powerful data processing, analysis, and transformation capabilities directly within your DataGOL workflows.
+
+## What you can achieve?
+
+-   **Data Aggregation:** Calculate sums, averages, counts, and statistical measures
+    
+-   **Text Processing:** Clean, format, and manipulate string data
+    
+-   **Date/Time Operations:** Parse, format, and calculate with dates and timestamps
+    
+-   **Conditional Logic:** Implement business rules and data validation
+    
+-   **Data Type Conversion:** Transform data between different formats
+    
+-   **Array/JSON Processing:** Handle complex nested data structures
+    
+-   **Mathematical Operations:** Perform calculations and statistical analysis
+
+## Aggregate functions 
+
+### COUNT
+
+#### Purpose: Count rows or non-null values.
+
+#### Usage:
+
+```sql
+* `COUNT(column_name)`
+* `COUNT(*)`
+```
+
+#### Example: `COUNT(customer_id)` -  Returns number of customers
+
+#### Use Case: Calculate total records, active users, or non-empty fields.
+
+### SUM
+
+#### Purpose: Calculate total of numeric values.
+
+#### Usage: `SUM(column_name)`
+
+#### Example: `SUM(sales_amount)`  -  Total sales revenue
+
+#### Use Case: Financial totals, quantity calculations, performance metrics.
+
+
+### AVG / MEAN
+
+#### Purpose: Calculate average value.
+
+#### Usage:
+
+```sql
+* `AVG(column_name)`
+* `MEAN(column_name)`
+```
+
+#### Example: `AVG(order_value)` - Average order size
+
+#### Use Case: Performance benchmarks, trend analysis, KPI calculations.
+
+### MIN / MAX
+
+#### Purpose: Find minimum or maximum values.
+
+#### Usage:
+
+```sql
+* `MIN(column_name)`
+* `MAX(column_name)`
+```
+
+#### Example: `MAX(transaction_date)`  - Latest transaction
+
+#### Use Case: Data quality checks, range analysis, finding extremes.
+
+### MEDIAN
+
+#### Purpose: Find middle value in sorted data.
+
+#### Usage: `MEDIAN(column_name)`
+
+#### Example: `MEDIAN(salary)`  - Middle salary value
+
+#### Use Case: Statistical analysis, outlier detection, fair comparisons.
+
+### PERCENTILE
+
+#### Purpose: Calculate exact percentile values.
+
+#### Usage: `PERCENTILE(column_name, percentile_value)`
+
+#### Example: `PERCENTILE(response_time, 0.95)`  - 95th percentile response time
+
+#### Use Case: Performance SLAs, quality metrics, distribution analysis.
+
+## Text/String Functions
+
+### CONCAT / CONCAT_WS
+
+#### Purpose: Join strings together.
+
+#### Usage:
+
+```sql
+* `CONCAT(str1, str2)`
+* `CONCAT_WS(separator, str1, str2)`
+```
+
+#### Example: `CONCAT_WS(' ', first_name, last_name)`  - "John Smith"
+
+#### Use Case: Create full names, build identifiers, format display text.
+
+### UPPER / LOWER
+
+#### Purpose: Change text case.
+
+#### Usage:
+
+```sql
+* `UPPER(text)`
+* `LOWER(text)`
+```
+
+#### Example: `UPPER(country_code)`  - "USA"
+
+#### Use Case: Data standardization, case-insensitive comparisons.
+
+### TRIM
+
+#### Purpose: Remove leading/trailing spaces.
+
+#### Usage: `TRIM(text)`
+
+#### Example: `TRIM(customer_name)`  - Clean customer names
+
+#### Use Case: Data cleaning, removing extra whitespace.
+
+### SUBSTRING
+
+#### Purpose: Extract part of a string.
+
+#### Usage: `SUBSTRING(text, start_position, length)`
+
+#### Example: `SUBSTRING(phone_number, 1, 3)`  - Area code
+
+#### Use Case: Extract codes, parse structured text, data validation.
+
+### REPLACE
+
+#### Purpose: Replace text patterns.
+
+#### Usage: `REPLACE(text, old_value, new_value)`
+
+#### Example: `REPLACE(phone, '-', '')`  - Remove dashes
+
+#### Use Case: Data cleaning, format standardization.
+
+### SPLIT
+
+#### Purpose: Split string into array.
+
+#### Usage: `SPLIT(text, delimiter)`
+
+#### Example: `SPLIT(full_address, ',')`  - Array of address parts
+
+#### Use Case: Parse delimited data, extract components.
+
+### CONTAINS / STARTSWITH
+
+#### Purpose: Check if text contains patterns.
+
+#### Usage:
+
+```sql
+* `CONTAINS(text, pattern)`
+* `STARTSWITH(text, prefix)`
+```
+
+#### Example: `CONTAINS(email, '@gmail.com')`  - TRUE/FALSE
+
+#### Use Case: Data filtering, pattern matching, validation.
+
+## Date/Time Functions
+
+### CURRENT_DATE / CURRENT_TIMESTAMP
+
+#### Purpose: Get current date/time.
+
+#### Usage:
+
+```sql
+* `CURRENT_DATE()`
+* `CURRENT_TIMESTAMP()`
+```
+
+#### Example: `CURRENT_DATE()`  - 2023-01-01
+
+#### Use Case: Timestamp records, calculate age, track processing time.
+
+### DATE_ADD / DATE_DIFF
+
+#### Purpose: Add days or calculate difference.
+
+#### Usage:
+
+```sql
+* `DATE_ADD(date, days)`
+* `DATE_DIFF(end_date, start_date)`
+```
+
+#### Example: `DATE_DIFF(order_date, CURRENT_DATE())`  - Days since order
+
+#### Use Case: Calculate aging, set due dates, measure durations.
+
+### DATE_FORMAT
+
+#### Purpose: Format dates as strings.
+
+#### Usage: `DATE_FORMAT(date, format)`
+
+#### Example: `DATE_FORMAT(order_date, 'yyyy-MM')`  - "2023-01"
+
+#### Use Case: Display formatting, grouping by period, reporting.
+
+### EXTRACT / DATE_PART
+
+#### Purpose: Extract date components.
+
+#### Usage:
+
+```sql
+* `EXTRACT(part FROM date)`
+* `DATE_PART(part, date)`
+```
+
+#### Example: `EXTRACT(YEAR FROM order_date)`  - 2023
+
+#### Use Case: Time-based analysis, grouping by periods.
+
+### LAST_DAY
+
+#### Purpose: Get last day of month.
+
+#### Usage: `LAST_DAY(date)`
+
+#### Example: `LAST_DAY(order_date)`  - Last day of order month
+
+#### Use Case: Month-end calculations, period boundaries.
+
+## Conditional Logic
+
+### IF
+
+#### Purpose: Simple conditional logic.
+
+#### Usage: `IF(condition, true_value, false_value)`
+
+#### Example: `IF(sales > 1000, 'High', 'Low')`  - Category based on sales
+
+#### Use Case: Data categorization, flag creation, business rules.
+
+### CASE WHEN
+
+#### Purpose: Multiple condition logic.
+
+#### Usage:
+
+```sql
+CASE
+  WHEN condition1 THEN value1
+  WHEN condition2 THEN value2
+  ELSE default
+END
+```
+
+
+#### Example:
+
+```sql
+CASE
+  WHEN score >= 90 THEN 'A'
+  WHEN score >= 80 THEN 'B'
+  ELSE 'C'
+END
+```
+
+
+#### Use Case: Complex categorization, multi-tier logic, scoring systems.
+
+
+### COALESCE
+
+#### Purpose: Return first non-null value.
+
+#### Usage: `COALESCE(value1, value2, default)`
+
+#### Example: `COALESCE(mobile_phone, home_phone, 'No Phone')`  - First available phone
+
+#### Use Case: Handle missing data, provide defaults, data completeness.
+
+### NULLIF
+
+#### Purpose: Return null if values are equal.
+
+#### Usage: `NULLIF(value1, value2)`
+
+#### Example: `NULLIF(discount, 0)`  - NULL if discount is 0
+
+#### Use Case: Convert zeros to nulls, conditional nulls. 
+
+
+
+
+
