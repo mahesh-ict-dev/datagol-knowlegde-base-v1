@@ -4,6 +4,10 @@ tags: [Visualizer, Dashboards, Widgets]
 slug: configuring-setting-widgets
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 DataGOL offers a flexible way to visualize your data through configurable widgets. When you configure a widget, you're essentially defining what data is displayed and how it's presented visually. This involves selecting the specific columns for the x and y axis, deciding if the y-axis should display cumulative values, and choosing from a range of technical indicators to overlay. You also fine-tune the aesthetic details like numeric notations and chart label colors during configuration.
 
 On the other hand, setting the widgets focuses on the overall structure and orientation of the chart. This is where you decide if multiple series should be stacked, whether to display the x and y axes labels, and if the chart should be rendered horizontally or vertically. Essentially, configuration deals with the data content and its immediate visual attributes, while settings govern the broader layout and presentation style of the widget.
@@ -14,11 +18,11 @@ On the other hand, setting the widgets focuses on the overall structure and orie
 
 1.  From the right side of the widget generation page, click the **Update Widget Column Configurations** icon.
     
-    ![configuring-setting-KPI-widget](/img/image-20250503-170512.png)
+    <ImagePopup src="/img/image-20250503-170512.png" alt="configuring-setting-KPI-widget" caption="configuring-setting-KPI-widget" />
     
 2.  Configure any of the following:
     
-    ![configuring-setting-KPI-widget1](/img/image-20250503-174701.png)
+    <ImagePopup src="/img/image-20250503-174701.png" alt="configuring-setting-KPI-widget1" caption="configuring-setting-KPI-widget1" />
 
 | Items           | Description                                                                                             |
 | :-------------- | :------------------------------------------------------------------------------------------------------ |
@@ -31,7 +35,7 @@ To set the KPI widget, do the following:
 
 1.  From the right side of the widget generation page, click the **Update settings** icon.
     
-   ![configuring-setting-KPI-widget](/img/image-20250503-170524.png)
+   <ImagePopup src="/img/image-20250503-170524.png" alt="configuring-setting-KPI-widget" caption="configuring-setting-KPI-widget" />
 
 2.  Set the following:
     
@@ -69,7 +73,7 @@ To perform KPI period comparison, do the following:
     
 2.  Apply a date filter to specify the period you want to analyze (e.g., Last Month, Last Quarter, Last Year). The KPI is displayed.
     
-     ![configuring-setting-KPI-widget](/img/visualizer/select-metric-and-date-filter.gif)
+     <ImagePopup src="/img/visualizer/select-metric-and-date-filter.gif" alt="configuring-setting-KPI-widget" caption="configuring-setting-KPI-widget" />
     
 3.  In the KPI configuration settings, click the metric and then the **Comparison Criteria** option and select the desired comparison period:
     
@@ -78,13 +82,13 @@ To perform KPI period comparison, do the following:
     -   **Year period**: Compares the selected year with the previous year.  
         The system will display the metric's value for the selected period and the comparison period, along with the percentage change.
         
-        ![configuring-setting-KPI-widget](/img/visualizer/yoy1.gif)
+        <ImagePopup src="/img/visualizer/yoy1.gif" alt="configuring-setting-KPI-widget" caption="configuring-setting-KPI-widget" />
 
 **Relative Date for Date Filtering**
 
 When you set the date filter, the **Relative Date** option allows you to set the base date to reference the period used for analysis, especially when dealing with incomplete data for the current period.
 
- ![configuring-setting-KPI-widget](/img/image-20250324-180253.png)
+ <ImagePopup src="/img/image-20250324-180253.png" alt="configuring-setting-KPI-widget" caption="configuring-setting-KPI-widget" />
 
 By specifying a relative date, such as March 1, 2025, you establish a consistent reference point for period calculations. Consequently, when applying a **Last Month** filter, the analysis will focus on the complete preceding month, in this case, February, 2025.
 
@@ -94,7 +98,7 @@ To configure Bar chart widget do the following:
 
 1.  From the right side of the widget generation page, click the **Update Widget Column Configurations** icon.
     
-    ![configuring-setting-bar-widget](/img/visualizer/image-20250503-170512.png) 
+    <ImagePopup src="/img/visualizer/image-20250503-170512.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" /> 
     
 2.  Configure any of the following:
     
@@ -112,14 +116,14 @@ DataGOL supports plotting multiple metrics (Y-axis) against a single dimension (
 For example:  
 As shown in the image, for a single dimension such as **Yearly Hire Date** on the **X-axis**, our system can display multiple metrics such as **Average Remote Work Frequency**, **Average Employee Satisfaction score** and **Sum work hours per week** on the **Y-axis**. This would visualize a combination chart of bars and line.
 
-![configuring-setting-bar-widget](/img/visualizer/image-20250508-130008.png) 
+<ImagePopup src="/img/visualizer/image-20250508-130008.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" /> 
 :::
 
 To set the Bar chart widget, do the following:
 
 1.  From the right side of the widget generation page, click the **Update settings** icon.
     
-    ![configuring-setting-bar-widget](/img/visualizer/image-20250503-170524.png) 
+    <ImagePopup src="/img/visualizer/image-20250503-170524.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" /> 
 
 2.  Set the following:
     
@@ -518,7 +522,7 @@ The **Tree view** in the Pivot table of a widget offers a hierarchical represent
         
     -   This provides a drill-down capability, allowing users to explore data at different levels of detail.
         
-        ![pivot-table-treeview](/img/visualizer/pivottable-treeview.gif)
+        <ImagePopup src="/img/visualizer/pivottable-treeview.gif" alt="pivot-table-treeview" caption="pivot-table-treeview" />
         
 -   **Subtotal Calculations:**
     
@@ -554,8 +558,8 @@ The **Tree view** in the Pivot table of a widget offers a hierarchical represent
     | |Numeric Notations | Display values in thousands (**K**), millions (**M**), or automatically. |
     | |Decimal Points | Specifies the decimal point. |
 
-    ![pivot-table-treeview](/img/visualizer/Setting-treeview1.gif)
+    <ImagePopup src="/img/visualizer/Setting-treeview1.gif" alt="pivot-table-treeview" caption="pivot-table-treeview" />
 
     You can rearrange rows and columns to control how your data is grouped and aggregated, providing you with maximum flexibility for analysis. You can also manipulate the location of data fields, switching them between rows and columns as needed.
     
-    ![pivot-table-treeview](/img/visualizer/Setting-treeview-rows-col-interchange.gif) 
+    <ImagePopup src="/img/visualizer/Setting-treeview-rows-col-interchange.gif" alt="pivot-table-treeview" caption="pivot-table-treeview" /> 

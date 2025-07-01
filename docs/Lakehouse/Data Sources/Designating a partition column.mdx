@@ -4,6 +4,10 @@ tags: [Lakehouse, Connector]
 slug: designating-a-partition-column
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 To designate a partition column, do the following: 
 
 1.  Navigate to the data source page for which you want to AI generate the metadata catalog.
@@ -14,15 +18,15 @@ To designate a partition column, do the following:
     
 4.  From the extreme right click the more options icon corresponding to a column and select the **Make partition column** option. This option is available only for columns with following data types: **int**, **bigint**, **timestamp**, **long,** and **date**.
     
-     ![designating-partition-column](/img/image-20250511-132102.png)
+     <ImagePopup src="/img/image-20250511-132102.png" alt="designating-partition-column" caption="designating-partition-column" />
     
 5.  In the **Partition Column Settings** box, select the Enable checkbox. You can also click **Advance Settings** and specify the partition size.
     
-    ![designating-partition-column1](/img/image-20250511-134329.png)
+    <ImagePopup src="/img/image-20250511-134329.png" alt="designating-partition-column1" caption="designating-partition-column1" />
     
     The column that is specified as the partition column is ticked in the listed.
     
-    ![designating-partition-column2](/img/image-20250511-134600.png)
+    <ImagePopup src="/img/image-20250511-134600.png" alt="designating-partition-column2" caption="designating-partition-column2" />
 
     The designated column will be used as the partition column by Apache Spark while processing datasets. Only a single column can be used as a Partition Column. The default partition size is 50K.
     :::info
@@ -33,4 +37,4 @@ To designate a partition column, do the following:
     If you attempt to change the partition column, a warning is displayed, since this action can impact the pipeline and retrieval efficiency.
     :::
 
-    ![designating-partition-column3](/img/image-20250511-134755.png)
+    <ImagePopup src="/img/image-20250511-134755.png" alt="designating-partition-column3" caption="designating-partition-column3" />

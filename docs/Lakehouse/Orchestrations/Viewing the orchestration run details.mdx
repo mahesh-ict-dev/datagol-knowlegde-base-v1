@@ -4,9 +4,13 @@ tags: [Lakehouse, Connector, Pipeline, Orchestrations]
 slug: viewing-the-orchestration-run-details
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 The **Runs** tab provides a comprehensive view of each orchestration execution. Here, you can readily see details such as the run's name, the user who initiated it, the start and end times, the total duration, and the current status (e.g., completed, failed). To investigate data lineage, click the more options icon. Additionally, clicking the **View Snapshot** link offers a detailed, point-in-time overview of that specific run.
 
-![viewing the orchestration run details](/img/orchestration/image-20250512-061419.png)
+<ImagePopup src="/img/orchestration/image-20250512-061419.png" alt="viewing the orchestration run details" caption="viewing the orchestration run details" />
 
 1.  On the DataGOL **Home** page, from the left navigation panel, click **Lakehouse** > **Orchestration**.
     
@@ -30,7 +34,7 @@ The **Runs** tab provides a comprehensive view of each orchestration execution. 
         
     -   **View Snapshot**: Click the link to view a quick snapshot of the details of the orchestration run. The snapshots of an orchestration run details the executed pipelines and their statuses at a given time, as your orchestration may not remain constant across different runs.
         
-        ![viewing the orchestration run details](/img/orchestration/orchestration-snapshot.gif)
+        <ImagePopup src="/img/orchestration/orchestration-snapshot.gif" alt="viewing the orchestration run details" caption="viewing the orchestration run details" />
         
     -   **More options icon**: Scroll right and click the more options icons to view the data lineage.
     

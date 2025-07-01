@@ -6,6 +6,10 @@ tags: [Reference]
 slug: datagol-best-practices
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 This document outlines DataGOL's recommended best practices, offering guidance, cautions, and solutions for various scenarios.
 
 ## Lakehouse
@@ -69,8 +73,8 @@ In this case, `table_name (folder) will be treated as the table name. All files 
 Make sure that the files within the folder have a consistent schema to avoid ingestion issues.
 :::
 
-	![s3-datasource](/img/best-practices/S3-data-source.png)
-	![s3-datasource](/img/best-practices/S3-data-source.png)
+	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-datasource" caption="s3-datasource" />
+	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-datasource" caption="s3-datasource" />
 
 ### Folder as data source
 
@@ -106,7 +110,7 @@ The **Bronze Layer** is where raw data is first ingested directly from source sy
 -	**Scenario 2**: Manual `Sync Schema` triggers fail to complete, and the last sync date remains unchanged.
 -	**Solution**: Contact us via Slack
 
-![Sync Schema failure](/img/best-practices/sync-schema-failure.png)
+<ImagePopup src="/img/best-practices/sync-schema-failure.png" alt="Sync Schema failure" caption="Sync Schema failure" />
 
   
 ## Data types changes
@@ -137,7 +141,7 @@ Adding a partition column to your datasource is highly beneficial when the datas
 	The Partition Column is not supported for warehouses.
 -	**Steps:**
 Lakeshouse > Datasource > Table > Column Info > Make Partition Column
-![Partition column usage](/img/best-practices/partition-column-usage.png)
+<ImagePopup src="/img/best-practices/partition-column-usage.png" alt="Partition column usage" caption="Partition column usage" />
 
 ## New stream selection
 
@@ -150,7 +154,7 @@ Lakeshouse > Datasource > Table > Column Info > Make Partition Column
 	4.	Select the new streams you want to include.
 	5.	Click **Save Changes**.
 	From the next pipeline run onward, the newly added stream(s) will begin syncing and depositing data into your warehouse.
-	![New Stream Selection](/img/best-practices/new-stream-selection.png)
+	<ImagePopup src="/img/best-practices/new-stream-selection.png" alt="New Stream Selection" caption="New Stream Selection" />
 
 ## Sync modes in pipelines
 
@@ -361,7 +365,7 @@ A dedupe pipeline is a custom data pipeline designed to identify and remove dupl
 **Iceberg**
 Transactional correctness and historical versioning: It supports ACID transactions, ensures data consistency even with concurrent writes, and allows you to query historical versions of the data (time travel).
 
-![iceberg vs parquet](/img/best-practices/iceberg-vs-parquet.png)
+<ImagePopup src="/img/best-practices/iceberg-vs-parquet.png" alt="iceberg vs parquet" caption="iceberg vs parquet" />
 
 ## Lakehouse permissions
 
@@ -419,7 +423,7 @@ Enable this feature to safeguard important workbooks within a collaborative work
 It is highly recommended for finalized gold layer data and data sets which are exposed as API’s.
 :::
  
-![delete-protection](/img/best-practices/delete-protection.png)
+<ImagePopup src="/img/best-practices/delete-protection.png" alt="delete-protection" caption="delete-protection" />
 
 ## Golden layer - Workbook is the key
 
@@ -481,7 +485,7 @@ Moreover, our Impact Analysis feature will help to ensure that we capture all th
 	    SELECT * FROM app_connection_read.table_123
 	    ```
     
-![joins-between-existing-workbooks](/img/best-practices/joins-between-existing-workbooks.png)
+<ImagePopup src="/img/best-practices/joins-between-existing-workbooks.png" alt="joins-between-existing-workbooks" caption="joins-between-existing-workbooks" />
 
   
 ## Storage type
@@ -506,7 +510,7 @@ DataGOl supports 3 different types of Query engines designed for specific use ca
     -   In workbooks, if the view is published via spark, the user has the capability to switch to Athena but it's not allowed when the view is published via JDBC.
     
 Athena support on Playground:
-![Athena support on playground](/img/best-practices/query-engines.png)
+<ImagePopup src="/img/best-practices/query-engines.png" alt="Athena support on playground" caption="Athena support on playground" />
 
 ### Persistent layer
 
@@ -526,10 +530,10 @@ Consider if a workbook was created using the `views.view_id` connection name of 
 :::
 
 Changing the query engine from Spark to Athena
-![persistent layer](/img/best-practices/persistent-layer.png)
+<ImagePopup src="/img/best-practices/persistent-layer.png" alt="persistent layer" caption="persistent layer" />
 
 Switching Data provider from Spark to JDBC:
-![persistent layer](/img/best-practices/persistent-layer-storage.png)
+<ImagePopup src="/img/best-practices/persistent-layer-storage.png" alt="persistent layer" caption="persistent layer" />
 
 ## BI query integration
 
@@ -548,7 +552,7 @@ When you want to build dashboards with interactive parameters, such as time rang
     
 -   Restricted Query Sources: BI queries can only be built on top of existing workbooks using view IDs or table IDs. They do not support querying directly from data sources or warehouses.
     
-	![bi query integration](/img/best-practices/bi-query-integration.png)
+	<ImagePopup src="/img/best-practices/bi-query-integration.png" alt="bi query integration" caption="bi query integration" />
 
 ## Workbook and BI formula support
 
@@ -562,7 +566,7 @@ You can create formula columns directly using the functions supported by the dat
 -   If the workbook uses a JDBC connection, only JDBC-compatible functions can be used.
     
 Creating Formula Column on Workbooks:
-![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support.png)  `
+<ImagePopup src="/img/best-practices/workbook-and-bi-formula-support.png" alt="workbook and bi formula" caption="workbook and bi formula" />  `
   
 #### In BI (Visualizer)
 
@@ -580,7 +584,7 @@ Always check the workbook’s data provider before writing formula logic in BI o
 Your_workspace > your workbook > Settings > Storage and Provider Settings
 
 Creating formula column on BI:
-![workbook and bi formula](/img/best-practices/workbook-and-bi-formula-support-1.png)  `
+<ImagePopup src="/img/best-practices/workbook-and-bi-formula-support-1.png" alt="workbook and bi formula" caption="workbook and bi formula" />  `
 
 # Playground
 
@@ -598,7 +602,7 @@ The Playground is a useful space for ad hoc analysis and safely testing queries 
 
 Example: `select * from source.table limit 50`
 
-![playground](/img/best-practices/adding-a-limit.png)
+<ImagePopup src="/img/best-practices/adding-a-limit.png" alt="playground" caption="playground" />
   
 
 # Troubleshooting steps for common Spark errors

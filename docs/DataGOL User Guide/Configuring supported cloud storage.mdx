@@ -4,6 +4,10 @@ tags: [AWS, Azure, Cloud]
 slug: using-your-own-storage-with-datagol
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 DataGOL seamlessly integrates with both AWS and Azure cloud storage, offering you flexibility in choosing your primary data location. By default, DataGOL utilizes its own managed AWS and Azure resources for storage, ensuring immediate and hassle-free operation.
 
 While the platform's default configuration with its own AWS access keys is recommended for most users, you have the option to designate a specific AWS account for all your organization's DataGOL storage needs. Similarly, while DataGOL provides its own managed Azure storage for smooth operation, you can also choose to use your own Azure account by providing the necessary access key credentials. This allows companies requiring specific account separation or integration with existing cloud infrastructure to tailor their DataGOL storage setup.
@@ -11,9 +15,9 @@ While the platform's default configuration with its own AWS access keys is recom
 ## Updating AWS access keys
 
 1. From the left side of the Home page, select **Company**. 
-   ![Company Settings](/img/image-20250506-135902.png)
+   <ImagePopup src="/img/image-20250506-135902.png" alt="Company Settings" caption="Company Settings" />
 3. Select the **Keys** tab.
-   ![AWS Keys Tab](/img/image-20250506-164725.png)
+   <ImagePopup src="/img/image-20250506-164725.png" alt="AWS Keys Tab" caption="AWS Keys Tab" />
 5. Click **Edit** to add your:
    - AWS Access Key  
    - AWS Secret Key  
@@ -31,7 +35,7 @@ If changing the AWS access keys, ensure that the root directory (AWS S3 Bucket) 
 1. From the left side of the Home page, select **Company**.
 2. Select the **Keys** tab.
 3.  
-   ![Azure Keys Tab](/img/image-20250506-170104.png)
+   <ImagePopup src="/img/image-20250506-170104.png" alt="Azure Keys Tab" caption="Azure Keys Tab" />
 4. In the Azure settings box, click **Edit** to add your:
    - Azure Account Name  
    - Azure Account Key  

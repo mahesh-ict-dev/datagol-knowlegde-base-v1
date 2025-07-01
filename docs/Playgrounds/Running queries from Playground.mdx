@@ -5,6 +5,10 @@ slug: running-queries-from-playground
 ---
 
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 .The Playground lets you retrieve and analyze specific data by writing and running SQL queries on your connected data sources.
 
 To run queries in Playground, do the following:
@@ -24,7 +28,7 @@ To run queries in Playground, do the following:
         For querying data residing in these specific DataSources, the Athena query engine is the recommended choice.
         Furthermore, for scenarios involving high data volumes, Athena can offer faster query execution, although it's important to note that this increased speed may come with higher costs.
         :::
-        ![running-queries-from-playground](/img/playground/image-20250511-183306.png) 
+        <ImagePopup src="/img/playground/image-20250511-183306.png" alt="running-queries-from-playground" caption="running-queries-from-playground" /> 
 
 1.  Selecting the appropriate provider can optimize query execution, especially for large datasets. With Spark data provider along with the copy option, a **Last Mile pipeline** will be created when the storage type is switched from S3 to DB. The Last Mile pipeline provides the visibility on the storage type conversion process to the user.
     
@@ -32,4 +36,4 @@ To run queries in Playground, do the following:
     
 3.  Click **Run** button above the query. The query is run and the results are displayed. Also, you can highlight a query or part of a query in the editor to run just the selected portion
     
-    ![running-queries-from-playground3](/img/playground/image-20250427-061602.png) 
+    <ImagePopup src="/img/playground/image-20250427-061602.png" alt="running-queries-from-playground3" caption="running-queries-from-playground3" /> 

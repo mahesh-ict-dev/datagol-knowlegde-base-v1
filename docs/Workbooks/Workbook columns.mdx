@@ -4,6 +4,10 @@ tags : [Workspace, Workbooks]
 slug: workbook-columns
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 Workbooks offer a rich set of column types designed to capture and manage your data effectively. By strategically choosing these column types, you can structure your data precisely to meet your specific requirements, ensuring accuracy, consistency, and enhanced functionality within your workbooks. The following column types are included in workbooks:
 
 -   **Textual data:** Use **Single Line Text** for short entries and **Long Text** for detailed notes and rich content (including HTML).
@@ -27,7 +31,7 @@ Workbooks offer a rich set of column types designed to capture and manage your d
     
 3.  Navigate to the last empty column towards the right and then click **+** from the header.
     
-   ![Workbook columns1](/img/image-20250501-120615.png)
+   <ImagePopup src="/img/image-20250501-120615.png" alt="Workbook columns1" caption="Workbook columns1" />
 
     
 4.  Enter a unique name for the column. This name will be displayed in the header.
@@ -87,7 +91,7 @@ Workbooks offer a rich set of column types designed to capture and manage your d
     
 5.  Select **Single line text** from the list.
     
-    ![Workbook columns1](/img/image-20250501-122352.png)
+    <ImagePopup src="/img/image-20250501-122352.png" alt="Workbook columns1" caption="Workbook columns1" />
     
 6.  Optionally provide a short description.
     
@@ -108,7 +112,7 @@ Workbooks offer a rich set of column types designed to capture and manage your d
     
 5.  Select **Link** from the list.
     
-    ![Workbook columns1](/img/image-20250501-123945.png) 
+    <ImagePopup src="/img/image-20250501-123945.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
 6.  From the **Child Workbook** dropdown select the workbook that you want to link from the current workbook.
     
@@ -133,7 +137,7 @@ Workbooks offer a rich set of column types designed to capture and manage your d
     
 5.  Select **Lookup** from the list.
     
-     ![Workbook columns1](/img/image-20250501-125945.png) Open 
+     <ImagePopup src="/img/image-20250501-125945.png" alt="Workbook columns1" caption="Workbook columns1" /> Open 
     
 6.  From the **Select lookup source** dropdown, choose the source for lookup.
     
@@ -347,11 +351,11 @@ Do the following to create an AI Generate column
     
 5.  Select **AI Generate** from the list.
     
-    ![Workbook columns1](/img/image-20250508-083300.png) 
+    <ImagePopup src="/img/image-20250508-083300.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
 6.  Write a prompt that instructs the AI on what kind of information to generate. This prompt can include placeholders (indicated by curly braces `{}`) that reference existing columns in the workbook. For example, the prompt could be **“**_**Research on**_ `{company name}`  _**which has website**_ `{company website}` _**and identify the company founder and company motives.**_**"**  
     
-    ![Workbook columns1](/img/image-20250508-091819.png) 
+    <ImagePopup src="/img/image-20250508-091819.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
 7.  Turn the **Web Access** toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).
     
@@ -361,12 +365,12 @@ Do the following to create an AI Generate column
     
 10.  Click the AI Generate icon to view the results of your query in each row.
     
-    ![Workbook columns1](/img/image-20250508-091241.png) 
+    <ImagePopup src="/img/image-20250508-091241.png" alt="Workbook columns1" caption="Workbook columns1" /> 
       
     Once the prompt is set, the AI processes each row in the workbook.  
     For each row, it replaces the placeholders in the prompt with the corresponding values from the specified columns. It then uses the prompt (and web access, if enabled) to generate the requested information. The generated content appears in the new **AI Generate** column for each row.
     
-     ![Workbook columns1](/img/image-20250508-090807.png)  
+     <ImagePopup src="/img/image-20250508-090807.png" alt="Workbook columns1" caption="Workbook columns1" />  
 
 **Example:**
 
@@ -376,11 +380,11 @@ _**"Provide some details about**_ `{credit_card_type}` _**and their business tre
 
 Also enables the web access.
 
-![Workbook columns1](/img/image-20250508-091909.png)   
+<ImagePopup src="/img/image-20250508-091909.png" alt="Workbook columns1" caption="Workbook columns1" />   
 
 When this AI Generate column is applied to rows containing company names and websites, the AI uses this information to search the web and populate the **Credit Card Type Information** column with details. The placeholder `{credit_card_type}` is dynamically replaced with the values from the respective row for each company being processed.
 
-![Workbook columns1](/img/image-20250508-092335.png)   
+<ImagePopup src="/img/image-20250508-092335.png" alt="Workbook columns1" caption="Workbook columns1" />   
 
 The same prompt applied to a different credit card, yields different results based on the information the AI finds online for that specific company.
 
@@ -410,12 +414,12 @@ Formula columns empower you to go beyond the raw data and create the specific in
 
 -   When you type a formula in the **Formula** field, a pop-up is displayed with examples that demonstrate the syntax and usage.
     
-    ![Workbook columns1](/img/image-20250129-135336.png)  
+    <ImagePopup src="/img/image-20250129-135336.png" alt="Workbook columns1" caption="Workbook columns1" />  
     
 -   The **Validate** option allows you to check the correctness of the entered formula before creating the column. If errors are detected, the system displays appropriate error messages.  
     Detailed error logs are also available, providing you with insights into the specific issues encountered and enabling further investigation.
     
-     ![Workbook columns1](/img/image-20250129-134917.png)  
+     <ImagePopup src="/img/image-20250129-134917.png" alt="Workbook columns1" caption="Workbook columns1" />  
     
 -   Even if the user chooses to bypass the **Validate** option, the system performs a background validation.If any potential errors are detected during this background check, a warning message is shown, which provides all the details of the potential issue.
     
@@ -424,15 +428,15 @@ Formula columns empower you to go beyond the raw data and create the specific in
     
 5.  Click **Create**. A timeline icon displays the in-progress status during Formula column creation.
     
-     ![Workbook columns1](/img/image-20250129-141352.png) 
+     <ImagePopup src="/img/image-20250129-141352.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
     Formula columns are indicated with an icon of formula in the header.
     
-    ![Workbook columns1](/img/image-20250129-140117.png) 
+    <ImagePopup src="/img/image-20250129-140117.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
     Tooltips are added to **Formula** column headers to easily refer to the underlying formula that is used to calculate the column's values.
     
-     ![Workbook columns1](/img/image-20250129-141120.png)  
+     <ImagePopup src="/img/image-20250129-141120.png" alt="Workbook columns1" caption="Workbook columns1" />  
 
 #### Generating formula with AI assist
 
@@ -455,7 +459,7 @@ Furthermore, you can verify the compatibility of the generated formula with the 
     
 3.  Click **Ask AI**. AI Assistant dialog box opens separately.
     
-    ![Workbook columns1](/img/image-20250508-094357.png) 
+    <ImagePopup src="/img/image-20250508-094357.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
 4.  Enter the prompt for generating formula in natural language.
     
@@ -463,7 +467,7 @@ Furthermore, you can verify the compatibility of the generated formula with the 
     
 6.  Click **Use this** button. The formula is added.
 
-     ![Workbook columns1](/img/image-20250508-095152.png) 
+     <ImagePopup src="/img/image-20250508-095152.png" alt="Workbook columns1" caption="Workbook columns1" /> 
  
 ### Create Button column
 
@@ -477,7 +481,7 @@ You can directly generate Jira tickets from the workbooks using the **Button** d
     
 4.  In the **Action** dropdown, select **Create Jira Ticket** and then click to **Setup Configuration**.
     
-    ![Workbook columns1](/img/image-20250224-181238.png)  
+    <ImagePopup src="/img/image-20250224-181238.png" alt="Workbook columns1" caption="Workbook columns1" />  
     
 5.  In the **Action configuration** box, specify the following. The Jira fields are auto-populated.
     
@@ -487,7 +491,7 @@ You can directly generate Jira tickets from the workbooks using the **Button** d
         
     -   Issue Type: The issue type.
         
-        ![Workbook columns1](/img/image-20250224-181529.png) 
+        <ImagePopup src="/img/image-20250224-181529.png" alt="Workbook columns1" caption="Workbook columns1" /> 
         
 6.  Click **Save**.
     

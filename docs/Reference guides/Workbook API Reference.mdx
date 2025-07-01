@@ -5,11 +5,15 @@ tags: [API, Workbook, Curl]
 ---
 
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 ## Overview
 
 This document describes how to use the REST API interface to retrieve and post data into a **DataGOL Workbook**.
 
-![Overview](/img/image_1_1.png)
+<ImagePopup src="/img/image_1_1.png" alt="Overview" caption="Overview" />
 
 ---
 
@@ -30,7 +34,7 @@ A service account is required to obtain a token for authentication when making A
 
 Navigate to the **Team** section and click on the **Service Accounts** tab, then click the **+ Service Account** button.
 
-![Service Account Tab](/img/image_1_2.png)
+<ImagePopup src="/img/image_1_2.png" alt="Service Account Tab" caption="Service Account Tab" />
 
 ---
 
@@ -38,7 +42,7 @@ Navigate to the **Team** section and click on the **Service Accounts** tab, then
 
 Fill in the service account details in the creation form.
 
-![Service Account Form](/img/image_1_3.png)
+<ImagePopup src="/img/image_1_3.png" alt="Service Account Form" caption="Service Account Form" />
 
 ---
 
@@ -46,7 +50,7 @@ Fill in the service account details in the creation form.
 
 After successful creation, **copy the generated token** for use in API requests.
 
-![Copy Token](/img/image_1_4.png)
+<ImagePopup src="/img/image_1_4.png" alt="Copy Token" caption="Copy Token" />
 
 ---
 
@@ -61,7 +65,7 @@ After successful creation, **copy the generated token** for use in API requests.
 > The copied `cURL` command can be executed as-is with the bearer token.  
 > Replace it with a **service account token** for long-lived authentication.
 
-![Workbook cURL Copy](/img/image_2_1.png)
+<ImagePopup src="/img/image_2_1.png" alt="Workbook cURL Copy" caption="Workbook cURL Copy" />
 
 ---
 

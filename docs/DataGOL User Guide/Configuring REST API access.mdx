@@ -4,15 +4,19 @@ tags: [User, Teams, Roles]
 slug: configuring-DataGOL-with-REST-APIs
 ---
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 DataGOL offers REST APIs to access workbook data. To configure REST API access:
 
 1. On the Home page, select **Teams** from the left navigation panel.  
 2. Click the **Service Accounts** tab and then click **+ Service Account**.  
-   ![service-accounts](/img/Login/config-rest-api-1.png)
+   <ImagePopup src="/img/Login/config-rest-api-1.png" alt="service-accounts" caption="service-accounts" />
 3. Specify a name and description for the service account. Optionally, select the **Keep token active without expiration** checkbox.  
 4. Click **Create**.  
 5. Use the generated token in the `x-auth-token` header for API requests.  
-   ![generate-token](/img/Login/config-rest-api-2.png)
+   <ImagePopup src="/img/Login/config-rest-api-2.png" alt="generate-token" caption="generate-token" />
 
    
    

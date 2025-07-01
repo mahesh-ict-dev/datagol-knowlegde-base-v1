@@ -5,6 +5,10 @@ slug: adding-data-sources
 ---
 
 
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
 :::tip [NOTE]
 
 Only an Account admin or Lakehouse admin can add data sources.
@@ -17,11 +21,11 @@ Do the following to add a datasource.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-    ![Add-datasource](/img/Datasource/image-20250505-070559.png)
+    <ImagePopup src="/img/Datasource/image-20250505-070559.png" alt="Add-datasource" caption="Add-datasource" />
         
 3.  Choose a database provider from the list, for example, **MySQL**.
     
-    ![Choose Database example MySQL](/img/Datasource/image-20250511-072035.png)
+    <ImagePopup src="/img/Datasource/image-20250511-072035.png" alt="Choose Database example MySQL" caption="Choose Database example MySQL" />
     
 4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following Datasources. Click the required datasource link from the following for integration details:
     
@@ -103,7 +107,7 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
     
 3.  Specify the following details to add S3 data source and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add s3 File CSV](/img/Datasource/image-20250511-072605.png)
+    <ImagePopup src="/img/Datasource/image-20250511-072605.png" alt="Add s3 File CSV" caption="Add s3 File CSV" />
 
     |**Field**  | **Description**|  
     |:----------|:---------|                                                                                                                     
@@ -133,7 +137,7 @@ Spark's configuration limits you to using credentials for only one S3 account at
 
     |        MySQL    | PostgreSQL  |
     |:-------------------------:|:-------------------------:|
-    |![Add MySQL](/img/Datasource/image-20250506-175842.png)| ![Add PostgreSQL](/img/Datasource/image-20250511-112352.png)|
+    |<ImagePopup src="/img/Datasource/image-20250506-175842.png" alt="Add MySQL" caption="Add MySQL" />| <ImagePopup src="/img/Datasource/image-20250511-112352.png" alt="Add PostgreSQL" caption="Add PostgreSQL" />|
 
     | Field | Description |
     |:---|:---|
@@ -155,7 +159,7 @@ Spark's configuration limits you to using credentials for only one S3 account at
     
 3.  Specify the following details to add folder and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add folder](/img/Datasource/image-20250511-072755.png)
+    <ImagePopup src="/img/Datasource/image-20250511-072755.png" alt="Add folder" caption="Add folder" />
 
     | Field | Description |
     |:---|:---|
@@ -173,11 +177,11 @@ Spark's configuration limits you to using credentials for only one S3 account at
 
 After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table's data.
 
-![Define-unique-data-table](/img/Datasource/att_195_for_220692503.png)
+<ImagePopup src="/img/Datasource/att_195_for_220692503.png" alt="Define-unique-data-table" caption="Define-unique-data-table" />
 
 To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The **Files** tab will provide you with the necessary options.
 
-![Define-unique-data-table1](/img/Datasource/att_224_for_220692503.png)
+<ImagePopup src="/img/Datasource/att_224_for_220692503.png" alt="Define-unique-data-table1" caption="Define-unique-data-table1" />
 
 :::tip NOTE
 
@@ -223,7 +227,7 @@ Do the following to add HubSpot as a datasource:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add HubSpot and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_Hubspot](/img/Datasource/image-20250511-080246.png)
+    <ImagePopup src="/img/Datasource/image-20250511-080246.png" alt="Add_Hubspot" caption="Add_Hubspot" />
 
     | Field | Description |
     |:---|:---|
@@ -283,7 +287,7 @@ To add Salesforce as a datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Salesforce and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_Salesforce](/img/Datasource/image-20250511-085826.png)
+    <ImagePopup src="/img/Datasource/image-20250511-085826.png" alt="Add_Salesforce" caption="Add_Salesforce" />
 
     | Field | Description |
     |:---|:---|
@@ -302,7 +306,7 @@ To add Salesforce as a datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_Snowflake](/img/Datasource/image-20250511-112121.png)
+    <ImagePopup src="/img/Datasource/image-20250511-112121.png" alt="Add_Snowflake" caption="Add_Snowflake" />
 
     | Field | Description |
     |---|---|
@@ -323,7 +327,7 @@ To add Salesforce as a datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add MongoDB Atlas and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
-    ![Add_MongoDB](/img/Datasource/image-20250511-111912.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111912.png" alt="Add_MongoDB" caption="Add_MongoDB" />
 
     | Field | Description |
     |---|---|
@@ -474,7 +478,7 @@ To add NetSuite as a datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add NetSuite and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_NetSuite](/img/Datasource/image-20250511-111639.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111639.png" alt="Add_NetSuite" caption="Add_NetSuite" />
     
     | Field | Description |
     |---|---|
@@ -497,7 +501,7 @@ To add NetSuite as a datasource, do the following:
     
 3.  Specify the following details to add NetSuite Reporting and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Netsuite_Reporting](/img/Datasource/image-20250511-111558.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111558.png" alt="Add_Netsuite_Reporting" caption="Add_Netsuite_Reporting" />
 
     | Field | Description |
     |---|---|
@@ -516,7 +520,7 @@ To add NetSuite as a datasource, do the following:
     
 3.  Specify the following details to add NetSuite-JDBC and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![NetSuite-JDBC](/img/Datasource/image-20250511-111519.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111519.png" alt="NetSuite-JDBC" caption="NetSuite-JDBC" />
 
     | Field | Description |
     |---|---|
@@ -565,7 +569,7 @@ To add Pipedrive as a datasource, do the following:
     
 3.  Specify the following details to add Pipedrive and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Pipedrive](/img/Datasource/image-20250511-095929.png)
+    <ImagePopup src="/img/Datasource/image-20250511-095929.png" alt="Add_Pipedrive" caption="Add_Pipedrive" />
     
     | Field | Description |
     |---|---|
@@ -611,7 +615,7 @@ To add Amplitude as datasource, do the following:
     
 3.  Specify the following details to add Amplitude and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Amplitude](/img/Datasource/image-20250511-100205.png)
+    <ImagePopup src="/img/Datasource/image-20250511-100205.png" alt="Add_Amplitude" caption="Add_Amplitude" />
     
     Field | Description |
     |---|---|
@@ -643,7 +647,7 @@ Do the following to
     
 3.  Click on the **API Keys** tab. Any existing API keys are listed.
 
-    ![Chargebee](/img/Datasource/image-20250112-214950.png)
+    <ImagePopup src="/img/Datasource/image-20250112-214950.png" alt="Chargebee" caption="Chargebee" />
 :::
 
 To add ChargeBee as a datasource, do the following:
@@ -654,7 +658,7 @@ To add ChargeBee as a datasource, do the following:
     
 3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Chargebee](/img/Datasource/image-20250511-100812.png) 
+    <ImagePopup src="/img/Datasource/image-20250511-100812.png" alt="Add_Chargebee" caption="Add_Chargebee" /> 
 
     | Field | Description |
     |---|---|
@@ -712,7 +716,7 @@ To add Shopify as a datasource, do the following:
     
 3.  Specify the following details to add Shopify and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Shopify](/img/Datasource/image-20250511-101024.png)
+    <ImagePopup src="/img/Datasource/image-20250511-101024.png" alt="Add_Shopify" caption="Add_Shopify" />
 
     | Field | Description |
     |---|---|
@@ -770,7 +774,7 @@ To add Monday as a datasource, do the following:
     
 3.  Specify the following details to add Monday and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_Monday](/img/Datasource/image-20250511-101736.png)
+    <ImagePopup src="/img/Datasource/image-20250511-101736.png" alt="Add_Monday" caption="Add_Monday" />
         
     | Field | Description |
     |---|---|
@@ -788,7 +792,7 @@ To add Monday as a datasource, do the following:
     
 3.  Specify the following details to add DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_DB2](/img/Datasource/image-20250511-111410.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111410.png" alt="Add_DB2" caption="Add_DB2" />
 
     | Field | Description |
     |---|---|
@@ -848,7 +852,7 @@ To add Quickbook as a datasource, do the following:
     
 3.  Specify the following details to add Quickbooks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-   ![sample](/img/Datasource/image-20250511-103419.png) 
+   <ImagePopup src="/img/Datasource/image-20250511-103419.png" alt="sample" caption="sample" /> 
     | Field | Description |
     |---|---|
     | **Connection Name** | Enter a unique name for the connection. |
@@ -895,7 +899,7 @@ To add Survey Monkey as datasource, do the following:
     
 3.  Specify the following details to add SurveyMonkey and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_SurveyMonkey](/img/Datasource/image-20250511-104259.png)
+    <ImagePopup src="/img/Datasource/image-20250511-104259.png" alt="Add_SurveyMonkey" caption="Add_SurveyMonkey" />
     
     | Field | Description |
     |---|---|
@@ -953,7 +957,7 @@ To add Cvent as a datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add Cvent and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_Cvent](/img/Datasource/image-20250511-111305.png)  
+    <ImagePopup src="/img/Datasource/image-20250511-111305.png" alt="Add_Cvent" caption="Add_Cvent" />  
 
     | Field | Description |
     |---|---|
@@ -1003,7 +1007,7 @@ To add SFTP Bulk as datasource, do the following:
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
 3.  Specify the following details to add SFTP Bulk and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    ![Add_SFTP_Hulk](/img/Datasource/image-20250511-111209.png)
+    <ImagePopup src="/img/Datasource/image-20250511-111209.png" alt="Add_SFTP_Hulk" caption="Add_SFTP_Hulk" />
 
     | Field | Description |
     |---|---|
@@ -1027,7 +1031,7 @@ To add SFTP Bulk as datasource, do the following:
     
 3.  Specify the following details to add SAP HANA and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_SAP_HANA](/img/Datasource/image-20250511-110627.png) 
+    <ImagePopup src="/img/Datasource/image-20250511-110627.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" /> 
 
     | Field | Description |
     |---|---|
@@ -1046,7 +1050,7 @@ To add SFTP Bulk as datasource, do the following:
     
 3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
-    ![Add_SAP_HANA](/img/Datasource/image-20250511-110915.png)  
+    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
 
     | Field | Description |
     |---|---|
