@@ -1,0 +1,504 @@
+---
+sidebar_position: 3
+tags: [formulas, apache spark]
+slug: bi-formula
+---
+
+
+## Overview
+
+This guide explains Business Intelligence (BI) formulas used in various reports and dashboards.
+Think of formulas as recipes that tell the computer how to calculate specific numbers, dates, or text from your data.
+
+## Number formulas
+
+**Purpose** 
+
+Calculate numerical results for business metrics
+
+### Simple math examples
+----------
+
+**Formula** 
+
+```sql
+sum(total_quantity) * 75
+```
+
+**Description** 
+
+Take all quantities, add them up, then multiply by 75
+
+**Real example**
+
+ If you sold 10 items, the result = 10 × 75 = 750
+
+**Business use** 
+
+Calculate bundle pricing, cost estimates
+
+#### Conditional math examples
+
+**Formula**
+
+```sql
+Case when month between {{date_range.start}} and {{date_range.end}} then actuals else 0 end
+```
+
+**Description**
+
+If the month is within my selected date range, show actual sales, otherwise, show `0`
+
+
+**Real example**
+
+-   January (in range): Shows $5,000   
+-   March (outside range): Shows $0
+
+**Business use**
+
+Filter data to specific periodstime periods.
+
+### Time-based calculations
+
+**Formula**
+
+```sql
+CASE WHEN DATE_PART('year', Date) = {{Year}} AND DATE_PART('month', Date) = DATE_PART('month', CURRENT_DATE) THEN plan ELSE 0 END
+```
+
+**Description**
+
+If the year matches my selected year AND the month matches the current month, show the plan number.
+
+**Real example** 
+
+In June 2024, only show the plan for June 2024 data.
+
+**Business Use**
+
+Month-to-date planning and tracking.
+
+
+## Currency formulas
+
+**Purpose** 
+
+Calculate money amounts with proper formatting
+
+### Year-over-year comparisons
+----------
+
+**Formula** 
+```sql
+sum(case when EXTRACT(year from CURRENT_DATE) = extract(year from date) and EXTRACT(month from date) <= EXTRACT(month from CURRENT_DATE) then total end)
+```
+**Description**
+
+Add up all the money from this year, but only for the months that have already passed. 
+
+**Real example**
+
+In June 2024, sum January through June 2024 totals
+
+**Business use**
+
+Year-to-date revenue tracking
+
+### Revenue differences
+----------
+
+**Formula**
+
+```sql
+mrr_actual - mrr_prior_year
+```
+**Description**
+
+Current monthly revenue minus last year's monthly revenue
+
+**Real example**
+
+$10,000 (this year) - $8,000 (last year) = $2,000 growth
+
+**Business use** 
+
+Growth measurement
+
+## Date formulas
+
+**Purpose**
+
+Create smart date filters and calculations
+
+### Dynamic date ranges
+----------
+
+**Formula**
+
+Complex CASE statement for date filtering
+
+**Description** 
+
+Depending on the period you choose (Today, This Week, This Month, etc.), calculate the correct start and end dates
+
+**Real example**
+
+-   Choose "This Month" - Shows June 1, 2024 to June 30, 2024
+-   Choose "Last Week" - Shows the previous Monday to Sunday
+   
+**Business use**
+
+Flexible report date filtering
+
+### Date comparisons
+----------
+
+**Formula**
+
+```sql
+DATEADD('DAY', 1, DATE_TRUNC('DAY', CURRENT_DATE))
+```
+**Description**
+
+Take today's date, remove the time part, then add one day
+
+**Real example**
+
+Today is June 19, 2024 3:45 PM - Result is June 20, 2024 12:00 AM
+
+**Business use**
+
+End-of-day calculations
+
+ ## Checkbox formulas
+
+**Purpose**
+
+Create True/False filters for data
+
+### Date range filters
+----------
+
+**Formula**
+
+```sql
+Case when apptdate between start_date_for_filter and end_date_for_filter then true else false end
+```
+**Description** 
+
+If the appointment date falls within my chosen date range, mark it as TRUE (include it), otherwise FALSE (exclude it)
+
+**Real example**
+
+-   Appointment on June 15, filter range June 1-30 - TRUE (include)
+    
+-   Appointment on May 15, filter range June 1-30 - FALSE (exclude)
+    
+**Business use** 
+
+Filter data for specific periods.
+
+### Year-to-date filters
+----------
+
+**Formula**
+
+```sql
+EXTRACT(month from createdon) <= EXTRACT(month from CURRENT_DATE)
+```
+**Description**
+
+ If the record was created in a month that has already passed this year, include it.
+
+**Real example** 
+
+In June, include January-June records, exclude July-December.
+
+**Business Use** 
+
+Year-to-date analysis
+
+## Single_Line_Text formulas
+
+**Purpose** 
+
+Create readable labels and categories
+
+### Year classification
+----------
+
+**Formula** 
+
+```sql
+CASE WHEN date_part('year',close_date) = {{year}} THEN 'This year' WHEN date_part('year',close_date) = {{year}}- 1 THEN 'Last year' ELSE NULL END
+```
+**Description** Look at the year of the close date. If it matches my selected year, label it as **This year**. If it's one year before, label it **Last year**.
+
+**Real example**
+
+-   Close date 2024-06-15, selected year 2024 → "This year"
+-   Close date 2023-06-15, selected year 2024 → "Last year"
+    
+**Business Use**
+
+Categorizing data by periods.
+
+  
+### Yes/No Indicators
+----------
+
+**Formula**
+
+```sql
+CASE WHEN SUM("logged hours") <= 0 THEN 'No' ELSE 'Yes' END 
+```
+ **Description** 
+
+ If the total logged hours is zero or less, show "No"; otherwise, show "Yes"
+
+**Real example**
+
+-   0 hours logged - "No"
+    
+-   5 hours logged - "Yes"
+    
+**Business use**
+
+Quick status indicators
+
+## Percentage formulas
+
+**Purpose** 
+
+Calculate percentages for ratios and completion rates
+
+### Penetration rates
+----------
+
+**Formula** 
+
+```sql
+cast(integrated_practices as float)/cast(total_practices as float)
+```
+
+**Description** 
+
+Divide the number of integrated practices by the total practices to get a percentage
+
+**Real example** 
+
+75 integrated ÷ 100 total = 0.75 (75%)
+
+**Business use** 
+
+Market penetration analysis
+
+### Completion rates
+----------
+
+**Formula**
+
+```sql
+cast(sum(completed_appts) / (case when sum(valid_appts) > 0 then sum(valid_appts) else 1 end) as float) * 100.0
+```
+**Description**
+
+Divide completed appointments by valid appointments, and multiply by 100 to get the percentage. If no valid appointments, avoid division by zero.
+
+**Real example** 
+
+80 completed ÷ 100 valid × 100 = 80%
+
+**Business use**
+
+Performance tracking
+
+## Technology integration made simple
+
+### Spark SQL compatibility
+----------
+
+**What is Spark?**
+
+Spark is a tool for processing large amounts of data quickly. Good News: Most of these formulas work directly with Spark examples that work well:
+
+-   `SUM, CASE WHEN, DATE_TRUNC`
+    
+-   Mathematical operations like `*, /, +, -`
+    
+Might need small changes:
+-   Parameter syntax: `{{year}}` - `?` (for prepared statements)
+-   Some date functions might have slightly different names.
+
+### JDBC integration
+----------
+
+**What is JDBC?**
+
+A way for programs to connect to databases. 
+
+**How does it work with these formulas?**
+
+-   Simple formulas work as-is
+    
+-   Complex formulas can be parameterized
+    
+-   Great for automated reporting
+    
+**Example transformation**
+
+-   Original: `DATE_PART('year', Date) = {{Year}}`
+    
+-   JDBC version: `DATE_PART('year', Date) = ?`
+    
+### Amazon Athena compatibility
+----------
+
+**What is Athena?**
+Amazon's service for analyzing data stored in the cloud. Good News: These formulas are mostly compatible since Athena uses standard SQL. 
+SQL Works great for:
+
+-   Large-scale data analysis
+    
+-   Cost-effective querying
+    
+-   Serverless processing
+
+**Best practices:**
+
+-   Use partitioned tables for date-based formulas
+    
+-   Store data in Parquet format for better performance
+    
+-   Consider materialized views for complex calculations
+    
+
+## Common formula patterns
+
+### Time intelligence
+----------
+**Pattern** 
+
+Compare the current period to the previous period. Examples: This year vs last year, this month vs last month. 
+
+**Business **value** 
+
+Track growth and trends.
+
+### Conditional logic
+----------
+**Pattern** 
+
+IF condition THEN result ELSE alternative. Examples: Date range filters, status categorization. 
+
+**Business value** 
+
+Dynamic calculations based on context.
+
+### Aggregation
+----------
+**Pattern** 
+
+SUM, AVG, COUNT of values. Examples: Total revenue, average deal size. 
+
+**Business **value** 
+
+Summary metrics for decision making
+
+### Rate calculations
+----------
+
+**Pattern**
+
+Part ÷ Whole × 100 Examples: Conversion rates, completion percentages 
+
+**Business **value** 
+
+Performance measurement
+
+## Benefits for different users
+
+### Business Users
+----------
+-   **Self-Service Analytics:** Create reports without technical help
+    
+-   **Consistent Calculations:** Same formula = same result every time
+    
+-   **Flexible Filtering:** Adjust date ranges and parameters easily
+    
+
+### Data Analysts
+----------
+
+-   **Reusable Logic:** Write once, use many times
+    
+-   **Maintainable Code:** Clear names and structure
+    
+-   **Scalable Solutions:** Works with small and large datasets
+    
+
+###  IT Teams
+----------
+
+-   **Standardized Approach:** Consistent formula patterns
+    
+-   **Performance Optimized:** Efficient calculations
+    
+-   **Integration Ready:** Works with modern data platforms
+ 
+## Best practices for formula management
+
+### Naming Conventions
+----------
+-   **Use descriptive names:** `mrr_this_year not formula1`
+    
+-   **Include context:** `ytd_revenue` not just `revenue`
+    
+-   **Be consistent:** `start_date_filter` and `end_date_filter`
+    
+
+### Documentation
+----------
+
+-   Comment complex logic
+    
+-   Provide examples of expected results
+    
+-   Document parameter meanings
+    
+
+### Testing
+----------
+
+-   Test with known data sets
+    
+-   Verify edge cases (empty data, zero values)
+    
+-   Compare results with manual calculations
+    
+
+### Performance
+----------
+
+-   Use appropriate data types
+    
+-   Minimize complex nested conditions
+    
+-   Consider pre-calculating frequently used values
+    
+
+## Conclusion
+
+For Business Success:
+
+-   Use these formulas to automate reporting
+    
+-   Ensure consistent calculations across teams
+    
+-   Enable self-service analytics for faster decision making
+    
+-   Scale analysis capabilities without proportional IT investment
+    
+
+This formula library provides the foundation for data-driven decision making, enabling organizations to transform raw data into actionable business intelligence efficiently and reliably.
