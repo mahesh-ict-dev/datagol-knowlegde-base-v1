@@ -14,11 +14,11 @@ This document outlines DataGOL's recommended best practices, offering guidance, 
 
 ## Lakehouse
 
-### Datasource configuration
+### Data source configuration
 
 Whenever feasible, configure each data source with a unique user/password pair tailored to its specific purpose. This helps manage resources better and avoids duplication.
 
-#### Naming convention for datasources
+#### Naming convention for data sources
 Names must be self-descriptive and follow a standardized format. Following are examples of a well-defined warehouse name:
 	-	**app_test_wh**
 		-   app: Represents the application data source.  
@@ -40,7 +40,7 @@ The suffix for the environment can also be added. For example: **prod**, **stagi
 
 ### Third party connectors  
 :::info
-Please contact us via Slack to get your connectors whitelisted. This is a prerequisite  to add any third party connector such as PostHog, Hubspot, SFTP Bulk etc from the datasource page.
+Please contact us via Slack to get your connectors whitelisted. This is a prerequisite  to add any third party connector such as PostHog, Hubspot, SFTP Bulk etc from the data source page.
 :::
 
 #### What to do?
@@ -73,12 +73,12 @@ In this case, `table_name (folder) will be treated as the table name. All files 
 Make sure that the files within the folder have a consistent schema to avoid ingestion issues.
 :::
 
-	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-datasource" caption="s3-datasource" />
-	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-datasource" caption="s3-datasource" />
+	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-data-source" caption="s3-data-source" />
+	<ImagePopup src="/img/best-practices/S3-data-source.png" alt="s3-data-source" caption="s3-data-source" />
 
 ### Folder as data source
 
-When a folder datasource is created, each folder within it is treated as a separate table. Therefore, it is recommended to provide meaningful and descriptive names to the folders.
+When a folder data source is created, each folder within it is treated as a separate table. Therefore, it is recommended to provide meaningful and descriptive names to the folders.
 
 Ensure to note the following:
 
@@ -135,12 +135,12 @@ While there's no strict limit on the number of warehouses you can create, it's c
 
 ## Partition column usage (when the data size is large)
 
-Adding a partition column to your datasource is highly beneficial when the datasource has millions of records. In such cases, when a pipeline is created on a datasource with a partition column, it enables the generation of multiple parallel tasks. This facilitates efficient data transfer to the warehouse and helps prevent connection timeout issues. The default partition size is 50,000 while the user has the flexibility to change it between 10,000 and 1,000,000 within the additional settings.
+Adding a partition column to your data source is highly beneficial when the data source has millions of records. In such cases, when a pipeline is created on a data source with a partition column, it enables the generation of multiple parallel tasks. This facilitates efficient data transfer to the warehouse and helps prevent connection timeout issues. The default partition size is 50,000 while the user has the flexibility to change it between 10,000 and 1,000,000 within the additional settings.
  
 -	**Implication**
 	The Partition Column is not supported for warehouses.
 -	**Steps:**
-Lakeshouse > Datasource > Table > Column Info > Make Partition Column
+Lakeshouse > Data Sources > Table > Column Info > Make Partition Column
 <ImagePopup src="/img/best-practices/partition-column-usage.png" alt="Partition column usage" caption="Partition column usage" />
 
 ## New stream selection
@@ -287,7 +287,7 @@ For Full refresh merge and Incremental merge to work to its full capability it i
 :::
 
 **Steps to add unique column:**
-Lakeshouse > Datasource > Table > Column Info > Unique Column
+Lakeshouse > Data Sources > Table > Column Info > Unique Column
 
 ### What is a Cursor field?
 
@@ -506,7 +506,7 @@ DataGOl supports 3 different types of Query engines designed for specific use ca
 -	Spark: Designed to handle large sized datasets.
 
 -	Athena: Designed to handle large datasets and faster data processing. However Athena has the below limitations,
-	-   In the playground, Athena is supported only for S3 datasource (Folder, s3 files and Warehouse).
+	-   In the playground, Athena is supported only for S3 data source (Folder, s3 files and Warehouse).
     -   In workbooks, if the view is published via spark, the user has the capability to switch to Athena but it's not allowed when the view is published via JDBC.
     
 Athena support on Playground:

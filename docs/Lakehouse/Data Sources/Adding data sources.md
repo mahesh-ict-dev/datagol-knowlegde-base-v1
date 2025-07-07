@@ -15,9 +15,9 @@ Only an Account admin or Lakehouse admin can add data sources.
 
 :::
 
-Do the following to add a datasource.
+Do the following to add a data source.
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -27,31 +27,31 @@ Do the following to add a datasource.
     
     <ImagePopup src="/img/Datasource/image-20250511-072035.png" alt="Choose Database example MySQL" caption="Choose Database example MySQL" />
     
-4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following Datasources. Click the required datasource link from the following for integration details:
+4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following data sources. Click the required data source link from the following for integration details:
     
-    -   [S3 Datasource](#adding-s3-data-source)
-    -   [PostgreSQL or Microsoft SQL](#adding-microsoft-sql-or-postgresql-as-a-datasource)
-    -   [Folder](#adding-folder-as-a-datasource)
-    -   [Hubspot](#adding-hubspot-as-datasource)
-    -   [MariaDB](#adding-mariadb-as-datasource)
-    -   [Salesforce](#adding-salesforce-as-datasource)
-    -   [Snowflake](#adding-snowflake-as-datasource)
-    -   [MongoDB Atlas](#adding-mongodb-atlas-datasource)
-    -   [Netsuite](#adding-netsuite-as-datasource)
-    -   [Netsuite Reporting](#adding-netsuite-reporting-as-datasource)
-    -   [NetSuite-JDBC](#adding-netsuite-jdbc-as-datasource)
-    -   [Pipedrive](#adding-pipedrive-as-datasource)
-    -   [Amplitude](#adding-amplitude-as-datasource)
-    -   [ChargeBee](#adding-chargebee-as-datasource)
-    -   [Shopify](#adding-shopify-as-datasource)
-    -   [Monday](#adding-monday-as-datasource)
-    -   [DB2](#adding-db2-as-datasource)
-    -   [Quickbooks](#adding-quickbooks-as-datasource)
-    -   [Surveymonkey](#adding-surveymonkey-as-datasource)
-    -   [Cvent](#adding-cvent-as-datasource)
-    -   [SFTP Bulk](#adding-sftp-bulk-as-datasource)
-    -   [SAP HANA](#adding-sap-hana-as-datasource)
-    -   [Azure File](#adding-azure-file-as-datasource)
+    -   [S3 Data source](#adding-s3-data-source)
+    -   [PostgreSQL or Microsoft SQL](#adding-microsoft-sql-or-postgresql-as-a-data-source)
+    -   [Folder](#adding-folder-as-a-data-source)
+    -   [Hubspot](#adding-hubspot-as-data-source)
+    -   [MariaDB](#adding-mariadb-as-data-source)
+    -   [Salesforce](#adding-salesforce-as-data-source)
+    -   [Snowflake](#adding-snowflake-as-data-source)
+    -   [MongoDB Atlas](#adding-mongodb-atlas-data-source)
+    -   [Netsuite](#adding-netsuite-as-data-source)
+    -   [Netsuite Reporting](#adding-netsuite-reporting-as-data-source)
+    -   [NetSuite-JDBC](#adding-netsuite-jdbc-as-data-source)
+    -   [Pipedrive](#adding-pipedrive-as-data-source)
+    -   [Amplitude](#adding-amplitude-as-data-source)
+    -   [ChargeBee](#adding-chargebee-as-data-source)
+    -   [Shopify](#adding-shopify-as-data-source)
+    -   [Monday](#adding-monday-as-data-source)
+    -   [DB2](#adding-db2-as-data-source)
+    -   [Quickbooks](#adding-quickbooks-as-data-source)
+    -   [Surveymonkey](#adding-surveymonkey-as-data-source)
+    -   [Cvent](#adding-cvent-as-data-source)
+    -   [SFTP Bulk](#adding-sftp-bulk-as-data-source)
+    -   [SAP HANA](#adding-sap-hana-as-data-source)
+    -   [Azure File](#adding-azure-file-as-data-source)
         
 5.  Click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data within that data source.
     
@@ -67,7 +67,7 @@ Simultaneous access to data residing in multiple, different S3 accounts (like Da
 
 :::info Prerequisite for adding S3 data source
 
-Before you add a S3 datasource, ensure to add the following beforehand from the Company section of the Home page.
+Before you add a S3 data source, ensure to add the following beforehand from the Company section of the Home page.
 
 -   AWS Access Keys
     
@@ -101,7 +101,7 @@ Do the following:
 s3 is available only in Amazon AWS infrastructure. S3 is not available as part of Microsoft Azure.
 
 :::
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Source**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -126,9 +126,9 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 Spark's configuration limits you to using credentials for only one S3 account at a time. This means that, at the company level, you can either configure Spark with access to your DataGOL S3 account or your S3 account, but not both simultaneously.
 :::
 
-### Adding Microsoft SQL or PostgreSQL as a datasource
+### Adding Microsoft SQL or PostgreSQL as a data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -147,13 +147,13 @@ Spark's configuration limits you to using credentials for only one S3 account at
     | **Port name** | Enter the port number used by the database server. |
     | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
     | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server datasource has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
 
 5.  Click **Submit**. 
 
-### Adding Folder as a datasource
+### Adding Folder as a data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -193,7 +193,7 @@ To upload, download, or delete files within a specific folder, click the folder 
 
 :::
 
-### Adding HubSpot as datasource
+### Adding HubSpot as data source
 
 :::info **Prerequisite for adding HubSpot**
 
@@ -221,8 +221,8 @@ Do the following:
 7.  Click **Copy** to copy the token to your clipboard.
 :::
 
-Do the following to add HubSpot as a datasource: 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+Do the following to add HubSpot as a data source: 
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -237,9 +237,9 @@ Do the following to add HubSpot as a datasource:
 
 4.  Click **Submit**. 
 
-### Adding MariaDB as datasource
+### Adding MariaDB as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -256,7 +256,7 @@ Do the following to add HubSpot as a datasource:
 
 4.  Click **Submit**. 
 
-### Adding Salesforce as datasource
+### Adding Salesforce as data source
 
 :::info **Prequisites for adding Salesforce**
 
@@ -280,9 +280,9 @@ To obtain these credentials, follow [**this walkthrough**](https://medium.com/@b
 2.  Use the user credentials when logging in to generate OAuth tokens.
 :::
 
-To add Salesforce as a datasource, do the following:
+To add Salesforce as a data source, do the following:
     
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -299,9 +299,9 @@ To add Salesforce as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Snowflake as datasource
+### Adding Snowflake as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -320,9 +320,9 @@ To add Salesforce as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding MongoDB Atlas datasource
+### Adding MongoDB Atlas data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -341,7 +341,7 @@ To add Salesforce as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding NetSuite as datasource
+### Adding NetSuite as data source
 
 :::info **Prequisites for adding NetSuite**
 
@@ -471,9 +471,9 @@ Do the following:
         6.  Save changes. After that, **Token ID** and **Token Secret** will be showed once (copy them to the safe place).
 :::
 
-To add NetSuite as a datasource, do the following:
+To add NetSuite as a data source, do the following:
     
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -493,9 +493,9 @@ To add NetSuite as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding NetSuite Reporting as datasource
+### Adding NetSuite Reporting as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -512,9 +512,9 @@ To add NetSuite as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding NetSuite-JDBC as datasource
+### Adding NetSuite-JDBC as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -533,7 +533,7 @@ To add NetSuite as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Pipedrive as datasource
+### Adding Pipedrive as data source
 
 :::info **Prerequisite for adding Pipedrive**
 
@@ -561,9 +561,9 @@ Do the following:
 
 :::
 
-To add Pipedrive as a datasource, do the following: 
+To add Pipedrive as a data source, do the following: 
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -579,7 +579,7 @@ To add Pipedrive as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Amplitude as datasource
+### Adding Amplitude as data source
 
 :::info **Prequisites for adding Amplitude**
 
@@ -607,9 +607,9 @@ Create a project first, if you don’t have one already. Refer to [Create a proj
 
 :::
 
-To add Amplitude as datasource, do the following:
+To add Amplitude as data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -626,7 +626,7 @@ To add Amplitude as datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding ChargeBee as datasource
+### Adding ChargeBee as data source
 
 :::info **Prequisites for adding Chargebee**
 
@@ -650,9 +650,9 @@ Do the following to
     <ImagePopup src="/img/Datasource/image-20250112-214950.png" alt="Chargebee" caption="Chargebee" />
 :::
 
-To add ChargeBee as a datasource, do the following:
+To add ChargeBee as a data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -669,7 +669,7 @@ To add ChargeBee as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Shopify as datasource
+### Adding Shopify as data source
 
 :::info **Prerequisite for adding Shopify**
 
@@ -708,9 +708,9 @@ Refer:
 -   [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
 :::
 
-To add Shopify as a datasource, do the following:   
+To add Shopify as a data source, do the following:   
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -728,7 +728,7 @@ To add Shopify as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Monday as datasource
+### Adding Monday as data source
 
 :::info **Prerequisite for adding Monday**
 
@@ -766,9 +766,9 @@ Do the following:
     5.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
 :::        
 
-To add Monday as a datasource, do the following:
+To add Monday as a data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -784,9 +784,9 @@ To add Monday as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding DB2 as datasource
+### Adding DB2 as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -805,7 +805,7 @@ To add Monday as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Quickbooks as datasource
+### Adding Quickbooks as data source
 
 :::info **Prerequisite for adding Quickbooks**
 
@@ -844,9 +844,9 @@ Do the following:
 -   Quickbooks connector works only for Quickbooks online account. It doesn’t work for Quickbooks Desktop Account. If you are using a Quickbooks Desktop Account please migrate your account to Quickbooks online. Refer [Migrate to Quickbooks online from desktop](https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US "https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US")
 :::
 
-To add Quickbook as a datasource, do the following:
+To add Quickbook as a data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -868,7 +868,7 @@ To add Quickbook as a datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding SurveyMonkey as datasource
+### Adding SurveyMonkey as data source
 
 :::info **Prerequisite for adding SurveyMonkey**
 
@@ -891,9 +891,9 @@ Do the following:
     
 :::
 
-To add Survey Monkey as datasource, do the following:
+To add Survey Monkey as data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -910,7 +910,7 @@ To add Survey Monkey as datasource, do the following:
 
 4.  Click **Submit**. 
 
-### Adding Cvent as datasource
+### Adding Cvent as data source
 
 :::info **Prerequisite for adding Cvent**
 
@@ -950,9 +950,9 @@ Do the following:
         -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
 :::
 
-To add Cvent as a datasource, do the following:
+To add Cvent as a data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -968,7 +968,7 @@ To add Cvent as a datasource, do the following:
 
 4.  Click **Submit**. 
     
-### Adding SFTP Bulk as datasource
+### Adding SFTP Bulk as data source
 
 :::info **Prerequisite for adding SFTP Bulk**
 
@@ -1000,9 +1000,9 @@ Do the following:
 2.  Create a folder in the server and drop your files there.
 :::
 
-To add SFTP Bulk as datasource, do the following:
+To add SFTP Bulk as data source, do the following:
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -1023,9 +1023,9 @@ To add SFTP Bulk as datasource, do the following:
 
 4.  Click **Submit**. 
     
-### Adding SAP HANA as datasource
+### Adding SAP HANA as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
@@ -1042,9 +1042,9 @@ To add SFTP Bulk as datasource, do the following:
     | **Port** | Specify the port number used by the database server. |
     | **Username/Password** | Specify the credentials to access the server. |
     
-### Adding Azure File as datasource
+### Adding Azure File as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Datasource**.
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     

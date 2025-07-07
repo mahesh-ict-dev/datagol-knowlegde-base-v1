@@ -4,12 +4,12 @@ tags: [Lakehouse, Connector]
 slug: viewing-the-created-data-source
 ---
 
-1.  From the DataGOL **Home** page, left navigation panel, select **Lakehouse** > **Datasource**.
+1.  From the DataGOL **Home** page, left navigation panel, select **Lakehouse** > **Data Sources**.
     
     ![select-datasource](/img/image-20250507-094141.png)
 
     
-2.  Select the provider that you chose during the setup and then the click the newly created datasources from the list. The following tabs are shown in the corresponding datasource page.
+2.  Select the provider that you chose during the setup and then the click the newly created data sources from the list. The following tabs are shown in the corresponding data source page.
     
     1.  **Summary**: The **Summary** tab serves as a central point for managing your added data source. 
          ![Summary](/img/image-20250507-101452.png)
@@ -18,16 +18,16 @@ slug: viewing-the-created-data-source
         
         -   **Describe:** Add or modify a description for the data source for easy identification and context.
             
-        -   **Configure:** Edit the initial settings you established when adding the datasource.
+        -   **Configure:** Edit the initial settings you established when adding the data source.
             
-        -   **Trace:** View the data lineage to understand the datasource's origins and transformations. Refer to [Data source lineage](/docs/Data%20Lineage/about-data-lineage)
+        -   **Trace:** View the data lineage to understand the data source's origins and transformations. Refer to [Data source lineage](/docs/Data%20Lineage/about-data-lineage)
         
-    2.  **Tables**: The **Tables** tab provides a comprehensive view of the tables within your chosen datasource. 
+    2.  **Tables**: The **Tables** tab provides a comprehensive view of the tables within your chosen data source. 
         ![Tables](/img/image-20250511-122810.png)
         
         Here's what you can:
         
-        -   **Browse tables:** See a list of all tables in the datasource.
+        -   **Browse tables:** See a list of all tables in the data source.
             
         -   **Access table information:** Click on a table name to open the Table Info page, where you can find:
             
