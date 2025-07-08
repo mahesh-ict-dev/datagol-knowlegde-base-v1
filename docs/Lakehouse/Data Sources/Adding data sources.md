@@ -31,30 +31,84 @@ Do the following to add a data source.
 
 ## Databases
 
-### Adding MySQL or PostgreSQL data source
+### Adding Amazon Redshift as data source
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-3.  Specify the following details to add Microsoft SQL or PostgreSQL and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-
-
-    |        MySQL    | PostgreSQL  |
-    |:-------------------------:|:-------------------------:|
-    |<ImagePopup src="/img/Datasource/image-20250506-175842.png" alt="Add MySQL" caption="Add MySQL" />| <ImagePopup src="/img/Datasource/image-20250511-112352.png" alt="Add PostgreSQL" caption="Add PostgreSQL" />|
+3.  Specify the following details to add Amazon Redshift and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/amazon-redshift.png" alt="Add_Amazon_Red_Shift" caption="Add_Amazon_Red_Shift" />
 
     | Field | Description |
-    |:---|:---|
-    | **Connection name** | Enter a unique name for the connection. |
-    | **Database** | Specify the name of the existing database that you want to connect. |
-    | **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
-    | **Port name** | Enter the port number used by the database server. |
-    | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+    | **Port** | Enter the port number used by the database server. |
+    | **Username/Password** | Provide the credentials to access the database server. |
+    | **Schema** | Specify the schema name for your connection. |
 
-5.  Click **Submit**. 
+4.  Click **Submit**.
+
+### Adding Databricks as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Databricks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/databricks.png" alt="databricks" caption="databricks" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Server Hostname** | Specify the host name of the Databricks cluster you want to connect to. |
+    | **HTTP Path** | Specify the HTTP path of the Databricks cluster you want to connect to. |
+    | **Databricks Unity Catalog Name** | Enter the name of the unity catalog for the database. |
+    | **Personal Access Token** | Specify the personal access token to authenticate access to the Databricks cluster. |
+    | **Port** | Specify the Databricks cluster port.|
+    | **Default Schema** | The default schema tables are written. If not specified otherwise, the default schema will be used.|
+
+4.  Click **Submit**.
+
+### Adding Google BigQuery data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Google BigQuery and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
+    <ImagePopup src="/img/google-big-query.png" alt="Add_google_big_query" caption="Add_google_big_query" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Project ID** | Specify the ID of the project that you want to connect. |
+    | **Dataset** | Specify the dataset name or ID for your connection. |
+    | **Credentials** | Specify the credentials to authenticate access to BigQuery. |
+
+4.  Click **Submit**. 
+
+### Adding IBM DB2 as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add IBM DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/ibm-db2.png" alt="Add_IBM_DB2" caption="Add_IBM_DB2" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Host Name** | Specify the host address of the database server. |
+    | **Port** | Specify the port number of the database server. |
+    | **Username / Password** | Provide the credentials for the account. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**.  
 
 ### Adding MariaDB data source
 
@@ -96,64 +150,30 @@ Do the following to add a data source.
 
 4.  Click **Submit**. 
 
-### Adding Google BigQuery data source
+### Adding MySQL or PostgreSQL data source
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-3.  Specify the following details to add Google BigQuery and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
-    <ImagePopup src="/img/google-big-query.png" alt="Add_google_big_query" caption="Add_google_big_query" />
+3.  Specify the following details to add Microsoft SQL or PostgreSQL and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+
+    |        MySQL    | PostgreSQL  |
+    |:-------------------------:|:-------------------------:|
+    |<ImagePopup src="/img/Datasource/image-20250506-175842.png" alt="Add MySQL" caption="Add MySQL" />| <ImagePopup src="/img/Datasource/image-20250511-112352.png" alt="Add PostgreSQL" caption="Add PostgreSQL" />|
 
     | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Project ID** | Specify the ID of the project that you want to connect. |
-    | **Dataset** | Specify the dataset name or ID for your connection. |
-    | **Credentials** | Specify the credentials to authenticate access to BigQuery. |
-
-4.  Click **Submit**. 
-
-### Adding Snowflake as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/Datasource/image-20250511-112121.png" alt="Add_Snowflake" caption="Add_Snowflake" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Schema Name** | Specify the schema name for your connection. |
-    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
-    | **Port** | Enter the port number used by the database server. |
-    | **Username/Password** | Provide the credentials to access the database server. |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **Database** | Specify the name of the existing database that you want to connect. |
+    | **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
+    | **Port name** | Enter the port number used by the database server. |
+    | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
     | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
 
-4.  Click **Submit**. 
-
-### Adding Amazon Redshift as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Amazon Redshift and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/amazon-redshift.png" alt="Add_Amazon_Red_Shift" caption="Add_Amazon_Red_Shift" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
-    | **Port** | Enter the port number used by the database server. |
-    | **Username/Password** | Provide the credentials to access the database server. |
-    | **Schema** | Specify the schema name for your connection. |
-
-4.  Click **Submit**. 
+5.  Click **Submit**. 
 
 ### Adding SAP HANA as data source
 
@@ -174,6 +194,8 @@ Do the following to add a data source.
     | **Port** | Specify the port number used by the database server. |
     | **Username/Password** | Specify the credentials to access the server. |
 
+4.  Click **Submit**.  
+
 ### Adding Snowflake as data source
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
@@ -193,50 +215,73 @@ Do the following to add a data source.
     | **Username/Password** | Provide the credentials to access the database server. |
     | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
-4.  Click **Submit**. 
-
-### Adding IBM DB2 as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add IBM DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/ibm-db2.png" alt="Add_IBM_DB2" caption="Add_IBM_DB2" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Host Name** | Specify the host address of the database server. |
-    | **Port** | Specify the port number of the database server. |
-    | **Username / Password** | Provide the credentials for the account. |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-
-4.  Click **Submit**. 
-
-### Adding Databricks as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Databricks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/databricks.png" alt="databricks" caption="databricks" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Server Hostname** | Specify the host name of the Databricks cluster you want to connect to. |
-    | **HTTP Path** | Specify the HTTP path of the Databricks cluster you want to connect to. |
-    | **Databricks Unity Catalog Name** | Enter the name of the unity catalog for the database. |
-    | **Personal Access Token** | Specify the personal access token to authenticate access to the Databricks cluster. |
-    | **Port** | Specify the Databricks cluster port.|
-    | **Default Schema** | The default schema tables are written. If not specified otherwise, the default schema will be used.|
-
-4.  Click **Submit**. 
+4.  Click **Submit**.  
 
 ## Data Files / Storage Services
+
+### Adding Azure File as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
+
+    | Field | Description |
+    |---|---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **File Format** | Specify any of the following file formats: **CSV** **Parquet** **JSON** |
+    | **Path to Azure container** | Path of the Azure Blob where the files exist. For example: `containername@storageaccountname.dfs.core.windows.net/path` |
+    | **Separator** | Specify the separator character to separate the data. For example: “,” |
+    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
+    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
+    | **Multiline** | Toggle to format the JSON output across multiple lines. |
+    | **Compression** | Select the file compression mode. |
+    | **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+
+4.  Click **Submit**. 
+
+### Adding Folder as a data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add folder and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-072755.png" alt="Add folder" caption="Add folder" />
+
+    | Field | Description |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **File Format** | Specify any of the following file formats: CSV, Parquet, JSON, Excel |
+    | **Separator** | Specify the separator character. |
+    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. This field is displayed only when the file format is CSV. |
+    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. This field is displayed only when the file format is CSV. |
+    | **Compression** | Select the file compression mode from any of the following options: **Uncompressed**, **gzip**, **lzo**, **brotli**, **lz4**, and **zstd**. |
+    | **Null Value** | A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field. |
+
+4.  Click **Submit**. 
+
+After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table's data.
+
+<ImagePopup src="/img/Datasource/att_195_for_220692503.png" alt="Define-unique-data-table" caption="Define-unique-data-table" />
+
+To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The **Files** tab will provide you with the necessary options.
+
+<ImagePopup src="/img/Datasource/att_224_for_220692503.png" alt="Define-unique-data-table1" caption="Define-unique-data-table1" />
+
+:::tip NOTE
+
+-   Adding files of different schemas in the same folder is not supported.
+    
+-   Multi tab excel files are not supported.
+    
+-   Folder names cannot be only numbers. Validation is yet to be added.
+
+:::
 
 ### Adding S3 data source  
 :::danger Caution
@@ -308,72 +353,6 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 Spark's configuration limits you to using credentials for only one S3 account at a time. This means that, at the company level, you can either configure Spark with access to your DataGOL S3 account or your S3 account, but not both simultaneously.
 :::
 
-### Adding Azure File as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
-
-    | Field | Description |
-    |---|---|
-    | **Connection name** | Enter a unique name for the connection. |
-    | **File Format** | Specify any of the following file formats: **CSV** **Parquet** **JSON** |
-    | **Path to Azure container** | Path of the Azure Blob where the files exist. For example: `containername@storageaccountname.dfs.core.windows.net/path` |
-    | **Separator** | Specify the separator character to separate the data. For example: “,” |
-    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
-    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
-    | **Multiline** | Toggle to format the JSON output across multiple lines. |
-    | **Compression** | Select the file compression mode. |
-    | **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
-
-4.  Click **Submit**. 
-
-### Adding Folder as a data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add folder and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-072755.png" alt="Add folder" caption="Add folder" />
-
-    | Field | Description |
-    |:---|:---|
-    | **Connection name** | Enter a unique name for the connection. |
-    | **File Format** | Specify any of the following file formats: CSV, Parquet, JSON, Excel |
-    | **Separator** | Specify the separator character. |
-    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. This field is displayed only when the file format is CSV. |
-    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. This field is displayed only when the file format is CSV. |
-    | **Compression** | Select the file compression mode from any of the following options: **Uncompressed**, **gzip**, **lzo**, **brotli**, **lz4**, and **zstd**. |
-    | **Null Value** | A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field. |
-
-
-
-5.  Click **Submit**. 
-
-After creating a data source, add a new folder to define a unique data table. Any files uploaded to this folder will be automatically merged to populate the table's data.
-
-<ImagePopup src="/img/Datasource/att_195_for_220692503.png" alt="Define-unique-data-table" caption="Define-unique-data-table" />
-
-To upload, download, or delete files within a specific folder, click the folder name or access the settings menu. The **Files** tab will provide you with the necessary options.
-
-<ImagePopup src="/img/Datasource/att_224_for_220692503.png" alt="Define-unique-data-table1" caption="Define-unique-data-table1" />
-
-:::tip NOTE
-
--   Adding files of different schemas in the same folder is not supported.
-    
--   Multi tab excel files are not supported.
-    
--   Folder names cannot be only numbers. Validation is yet to be added.
-
-:::
-
 ### Adding SFTP Bulk as data source
 
 :::info **Prerequisite for adding SFTP Bulk**
@@ -429,7 +408,7 @@ To add SFTP Bulk as data source, do the following:
 
 4.  Click **Submit**. 
 
-### Business Applications/SaaS
+## Business Applications/SaaS
 
 ### Adding Amplitude as data source
 

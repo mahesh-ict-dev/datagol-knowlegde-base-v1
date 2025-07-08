@@ -8,45 +8,42 @@ slug: impact-analysis
 import ImagePopup from '@site/src/components/ImagePopup';
 
 
-
-## Overview
-
-Impact analysis is a new capability introduced in the Lineage module to help users assess the downstream effects of potentially disruptive actions within the platform. This feature is designed to increase user awareness and reduce unintended consequences when altering or removing data entities.
+Impact analysis is a capability in the Data Lineage module to help you assess the downstream effects of potentially disruptive actions within the platform. This feature is designed to increase the awareness and reduce unintended consequences when altering or removing data entities.
 
 :::info [Important]
-This feature provides non-blocking warnings. Users will not be prevented from proceeding, but they will receive an alert detailing the potential impact of their actions.
+This feature provides non-blocking warnings. You will not be prevented from proceeding, but will receive an alert detailing the potential impact of their actions.
 :::
 
 Impact analysis brings visibility, clarity, and confidence to users who are making changes to critical data assets.
 
 
-## How it works
+## How it works?
 
-When a user initiates a potentially disruptive action—like deleting a workbook column, editing a pipeline, or removing a data source—the platform runs a real-time dependency check. It:
+When you initiate a potentially disruptive action—like deleting a workbook column, editing a pipeline, or removing a data source—the platform runs a real-time dependency check, this platform executes the following:
 
-1. Scans the Lineage Graph to identify any entities (like dashboards, other pipelines, or workbook views) that are directly or indirectly dependent on the item being modified.
+1. Scans the Lineage Graph to identify any entities (like dashboards, other pipelines, or workbook views) that are directly or indirectly dependent on the modified item.
 
 2. Categorizes dependencies into:
 
     - Immediate (directly affected)
     - All Downstream (transitive effects through connected assets)
 
-3. Surfaces the results via:
+3. Presents the results via:
 
     - A list view (for structured analysis)
     - A graph view (for visual understanding)
 
-4. Warns the user, but does not block the action, giving them the choice to:
+4. Warns you, but does not block the action, giving you the choice to:
 
     - Investigate and proceed confidently
     - Cancel and adjust their action based on impact
 
 
-## Why it’s useful
+## Why it’s useful?
 
 -   **Prevents unintended breakages**
 
-    Without impact analysis, changes made to one part of the system (like deleting a data pipeline) can cause silent failures in dashboards, reporting tools, or downstream processes. This feature helps users see the ripple effects before they commit to a change.
+    Without impact analysis, changes made to one part of the system (like deleting a data pipeline) can cause silent failures in dashboards, reporting tools, or downstream processes. This feature helps you view the ripple effects before you commit to a change.
 
     **Example:** A user deletes a column from a workbook. That column feeds into a chart on an executive dashboard. Impact analysis alerts the user to this dependency so they can avoid breaking the dashboard.
 
@@ -92,73 +89,65 @@ Impact analysis is available for the following actions:
 | DELETE_DATA_PIPELINE | Triggered when a data pipeline is deleted.                                |
 
 
-## Functionality
+## Impact analysis process
+When you initiate any of the supported event types, the system performs the following steps:
 
-When a user initiates any of the supported actions, the system performs the following steps:
+1. **Triggers impact analysis check**: Before applying the change, the system automatically initiates an impact analysis to determine downstream dependencies that could be affected.
 
-### 1. Trigger impact analysis check
+2. **Categorizes the downstream impact**: The results are categorized into two scopes:
 
-Before applying the change, the system automatically initiates an impact analysis to determine downstream dependencies that could be affected.
+    - **Immediate Impacted Entities**
+    Directly affected items, such as views or pipelines, that explicitly reference the item being changed.
 
-### 2. Categorize the downstream impact
+    - **All Downstream Items (Transitive Dependencies)**
+    A comprehensive list of indirect dependencies across the lineage chain, including:
 
-The results are categorized into two scopes:
+        - Workbooks
+        - Dashboards
+        - Data Pipelines
+        - Views and Columns
+        - Assets referencing the impacted entities
 
-- **Immediate Impacted Entities**
-  Directly affected items, such as views or pipelines, that explicitly reference the item being changed.
+3. **Displays the following visualization options:**
 
-- **All Downstream Items (Transitive Dependencies)**
-  A comprehensive list of indirect dependencies across the lineage chain, including:
+    -   **List view**
+        A structured, searchable list of all impacted entities. Includes metadata such as:
 
-    - Workbooks
-    - Dashboards
-    - Data Pipelines
-    - Views and Columns
-    - Assets referencing the impacted entities
+        - Entity Type (Workbook, Dashboard, Column, etc.)
+        - Entity Name
+        - Path of dependency
+        - Last updated time
 
-### 3. Visualization options
+        <ImagePopup src="/img/impact-analysis.png" alt="Impact Analysis" caption="Impact Analysis" />
 
-#### List view
+    -   Graph view
+        An interactive graphical lineage view showing:
 
-A structured, searchable list of all impacted entities. Includes metadata such as:
+        - The root entity being modified
+        - All directly and indirectly connected downstream entities
+        - Color-coded distinction between directly and transitively impacted items
+        - Hover/Click interactions to explore specific nodes in more detail
 
-- Entity Type (Workbook, Dashboard, Column, etc.)
-- Entity Name
-- Path of dependency
-- Last updated time
+        <ImagePopup src="/img/impact-analysis1.png" alt="Impact Analysis1" caption="Impact Analysis1" />
 
-<ImagePopup src="/img/impact-analysis.png" alt="Impact Analysis" caption="Impact Analysis" />
+4. **Highlights the impact clearly:** 
+    Items that are impacted by the proposed change are visually emphasized:
 
-#### Graph view
+    - ⚠️ Warning icons on affected nodes or rows
+    - Color highlights for easy differentiation
+    - Expandable sections for viewing more details (e.g., which columns in a view are affected)
 
-An interactive graphical lineage view showing:
+5. **User action and feedback:**
 
-- The root entity being modified
-- All directly and indirectly connected downstream entities
-- Color-coded distinction between directly and transitively impacted items
-- Hover/Click interactions to explore specific nodes in more detail
+    - The warning is non-blocking. You can proceed with the action after reviewing the impact.
+    - You are presented with:
 
-<ImagePopup src="/img/impact-analysis1.png" alt="Impact Analysis1" caption="Impact Analysis1" />
-
-### 4. Clear impact highlighting
-
-Items that are impacted by the proposed change are visually emphasized:
-
-- ⚠️ Warning icons on affected nodes or rows
-- Color highlights for easy differentiation
-- Expandable sections for viewing more details (e.g., which columns in a view are affected)
-
-### 5. User action and feedback
-
-- The warning is non-blocking. Users can proceed with the action after reviewing the impact.
-- Users are presented with:
-
-    - A warning is displayed summarizing the scope of impact
-    - The option to explore the List or Graph view
-    - A "Proceed Anyway" or "Cancel Action" button
+        - A warning, which summarizes the scope of impact
+        - Options to explore the List or Graph view
+        - A "Proceed Anyway" or "Cancel Action" button
 
 
-## Example workflow
+## Impact analysis example
 
 1. A user attempts to delete the column `total_sales` from a workbook.
 2. The system runs the impact analysis.
@@ -170,8 +159,3 @@ Items that are impacted by the proposed change are visually emphasized:
 4. User explores the graph view to understand the propagation path.
 5. User decides to proceed with the deletion after reviewing the impact.
 
-
-## Technical considerations
-
-- Impact analysis uses lineage graph traversal to identify downstream relationships.
-- Visualization powered by existing lineage graph infrastructure.
