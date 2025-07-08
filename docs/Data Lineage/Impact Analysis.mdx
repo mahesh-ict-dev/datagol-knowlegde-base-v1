@@ -1,0 +1,51 @@
+---
+sidebar_position : 6
+tags: [Lineage]
+slug: impact-analysis
+---
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+Impact Analysis helps you predict and understand the potential consequences of making a change before you actually implement it. Think of it as a foresight tool for your data systems.
+
+When you are about to make a significant change—like altering a data source, modifying a report, or updating a dashboard—Impact Analysis gives you a clear picture of everything that might be affected. It highlights all the downstream dependencies, meaning it shows you exactly which workbooks, dashboards, and data pipelines rely on the component you are planning to change.
+
+By proactively identifying these connections, you can understand the potential ripple effects across your entire data landscape. This means you can anticipate issues, plan for necessary adjustments, and mitigate risks before they occur. Ultimately, Impact Analysis gives you greater confidence and control over your data assets, ensuring your changes are smooth and don't inadvertently break something important.
+
+Currently, the following  event types are supported for Impact Analysis:
+
+-   **DELETE_WORKBOOK_COLUMN**
+    
+-   **DELETE_DATA_SOURCE**
+    
+-   **EDIT_DATA_PIPELINE**
+    
+-   **DELETE_WORKBOOK**
+    
+-   **DELETE_DATA_PIPELINE**
+    
+
+## How Impact Analsis work?
+
+When you attempt to perform any of these actions, the system will automatically:
+
+1.  Trigger an impact analysis check before applying the change.
+    
+2.  Display a clear distinction between:
+    
+    -   Immediately affecting entities: Direct impacts of your proposed change.
+        
+    -   All downstream items: Transitive dependencies across all your workbooks, dashboards, assets, and more.
+        
+3.  Present a comprehensive view of all impacted downstream entities through both a list view and a graph view. This includes affected views, columns, pipelines, and dashboards.
+
+<ImagePopup src="/img/impact-analysis.png" alt="Impact Analysis" caption="Impact Analysis" />
+
+<ImagePopup src="/img/impact-analysis1.png" alt="Impact Analysis1" caption="Impact Analysis1" />
+
+    
+5.  Clearly highlight affected items, giving you options to inspect them further.
+    
+
+Impact analysis is a **non-blocking warning**. You will not be prevented from completing the action. However, you will receive a warning and a chance to review the potential impact, empowering you to make informed decisions.

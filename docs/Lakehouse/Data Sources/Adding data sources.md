@@ -5,8 +5,6 @@ slug: adding-data-sources
 ---
 
 
-
-
 import ImagePopup from '@site/src/components/ImagePopup';
 
 :::tip [NOTE]
@@ -27,34 +25,218 @@ Do the following to add a data source.
     
     <ImagePopup src="/img/Datasource/image-20250511-072035.png" alt="Choose Database example MySQL" caption="Choose Database example MySQL" />
     
-4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. You can add any of the following data sources. Click the required data source link from the following for integration details:
-    
-    -   [S3 Data source](#adding-s3-data-source)
-    -   [PostgreSQL or Microsoft SQL](#adding-microsoft-sql-or-postgresql-as-a-data-source)
-    -   [Folder](#adding-folder-as-a-data-source)
-    -   [Hubspot](#adding-hubspot-as-data-source)
-    -   [MariaDB](#adding-mariadb-as-data-source)
-    -   [Salesforce](#adding-salesforce-as-data-source)
-    -   [Snowflake](#adding-snowflake-as-data-source)
-    -   [MongoDB Atlas](#adding-mongodb-atlas-data-source)
-    -   [Netsuite](#adding-netsuite-as-data-source)
-    -   [Netsuite Reporting](#adding-netsuite-reporting-as-data-source)
-    -   [NetSuite-JDBC](#adding-netsuite-jdbc-as-data-source)
-    -   [Pipedrive](#adding-pipedrive-as-data-source)
-    -   [Amplitude](#adding-amplitude-as-data-source)
-    -   [ChargeBee](#adding-chargebee-as-data-source)
-    -   [Shopify](#adding-shopify-as-data-source)
-    -   [Monday](#adding-monday-as-data-source)
-    -   [DB2](#adding-db2-as-data-source)
-    -   [Quickbooks](#adding-quickbooks-as-data-source)
-    -   [Surveymonkey](#adding-surveymonkey-as-data-source)
-    -   [Cvent](#adding-cvent-as-data-source)
-    -   [SFTP Bulk](#adding-sftp-bulk-as-data-source)
-    -   [SAP HANA](#adding-sap-hana-as-data-source)
-    -   [Azure File](#adding-azure-file-as-data-source)
+4.  Enter the required integration details for the selected database provider, such as connection name, database name, host, port, username, and password etc. 
         
 5.  Click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data within that data source.
+
+## Databases
+
+### Adding MySQL or PostgreSQL data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Microsoft SQL or PostgreSQL and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+
+    |        MySQL    | PostgreSQL  |
+    |:-------------------------:|:-------------------------:|
+    |<ImagePopup src="/img/Datasource/image-20250506-175842.png" alt="Add MySQL" caption="Add MySQL" />| <ImagePopup src="/img/Datasource/image-20250511-112352.png" alt="Add PostgreSQL" caption="Add PostgreSQL" />|
+
+    | Field | Description |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **Database** | Specify the name of the existing database that you want to connect. |
+    | **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
+    | **Port name** | Enter the port number used by the database server. |
+    | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+
+5.  Click **Submit**. 
+
+### Adding MariaDB data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add MariaDB and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+| Field | Description |
+|:---|:---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Database name** | Specify the name of the existing database you want to connect to. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
+
+### Adding MongoDB Atlas data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add MongoDB Atlas and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
+    <ImagePopup src="/img/Datasource/image-20250511-111912.png" alt="Add_MongoDB" caption="Add_MongoDB" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Schema Name** | Specify the schema name for your connection. |
+    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+    | **Port** | Enter the port number used by the database server. |
+    | **Username/Password** | Provide the credentials to access the database server. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
+
+### Adding Google BigQuery data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Google BigQuery and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
+    <ImagePopup src="/img/google-big-query.png" alt="Add_google_big_query" caption="Add_google_big_query" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Project ID** | Specify the ID of the project that you want to connect. |
+    | **Dataset** | Specify the dataset name or ID for your connection. |
+    | **Credentials** | Specify the credentials to authenticate access to BigQuery. |
+
+4.  Click **Submit**. 
+
+### Adding Snowflake as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-112121.png" alt="Add_Snowflake" caption="Add_Snowflake" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Schema Name** | Specify the schema name for your connection. |
+    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+    | **Port** | Enter the port number used by the database server. |
+    | **Username/Password** | Provide the credentials to access the database server. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
+
+### Adding Amazon Redshift as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Amazon Redshift and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/amazon-redshift.png" alt="Add_Amazon_Red_Shift" caption="Add_Amazon_Red_Shift" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+    | **Port** | Enter the port number used by the database server. |
+    | **Username/Password** | Provide the credentials to access the database server. |
+    | **Schema** | Specify the schema name for your connection. |
+
+4.  Click **Submit**. 
+
+### Adding SAP HANA as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add SAP HANA and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-110627.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" /> 
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Database Name** | Specify the name of the existing data that you want to connect. |
+    | **Schema Name** | Specify the schema name. |
+    | **Hostname** | Provide the hostname of the server where the database resides. |
+    | **Port** | Specify the port number used by the database server. |
+    | **Username/Password** | Specify the credentials to access the server. |
+
+### Adding Snowflake as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-112121.png" alt="Add_Snowflake" caption="Add_Snowflake" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Schema Name** | Specify the schema name for your connection. |
+    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+    | **Port** | Enter the port number used by the database server. |
+    | **Username/Password** | Provide the credentials to access the database server. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
+
+### Adding IBM DB2 as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add IBM DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/ibm-db2.png" alt="Add_IBM_DB2" caption="Add_IBM_DB2" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Database Name** | Specify the name of the existing database you want to connect to. |
+    | **Host Name** | Specify the host address of the database server. |
+    | **Port** | Specify the port number of the database server. |
+    | **Username / Password** | Provide the credentials for the account. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 
+
+### Adding Databricks as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Databricks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/databricks.png" alt="databricks" caption="databricks" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Server Hostname** | Specify the host name of the Databricks cluster you want to connect to. |
+    | **HTTP Path** | Specify the HTTP path of the Databricks cluster you want to connect to. |
+    | **Databricks Unity Catalog Name** | Enter the name of the unity catalog for the database. |
+    | **Personal Access Token** | Specify the personal access token to authenticate access to the Databricks cluster. |
+    | **Port** | Specify the Databricks cluster port.|
+    | **Default Schema** | The default schema tables are written. If not specified otherwise, the default schema will be used.|
+
+4.  Click **Submit**. 
+
+## Data Files / Storage Services
 
 ### Adding S3 data source  
 :::danger Caution
@@ -126,30 +308,29 @@ s3 is available only in Amazon AWS infrastructure. S3 is not available as part o
 Spark's configuration limits you to using credentials for only one S3 account at a time. This means that, at the company level, you can either configure Spark with access to your DataGOL S3 account or your S3 account, but not both simultaneously.
 :::
 
-### Adding Microsoft SQL or PostgreSQL as a data source
+### Adding Azure File as data source
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-3.  Specify the following details to add Microsoft SQL or PostgreSQL and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-
-
-    |        MySQL    | PostgreSQL  |
-    |:-------------------------:|:-------------------------:|
-    |<ImagePopup src="/img/Datasource/image-20250506-175842.png" alt="Add MySQL" caption="Add MySQL" />| <ImagePopup src="/img/Datasource/image-20250511-112352.png" alt="Add PostgreSQL" caption="Add PostgreSQL" />|
+3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
 
     | Field | Description |
-    |:---|:---|
+    |---|---|
     | **Connection name** | Enter a unique name for the connection. |
-    | **Database** | Specify the name of the existing database that you want to connect. |
-    | **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
-    | **Port name** | Enter the port number used by the database server. |
-    | **Schema** | Specify the schema name for your PostgreSQL or Microsoft SQL connection. If left blank, the default schema will be used (**“public”** for Postgres and **“dbo”** for Microsoft SQL). |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-    | **Case Sensitive** | Specify whether your PostgreSQL or Microsoft SQL Server data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+    | **File Format** | Specify any of the following file formats: **CSV** **Parquet** **JSON** |
+    | **Path to Azure container** | Path of the Azure Blob where the files exist. For example: `containername@storageaccountname.dfs.core.windows.net/path` |
+    | **Separator** | Specify the separator character to separate the data. For example: “,” |
+    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
+    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
+    | **Multiline** | Toggle to format the JSON output across multiple lines. |
+    | **Compression** | Select the file compression mode. |
+    | **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
 
-5.  Click **Submit**. 
+4.  Click **Submit**. 
 
 ### Adding Folder as a data source
 
@@ -192,6 +373,211 @@ To upload, download, or delete files within a specific folder, click the folder 
 -   Folder names cannot be only numbers. Validation is yet to be added.
 
 :::
+
+### Adding SFTP Bulk as data source
+
+:::info **Prerequisite for adding SFTP Bulk**
+
+The following connector information is required from the client:
+
+-   Username
+    
+-   Password
+    
+-   Host
+    
+-   Port
+    
+-   File Type
+    
+-   Stream Name
+    
+-   Folder Path
+    
+-   CSV Separator
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to a SFTP server using your credentials.
+    
+2.  Create a folder in the server and drop your files there.
+:::
+
+To add SFTP Bulk as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add SFTP Bulk and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-111209.png" alt="Add_SFTP_Hulk" caption="Add_SFTP_Hulk" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **File Type** | Currently, only CSV files are supported. |
+    | **Username / Password** | Specify the client credentials. |
+    | **Host Address** | Specify the SFTP server address. |
+    | **Port** | Specify the port number of the SFTP server. |
+    | **Stream Name** | Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names. Sync modes (incremental/full refresh) are configured at the _stream_ level, not at the pipeline level. |
+    | **Folder Path** | Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., `/home/Ubuntu/SFTP/credit`). Ensure this path is accurate. |
+    | **Start Date** | Specify the date from which to begin replicating data. This allows for historical data selection. |
+    | **CSV separator** | Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured. |
+
+4.  Click **Submit**. 
+
+### Business Applications/SaaS
+
+### Adding Amplitude as data source
+
+:::info **Prequisites for adding Amplitude**
+
+The following connector information is required from the client:
+
+-   API Key
+    
+-   Secret Key
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Log on to your [Amplitude account](https://amplitude.com/ "https://amplitude.com/").
+    
+2.  Navigate to **Settings** > **Organization** **Settings** _>_ **Projects** and click the name of the project you want to view or edit. This opens the **General** tab, where you will find the following information about your project:
+    
+    -   API Key
+        
+    -   Secret Key
+        
+
+Create a project first, if you don’t have one already. Refer to [Create a project in Amplitude](https://amplitude.com/docs/get-started/create-project "https://amplitude.com/docs/get-started/create-project").
+
+:::
+
+To add Amplitude as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Amplitude and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-100205.png" alt="Add_Amplitude" caption="Add_Amplitude" />
+    
+    Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Key** | Amplitude API Key. See the docs for more information on how to generate this key. |
+    | **Secret Key** | Amplitude Secret Key. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
+
+4.  Click **Submit**. 
+
+### Adding ChargeBee as data source
+
+:::info **Prequisites for adding Chargebee**
+
+The following connector information is required from the client:
+
+-   API key
+    
+-   Site
+    
+-   Start date
+    
+
+Do the following to
+
+1.  Log on to your [Chargebee account](https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE "https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE").
+    
+2.  To create and configure the API keys, select **Settings** > **Configure Chargebee** > **API Keys and Webhooks**.
+    
+3.  Click on the **API Keys** tab. Any existing API keys are listed.
+
+    <ImagePopup src="/img/Datasource/image-20250112-214950.png" alt="Chargebee" caption="Chargebee" />
+:::
+
+To add ChargeBee as a data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-100812.png" alt="Add_Chargebee" caption="Add_Chargebee" /> 
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Key** | ChargeBee API Key. |
+    | **Site** | The site prefix for your ChargeBee instance. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |    
+
+4.  Click **Submit**. 
+
+### Adding Cvent as data source
+
+:::info **Prerequisite for adding Cvent**
+
+The following connector information is required from the client:
+
+-   Client ID
+    
+-   Client Secret
+    
+
+Do the following:
+
+1.  Login to your [Cvent account](https://www.cvent.com/ "https://www.cvent.com") and go to **Abstracts** > **Users** > **Login**.
+    
+2.  Access the Cvent Developer portal:
+    
+    -   Visit Cvent’s **Developer Portal**. You can typically access it by searching for "Cvent Developer Portal" or by navigating directly to [developers cvent portal](https://developers.cvent.com/ "https://developers.cvent.com/")
+        
+3.  Create a New Application:
+    
+    -   Once you are logged into the Developer Portal, look for an option to create a new application.
+        
+    -   You'll need to provide some details about your application, such as:
+        
+        -   Name of the application.
+            
+        -   Description of the application.
+            
+        -   Redirect URL (if applicable).
+            
+4.  Get Your Client ID and Client Secret:
+    
+    -   After registering your application, you will be provided with:
+        
+        -   **Client ID**: A unique identifier for your application.
+            
+        -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
+:::
+
+To add Cvent as a data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Cvent and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-111305.png" alt="Add_Cvent" caption="Add_Cvent" />  
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Client ID** | A unique identifier for your application. |
+    | **Client secret** | A secret key that is used for securely authenticating API requests on behalf of your app. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+
+4.  Click **Submit**. 
 
 ### Adding HubSpot as data source
 
@@ -237,107 +623,59 @@ Do the following to add HubSpot as a data source:
 
 4.  Click **Submit**. 
 
-### Adding MariaDB as data source
+### Adding Monday as data source
 
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add MariaDB and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-| Field | Description |
-|:---|:---|
-| **Connection name** | Enter a unique name for the connection. |
-| **Database name** | Specify the name of the existing database you want to connect to. |
-| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
-| **Port** | Enter the port number used by the database server. |
-| **Username/Password** | Provide the credentials to access the database server. |
-| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-
-4.  Click **Submit**. 
-
-### Adding Salesforce as data source
-
-:::info **Prequisites for adding Salesforce**
+:::info **Prerequisite for adding Monday**
 
 The following connector information is required from the client:
 
--   Client ID
-    
--   Client Secret
-    
--   Refresh Token
-    
--   Domain: eg [**salesforce.your-domain.com**](http://salesforce.your-domain.com/ "http://salesforce.your-domain.com/")
-    
--   Start Date
+-   API Token
     
 
-To obtain these credentials, follow [**this walkthrough**](https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b "https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b") with the following modifications:
+Do the following:
 
-1.  If your Salesforce URL is not in the `X.salesforce.com` format, use your Salesforce domain name. For example, if your Salesforce URL is `awesomecompany.force.com` then use that instead of `awesomecompany.salesforce.com`.
+1.  Login to your [monday account](http://monday.com/ "http://monday.com").
     
-2.  Use the user credentials when logging in to generate OAuth tokens.
-:::
-
-To add Salesforce as a data source, do the following:
+2.  **Admin tab**  
+    If you are an **admin** user on your [monday.com](http://monday.com/ "http://monday.com/") account, follow these steps to access your API token:
     
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    1.  Log into your [monday.com](http://monday.com/ "http://monday.com/") account.
+        
+    2.  Click on your avatar/profile picture in the top right corner.
+        
+    3.  Select **Administration** > **Connections** > **API**.
+        
+    4.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
+        
+3.  **Developer tab**  
+    If you are a **member user** or an **admin** on your [monday.com](http://monday.com/ "http://monday.com/") account, follow these steps to access your API token:
     
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Salesforce and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/Datasource/image-20250511-085826.png" alt="Add_Salesforce" caption="Add_Salesforce" />
+    1.  Log into your [monday.com](http://monday.com/ "http://monday.com/") account.
+        
+    2.  Click on your profile picture in the top right corner.
+        
+    3.  Select **Developers**. This will open the _Developer Center_ in another tab.
+        
+    4.  Click **My Access Tokens** > **Show**.
+        
+    5.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
+:::        
 
-    | Field | Description |
-    |:---|:---|
-    | **Connection name** | Enter a unique name for the Salesforce connection. |
-    | **Client ID/Client secret** | Enter your Salesforce developer application's Client ID and Secret. |
-    | **Refresh Token** | Enter your application's [Salesforce Refresh Token](https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm) used for Airbyte to access your Salesforce account. |
-    | **Domain** | The domain for your Salesforce account, e.g. `datagol.salesforce.com`, `salesforce.your-domain.com`. |
-    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |    
-
-4.  Click **Submit**. 
-
-### Adding Snowflake as data source
+To add Monday as a data source, do the following:
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
     
 2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
     
-3.  Specify the following details to add Snowflake and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/Datasource/image-20250511-112121.png" alt="Add_Snowflake" caption="Add_Snowflake" />
-
+3.  Specify the following details to add Monday and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-101736.png" alt="Add_Monday" caption="Add_Monday" />
+        
     | Field | Description |
     |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Schema Name** | Specify the schema name for your connection. |
-    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
-    | **Port** | Enter the port number used by the database server. |
-    | **Username/Password** | Provide the credentials to access the database server. |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
-
-4.  Click **Submit**. 
-
-### Adding MongoDB Atlas data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add MongoDB Atlas and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.  
-    <ImagePopup src="/img/Datasource/image-20250511-111912.png" alt="Add_MongoDB" caption="Add_MongoDB" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Schema Name** | Specify the schema name for your connection. |
-    | **Hostname** | Provide the hostname or IP address of the server where the database resides. |
-    | **Port** | Enter the port number used by the database server. |
-    | **Username/Password** | Provide the credentials to access the database server. |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Authorization Method** | The authorization method to use to retrieve data from Monday. |
+    | **API Token** | API Token for making authenticated requests. |
 
 4.  Click **Submit**. 
 
@@ -493,25 +831,6 @@ To add NetSuite as a data source, do the following:
 
 4.  Click **Submit**. 
 
-### Adding NetSuite Reporting as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add NetSuite Reporting and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-111558.png" alt="Add_Netsuite_Reporting" caption="Add_Netsuite_Reporting" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Consumer Key** | Specify the Consumer Key for authentication. |
-    | **Token Key / Secret** | Specify the Token key and secret for authenticating the access. |
-    | **Start Date** | Specify the date from which to begin replicating extracting data. |
-
-4.  Click **Submit**. 
-
 ### Adding NetSuite-JDBC as data source
 
 1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
@@ -530,6 +849,25 @@ To add NetSuite as a data source, do the following:
     | **Username/password** | Provide the credentials for the account. |
     | **Hostname** | Specify the host address of the database server. |
     | **Port** | Specify the port number of the database server. |
+
+4.  Click **Submit**. 
+
+### Adding NetSuite Reporting as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add NetSuite Reporting and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-111558.png" alt="Add_Netsuite_Reporting" caption="Add_Netsuite_Reporting" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Consumer Key** | Specify the Consumer Key for authentication. |
+    | **Token Key / Secret** | Specify the Token key and secret for authenticating the access. |
+    | **Start Date** | Specify the date from which to begin replicating extracting data. |
 
 4.  Click **Submit**. 
 
@@ -576,232 +914,6 @@ To add Pipedrive as a data source, do the following:
     | **Connection Name** | Enter a unique name for the connection. |
     | **API Token** | The Pipedrive API Token. This is a mandatory field. |
     | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. This is a mandatory field. |  
-
-4.  Click **Submit**. 
-
-### Adding Amplitude as data source
-
-:::info **Prequisites for adding Amplitude**
-
-The following connector information is required from the client:
-
--   API Key
-    
--   Secret Key
-    
--   Start Date
-    
-
-Do the following:
-
-1.  Log on to your [Amplitude account](https://amplitude.com/ "https://amplitude.com/").
-    
-2.  Navigate to **Settings** > **Organization** **Settings** _>_ **Projects** and click the name of the project you want to view or edit. This opens the **General** tab, where you will find the following information about your project:
-    
-    -   API Key
-        
-    -   Secret Key
-        
-
-Create a project first, if you don’t have one already. Refer to [Create a project in Amplitude](https://amplitude.com/docs/get-started/create-project "https://amplitude.com/docs/get-started/create-project").
-
-:::
-
-To add Amplitude as data source, do the following:
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Amplitude and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-100205.png" alt="Add_Amplitude" caption="Add_Amplitude" />
-    
-    Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **API Key** | Amplitude API Key. See the docs for more information on how to generate this key. |
-    | **Secret Key** | Amplitude Secret Key. |
-    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
-
-4.  Click **Submit**. 
-
-### Adding ChargeBee as data source
-
-:::info **Prequisites for adding Chargebee**
-
-The following connector information is required from the client:
-
--   API key
-    
--   Site
-    
--   Start date
-    
-
-Do the following to
-
-1.  Log on to your [Chargebee account](https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE "https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE").
-    
-2.  To create and configure the API keys, select **Settings** > **Configure Chargebee** > **API Keys and Webhooks**.
-    
-3.  Click on the **API Keys** tab. Any existing API keys are listed.
-
-    <ImagePopup src="/img/Datasource/image-20250112-214950.png" alt="Chargebee" caption="Chargebee" />
-:::
-
-To add ChargeBee as a data source, do the following:
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-100812.png" alt="Add_Chargebee" caption="Add_Chargebee" /> 
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **API Key** | ChargeBee API Key. |
-    | **Site** | The site prefix for your ChargeBee instance. |
-    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |    
-
-4.  Click **Submit**. 
-
-### Adding Shopify as data source
-
-:::info **Prerequisite for adding Shopify**
-
-The following connector information is required from the client:
-
--   Shopify Store
-    
--   API password
-    
--   Start Date
-    
-
-Do the following:
-
-1.  Login to your [Shopify account](https://www.shopify.com/ "https://www.shopify.com/").
-    
-2.  Once logged in, your store name is often part of the URL in your browser's address bar. For example:
-    
-    `https://your-store-name.myshopify.com/admin`
-    
-3.  In the dashboard, navigate to **Settings** > **App and sales channels** > **Develop apps** > **Create an app**.
-    
-4.  Select a name for your new app.
-    
-5.  Select **Configure Admin API scopes**.
-    
-6.  Grant access to the [following list of scopes](http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app "http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app"). Only select scopes prefixed with `read_`, not `write_` (e.g. `read_locations`,`read_price_rules`, etc ).
-    
-7.  Click **Install app** to give this app access to your data.
-    
-8.  Once installed, go to **API Credentials** to copy the **Admin API Access Token**. You are now ready to set up the source in Airbyte.
-    
-
-Refer:
--   [Where can I get Shopify API password](https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password "https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password") 
--   [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
-:::
-
-To add Shopify as a data source, do the following:   
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Shopify and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-101024.png" alt="Add_Shopify" caption="Add_Shopify" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Shopify Store** | The name of your Shopify store found in the URL. |
-    | **Authorization Method** | The authorization method to use to retrieve data from Shopify. |
-    | **API Password** | The API Password for your private application in the `Shopify` store. |
-    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
-
-4.  Click **Submit**. 
-
-### Adding Monday as data source
-
-:::info **Prerequisite for adding Monday**
-
-The following connector information is required from the client:
-
--   API Token
-    
-
-Do the following:
-
-1.  Login to your [monday account](http://monday.com/ "http://monday.com").
-    
-2.  **Admin tab**  
-    If you are an **admin** user on your [monday.com](http://monday.com/ "http://monday.com/") account, follow these steps to access your API token:
-    
-    1.  Log into your [monday.com](http://monday.com/ "http://monday.com/") account.
-        
-    2.  Click on your avatar/profile picture in the top right corner.
-        
-    3.  Select **Administration** > **Connections** > **API**.
-        
-    4.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
-        
-3.  **Developer tab**  
-    If you are a **member user** or an **admin** on your [monday.com](http://monday.com/ "http://monday.com/") account, follow these steps to access your API token:
-    
-    1.  Log into your [monday.com](http://monday.com/ "http://monday.com/") account.
-        
-    2.  Click on your profile picture in the top right corner.
-        
-    3.  Select **Developers**. This will open the _Developer Center_ in another tab.
-        
-    4.  Click **My Access Tokens** > **Show**.
-        
-    5.  Copy your personal token. Note that you can always regenerate a new token, but doing so will cause any previous tokens to expire.
-:::        
-
-To add Monday as a data source, do the following:
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Monday and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-101736.png" alt="Add_Monday" caption="Add_Monday" />
-        
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Authorization Method** | The authorization method to use to retrieve data from Monday. |
-    | **API Token** | API Token for making authenticated requests. |
-
-4.  Click **Submit**. 
-
-### Adding DB2 as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add DB2 and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-111410.png" alt="Add_DB2" caption="Add_DB2" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Database Name** | Specify the name of the existing database you want to connect to. |
-    | **Host Name** | Specify the host address of the database server. |
-    | **Port** | Specify the port number of the database server. |
-    | **Username / Password** | Provide the credentials for the account. |
-    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
 
 4.  Click **Submit**. 
 
@@ -868,6 +980,108 @@ To add Quickbook as a data source, do the following:
 
 4.  Click **Submit**. 
 
+### Adding Salesforce as data source
+
+:::info **Prequisites for adding Salesforce**
+
+The following connector information is required from the client:
+
+-   Client ID
+    
+-   Client Secret
+    
+-   Refresh Token
+    
+-   Domain: eg [**salesforce.your-domain.com**](http://salesforce.your-domain.com/ "http://salesforce.your-domain.com/")
+    
+-   Start Date
+    
+
+To obtain these credentials, follow [**this walkthrough**](https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b "https://medium.com/@bpmmendis94/obtain-access-refresh-tokens-from-salesforce-rest-api-a324fe4ccd9b") with the following modifications:
+
+1.  If your Salesforce URL is not in the `X.salesforce.com` format, use your Salesforce domain name. For example, if your Salesforce URL is `awesomecompany.force.com` then use that instead of `awesomecompany.salesforce.com`.
+    
+2.  Use the user credentials when logging in to generate OAuth tokens.
+:::
+
+To add Salesforce as a data source, do the following:
+    
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Salesforce and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-085826.png" alt="Add_Salesforce" caption="Add_Salesforce" />
+
+    | Field | Description |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the Salesforce connection. |
+    | **Client ID/Client secret** | Enter your Salesforce developer application's Client ID and Secret. |
+    | **Refresh Token** | Enter your application's [Salesforce Refresh Token](https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm) used for Airbyte to access your Salesforce account. |
+    | **Domain** | The domain for your Salesforce account, e.g. `datagol.salesforce.com`, `salesforce.your-domain.com`. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |    
+
+4.  Click **Submit**. 
+
+### Adding Shopify as data source
+
+:::info **Prerequisite for adding Shopify**
+
+The following connector information is required from the client:
+
+-   Shopify Store
+    
+-   API password
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to your [Shopify account](https://www.shopify.com/ "https://www.shopify.com/").
+    
+2.  Once logged in, your store name is often part of the URL in your browser's address bar. For example:
+    
+    `https://your-store-name.myshopify.com/admin`
+    
+3.  In the dashboard, navigate to **Settings** > **App and sales channels** > **Develop apps** > **Create an app**.
+    
+4.  Select a name for your new app.
+    
+5.  Select **Configure Admin API scopes**.
+    
+6.  Grant access to the [following list of scopes](http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app "http://52.203.24.77:8000/workspaces/ee182db1-4c12-467e-8730-881aa8d3d04b/source/new-source/9da77001-af33-4bcd-be46-6252bf9342b9#scopes-required-for-custom-app"). Only select scopes prefixed with `read_`, not `write_` (e.g. `read_locations`,`read_price_rules`, etc ).
+    
+7.  Click **Install app** to give this app access to your data.
+    
+8.  Once installed, go to **API Credentials** to copy the **Admin API Access Token**. You are now ready to set up the source in Airbyte.
+    
+
+Refer:
+-   [Where can I get Shopify API password](https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password "https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password") 
+-   [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
+:::
+
+To add Shopify as a data source, do the following:   
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+    
+3.  Specify the following details to add Shopify and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-101024.png" alt="Add_Shopify" caption="Add_Shopify" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Shopify Store** | The name of your Shopify store found in the URL. |
+    | **Authorization Method** | The authorization method to use to retrieve data from Shopify. |
+    | **API Password** | The API Password for your private application in the `Shopify` store. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
+
+4.  Click **Submit**. 
+
 ### Adding SurveyMonkey as data source
 
 :::info **Prerequisite for adding SurveyMonkey**
@@ -908,161 +1122,4 @@ To add Survey Monkey as data source, do the following:
     | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
     | **Origin datacenter of the SurveyMonkey account** | Depending on the originating datacenter of the SurveyMonkey account, the API access URL may be different. |
 
-4.  Click **Submit**. 
-
-### Adding Cvent as data source
-
-:::info **Prerequisite for adding Cvent**
-
-The following connector information is required from the client:
-
--   Client ID
-    
--   Client Secret
-    
-
-Do the following:
-
-1.  Login to your [Cvent account](https://www.cvent.com/ "https://www.cvent.com") and go to **Abstracts** > **Users** > **Login**.
-    
-2.  Access the Cvent Developer portal:
-    
-    -   Visit Cvent’s **Developer Portal**. You can typically access it by searching for "Cvent Developer Portal" or by navigating directly to [developers cvent portal](https://developers.cvent.com/ "https://developers.cvent.com/")
-        
-3.  Create a New Application:
-    
-    -   Once you are logged into the Developer Portal, look for an option to create a new application.
-        
-    -   You'll need to provide some details about your application, such as:
-        
-        -   Name of the application.
-            
-        -   Description of the application.
-            
-        -   Redirect URL (if applicable).
-            
-4.  Get Your Client ID and Client Secret:
-    
-    -   After registering your application, you will be provided with:
-        
-        -   **Client ID**: A unique identifier for your application.
-            
-        -   **Client Secret**: A secret key that is used for securely authenticating API requests on behalf of your app.
-:::
-
-To add Cvent as a data source, do the following:
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Cvent and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/Datasource/image-20250511-111305.png" alt="Add_Cvent" caption="Add_Cvent" />  
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Client ID** | A unique identifier for your application. |
-    | **Client secret** | A secret key that is used for securely authenticating API requests on behalf of your app. |
-    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
-
-4.  Click **Submit**. 
-    
-### Adding SFTP Bulk as data source
-
-:::info **Prerequisite for adding SFTP Bulk**
-
-The following connector information is required from the client:
-
--   Username
-    
--   Password
-    
--   Host
-    
--   Port
-    
--   File Type
-    
--   Stream Name
-    
--   Folder Path
-    
--   CSV Separator
-    
--   Start Date
-    
-
-Do the following:
-
-1.  Login to a SFTP server using your credentials.
-    
-2.  Create a folder in the server and drop your files there.
-:::
-
-To add SFTP Bulk as data source, do the following:
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add SFTP Bulk and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    <ImagePopup src="/img/Datasource/image-20250511-111209.png" alt="Add_SFTP_Hulk" caption="Add_SFTP_Hulk" />
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **File Type** | Currently, only CSV files are supported. |
-    | **Username / Password** | Specify the client credentials. |
-    | **Host Address** | Specify the SFTP server address. |
-    | **Port** | Specify the port number of the SFTP server. |
-    | **Stream Name** | Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names. Sync modes (incremental/full refresh) are configured at the _stream_ level, not at the pipeline level. |
-    | **Folder Path** | Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., `/home/Ubuntu/SFTP/credit`). Ensure this path is accurate. |
-    | **Start Date** | Specify the date from which to begin replicating data. This allows for historical data selection. |
-    | **CSV separator** | Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured. |
-
-4.  Click **Submit**. 
-    
-### Adding SAP HANA as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add SAP HANA and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-110627.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" /> 
-
-    | Field | Description |
-    |---|---|
-    | **Connection Name** | Enter a unique name for the connection. |
-    | **Database Name** | Specify the name of the existing data that you want to connect. |
-    | **Schema Name** | Specify the schema name. |
-    | **Hostname** | Provide the hostname of the server where the database resides. |
-    | **Port** | Specify the port number used by the database server. |
-    | **Username/Password** | Specify the credentials to access the server. |
-    
-### Adding Azure File as data source
-
-1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
-    
-2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
-    
-3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
-    
-    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
-
-    | Field | Description |
-    |---|---|
-    | **Connection name** | Enter a unique name for the connection. |
-    | **File Format** | Specify any of the following file formats: **CSV** **Parquet** **JSON** |
-    | **Path to Azure container** | Path of the Azure Blob where the files exist. For example: `containername@storageaccountname.dfs.core.windows.net/path` |
-    | **Separator** | Specify the separator character to separate the data. For example: “,” |
-    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
-    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
-    | **Multiline** | Toggle to format the JSON output across multiple lines. |
-    | **Compression** | Select the file compression mode. |
-    | **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
-
-4.  Click **Submit**. 
-
+4.  Click **Submit**.    

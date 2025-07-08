@@ -26,10 +26,8 @@ DataGOL provides the following AI agents, each designed for specific tasks:
 
 -   [**SQL Agent**](sql-agent): Generates, optimizes, and debugs SQL queries using natural language prompts. Maximum of five data sources can be used for query execution.
     
-    -   **Query Generation:** You can input natural language descriptions for your desired SQL queries.
-        
+    -   **Query Generation:** You can input natural language descriptions for your desired SQL queries.  
     -   **Query Optimization:** Use the Optimize Query function to refine complex queries for improved efficiency.
-        
     -   **Query Debugging:** Use the Debug Query function to identify and correct errors in generated or existing queries.
         
 -   [**Data Cleaning (DC) Agent**](data-cleaning-agent-DCA-agent)**:** Designed to clean and organize data within a workbook
@@ -40,28 +38,18 @@ DataGOL provides the following AI agents, each designed for specific tasks:
 DataGOL agents intelligently assist in multiple ways:
 
 -   **Agent routing:** Routes the user requests to the most appropriate agent based on keywords and the nature of the query.
-    
 -   **Transparency and control:** Provides transparency by displaying the underlying code (SQL or Python) used to generate results. Users can also access code in a playground environment for further experimentation.
-    
--   **Interactive feedback:** Users can provide feedback on agent responses, helping to improve accuracy and performance over time.
-    
+-   **Interactive feedback:** Users can provide feedback on agent responses, helping to improve accuracy and performance over time.   
 -   **Conversation starters:** Pre-defined questions and prompts help users quickly get started with data exploration.
-    
 -   **Data security:** Data analysis is performed locally on the user's server, ensuring data privacy and security.
-    
 -   **Query cancellation:** Ability for users to cancel long-running queries.
-    
 -   **Progress indicators:** Visual cues to indicate the query is in progress.
     
-
 ## Key user considerations
 
 -   **Agents on structured data:** When working with agents, keep in mind that their responses will be tailored to the specific workbook you currently have selected. This allows for more focused and relevant interactions based on your active dataset.
-    
 -   **Agent selection:** While the default agent has some auto routing, it is best to choose the agent that best fits the desired output.
-    
 -   **Data relevance:** The agents are designed to work within the context of the loaded dataset.
-    
 -   **Feedback:** User feedback is crucial for improving the agents.
     
 

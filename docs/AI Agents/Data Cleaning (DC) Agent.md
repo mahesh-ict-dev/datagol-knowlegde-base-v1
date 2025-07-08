@@ -12,19 +12,13 @@ The DC agent helps users to clean and organize their data within a workbook. Thi
 ### **Key Features:**
 
 -   **Deduplication:** Identifies and removes duplicate records based on selected columns.
-    
 -   **Normalization:** Restructures data into multiple related tables to improve data organization and reduce redundancy.
-    
 -   **Data imputation:** Fills in missing values (NAs) with user-specified values.
-    
 -   **Filtering:** Allows users to filter data based on specific criteria.
-    
 -   **Conversational interaction:** Users can interact with the agent using natural language commands (e.g., "help me dedup").
-    
 -   **Data analysis:** Provides an overview of the data, including the number of rows and columns, unique values, and missing values.
     
 -   **Downloadable output:** Users can download the cleaned data.
-    
 -   **Reset functionality:** Allows users to reset the agent's context and revert to the original data.
     
 
