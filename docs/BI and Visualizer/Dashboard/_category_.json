@@ -1,7 +1,7 @@
 {
   "label": "Dashboard",
   "description": "Explore various dashboards that can be integrated with our system.",
-  "position": 2,
+  "position": 3,
   "link": {
     "type": "generated-index"
   }
