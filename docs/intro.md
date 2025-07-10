@@ -15,7 +15,7 @@ DataGOL offers:
 By leveraging AI-powered business intelligence, DataGOL supports data-driven decision-making for both internal and customer-facing analytics.
 
 
-### 🔗 [Connect](/docs/Lakehouse/Data%20Sources/adding-data-sources)
+### 🔗 [Connect](/docs/Lakehouse/%20Data%20sources/adding-data-sources)
 Gather data from any source.
 
 ------
@@ -35,7 +35,7 @@ Create BI visualizations.
 
 ------
 
-### 🤖 [AI Personal Assistant](/docs/AI%20Agents%20/about-AI-agents)
+### 🤖 [AI Personal Assistant](</docs/AI Agents/about-AI-agents>)
 Use AI as your personal assistant.
 
 ------
