@@ -1,24 +1,18 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 slug: datagol-faq
 ---
 
 ## Agents
 ### What SQL dialect and functions are supported?
-Spark SQL is the default dialect.
+DataGol supports both Apache **Spark™ SQL** and **JDBC** dialects, with the appropriate dialect automatically applied based on the data provider selected within the platform's query playground.
 
-**Key Points:**
--   Supports Spark functions (coalesce, cast, case, etc.).  
--   SQL Copilot can assist with query suggestions.  
-      
-## AS-OF time travel
-### How to enable **AS-OF** time travel?
+For relational databases such as PostgreSQL, MySQL, and others, you can leverage JDBC-based queries, utilizing the SQL functions supported by the native database.
 
-Requires: Parameterized orchestration.
+When querying data from data warehouses, folder datasources, or constructing queries on top of existing views, Apache Spark™ SQL should be employed. 
+Apache Spark™ functions can be referenced [here](https://spark.apache.org/docs/latest/api/sql/index.html).
 
-To enable **AS-OF** time travel, do the following:
-1. Pass a historical date in views or workbook queries.  
-2. View the dataset as it existed at that point in time.
+For querying large datasets, particularly when an alternative to Apache Spark™ is desired, Amazon Athena (a service by Amazon Web Services) is also supported. 
 
 ## BI and Visualizer 
 
@@ -29,7 +23,7 @@ Dashboards are built on top of workbooks using a Visualizer. They support:
 
 **Key Points:**
 
--   Widgets use [formulas and parameters](</docs/BI and Visualizer/Creating formulas and parameters in Visualizer.mdx>).   
+-   Widgets use [formulas and parameters](</docs/BI and Visualizer/creating-formulas-and-parameters-in-visualizer>).   
 -   Widget-level filters override page-level filters.      
 -   Drill-downs can be column-based or widget-defined.  
       
@@ -86,23 +80,30 @@ Give the path up to the base folder. DataGOL processes each subfolder (e.g., tab
 ### How to onboard 3rd party connectors (PostHog, HubSpot, etc.)?
 Do the following to onboard 3rd party connectors:
 1.  Request whitelisting via Slack.  
-2.  Once whitelisted, configure the data source.
+2.  Once whitelisted, you can create a new data source from the [**Data Sources**](</docs/Lakehouse/%20Data%20sources/adding-data-sources>) page with the appropriate connector.
 3.  Create a pipeline from the data source.     
 
 :::info [Special case]
-Some APIs (e.g., PostHog) send entire record updates rather than diffs — deduplication pipelines are needed to retain only the latest rows.
+Some APIs send updated data as separate records. In such cases, deduplication pipelines are essential to ensure you retain only the most recent version of each record.
 :::
 
-### What is partitioning, and when to use it?
-**Use Case:**
--   Large datasets that can benefit from parallelism in Spark.  
+### What is a partition column in Spark?
 
-**How:**
--   Choose a partition column (integer/date).  
--   Set partition size (default: 50).  
--   Spark executes parallel tasks for faster syncs.  
+A **partition column** in Spark is a crucial element for achieving parallelism and significantly reducing job processing times. When you designate a column as a partition column, Spark uses it to divide your data into multiple, smaller chunks. This allows **multiple jobs** to run concurrently, processing different partitions simultaneously. By default, Spark aims for a partition size of **50,000 records**.
 
-**Not Applicable:** For REST-based APIs (e.g., HubSpot, Jira, Zendesk).
+#### When should you use a partition column?
+
+You should utilize a partition column when you are building a pipeline to transfer a large dataset to a data warehouse. Without proper partitioning, such operations can lead to a substantial increase in the time required for the job to complete, potentially causing performance bottlenecks.
+
+#### How do you use a partition column?
+
+To designate a partition column:
+
+1.  Go to **Lakehouse** > **Data Sources** page and click the data source where you want to designate a partition column. 
+2.  Go to the specific **table** you are working wit and mark a column as the partition column. It is generally ideal to choose a column that serves as an **index in your source system**, as this often ensures a good distribution of data across partitions.
+    For more detailed steps, refer to [Designating a partition column](/docs/Lakehouse/%20Data%20sources/designating-a-partition-column).
+
+---
 
 ### Should I copy data into DataGOL or query directly from the source?
 **Copy use case:**
@@ -116,23 +117,22 @@ Some APIs (e.g., PostHog) send entire record updates rather than diffs — dedup
 **Supported:**
 -   Excel, Parquet, CSV, and JSON.
 
-### What happens during data source sync failure?
+### What happens during data source sync failure and the tables show **0** in data source?
 
-**Common Reasons:**
--   Incorrect S3 path.  
-
-**Action:**
--   Check sync logs.  
--   Contact the DataGOL team via Slack.
+If your datasource is S3, make sure to check the S3 bucket path. For other types of data sources, please contact the DataGOL team via Slack. 
 
 ### Can I join data from multiple sources?
-Yes, you can! You can join data from various sources (for example, S3 and Redshift) by using custom pipelines.
+Yes, you can! You can join data from multipe data sources (for example, S3 and Redshift).
 
-Here's how it works:
+#### How to join data from multiple sources?
 
--   First, make sure all your data sources are added and configured under [Lakehouse > Data Sources](/).
--   Then, you can write your joins in Spark SQL within a custom pipeline to combine the data and push a unified result into a single warehouse.  
+There are two options available: **Custom Pipelines** and **Workbooks via Playground**.
 
+**Custom pipelines**
+Alternatively, you can create a [custom pipeline](</docs/Lakehouse/Pipelines/creating-custom-pipeline>) where you write custom queries to pull data from multiple sources.
+
+**Workbooks via Playground**
+With workbooks via Playground, you can [write SQL queries using Spark as the provider](</docs/Playgrounds/create-queries-in-playground>) to join data from multiple sources.
 
 ## Lakehouse
 
@@ -218,9 +218,10 @@ Custom SQL logic can be applied for each stream to retain the latest records.
       
 **Query Engines:**
 
--   Spark SQL (default)  
--   Athena (alternative)  
--   JDBC (Although not explicitly available, it is not recommended for large volumes.)  
+-   Spark SQL (Default - supported in Playground and Lakehouse)
+-   Athena (Supported in Playground and Lakeshouse)
+-   JDBC - (Supported in Playground only and not recommended for large datasets).
+ 
 
 **Key Points:**
 
@@ -253,13 +254,19 @@ Create a multi-layered data model:
 Avoid deeply nested CTEs. Instead, break logic into multiple views using pipelines — more performant and maintainable.
 :::
 
-### How to update the cursor field in an incremental pipeline?
+### How to update the cursor field in an incremental append sync mode??
 
-**Workaround:**
-
-1.  Go to the pipeline.  
-2.  Remove the stream. 
-3.  Re-add it from the stream settings with the new cursor field.
+If you need to update the cursor field for a stream configured with incremental append sync mode, you cannot directly change it within the existing pipeline. This is because once incremental append is selected, direct modifications to the cursor field are not permitted.
+Here's the **workaround**:
+1.  Delete the specific stream's pipeline:
+    1.  Navigate to the main pipeline that contains the stream you wish to modify.
+    2.  Identify the pipeline corresponding to that particular stream.
+    3.  Delete this individual stream's pipeline. This will remove the stream from your main pipeline.
+2.  Re-add the stream with the desired cursor field:
+    1.  Go back to your main pipeline. The deleted stream will no longer be present.
+    2.  Search for and re-select the stream you just removed.
+    3.  When adding it back, select the incremental append sync mode again. Now you will be able to choose your desired cursor field (e.g., "last modified" instead of "ID").
+    4,  Save your changes.
       
 
 ### How to manage large APIs like HubSpot if pipelines timeout?
@@ -267,8 +274,10 @@ Avoid deeply nested CTEs. Instead, break logic into multiple views using pipelin
 **Solutions:**
 
 -   Reduce the number of streams per pipeline.   
--   Use incremental fetches with modifiedAt or updatedAt fields.  
+-   Use incremental Append mode wherever possible.
 -   If the HubSpot connector does not support this, segment the workload across multiple data sources.
+-   Restrict the start date (in **Datas Sources** page) for latest/required years.
+
 
 ### Parquet vs Iceberg – When to use what?
 Format | Use Case | 
@@ -353,7 +362,10 @@ Yes, but linking filters across visuals (like dynamic filters) is not yet suppor
       
    
 ### How are dashboards created and managed?
-Users drag and drop fields from loaded workbooks, configure visual properties, and pin to dashboards.
+Users drag and drop fields from loaded workbooks, configure visual properties, and pin to dashboards. 
+Also refer:
+-   [Creating dashboards](</docs/BI and Visualizer/Dashboard/creating-dashboard>)
+-   [Managing layout and widgets in a dashboard](</docs/BI and Visualizer/Dashboard/managing-layout-widgets-in-dashboards>)
 
 Key Points:
 

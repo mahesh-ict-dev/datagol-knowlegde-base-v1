@@ -1,6 +1,6 @@
 {
-  "label": "Data pipeline",
-  "position": 2,
+  "label": "Pipelines",
+  "position": 4,
   "link": {
     "type": "generated-index",
     "description": "Understand the importannce of Lakehouse and its concepts."

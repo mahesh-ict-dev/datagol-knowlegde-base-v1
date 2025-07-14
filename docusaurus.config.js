@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+    
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -16,11 +17,16 @@ const config = {
 
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://docs.datagol.ai',
+  // Set the production url of your site here , Uncomment these two lines before pushing to production
+  //url: 'https://docs.datagol.ai',
+  //baseUrl: '/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  
+
+  // comment these 2 lines before piushing to production
+  url: 'https://mahesh-ict-dev.github.io',
+  baseUrl: '/datagol-knowlegde-base-v1/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

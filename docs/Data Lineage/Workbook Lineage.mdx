@@ -4,7 +4,13 @@ tags: [Lineage]
 slug: workbook-lineage
 ---
 
-Workbook lineage traces the data back from its original source, showing any materialized views along the way. Workbook lineage focuses on a specific workbook and illustrates its data origins. It displays:
+import ImagePopup from '@site/src/components/ImagePopup';
+
+Workbook lineage traces the data back from its original source, showing any materialized views along the way.
+
+<ImagePopup src="/img/workbook-lineage.png" alt="Workbook Lineage" caption="Workbook Lineage" />
+
+Workbook lineage focuses on a specific workbook and illustrates its data origins. It displays:
 
 * The underlying data source(s) that provide the data for the workbook.
 * Any intermediate materialized views (which are also workbooks created from published queries) that might sit between the original data source and the final workbook. These represent pre-calculated or transformed datasets used by the workbook.

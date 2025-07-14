@@ -1,7 +1,8 @@
 ---
-title: Workbook API Reference
+title: Workbook API reference
 slug: workbook-api-reference
 tags: [API, Workbook, Curl]
+sidebar_position : 28
 ---
 
 
@@ -17,7 +18,7 @@ This document describes how to use the REST API interface to retrieve and post d
 
 ---
 
-## 1. Create a Service Account
+## 1. Create a service account
 
 A service account is required to obtain a token for authentication when making API calls.
 
@@ -30,7 +31,7 @@ A service account is required to obtain a token for authentication when making A
 
 ---
 
-### Navigation to Service Accounts
+### Navigation to service accounts
 
 Navigate to the **Team** section and click on the **Service Accounts** tab, then click the **+ Service Account** button.
 
@@ -38,7 +39,7 @@ Navigate to the **Team** section and click on the **Service Accounts** tab, then
 
 ---
 
-### Creating the Service Account
+### Creating the service account
 
 Fill in the service account details in the creation form.
 
@@ -46,7 +47,7 @@ Fill in the service account details in the creation form.
 
 ---
 
-### Copying the Generated Token
+### Copying the generated token
 
 After successful creation, **copy the generated token** for use in API requests.
 
@@ -54,9 +55,9 @@ After successful creation, **copy the generated token** for use in API requests.
 
 ---
 
-## 2. Get Workbook Data
+## 2. Get workbook data
 
-### Obtaining the API Request
+### Obtaining the API request
 
 - Navigate to the target workbook
 - Go to **Settings**
@@ -69,7 +70,7 @@ After successful creation, **copy the generated token** for use in API requests.
 
 ---
 
-### API Request Example
+### API request Example
 
 ```bash
 curl --location 'https://be.datagol.ai/noCo/api/v2/workspaces/03d079b8-ddbf-4752-926a-8700c4be056c/tables/77b75932-a6f3-405a-aade-fc4bff973858/data/external' \
@@ -85,7 +86,7 @@ curl --location 'https://be.datagol.ai/noCo/api/v2/workspaces/03d079b8-ddbf-4752
 
 ---
 
-## 3. Insert Data into a Workbook
+## 3. Insert data into a workbook
 
 Data can be inserted into a workbook using the workspace ID and workbook ID, specifying column names and values in key-value pairs.
 
@@ -110,7 +111,7 @@ curl --location 'https://be.datagol.ai/noCo/api/v2/workspaces/03d079b8-ddbf-4752
 
 ---
 
-### Request Parameters
+### Request parameters
 
 - `position`: Specifies the position where the new row should be inserted (e.g., `0` for the beginning)
 - `cellValues`: Object containing column names as keys and their corresponding values
