@@ -3,31 +3,16 @@ name: CI
 on:
   push:
     branches: [ main ]
-    paths: 
-      - 'docs/**'
-      - 'blog/**'
-      - 'docusaurus.config.js'
-      - 'sidebars.js'
-      - 'static/**'
-      - 'src/**'
-      - 'package.json'
-      
   pull_request:
     branches: [ main ]
-    paths: 
-      - 'docs/**'
-      - 'blog/**'
-      - 'docusaurus.config.js'
-      - 'sidebars.js'
-      - 'static/**'
-      - 'src/**'
-      - 'package.json'
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,6 +25,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
