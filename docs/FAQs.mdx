@@ -3,16 +3,18 @@ sidebar_position: 7
 slug: datagol-faq
 ---
 
-## Agents
-### What SQL dialect and functions are supported?
-DataGol supports both Apache **Spark™ SQL** and **JDBC** dialects, with the appropriate dialect automatically applied based on the data provider selected within the platform's query playground.
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## What SQL dialect and functions are supported?
+By default, Spark is selected, but you have the flexibility to change it based on your data source. DataGOL supports both Apache Spark™ SQL and JDBC dialects based on the data provider selected within the Playground.
 
 For relational databases such as PostgreSQL, MySQL, and others, you can leverage JDBC-based queries, utilizing the SQL functions supported by the native database.
 
 When querying data from data warehouses, folder datasources, or constructing queries on top of existing views, Apache Spark™ SQL should be employed. 
 Apache Spark™ functions can be referenced [here](https://spark.apache.org/docs/latest/api/sql/index.html).
 
-For querying large datasets, particularly when an alternative to Apache Spark™ is desired, Amazon Athena (a service by Amazon Web Services) is also supported. 
+Athena is supported for faster data retrieval and applicable only for S3 data.
+
 
 ## BI and Visualizer 
 
@@ -36,18 +38,9 @@ Deleted records are handled using **Full Refresh Merge** with Iceberg, which com
 -   CDC pipelines are not directly supported in DataGOL.  
 -   Full refresh merge provides a reliable internal alternative.  
       
-### Can DataGOL integrate with existing warehouses like Redshift or Snowflake?
-Yes. Connections are defined in the Data Sources layer. Both source and target warehouses must be configured.
-
-**Key Points:**
--   Destination must be explicitly selected when creating pipelines.  
--   DataGOL supports two roles:
--   ETL Only: It acts as a transformation layer—pulls data from sources, the user is able to process it (joins, filters, cleans, etc.), and write it into your warehouse.  
--   Full Warehouse: It stores data within its own internal open-format storage (e.g., Parquet or Iceberg), and also runs queries and dashboards from there.  
-
 ### How should we name data sources and warehouses?
 
-**Best Practice:**
+**Best practice:**
 -   Format: 
     ```
     <ProductName>_<Environment>_<DB|Warehouse>
@@ -61,13 +54,19 @@ app_prod_db, app_stage_wh
 
 This naming helps differentiate between DB, warehouse, and S3 sources clearly and ensures uniqueness for use-case-driven design.
 
-### How are S3 data sources structured?
-**S3 Path Format:**
+### How to define the S3 bucket path when adding an S3 data source.
+
+**S3 path format:**
+
+The S3 bucket path must extend to the location where the files exist.
+
+Example: If your files are located at `bucket/folder_1/folder_2/<files>`, enter the path as `bucket/folder_1/`. The final folder `folder_2` will be used as the table name in DataGOL.
 
 ```
 <bucket>/<base_folder>/<table_name>/<files>
 ```
-The `table_name` folder becomes the table name in DataGOL.
+
+Provide a self-described folder name for generating logical table names. 
       
 :::tip [Important]
 Give the path up to the base folder. DataGOL processes each subfolder (e.g., table_name) as an individual table.
@@ -75,101 +74,108 @@ Give the path up to the base folder. DataGOL processes each subfolder (e.g., tab
 
 **Schema Tips:**
 -   Keep data types and column names consistent.  
--   Only CSV is supported, unless a new folder data source is created for an alternative format.
+-   S3 data source supports: CSV, Parquet, and JSON.
 
 ### How to onboard 3rd party connectors (PostHog, HubSpot, etc.)?
 Do the following to onboard 3rd party connectors:
-1.  Request whitelisting via Slack.  
-2.  Once whitelisted, you can create a new data source from the [**Data Sources**](</docs/Lakehouse/%20Data%20sources/adding-data-sources>) page with the appropriate connector.
+1.  Contact support team to whitelist connectors.
+2.  Once whitelisted, you can create a new data source from the [**Data Sources**](</docs/Lakehouse/%20Data%20sources/adding-data-sources>) page with the appropriate connector and active credentials. 
+    
+    :::caution
+     Please provide the start date wherever applicable else DataGOL will default to replicating data from the past year.
+    :::
+
 3.  Create a pipeline from the data source.     
 
 :::info [Special case]
 Some APIs send updated data as separate records. In such cases, deduplication pipelines are essential to ensure you retain only the most recent version of each record.
 :::
 
-### What is a partition column in Spark?
+### What is a partition column and when to use it?
 
-A **partition column** in Spark is a crucial element for achieving parallelism and significantly reducing job processing times. When you designate a column as a partition column, Spark uses it to divide your data into multiple, smaller chunks. This allows **multiple jobs** to run concurrently, processing different partitions simultaneously. By default, Spark aims for a partition size of **50,000 records**.
+The partition column is used to create parallelism in Spark. Based on the partition column selected, multiple jobs will be created to minimise the time consumption for job processing. The default partition size is 50,000.
+:::info
+Partition columns are supported only for SQL datasources.
+:::
+
 
 #### When should you use a partition column?
 
-You should utilize a partition column when you are building a pipeline to transfer a large dataset to a data warehouse. Without proper partitioning, such operations can lead to a substantial increase in the time required for the job to complete, potentially causing performance bottlenecks.
+You should use a partition column feature, when a pipeline is created to move a large dataset to a warehouse, it significantly increases the job completion time. 
 
 #### How do you use a partition column?
 
 To designate a partition column:
 
-1.  Go to **Lakehouse** > **Data Sources** page and click the data source where you want to designate a partition column. 
-2.  Go to the specific **table** you are working wit and mark a column as the partition column. It is generally ideal to choose a column that serves as an **index in your source system**, as this often ensures a good distribution of data across partitions.
-    For more detailed steps, refer to [Designating a partition column](/docs/Lakehouse/%20Data%20sources/designating-a-partition-column).
-
----
-
-### Should I copy data into DataGOL or query directly from the source?
-**Copy use case:**
--   When downstream orchestration, time travel, or dedup is required. 
+1.  Navigate to the data source page for which you want to AI generate the metadata catalog.
     
-**Direct query use case:**
--   For real-time dashboards or when querying cost-heavy external sources (e.g., Snowflake, BigQuery).
+2.  Go to the **Tables** tab and click the link of the specific table you wish to catalog.
+    
+3.  In the **Table Info** page, click the **Column** **info** tab.
+    
+4.  From the extreme right click the more options icon corresponding to a column and select the **Make partition column** option. This option is available only for columns with following data types: **int**, **bigint**, **timestamp**, **long,** and **date**.
+    
+     <ImagePopup src="/img/image-20250511-132102.png" alt="designating-partition-column" caption="designating-partition-column" />
+    
+5.  In the **Partition Column Settings** box, select the Enable checkbox. You can also click **Advance Settings** and specify the partition size.
+    
+    <ImagePopup src="/img/image-20250511-134329.png" alt="designating-partition-column1" caption="designating-partition-column1" />
+    
+    The column that is specified as the partition column is ticked in the listed.
+    
+    <ImagePopup src="/img/image-20250511-134600.png" alt="designating-partition-column2" caption="designating-partition-column2" />
 
-### What formats are supported for Folder data source?
+    The designated column will be used as the partition column by Apache Spark while processing datasets. Only a single column can be used as a partition column. The default partition size is 50K.
+    :::info
+    This setting is available only for RDBMS data sources.
+    :::
 
-**Supported:**
--   Excel, Parquet, CSV, and JSON.
+    :::warning 
+    If you attempt to change the partition column, a warning is displayed, since this action can impact the pipeline and retrieval efficiency.
+    :::
 
-### What happens during data source sync failure and the tables show **0** in data source?
+    <ImagePopup src="/img/image-20250511-134755.png" alt="designating-partition-column3" caption="designating-partition-column3" />
 
-If your datasource is S3, make sure to check the S3 bucket path. For other types of data sources, please contact the DataGOL team via Slack. 
+### What happens when the sync schema fails and the tables show as 0?
 
-### Can I join data from multiple sources?
-Yes, you can! You can join data from multipe data sources (for example, S3 and Redshift).
+If your datasource is S3, make sure the path to the S3 bucket is correct, for third-party and other DB sources, confirm if the credentials are valid and active. If the issue persists, contact the Support team.
+
+### Can I write queries joining multiple sources?
+
+Yes, you can join data from multipe data sources (for example, PostgreSQL, MySQL, warehouse etc.).
 
 #### How to join data from multiple sources?
 
-There are two options available: **Custom Pipelines** and **Workbooks via Playground**.
+There are two options available: **Custom Pipelines** and **Playground** to create workbook from different sources.
 
-**Custom pipelines**
-Alternatively, you can create a [custom pipeline](</docs/Lakehouse/Pipelines/creating-custom-pipeline>) where you write custom queries to pull data from multiple sources.
+-   **Custom pipelines:**
+    [Custom pipelines](</docs/Lakehouse/Pipelines/creating-custom-pipeline>) support custom queries, where the user has the flexibility to write joins on multiple data sources.
 
-**Workbooks via Playground**
-With workbooks via Playground, you can [write SQL queries using Spark as the provider](</docs/Playgrounds/create-queries-in-playground>) to join data from multiple sources.
+-   **Playground:**
+    From [Playground](</docs/Playground/Create queries in Playground.mdx>), you can write SQL queries using Spark. With Spark as the provider, you have the flexibility to write join queries on multiple data sources.
 
 ## Lakehouse
 
-### How do permissions and access work in Lakehouse?
+### What are the roles applicable for Lakehouse?
 
-| Role | Capabilities | 
-| :------- | :--------------------------------------------------------------------------- | 
-| **Admin** | Full access to create/delete data sources, pipelines, and orchestrations. | 
-| **Member** | Can view all, but only edit pipelines/orchestrations if explicitly invited. |
-
-**Governance:**
-
--   Producers (data team) control access to workspaces.  
--   Consumers (business teams) collaborate in their own workbooks.
+DataGOL supports two roles specific to Lakehouse - Lakehouse Member and Lakehouse Admin. See [Roles and permissions](</docs/Reference guides/Roles and permissions.mdx>) for more details. 
 
 ## Pipeline
 
 ### What are the available pipeline types in DataGOL, and when should each be used?
-DataGOL supports three pipeline types:
--   **Standard Pipelines:** Used for straightforward replication of source tables with sync modes.  
--   **Custom Pipelines:** Designed for SQL-based transformations like joins, format changes, or business logic.  
--   **Dedupe Pipelines:** Remove duplicate records when systems (e.g., Salesforce) retain updated rows as separate entries.  
-      
-Key Points:
 
--   **Standard:** Good for raw replication with minimal transformation.  
--   **Custom:** Required when transforming time formats, handling nulls, or merging sources.  
--   **Dedupe:** Best suited for systems that log updates as new records; used to identify and retain only the latest version of each record by removing duplicates.  
+DataGOL supports three pipeline types:
+-   **Standard Pipelines:** Used for straightforward replication of source tables with sync modes. Good for raw replication with minimal transformation. 
+-   **Custom Pipelines:** Designed for SQL-based transformations like joins, format changes, or business logic. Required when transforming time formats, handling nulls, or merging sources. 
+-   **Dedupe Pipelines:** Remove duplicate records when systems (e.g., Salesforce) retain updated rows as separate entries. Best suited for systems that log updates as new records; used to identify and retain only the latest version of each record by removing duplicates.  
 
 ### Can users transform data types, nulls, or time formats in standard pipelines?
-
 No, such transformations require custom pipelines where SQL queries can be written to clean and reformat data.
 
 **Key Points:**
 
--   Use Playground for SQL transformations.  
--   Handles complex transformations, including cross-table joins, data type casting, and format normalization. 
+-   Use the Playground if transformations need to be handled before creating the workbook. 
+-   Use a custom pipeline to handle transformations to push it to the warehouse. 
 
 ### What are the different sync modes?
 | Sync Mode            | Description                                                                                                                                   | Notes                                                                                                                              |
@@ -183,13 +189,13 @@ No, such transformations require custom pipelines where SQL queries can be writt
 ### When and how should we use dedup pipelines?
 **Use Case:**
 
--   Third-party sources that resend full record updates.  
+-   Required for REST connectors (HubSpot, Salesforce, Cvent) or pipelines where every update is produced as a new record.
 -   Append modes where duplication is expected.  
 
 **Setup:**
 
--   Source: Warehouse with duplicates.  
--   Destination: Cleaned warehouse.  
+Create a dedupe pipeline with the source as the warehouse with duplicates and the destination as the cleaned warehouse. Custom SQL logic can be applied for each stream to retain the latest records. The default dedupe logic (e.g., Salesforce-oriented) may not work for other connectors.
+
       
 Custom SQL logic can be applied for each stream to retain the latest records.
 
@@ -209,7 +215,7 @@ Custom SQL logic can be applied for each stream to retain the latest records.
 -   Full Refresh Merge is useful for detecting deletes via Iceberg snapshot comparison.  
 
 
-### What are the destination formats and query engines supported by DataGOL?
+### What are the destination formats and query engines supported in pipelines?
 
 **Supported formats:**
 
@@ -219,7 +225,7 @@ Custom SQL logic can be applied for each stream to retain the latest records.
 **Query Engines:**
 
 -   Spark SQL (Default - supported in Playground and Lakehouse)
--   Athena (Supported in Playground and Lakeshouse)
+-   Athena (Supported in Playground and Lakehouse)
 -   JDBC - (Supported in Playground only and not recommended for large datasets).
  
 
@@ -254,7 +260,7 @@ Create a multi-layered data model:
 Avoid deeply nested CTEs. Instead, break logic into multiple views using pipelines — more performant and maintainable.
 :::
 
-### How to update the cursor field in an incremental append sync mode??
+### How to update the cursor field in an incremental append sync mode?
 
 If you need to update the cursor field for a stream configured with incremental append sync mode, you cannot directly change it within the existing pipeline. This is because once incremental append is selected, direct modifications to the cursor field are not permitted.
 Here's the **workaround**:
@@ -282,13 +288,13 @@ Here's the **workaround**:
 ### Parquet vs Iceberg – When to use what?
 Format | Use Case | 
 | :-------- | :--------------------------------- | 
-| **Parquet** | Efficient analytics, low overhead. | 
-| **Iceberg** | Required for time travel/versioning. |
+| **Parquet** | Efficient analytics, low overhead, and time travel support with incremental append and dedupe.| 
+| **Iceberg** | Required when upsert feature is needed for incremental merge and Full Refresh Merge sync modes.
+ |
 
 :::tip
 Usage of Parquet or Iceberg depends on the actual use case.
 :::
-  
       
 ## Playground    
 
@@ -315,14 +321,16 @@ Use Playground to test the query and update the workbook schema.
 
 ### What is the role of the Workbook in the BI flow?
 
-Workbooks are saved queries or views from the Playground. They act as the golden data layer for dashboards.
+Workbooks are views created from Playground and act as the golden layer for the dashboard.
+Make sure to update the column datatypes in workbooks since the same datatypes will be inferred in BI. For example, for a date field that must have the date datatype in the workbook, a column that has distinct values can be made a single select type, etc. Keep the workbook columns self-descriptive, which can later help AI answer your questions based on your workbook. Use descriptive workbook names and versioning for long-term maintainability. Use delete protection on finalized workbooks to avoid accidental deletions. Ensure a well-defined, clean structure of workbooks for better BI compatibility.
+
 
 **Key Points:**
 
 -   Can be published to workspaces.     
 -   Supports API-accessible data, which can be filtered and downloaded.  
        
-### How is access and sharing managed across workspaces and workbooks?
+### How is access and sharing managed across workspace?
 
 Workspaces support role-based sharing:
 
@@ -372,11 +380,3 @@ Key Points:
 -   No widget limits per dashboard.  
 -   Widgets can be duplicated, sorted, and grouped.  
 -   Export to PDF is not yet supported, but on the roadmap.  
-
-### What are the future enhancements in DataGOL?
-
-Planned features include:
--   Graphical query builder  
--   PDF export of dashboards  
--   Improved dynamic titles in widgets  
--   Filter linking across visuals
