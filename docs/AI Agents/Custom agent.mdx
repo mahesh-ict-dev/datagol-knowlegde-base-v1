@@ -1,0 +1,78 @@
+---
+sidebar_position : 7
+tags : [AI, AI Agents,]
+slug : custom-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## What is Custom agent?
+
+The Custom agent provides a flexible framework to create and configure your own AI agents tailored to specific needs. It allows you to define the agent's behavior, knowledge sources, and even its appearance, giving you significant control over its functionality.
+
+The Custom agent offers extensive customization options:
+
+-   **Customizable knowledge base**: You can select multiple workspaces and even websites as knowledge sources for your agent, allowing it to draw information from diverse locations. 
+    
+-   **Tailored responses**: You can define a **system prompt** to guide the agent's behavior and set specific **instructions** for how it should format its responses (e.g., using bullet points, specific tone).
+    
+-   **Conversation starters**: You can pre-define **conversation starters** that appear as clickable prompts, helping users initiate interactions with your Custom agent.
+    
+-   **Branding and appearance**: You can upload a **logo** for your Custom agent, and if published to your website, its appearance can be further customized using CSS.
+    
+-   **Integration with external websites**: Custom agents can be **published** and integrated into your own company's website using provided script tags, allowing you to host an AI assistant tailored to your specific content.
+    
+
+### **Configuring and creating the Custom agent**
+
+The process of configuring a Custom agent involves both creation and detailed setup:
+
+1.  Navigate to **Agents** section and click **Explore**.
+
+    <ImagePopup src="/img/agents/custom-agent-explore-create.png" alt="custom agent create" caption="custom agent create"/>
+
+2. In the Explore page, click **Create agent**.
+
+3.  Provide the following details:
+
+    <ImagePopup src="/img/agents/custom-agent-new.png" alt="custom agent new" caption="custom agent new"/>
+
+    
+    -   **Name**: Give your agent a unique name.
+        
+    -   **Description**: Provide a brief description of what your agent does.
+        
+    -   **Logo**: Upload a logo to personalize your agent's appearance.
+   
+4.	 In the **Best for** section, click **Add item** and specify the  tasks or scenarios the agent is best suited for.
+        
+4.  In the **Conversation starters**, you can add suggested questions or topics that users can click to start a conversation.
+    
+5.  In the **System prompt ** section, set the following:
+    
+    -   **Prompt**: Specify the system prompt.  This defines the agent's core behavior (e.g., "Answer as per the documents and only answer questions related to [Your Product/Topic]").
+        
+    -   **Instructions**: Specify how the agent should structure its responses (e.g., "Response in nicely formatted bullet points whenever needed.").
+
+	-	**Examples**: Add example outputs that can guide the agent responses. 
+        
+6.  In the **Sources** section, you can add data sources for your agent to perform tasks and integrations. Click **+ New Source** and select any of the following: 
+    
+    -   **Workspaces**: Select one or more existing workspaces that contain documents relevant to your agent's purpose.
+        
+    -   **Websites**: Add URLs of websites that the agent should refer to for information.
+        
+7.  **Save or publish** the agent. 
+    
+    -   **Save as draft**: If you are still working on the agent, saving it as a draft will make it visible only in the **Explore** page within the platform.
+        
+    -   **Publish**: Publishing the agent allows you to integrate it onto an external website. Once published, you can access integration scripts to embed the agent on your site.
+        
+
+### **Using the Custom agent**
+
+Once your Custom agent is configured and saved or published, users can interact with it based on its defined knowledge base and instructions.
+
+-   **Within the platform**: Select your Custom agent from the **Explore** section. You can then ask questions, and the agent will respond based on the content of its configured workspaces and websites, adhering to the system prompt and instructions you've set.
+    
+-   **On your website**: If you have published the agent and embedded its script, it will appear as an interactive element (e.g., a chat popup) on your website. Users can then ask questions related to your website's content or the specific knowledge you have provided.
