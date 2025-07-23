@@ -1,32 +1,62 @@
 ---
-sidebar_position : 4
+sidebar_position : 6
 tags : [AI, AI Agents,]
 slug : python-agent
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-The Python agent is designed to handle more complex data analysis tasks that go beyond basic SQL queries and visualizations. The Python agent is utilized for complex data manipulation tasks that exceed the capabilities of standard SQL queries. Such tasks include generating machine learning code for rapid testing, performing dimensionality reduction using PCA, and conducting anomaly detection with statistical models. Here's a breakdown of its purpose and capabilities:
+## What is Python agent?
 
-<ImagePopup src="/img/AI/python-agent.png" alt="Python Agent" caption="Python Agent" />
+The Python agent is an AI-powered tool that executes Python code to analyze data from your workbooks and generate diverse outputs, including tables, charts, and detailed explanations. This agent is particularly useful for in-depth data analysis, visualization, and transformation.
 
-### **Purpose**
+<ImagePopup src="/img/agents/python-agent.png" alt="python-agent" caption="python agent"/>
 
--   To perform sophisticated data analysis tasks using Python code generation and execution
+The Python agent offers the following enhanced data analysis and visualization capabilities:
+
+-   **Code generation and execution**: It can understand your natural language queries and generate executable Python code to perform data analysis.
     
-    -   Advanced statistical analysis.
-    -   Other data science operations.
+-   **Multi-format output**: The Python agent can provide results in multiple formats for a single query, including:
+   
+    -   **Working Python code**: It displays the actual Python code used to generate the analysis.
         
-
-### **Key Features**
-
--   **Python-based processing:** Leverages the power of Python and its data science libraries (e.g., Pandas, Scikit-learn) to perform complex computations.   
--   **Forecasting and prediction:** Enables users to generate forecasts and predictions based on historical data. For example, predicting future trends in billed amounts.
--   **Model application:** Allows the application of various data science models to analyze data and derive insights.
--   **Complements DCA and BI agents:** Extends the capabilities of the DCA and BI agents by providing more advanced analytical tools.
+    -   **Detailed explanations**: It analyzes the output of the Python code and provides comprehensive explanations of the results.
+        
+    -   **Tables (data frames)**: It generates and displays data in a tabular format.
+        
+    -   **Charts and visualizations**: It can create various chart types (e.g., bar charts, scatter plots) to visually represent the data. These charts are often interactive, allowing for hovering, zooming, and displaying labels.
+        
+-   **Streaming responses**: The agent supports streaming responses, meaning you can see the output being generated in real-time as the analysis progresses.
     
 
-### **Use cases**
+## **Configuring the Python agent**
 
--   Performing in-depth statistical analysis.
--   Automating complex data analysis workflows.
+Configuring the Python agent involves selecting a workbook as its data source.
+
+1.  Navigate to the Python agent within the platform.
+    
+2.  You will see an option to select a workbook. Choose the workbook that contains the data you wish the agent to analyze. This workbook could be one you have uploaded as a CSV, or exported from a query or pipeline.
+
+    <ImagePopup src="/img/agents/python-workbook.png" alt="python-workbook" caption="python workbook"/>
+
+
+:::[Info]
+The agent will use the data within the selected workbook for all its analyses.
+:::
+
+## **Using the Python agent**
+
+Once the workbook is selected, you can start posing questions to the Python agent.
+
+**Examples of usage:**
+
+-   "Which patient profile (age, condition, medication) are most likely to be readmitted within 30 days?"
+    
+-   "Analyze the sales data for the last quarter and show me the top 5 performing products."
+    
+-   "Visualize the relationship between customer demographics and purchase frequency."
+    
+
+The agent will then process your query, generate and execute Python code, and present the results in various formats (code, explanation, tables, charts) as appropriate.
+
+----------

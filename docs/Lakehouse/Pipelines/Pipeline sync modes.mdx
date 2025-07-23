@@ -32,7 +32,7 @@ While creating a pipelilne, you can choose any of the following sync mode option
 -   **Incremental | Merge** and **Full Refresh | Append** sync modes are irreversible once saved.
 -   For merge operations, you must specify unique columns (primary key) for row identification. If not specified, **Incremental | Merge** defaults to **Incremental | Append**   
 -   **Full refresh | Merge** and **Incremental | Merge** are only valid for Iceberg format. If Parquet is selected with merge operations, a warning is displayed.
--   Pipelines can transition from **Full Refresh** to any other mode. However, once it is in Incremental | Append, Full Refresh|Merge, or Incremental | merge modes, it cannot be reverted to full refresh.
+-   Pipelines can transition from **Full Refresh** to any other mode. However, once it is in Incremental | Append, Full Refresh | Merge, or Incremental | merge modes, it cannot be reverted to full refresh.
 :::
 
 
