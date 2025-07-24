@@ -38,3 +38,18 @@ To run queries in Playground, do the following:
 3.  Click **Run** button above the query. The query is run and the results are displayed. Also, you can highlight a query or part of a query in the editor to run just the selected portion
     
     <ImagePopup src="/img/playground/image-20250427-061602.png" alt="running-queries-from-playground3" caption="running-queries-from-playground3" /> 
+
+:::info
+When a data source has a specific schema name and you are querying the database directly in a playground environment, the query format for referencing objects within that schema must be used as follows:
+
+`SELECT * FROM <datasource>.<schema>.<table> LIMIT 10`
+
+-   `<datasource>`: Replace this with the name of the data source.
+
+-   `<schema_name>`: Replace this with the actual name of the schema where the table resides. Schemas organize database objects and act as namespaces.
+
+-   `<table_name>`: Replace this with the actual name of the table you want to query.
+
+-   `LIMIT 10`: This is an optional clause that restricts the number of rows returned to 10. It is good practice in a playground to prevent large results from slowing things down. You can adjust this number or remove it if you need more (or all) rows.
+
+:::

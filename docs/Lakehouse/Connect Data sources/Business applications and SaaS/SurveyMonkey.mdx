@@ -1,0 +1,51 @@
+---
+sidebar_position: 13
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-surveymonkey
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding SurveyMonkey as data source
+
+:::info **Prerequisite for adding SurveyMonkey**
+
+The following connector information is required from the client:
+
+-   Access Token
+    
+-   Origin datacenter of the SurveyMonkey account (Default: USA)
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to your SurveyMonkey account [Survey Monkey Login](https://www.surveymonkey.com/mp/sign-in/ "https://www.surveymonkey.com/mp/sign-in/")
+    
+2.  Create an app.
+    
+3.  After creating an app, navigate to the created app settings, and check the credentials section for the access token. Ensure to have a higher daily API limit to read data without any issues.
+    
+:::
+
+To add Survey Monkey as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Survey Monkey icon. 
+    
+3.  Specify the following details to add SurveyMonkey and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-104259.png" alt="Add_SurveyMonkey" caption="Add_SurveyMonkey" />
+    
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Access Token** | Specify the SurveyMonkey access token. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+    | **Origin datacenter of the SurveyMonkey account** | Depending on the originating datacenter of the SurveyMonkey account, the API access URL may be different. |
+
+4.  Click **Submit**.    

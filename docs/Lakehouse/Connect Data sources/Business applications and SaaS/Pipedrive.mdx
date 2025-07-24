@@ -1,0 +1,55 @@
+---
+sidebar_position: 8
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-pipedrive
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Pipedrive as data source
+
+:::info **Prerequisite for adding Pipedrive**
+
+The following connector information is required from the client:
+
+-   API Token
+    s
+-   Start Date
+
+Do the following:
+
+1.  Login to your [Pipedrive account](https://app.pipedrive.com/auth/login "https://app.pipedrive.com/auth/login").
+    
+2.  Enable API Token: If you do not see API next to the `Your companies` section, it is due to the permission sets handled by the company's admin. The company's admin can give you access to your API token by enabling it for you from the settings in Pipedrive web app.
+    
+    For more information, access [enabling API for company users](https://pipedrive.readme.io/docs/enabling-api-for-company-users "https://pipedrive.readme.io/docs/enabling-api-for-company-users").
+    
+3.  Find the API token:
+    
+    You can get the API token manually from the Pipedrive web app by going to account name (on the top right) > **Company settings** > **Personal preferences** > **API**.
+    
+    See [How to find the API Token](https://pipedrive.readme.io/docs/how-to-find-the-api-token "https://pipedrive.readme.io/docs/how-to-find-the-api-token") for detailed information.
+    
+4.  You can get the API token manually from the Pipedrive web app by going to _account name (on the top right)  > **Company settings** > **Personal preferences** > **API**_ or by clicking [here](https://app.pipedrive.com/settings/api "https://app.pipedrive.com/settings/api") (in case you have multiple companies open at the same time, this link will redirect you to the API token of the last opened company).
+
+:::
+
+To add Pipedrive as a data source, do the following: 
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Pipedrive icon. 
+    
+3.  Specify the following details to add Pipedrive and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-095929.png" alt="Add_Pipedrive" caption="Add_Pipedrive" />
+    
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Token** | The Pipedrive API Token. This is a mandatory field. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. This is a mandatory field. |  
+
+4.  Click **Submit**. 

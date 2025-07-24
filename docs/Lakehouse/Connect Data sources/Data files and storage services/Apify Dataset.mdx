@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-apify-dataset
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+### Adding Apify Dataset as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Apify Dataset icon. 
+    
+3.  Specify the following details to add Apify Dataset and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/apify_dataset.png" alt="Add Apify Dataset" caption="Add Apify Dataset" />  
+
+    | Field | Description |
+    |---|---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **Dataset ID** | Specify The ID of the dataset you want to load. After logging into the Apify Console, you can find your datasets in the Storage section under the **Datasets** tab. Refer to the Apify documentation for more details. |
+    | **Start date** | Specify your personal API token for the Apify Dataset account. After logging into the Apify console, you can find it under **Integrations** tab > **Settings**. Refer to the Apify documentation for more details.|
+
+4.  Click **Submit**. 

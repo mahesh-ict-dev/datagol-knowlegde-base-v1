@@ -1,0 +1,53 @@
+---
+sidebar_position: 3
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-hubspot
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding HubSpot as data source
+
+:::info **Prerequisite for adding HubSpot**
+
+The following connector information is required from the client:
+
+-   Access Token
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to your HubSpot account [Hubspot Login](https://app.hubspot.com/login/legacy?hubs_signup-url=knowledge.hubspot.com%2Faccount-management%2Fwhy-can-t-i-log-into-hubspot&hubs_signup-cta=cta_button&hsCtaTracking=d82c5d82-821c-4c0d-86f5-6c34dced0e6d%7C16494015-d90f-47fc-adc3-593e2e1bdfa0 "https://app.hubspot.com/login/legacy?hubs_signup-url=knowledge.hubspot.com%2Faccount-management%2Fwhy-can-t-i-log-into-hubspot&hubs_signup-cta=cta_button&hsCtaTracking=d82c5d82-821c-4c0d-86f5-6c34dced0e6d%7C16494015-d90f-47fc-adc3-593e2e1bdfa0")
+    
+2.  Set up Hubspot for Airbyte Open Source: Private app setup (Recommended): If you are authenticating via a Private App, you will need to use your access token to set up the connector. Refer to the [official HubSpot documentation](https://developers.hubspot.com/docs/api/private-apps "https://developers.hubspot.com/docs/api/private-apps") for a detailed guide.
+    
+3.  After private app setup is complete In your HubSpot account, click the **settings icon** in the main navigation bar.
+    
+4.  In the left sidebar menu, navigate to **Integrations** > **Private apps**.
+    
+5.  Click the **name** of your app.
+    
+6.  Click the **Auth** tab and then click **Show token** to reveal your access token.
+    
+7.  Click **Copy** to copy the token to your clipboard.
+:::
+
+Do the following to add HubSpot as a data source: 
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the HubSpot icon. 
+    
+3.  Specify the following details to add HubSpot and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-080246.png" alt="Add_Hubspot" caption="Add_Hubspot" />
+
+    | Field | Description |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **Access token** | Specify the HubSpot access token. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+
+4.  Click **Submit**. 

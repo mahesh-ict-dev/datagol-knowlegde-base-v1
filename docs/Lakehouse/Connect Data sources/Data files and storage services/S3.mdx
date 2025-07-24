@@ -1,0 +1,80 @@
+---
+sidebar_position: 3
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-s3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding S3 data source  
+
+:::caution
+
+The Spark environment, at the company level, allows for only one set of S3 access credentials to be configured at any given time. Consequently, Spark can be set up to access data from either DataGOL's S3 account or a single, specific client's S3 account.
+
+Simultaneous access to data residing in multiple, different S3 accounts (like DataGOL's _and_ a client's at the same time) is NOT supported with the current configuration.
+
+:::
+
+:::info Prerequisite for adding S3 data source
+
+Before you add a S3 data source, ensure to add the following beforehand from the Company section of the Home page.
+
+-   AWS Access Keys
+    
+-   AWS Secret Key
+    
+-   Region
+    
+-   Root Directory
+    
+
+Do the following:
+
+1.  On the **Home** page of DataGOL, from the left navigation panel, click **Company**.
+    
+2.  Click the **Keys** tab.
+    
+3.  In the **AWS Settings** box, click the edit button and specify the following details:
+    
+    -   **AWS Access Keys**
+        
+    -   **AWS Secret Key**
+        
+    -   **Region**
+        
+4.  In the **Root Directory** text box, specify the root directory.
+    
+:::
+
+:::tip NOTE
+
+s3 is available only in Amazon AWS infrastructure. S3 is not available as part of Microsoft Azure.
+
+:::
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Source**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the S3 icon. 
+    
+3.  Specify the following details to add S3 data source and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-072605.png" alt="Add s3 File CSV" caption="Add s3 File CSV" />
+
+    |**Field**  | **Description**|  
+    |:----------|:---------|                                                                                                                     
+    | **Connection name**   | Enter a unique name for the connection.                                                                                                              |
+    | **File Format**       | Specify any of the following file formats: `CSV`, `Parquet`, `JSON`, `Delta` (Coming soon)                                                           |
+    | **Path to S3 bucket** | Specify the path of the S3 bucket where the files exist. Example: If file is present in `s3a://catalog/db/source/test.csv` then path will be `catalog/db`. Example format: `s3a://catalog/db/`   | 
+    | **Separator**         | Specify the separator character.                                                                                                                     |
+    | **Header**            | Toggle to indicate if the first row of your CSV contains column headers.                                                                             |
+    | **Infer Schema**      | Toggle to automatically determine the data type of each column in your data.                                                                         |
+    | **Compression**       | Select the file compression mode from the following options: `Uncompressed`, `gzip`, `lzo`, `brotli`, `lz4`, `zstd`                                 |
+    | **Null Value**        | A set of case-sensitive strings that should be interpreted as null values. For example, if the value 'NA' should be interpreted as null, enter 'NA' in this field.                                                                                  |
+    
+4.  Click **Submit**.
+    
+:::warning  [**Limitations**]
+Spark's configuration limits you to using credentials for only one S3 account at a time. This means that, at the company level, you can either configure Spark with access to your DataGOL S3 account or your S3 account, but not both simultaneously.
+:::
