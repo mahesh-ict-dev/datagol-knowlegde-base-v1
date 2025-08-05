@@ -1,0 +1,47 @@
+---
+sidebar_position : 10
+tags : [AI, AI Agents,]
+slug : data-conversion-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+The DCA enables users to quickly retrieve and analyze data from workbooks using natural language queries. Moreover, the agent also provides tabular results based on SQL queries.
+
+<ImagePopup src="/img/AI/DCA.png" alt="DCA" caption="DCA" />
+
+### **Key features of a DCA**
+
+-   **Natural language querying:** Users can ask questions in plain English (e.g., "What are the top 3 denial categories?").
+-   **SQL query generation:** The agent translates natural language into SQL queries to retrieve data.
+-   **Tabular Output:** Results are presented in a structured table format. 
+-   **Transparency:** Users can view the generated SQL query to understand how the results were obtained. 
+-   **Filtering, sorting, and aggregation:** Supports queries involving filtering, sorting, grouping, and aggregation of data.
+-   **Outlier Detection:** Can identify and display outlier records based on user-defined criteria (e.g., "show me records where the build amount is more than twice the average").   
+-   **Automatic Agent Routing:** Will route to the chart agent, if chart related keywords are detected.
+    
+
+### **Use cases**
+
+-   Quickly finds specific data points.
+-   Analyzies trends and patterns in data.   
+-   Generates reports and summaries.   
+-   Identifies outliers and anomalies.
+    
+
+### **Limitations**
+
+-   Primarily designed for structured data.
+-   Relies on SQL query generation.
+-   Routing of agents based on keywords is not perfect.
+    
+
+### **User interaction**
+
+-   Users enter questions in a text-based chat interface.
+-   Results are displayed in text or a table format based on the query.
+-   Ability to view the generated SQL code.  
+-   Offers flexibility in visualizing data by providing relevant, predefined charts based on the user’s questions to DCA. 
+-   Users have the ability to download the generated results.
+-   Users can create focused subviews derived from the initial result set.   
+-   DCA offers a human-in-the-loop feature, allowing users to directly edit and rerun the query.

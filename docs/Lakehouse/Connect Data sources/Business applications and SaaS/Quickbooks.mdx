@@ -1,0 +1,72 @@
+---
+sidebar_position: 9
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-quickbooks
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Quickbooks as data source
+
+:::info **Prerequisite for adding Quickbooks**
+
+The following connector information is required from the client:
+
+-   Access Token
+    
+-   Client ID
+    
+-   Client Secret
+    
+-   Realm ID
+    
+-   Refresh Token
+    
+-   Token Expiry Date
+    
+-   Start Date
+    
+
+Do the following:
+
+**Set up QuickBooks**
+
+1.  Create an [Intuit Developer account](https://developer.intuit.com/app/developer/qbo/docs/get-started "https://developer.intuit.com/app/developer/qbo/docs/get-started")
+    
+2.  Create a workspace and then create an application by filing the required details in the form.
+    
+3.  Obtain credentials. The easiest way to get these credentials is by using Quickbook's [OAuth 2.0 playground](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground")
+    
+
+:::tip [Note]
+
+-   Access token expires every 60 min/hour and a new access token is automatically fetched by Airbyte using the refresh token. A Refresh token is valid for 101 days but expires every 24 hrs. A new Refresh token is automatically generated using the old refresh token and will be updated. After every 101 days a new refresh token has to be fetched from the [2.0 playground](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0-playground").
+    
+-   Quickbooks connector works only for Quickbooks online account. It doesn’t work for Quickbooks Desktop Account. If you are using a Quickbooks Desktop Account please migrate your account to Quickbooks online. Refer [Migrate to Quickbooks online from desktop](https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US "https://quickbooks.intuit.com/learn-support/en-us/help-article/import-export-data-files/move-quickbooks-desktop-file-quickbooks-online/L6af3Z0Fb_US_en_US")
+:::
+
+To add Quickbook as a data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Quickbooks icon. 
+    
+3.  Specify the following details to add Quickbooks and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+   <ImagePopup src="/img/Datasource/image-20250511-103419.png" alt="sample" caption="sample" /> 
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Auth Type** | Specify the authentication type. |
+    | **Access Token** | Specify the Quickbooks access token. |
+    | **Client ID** | Identifies which app is making the request. Obtain this value from the Keys tab on the app profile via My Apps on the developer site. There are two versions of this key: development and production. |
+    | **Realm ID** | Labeled Company ID. The Make API Calls panel is populated with the realm id and the current access token. |
+    | **Client secret** | Obtain this value from the **Keys** tab on the app profile via **My Apps** on the developer site. There are two versions of this key: development and production. |
+    | **Refresh Token** | Specify a token that can be used when refreshing the access token. |
+    | **Token Expiry Date** | Specify the expiry date of the token. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+    | **Sandbox** | Use the toggle to specify whether to use the sandbox or production environment. |
+
+4.  Click **Submit**. 

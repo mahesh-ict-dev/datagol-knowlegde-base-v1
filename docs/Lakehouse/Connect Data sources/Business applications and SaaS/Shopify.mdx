@@ -1,0 +1,68 @@
+---
+sidebar_position: 11
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-shopify
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+### Adding Shopify as data source
+
+:::info **Prerequisite for adding Shopify**
+
+The following connector information is required from the client:
+
+-   Shopify Store
+    
+-   API password
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to your [Shopify account](https://www.shopify.com/ "https://www.shopify.com/").
+    
+2.  Once logged in, your store name is often part of the URL in your browser's address bar. For example:
+    
+    `https://your-store-name.myshopify.com/admin`
+    
+3.  In the dashboard, navigate to **Settings** > **App and sales channels** > **Develop apps** > **Create an app**.
+    
+4.  Select a name for your new app.
+    
+5.  Select **Configure Admin API scopes**.
+    
+6.  Grant access to the list of scopes. Only select scopes prefixed with `read_`, not `write_` (e.g. `read_locations`,`read_price_rules`, etc ).
+    
+7.  Click **Install app** to give this app access to your data.
+    
+8.  Once installed, go to **API Credentials** to copy the **Admin API Access Token**. You are now ready to set up the source in Airbyte.
+    
+
+Refer:
+-   [Where can I get Shopify API password](https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password "https://www.shopping-cart-migration.com/faq/faq/40-where-can-i-get-shopify-api-key-and-api-password") 
+-   [How to get the Shopify API password](https://youtu.be/-v_FbEvRD98 "https://youtu.be/-v_FbEvRD98")
+:::
+
+To add Shopify as a data source, do the following:   
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Shopify icon. 
+    
+3.  Specify the following details to add Shopify and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-101024.png" alt="Add_Shopify" caption="Add_Shopify" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **Shopify Store** | The name of your Shopify store found in the URL. |
+    | **Authorization Method** | The authorization method to use to retrieve data from Shopify. |
+    | **API Password** | The API Password for your private application in the `Shopify` store. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
+
+4.  Click **Submit**. 

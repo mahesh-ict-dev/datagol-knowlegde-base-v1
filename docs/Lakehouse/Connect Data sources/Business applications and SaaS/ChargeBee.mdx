@@ -1,0 +1,61 @@
+---
+sidebar_position: 2
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-chargebee
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding ChargeBee as data source
+
+:::info **Prequisites for adding Chargebee**
+
+The following connector information is required from the client:
+
+-   API key
+    
+-   Site
+    
+-   Start date
+    
+
+Do the following to
+
+1.  Log on to your [Chargebee account](https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE "https://app.chargebee.com/login?_gl=1*1jmfwgg*_gcl_aw*R0NMLjE3MzY3MTc3NjIuQ2p3S0NBaUE3WTI4QmhBbkVpd0FBZE9KVUxmOWJPYmJITFlxQnp4WFNwVjllby1HWEtQS1JBZC02Ymp6STctOWF0aE9nU0tHbU1xUGN4b0NXVE1RQXZEX0J3RQ..*_gcl_au*MjAxMTI4MDM5Ni4xNzM2NzE3NzQ3*_up*MQ..*_gs*MQ..&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULf9bObbHLYqBzxXSpV9eo-GXKPKRAd-6bjzI7-9athOgSKGmMqPcxoCWTMQAvD_BwE").
+    
+2.  To create and configure the API keys, select **Settings** > **Configure Chargebee** > **API Keys and Webhooks**.
+    
+3.  Click on the **API Keys** tab. Any existing API keys are listed.
+
+    <ImagePopup src="/img/Datasource/image-20250112-214950.png" alt="Chargebee" caption="Chargebee" />
+:::
+
+To add ChargeBee as a data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Chargebee icon. 
+    
+3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-100812.png" alt="Add_Chargebee" caption="Add_Chargebee" /> 
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Key** | ChargeBee API Key. |
+    | **Site** | The site prefix for your ChargeBee instance. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |    
+
+4.  Click **Submit**. 
+
+## Supported sync modes
+
+The Chargebee source connector supports the following Sync modes:
+
+-   Full Refresh |Overwrite
+-   Full Refresh | Append
+-   Incremental | Append
+-   Incremental | Append + Deduped

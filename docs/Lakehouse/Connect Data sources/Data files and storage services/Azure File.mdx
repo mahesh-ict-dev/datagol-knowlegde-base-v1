@@ -1,0 +1,33 @@
+---
+sidebar_position: 2
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-azure-file
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+### Adding Azure File as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Azure File icon. 
+    
+3.  Specify the following details to add Azure File and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-110915.png" alt="Add_SAP_HANA" caption="Add_SAP_HANA" />  
+
+    | Field | Description |
+    |---|---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **File Format** | Specify any of the following file formats: **CSV** **Parquet** **JSON** |
+    | **Path to Azure container** | Path of the Azure Blob where the files exist. For example: `containername@storageaccountname.dfs.core.windows.net/path` |
+    | **Separator** | Specify the separator character to separate the data. For example: “,” |
+    | **Header** | Toggle to indicate if the first row of your CSV contains column headers. |
+    | **Infer Schema** | Toggle to automatically determine the data type of each column in your data. |
+    | **Multiline** | Toggle to format the JSON output across multiple lines. |
+    | **Compression** | Select the file compression mode. |
+    | **Start date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |
+
+4.  Click **Submit**. 
