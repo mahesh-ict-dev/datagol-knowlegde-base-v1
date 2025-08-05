@@ -1,0 +1,8 @@
+{
+  "label": "Widgets",
+  "description": "Explore BI Widgets  in DataGOL",
+  "position": 2,
+  "link": {
+    "type": "generated-index"
+  }
+}

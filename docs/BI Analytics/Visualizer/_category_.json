@@ -1,0 +1,8 @@
+{
+  "label": "Visualizer",
+  "description": "Explore various AI Agents that can be integrated with our system.", 
+  "position": 1,
+  "link": {
+    "type": "generated-index"
+  }
+}
