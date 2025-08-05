@@ -38,7 +38,7 @@ To add Salesforce as a data source, do the following:
 
 3. In the New Data Source page, click the Salesforce icon. 
     
-3.  Specify the following details to add Salesforce and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+3.  Specify the following details to add Salesforce. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     <ImagePopup src="/img/Datasource/image-20250511-085826.png" alt="Add_Salesforce" caption="Add_Salesforce" />
 
     | Field | Description |
@@ -50,3 +50,12 @@ To add Salesforce as a data source, do the following:
     | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. |    
 
 4.  Click **Submit**. 
+
+## Supported sync modes
+
+Salesforce supports the following sync modes:
+
+-   (Recommended) Incremental Sync | Append + Deduped
+-   Full Refresh | Overwrite
+-   Full Refresh | Append
+-   Incremental Sync | Append

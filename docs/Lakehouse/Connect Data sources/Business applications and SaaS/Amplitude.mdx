@@ -42,29 +42,19 @@ To add Amplitude as data source, do the following:
 
 3. In the New Data Source page, click the Amplitude icon. 
     
-3.  Specify the following details to add Amplitude and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+3.  Specify the following details to add Amplitude. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
     <ImagePopup src="/img/Datasource/image-20250511-100205.png" alt="Add_Amplitude" caption="Add_Amplitude" />
     
     Field | Description |
     |---|---|
     | **Connection Name** | Enter a unique name for the connection. |
-    | **API Key** | Amplitude API Key. See the docs for more information on how to generate this key. |
-    | **Secret Key** | Amplitude Secret Key. |
+    | **API Key** | Amplitude [project’s API ke](https://amplitude.com/docs/admin/account-management/manage-orgs-projects#view-and-edit-your-project-information)y. |
+    | **Secret Key** | Amplitude [project's secret key](https://amplitude.com/docs/admin/account-management/manage-orgs-projects#view-and-edit-your-project-information). |
     | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
 
 4.  Click **Submit**. 
 
-## Supported Streams
-
-Amplitude supports the following streams:
-
--   [Active Users Counts](https://www.docs.developers.amplitude.com/analytics/apis/dashboard-rest-api/#get-active-and-new-user-counts)  (Incremental sync)
--   [Annotations](https://www.docs.developers.amplitude.com/analytics/apis/chart-annotations-api/#get-all-chart-annotations)
--   [Average Session Length](https://www.docs.developers.amplitude.com/analytics/apis/dashboard-rest-api/#get-average-session-length)  (Incremental sync)
--   [Cohorts](https://www.docs.developers.amplitude.com/analytics/apis/behavioral-cohorts-api/#get-all-cohorts-response)
--   [Events](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema)  (Incremental sync)
--   [Events List](https://amplitude.com/docs/apis/analytics/dashboard-rest#get-events-list)
 
 ## Supported sync modes
 
@@ -72,3 +62,14 @@ Amplitude supports the following Sync modes:
 
 -   Full Refresh
 -   Incremental
+
+## Supported Streams
+
+Amplitude supports the following streams:
+
+-   Active Users Counts
+-   Annotations
+-   Average Session Length
+-   Cohorts
+-   Events
+-   Events List

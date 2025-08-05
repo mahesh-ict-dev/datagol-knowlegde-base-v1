@@ -1,0 +1,88 @@
+---
+slug: create-link-joins-dynamic tables
+tags: [API, Workbook, Curl]
+sidebar_position : 29
+---
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+If you want to connect to specific records from another workbook in DataGOL, you create a **Link**. A **Link** is a direct relationship created between two different tables or workbooks. This is done by adding a specific column to a workbook and then manually or automatically connecting it to records in another workbook. **Links** are about **connecting records** and viewing related data within an existing workbook. They add a column to your current table.
+
+A **Join** combines data from two or more tables into a single, new workbook based on a specified condition. **Joins** are about **combining entire workbooks** to create a **new, single workbook**. They are a more permanent way to merge datasets for analysis or reporting.
+
+## Create Links
+
+Links are used to visually connect records and see related data directly within a single table. They are useful for establishing a one-to-one or one-to-many relationship.
+
+**1. Create a new Link column**
+    1.  In your parent workbook, create a new column.
+    2.  Select **"Link"** as the column type.
+
+    <ImagePopup src="/img/link-joins/create-link-column.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+
+**2. Configure the Link column**
+
+     <ImagePopup src="/img/link-joins/create-link-column1.png" alt="Links-and-Joins" caption="Links and Joins" />   
+
+    1.   **Select Child Workbook:** Choose the workbook you want to link to.
+    2.   **Specify Join Type:** Select a mapping type, such as one-to-one, one-to-many, or many-to-many.
+    3.   **Choose Auto Join (Optional):**
+            * **Manual:** You can manually link records by clicking the plus (+) button in the link column and selecting the specific record from the child table you want to connect to. This is ideal when there is no clear joining condition or if you need to be very specific about the connections.
+            * **Automatic:** Set a condition for the link to be created automatically. For example, if you set the condition as "Parent Table.ID equals Child Table.ID," the records will link themselves whenever their IDs match.
+    4. Click **Save**. 
+    5. (Optional) From the Lookup box, select specific fields from the linked workbook to add them as Lookup fields in current  workbook.
+
+**3. Select or add Lookups with Links**
+
+        1.  Go to the **Link column** you just created.
+        2.  Click + sign and choose the **specific field** from the child workbook that you want to link. 
+
+            <ImagePopup src="/img/link-joins/create-link-plus-sign.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+            <ImagePopup src="/img/link-joins/lookup-links.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+            The value from the linked record will then appear in this new column.
+
+**4. View the linked recordss**
+
+To view each linked record, you can expand the option in the parent workbook where the link was created.
+
+<ImagePopup src="/img/link-joins/lookup-links1.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+When you create a link, a new column is added to the parent workbook. Within this column, each cell represents a record. Click the expand button for a specific record, which reveals the values of the corresponding linked record(s) from the child workbook.
+
+ <ImagePopup src="/img/link-joins/create-link-plus-sign.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+Alternatively, you can create a lookup column. 
+ <ImagePopup src="/img/link-joins/create-look-up1.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+ This method directly pulls and displays a specific field's value from the linked child record into a new column in your parent workbook. This allows you to see the mapped data without expanding the link for each record individually.
+
+  <ImagePopup src="/img/link-joins/lookup1.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+### Creating Joins
+
+Joins are used to create a completely new workbook that combines data from multiple source workbooks. This results in a merged view of the data.
+
+1. Open the workbook from where you want to add Joins. 
+
+2. From the **Settings** drop-down menu, select the **Link Join Workbooks** options. 
+
+   <ImagePopup src="/img/link-joins/create-joins.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+3.  Configure the Join:
+
+    <ImagePopup src="/img/link-joins/create-joins1.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+        1. In the **Link / Join Workbooks box**, select the Right Workbooks.  The primary workbook you are working in is the "left" workbook, and the one you want to join to is the "right" workbook. This process typically performs a **left outer join**, meaning all records from the left workbook will be included, even if they don't have a matching record in the right workbook.
+        2. Choose which columns from the joined workbooks you want to see in the new, combined workbook. This allows you to select only the relevant data.
+
+        <ImagePopup src="/img/link-joins/create-joins3.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+        3.  Specify the criteria for the join. For example, you might set the condition as "Left Workbook.ProductID equals Right Workbook.ProductID. 
+        
+        Optionally, you can click **Add a link to another workbook** and add more Right workbooks. This method allows you to join multiple tables at once, creating complex combined datasets.
+4.  Give the new workbook a name and click **Create and Publish**. The system will then generate a new workbook containing the joined data.
+

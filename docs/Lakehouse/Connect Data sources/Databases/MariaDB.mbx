@@ -14,7 +14,7 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 3. In the New Data Source page, click the MariaDB icon. 
     
-3.  Specify the following details to add MariaDB and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+3.  Specify the following details to add MariaDB. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
 | Field | Description |
 |:---|:---|

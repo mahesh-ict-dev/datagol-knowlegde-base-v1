@@ -38,14 +38,14 @@ To add ChargeBee as a data source, do the following:
 
 3. In the New Data Source page, click the Chargebee icon. 
     
-3.  Specify the following details to add Chargebee and then click **Submit**. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+3.  Specify the following details to add Chargebee. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
     
     <ImagePopup src="/img/Datasource/image-20250511-100812.png" alt="Add_Chargebee" caption="Add_Chargebee" /> 
 
     | Field | Description |
     |---|---|
     | **Connection Name** | Enter a unique name for the connection. |
-    | **API Key** | ChargeBee API Key. |
+    | **API Key** | Enter the [ChargeBee API Key](https://apidocs.chargebee.com/docs/api?prod_cat_ver=2#api_authentication). |
     | **Site** | The site prefix for your ChargeBee instance. |
     | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |    
 
@@ -59,3 +59,61 @@ The Chargebee source connector supports the following Sync modes:
 -   Full Refresh | Append
 -   Incremental | Append
 -   Incremental | Append + Deduped
+
+## Supported streams
+
+The Chargebee source connector supports the following streams:
+
+-   Addons
+    
+-   Attached Items
+    
+-   Comments
+    
+-   Contacts
+    
+-   Coupons
+    
+-   Credit Notes
+    
+-   Customers
+    
+-   Differential Prices
+    
+-   Events
+    
+-   Gifts
+    
+-   Hosted Pages
+    
+-   Invoices
+    
+-   Items
+    
+-   Item Prices
+    
+-   Item Families
+    
+-   Orders
+    
+-   Payment Sources
+    
+-   Plans
+    
+-   Promotional Credits
+    
+-   Quotes
+    
+-   Quote Line Groups
+    
+-   Site Migration Details
+    
+-   Subscriptions
+    
+-   Subscriptions With Scheduled Changes
+    
+-   Transactions
+    
+-   Unbilled Charges
+    
+-   Virtual Bank Accounts
