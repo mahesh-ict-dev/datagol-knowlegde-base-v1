@@ -6,7 +6,7 @@ slug: alerting
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-Alerting is a core feature in DataGOL that allows you to monitor your systems and get notified when metrics, logs, or other data crosses a predefined threshold. It's a proactive way to manage the health of your environment, so you can respond to issues quickly and prevent them from becoming critical.
+Alerting is a core feature in DataGOL that allows you to monitor your systems and get notified when metrics, logs, or other data cross a predefined threshold. It is a proactive way to manage the health of your environment, so you can respond to issues quickly and prevent them from becoming critical.
 
 Alerts are powered by monitors, which are the rules you create to track data. While you often use dashboards and widgets to visualize your data, the same underlying data and filters from those visualizations are used to build the alert conditions. For example, if you have a widget showing daily revenue, you can create an alert based on that widget that notifies you if the revenue drops below a certain amount.
 
@@ -16,7 +16,7 @@ Alerts are powered by monitors, which are the rules you create to track data. Wh
 Creating an alert lets you define the conditions and notification settings for your monitor or rules to track data.
 
 1.  **Select the widget**. 
-    On your dashboard, **right-click** on the widget you want to create an alert for, select **Set Alerts** and the respective metric for which you want to set an alert. 
+    On your dashboard, **right-click** on the widget you want to create an alert for, select **Set Alerts**, and the respective metric for which you want to set an alert. 
 
     <ImagePopup src="/img/alerts/set-alert.png" alt="Create Alerts Home" caption="Create Alerts" />
 
@@ -27,7 +27,7 @@ Creating an alert lets you define the conditions and notification settings for y
 
 2.  **Define the alert conditions**:
     * **Alert name**: Give your alert a clear, descriptive name.
-    * **Status**: Choose whether to keep the Alert in active or inactive state. 
+    * **Status**: Choose whether to keep the Alert in an active or inactive state. 
     * **Thresholds**: Set the value that will trigger the alert. You can choose from different types of comparisons:
         * **Standard threshold**: Triggers when the value is greater than, less than, or equal to a specific number.
         * **Percentage change**: Triggers if the value changes by a certain percentage compared to a previous period (e.g., a 10% drop from the previous week).
@@ -51,7 +51,7 @@ Creating an alert lets you define the conditions and notification settings for y
 
 ## Checking or viewing alerts
 
-After creating an alert, you need can track its status and review its history.
+After creating an alert, you can track its status and review its history.
 
 ### 1. The alerts home page
 
@@ -67,7 +67,7 @@ After creating an alert, you need can track its status and review its history.
 
 * Within the alerts, you will find the following tabs:
 *   **Alerts**: Displays the list of all alerts that are generated based on the set conditions. 
-* **History**: Displays the records when the the alert condition was met. One execution happens per alert. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
+* **History**: Displays the records when the alert condition was met. One execution happens per alert. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
 * **Notification**: This records every time a notification was sent to a user. One execution can result in multiple notifications if there are multiple recipients.
 
 ### 3. Dashboard and widget notifications
