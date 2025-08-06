@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdg_knowlege_base=self.webpackChunkdg_knowlege_base||[]).push([[1903],{1912:e=>{e.exports=JSON.parse('{"blogBasePath":"/datagol-knowlegde-base-v1/blog","blogTitle":"Blog","authorsListPath":"/datagol-knowlegde-base-v1/blog/authors"}')}}]);
