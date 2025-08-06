@@ -26,7 +26,7 @@ const config = {
 
   // comment these 2 lines before pushing to production
   url: 'https://mahesh-ict-dev.github.io',
-  baseUrl: '/',
+  baseUrl: '/datagol-knowlegde-base-v1/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
