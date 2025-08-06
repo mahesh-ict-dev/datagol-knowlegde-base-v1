@@ -1,0 +1,31 @@
+---
+sidebar_position: 7
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-mssql
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Microsoft SQL Server data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Microsoft SQL Server icon. 
+    
+3.  Specify the following details to add Microsoft SQL Server. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+    <ImagePopup src="/img/Datasource/mssql.png" alt="Add MSSQL" caption="Add MSSQL" />
+
+    | Field | Description |
+    |:---|:---|
+    | **Connection name** | Enter a unique name for the connection. |
+    | **Database** | Specify the name of the existing database that you want to connect. |
+    | **Host name** | Specify the hostname or IP address of the server wherein the database is located. |
+    | **Port name** | Enter the port number used by the database server. |
+    | **Schema** | Specify the schema name for your MS SQL Server connection. If left blank, the default schema will be used. |
+    | **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+    | **Case Sensitive** | Specify whether your MS SQL data source has case-sensitive table names. This option allows for seamless integration with databases that use Camel Case or other naming conventions. |   
+
+5.  Click **Submit**. 

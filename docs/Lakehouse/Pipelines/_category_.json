@@ -1,6 +1,6 @@
 {
   "label": "Pipelines",
-  "position": 4,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "Understand the importannce of Lakehouse and its concepts."

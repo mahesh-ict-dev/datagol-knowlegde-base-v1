@@ -3,35 +3,147 @@ sidebar_position: 2
 slug: datagol-concepts
 ---
 
-### Lakehouse
-Lakehouse is a data warehouse that combines the best features of data lakes and datawarehouses. It is designed to handle both structured and unstructured data, providing a unified platform for data storage, processing, and analytics.
+## Lakehouse
+DataGOL’s [Lakehouse](</docs/Lakehouse/About Lakehouse.mdx>) is the heart of the unified platform. It merges low‑cost, schema‑on‑read storage with warehouse‑grade governance and performance. 
+Key capabilities include:
+-   **Drag‑and‑drop pipelines**
+-   **Automatic ER‑diagram generation**
+-   **Materialized views for sub‑second BI**
+-   **Granular ACLs**
+-   **Proactive schema‑change detection that protects downstream jobs**
+
+Think of it as **data lake freedom with warehouse discipline** but without the typical bolt‑on complexity.
+
+:::info[Why it matters?]
+You get a single, versioned source of truth that scales from raw logs to highly curated marts, ready for AI agents or BI dashboards without repetitive copying.
+:::
+
 See also: 
 -   [About Lakehouse](/docs/Lakehouse/about-lakehouse)
 -   [Lakehouse workflow](/docs/Lakehouse/lakehouse-workflow)
 
-### Data Sources
-From [Data sources](/docs/Lakehouse/%20Data%20sources/About%20data%20sources) you connect and access a wide range of data platforms. This includes databases, data warehouses, data lakes, API’s, and more.
+## Data Sources
+The [Data sources](</docs/Lakehouse/Data sources/About Data sources.mdx>) module lets you integrate almost all data sources into the Lakehouse — MySQL, SQL Server, Postgres, DB2, Mongo, Snowflake, REST APIs, and more. Connection is effortless, enforces least‑privilege credentials, and auto‑discovers schemas the moment you hit **Submit**. 
+:::tip[Forward‑looking tip]
+Every new product is treated as a potential product. Proactively metadata and lineage is established for all new data sources simplifying future compliance audits and improving data traceability.
+:::
 
-### Pipelines
-[Pipelines](/docs/Lakehouse/Pipelines/about-pipelines) contains a series of processes and steps that are used to extract, transform, and load(ETL) data from its source (data source) to a destination such as a data warehouse, data lake, or another system for analysis and storage.
+## Pipelines
+[Pipelines](/docs/Lakehouse/Pipelines/about-pipelines) are the production lines of DataGOL.
 
-### Data Warehouse
-A data warehouse is a storage system that gathers and organizes large volumes of data from various sources for analytical purposes, such as reporting and data analysis.
+-   Standard: One‑to‑one replication into the warehouse.
 
-### Workspaces
-[Workspaces](/docs/Workspaces/about-workspace) are virtual environments or areas within a system or software platform where users can collaborate, organize, and manage their work-related tasks, projects,or data.
+-   Custom: Craft a single SQL query to join data from multiple sources and generate a refined and curated table.
+
+-   Dedup — Remove duplicates after data is loaded ensuring pristine analytics.
+
+ Use Spark for complex tasks, but switch to Athena to reduce costs when both your source and destination are in S3.
+
+:::caution[Reality check]
+Relying on manual coding for ETL scripts is inefficient and consumes significant resources. By utilizing a visual orchestrator, you can automate the majority of repetitive tasks, allowing your team to allocate their expertise toward addressing complex data scenarios and ensuring overall data quality.
+:::
+
+## Data Warehouse
+
+The Data Warehouse component within the Lakehouse architecture ensures data persistence through formats such as Iceberg or Parquet. This approach provides several key advantages:
+
+-   Time-travel queries allow you to access historical versions of your data.
+
+-   ACID guarantees (Atomicity, Consistency, Isolation, Durability) ensure reliable and valid transactions.
+
+-   Incremental refreshes efficiently update data without creating redundant copies, preventing data bloat.
+
+This design enables analysts to execute "as-of" reports concurrently with engineers loading new data batches, all without the risk of locks or system downtime.
+
+:::info[Pro-move]
+Pin critical snapshots before major schema refactoring. This creates a reliable checkpoint, allowing you to quickly roll back to a previous state in minutes if business rules or requirements unexpectedly change.
+:::
+
+## Workspaces
+[Workspaces](/docs/Workspaces/about-workspace) are secure, collaborative environments designed for teams and external partners. You can assign specific roles, such as Viewer, Editor, or Creator, to maintain a balance between flexibility and control.
+Each workspace is a self-contained unit with its own workbooks, dashboards, and permissions. This design ensures that projects and their related assets are securely partitioned, keeping work neatly organized by team or business unit.
 
 ### Workbooks
-[Workbooks](/docs/Workbooks/about-workbook) are digital documents or files used to organize and analyze data, often
-containing multiple sheets or tabs with data, formulas, charts, and other elements.
+[Workbooks](/docs/Workbooks/about-workbook) serve as a flexible canvas for data modeling and analysis, available in two primary forms:
+
+-   **Static workbooks** are a live, read-only mirror of a source table ensuring data is always fresh. 
+-   **Dynamic workbooks** are editable and supports features such as data uploads, formulas, and AI-generated columns. 
+
+Both types include built-in, column-level lineage and dependency graphs, which helps to quickly identify and trace errors.
 
 ### Dashboard
-A [dashboard](</docs/BI and Visualizer/Dashboard/about-dashboard>) is a visual representation of key performance indicators (KPIs), metrics,
-and data points that provide a summary view of an organization or system's
-performance, typically displayed in a graphical format for quick insights.
+**Dashboards** take widgets from multiple workbooks and stitch them together into a single, real-time story. Dashboards can be embedded, filtered, and can instantly switch between underlying workbooks, making them perfect for **customer-facing portals** or **executive decision-making rooms**.
 
-### AI Agent
-[AI Agents](</docs/AI Agents/about-AI-agents>) are virtual assistants enhanced by Artificial Intelligence to boost productivity and efficiency in work settings.
+:::info[Guidance for Effective Dashboards]
+To ensure clarity, each dashboard should be laser-focused on a single audience and a maximum of five key performance indicators (KPIs). Anything more can lead to information overload and dilute the core message.
+:::
 
-### Playground
-[Playground](</docs/Playgrounds/about-playground>) is an environment where users can experiment, test and explore the data.
+## AI Agent
+
+[DataGOL’s agents](</docs/AI Agents/About AI agents.mdx>) add chat‑native superpowers:
+
+-   **Data Conversation agent**  for Natural‑language SQL.
+
+-   **BI (Chart) agent**  for instant visualizations.
+
+-   **Python agent**  for running code for advanced stats or ML right in context.
+
+-   **RAG agent** for asking questions across PDFs, PPTs, images.
+
+-   **SQL agent** to generate, optimize, debug multi‑source queries.
+
+-   Data Cleaning agent for automating standardization and de‑duplication.
+    
+DataGOL agents are designed for smart, flexible data management. They intelligently route tasks, provide full visibility into the underlying code, and can connect securely to your on-premises data. You also have complete control to cancel long-running jobs at any time.
+
+:::tip[Look ahead]
+Combine RAG + Python agents to build lightweight analytical copilots for business teams without writing a single microservice.
+:::
+
+## Playground
+
+[Playground](</docs/Playground/About Playground.mdx>) is a space for testing ideas and running quick SQL queries. You can connect to any data source, pull specific data you need, and use an AI SQL co-pilot to help when you hit a roadblock. When you are done, you can publish your results directly into a workbook for production use.
+
+:::tip[Best Practice]
+To make sure your exploratory work is useful, follow a **query → publish → iterate** process. This method helps you turn messy data exploration into governed, usable assets with just a click.
+:::
+
+## Data lineage  and  Impact analysis
+
+Data lineage provides a complete record of a dataset's journey, from its original source to the final dashboard.
+
+:::tip[Forward‑looking tip]
+Treat lineage graphs as living documentation. Lineage graphs are a valuable tool for maintaining accurate documentation. By embedding screenshots of these graphs in pull requests (PRs) and architecture reviews, you can ensure everyone is aligned with the current data flow. This practice also helps accelerate the onboarding process for new team members by providing a clear and up-to-date visual reference.
+:::
+
+This traceability allows you to effectively troubleshoot data quality issues, simplify audit processes, and confidently implement schema changes without causing unintended consequences. 
+
+
+|View|What it shows|Typical use|
+|------|------------|-----------|
+|**Data Source**|All pipelines and workbooks that consume a given source.|Assess blast‑radius before decommissioning a source.|
+|**Pipeline**|Source tables → in‑flight transforms → destination tables.|Validate transformations; prove no PII leaks.|
+|**Workbook**|Upstream sources and materialized views feeding a workbook.|Trace odd numbers back to origin, column‑by‑column.|
+
+### Impact analysis – your early warning system
+Every time you delete a column, edit a pipeline, or retire a data source, DataGOL runs a real‑time dependency scan, categorises immediate vs. downstream impacts, and surfaces a list + graph view. Warnings are non‑blocking, you can proceed or cancel the action.
+
+
+:::info[Putting it all together]
+
+-   **Lakehouse stores**
+-   **Pipelines move**
+-   **Workspaces govern**
+-   **Workbooks model**
+-   **Dashboards tell the story**
+-   **AI Agents speed insight**
+-   **Playground fuels discovery**
+
+_Master these building blocks and you can deliver analytics products, not just reports, at startup speed but enterprise scale._
+:::
+
+
+
+
+
+
