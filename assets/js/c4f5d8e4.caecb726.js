@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdg_knowlege_base=self.webpackChunkdg_knowlege_base||[]).push([[2634],{8396:(e,l,n)=>{n.r(l),n.d(l,{default:()=>t});var s=n(6540),u=n(6347);function t(){let e=(0,u.W6)();return(0,s.useEffect)(()=>{e.replace("/docs/intro")},[e]),null}}}]);
