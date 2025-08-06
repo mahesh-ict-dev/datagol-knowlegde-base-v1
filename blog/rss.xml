@@ -4,10 +4,253 @@
         <title>DataGOL Documentation Blog</title>
         <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog</link>
         <description>DataGOL Documentation Blog</description>
-        <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 06 Aug 2025 18:36:28 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Python agent1]]></title>
+            <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1</link>
+            <guid>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1</guid>
+            <pubDate>Wed, 06 Aug 2025 18:36:28 GMT</pubDate>
+            <description><![CDATA[The Python agent is designed to handle more complex data analysis tasks that go beyond basic SQL queries and visualizations. The Python agent is utilized for complex data manipulation tasks that exceed the capabilities of standard SQL queries. Such tasks include generating machine learning code for rapid testing, performing dimensionality reduction using PCA, and conducting anomaly detection with statistical models. Here's a breakdown of its purpose and capabilities:]]></description>
+            <content:encoded><![CDATA[<p>The Python agent is designed to handle more complex data analysis tasks that go beyond basic SQL queries and visualizations. The Python agent is utilized for complex data manipulation tasks that exceed the capabilities of standard SQL queries. Such tasks include generating machine learning code for rapid testing, performing dimensionality reduction using PCA, and conducting anomaly detection with statistical models. Here's a breakdown of its purpose and capabilities:</p>
+<img src="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/AI/python-agent.png" alt="Python Agent" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="purpose"><strong>Purpose</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1#purpose" class="hash-link" aria-label="Direct link to purpose" title="Direct link to purpose">​</a></h3>
+<ul>
+<li>
+<p>To perform sophisticated data analysis tasks using Python code generation and execution</p>
+<ul>
+<li>Advanced statistical analysis.</li>
+<li>Other data science operations.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-features"><strong>Key Features</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1#key-features" class="hash-link" aria-label="Direct link to key-features" title="Direct link to key-features">​</a></h3>
+<ul>
+<li><strong>Python-based processing:</strong> Leverages the power of Python and its data science libraries (e.g., Pandas, Scikit-learn) to perform complex computations.</li>
+<li><strong>Forecasting and prediction:</strong> Enables users to generate forecasts and predictions based on historical data. For example, predicting future trends in billed amounts.</li>
+<li><strong>Model application:</strong> Allows the application of various data science models to analyze data and derive insights.</li>
+<li><strong>Complements DCA and BI agents:</strong> Extends the capabilities of the DCA and BI agents by providing more advanced analytical tools.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases"><strong>Use cases</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1#use-cases" class="hash-link" aria-label="Direct link to use-cases" title="Direct link to use-cases">​</a></h3>
+<ul>
+<li>Performing in-depth statistical analysis.</li>
+<li>Automating complex data analysis workflows.</li>
+</ul>]]></content:encoded>
+            <category>AI</category>
+            <category>AI Agents</category>
+        </item>
+        <item>
+            <title><![CDATA[Retrieval Augmented Generation (RAG) agent]]></title>
+            <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent</link>
+            <guid>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent</guid>
+            <pubDate>Wed, 06 Aug 2025 18:36:28 GMT</pubDate>
+            <description><![CDATA[RAG agents enhance Large Language Models (LLMs) by providing them with access to an external knowledge base, enabling accurate and efficient information retrieval from unstructured data.]]></description>
+            <content:encoded><![CDATA[<p>RAG agents enhance Large Language Models (LLMs) by providing them with access to an external knowledge base, enabling accurate and efficient information retrieval from unstructured data.</p>
+<img src="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/AI/image-20250512-175234.png" alt="RAG-agent1" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-features">Key features<a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#key-features" class="hash-link" aria-label="Direct link to Key features" title="Direct link to Key features">​</a></h3>
+<ul>
+<li>
+<p><strong>Knowledge base integration:</strong></p>
+<ul>
+<li>RAG agents leverage uploaded unstructured data (documents) within a workspace as a knowledge base.</li>
+<li>Supported file formats: PDF, DOC, TXT, PPT.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accurate information retrieval:</strong></p>
+<ul>
+<li>By grounding LLMs with a specific knowledge base, RAG agents provide more accurate and contextually relevant responses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient information retrieval:</strong></p>
+<ul>
+<li>Streamlined process for retrieving information directly from uploaded documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data extraction and formatting:</strong></p>
+<ul>
+<li>Ability to extract specific details from documents in JSON or tabular formats.</li>
+<li>Capability to compare information across multiple documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Document and Chunk referencing:</strong></p>
+<ul>
+<li>Provides references to the specific documents and chunks of information used to generate responses.</li>
+<li><strong>Current limitations</strong>: Preview is only available for PDF documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom RAG Agents:</strong></p>
+<ul>
+<li>Specialized agents for specific use cases, such as invoice analysis (Invoice Analyzer Agent) and clinical report analysis (Clinical Report Analyzer Agent).</li>
+<li>These custom agents are designed to handle variations in document structures and extract relevant information.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="specific-rag-agent-capabilities"><strong>Specific RAG agent capabilities</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#specific-rag-agent-capabilities" class="hash-link" aria-label="Direct link to specific-rag-agent-capabilities" title="Direct link to specific-rag-agent-capabilities">​</a></h3>
+<ul>
+<li>
+<p><strong>Simple Question Answering:</strong></p>
+<ul>
+<li>Provides answers to direct questions based on document content.</li>
+</ul>
+</li>
+<li>
+<p><strong>Detailed Information Extraction:</strong></p>
+<ul>
+<li>Extracts specific details from documents, such as metrics, names, or values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Comparative Analysis:</strong></p>
+<ul>
+<li>Compares information across multiple documents and provides a summary or conclusion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Formatting:</strong></p>
+<ul>
+<li>Formats extracted data into JSON or tables.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custom-rag-agents"><strong>Custom RAG agents</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#custom-rag-agents" class="hash-link" aria-label="Direct link to custom-rag-agents" title="Direct link to custom-rag-agents">​</a></h3>
+<ul>
+<li>
+<p><strong>Invoice analyzer agent:</strong></p>
+<ul>
+<li>Extracts data from various invoice formats, including tracking IDs and other relevant details.</li>
+<li>Customized to generate outputs in data in JSON format and Table formats</li>
+</ul>
+</li>
+<li>
+<p><strong>Clinical report analyzer agent:</strong></p>
+<ul>
+<li>Extracts data from clinical reports, including test results and patient information.</li>
+<li>Customized to generate response in JSON and table formats.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workflow"><strong>Workflow</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#workflow" class="hash-link" aria-label="Direct link to workflow" title="Direct link to workflow">​</a></h3>
+<ol>
+<li>
+<p>Upload unstructured documents to the workspace.</p>
+</li>
+<li>
+<p>Select the RAG agent within the platform.</p>
+</li>
+<li>
+<p>Input your questions or requests related to the uploaded documents. The processing is as follows:</p>
+<ul>
+<li>
+<p>The system processes the documents (chunking, indexing). Processing time depends on the number and size of documents.</p>
+</li>
+<li>
+<p>While the agent is processing, a message is displayed indicating the processing status.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The RAG agent generates a response based on the information retrieved from the documents. The following references are made:</p>
+<ul>
+<li>
+<p>The system provides references to the documents and specific chunks used to generate the response.</p>
+</li>
+<li>
+<p>The documents tab shows the exact chunk that the answer came from.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The extracted information can be presented in JSON or tabular formats as requested.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="limitations-and-future-enhancements"><strong>Limitations and Future Enhancements:</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#limitations-and-future-enhancements" class="hash-link" aria-label="Direct link to limitations-and-future-enhancements" title="Direct link to limitations-and-future-enhancements">​</a></h3>
+<ul>
+<li>
+<p><strong>Document Preview:</strong></p>
+<ul>
+<li>Currently, document preview is only available for PDF files. Support for other file types is planned.</li>
+</ul>
+</li>
+<li>
+<p><strong>Direct chunk highlighting:</strong></p>
+<ul>
+<li>Future enhancements will include highlighting the specific chunk within the document when references are clicked.</li>
+</ul>
+</li>
+<li>
+<p><strong>Knowledge source integration:</strong></p>
+<ul>
+<li>Future development will explore the ability to connect to external knowledge bases and repositories.</li>
+</ul>
+</li>
+<li>
+<p><strong>Audio and video file support:</strong></p>
+<ul>
+<li>MP3 and MP4 support are on the roadmap.</li>
+</ul>
+</li>
+<li>
+<p><strong>API/SDK availability:</strong></p>
+<ul>
+<li>APIs and SDKs for RAG agents are planned for future release.</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom agent building tools:</strong></p>
+<ul>
+<li>Tools to allow users to build and customize their own agents are planned.</li>
+</ul>
+</li>
+<li>
+<p><strong>Orchestrator copilot:</strong></p>
+<ul>
+<li>The ability to have the orchestrator copilot query both structured and unstructured data is a planned feature.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="faq"><strong>FAQ</strong><a href="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent#faq" class="hash-link" aria-label="Direct link to faq" title="Direct link to faq">​</a></h3>
+<ul>
+<li>
+<p><strong>Can I upload documents in languages other than English?</strong></p>
+<ul>
+<li>Yes, the RAG agent supports multiple languages, leveraging the capabilities of the underlying LLM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Does the default Data Conversion (DC) agent work with documents?</strong></p>
+<ul>
+<li>No, the DC agent does not work with unstructured documents. You must select the RAG agent for document processing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Is there a limit on the number of documents I can upload?</strong></p>
+<ul>
+<li>There is no hard limit, but processing time will increase with the number of documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Can I switch between different agents?</strong></p>
+<ul>
+<li>Yes, you can switch between RAG agents and other available agents at any time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Can I Delete a document?</strong></p>
+<ul>
+<li>Yes, documents can be deleted by selecting "View All" and then selecting the document to be deleted.</li>
+</ul>
+</li>
+</ul>]]></content:encoded>
+            <category>AI</category>
+            <category>AI Agents</category>
+        </item>
         <item>
             <title><![CDATA[Welcome]]></title>
             <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/welcome</link>
