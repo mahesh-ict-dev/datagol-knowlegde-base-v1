@@ -1,0 +1,243 @@
+---
+title: Embedded Analytics
+sidebar_position: 13
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+# External Embedding using an iframe for Dashboard Pages
+
+## Introduction
+
+This document outlines the external embedding process for Business Intelligence (Dashboard) pages. It describes the setup, requirements, server-to-server authentication mechanism, and the data flow between the browser, DataGOL Server, and external auth server. This solution ensures secure and seamless embedding of Dashboard pages into an external application.
+
+---
+
+## Data Setup on Workspace
+
+Before we start external embedding for dashboard pages, a few prerequisites need to be met before enabling third-party sharing using iframe.
+
+### Data Setup
+
+1) Leverage the [Lakehouse](docs/Lakehouse/About%20Lakehouse.mdx) and [Workbook](/docs/Workbooks/about-workbook) module on the DataGOL platform to organize your data models from different data sources into a [Workspace](/docs/Workspaces/about-workspace).
+
+2) Once the data is imported into the Workspace, the data can be seen within the **Workbooks** module in the workspace.
+
+3) Make sure the column types are set appropriately. This is very important as it could impact the BI capabilities of your data.
+
+> ✅ We recommend making these workbooks delete protected.
+
+Here is a sample view of the workbook:
+[delete protected workbook](/docs/Workbooks/Enabling%20delete%20protection.mdx)
+
+---
+
+## Dashboard Setup
+
+Now we can set up the dashboard pages powered by the data present in the workbooks.
+
+Here is a sample dashboard:
+
+   <ImagePopup src="/img/board-setup.png" alt="switch-workbooks-in-a-dashboard" caption="dashboard" />
+
+We have the data as well as the dashboard setup already completed at this time. Let’s start with the dashboard embedding process.
+
+---
+
+## Requirements
+
+To implement the external embedding mechanism, the following are required:
+
+### Dashboard Embedding Setup
+
+- Enable third-party sharing with proper configuration.
+- **Filter Column**: A common column across all the workbooks being used on the dashboard. This is used to filter data in the iframe (e.g., to show tenant-specific data).
+  - Only one filter column is allowed at the moment.
+  - All workbooks used must include this column.
+
+- **Domain**: The external website domain that will embed and render the dashboard. Server-to-server authentication will be done against this domain.
+
+> Note: The selected filter column should be available across **all workbooks** used in the dashboard.
+
+- `appId` and `pageId` can be found using the **Copy Link** button on the dashboard page.
+
+ 1.  On the Dashboard, from the upper right corner, click settings and then choose **Third Party Sharing**. The **Third Party Sharing** box is displayed.
+
+        <ImagePopup src="/img/settings.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+
+    2.  In the **Third Party Sharing** box, do the following:
+
+        <ImagePopup src="/img/visualizer/image-20250504-133423.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+
+
+---
+
+## Iframe Link Setup
+
+The external website will launch the embedded dashboard using an iframe.
+
+### URL Format
+
+https://app.datagol.ai/thirdParty/app/[appId]/page/[pageId]?userId=[userId]&authToken=[authToken]&filterColumnName=[filterColumValue]
+
+
+### Dynamic Parameters
+
+- `appId`: Application identifier provided by DataGOL.
+- `pageId`: Dashboard page identifier provided by DataGOL (as you may have multiple pages).
+- `userId`: Optional user identifier.
+- `authToken`: Token validated via server-to-server Auth, to ensure the user is allowed access.
+- `filterColumnName`: Column used to filter data across all workbooks.
+
+### Sample iframe URL
+````
+https://datagol.ai/thirdParty/app/app_g253321/page/page_p232243?userId=user_L454322&authToken=dg35Aqwfwlt890&department=HR
+````
+
+
+> ⚠️ **Best Practice:** Do **not** use your system’s internal user auth token. Use a separate token for DataGOL, since it is passed in the URL.
+
+---
+
+## External Auth Server Requirements
+
+To ensure secure access, an external auth API must be implemented.
+
+### API Endpoint Example
+````
+https://domain.com/oauth/authorize
+````
+
+### Query Parameters
+
+- `userId`: Unique identifier for the user (optional).
+- `filterColumnName`: Used to filter data in workbooks.
+
+### Request Headers
+
+- `X-Auth-Token`: The token used for authentication (provided during iframe invocation).
+
+### Sample API Call
+
+```bash
+curl -v -XGET -H "X-Auth-Token: dg35Aqwfwlt890" \
+'https://domain.com/oauth/authorize?userId=user_L454322&department=HR'
+```
+
+---
+### **Best Practice**: Do not reuse internal authentication tokens. Always use dedicated tokens for DataGOL integration.
+---
+
+### Authentication Process
+Overview
+Server-to-server authentication ensures secure access to embedded dashboards by validating user credentials against your external auth server.
+
+### Embedding Flow:
+
+  <ImagePopup src="/img/embed-flow1.png" alt="embedding" caption="embedding" />
+
+## Authentication Process
+
+### Overview
+
+Server-to-server authentication ensures **secure access** to embedded dashboards by validating user credentials against your **external auth server**.
+
+---
+
+###  Flow
+
+####  Browser Layer
+
+1. The user accesses a page with the embedded dashboard iframe.
+2. The browser sends a request to the **DataGOL Server** to fetch the dashboard.
+
+####  DataGOL Server Layer
+
+3. The DataGOL server retrieves the **embedding configuration**.
+4. It checks whether **server-to-server authentication** is required.
+5. If required, DataGOL sends an authentication request to the **external auth server**, including:
+   - `userId`
+   - `authToken`
+   - `filterColumnName`
+6. If validation succeeds, DataGOL returns the **dashboard details** to the browser.
+
+#### External Auth Server Layer
+
+7. The external auth server validates the request:
+   - Returns **`200 OK`** if authorized
+   - Returns **`401` or `500`** if unauthorized or failed
+
+####  Render
+
+8. The browser receives the authenticated dashboard data.
+9. It renders the **iframe**, displaying the embedded dashboard.
+
+---
+
+## Responsibilities
+
+###  Client Responsibilities
+
+Clients must provide:
+
+- **Auth API endpoint**:
+Sample Path:
+````
+https://domain.com/oauth/authorize
+````
+
+- **Required query parameters**:
+- `userId`
+- `filterColumnName`
+
+- **Required header**:
+- `X-Auth-Token`
+
+- **HTTP method**: `GET`
+
+- **Expected response codes**:
+- `200 OK` – Authorized
+- `401 Unauthorized` – Rejected
+
+- Ensure that the **DataGOL Server can access** the auth API domain.
+
+- Implement:
+- **Secure token management**
+- **Proper filter value handling**
+
+---
+
+## Error Handling
+
+###  Authentication Failure
+
+If the external auth server **rejects the request**, the embedded dashboard **will not load**.
+
+Make sure:
+
+- Credentials are valid
+- Token and filter values are correctly passed
+- The auth server is reachable from DataGOL
+
+###  iframe Construction Failure
+
+If **required parameters** (`authToken`, `userId`, `filterColumnName`) are missing, the iframe **won’t be constructed**.
+
+>  Debug logs on the DataGOL Server will indicate missing or malformed fields.
+
+---
+
+##  Security Considerations
+
+- Use **HTTPS** for all iframe and API communication.
+- Set an **expiry** on `authToken` values to reduce misuse risk.
+- External auth servers should implement **robust validation** and rate limiting.
+
+---
+
+## 📞 Contact and Support
+
+For help with integration, contact our support team:
+
+📧 **support@datagol.ai**
+
