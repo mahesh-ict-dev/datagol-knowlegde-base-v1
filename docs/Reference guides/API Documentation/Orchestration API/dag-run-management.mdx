@@ -1,0 +1,456 @@
+# DAG Run Management API
+
+The DAG Run Management API provides endpoints for managing DAG execution instances, monitoring run status, and controlling workflow execution.
+
+## Get DAG Runs
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/runs`
+
+Retrieves all runs for a specific DAG.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `includeJobs` | Boolean | No | Include job details in response (default: false) |
+| `status` | String | No | Filter by run status |
+| `limit` | Integer | No | Maximum number of runs to return (default: 50) |
+| `offset` | Integer | No | Number of runs to skip (default: 0) |
+
+### Response
+
+```json
+{
+  "data": [
+    {
+      "id": 301,
+      "dagId": 1,
+      "status": "COMPLETED",
+      "startTime": "2024-01-15T10:00:00Z",
+      "endTime": "2024-01-15T10:15:00Z",
+      "type": "MANUAL",
+      "createdBy": {
+        "id": 456,
+        "email": "user@example.com"
+      },
+      "parameters": {
+        "sourceTable": "raw_data",
+        "targetTable": "processed_data"
+      },
+      "jobMappings": [
+        {
+          "id": 401,
+          "dagRunId": 301,
+          "dagNodeId": 101,
+          "executionOrder": 1,
+          "jobId": 501,
+          "parameters": {}
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 25,
+    "limit": 50,
+    "offset": 0
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/runs?includeJobs=true&limit=10" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Get DAG Run by ID
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/runs/{runId}`
+
+Retrieves a specific DAG run.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `runId` | Long | Yes | The run ID |
+
+### Response
+
+```json
+{
+  "id": 301,
+  "dagId": 1,
+  "status": "COMPLETED",
+  "startTime": "2024-01-15T10:00:00Z",
+  "endTime": "2024-01-15T10:15:00Z",
+  "type": "MANUAL",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "parameters": {
+    "sourceTable": "raw_data",
+    "targetTable": "processed_data"
+  },
+  "jobMappings": [
+    {
+      "id": 401,
+      "dagRunId": 301,
+      "dagNodeId": 101,
+      "executionOrder": 1,
+      "jobId": 501,
+      "job": {
+        "id": 501,
+        "name": "Data Extraction Job",
+        "status": "SUCCEEDED",
+        "startTime": "2024-01-15T10:00:00Z",
+        "endTime": "2024-01-15T10:05:00Z"
+      },
+      "parameters": {}
+    }
+  ],
+  "dagSnapshotId": 1
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/301" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Create DAG Run
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/runs`
+
+Initiates a new DAG run.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Request Body (optional)
+
+```json
+{
+  "parameters": {
+    "sourceTable": "raw_data_v2",
+    "targetTable": "processed_data_v2",
+    "customParam": "value"
+  }
+}
+```
+
+### Response
+
+```json
+{
+  "id": 302,
+  "dagId": 1,
+  "status": "PENDING",
+  "startTime": "2024-01-15T11:00:00Z",
+  "type": "MANUAL",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "parameters": {
+    "sourceTable": "raw_data_v2",
+    "targetTable": "processed_data_v2",
+    "customParam": "value"
+  },
+  "jobMappings": [
+    {
+      "id": 401,
+      "dagRunId": 302,
+      "dagNodeId": 101,
+      "executionOrder": 1,
+      "parameters": {}
+    }
+  ]
+}
+```
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/runs" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "parameters": {
+      "sourceTable": "raw_data_v2",
+      "targetTable": "processed_data_v2",
+      "customParam": "value"
+    }
+  }'
+```
+
+## Update DAG Run
+
+**Endpoint:** `PUT /orchestration/api/v1/dags/{dagId}/runs/{runId}`
+
+Updates a DAG run (typically used for status updates).
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `runId` | Long | Yes | The run ID |
+
+### Request Body
+
+```json
+{
+  "status": "CANCELLED",
+  "endTime": "2024-01-15T11:05:00Z"
+}
+```
+
+### Example Request
+
+```bash
+curl -X PUT "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/302" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "CANCELLED",
+    "endTime": "2024-01-15T11:05:00Z"
+  }'
+```
+
+## Cancel DAG Run
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/runs/{runId}/cancel`
+
+Cancels a running DAG execution.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `runId` | Long | Yes | The run ID |
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/302/cancel" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Retry DAG Run
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/runs/{runId}/retry`
+
+Retries a failed DAG run from the point of failure.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `runId` | Long | Yes | The run ID |
+
+### Request Body (optional)
+
+```json
+{
+  "parameters": {
+    "sourceTable": "raw_data_v3",
+    "targetTable": "processed_data_v3"
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/302/retry" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "parameters": {
+      "sourceTable": "raw_data_v3",
+      "targetTable": "processed_data_v3"
+    }
+  }'
+```
+
+## Get DAG Run Logs
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/runs/{runId}/logs`
+
+Retrieves execution logs for a DAG run.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `runId` | Long | Yes | The run ID |
+
+### Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `nodeId` | Long | No | Filter logs by specific node |
+| `level` | String | No | Filter by log level (INFO, WARN, ERROR) |
+| `limit` | Integer | No | Maximum number of log entries (default: 100) |
+
+### Response
+
+```json
+{
+  "data": [
+    {
+      "timestamp": "2024-01-15T10:00:00Z",
+      "level": "INFO",
+      "nodeId": 101,
+      "nodeName": "Data Extraction",
+      "message": "Starting data extraction from source",
+      "details": {
+        "sourceTable": "raw_data",
+        "recordCount": 1000
+      }
+    },
+    {
+      "timestamp": "2024-01-15T10:05:00Z",
+      "level": "INFO",
+      "nodeId": 101,
+      "nodeName": "Data Extraction",
+      "message": "Data extraction completed successfully",
+      "details": {
+        "extractedRecords": 1000,
+        "duration": 300
+      }
+    }
+  ]
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/301/logs?level=ERROR" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Run Status Monitoring
+
+### Run Status Values
+
+| Status | Description |
+|--------|-------------|
+| `PENDING` | Run is queued for execution |
+| `RUNNING` | Run is currently executing |
+| `COMPLETED` | Run completed successfully |
+| `FAILED` | Run failed during execution |
+| `CANCELLED` | Run was cancelled by user |
+| `PAUSED` | Run is paused (manual intervention required) |
+
+### Status Transition Rules
+
+- `PENDING` → `RUNNING` (automatic)
+- `RUNNING` → `COMPLETED` (automatic, all nodes succeed)
+- `RUNNING` → `FAILED` (automatic, any node fails)
+- `RUNNING` → `CANCELLED` (manual)
+- `RUNNING` → `PAUSED` (manual or system)
+- `PAUSED` → `RUNNING` (manual resume)
+- `FAILED` → `PENDING` (retry)
+
+## Run Parameters
+
+### Parameter Inheritance
+
+DAG runs inherit parameters from the DAG's default parameters and can be overridden:
+
+```json
+{
+  "parameters": {
+    "sourceTable": "raw_data_v2",        // Override default
+    "targetTable": "processed_data_v2",  // Override default
+    "customParam": "value",              // New parameter
+    "batchSize": 1000                    // New parameter
+  }
+}
+```
+
+### Parameter Validation
+
+- Parameters must be valid JSON
+- Maximum parameter size: 50KB
+- Reserved parameter names: `dagId`, `runId`, `status`, `startTime`, `endTime`
+
+## Run Execution Flow
+
+### Execution Order
+
+1. **Validation**: Validate DAG structure and parameters
+2. **Snapshot**: Create DAG snapshot for version control
+3. **Job Mapping**: Create job mappings for each node
+4. **Execution**: Execute nodes in topological order
+5. **Monitoring**: Track execution status and logs
+6. **Completion**: Update final status and metrics
+
+### Parallel Execution
+
+Nodes without dependencies can execute in parallel:
+
+```json
+{
+  "jobMappings": [
+    {
+      "dagNodeId": 101,
+      "executionOrder": 1,
+      "status": "RUNNING"
+    },
+    {
+      "dagNodeId": 102,
+      "executionOrder": 1,  // Same order = parallel execution
+      "status": "RUNNING"
+    },
+    {
+      "dagNodeId": 103,
+      "executionOrder": 2,  // Higher order = sequential execution
+      "status": "PENDING"
+    }
+  ]
+}
+```
+
+## Error Scenarios
+
+### Common Error Responses
+
+| Status Code | Error Type | Description |
+|-------------|------------|-------------|
+| 400 | Bad Request | Invalid parameters or DAG configuration |
+| 404 | Not Found | DAG or run not found |
+| 409 | Conflict | DAG already running or invalid state transition |
+| 422 | Unprocessable Entity | DAG validation failed |
+
+### Example Error Response
+
+```json
+{
+  "error": {
+    "code": "DAG_ALREADY_RUNNING",
+    "message": "A new run cannot be created because this DAG is already running.",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+```

@@ -1,0 +1,329 @@
+# DAG Edge Management API
+
+The DAG Edge Management API provides endpoints for managing connections (edges) between nodes in a DAG workflow.
+
+## Create Edge
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/edges`
+
+Creates a connection between two nodes in the DAG.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Request Body
+
+```json
+{
+  "fromNodeId": 101,
+  "toNodeId": 102,
+  "metadata": {
+    "condition": "success",
+    "description": "Data flow from extraction to transformation"
+  }
+}
+```
+
+### Response
+
+```json
+{
+  "id": 201,
+  "dagId": 1,
+  "fromNodeId": 101,
+  "toNodeId": 102,
+  "metadata": {
+    "condition": "success",
+    "description": "Data flow from extraction to transformation"
+  },
+  "createdAt": "2024-01-15T10:40:00Z"
+}
+```
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 102,
+    "metadata": {
+      "condition": "success",
+      "description": "Data flow from extraction to transformation"
+    }
+  }'
+```
+
+## Update Edge
+
+**Endpoint:** `PUT /orchestration/api/v1/dags/{dagId}/edges/{edgeId}`
+
+Updates an existing edge in the DAG.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `edgeId` | Long | Yes | The edge ID |
+
+### Request Body
+
+```json
+{
+  "fromNodeId": 101,
+  "toNodeId": 103,
+  "metadata": {
+    "condition": "success",
+    "description": "Updated data flow path"
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X PUT "https://api.saasxl.com/orchestration/api/v1/dags/1/edges/201" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 103,
+    "metadata": {
+      "condition": "success",
+      "description": "Updated data flow path"
+    }
+  }'
+```
+
+## Delete Edge
+
+**Endpoint:** `DELETE /orchestration/api/v1/dags/{dagId}/edges/{edgeId}`
+
+Removes an edge from the DAG.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `edgeId` | Long | Yes | The edge ID |
+
+### Example Request
+
+```bash
+curl -X DELETE "https://api.saasxl.com/orchestration/api/v1/dags/1/edges/201" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Edge Metadata Guidelines
+
+### Common Metadata Fields
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `condition` | String | Execution condition | `"success"`, `"failure"`, `"always"` |
+| `description` | String | Human-readable description | `"Data flow from extraction to transformation"` |
+| `priority` | Number | Edge priority for parallel execution | `1`, `2`, `3` |
+| `timeout` | Number | Edge timeout in seconds | `300` |
+| `retryPolicy` | Object | Retry configuration | `{"maxRetries": 3, "delay": 60}` |
+| `dataMapping` | Object | Data transformation rules | `{"sourceField": "targetField"}` |
+| `validation` | Object | Data validation rules | `{"required": ["field1", "field2"]}` |
+
+### Example Edge Creation with Full Metadata
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 102,
+    "metadata": {
+      "condition": "success",
+      "description": "Transfer extracted data to transformation pipeline",
+      "priority": 1,
+      "timeout": 300,
+      "retryPolicy": {
+        "maxRetries": 3,
+        "delay": 60,
+        "backoffMultiplier": 2
+      },
+      "dataMapping": {
+        "sourceTable": "extracted_data",
+        "targetTable": "transformed_data"
+      },
+      "validation": {
+        "required": ["user_id", "timestamp"],
+        "dataTypes": {
+          "user_id": "integer",
+          "timestamp": "datetime"
+        }
+      }
+    }
+  }'
+```
+
+## Edge Types and Conditions
+
+### Execution Conditions
+
+| Condition | Description | Use Case |
+|-----------|-------------|----------|
+| `success` | Execute only if source node succeeds | Normal data flow |
+| `failure` | Execute only if source node fails | Error handling |
+| `always` | Execute regardless of source node status | Cleanup operations |
+| `conditional` | Execute based on custom logic | Business rules |
+
+### Conditional Edge Example
+
+```json
+{
+  "fromNodeId": 101,
+  "toNodeId": 102,
+  "metadata": {
+    "condition": "conditional",
+    "expression": "data.recordCount > 1000",
+    "description": "Only process if more than 1000 records"
+  }
+}
+```
+
+## Edge Validation Rules
+
+### Node Validation
+
+- Both `fromNodeId` and `toNodeId` must exist in the DAG
+- Nodes must belong to the same DAG
+- Cannot create self-loops (fromNodeId ≠ toNodeId)
+
+### Acyclic Graph Validation
+
+- Edges must not create circular dependencies
+- System validates DAG structure before allowing edge creation
+- Maximum path length: 50 nodes
+
+### Metadata Validation
+
+- Metadata must be a valid JSON object
+- Maximum metadata size: 5KB
+- Reserved keys: `id`, `dagId`, `fromNodeId`, `toNodeId`, `createdAt`
+
+## Parallel Execution
+
+### Edge Priority
+
+When multiple edges lead to the same target node, priority determines execution order:
+
+```json
+{
+  "fromNodeId": 101,
+  "toNodeId": 103,
+  "metadata": {
+    "priority": 1,
+    "description": "High priority path"
+  }
+}
+```
+
+### Parallel Edge Example
+
+```bash
+# Create parallel paths
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 102,
+    "metadata": {
+      "priority": 1,
+      "description": "Primary data path"
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 103,
+    "metadata": {
+      "priority": 2,
+      "description": "Secondary data path"
+    }
+  }'
+```
+
+## Error Handling Edges
+
+### Failure Handling Example
+
+```bash
+# Create failure handling edge
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 101,
+    "toNodeId": 104,
+    "metadata": {
+      "condition": "failure",
+      "description": "Error handling pipeline",
+      "retryPolicy": {
+        "maxRetries": 2,
+        "delay": 120
+      }
+    }
+  }'
+```
+
+## Edge Monitoring
+
+### Edge Execution Status
+
+Edges can be monitored during DAG execution:
+
+```json
+{
+  "id": 201,
+  "dagId": 1,
+  "fromNodeId": 101,
+  "toNodeId": 102,
+  "status": "PENDING",
+  "executionTime": "2024-01-15T10:45:00Z",
+  "duration": 30,
+  "metadata": {
+    "condition": "success",
+    "description": "Data flow from extraction to transformation"
+  }
+}
+```
+
+## Error Scenarios
+
+### Common Error Responses
+
+| Status Code | Error Type | Description |
+|-------------|------------|-------------|
+| 400 | Bad Request | Invalid node IDs or metadata |
+| 404 | Not Found | DAG or nodes not found |
+| 409 | Conflict | Circular dependency detected |
+| 422 | Unprocessable Entity | Invalid edge configuration |
+
+### Example Error Response
+
+```json
+{
+  "error": {
+    "code": "CIRCULAR_DEPENDENCY",
+    "message": "Edge creation would create a circular dependency",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+```
