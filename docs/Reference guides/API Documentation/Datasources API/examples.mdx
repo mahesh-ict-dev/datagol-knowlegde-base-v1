@@ -94,7 +94,7 @@ def execute_query(self, sql_query, data_provider="SPARK", lite=False):
     }
     params = {'lite': lite} if lite else None
     
-    return self._make_request('POST', '/internal/queryResults', data=data, params=params)
+    return self._make_request('POST', '/queries/execute', data=data, params=params)
 
 # Usage example
 query = "SELECT * FROM users LIMIT 10"
@@ -271,7 +271,7 @@ const QueryExecutor = ({ baseUrl, jwtToken }) => {
   const executeQuery = async (e) => {
     e.preventDefault();
     try {
-      const result = await makeRequest('POST', '/internal/queryResults', {
+      const result = await makeRequest('POST', '/queries/execute', {
         sqlQuery: query,
         dataProvider: 'SPARK'
       });
@@ -386,7 +386,7 @@ class DataGOLDatasourcesClient {
 
   // Query operations
   async executeQuery(sqlQuery, dataProvider = 'SPARK', lite = false) {
-    return this.makeRequest('POST', '/internal/queryResults', {
+    return this.makeRequest('POST', '/queries/execute', {
       sqlQuery,
       dataProvider
     }, { lite });
@@ -508,7 +508,7 @@ class DataGOLDatasourcesAPI {
 
   // Query operations
   async executeQuery(sqlQuery, dataProvider = 'SPARK') {
-    return this.makeRequest('POST', '/internal/queryResults', {
+    return this.makeRequest('POST', '/queries/execute', {
       sqlQuery,
       dataProvider
     });
