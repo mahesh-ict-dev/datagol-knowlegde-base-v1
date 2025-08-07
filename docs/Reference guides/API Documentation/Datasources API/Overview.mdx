@@ -1,0 +1,360 @@
+---
+title: Datasources API Documentation
+description: Complete API documentation for Datasources v1
+---
+
+# Datasources API Documentation
+
+## Overview
+
+The Datasources API provides comprehensive functionality for managing data sources, tables, columns, queries, annotations, and related metadata. All APIs are currently available in version 1.
+
+## Base URL Structure
+
+```bash
+dataSources/api/v1/     # Version 1 APIs
+```
+
+## Authentication
+
+All Datasources APIs require JWT authentication via the `s_jwt` security requirement.
+
+## API Categories
+
+### 1. Core DataSource Management
+### 2. Table & Column Management  
+### 3. Schema Management
+### 4. Query Management
+### 5. File Management
+### 6. Annotations & Classifications
+### 7. Glossary Management
+### 8. Links & Relationships
+### 9. Materialized Views
+### 10. Internal Operations
+
+---
+
+## 1. Core DataSource Management
+
+### DataSource CRUD Operations
+**Base Path**: `dataSources/api/v1/dataSources`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `POST` | `/` | Create a new datasource | `ROLE_CREATE_LAKEHOUSE`, `ROLE_CREATE_DATASOURCE` |
+| `GET` | `/` | Get all datasources | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{dataSourceId}` | Get datasource by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{dataSourceId}` | Update datasource | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `DELETE` | `/{dataSourceId}` | Delete datasource | `ROLE_DELETE_LAKEHOUSE`, `ROLE_DELETE_DATASOURCE` |
+
+#### Query Parameters
+- `includeTables` (boolean, default: false) - Include table information
+- `includeSchema` (boolean, default: false) - Include schema information
+
+### DataSource Relationships
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/getDataSourcesRelationships` | Get datasource relationships | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Schema Synchronization
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/{dataSourceId}/syncSchema` | Sync datasource schema | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{dataSourceId}/getSyncSchemaStatus` | Get sync schema status | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 2. Table & Column Management
+
+### Table Operations
+**Base Path**: `dataSources/api/v1/dataSources/{dataSourceId}/tables`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all tables for datasource | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{tableId}` | Get table by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Add table to datasource | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `PUT` | `/{tableId}` | Update table | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `DELETE` | `/{tableId}` | Delete table | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `DELETE` | `/` | Delete multiple tables | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+
+### Column Operations
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `PUT` | `/{tableId}/columns/{columnId}` | Update column | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+
+### Table Descriptions
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `PUT` | `/{tableId}/descriptions` | Update table descriptions | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+
+### Row Operations
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/{tableId}/rows` | Get table rows | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+#### Query Parameters
+- `limit` (Long, optional) - Limit number of rows returned
+
+### Partition Column Operations
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/{tableId}/column/{columnId}/partitionCol` | Set partition column | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{tableId}/column/{columnId}/partitionCol` | Remove partition column | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+#### Query Parameters
+- `partitionSize` (int, default: 50000) - Partition size for column
+
+### Unique Column Operations
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `POST` | `/{tableId}/uniqueColumn` | Mark column as unique | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 3. Schema Management
+
+### Schema Operations
+**Base Path**: `dataSources/api/v1/dataSources/{dataSourceId}/schemas`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get latest schema | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Refresh schema | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{schemaId}` | Get schema by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 4. Query Management
+
+### Query CRUD Operations
+**Base Path**: `dataSources/api/v1/queries`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all queries | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create query | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{queryId}` | Get query by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{queryId}` | Update query | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{queryId}` | Delete query | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Query Execution
+**Base Path**: `dataSources/api/v1/internal`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `POST` | `/queryResults` | Execute query and get results | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+#### Query Parameters
+- `lite` (boolean, default: false) - Return lite results
+
+### Functions
+**Base Path**: `dataSources/api/v1/formulas`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get supported functions | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 5. File Management
+
+### File Operations
+**Base Path**: `dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/dataSourceFiles`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `POST` | `/` | Upload files to table | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `DELETE` | `/` | Delete files from table | `ROLE_EDIT_LAKEHOUSE`, `ROLE_EDIT_DATASOURCE` |
+| `GET` | `/{fileId}` | Download file | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 6. Annotations & Classifications
+
+### Annotations
+**Base Path**: `dataSources/api/v1/annotation`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all annotations | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create annotation | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Element Annotations
+**Base Path**: `dataSources/api/v1/elementAnnotations`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all element annotations | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create element annotations | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{elementId}` | Get annotations by element ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/table/{tableId}` | Get annotations by table ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{elementId}` | Update element annotations | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{elementAnnotationId}` | Delete annotation | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Classifications
+**Base Path**: `dataSources/api/v1/classifications`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all classifications | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create classification | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{classificationId}` | Get classification by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{classificationId}` | Update classification | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{classificationId}` | Delete classification | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 7. Glossary Management
+
+### Glossary CRUD Operations
+**Base Path**: `dataSources/api/v1/glossaries`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all glossaries | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create glossary | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{glossaryId}` | Get glossary by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{glossaryId}` | Update glossary | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{glossaryId}` | Delete glossary | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Glossary Terms
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/{glossaryId}/terms` | Get all terms for glossary | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/{glossaryId}/terms` | Create term in glossary | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/terms` | Create standalone term | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{glossaryId}/{glossaryTermId}` | Get term by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{glossaryId}/{glossaryTermId}` | Update term | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{glossaryId}/{glossaryTermId}` | Delete term | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 8. Links & Relationships
+
+### Column Links
+**Base Path**: `dataSources/api/v1/links`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all column links | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create column links | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{linkId}` | Update column link | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{linkId}` | Delete column link | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Table Links
+**Base Path**: `dataSources/api/v1/tableLinks`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all table links | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 9. Materialized Views
+
+### View CRUD Operations
+**Base Path**: `dataSources/api/v1/internal/materializedViews`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/` | Get all materialized views | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `POST` | `/` | Create materialized view | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `GET` | `/{viewId}` | Get view by ID | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `PUT` | `/{viewId}` | Update view | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+| `DELETE` | `/{viewId}` | Delete view | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+---
+
+## 10. Internal Operations
+
+### Configuration
+**Base Path**: `dataSources/api/v1/config`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/dataSources` | Get datasource configurations | `ROLE_VIEW_LAKEHOUSE`, `ROLE_VIEW_DATASOURCE` |
+
+### Migration Operations
+**Base Path**: `dataSources/api/v1/internal`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `POST` | `/migrateExistingRestDataSource` | Migrate existing REST datasources | `ROLE_CREATE_LAKEHOUSE`, `ROLE_CREATE_DATASOURCE` |
+| `POST` | `/migrateExistingFolderDataSource` | Migrate existing folder datasources | `ROLE_CREATE_LAKEHOUSE`, `ROLE_CREATE_DATASOURCE` |
+
+### Internal DataSource Access
+**Base Path**: `dataSources/api/v1/dataSources/internal/{token}`
+
+| Method | Endpoint | Description | Required Roles |
+|--------|----------|-------------|----------------|
+| `GET` | `/{dataSourceId}/tables` | Get tables by datasource (internal) | Internal token required |
+
+---
+
+## Common Features
+
+### Authentication
+All APIs require JWT authentication with the `s_jwt` security requirement.
+
+### Role-Based Access Control
+- `ROLE_CREATE_LAKEHOUSE` / `ROLE_CREATE_DATASOURCE` - Create operations
+- `ROLE_VIEW_LAKEHOUSE` / `ROLE_VIEW_DATASOURCE` - Read operations  
+- `ROLE_EDIT_LAKEHOUSE` / `ROLE_EDIT_DATASOURCE` - Update operations
+- `ROLE_DELETE_LAKEHOUSE` / `ROLE_DELETE_DATASOURCE` - Delete operations
+
+### Error Handling
+- Standard HTTP status codes
+- Consistent error response format
+- Detailed error messages for debugging
+
+### Request/Response Format
+- JSON request/response bodies
+- Consistent DTO structures
+- Proper validation annotations
+
+### File Upload
+- Multipart file upload support
+- Various file format support (CSV, Excel, etc.)
+- File validation and processing
+
+### Pagination
+- Support for paginated responses
+- Page number and size parameters
+- Consistent pagination structure
+
+---
+
+## Data Types
+
+### DataSource Types
+- `SQL` - SQL databases (PostgreSQL, MySQL, etc.)
+- `S3` - Amazon S3 storage
+- `AZURE` - Azure Blob Storage
+- `CSV` - CSV files
+- `PARQUET` - Parquet files
+- `JSON` - JSON files
+
+### Storage Types
+- `S3` - Amazon S3
+- `AZURE` - Azure Blob Storage
+
+### Request Status
+- `INITIATED` - Request started
+- `IN_PROGRESS` - Request in progress
+- `COMPLETED` - Request completed
+- `FAILED` - Request failed
+
+---
+
+## Version Information
+
+### Current Version: v1
+- All Datasources APIs are currently in version 1
+- APIs follow consistent naming and structure patterns
+
+### Future Versions
+- Version 2 APIs may be introduced for enhanced functionality
+- Backward compatibility will be maintained where possible
+- Migration guides will be provided for version upgrades
+
