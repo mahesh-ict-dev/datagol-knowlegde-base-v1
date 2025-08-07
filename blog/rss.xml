@@ -4,7 +4,7 @@
         <title>DataGOL Documentation Blog</title>
         <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog</link>
         <description>DataGOL Documentation Blog</description>
-        <lastBuildDate>Thu, 07 Aug 2025 09:56:42 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 07 Aug 2025 11:43:01 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[Creating workbook with document upload]]></title>
             <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/creating-workbook-with-document-upload</link>
             <guid>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/creating-workbook-with-document-upload</guid>
-            <pubDate>Thu, 07 Aug 2025 09:56:42 GMT</pubDate>
+            <pubDate>Thu, 07 Aug 2025 11:43:01 GMT</pubDate>
             <description><![CDATA[For document uploads, both CSV and Excel files are supported. However, for enhanced functionality and integration capabilities, it is recommended to upload these file types as workbooks. Also, note that the preview feature is currently available only for images and PDF documents.]]></description>
             <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>For document uploads, both CSV and Excel files are supported. However, for enhanced functionality and integration capabilities, it is recommended to upload these file types as workbooks. Also, note that the preview feature is currently available only for images and PDF documents.</p></div></div>
 <ol>
@@ -37,7 +37,7 @@ The uploaded files/folders are listed in the <strong>Documents</strong> tab. Onc
             <title><![CDATA[Python agent1]]></title>
             <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1</link>
             <guid>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/python-agent-1</guid>
-            <pubDate>Thu, 07 Aug 2025 09:56:42 GMT</pubDate>
+            <pubDate>Thu, 07 Aug 2025 11:43:01 GMT</pubDate>
             <description><![CDATA[The Python agent is designed to handle more complex data analysis tasks that go beyond basic SQL queries and visualizations. The Python agent is utilized for complex data manipulation tasks that exceed the capabilities of standard SQL queries. Such tasks include generating machine learning code for rapid testing, performing dimensionality reduction using PCA, and conducting anomaly detection with statistical models. Here's a breakdown of its purpose and capabilities:]]></description>
             <content:encoded><![CDATA[<p>The Python agent is designed to handle more complex data analysis tasks that go beyond basic SQL queries and visualizations. The Python agent is utilized for complex data manipulation tasks that exceed the capabilities of standard SQL queries. Such tasks include generating machine learning code for rapid testing, performing dimensionality reduction using PCA, and conducting anomaly detection with statistical models. Here's a breakdown of its purpose and capabilities:</p>
 <img src="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/AI/python-agent.png" alt="Python Agent" style="cursor:pointer">
@@ -70,7 +70,7 @@ The uploaded files/folders are listed in the <strong>Documents</strong> tab. Onc
             <title><![CDATA[Retrieval Augmented Generation (RAG) agent]]></title>
             <link>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent</link>
             <guid>https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/blog/retrieval-augmented-generation-agent-RAG-agent</guid>
-            <pubDate>Thu, 07 Aug 2025 09:56:42 GMT</pubDate>
+            <pubDate>Thu, 07 Aug 2025 11:43:01 GMT</pubDate>
             <description><![CDATA[RAG agents enhance Large Language Models (LLMs) by providing them with access to an external knowledge base, enabling accurate and efficient information retrieval from unstructured data.]]></description>
             <content:encoded><![CDATA[<p>RAG agents enhance Large Language Models (LLMs) by providing them with access to an external knowledge base, enabling accurate and efficient information retrieval from unstructured data.</p>
 <img src="https://mahesh-ict-dev.github.io/datagol-knowlegde-base-v1/img/AI/image-20250512-175234.png" alt="RAG-agent1" style="cursor:pointer">
