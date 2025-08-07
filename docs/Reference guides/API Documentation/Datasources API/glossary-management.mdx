@@ -1,0 +1,237 @@
+# Glossary Management API
+
+The Glossary Management API provides operations for managing glossaries and glossary terms.
+
+## Glossary CRUD Operations
+
+### Get All Glossaries
+
+**GET** `/dataSources/api/v1/glossaries`
+
+Retrieves all glossaries.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<GlossaryDTO>`.
+
+### Create Glossary
+
+**POST** `/dataSources/api/v1/glossaries`
+
+Creates a new glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "category": "string"
+}
+```
+
+### Response
+
+Returns a `GlossaryDTO` object.
+
+### Get Glossary by ID
+
+**GET** `/dataSources/api/v1/glossaries/{glossaryId}`
+
+Retrieves a specific glossary by ID.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+
+### Response
+
+Returns a `GlossaryDTO` object.
+
+### Update Glossary
+
+**PUT** `/dataSources/api/v1/glossaries/{glossaryId}`
+
+Updates an existing glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary to update
+
+### Request Body
+
+Same as Create Glossary
+
+### Response
+
+Returns a `GlossaryDTO` object.
+
+### Delete Glossary
+
+**DELETE** `/dataSources/api/v1/glossaries/{glossaryId}`
+
+Deletes a glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary to delete
+
+### Response
+
+`204 No Content`
+
+## Glossary Terms
+
+### Get All Terms for Glossary
+
+**GET** `/dataSources/api/v1/glossaries/{glossaryId}/terms`
+
+Retrieves all terms for a specific glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+
+### Response
+
+Returns a `List<GlossaryTermDTO>`.
+
+### Create Term in Glossary
+
+**POST** `/dataSources/api/v1/glossaries/{glossaryId}/terms`
+
+Creates a new term in a specific glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "definition": "string",
+  "synonyms": ["string"],
+  "relatedTerms": ["string"]
+}
+```
+
+### Response
+
+Returns a `GlossaryTermDTO` object.
+
+### Create Standalone Term
+
+**POST** `/dataSources/api/v1/glossaries/terms`
+
+Creates a standalone term not associated with a specific glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "definition": "string",
+  "synonyms": ["string"],
+  "relatedTerms": ["string"],
+  "glossaryId": "string"
+}
+```
+
+### Response
+
+Returns a `GlossaryTermDTO` object.
+
+### Get Term by ID
+
+**GET** `/dataSources/api/v1/glossaries/{glossaryId}/{glossaryTermId}`
+
+Retrieves a specific term by ID within a glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+- `glossaryTermId` (string) - The ID of the term
+
+### Response
+
+Returns a `GlossaryTermDTO` object.
+
+### Update Term
+
+**PUT** `/dataSources/api/v1/glossaries/{glossaryId}/{glossaryTermId}`
+
+Updates an existing term.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+- `glossaryTermId` (string) - The ID of the term to update
+
+### Request Body
+
+Same as Create Term
+
+### Response
+
+Returns a `GlossaryTermDTO` object.
+
+### Delete Term
+
+**DELETE** `/dataSources/api/v1/glossaries/{glossaryId}/{glossaryTermId}`
+
+Deletes a term from a glossary.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `glossaryId` (string) - The ID of the glossary
+- `glossaryTermId` (string) - The ID of the term to delete
+
+### Response
+
+`204 No Content`

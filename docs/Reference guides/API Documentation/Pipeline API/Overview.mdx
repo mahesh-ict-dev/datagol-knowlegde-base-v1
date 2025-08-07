@@ -1,0 +1,28 @@
+# Pipeline API Documentation
+
+## Overview
+
+The Pipeline API provides comprehensive functionality for managing data pipelines, including creation, execution, monitoring, and maintenance of data processing workflows. The API is organized into two main versions:
+
+- **Pipeline v1**: Legacy APIs with basic pipeline functionality
+- **Pipeline v2**: Enhanced APIs with advanced features and improved data structures
+
+## Base URL Structure
+
+```bash
+/dataPipeline/api/v1/     # Version 1 APIs
+/dataPipeline/api/v2/     # Version 2 APIs
+```
+
+## Authentication
+
+All Pipeline APIs require JWT authentication via the `s_jwt` security requirement. Users must have appropriate permissions to access pipeline resources.
+
+## Quick Navigation
+
+- [Pipeline Management API](./pipeline-management)
+- [Pipeline Jobs API](./pipeline-jobs)
+- [Pipeline History API](./pipeline-history)
+- [Data Models](./data-models)
+- [Error Handling](./error-handling)
+- [Examples](./examples)
