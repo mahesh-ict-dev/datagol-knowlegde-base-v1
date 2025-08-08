@@ -1,0 +1,116 @@
+.localeDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.localeDropdownButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: var(--ifm-navbar-link-color);
+}
+
+.localeDropdownButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.localeDropdownLabel {
+  font-weight: 500;
+}
+
+.localeDropdownArrow {
+  transition: transform 0.2s ease;
+}
+
+.localeDropdownArrow.rotated {
+  transform: rotate(180deg);
+}
+
+.localeDropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 150px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  margin-top: 4px;
+}
+
+.localeDropdownMenu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.localeDropdownItem {
+  display: block;
+  padding: 10px 16px;
+  color: var(--ifm-navbar-link-color);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.localeDropdownItem:last-child {
+  border-bottom: none;
+}
+
+.localeDropdownItem:hover {
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+}
+
+.localeDropdownItem.dropdown__link--active {
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 600;
+}
+
+/* Mobile styles */
+@media (max-width: 996px) {
+  .localeDropdown {
+    width: 100%;
+  }
+  
+  .localeDropdownButton {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .localeDropdownMenu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 0;
+    margin-top: 0;
+  }
+  
+  .localeDropdownMenu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  
+  .localeDropdownItem {
+    border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  }
+}

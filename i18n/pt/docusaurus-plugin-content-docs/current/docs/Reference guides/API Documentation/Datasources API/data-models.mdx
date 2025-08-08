@@ -1,0 +1,356 @@
+---
+title: Data Models
+description: Data models and schemas for Datasources API
+---
+
+# Data Models
+
+This page describes the data models and schemas used in the Datasources API.
+
+## DataSource Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "string",
+  "properties": "object",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)",
+  "status": "string",
+  "tables": "array (optional)",
+  "schemas": "array (optional)"
+}
+```
+
+### DataSource Types
+
+- `SQL` - SQL databases (PostgreSQL, MySQL, etc.)
+- `S3` - Amazon S3 storage
+- `AZURE` - Azure Blob Storage
+- `CSV` - CSV files
+- `PARQUET` - Parquet files
+- `JSON` - JSON files
+
+### Properties Examples
+
+#### SQL DataSource
+```json
+{
+  "host": "localhost",
+  "port": 5432,
+  "database": "mydb",
+  "username": "user",
+  "password": "password",
+  "schema": "public"
+}
+```
+
+#### S3 DataSource
+```json
+{
+  "bucket": "my-bucket",
+  "region": "us-east-1",
+  "accessKey": "AKIA...",
+  "secretKey": "...",
+  "prefix": "data/"
+}
+```
+
+## Table Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "dataSourceId": "string",
+  "columns": "array",
+  "rowCount": "number",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)",
+  "description": "string (optional)",
+  "partitionColumns": "array (optional)",
+  "uniqueColumns": "array (optional)"
+}
+```
+
+## Column Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "dataType": "string",
+  "nullable": "boolean",
+  "defaultValue": "string (optional)",
+  "description": "string (optional)",
+  "isPartition": "boolean",
+  "isUnique": "boolean"
+}
+```
+
+### Data Types
+
+- `STRING`
+- `INTEGER`
+- `LONG`
+- `DOUBLE`
+- `BOOLEAN`
+- `DATE`
+- `TIMESTAMP`
+- `BINARY`
+- `ARRAY`
+- `MAP`
+- `STRUCT`
+
+## Query Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "sqlQuery": "string",
+  "dataProvider": "string",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)",
+  "createdBy": "string",
+  "description": "string (optional)"
+}
+```
+
+### Data Providers
+
+- `SPARK` - Apache Spark
+- `TRINO` - Trino (formerly PrestoSQL)
+
+## Query Result Model
+
+```json
+{
+  "data": "array",
+  "columns": "array",
+  "rowCount": "number",
+  "executionTime": "number (milliseconds)",
+  "status": "string",
+  "error": "string (optional)"
+}
+```
+
+## Schema Model
+
+```json
+{
+  "id": "string",
+  "dataSourceId": "string",
+  "version": "number",
+  "tables": "array",
+  "createdAt": "string (ISO 8601)",
+  "status": "string"
+}
+```
+
+## Annotation Model
+
+```json
+{
+  "id": "string",
+  "elementId": "string",
+  "elementType": "string",
+  "annotationType": "string",
+  "content": "string",
+  "createdAt": "string (ISO 8601)",
+  "createdBy": "string",
+  "updatedAt": "string (ISO 8601)"
+}
+```
+
+### Element Types
+
+- `DATASOURCE`
+- `TABLE`
+- `COLUMN`
+
+### Annotation Types
+
+- `DESCRIPTION`
+- `BUSINESS_RULE`
+- `DATA_QUALITY`
+- `CUSTOM`
+
+## Classification Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "description": "string",
+  "category": "string",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)"
+}
+```
+
+## Glossary Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "description": "string",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)",
+  "terms": "array (optional)"
+}
+```
+
+## Glossary Term Model
+
+```json
+{
+  "id": "string",
+  "glossaryId": "string",
+  "name": "string",
+  "definition": "string",
+  "synonyms": "array (optional)",
+  "relatedTerms": "array (optional)",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)"
+}
+```
+
+## Link Model
+
+```json
+{
+  "id": "string",
+  "sourceColumnId": "string",
+  "targetColumnId": "string",
+  "linkType": "string",
+  "description": "string (optional)",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)"
+}
+```
+
+### Link Types
+
+- `FOREIGN_KEY`
+- `BUSINESS_KEY`
+- `CUSTOM`
+
+## Materialized View Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "sqlQuery": "string",
+  "refreshSchedule": "string (cron expression)",
+  "lastRefresh": "string (ISO 8601)",
+  "status": "string",
+  "createdAt": "string (ISO 8601)",
+  "updatedAt": "string (ISO 8601)"
+}
+```
+
+## File Model
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "size": "number",
+  "contentType": "string",
+  "uploadedAt": "string (ISO 8601)",
+  "uploadedBy": "string",
+  "tableId": "string",
+  "dataSourceId": "string"
+}
+```
+
+## Error Response Model
+
+```json
+{
+  "error": "string",
+  "message": "string",
+  "code": "string (optional)",
+  "details": "object (optional)",
+  "timestamp": "string (ISO 8601)"
+}
+```
+
+## Pagination Model
+
+```json
+{
+  "content": "array",
+  "pageable": {
+    "pageNumber": "number",
+    "pageSize": "number",
+    "sort": "object"
+  },
+  "totalElements": "number",
+  "totalPages": "number",
+  "last": "boolean",
+  "first": "boolean",
+  "numberOfElements": "number"
+}
+```
+
+## Status Values
+
+### Request Status
+- `INITIATED` - Request started
+- `IN_PROGRESS` - Request in progress
+- `COMPLETED` - Request completed
+- `FAILED` - Request failed
+
+### DataSource Status
+- `ACTIVE` - DataSource is active and accessible
+- `INACTIVE` - DataSource is inactive
+- `ERROR` - DataSource has errors
+- `SYNCING` - Schema synchronization in progress
+
+### Schema Status
+- `VALID` - Schema is valid
+- `INVALID` - Schema has validation errors
+- `SYNCING` - Schema synchronization in progress
+
+## Common Fields
+
+### Timestamps
+All timestamp fields follow ISO 8601 format: `YYYY-MM-DDTHH:mm:ss.sssZ`
+
+### IDs
+All ID fields are strings and are generated by the system.
+
+### Optional Fields
+Fields marked as optional may be `null` or omitted from the response.
+
+### Arrays
+Array fields may be empty (`[]`) when no items exist.
+
+## Validation Rules
+
+### DataSource Name
+- Required field
+- Maximum 255 characters
+- Must be unique within the workspace
+- Alphanumeric characters, spaces, hyphens, and underscores only
+
+### SQL Query
+- Required field for queries
+- Maximum 10,000 characters
+- Must be valid SQL syntax for the target data provider
+
+### File Upload
+- Maximum file size: 100MB
+- Supported formats: CSV, JSON, Parquet, Excel
+- File name must be unique within the table
+
+### Pagination
+- Default page size: 20
+- Maximum page size: 100
+- Page numbers start from 0
+

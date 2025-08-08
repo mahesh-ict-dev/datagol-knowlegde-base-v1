@@ -1,0 +1,666 @@
+---
+title: Datasources API Examples
+description: Code examples for Datasources API in Python, React, and JavaScript
+---
+
+# Datasources API Examples
+
+This page provides practical code examples for using the Datasources API in different programming languages and frameworks.
+
+## Python Examples
+
+### Basic Setup
+
+```python
+import requests
+import json
+
+class DataGOLDatasourcesAPI:
+    def __init__(self, base_url, jwt_token):
+        self.base_url = base_url.rstrip('/')
+        self.headers = {
+            'Authorization': f'Bearer {jwt_token}',
+            'Content-Type': 'application/json'
+        }
+    
+    def _make_request(self, method, endpoint, data=None, params=None):
+        url = f"{self.base_url}/dataSources/api/v1{endpoint}"
+        response = requests.request(
+            method=method,
+            url=url,
+            headers=self.headers,
+            json=data,
+            params=params
+        )
+        response.raise_for_status()
+        return response.json()
+```
+
+### Creating a DataSource
+
+```python
+def create_datasource(self, name, datasource_type, properties):
+    """Create a new datasource"""
+    data = {
+        "name": name,
+        "type": datasource_type,
+        "properties": properties
+    }
+    
+    return self._make_request('POST', '/dataSources', data=data)
+
+# Usage example
+api = DataGOLDatasourcesAPI('https://your-datagol-instance.com', 'your-jwt-token')
+
+# Create PostgreSQL datasource
+postgres_properties = {
+    "host": "localhost",
+    "port": 5432,
+    "database": "mydb",
+    "username": "user",
+    "password": "password"
+}
+
+datasource = api.create_datasource("My PostgreSQL DB", "SQL", postgres_properties)
+print(f"Created datasource with ID: {datasource['id']}")
+```
+
+### Getting Tables with Data
+
+```python
+def get_datasource_tables(self, datasource_id, include_tables=True, include_schema=False):
+    """Get all tables for a datasource"""
+    params = {
+        'includeTables': include_tables,
+        'includeSchema': include_schema
+    }
+    
+    return self._make_request('GET', f'/dataSources/{datasource_id}', params=params)
+
+# Usage example
+tables = api.get_datasource_tables(123, include_tables=True)
+for table in tables.get('tables', []):
+    print(f"Table: {table['name']}, Columns: {len(table.get('columns', []))}")
+```
+
+### Executing Queries
+
+```python
+def execute_query(self, sql_query, data_provider="SPARK", lite=False):
+    """Execute a SQL query and get results"""
+    data = {
+        "sqlQuery": sql_query,
+        "dataProvider": data_provider
+    }
+    params = {'lite': lite} if lite else None
+    
+    return self._make_request('POST', '/queries/execute', data=data, params=params)
+
+# Usage example
+query = "SELECT * FROM users LIMIT 10"
+results = api.execute_query(query, lite=True)
+print(f"Query returned {len(results.get('data', []))} rows")
+```
+
+### File Upload
+
+```python
+def upload_files(self, datasource_id, table_id, file_paths):
+    """Upload files to a table"""
+    url = f"{self.base_url}/dataSources/api/v1/dataSources/{datasource_id}/tables/{table_id}/dataSourceFiles"
+    
+    files = []
+    for file_path in file_paths:
+        files.append(('files', open(file_path, 'rb')))
+    
+    response = requests.post(
+        url,
+        headers={'Authorization': f'Bearer {self.jwt_token}'},
+        files=files
+    )
+    response.raise_for_status()
+    return response.json()
+
+# Usage example
+file_paths = ['data1.csv', 'data2.csv']
+upload_result = api.upload_files(123, 456, file_paths)
+print(f"Uploaded {len(upload_result)} files")
+```
+
+## React Examples
+
+### API Service Hook
+
+```jsx
+import { useState, useCallback } from 'react';
+
+const useDataGOLAPI = (baseUrl, jwtToken) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const makeRequest = useCallback(async (method, endpoint, data = null, params = null) => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const url = new URL(`${baseUrl}/dataSources/api/v1${endpoint}`);
+      if (params) {
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+      }
+      
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: data ? JSON.stringify(data) : undefined,
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [baseUrl, jwtToken]);
+
+  return { makeRequest, loading, error };
+};
+```
+
+### DataSource Management Component
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { useDataGOLAPI } from './useDataGOLAPI';
+
+const DataSourceManager = ({ baseUrl, jwtToken }) => {
+  const { makeRequest, loading, error } = useDataGOLAPI(baseUrl, jwtToken);
+  const [datasources, setDatasources] = useState([]);
+  const [newDataSource, setNewDataSource] = useState({
+    name: '',
+    type: 'SQL',
+    properties: {}
+  });
+
+  // Fetch all datasources
+  const fetchDataSources = async () => {
+    try {
+      const result = await makeRequest('GET', '/dataSources');
+      setDatasources(result);
+    } catch (err) {
+      console.error('Failed to fetch datasources:', err);
+    }
+  };
+
+  // Create new datasource
+  const createDataSource = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await makeRequest('POST', '/dataSources', newDataSource);
+      setDatasources(prev => [...prev, result]);
+      setNewDataSource({ name: '', type: 'SQL', properties: {} });
+    } catch (err) {
+      console.error('Failed to create datasource:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataSources();
+  }, []);
+
+  return (
+    <div>
+      <h2>Data Sources</h2>
+      
+      {error && <div className="error">{error}</div>}
+      
+      {/* Create new datasource form */}
+      <form onSubmit={createDataSource}>
+        <input
+          type="text"
+          placeholder="DataSource Name"
+          value={newDataSource.name}
+          onChange={(e) => setNewDataSource(prev => ({ ...prev, name: e.target.value }))}
+        />
+        <select
+          value={newDataSource.type}
+          onChange={(e) => setNewDataSource(prev => ({ ...prev, type: e.target.value }))}
+        >
+          <option value="SQL">SQL</option>
+          <option value="S3">S3</option>
+          <option value="CSV">CSV</option>
+        </select>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Creating...' : 'Create DataSource'}
+        </button>
+      </form>
+
+      {/* List datasources */}
+      <div>
+        {datasources.map(ds => (
+          <div key={ds.id} className="datasource-item">
+            <h3>{ds.name}</h3>
+            <p>Type: {ds.type}</p>
+            <p>ID: {ds.id}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+```
+
+### Query Execution Component
+
+```jsx
+import React, { useState } from 'react';
+import { useDataGOLAPI } from './useDataGOLAPI';
+
+const QueryExecutor = ({ baseUrl, jwtToken }) => {
+  const { makeRequest, loading, error } = useDataGOLAPI(baseUrl, jwtToken);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState(null);
+
+  const executeQuery = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await makeRequest('POST', '/queries/execute', {
+        sqlQuery: query,
+        dataProvider: 'SPARK'
+      });
+      setResults(result);
+    } catch (err) {
+      console.error('Query execution failed:', err);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Query Executor</h2>
+      
+      {error && <div className="error">{error}</div>}
+      
+      <form onSubmit={executeQuery}>
+        <textarea
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter your SQL query..."
+          rows={5}
+          cols={50}
+        />
+        <button type="submit" disabled={loading || !query.trim()}>
+          {loading ? 'Executing...' : 'Execute Query'}
+        </button>
+      </form>
+
+      {results && (
+        <div className="results">
+          <h3>Query Results</h3>
+          <pre>{JSON.stringify(results, null, 2)}</pre>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+## JavaScript Examples
+
+### Node.js API Client
+
+```javascript
+const axios = require('axios');
+
+class DataGOLDatasourcesClient {
+  constructor(baseUrl, jwtToken) {
+    this.baseUrl = baseUrl.replace(/\/$/, '');
+    this.jwtToken = jwtToken;
+    this.client = axios.create({
+      baseURL: `${this.baseUrl}/dataSources/api/v1`,
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  async makeRequest(method, endpoint, data = null, params = null) {
+    try {
+      const response = await this.client.request({
+        method,
+        url: endpoint,
+        data,
+        params
+      });
+      return response.data;
+    } catch (error) {
+      console.error(`API request failed: ${error.message}`);
+      throw error;
+    }
+  }
+
+  // DataSource operations
+  async createDataSource(name, type, properties) {
+    return this.makeRequest('POST', '/dataSources', {
+      name,
+      type,
+      properties
+    });
+  }
+
+  async getDataSources(includeTables = false, includeSchema = false) {
+    return this.makeRequest('GET', '/dataSources', null, {
+      includeTables,
+      includeSchema
+    });
+  }
+
+  async getDataSourceById(id) {
+    return this.makeRequest('GET', `/dataSources/${id}`);
+  }
+
+  async updateDataSource(id, data) {
+    return this.makeRequest('PUT', `/dataSources/${id}`, data);
+  }
+
+  async deleteDataSource(id) {
+    return this.makeRequest('DELETE', `/dataSources/${id}`);
+  }
+
+  // Table operations
+  async getTables(dataSourceId) {
+    return this.makeRequest('GET', `/dataSources/${dataSourceId}/tables`);
+  }
+
+  async getTableRows(dataSourceId, tableId, limit = null) {
+    const params = limit ? { limit } : {};
+    return this.makeRequest('GET', `/dataSources/${dataSourceId}/tables/${tableId}/rows`, null, params);
+  }
+
+  // Query operations
+  async executeQuery(sqlQuery, dataProvider = 'SPARK', lite = false) {
+    return this.makeRequest('POST', '/queries/execute', {
+      sqlQuery,
+      dataProvider
+    }, { lite });
+  }
+
+  // File operations
+  async uploadFiles(dataSourceId, tableId, files) {
+    const FormData = require('form-data');
+    const formData = new FormData();
+    
+    files.forEach(file => {
+      formData.append('files', file);
+    });
+
+    const response = await this.client.post(
+      `/dataSources/${dataSourceId}/tables/${tableId}/dataSourceFiles`,
+      formData,
+      {
+        headers: {
+          ...formData.getHeaders(),
+          'Authorization': `Bearer ${this.jwtToken}`
+        }
+      }
+    );
+    
+    return response.data;
+  }
+}
+
+// Usage example
+async function main() {
+  const client = new DataGOLDatasourcesClient(
+    'https://your-datagol-instance.com',
+    'your-jwt-token'
+  );
+
+  try {
+    // Create a datasource
+    const datasource = await client.createDataSource('My Database', 'SQL', {
+      host: 'localhost',
+      port: 5432,
+      database: 'mydb',
+      username: 'user',
+      password: 'password'
+    });
+    console.log('Created datasource:', datasource.id);
+
+    // Get all datasources
+    const datasources = await client.getDataSources(true, false);
+    console.log('Total datasources:', datasources.length);
+
+    // Execute a query
+    const results = await client.executeQuery('SELECT * FROM users LIMIT 5', 'SPARK', true);
+    console.log('Query results:', results);
+
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+main();
+```
+
+### Browser-based JavaScript
+
+```javascript
+class DataGOLDatasourcesAPI {
+  constructor(baseUrl, jwtToken) {
+    this.baseUrl = baseUrl.replace(/\/$/, '');
+    this.jwtToken = jwtToken;
+  }
+
+  async makeRequest(method, endpoint, data = null, params = null) {
+    const url = new URL(`${this.baseUrl}/dataSources/api/v1${endpoint}`);
+    
+    if (params) {
+      Object.keys(params).forEach(key => {
+        url.searchParams.append(key, params[key]);
+      });
+    }
+
+    const options = {
+      method,
+      headers: {
+        'Authorization': `Bearer ${this.jwtToken}`,
+        'Content-Type': 'application/json'
+      }
+    };
+
+    if (data) {
+      options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  }
+
+  // DataSource operations
+  async createDataSource(name, type, properties) {
+    return this.makeRequest('POST', '/dataSources', {
+      name,
+      type,
+      properties
+    });
+  }
+
+  async getDataSources(includeTables = false) {
+    return this.makeRequest('GET', '/dataSources', null, { includeTables });
+  }
+
+  async getDataSourceById(id) {
+    return this.makeRequest('GET', `/dataSources/${id}`);
+  }
+
+  // Query operations
+  async executeQuery(sqlQuery, dataProvider = 'SPARK') {
+    return this.makeRequest('POST', '/queries/execute', {
+      sqlQuery,
+      dataProvider
+    });
+  }
+
+  // File upload
+  async uploadFiles(dataSourceId, tableId, files) {
+    const formData = new FormData();
+    
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+
+    const url = `${this.baseUrl}/dataSources/api/v1/dataSources/${dataSourceId}/tables/${tableId}/dataSourceFiles`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.jwtToken}`
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  }
+}
+
+// Usage example
+const api = new DataGOLDatasourcesAPI('https://your-datagol-instance.com', 'your-jwt-token');
+
+// Create datasource
+api.createDataSource('My Database', 'SQL', {
+  host: 'localhost',
+  port: 5432,
+  database: 'mydb'
+})
+.then(datasource => {
+  console.log('Created datasource:', datasource);
+})
+.catch(error => {
+  console.error('Error creating datasource:', error);
+});
+
+// Execute query
+api.executeQuery('SELECT * FROM users LIMIT 10')
+.then(results => {
+  console.log('Query results:', results);
+})
+.catch(error => {
+  console.error('Error executing query:', error);
+});
+
+// File upload example
+document.getElementById('fileInput').addEventListener('change', async (event) => {
+  const files = event.target.files;
+  
+  try {
+    const result = await api.uploadFiles(123, 456, files);
+    console.log('Files uploaded:', result);
+  } catch (error) {
+    console.error('Error uploading files:', error);
+  }
+});
+```
+
+## Error Handling Examples
+
+### Python Error Handling
+
+```python
+def handle_api_errors(func):
+    """Decorator for handling API errors"""
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 401:
+                print("Authentication failed. Please check your JWT token.")
+            elif e.response.status_code == 403:
+                print("Access denied. Check your permissions.")
+            elif e.response.status_code == 404:
+                print("Resource not found.")
+            else:
+                print(f"HTTP error: {e.response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Network error: {e}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+    return wrapper
+
+@handle_api_errors
+def safe_api_call(self, method, endpoint, data=None):
+    return self._make_request(method, endpoint, data)
+```
+
+### JavaScript Error Handling
+
+```javascript
+class APIError extends Error {
+  constructor(message, status, code) {
+    super(message);
+    this.name = 'APIError';
+    this.status = status;
+    this.code = code;
+  }
+}
+
+async function handleAPIError(response) {
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new APIError(
+      errorData.message || `HTTP ${response.status}`,
+      response.status,
+      errorData.code
+    );
+  }
+  return response;
+}
+
+// Enhanced makeRequest method
+async makeRequest(method, endpoint, data = null, params = null) {
+  try {
+    const url = new URL(`${this.baseUrl}/dataSources/api/v1${endpoint}`);
+    if (params) {
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    }
+    
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${this.jwtToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: data ? JSON.stringify(data) : undefined,
+    });
+    
+    await handleAPIError(response);
+    return response.json();
+  } catch (error) {
+    if (error instanceof APIError) {
+      console.error(`API Error ${error.status}: ${error.message}`);
+    } else {
+      console.error('Network error:', error.message);
+    }
+    throw error;
+  }
+}
+```
+
+These examples provide comprehensive coverage of the Datasources API functionality across different programming languages and frameworks, including proper error handling and best practices.
+

@@ -1,0 +1,965 @@
+---
+sidebar_position: 1
+tags: [formulas, apache spark]
+slug: datagol-apache-sparx-formula
+---
+
+## Overview
+
+This document provides a comprehensive reference for Apache Spark formulas supported in DataGOL. These formulas enable powerful data processing, analysis, and transformation capabilities directly within your DataGOL workflows.
+
+## What you can achieve?
+
+-   **Data aggregation:** Calculate sums, averages, counts, and statistical measures
+    
+-   **Text processing:** Clean, format, and manipulate string data
+    
+-   **Date/Time operations:** Parse, format, and calculate with dates and timestamps
+    
+-   **Conditional logic:** Implement business rules and data validation
+    
+-   **Data type conversion:** Transform data between different formats
+    
+-   **Array/JSON processing:** Handle complex nested data structures
+    
+-   **Mathematical operations:** Perform calculations and statistical analysis
+
+
+## Best Practices
+
+### Performance tips
+* **Use appropriate data types** - Cast data early in your pipeline.
+* **Filter early** - Apply `WHERE` conditions before complex calculations.
+* **Avoid nested functions** - Break complex formulas into steps.
+* **Use COALESCE** - Handle nulls explicitly to avoid errors.
+
+### Common patterns
+* **Data cleaning**: `TRIM(UPPER(COALESCE(field, 'DEFAULT')))`
+* **Age calculation**: `DATE_DIFF(CURRENT_DATE(), birth_date) / 365`
+* **Categorization**: Use `CASE WHEN` for business logic.
+* **Null handling**: Always consider null values in calculations.
+
+### Error handling
+* Use `TRY_*` functions for safe operations: `TRY_DIVIDE`, `TRY_TO_NUMBER`.
+* Test formulas with sample data before production use.
+* Validate data types and ranges.
+
+## Formula categories
+
+| Category          | Primary use                  | Key functions                         |
+| :---------------- | :--------------------------- | :------------------------------------ |
+| Aggregation       | Summarize data               | COUNT, SUM, AVG, MIN, MAX             |
+| Text Processing   | Clean/format strings         | CONCAT, TRIM, UPPER, REPLACE          |
+| Date/Time         | Handle temporal data         | DATE_ADD, DATE_DIFF, EXTRACT          |
+| Conditional       | Business logic               | IF, CASE WHEN, COALESCE               |
+| Conversion        | Data type changes            | CAST, TO_DATE, STRING                 |
+| Mathematical      | Calculations                 | ROUND, ABS, POWER, MOD                |
+| Pattern Matching  | Find/replace patterns        | LIKE, REGEXP_REPLACE                  |
+| Array/JSON        | Complex data types           | SIZE, GET, FLATTEN                    |
+
+This reference provides the foundation for powerful data processing in DataGOL using Apache Spark. Start with simple formulas and gradually combine them for more complex data transformations.
+
+
+## Aggregate functions 
+
+### COUNT
+-----
+
+#### Purpose: 
+Count rows or non-null values.
+
+#### Usage:
+
+```sql
+* COUNT(column_name)
+* COUNT(*)
+```
+#### Example: 
+Returns number of customers
+```sql
+COUNT(customer_id)
+```
+#### Use Case: 
+Calculate total records, active users, or non-empty fields.
+
+
+### SUM
+-----
+
+#### Purpose:
+
+Calculate the **total of numeric values**.
+
+#### Usage:
+
+```sql
+SUM(column_name)
+```
+
+#### Example:
+
+Returns total sales revenue
+
+```sql
+SUM(sales_amount)
+```
+
+#### Use Case:
+
+Use for **financial totals**, **quantity calculations**, or **performance metrics**.
+
+
+### AVG / MEAN
+-----
+
+#### Purpose:
+
+Calculate the **average value** of a set of numbers.
+
+#### Usage:
+
+```sql
+* AVG(column_name)
+* MEAN(column_name)
+```
+
+#### Example:
+
+Returns average order size
+
+```sql
+AVG(order_value)
+```
+
+#### Use Case:
+
+Useful for **performance benchmarks**, **trend analysis**, and **KPI calculations**.
+
+
+
+### MIN / MAX
+-----
+
+#### Purpose:
+
+Find the **minimum or maximum values** within a dataset.
+
+#### Usage:
+
+```sql
+* MIN(column_name)
+* MAX(column_name)
+```
+
+#### Example:
+
+Returns the latest transaction date
+
+```sql
+MAX(transaction_date)
+```
+
+#### Use Case:
+
+Apply for **data quality checks**, **range analysis**, and **finding extremes**.
+
+
+### MEDIAN
+-----
+
+#### Purpose:
+
+Find the **middle value** in sorted data.
+
+#### Usage:
+
+```sql
+MEDIAN(column_name)
+```
+
+#### Example:
+
+Returns the middle salary value
+
+```sql
+MEDIAN(salary)
+```
+
+#### Use Case:
+
+Good for **statistical analysis**, **outlier detection**, and **fair comparisons**.
+
+
+
+### PERCENTILE
+-----
+
+#### Purpose:
+
+Calculate **exact percentile values** from a dataset.
+
+#### Usage:
+
+```sql
+PERCENTILE(column_name, percentile_value)
+```
+
+#### Example:
+
+Returns the 95th percentile response time
+
+```sql
+PERCENTILE(response_time, 0.95)
+```
+
+#### Use Case:
+
+Crucial for **performance SLAs**, **quality metrics**, and **distribution analysis**.
+
+
+
+## Text/String functions
+
+
+### CONCAT / CONCAT\_WS
+-----
+
+#### Purpose:
+
+**Join strings together**.
+
+#### Usage:
+
+```sql
+* CONCAT(str1, str2)
+* CONCAT_WS(separator, str1, str2)
+```
+
+#### Example:
+
+Returns "John Smith"
+
+```sql
+CONCAT_WS(' ', first_name, last_name)
+```
+
+#### Use Case:
+
+Use to **create full names**, **build identifiers**, or **format display text**.
+
+
+
+### UPPER / LOWER
+-----
+
+#### Purpose:
+
+**Change the text case** of a string.
+
+#### Usage:
+
+```sql
+* UPPER(text)
+* LOWER(text)
+```
+
+#### Example:
+
+Returns "USA"
+
+```sql
+UPPER(country_code)
+```
+
+#### Use Case:
+
+Useful for **data standardization** and **case-insensitive comparisons**.
+
+
+
+### TRIM
+-----
+
+#### Purpose:
+
+**Remove leading/trailing spaces** from a string.
+
+#### Usage:
+
+```sql
+TRIM(text)
+```
+
+#### Example:
+
+Returns clean customer names
+
+```sql
+TRIM(customer_name)
+```
+
+#### Use Case:
+
+Primarily used for **data cleaning** and **removing extra whitespace**.
+
+
+### SUBSTRING
+-----
+
+#### Purpose:
+
+**Extract part of a string**.
+
+#### Usage:
+
+```sql
+SUBSTRING(text, start_position, length)
+```
+
+#### Example:
+
+Returns the area code from a phone number
+
+```sql
+SUBSTRING(phone_number, 1, 3)
+```
+
+#### Use Case:
+
+Effective for **extracting codes**, **parsing structured text**, and **data validation**.
+
+
+### REPLACE
+-----
+
+#### Purpose:
+
+**Replace specific text patterns** within a string.
+
+#### Usage:
+
+```sql
+REPLACE(text, old_value, new_value)
+```
+
+#### Example:
+
+Removes dashes from a phone number
+
+```sql
+REPLACE(phone, '-', '')
+```
+
+#### Use Case:
+
+Common for **data cleaning** and **format standardization**.
+
+
+### SPLIT
+-----
+
+#### Purpose:
+
+**Split a string into an array** of substrings.
+
+#### Usage:
+
+```sql
+SPLIT(text, delimiter)
+```
+
+#### Example:
+
+Returns an array of address parts
+
+```sql
+SPLIT(full_address, ',')
+```
+
+#### Use Case:
+
+Ideal for **parsing delimited data** and **extracting components**.
+
+
+### CONTAINS / STARTSWITH
+-----
+
+#### Purpose:
+
+**Check if text contains specific patterns** or prefixes.
+
+#### Usage:
+
+```sql
+* CONTAINS(text, pattern)
+* STARTSWITH(text, prefix)
+```
+
+#### Example:
+
+Returns TRUE/FALSE indicating if an email contains "@gmail.com"
+
+```sql
+CONTAINS(email, '@gmail.com')
+```
+
+#### Use Case:
+
+Used for **data filtering**, **pattern matching**, and **validation**.
+
+
+## Date/Time functions
+
+
+### CURRENT\_DATE / CURRENT\_TIMESTAMP
+-----
+
+#### Purpose:
+
+**Get the current date/time**.
+
+#### Usage:
+
+```sql
+* CURRENT_DATE()
+* CURRENT_TIMESTAMP()
+```
+
+#### Example:
+
+Returns the current date, e.g., 2023-01-01
+
+```sql
+CURRENT_DATE()
+```
+
+#### Use Case:
+
+Useful to **timestamp records**, **calculate age**, or **track processing time**.
+
+
+### DATE\_ADD / DATE\_DIFF
+-----
+
+#### Purpose:
+
+**Add days to a date** or **calculate the difference** between two dates.
+
+#### Usage:
+
+```sql
+* DATE_ADD(date, days)
+* DATE_DIFF(end_date, start_date)
+```
+
+#### Example:
+
+Returns the number of days since an order
+
+```sql
+DATE_DIFF(order_date, CURRENT_DATE())
+```
+
+#### Use Case:
+
+Good for **calculating aging**, **setting due dates**, and **measuring durations**.
+
+
+### DATE\_FORMAT
+-----
+
+#### Purpose:
+
+**Format dates as strings** according to a specified pattern.
+
+#### Usage:
+
+```sql
+DATE_FORMAT(date, format)
+```
+
+#### Example:
+
+Returns "2023-01"
+
+```sql
+DATE_FORMAT(order_date, 'yyyy-MM')
+```
+
+#### Use Case:
+
+Helpful for **display formatting**, **grouping by period**, and **reporting**.
+
+
+### EXTRACT / DATE\_PART
+-----
+
+#### Purpose:
+
+**Extract specific components** (e.g., year, month) from a date.
+
+#### Usage:
+
+```sql
+* EXTRACT(part FROM date)
+* DATE_PART(part, date)
+```
+
+#### Example:
+
+Returns the year from an order date, e.g., 2023
+
+```sql
+EXTRACT(YEAR FROM order_date)
+```
+
+#### Use Case:
+
+Essential for **time-based analysis** and **grouping by periods**.
+
+
+### LAST\_DAY
+-----
+
+#### Purpose:
+
+**Get the last day of the month** for a given date.
+
+#### Usage:
+
+```sql
+LAST_DAY(date)
+```
+
+#### Example:
+
+Returns the last day of the order month
+
+```sql
+LAST_DAY(order_date)
+```
+
+#### Use Case:
+
+Useful for **month-end calculations** and defining **period boundaries**.
+
+
+## Conditional Logic
+
+
+### IF
+-----
+
+#### Purpose:
+
+Apply **simple conditional logic**.
+
+#### Usage:
+
+```sql
+IF(condition, true_value, false_value)
+```
+
+#### Example:
+
+Categorizes based on sales: 'High' if sales \> 1000, else 'Low'
+
+```sql
+IF(sales > 1000, 'High', 'Low')
+```
+
+#### Use Case:
+
+Used for **data categorization**, **flag creation**, and implementing **business rules**.
+
+
+### CASE WHEN
+-----
+
+#### Purpose:
+
+Apply **multiple condition logic**.
+
+#### Usage:
+
+```sql
+CASE
+  WHEN condition1 THEN value1
+  WHEN condition2 THEN value2
+  ELSE default
+END
+```
+
+#### Example:
+
+Assigns a grade based on score: 'A' for \>= 90, 'B' for \>= 80, else 'C'
+
+```sql
+CASE
+  WHEN score >= 90 THEN 'A'
+  WHEN score >= 80 THEN 'B'
+  ELSE 'C'
+END
+```
+
+#### Use Case:
+
+Ideal for **complex categorization**, **multi-tier logic**, and **scoring systems**.
+
+
+### COALESCE
+-----
+
+#### Purpose:
+
+**Return the first non-null value** from a list.
+
+#### Usage:
+
+```sql
+COALESCE(value1, value2, default)
+```
+
+#### Example:
+
+Returns the mobile phone, home phone, or 'No Phone' if both are null
+
+```sql
+COALESCE(mobile_phone, home_phone, 'No Phone')
+```
+
+#### Use Case:
+
+Helps to **handle missing data**, **provide defaults**, and ensure **data completeness**.
+
+
+### NULLIF
+-----
+
+#### Purpose:
+
+**Return null if two values are equal**.
+
+#### Usage:
+
+```sql
+NULLIF(value1, value2)
+```
+
+#### Example:
+
+Returns NULL if the discount is 0
+
+```sql
+NULLIF(discount, 0)
+```
+
+#### Use Case:
+
+Useful for **converting zeros to nulls** or creating **conditional nulls**.
+
+## Data Type Conversion
+
+
+### CAST functions
+-----
+
+#### Purpose:
+
+**Convert between different data types**.
+
+#### Usage:
+
+```sql
+* INT(value)
+* FLOAT(value)
+* STRING(value)
+* BOOLEAN(value)
+```
+
+#### Example:
+
+Converts `sales_amount` to an integer
+
+```sql
+INT(sales_amount)
+```
+
+#### Use Case:
+
+Ensures **data type consistency**, enables **calculations**, and aids in **data validation**.
+
+
+### TO\_DATE / TO\_TIMESTAMP
+-----
+
+#### Purpose:
+
+**Parse strings into date or timestamp values**.
+
+#### Usage:
+
+```sql
+TO_DATE(date_string, format)
+```
+
+#### Example:
+
+Converts '2023-01-01' to a date value
+
+```sql
+TO_DATE('2023-01-01', 'yyyy-MM-dd')
+```
+
+#### Use Case:
+
+Useful for **importing data**, **parsing text dates**, and **data integration**.
+
+
+## Mathematical function
+
+
+### ROUND / CEIL / FLOOR
+-----
+
+#### Purpose:
+
+**Round numbers** in various ways.
+
+#### Usage:
+
+```sql
+* ROUND(number, decimals)
+* CEIL(number)
+* FLOOR(number)
+```
+
+#### Example:
+
+Rounds `price` to 2 decimal places
+
+```sql
+ROUND(price, 2)
+```
+
+#### Use Case:
+
+Applied in **financial calculations**, **display formatting**, and **data binning**.
+
+
+### ABS / NEGATIVE
+-----
+
+#### Purpose:
+
+Get the **absolute value** of a number or its **negation**.
+
+#### Usage:
+
+```sql
+* ABS(number)
+* NEGATIVE(number)
+```
+
+#### Example:
+
+Returns an always positive value for `profit_loss`
+
+```sql
+ABS(profit_loss)
+```
+
+#### Use Case:
+
+Used for **distance calculations** and **magnitude analysis**.
+
+
+### MOD
+-----
+
+#### Purpose:
+
+Calculate the **remainder after division**.
+
+#### Usage:
+
+```sql
+MOD(number, divisor)
+```
+
+#### Example:
+
+Returns the last digit of an ID
+
+```sql
+MOD(customer_id, 10)
+```
+
+#### Use Case:
+
+Useful for **data sampling**, identifying **cyclic patterns**, and **partitioning**.
+
+
+### POWER / SQRT
+-----
+
+#### Purpose:
+
+Calculate the **power of a number** or its **square root**.
+
+#### Usage:
+
+```sql
+* POWER(base, exponent)
+* SQRT(number)
+```
+
+#### Example:
+
+Returns the side length of a square from its area
+
+```sql
+SQRT(area)
+```
+
+#### Use Case:
+
+Common in **scientific calculations** and **geometric formulas**.
+
+### ARRAY functions
+
+
+### ARRAY operations
+-----
+
+#### Purpose:
+
+**Work with array data**.
+
+#### Usage:
+
+```sql
+* SIZE(array)
+* GET(array, index)
+* CONTAINS(array, value)
+```
+
+#### Example:
+
+Returns the number of tags in an array
+
+```sql
+SIZE(tags_array)
+```
+
+#### Use Case:
+
+Used to **handle multi-value fields**, **analyze lists**, and perform **data validation**.
+
+### FLATTEN
+-----
+
+#### Purpose:
+
+**Convert nested arrays into a single array**.
+
+#### Usage:
+
+```sql
+FLATTEN(nested_array)
+```
+
+#### Example:
+
+Converts nested categories into a single list
+
+```sql
+FLATTEN(categories)
+```
+
+#### Use Case:
+
+Helps to **simplify complex data** and **prepare it for analysis**.
+
+
+## JSON functions
+
+### JSON Processing
+-----
+#### Purpose:
+
+**Extract data from JSON** objects.
+
+#### Usage:
+
+```sql
+* GET_JSON_OBJECT(json, path)
+* FROM_JSON(json, schema)
+```
+
+#### Example:
+
+Extracts the email from user data in JSON format
+
+```sql
+GET_JSON_OBJECT(user_data, '$.email')
+```
+
+#### Use Case:
+
+Crucial for **API data processing** and **semi-structured data analysis**.
+
+
+### Pattern Matching
+-----
+
+### LIKE / ILIKE
+
+#### Purpose:
+
+Perform **pattern matching** (case-sensitive or insensitive).
+
+#### Usage:
+
+```sql
+* LIKE(text, pattern)
+* ILIKE(text, pattern)
+```
+
+#### Example:
+
+Checks if `product_name` contains "iPhone"
+
+```sql
+LIKE(product_name, '%iPhone%')
+```
+
+#### Use Case:
+
+Used for **text search**, **data filtering**, and **pattern detection**.
+
+
+### REGEXP functions
+-----
+
+#### Purpose:
+
+Perform **regular expression matching** and manipulation.
+
+#### Usage:
+
+```sql
+REGEXP_REPLACE(text, pattern, replacement)
+```
+
+#### Example:
+
+Removes non-numeric characters from a phone number, leaving only numbers
+
+```sql
+REGEXP_REPLACE(phone, '[^0-9]', '')
+```
+
+#### Use Case:
+
+Essential for **data cleaning**, **format validation**, and complex **text processing**.

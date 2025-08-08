@@ -1,0 +1,173 @@
+# DataSource Management API
+
+The DataSource Management API provides core CRUD operations for managing data sources.
+
+## Create DataSource
+
+**POST** `/dataSources/api/v1/dataSources`
+
+Creates a new datasource with the specified configuration.
+
+### Required Roles
+- `ROLE_CREATE_LAKEHOUSE`
+- `ROLE_CREATE_DATASOURCE`
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "type": "SQL | S3 | AZURE | CSV | PARQUET | JSON",
+  "connectionConfig": {
+    "host": "string",
+    "port": "number",
+    "database": "string",
+    "username": "string",
+    "password": "string"
+  },
+  "storageConfig": {
+    "bucket": "string",
+    "region": "string",
+    "accessKey": "string",
+    "secretKey": "string"
+  }
+}
+```
+
+### Response
+
+Returns a `DataSourceDTO` object.
+
+## Update DataSource
+
+**PUT** `/dataSources/api/v1/dataSources/{dataSourceId}`
+
+Updates an existing datasource.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource to update
+
+### Request Body
+
+Same as Create DataSource
+
+### Response
+
+Returns a `DataSourceDTO` object.
+
+## Delete DataSource
+
+**DELETE** `/dataSources/api/v1/dataSources/{dataSourceId}`
+
+Deletes a datasource.
+
+### Required Roles
+- `ROLE_DELETE_LAKEHOUSE`
+- `ROLE_DELETE_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource to delete
+
+### Response
+
+`204 No Content`
+
+## Get All DataSources
+
+**GET** `/dataSources/api/v1/dataSources`
+
+Retrieves all datasources for the authenticated user.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Query Parameters
+
+- `includeTables` (boolean, default: false) - Include table information
+- `includeSchema` (boolean, default: false) - Include schema information
+
+### Response
+
+Returns a `List<DataSourceDTO>`.
+
+## Get DataSource by ID
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}`
+
+Retrieves a specific datasource by ID.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Query Parameters
+
+- `includeTables` (boolean, default: false) - Include table information
+- `includeSchema` (boolean, default: false) - Include schema information
+
+### Response
+
+Returns a `DataSourceDTO` object.
+
+## Get DataSource Relationships
+
+**GET** `/dataSources/api/v1/dataSources/getDataSourcesRelationships`
+
+Retrieves relationships between datasources.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<DataSourceRelationshipDTO>`.
+
+## Sync Schema
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/syncSchema`
+
+Synchronizes the schema for a datasource.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Response
+
+Returns a `SchemaSyncResponseDTO` object.
+
+## Get Sync Schema Status
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/getSyncSchemaStatus`
+
+Gets the status of schema synchronization.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Response
+
+Returns a `SchemaSyncStatusDTO` object.
+

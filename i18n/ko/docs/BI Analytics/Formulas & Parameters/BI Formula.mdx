@@ -1,0 +1,61 @@
+---
+sidebar_position: 10
+tags: [Visualizer, Dashboards, Widgets]
+title: BI Formulas
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+##  What Are Formulas in DataGOL?
+
+Formulas in DataGOL are user-defined expressions that allow you to derive new insights by creating calculated fields from existing data. These formulas can be created using a combination of columns, mathematical operators, logical functions, and built-in expressions. They help translate raw data into meaningful business metrics and are essential for KPI creation, data transformation, and customized analysis.
+
+Unlike hardcoded metrics, formulas are dynamic, reusable, and visually configurable within the DataGOL Visualizer—making them accessible even to non-technical users.
+
+---
+
+## **Creating formulas**
+
+
+-   Only users with **Creator** or **Editor** permissions for the workspace can add a formula column.
+
+-   Formula columns are visually distinguished and marked with an indicator. A tool tip is shown when you hover over the formula, which displays the details of the formula.
+
+-   In formula addition, static workbooks exclusively use Spark functions, while dynamic workbooks utilize JDBC functions.
+
+To add a **Formula** column directly from Visualizer, do as follows:
+
+1.  From **Visualizer**, adjacent to list of columns on the left, click the **Add Formula Column** button.
+
+    <ImagePopup src="/img/image-20250203-141124.png" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
+
+2.  In the **Create Formula** **Column** box, provide the details such as **Name**, **Formula**, **Column Type**, and **Description**. Refer the [Formula handbook](</docs/Reference guides/formula-reference>) for more details.
+
+    <ImagePopup src="/img/image-20250203-142026.png" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
+
+3. Validate the Formula
+    By clicking on the **Validate** option on the pop up , you can quickly validate your formula and see the sample output
+
+4.  Click **Create**.
+    The new formula appears in the data panel, categorized as a metric or dimension.
+>  You can use autocomplete suggestions for column names and supported functions, reducing errors during creation.
+
+---
+
+## ️ How to Edit a Formula ?
+
+1. Hover over the formula in the data panel.
+2. Click the **Edit icon** next to the formula name.
+3. Modify the logic, aggregation, or formatting.
+4. Re-validate and **Save** the changes.
+
+>  If the formula is used in multiple widgets, edits will propagate and may impact downstream visuals.
+
+---
+
+##  How to Use Formulas in the Visualizer ?
+
+- Select the formula column into charts, tables, or KPIs just like a regular column.
+- Apply filters or sorting using formula fields.
+- Use formulas in combination with **drill-downs**, **alerts**, or **widget-level filters**.
+- Formulas can also be layered inside **BI Workbook SQL logic** for advanced modeling.

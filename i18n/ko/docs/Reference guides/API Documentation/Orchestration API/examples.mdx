@@ -1,0 +1,1103 @@
+# Examples
+
+This section provides comprehensive examples of how to use the Orchestration API for common use cases.
+
+## Example 1: ETL Pipeline Workflow
+
+### Step 1: Create DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "ETL Pipeline",
+    "scheduleType": "SCHEDULED",
+    "schedule": {
+      "basicSchedule": {
+        "timeUnit": "HOUR",
+        "units": "24"
+      }
+    },
+    "defaultParameters": {
+      "sourceDatabase": "production",
+      "targetDatabase": "warehouse"
+    },
+    "metadata": {
+      "description": "Daily ETL pipeline for data warehouse",
+      "owner": "data-team",
+      "environment": "production"
+    }
+  }'
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "ETL Pipeline",
+  "companyId": 123,
+  "createdAt": "2024-01-15T10:30:00Z",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "scheduleType": "SCHEDULED",
+  "schedule": {
+    "basicSchedule": {
+      "timeUnit": "HOUR",
+      "units": "24"
+    }
+  }
+}
+```
+
+### Step 2: Add Nodes
+
+```bash
+# Add extraction node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 101,
+    "metadata": {
+      "step": "extract",
+      "description": "Extract data from source database",
+      "priority": "high",
+      "timeout": 3600,
+      "retryCount": 3
+    }
+  }'
+
+# Add transformation node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 102,
+    "metadata": {
+      "step": "transform",
+      "description": "Transform and clean data",
+      "priority": "medium",
+      "timeout": 7200,
+      "retryCount": 2
+    }
+  }'
+
+# Add load node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 103,
+    "metadata": {
+      "step": "load",
+      "description": "Load data into warehouse",
+      "priority": "high",
+      "timeout": 1800,
+      "retryCount": 3
+    }
+  }'
+```
+
+### Step 3: Create Edges
+
+```bash
+# Connect extract to transform
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 1,
+    "toNodeId": 2,
+    "metadata": {
+      "condition": "success",
+      "description": "Data flow from extraction to transformation",
+      "priority": 1
+    }
+  }'
+
+# Connect transform to load
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 2,
+    "toNodeId": 3,
+    "metadata": {
+      "condition": "success",
+      "description": "Data flow from transformation to load",
+      "priority": 1
+    }
+  }'
+```
+
+### Step 4: Execute DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/runs" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "parameters": {
+      "sourceTable": "users",
+      "targetTable": "dim_users",
+      "batchSize": 1000,
+      "extractDate": "2024-01-15"
+    }
+  }'
+```
+
+## Example 2: Data Quality Pipeline
+
+### Create Data Quality DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Data Quality Checks",
+    "scheduleType": "CRON",
+    "schedule": {
+      "cronExpression": "0 0 6 * * ?"
+    },
+    "defaultParameters": {
+      "qualityThreshold": 0.95,
+      "alertEmail": "data-team@company.com",
+      "dataSource": "warehouse"
+    },
+    "metadata": {
+      "description": "Daily data quality validation pipeline",
+      "owner": "data-quality-team",
+      "environment": "production"
+    }
+  }'
+```
+
+### Add Quality Check Nodes
+
+```bash
+# Data completeness check
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/2/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 201,
+    "metadata": {
+      "checkType": "completeness",
+      "description": "Check for missing values in critical fields",
+      "threshold": 0.95
+    }
+  }'
+
+# Data accuracy check
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/2/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 202,
+    "metadata": {
+      "checkType": "accuracy",
+      "description": "Validate data against business rules",
+      "threshold": 0.98
+    }
+  }'
+
+# Data consistency check
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/2/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 203,
+    "metadata": {
+      "checkType": "consistency",
+      "description": "Check for data consistency across tables",
+      "threshold": 0.99
+    }
+  }'
+```
+
+### Create Parallel Quality Checks
+
+```bash
+# All quality checks can run in parallel
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/2/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 4,
+    "toNodeId": 5,
+    "metadata": {
+      "condition": "success",
+      "description": "Completeness check to accuracy check",
+      "priority": 1
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/2/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 4,
+    "toNodeId": 6,
+    "metadata": {
+      "condition": "success",
+      "description": "Completeness check to consistency check",
+      "priority": 1
+    }
+  }'
+```
+
+## Example 3: Real-time Processing Pipeline
+
+### Create Real-time DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Real-time Analytics",
+    "scheduleType": "DATA_CHANGE",
+    "defaultParameters": {
+      "streamSource": "kafka",
+      "processingWindow": "5m",
+      "batchSize": 100
+    },
+    "metadata": {
+      "description": "Real-time data processing for analytics",
+      "owner": "analytics-team",
+      "environment": "production"
+    }
+  }'
+```
+
+### Add Real-time Processing Nodes
+
+```bash
+# Stream ingestion
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/3/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 301,
+    "metadata": {
+      "step": "ingestion",
+      "description": "Ingest data from Kafka stream",
+      "timeout": 300,
+      "retryCount": 1
+    }
+  }'
+
+# Real-time processing
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/3/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 302,
+    "metadata": {
+      "step": "processing",
+      "description": "Process data in real-time",
+      "timeout": 600,
+      "retryCount": 2
+    }
+  }'
+
+# Real-time aggregation
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/3/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 303,
+    "metadata": {
+      "step": "aggregation",
+      "description": "Aggregate data for dashboards",
+      "timeout": 300,
+      "retryCount": 1
+    }
+  }'
+```
+
+## Example 4: Machine Learning Pipeline
+
+### Create ML Pipeline DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "ML Model Training",
+    "scheduleType": "CRON",
+    "schedule": {
+      "cronExpression": "0 0 2 * * MON"
+    },
+    "defaultParameters": {
+      "modelType": "classification",
+      "trainingData": "user_behavior_data",
+      "validationSplit": 0.2
+    },
+    "metadata": {
+      "description": "Weekly ML model retraining pipeline",
+      "owner": "ml-team",
+      "environment": "production"
+    }
+  }'
+```
+
+### Add ML Pipeline Nodes
+
+```bash
+# Data preparation
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/4/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 401,
+    "metadata": {
+      "step": "data_prep",
+      "description": "Prepare and clean training data",
+      "timeout": 3600,
+      "retryCount": 2
+    }
+  }'
+
+# Feature engineering
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/4/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 402,
+    "metadata": {
+      "step": "feature_engineering",
+      "description": "Create features for ML model",
+      "timeout": 1800,
+      "retryCount": 2
+    }
+  }'
+
+# Model training
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/4/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 403,
+    "metadata": {
+      "step": "training",
+      "description": "Train ML model",
+      "timeout": 7200,
+      "retryCount": 1
+    }
+  }'
+
+# Model evaluation
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/4/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 404,
+    "metadata": {
+      "step": "evaluation",
+      "description": "Evaluate model performance",
+      "timeout": 900,
+      "retryCount": 2
+    }
+  }'
+
+# Model deployment
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/4/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 405,
+    "metadata": {
+      "step": "deployment",
+      "description": "Deploy model to production",
+      "timeout": 600,
+      "retryCount": 3
+    }
+  }'
+```
+
+## Example 5: Complex Multi-Branch Pipeline
+
+### Create Multi-Branch DAG
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Multi-Branch Data Processing",
+    "scheduleType": "SCHEDULED",
+    "schedule": {
+      "basicSchedule": {
+        "timeUnit": "HOUR",
+        "units": "12"
+      }
+    },
+    "defaultParameters": {
+      "dataSource": "multiple_sources",
+      "processingMode": "parallel"
+    },
+    "metadata": {
+      "description": "Complex multi-branch data processing pipeline",
+      "owner": "data-engineering",
+      "environment": "production"
+    }
+  }'
+```
+
+### Add Multi-Branch Nodes
+
+```bash
+# Data ingestion (start node)
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 501,
+    "metadata": {
+      "step": "ingestion",
+      "description": "Ingest data from multiple sources",
+      "isStartNode": true
+    }
+  }'
+
+# Branch 1: User data processing
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 502,
+    "metadata": {
+      "step": "user_processing",
+      "description": "Process user-related data",
+      "branch": "user_data"
+    }
+  }'
+
+# Branch 2: Transaction data processing
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 503,
+    "metadata": {
+      "step": "transaction_processing",
+      "description": "Process transaction data",
+      "branch": "transaction_data"
+    }
+  }'
+
+# Branch 3: Analytics data processing
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 504,
+    "metadata": {
+      "step": "analytics_processing",
+      "description": "Process analytics data",
+      "branch": "analytics_data"
+    }
+  }'
+
+# Data aggregation (convergence node)
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 505,
+    "metadata": {
+      "step": "aggregation",
+      "description": "Aggregate data from all branches",
+      "isEndNode": true
+    }
+  }'
+```
+
+### Create Multi-Branch Edges
+
+```bash
+# Create parallel branches from ingestion
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 11,
+    "toNodeId": 12,
+    "metadata": {
+      "condition": "success",
+      "description": "User data branch",
+      "priority": 1
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 11,
+    "toNodeId": 13,
+    "metadata": {
+      "condition": "success",
+      "description": "Transaction data branch",
+      "priority": 1
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 11,
+    "toNodeId": 14,
+    "metadata": {
+      "condition": "success",
+      "description": "Analytics data branch",
+      "priority": 1
+    }
+  }'
+
+# Converge all branches to aggregation
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 12,
+    "toNodeId": 15,
+    "metadata": {
+      "condition": "success",
+      "description": "User data to aggregation",
+      "priority": 1
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 13,
+    "toNodeId": 15,
+    "metadata": {
+      "condition": "success",
+      "description": "Transaction data to aggregation",
+      "priority": 1
+    }
+  }'
+
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/5/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 14,
+    "toNodeId": 15,
+    "metadata": {
+      "condition": "success",
+      "description": "Analytics data to aggregation",
+      "priority": 1
+    }
+  }'
+```
+
+## Example 6: Error Handling and Recovery
+
+### Create DAG with Error Handling
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Error Handling Pipeline",
+    "scheduleType": "MANUAL",
+    "defaultParameters": {
+      "retryAttempts": 3,
+      "alertOnFailure": true
+    },
+    "metadata": {
+      "description": "Pipeline with comprehensive error handling",
+      "owner": "data-team",
+      "environment": "production"
+    }
+  }'
+```
+
+### Add Nodes with Error Handling
+
+```bash
+# Main processing node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 601,
+    "metadata": {
+      "step": "main_processing",
+      "description": "Main data processing step",
+      "retryCount": 3,
+      "retryDelay": 300
+    }
+  }'
+
+# Error handling node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 602,
+    "metadata": {
+      "step": "error_handling",
+      "description": "Handle processing errors",
+      "retryCount": 1
+    }
+  }'
+
+# Cleanup node
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/nodes" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pipelineId": 603,
+    "metadata": {
+      "step": "cleanup",
+      "description": "Cleanup temporary data",
+      "retryCount": 2
+    }
+  }'
+```
+
+### Create Error Handling Edges
+
+```bash
+# Success path
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 16,
+    "toNodeId": 18,
+    "metadata": {
+      "condition": "success",
+      "description": "Success path to cleanup"
+    }
+  }'
+
+# Failure path
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 16,
+    "toNodeId": 17,
+    "metadata": {
+      "condition": "failure",
+      "description": "Failure path to error handling"
+    }
+  }'
+
+# Error handling to cleanup
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/6/edges" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fromNodeId": 17,
+    "toNodeId": 18,
+    "metadata": {
+      "condition": "always",
+      "description": "Always cleanup after error handling"
+    }
+  }'
+```
+
+## Example 7: Monitoring and Logging
+
+### Monitor DAG Execution
+
+```bash
+# Get DAG status
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+
+# Get recent runs
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/runs?includeJobs=true&limit=10" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+
+# Get run logs
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/runs/301/logs?level=ERROR" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Create Snapshot for Version Control
+
+```bash
+# Create snapshot before changes
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "description": "Stable version before adding new transformation",
+    "version": "1.0.0",
+    "tags": ["stable", "production"]
+  }'
+
+# Compare snapshots
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/compare?fromSnapshotId=1&toSnapshotId=2" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Example 8: Python Client Implementation
+
+```python
+import requests
+import json
+from typing import Dict, List, Optional
+
+class OrchestrationClient:
+    def __init__(self, base_url: str, token: str):
+        self.base_url = base_url
+        self.headers = {
+            'Authorization': f'Bearer {token}',
+            'Content-Type': 'application/json'
+        }
+    
+    def create_dag(self, name: str, schedule_type: str, schedule_config: Dict, 
+                   default_params: Optional[Dict] = None, metadata: Optional[Dict] = None) -> Dict:
+        """Create a new DAG workflow."""
+        url = f"{self.base_url}/orchestration/api/v1/dags"
+        data = {
+            "name": name,
+            "scheduleType": schedule_type,
+            "schedule": schedule_config
+        }
+        
+        if default_params:
+            data["defaultParameters"] = default_params
+        if metadata:
+            data["metadata"] = metadata
+            
+        response = requests.post(url, headers=self.headers, json=data)
+        response.raise_for_status()
+        return response.json()
+    
+    def add_node(self, dag_id: int, pipeline_id: int, metadata: Optional[Dict] = None) -> Dict:
+        """Add a node to a DAG."""
+        url = f"{self.base_url}/orchestration/api/v1/dags/{dag_id}/nodes"
+        data = {
+            "pipelineId": pipeline_id,
+            "metadata": metadata or {}
+        }
+        response = requests.post(url, headers=self.headers, json=data)
+        response.raise_for_status()
+        return response.json()
+    
+    def create_edge(self, dag_id: int, from_node_id: int, to_node_id: int, 
+                   metadata: Optional[Dict] = None) -> Dict:
+        """Create an edge between two nodes."""
+        url = f"{self.base_url}/orchestration/api/v1/dags/{dag_id}/edges"
+        data = {
+            "fromNodeId": from_node_id,
+            "toNodeId": to_node_id,
+            "metadata": metadata or {}
+        }
+        response = requests.post(url, headers=self.headers, json=data)
+        response.raise_for_status()
+        return response.json()
+    
+    def run_dag(self, dag_id: int, parameters: Optional[Dict] = None) -> Dict:
+        """Execute a DAG run."""
+        url = f"{self.base_url}/orchestration/api/v1/dags/{dag_id}/runs"
+        data = {"parameters": parameters or {}}
+        response = requests.post(url, headers=self.headers, json=data)
+        response.raise_for_status()
+        return response.json()
+    
+    def get_dag_status(self, dag_id: int) -> Dict:
+        """Get DAG status and latest run information."""
+        url = f"{self.base_url}/orchestration/api/v1/dags/{dag_id}"
+        response = requests.get(url, headers=self.headers)
+        response.raise_for_status()
+        return response.json()
+    
+    def get_dag_runs(self, dag_id: int, include_jobs: bool = False, 
+                    limit: int = 50) -> Dict:
+        """Get DAG run history."""
+        url = f"{self.base_url}/orchestration/api/v1/dags/{dag_id}/runs"
+        params = {
+            "includeJobs": include_jobs,
+            "limit": limit
+        }
+        response = requests.get(url, headers=self.headers, params=params)
+        response.raise_for_status()
+        return response.json()
+
+# Usage example
+def create_etl_pipeline():
+    client = OrchestrationClient("https://api.saasxl.com", "YOUR_JWT_TOKEN")
+    
+    # Create ETL DAG
+    dag = client.create_dag(
+        name="ETL Pipeline",
+        schedule_type="SCHEDULED",
+        schedule_config={
+            "basicSchedule": {
+                "timeUnit": "HOUR",
+                "units": "24"
+            }
+        },
+        default_params={
+            "sourceDatabase": "production",
+            "targetDatabase": "warehouse"
+        },
+        metadata={
+            "description": "Daily ETL pipeline",
+            "owner": "data-team"
+        }
+    )
+    
+    # Add nodes
+    extract_node = client.add_node(dag['id'], 101, {
+        "step": "extract",
+        "description": "Extract data from source"
+    })
+    
+    transform_node = client.add_node(dag['id'], 102, {
+        "step": "transform",
+        "description": "Transform data"
+    })
+    
+    load_node = client.add_node(dag['id'], 103, {
+        "step": "load",
+        "description": "Load data to target"
+    })
+    
+    # Create edges
+    client.create_edge(dag['id'], extract_node['id'], transform_node['id'], {
+        "condition": "success",
+        "description": "Extract to transform"
+    })
+    
+    client.create_edge(dag['id'], transform_node['id'], load_node['id'], {
+        "condition": "success",
+        "description": "Transform to load"
+    })
+    
+    # Run the DAG
+    run = client.run_dag(dag['id'], {
+        "sourceTable": "users",
+        "targetTable": "dim_users"
+    })
+    
+    print(f"ETL Pipeline created with ID: {dag['id']}")
+    print(f"DAG run started with ID: {run['id']}")
+    
+    return dag, run
+
+if __name__ == "__main__":
+    dag, run = create_etl_pipeline()
+```
+
+## Example 9: JavaScript/Node.js Client
+
+```javascript
+class OrchestrationClient {
+    constructor(baseUrl, token) {
+        this.baseUrl = baseUrl;
+        this.headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+    }
+
+    async createDag(name, scheduleType, scheduleConfig, defaultParams = {}, metadata = {}) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags`;
+        const data = {
+            name,
+            scheduleType,
+            schedule: scheduleConfig,
+            defaultParameters: defaultParams,
+            metadata
+        };
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to create DAG: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+
+    async addNode(dagId, pipelineId, metadata = {}) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags/${dagId}/nodes`;
+        const data = {
+            pipelineId,
+            metadata
+        };
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to add node: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+
+    async createEdge(dagId, fromNodeId, toNodeId, metadata = {}) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags/${dagId}/edges`;
+        const data = {
+            fromNodeId,
+            toNodeId,
+            metadata
+        };
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to create edge: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+
+    async runDag(dagId, parameters = {}) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags/${dagId}/runs`;
+        const data = { parameters };
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to run DAG: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+
+    async getDagStatus(dagId) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags/${dagId}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: this.headers
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to get DAG status: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+
+    async getDagRuns(dagId, includeJobs = false, limit = 50) {
+        const url = `${this.baseUrl}/orchestration/api/v1/dags/${dagId}/runs`;
+        const params = new URLSearchParams({
+            includeJobs: includeJobs.toString(),
+            limit: limit.toString()
+        });
+        
+        const response = await fetch(`${url}?${params}`, {
+            method: 'GET',
+            headers: this.headers
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to get DAG runs: ${response.statusText}`);
+        }
+        
+        return response.json();
+    }
+}
+
+// Usage example
+async function createETLPipeline() {
+    const client = new OrchestrationClient('https://api.saasxl.com', 'YOUR_JWT_TOKEN');
+    
+    try {
+        // Create ETL DAG
+        const dag = await client.createDag(
+            'ETL Pipeline',
+            'SCHEDULED',
+            {
+                basicSchedule: {
+                    timeUnit: 'HOUR',
+                    units: '24'
+                }
+            },
+            {
+                sourceDatabase: 'production',
+                targetDatabase: 'warehouse'
+            },
+            {
+                description: 'Daily ETL pipeline',
+                owner: 'data-team'
+            }
+        );
+        
+        // Add nodes
+        const extractNode = await client.addNode(dag.id, 101, {
+            step: 'extract',
+            description: 'Extract data from source'
+        });
+        
+        const transformNode = await client.addNode(dag.id, 102, {
+            step: 'transform',
+            description: 'Transform data'
+        });
+        
+        const loadNode = await client.addNode(dag.id, 103, {
+            step: 'load',
+            description: 'Load data to target'
+        });
+        
+        // Create edges
+        await client.createEdge(dag.id, extractNode.id, transformNode.id, {
+            condition: 'success',
+            description: 'Extract to transform'
+        });
+        
+        await client.createEdge(dag.id, transformNode.id, loadNode.id, {
+            condition: 'success',
+            description: 'Transform to load'
+        });
+        
+        // Run the DAG
+        const run = await client.runDag(dag.id, {
+            sourceTable: 'users',
+            targetTable: 'dim_users'
+        });
+        
+        console.log(`ETL Pipeline created with ID: ${dag.id}`);
+        console.log(`DAG run started with ID: ${run.id}`);
+        
+        return { dag, run };
+    } catch (error) {
+        console.error('Failed to create ETL pipeline:', error);
+        throw error;
+    }
+}
+
+// Execute the example
+createETLPipeline().catch(console.error);
+```
+
+These examples demonstrate various use cases and patterns for working with the Orchestration API, from simple ETL pipelines to complex multi-branch workflows with error handling and monitoring.
+

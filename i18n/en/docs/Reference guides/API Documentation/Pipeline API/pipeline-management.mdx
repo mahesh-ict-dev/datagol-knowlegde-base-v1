@@ -1,0 +1,241 @@
+# Pipeline Management API
+
+The Pipeline Management API provides core CRUD operations for managing data pipelines.
+
+## Create Pipeline
+
+**POST** `/dataPipeline/api/v2/`
+
+Creates a new data pipeline with the specified configuration.
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "type": "CUSTOM|STANDARD|DEDUP",
+  "description": "string",
+  "scheduleType": "MANUAL|CRON|SCHEDULED|DATA_CHANGE",
+  "schedule": {
+    "cronExpression": "string",
+    "timeZone": "string"
+  },
+  "sources": [
+    {
+      "id": "number",
+      "name": "string",
+      "type": "string"
+    }
+  ],
+  "destination": {
+    "id": "number",
+    "name": "string",
+    "type": "string"
+  },
+  "streams": [
+    {
+      "name": "string",
+      "query": "string",
+      "outputTableName": "string",
+      "syncMode": "FULL|INCREMENTAL",
+      "columns": ["string"],
+      "uniqueColumns": ["string"],
+      "requiredParams": ["string"]
+    }
+  ],
+  "processes": [
+    {
+      "name": "string",
+      "query": "string",
+      "processType": "PRE|POST",
+      "rank": "number"
+    }
+  ],
+  "parameters": {},
+  "workbookMetadata": {},
+  "queryEngine": "SPARK|SNOWFLAKE|BIGQUERY",
+  "isMvPipeline": "boolean",
+  "isLastMilePipeline": "boolean",
+  "parentId": "number",
+  "clonedParentId": "number",
+  "where": {
+    "condition": "string",
+    "parameters": {}
+  }
+}
+```
+
+### Response
+
+Returns a `PipelineDTO` object.
+
+## Update Pipeline
+
+**PUT** `/dataPipeline/api/v2/{dataPipelineId}`
+
+Updates an existing pipeline with new configuration.
+
+### Path Parameters
+
+- `dataPipelineId` (number) - The ID of the pipeline to update
+
+### Request Body
+
+Same as Create Pipeline
+
+### Response
+
+Returns a `PipelineDTO` object.
+
+## Delete Pipeline
+
+**DELETE** `/dataPipeline/api/v1/{pipelineId}`
+
+Deletes a pipeline and all associated data.
+
+### Path Parameters
+
+- `pipelineId` (number) - The ID of the pipeline to delete
+
+### Response
+
+`204 No Content`
+
+## Get All Pipelines
+
+**GET** `/dataPipeline/api/v2/`
+
+Retrieves all pipelines for the authenticated user.
+
+### Query Parameters
+
+- `includeJobs` (boolean, default: true) - Whether to include job information
+
+### Response
+
+Returns a `List<PipelineDTO>`.
+
+## Get All Pipelines (Paginated)
+
+**POST** `/dataPipeline/api/v2/getAllPaginated`
+
+Retrieves pipelines with pagination and search capabilities.
+
+### Query Parameters
+
+- `includeJobs` (boolean, default: true) - Whether to include job information
+- `page` (number, default: 1) - Page number
+- `size` (number, default: 12) - Page size
+
+### Request Body
+
+```json
+{
+  "searchFilters": {
+    "NAME": ["string"],
+    "TYPE": ["string"],
+    "STATUS": ["string"]
+  },
+  "searchString": "string",
+  "sortByField": "string"
+}
+```
+
+### Response
+
+Returns a `Page<PipelineDTO>`.
+
+## Get Pipeline by ID
+
+**GET** `/dataPipeline/api/v2/{pipelineId}`
+
+Retrieves a specific pipeline by its ID.
+
+### Path Parameters
+
+- `pipelineId` (number) - The ID of the pipeline
+
+### Response
+
+Returns a `PipelineDTO` object.
+
+## Get Query Engines
+
+**GET** `/dataPipeline/api/v2/queryEngines`
+
+Retrieves available query engines for the user.
+
+### Response
+
+```json
+[
+  "SPARK",
+  "SNOWFLAKE",
+  "BIGQUERY"
+]
+```
+
+## Generate Query
+
+**POST** `/dataPipeline/api/v2/generateQuery`
+
+Generates SQL query for a specific stream.
+
+### Request Body
+
+```json
+{
+  "user": {},
+  "dsId": "number",
+  "dataPipelineId": "number",
+  "stream": "string",
+  "where": {
+    "condition": "string",
+    "parameters": {}
+  },
+  "columns": ["string"],
+  "parameters": {}
+}
+```
+
+### Response
+
+```json
+{
+  "streamName": "generated SQL query"
+}
+```
+
+## Get Pipeline Revisions
+
+**POST** `/dataPipeline/api/v2/{dataPipelineId}/getPreviousRevision`
+
+Retrieves revision history for a pipeline.
+
+### Path Parameters
+
+- `dataPipelineId` (number) - The ID of the pipeline
+
+### Request Body
+
+```json
+{
+  "pageNumber": "number",
+  "pageSize": "number"
+}
+```
+
+### Response
+
+Returns a `List<PipelineRevisionDTO>`.
+
+## Migrate Scheduled Jobs
+
+**GET** `/dataPipeline/api/v2/migrateScheduledJobs`
+
+Migrates scheduled jobs to the new system.
+
+### Response
+
+`204 No Content`
+

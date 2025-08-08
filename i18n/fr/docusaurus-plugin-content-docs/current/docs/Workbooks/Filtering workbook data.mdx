@@ -1,0 +1,58 @@
+---
+sidebar_position : 26
+tags : [Workspace, Workbooks]
+slug: filtering-workbook-data
+---
+
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+When you have a large dataset in a workbook, it can be challenging to identify specific trends, patterns, or insights. Filtering allows you to temporarily hide certain rows of data based on criteria you define for one or more columns. This leaves you with only the subset of data that meets your specific needs for analysis.
+
+Advanced filters empower you to precisely refine displayed data by applying sophisticated conditions that go beyond simple comparisons. You can combine multiple criteria using logical operators like AND and OR.
+
+### Adding filters to workbook data
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Click the **Filter** button from the top and specify the condition.
+    
+4.  Click **Add Condition** and specify the conditions. You can click **Add Condition Group** to combine conditions with **AND** and **OR** operators.
+    
+    <ImagePopup src="/img/image-20250430-154419.png" alt="filtering-workbook-data1" caption="filtering-workbook-data1" />
+   
+5.  Click **Save**. The data content that meets the criteria are filtered and displayed.
+    
+
+You can now resize the **Filter** box horizontally to view longer input values. The filter box can also be dragged and moved on the screen.
+
+### Editing filters set for workbook data
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Click the **Filter** button from the top and edit the required conditions.
+    
+4.  Click **Save**.
+    
+
+### Deleting filters set for workbook data
+
+1.  On the **Home** page, from the left navigation panel, click **Workspace** and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+    
+2.  Click the **Workbook** tab and select the required workbook.
+    
+3.  Click the **Filter** button from the top. The filters are listed in the **Filter** box.
+    
+4.  Click the **Remove this condition** icon at the end of each condition.
+    
+5.  Click **Save**.
+    
+
+If a **workbook column** used in a filter is **deleted or modified**—for example, if the workbook was published from the playground and the underlying query has changed—it can break the filter clause. In such cases, filters relying on that column may not work as expected.
+
+Users should manually remove or update the invalid filter condition from the Filter section to ensure data displays correctly.

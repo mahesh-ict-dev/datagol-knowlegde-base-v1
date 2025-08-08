@@ -1,0 +1,29 @@
+---
+sidebar_position: 2
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-databricks
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Databricks as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Databricks icon. 
+    
+3.  Specify the following details to add Databricks. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/databricks.png" alt="databricks" caption="databricks" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for this connection. This will help you identify it later. |
+    | **Server Hostname** | Specify the host name of the Databricks cluster you want to connect to. |
+    | **HTTP Path** | Specify the HTTP path of the Databricks cluster you want to connect to. |
+    | **Databricks Unity Catalog Name** | Enter the name of the unity catalog for the database. |
+    | **Personal Access Token** | Specify the personal access token to authenticate access to the Databricks cluster. Refer to [Databricks documentation: Databricks personal access token authentication](https://docs.databricks.com/aws/en/dev-tools/auth/pat). |
+    | **Port** | Specify the Databricks cluster port.|
+    | **Default Schema** | The default schema tables are written. If not specified otherwise, the default schema will be used.|
+
+4.  Click **Submit**.

@@ -1,0 +1,108 @@
+# Links Management API
+
+The Links Management API provides operations for managing column links and table links between data sources.
+
+## Column Links
+
+### Get All Column Links
+
+**GET** `/dataSources/api/v1/links`
+
+Retrieves all column links.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<ColumnLinkDTO>`.
+
+### Create Column Links
+
+**POST** `/dataSources/api/v1/links`
+
+Creates new column links.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Request Body
+
+```json
+{
+  "sourceColumnId": "string",
+  "targetColumnId": "string",
+  "linkType": "string",
+  "description": "string"
+}
+```
+
+### Response
+
+Returns a `ColumnLinkDTO` object.
+
+### Update Column Link
+
+**PUT** `/dataSources/api/v1/links/{linkId}`
+
+Updates an existing column link.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `linkId` (string) - The ID of the column link
+
+### Request Body
+
+```json
+{
+  "sourceColumnId": "string",
+  "targetColumnId": "string",
+  "linkType": "string",
+  "description": "string"
+}
+```
+
+### Response
+
+Returns a `ColumnLinkDTO` object.
+
+### Delete Column Link
+
+**DELETE** `/dataSources/api/v1/links/{linkId}`
+
+Deletes a column link.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `linkId` (string) - The ID of the column link to delete
+
+### Response
+
+`204 No Content`
+
+## Table Links
+
+### Get All Table Links
+
+**GET** `/dataSources/api/v1/tableLinks`
+
+Retrieves all table links.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<TableLinkDTO>`.
+

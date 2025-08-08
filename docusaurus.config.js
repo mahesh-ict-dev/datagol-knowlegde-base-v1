@@ -36,13 +36,40 @@ const config = {
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
+  
+  // URL mapping and redirects
+  trailingSlash: false,
+  baseUrlIssueBanner: false,
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'es', 'fr', 'pt', 'zh'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en',
+        label: 'English',
+      },
+      es: {
+        htmlLang: 'es',
+        label: 'Español',
+      },
+      fr: {
+        htmlLang: 'fr',
+        label: 'Français',
+      },
+
+      pt: {
+        htmlLang: 'pt',
+        label: 'Português',
+      },
+      zh: {
+        htmlLang: 'zh',
+        label: '中文',
+      },
+    },
   },
 
   // Performance Optimizations
@@ -172,20 +199,25 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          //{to: 'https://app.datagol.ai', label: 'Visit DataGOL', position: 'right'},
           {to: 'https://www.datagol.ai/', label: 'Visit DataGOL', position: 'right'},
-          //  {
-          //    href: 'https://app.datagol.ai',
-          //    label: 'DataGOL',
-          //    position: 'right',
-          //  },
-          // Performance: Add search bar
           {
             type: 'search',
             position: 'right',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+            dropdownItemsAfter: [
+              {
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;" />',
+              },
+              {
+                href: 'https://github.com/DataGOL/datagol-knowlegde-base-v1',
+                label: 'Help Us Translate',
+              },
+            ],
           }
-          
-          
         ],
         hideOnScroll: false, // Set to true to hide navbar on scroll for better UX
       },
@@ -202,6 +234,10 @@ const config = {
       //         {
       //           label: 'Documentation',
       //           to: '/docs/intro',
+      //         },
+      //         {
+      //           label: 'API Reference',
+      //           to: '/docs/reference-guides/api-documentation',
       //         },
       //       ],
       //     },
@@ -227,15 +263,19 @@ const config = {
       //       ],
       //     },
       //     {
-      //       title: 'More',
+      //       title: 'Support',
       //       items: [
       //         {
       //           label: 'GitHub',
       //           href: 'https://github.com/DataGOL',
       //         },
       //         {
-      //           label: 'Support',
+      //           label: 'Contact Support',
       //           href: 'mailto:support@datagol.ai',
+      //         },
+      //         {
+      //           label: 'FAQ',
+      //           to: '/docs/faqs',
       //         },
       //       ],
       //     },
@@ -335,13 +375,15 @@ const config = {
           indexBlog: false,
           indexPages: true,
           docsRouteBasePath: '/docs',
-          language: ['en'],
+          language: ['en', 'es', 'fr', 'pt', 'zh'],
           // Performance optimizations for search
           searchResultLimits: 8,
           searchResultContextMaxLength: 50,
           explicitSearchResultPath: true,
         },
       ],
+      
+
       
       // Sitemap plugin (now configured in presets for better performance)
       

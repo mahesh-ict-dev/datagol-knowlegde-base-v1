@@ -154,3 +154,134 @@ If you want to make only certain links italic, add a class in your Markdown usin
     width: 150px !important;
   }
 }
+
+/* Language dropdown improvements */
+.navbar__item.dropdown {
+  position: relative;
+}
+
+.navbar__item.dropdown .dropdown__menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  min-width: 160px;
+}
+
+.navbar__item.dropdown .dropdown__link {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navbar__item.dropdown .dropdown__link:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-primary);
+}
+
+.navbar__item.dropdown .dropdown__link--active {
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 600;
+}
+
+/* Locale dropdown specific styling */
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__menu {
+  padding: 0.5rem 0;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link {
+  font-size: 0.9rem;
+}
+
+/* Footer improvements */
+.footer {
+  background: var(--ifm-color-emphasis-900);
+  border-top: 1px solid var(--ifm-color-emphasis-700);
+}
+
+.footer__title {
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-100);
+}
+
+.footer__link-item {
+  color: var(--ifm-color-emphasis-400);
+  transition: color 0.2s ease;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-emphasis-200);
+  text-decoration: none;
+}
+
+.footer__copyright {
+  color: var(--ifm-color-emphasis-500);
+  font-size: 0.875rem;
+}
+
+/* Dark mode footer adjustments */
+[data-theme='dark'] .footer {
+  background: var(--ifm-color-emphasis-800);
+  border-top-color: var(--ifm-color-emphasis-600);
+}
+
+[data-theme='dark'] .footer__title {
+  color: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .footer__link-item {
+  color: var(--ifm-color-emphasis-500);
+}
+
+[data-theme='dark'] .footer__link-item:hover {
+  color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .footer__copyright {
+  color: var(--ifm-color-emphasis-400);
+}
+
+/* Language indicator and improved dropdown visibility */
+.navbar__item.dropdown[data-dropdown-type="locale"] {
+  position: relative;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"]::before {
+  content: '🌐';
+  margin-right: 4px;
+  font-size: 14px;
+}
+
+/* Language switcher improvements */
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Add language flags or indicators */
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link[href*="/es/"]::before {
+  content: '🇪🇸';
+  margin-right: 4px;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link[href*="/fr/"]::before {
+  content: '🇫🇷';
+  margin-right: 4px;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link[href*="/pt/"]::before {
+  content: '🇵🇹';
+  margin-right: 4px;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link[href*="/zh/"]::before {
+  content: '🇨🇳';
+  margin-right: 4px;
+}
+
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link[href*="/en/"]::before,
+.navbar__item.dropdown[data-dropdown-type="locale"] .dropdown__link:not([href*="/"])::before {
+  content: '🇺🇸';
+  margin-right: 4px;
+}

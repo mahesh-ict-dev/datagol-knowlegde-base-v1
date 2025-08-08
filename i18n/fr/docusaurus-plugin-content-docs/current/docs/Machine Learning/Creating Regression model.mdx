@@ -1,0 +1,28 @@
+---
+sidebar_position : 4
+tags: [Lineage]
+slug: creating-regression-model
+---
+
+From a workbook, click **Actions** > **ML Dashboard**. The ML Dashboard page is displayed.
+From the **Create Model** section, click **Regression** and specify the following:
+
+| Feature                   | Linear Regression                                                     |
+| :------------------------ | :-------------------------------------------------------------------- |
+| **Model Type** | Generalized linear model                                              |
+| **Best Suited For** | Linearly related continuous targets; when interpretability is key     |
+| **Relationship Modeling** | Assumes a linear relationship between predictors and target           |
+| **Handling of Interactions** | Requires manual inclusion of interaction terms                        |
+| **Interpretability** | Very high – clear coefficient estimates and significance tests        |
+| **Parameter Tuning** | Minimal – primarily choice of regularization (e.g., L1/L2 penalties)  |
+| **Data Requirements** | Needs homoscedasticity, no multicollinearity, and normally distributed errors |
+| **Handling of Outliers** | Sensitive to outliers; robust variants (e.g., RANSAC) can mitigate    |
+| **Multicollinearity** | Problematic – variance inflation; requires feature selection or PCA   |
+| **Feature Importance** | Directly from coefficient magnitudes                                  |
+| **Library Support** | scikit-learn (LinearRegression, Ridge, Lasso), statsmodels            |
+| **Prediction Output** | Continuous point estimates (with optional confidence intervals)       |
+| **Deployment Readiness** | Extremely lightweight; instantaneous inference; minimal memory footprint |
+| **External Features** | New features simply added as new coefficients                         |
+| **Community & Resources** | Extensive academic literature; ubiquitous baseline for regression tasks |
+
+Click **Create** and commence the model training process.

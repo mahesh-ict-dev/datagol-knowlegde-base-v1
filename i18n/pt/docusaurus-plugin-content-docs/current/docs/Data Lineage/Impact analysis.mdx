@@ -1,0 +1,161 @@
+---
+sidebar_position : 6
+tags: [Lineage]
+slug: impact-analysis
+---
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+Impact analysis is a capability in the Data Lineage module to help you assess the downstream effects of potentially disruptive actions within the platform. This feature is designed to increase the awareness and reduce unintended consequences when altering or removing data entities.
+
+:::info [Important]
+This feature provides non-blocking warnings. You will not be prevented from proceeding, but will receive an alert detailing the potential impact of their actions.
+:::
+
+Impact analysis brings visibility, clarity, and confidence to users who are making changes to critical data assets.
+
+
+## How it works?
+
+When you initiate a potentially disruptive action—like deleting a workbook column, editing a pipeline, or removing a data source—the platform runs a real-time dependency check, this platform executes the following:
+
+1. Scans the Lineage Graph to identify any entities (like dashboards, other pipelines, or workbook views) that are directly or indirectly dependent on the modified item.
+
+2. Categorizes dependencies into:
+
+    - Immediate (directly affected)
+    - All Downstream (transitive effects through connected assets)
+
+3. Presents the results via:
+
+    - A list view (for structured analysis)
+    - A graph view (for visual understanding)
+
+4. Warns you, but does not block the action, giving you the choice to:
+
+    - Investigate and proceed confidently
+    - Cancel and adjust their action based on impact
+
+
+## Why it’s useful?
+
+-   **Prevents unintended breakages**
+
+    Without impact analysis, changes made to one part of the system (like deleting a data pipeline) can cause silent failures in dashboards, reporting tools, or downstream processes. This feature helps you view the ripple effects before you commit to a change.
+
+    **Example:** A user deletes a column from a workbook. That column feeds into a chart on an executive dashboard. Impact analysis alerts the user to this dependency so they can avoid breaking the dashboard.
+
+-   **Builds trust in the platform**
+
+    By making data relationships transparent, users feel more confident making changes. They know the system will flag what’s at risk and give them a chance to respond, which increases trust in the data and the tools.
+
+-   **Improves collaboration across teams**
+
+    Impact analysis helps data owners, engineers, analysts, and business users stay aligned. When dependencies are surfaced, teams can coordinate before making changes—reducing fire drills and urgent bug fixes.
+
+-   **Supports governance and compliance**
+
+    In regulated industries or large enterprises, data changes can have compliance implications. With impact analysis, teams can:
+
+    - Document what assets will be affected
+    - Notify stakeholders before applying changes
+    - Track who made changes and why
+
+-   **Saves time and cost**
+
+    Catching issues before they propagate downstream is far cheaper than debugging and restoring broken reports or corrupted data pipelines after the fact.
+
+-   **Promotes better data hygiene**
+
+    By making dependencies visible, teams are more likely to:
+
+    - Clean up unused assets
+    - Decommission unused columns or pipelines safely
+    - Avoid redundant or conflicting updates
+
+
+## Supported event types
+
+Impact analysis is available for the following actions:
+
+| Event Type           | Description                                                               |
+| :------------------- | :------------------------------------------------------------------------ |
+| DELETE_WORKBOOK_COLUMN | Triggered when a user deletes a column from a workbook.                   |
+| DELETE_DATA_SOURCE   | Triggered when a data source is deleted.                                  |
+| EDIT_DATA_PIPELINE   | Triggered when structural changes are made to a data pipeline (e.g., changing transformation logic, removing nodes). |
+| DELETE_WORKBOOK      | Triggered when an entire workbook is deleted.                             |
+| DELETE_DATA_PIPELINE | Triggered when a data pipeline is deleted.                                |
+
+
+## Impact analysis process
+When you initiate any of the supported event types, the system performs the following steps:
+
+1. **Triggers impact analysis check**: Before applying the change, the system automatically initiates an impact analysis to determine downstream dependencies that could be affected.
+
+2. **Categorizes the downstream impact**: The results are categorized into two scopes:
+
+    - **Immediate Impacted Entities**
+    Directly affected items, such as views or pipelines, that explicitly reference the item being changed.
+
+    - **All Downstream Items (Transitive Dependencies)**
+    A comprehensive list of indirect dependencies across the lineage chain, including:
+
+        - Workbooks
+        - Dashboards
+        - Data Pipelines
+        - Views and Columns
+        - Assets referencing the impacted entities
+
+3. **Displays the following visualization options:**
+
+    -   **List view**
+        A structured, searchable list of all impacted entities. Includes metadata such as:
+
+        - Entity Type (Workbook, Dashboard, Column, etc.)
+        - Entity Name
+        - Path of dependency
+        - Last updated time
+
+        <ImagePopup src="/img/impact-analysis.png" alt="Impact Analysis" caption="Impact Analysis" />
+
+    -   Graph view
+        An interactive graphical lineage view showing:
+
+        - The root entity being modified
+        - All directly and indirectly connected downstream entities
+        - Color-coded distinction between directly and transitively impacted items
+        - Hover/Click interactions to explore specific nodes in more detail
+
+        <ImagePopup src="/img/impact-analysis1.png" alt="Impact Analysis1" caption="Impact Analysis1" />
+
+4. **Highlights the impact clearly:** 
+    Items that are impacted by the proposed change are visually emphasized:
+
+    - ⚠️ Warning icons on affected nodes or rows
+    - Color highlights for easy differentiation
+    - Expandable sections for viewing more details (e.g., which columns in a view are affected)
+
+5. **User action and feedback:**
+
+    - The warning is non-blocking. You can proceed with the action after reviewing the impact.
+    - You are presented with:
+
+        - A warning, which summarizes the scope of impact
+        - Options to explore the List or Graph view
+        - A "Proceed Anyway" or "Cancel Action" button
+
+
+## Impact analysis example
+
+1. A user attempts to delete the column `total_sales` from a workbook.
+2. The system runs the impact analysis.
+3. The screen displays the following:
+
+    - 3 directly affected views
+    - 2 dashboards and 1 pipeline that depend on those views
+
+4. User explores the graph view to understand the propagation path.
+5. User decides to proceed with the deletion after reviewing the impact.
+

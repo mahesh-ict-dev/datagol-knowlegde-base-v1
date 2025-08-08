@@ -1,0 +1,92 @@
+---
+sidebar_position: 7
+tags: [Visualizer, Dashboards, Widgets]
+slug: Parameters
+---
+
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+In DataGOL,**Parameters** are dynamic input placeholders—such as a number, text, date, or boolean—that **replace hardcoded values in formulas or BI Workbooks**. They allow users to **adjust values on the fly** in dashboards or visualizations without editing the actual SQL or underlying dataset.
+
+Think of a parameter as a control knob for your analysis:
+Instead of rewriting a formula to test different targets, dates, or metrics, you just **change the parameter value** and see the results update instantly.
+Parameters in BI tools empower users to dynamically control data views and interact with dashboards without altering the underlying data. Thus enhancing flexibility by enabling what-if analysis and metric switching
+
+This is a Widget created using the above example Formula & Parameter.
+ This Compares **'This Year' and 'Last Year'** Revenue performance across various months, the definition of what 'This Year' and 'Last Year' changes dynamically based on the parameter selected on the dashboard
+
+    <ImagePopup src="/img/sales-comparison.gif" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
+
+
+### Key Characteristics
+**Interactive**: Users can input values directly on dashboards.
+
+**Reusable**: Parameters can be referenced across multiple formulas and widgets.
+
+**Flexible Types**: Support for Text, Number, Boolean, Date, Date Range, Static Enum, and Dynamic Enum.
+
+**Formula-Compatible**: Must be used within a formula to affect analysis or visualization.
+
+### How to Create a Parameter ?
+
+1.  From **Visualizer**, adjacent to list of columns on the lower left, click the **Create Parameter** button.
+
+2.  Add the following details in the **Add Parameter** box:
+
+    <ImagePopup src="/img/image-20250508-112058.png" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
+
+    -   **Name**: Specify a unique name for the parameter.
+
+    -   **Key**: Select a unique identifier for your parameter, such as year.
+
+    -   **Type**: Select the data type for the key from TEXT, NUMBER, BOOLEAN, DATE, DATE TIME, DATE RANGE, DYNAMIC ENUM, STATIC ENUM.
+        For example, If you have want to specify the default value as year, you can select NUMBER type.
+
+    -   **Default** **Value**: Specify a default value, such as 2025.
+
+
+3.  Click **Create**. The created parameters are listed in the **Parameters** section.
+
+Note : For the parameters to be effective , they need to be passed as part of a formula column
+
+### Best Practices
+- Use clear parameter names so business users understand what to input.
+- Add default values to avoid empty results.
+- Validate your formula logic when combining with parameters.
+- Reuse parameters across multiple widgets for consistency.
+
+### How to Implement a Parameter :
+
+To make the parameter functional:
+
+1. Go to the **Formulas** section.
+2. Create a new formula that references the parameter.
+
+Example: Parameter usage in a formula
+
+  ```sql
+CASE
+    WHEN date_part('year', year_month)={{YEAR}} THEN 'This year'
+    WHEN date_part ('year', year_month)={{YEAR}}-1 THEN 'last year'
+    ELSE NULL
+END
+
+  ```
+
+
+### Using Parameters on Dashboards
+
+- Identify the Parameter on dashboard page
+
+ <ImagePopup src="/img/param.png" alt="parameters" caption="parameters" />
+
+
+
+
+
+
+
+
+

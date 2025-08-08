@@ -1,0 +1,133 @@
+# Alert History API
+
+The Alert History API provides functionality for monitoring alert execution history and statistics.
+
+## Get Alert History
+
+**GET** `/alerts/history/api/v1/alert/{alertId}`
+
+Retrieves execution history for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Response
+
+Returns a `List<AlertHistoryDTO>`.
+
+## Get Paginated Alert History
+
+**GET** `/alerts/history/api/v1/alert/{alertId}/paginated`
+
+Retrieves paginated execution history for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Query Parameters
+
+- `page` (integer) - Page number (default: 0)
+- `size` (integer) - Page size (default: 20)
+- `sort` (string) - Sort field and direction
+
+### Response
+
+Returns a `Page<AlertHistoryDTO>`.
+
+## Get Triggered Alerts
+
+**GET** `/alerts/history/api/v1/alert/{alertId}/triggered`
+
+Retrieves only triggered alert executions for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Response
+
+Returns a `List<AlertHistoryDTO>`.
+
+## Get Company Alert History
+
+**GET** `/alerts/history/api/v1/company`
+
+Retrieves all alert execution history for the user's company.
+
+### Response
+
+Returns a `List<AlertHistoryDTO>`.
+
+## Get Paginated Company Alert History
+
+**GET** `/alerts/history/api/v1/company/paginated`
+
+Retrieves paginated alert execution history for the user's company.
+
+### Query Parameters
+
+- `page` (integer) - Page number (default: 0)
+- `size` (integer) - Page size (default: 20)
+- `sort` (string) - Sort field and direction
+
+### Response
+
+Returns a `Page<AlertHistoryDTO>`.
+
+## Get Alert Statistics
+
+**GET** `/alerts/history/api/v1/statistics`
+
+Retrieves alert execution statistics for the user's company.
+
+### Query Parameters
+
+- `since` (date, required) - Start date for statistics (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+
+### Response
+
+Returns a `List<Tuple<String, Map<String, Object>>>`.
+
+## Count Company Triggered Alerts
+
+**GET** `/alerts/history/api/v1/company/count/triggered`
+
+Gets the count of triggered alerts for the user's company.
+
+### Response
+
+```json
+{
+  "triggeredCount": "long"
+}
+```
+
+## Delete Alert History
+
+**DELETE** `/alerts/history/api/v1/alert/{alertId}`
+
+Deletes all execution history for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Response
+
+`204 No Content`
+
+## Cleanup Old Alert History
+
+**DELETE** `/alerts/history/api/v1/cleanup`
+
+Deletes alert history entries older than the specified date.
+
+### Query Parameters
+
+- `beforeDate` (date, required) - Delete entries before this date (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+
+### Response
+
+`204 No Content` 

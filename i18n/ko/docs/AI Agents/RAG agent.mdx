@@ -1,0 +1,61 @@
+---
+sidebar_position : 7
+tags : [AI, AI Agents,]
+slug : rag-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## What is a RAG agent?
+
+The RAG (Retrieval-Augmented Generation) Agent is an AI-powered tool designed to understand and answer questions based on the content of unstructured documents. You can ask questions across your uploaded documents, workspace files, or indexed knowledge sources. The agent reads, retrieves, and summarizes intelligently. It excels at document understanding and providing contextual answers by retrieving relevant information from a knowledge base of uploaded files. 
+
+<ImagePopup src="/img/agents/rag-agent.png" alt="rag-agent" caption="RAG agent"/>
+
+The RAG agent enhances your ability to quickly extract information from documents with the following key capabilities:
+
+-   **Document understanding**: The agent can process and understand the content within various unstructured documents. RAG agent reads from PDFs, Google Docs, Notion exports, and more, understands context, and retrieves exact answers.
+    
+-   **Contextual answers**: It provides answers to your questions based on the specific text and context retrieved from the indexed documents in its knowledge base. The agent generates precise, cited answers with source references.
+    
+-   **Support for multiple file types**: The RAG agent supports a variety of document formats, including PDFs, Microsoft Word documents (`.doc`, `.docx`), CSVs, and XML files.
+    
+-   **Image retrieval**: The RAG agent can also retrieve and display relevant images from your PDF documents that were referred to during the answering of your query, providing a richer contextual understanding.
+    
+
+## **Configuring the RAG agent**
+
+The RAG agent configuration primarily involves uploading and indexing your documents within a workspace.
+
+1.  **Select a workspace**: Navigate to the **Explore** section and select the RAG agent. You will then choose an existing workspace where your documents are stored or create a new one.
+
+	<ImagePopup src="/img/agents/rag-select-workspace.png" alt="rag-select-workspace" caption="RAG Select Workspace"/>
+    
+2.  **Upload documents**: Within your chosen workspace, go to the **Documents** section. You can upload various file types, such as PDFs, Word documents, CSVs, and XML files.
+    
+3.  **Monitor indexing status**: After uploading, a status indicator (a green tick mark in the list view or a "completed" status) will show if the file has been successfully **indexed**. Indexing means the file's content has been processed and added to the RAG agent's knowledge base, making it searchable and available for answering questions.
+
+## **Using the RAG agent**
+
+Once your documents are indexed, you can start asking questions to the RAG agent. 
+
+1.  From the DataGOL Home page, navigate to the **Agents** section within the platform.
+2.  Click **RAG agent**.
+3. On the RAG agent's chat page, ensure the correct workspace (the one containing your indexed documents) is selected. This is indicated by a green tag showing the workspace name.
+4. Type your question into the chat interface. The agent will then retrieve information from the indexed documents within the selected workspace to provide an answer.
+
+	**Examples of usage:**
+	-   "What is John Doe's educational background?" (If "John Doe's resume" is indexed)  
+	-   "Can you help me understand the Lakehouse module?" (If a product manual with a "Lakehouse module" section and relevant images is indexed)
+
+	From the generated responses, you can do the following:
+	- **Review source documents**: If the answer is derived from a specific document, the agent will indicate which document. You can click on this reference to be taken directly to the source document for verification.
+
+		<ImagePopup src="/img/agents/rag-agent-doc-reference.png" alt="rag-doc-reference" caption="RAG Document Reference"/>
+
+    -	**Visualize relevant images**: If your query's answer references an image within the source PDF, the RAG agent will display that image alongside the textual response for better context.
+
+		<ImagePopup src="/img/agents/rag-agent-images-reference.png" alt="RAG Image Reference" caption="RAG Image Reference"/>
+
+    
+

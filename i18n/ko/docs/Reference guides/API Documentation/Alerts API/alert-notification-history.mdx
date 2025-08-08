@@ -1,0 +1,291 @@
+# Alert Notification History API
+
+The Alert Notification History API provides functionality for managing notification history and status.
+
+## Get Notification History for Alert
+
+**GET** `/api/v1/alerts/notification-history/alert/{alertId}`
+
+Retrieves notification history for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Query Parameters
+
+- `page` (integer, default: 0) - Page number
+- `size` (integer, default: 20) - Page size
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Notification History by Email
+
+**GET** `/api/v1/alerts/notification-history/email/{email}`
+
+Retrieves notification history for a specific email address.
+
+### Path Parameters
+
+- `email` (string) - The email address
+
+### Query Parameters
+
+- `page` (integer, default: 0) - Page number
+- `size` (integer, default: 20) - Page size
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Triggered Notifications
+
+**GET** `/api/v1/alerts/notification-history/alert/{alertId}/triggered`
+
+Retrieves triggered notifications for a specific alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Notification History by Company
+
+**GET** `/api/v1/alerts/notification-history/company/{companyId}`
+
+Retrieves notification history for a specific company.
+
+### Path Parameters
+
+- `companyId` (long) - The company ID
+
+### Query Parameters
+
+- `page` (integer, default: 0) - Page number
+- `size` (integer, default: 20) - Page size
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Notification History by User
+
+**GET** `/api/v1/alerts/notification-history/user/{userId}`
+
+Retrieves notification history for a specific user with optional date range filtering.
+
+### Path Parameters
+
+- `userId` (long) - The user ID
+
+### Query Parameters
+
+- `page` (integer, default: 0) - Page number
+- `size` (integer, default: 20) - Page size
+- `startDate` (date, optional) - Start date for filtering (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+- `endDate` (date, optional) - End date for filtering (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Notification History by Date Range
+
+**GET** `/api/v1/alerts/notification-history/alert/{alertId}/date-range`
+
+Retrieves notification history for a specific alert within a date range.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Query Parameters
+
+- `startDate` (date, required) - Start date (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+- `endDate` (date, required) - End date (ISO format: yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+- `page` (integer, default: 0) - Page number
+- `size` (integer, default: 20) - Page size
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Unread Notification History
+
+**GET** `/api/v1/alerts/notification-history/unread`
+
+Retrieves unread notification history.
+
+### Query Parameters
+
+- `alertId` (string, optional) - Filter by specific alert ID
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Pending Notifications
+
+**GET** `/api/v1/alerts/notification-history/pending`
+
+Retrieves all pending notifications.
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Mark Notification as Sent
+
+**POST** `/api/v1/alerts/notification-history/{notificationHistoryId}/mark-sent`
+
+Marks a notification as sent.
+
+### Path Parameters
+
+- `notificationHistoryId` (string) - The notification history ID
+
+### Response
+
+`200 OK`
+
+## Mark Notification as Seen
+
+**POST** `/api/v1/alerts/notification-history/{notificationHistoryId}/mark-seen`
+
+Marks a notification history entry as seen.
+
+### Path Parameters
+
+- `notificationHistoryId` (string) - The notification history ID
+
+### Response
+
+`200 OK`
+
+## Mark Notifications as Seen by Notification IDs
+
+**POST** `/api/v1/alerts/notification-history/mark-seen-by-notification`
+
+Marks multiple notifications as seen by their IDs.
+
+### Request Body
+
+```json
+["string"]
+```
+
+### Response
+
+`200 OK`
+
+## Mark Notifications as Seen by Element Filters
+
+**POST** `/api/v1/alerts/notification-history/mark-seen-by-elements`
+
+Marks notifications as seen by element filters.
+
+### Request Body
+
+```json
+[
+  {
+    "elementId": "string",
+    "elementType": "string"
+  }
+]
+```
+
+### Response
+
+```json
+{
+  "message": "string",
+  "updatedCount": "integer",
+  "filters": "array"
+}
+```
+
+## Get Notification Statistics
+
+**GET** `/api/v1/alerts/notification-history/stats`
+
+Retrieves notification statistics.
+
+### Query Parameters
+
+- `alertId` (string, optional) - Filter by alert ID
+- `companyId` (long, optional) - Filter by company ID
+- `userId` (long, optional) - Filter by user ID
+
+### Response
+
+```json
+{
+  "triggeredCount": "long"
+}
+```
+
+## Delete Notification History
+
+**DELETE** `/api/v1/alerts/notification-history/alert/{alertId}`
+
+Deletes notification history for an alert.
+
+### Path Parameters
+
+- `alertId` (string) - The ID of the alert
+
+### Response
+
+`200 OK`
+
+## Get Pending Notifications for User
+
+**GET** `/api/v1/alerts/notification-history/pending/user`
+
+Retrieves pending notifications for the logged-in user.
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Pending Notifications by Element
+
+**GET** `/api/v1/alerts/notification-history/pending/element`
+
+Retrieves pending notifications by element ID and element type.
+
+### Query Parameters
+
+- `elementId` (string, required) - The element ID
+- `elementType` (string, required) - The element type
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`.
+
+## Get Pending Notifications by Element Filters
+
+**POST** `/api/v1/alerts/notification-history/pending/elements`
+
+Retrieves pending notifications by multiple element filters.
+
+### Request Body
+
+```json
+[
+  {
+    "elementId": "string",
+    "elementType": "string"
+  }
+]
+```
+
+### Response
+
+Returns a `List<AlertNotificationHistoryDTO>`. 

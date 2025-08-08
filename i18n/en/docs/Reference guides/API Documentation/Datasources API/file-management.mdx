@@ -1,0 +1,76 @@
+# File Management API
+
+The File Management API provides operations for uploading, downloading, and managing files within data source tables.
+
+## File Operations
+
+### Upload Files to Table
+
+**POST** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/dataSourceFiles`
+
+Uploads files to a specific table.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Request Body
+
+Multipart form data with files.
+
+### Response
+
+Returns a `FileUploadResponseDTO` object.
+
+### Delete Files from Table
+
+**DELETE** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/dataSourceFiles`
+
+Deletes files from a specific table.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Request Body
+
+```json
+{
+  "fileIds": ["string"]
+}
+```
+
+### Response
+
+`204 No Content`
+
+### Download File
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/dataSourceFiles/{fileId}`
+
+Downloads a specific file from a table.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+- `fileId` (string) - The ID of the file
+
+### Response
+
+Returns the file content as a download.
+

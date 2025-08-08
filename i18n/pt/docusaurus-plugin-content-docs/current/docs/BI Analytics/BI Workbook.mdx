@@ -1,0 +1,104 @@
+---
+title: BI Workbook
+sidebar_position: 5
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+##  BI Workbooks in DataGOL
+
+**BI Workbooks** (also referred to as SQL Workbooks) are virtual workbooks that allow users to write custom SQL queries directly within the Visualizer. They provide greater control over data transformation, filtering, and parameterization, making them especially useful for advanced and dynamic analytical use cases.
+
+BI Workbooks are typically built on top of existing regular workbooks and are ideal when the default data model doesn’t fully meet specific reporting or filtering needs.
+
+
+##  When to Use a BI Workbook?
+
+BI Workbooks are especially useful when:
+
+- You are working with a **flattened data model** and need more control over filters, joins, or transformations.
+- You want to create **dynamic views** using parameters that regular workbooks can't support.
+- You need to define **custom calculated fields** using SQL expressions.
+- You want to **extend a golden layer** without modifying the original model.
+
+Whether you're an analyst or an advanced business user, BI Workbooks offer the flexibility to shape data the way your scenario demands — all while staying within the familiar DataGOL interface.
+
+---
+
+
+##  Key Benefits of BI Workbooks
+
+- **Custom SQL Logic**: Write custom queries for highly specific views.
+- **Parameterized Analysis**: Use parameters to dynamically filter or modify the dataset.
+- **Layered Exploration**: Extend a flattened base dataset with your own logic and calculated fields.
+---
+
+##  How to Create a BI Workbook
+
+1. Open the **Visualizer** and select the base workbook you'd like to build upon.
+2. Click on **New Query**.
+ <ImagePopup src="/img/new-query.gif" alt="bi-query" caption="bi-query" />
+3. Choose the appropriate **Data Provider** from the top-right corner.
+   > ⚠️ *Note: This selection is permanent and cannot be changed later.*
+4. Start writing your **SQL query**. The editor includes auto-complete suggestions for available workbooks, columns, formulas, and parameters within the workspace.
+5. Click **Run** to execute your query. If successful, the resulting columns (Dimensions, Metrics, Dates) will be available for use.
+6. Use these columns to start building widgets like charts, tables, or KPIs.
+7. When you pin your **first widget to a dashboard**, DataGOL will prompt you to **name and save** the BI Workbook.
+
+##  SQL Editor Autocomplete
+
+The **SQL editor** in DataGOL offers intelligent autocomplete functionality to help speed up query building and reduce errors. Suggestions are based on the tables, columns, formulas, and parameters available within your selected data connection.
+
+###  How It Works
+
+- As you begin typing your SQL query (e.g., `SELECT * FROM`), the editor will automatically suggest relevant tables available in the current connection.
+- Once a table is selected, the system autocompletes the query by assigning its internal reference name.
+
+   <ImagePopup src="/img/bi-query-writing.gif" alt="bi-query" caption="bi-query" />
+
+
+###  In the given Example
+
+```sql
+-- User input:
+SELECT * FROM pms_data-pms_data.csv
+
+-- Autocompleted as:
+SELECT * FROM app_connection_read.table_1663904
+
+```
+
+
+This maps the selected table to its internal reference and completes the syntax for immediate execution.
+
+Tip: You can also use autocomplete to reference columns, saved formulas, and parameters, making query building faster and more reliable.
+---
+## ✏️ How to Edit an Existing BI Workbook
+
+How to make changes to an already created BI Workbook:
+
+1. Open the **Visualizer** and select the desired **BI Workbook** from the source list.
+2. Click on **Edit Query**.
+     <ImagePopup src="/img/editBI.png" alt="bi-query" caption="bi-query" />
+
+3. Modify the existing SQL query as needed.
+4. Click **Run** to execute the updated query.
+5. Once the query runs successfully, a **new list of columns** (dimensions, metrics, dates) will be displayed.
+6. You can now:
+   - Update these changes to the existing BI Workbook,
+   - Create a new BI Workbook with the newly modified query.
+
+ 📝 Tip: Always validate that your existing widgets columns reflect the updated structure of the workbook and no data is lost.
+
+-----
+## 🔍 How to Identify a BI Workbook
+
+Once created, BI Workbooks are accessible and reusable like any other workbook:
+
+1. Click **Select Source** in the Visualizer.
+<ImagePopup src="/img/identifyBIWB.png" alt="bi-query" caption="bi-query" />
+2. Your newly created BI Workbook will appear in the list alongside regular workbooks.
+3. BI Workbooks are clearly labeled with a distinct **BI Workbook tag** to differentiate them.
+4. Upon selecting a BI Workbook, you can view the **underlying SQL query** directly in the editor.
+5. Click **Select** to begin creating widgets with the chosen BI Workbook.
+

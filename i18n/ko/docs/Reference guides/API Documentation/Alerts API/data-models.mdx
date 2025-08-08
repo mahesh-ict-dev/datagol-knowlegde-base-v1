@@ -1,0 +1,167 @@
+# Data Models
+
+This section describes the data models used in the Alerts API.
+
+## AlertDTO
+
+Represents an alert configuration.
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "status": "string",
+  "description": "string",
+  "recipients": ["string"],
+  "messageTemplateId": "string",
+  "scheduleType": "CRON | MANUAL | SCHEDULED | DATA_CHANGE",
+  "cronExpression": "string",
+  "sourceType": "string",
+  "sourceId": "string",
+  "alarmSourceType": "string",
+  "companyId": "long",
+  "userId": "long",
+  "config": {
+    "key": "value"
+  },
+  "elementLinks": [
+    {
+      "alertId": "string",
+      "elementId": "string",
+      "elementType": "string"
+    }
+  ],
+  "lastExecutedHistory": "AlertHistoryDTO",
+  "createdAt": "date",
+  "updatedAt": "date",
+  "createdBy": "string",
+  "updatedBy": "string"
+}
+```
+
+## AlertHistoryDTO
+
+Represents alert execution history.
+
+```json
+{
+  "id": "string",
+  "alertId": "string",
+  "alertName": "string",
+  "executedAt": "date",
+  "value": "double",
+  "comparisonValue": "double",
+  "query": "string",
+  "executionMetadata": "AlertExecutionMetadata",
+  "thresholdMet": "boolean",
+  "notificationSent": "boolean",
+  "alertDescription": "string",
+  "alertStatus": "string",
+  "alertSourceType": "string",
+  "alertSourceId": "string",
+  "createdAt": "date",
+  "updatedAt": "date",
+  "createdBy": "string",
+  "updatedBy": "string"
+}
+```
+
+## AlertNotificationHistoryDTO
+
+Represents notification history for alerts.
+
+```json
+{
+  "id": "string",
+  "alertId": "string",
+  "alertIdHistoryId": "string",
+  "alertName": "string",
+  "executedAt": "date",
+  "value": "double",
+  "query": "string",
+  "executionMetadata": "AlertExecutionMetadata",
+  "thresholdMet": "boolean",
+  "notificationSent": "boolean",
+  "seen": "boolean",
+  "links": [
+    {
+      "alertId": "string",
+      "elementId": "string",
+      "elementType": "string"
+    }
+  ],
+  "email": "string",
+  "alertDescription": "string",
+  "alertStatus": "string",
+  "alertSourceType": "string",
+  "alertSourceId": "string",
+  "createdAt": "date",
+  "updatedAt": "date",
+  "createdBy": "string",
+  "updatedBy": "string"
+}
+```
+
+## AlertExecutionMetadata
+
+Contains metadata about alert execution.
+
+```json
+{
+  "thresholdOperand": "string",
+  "thresholdValue": "double",
+  "executionStatus": "SUCCESS | FAILED",
+  "errorMessage": "string",
+  "triggerMessage": "string",
+  "executionTimeMs": "long",
+  "dataSource": "string",
+  "tableName": "string",
+  "columnName": "string",
+  "aggregationType": "string",
+  "filters": "string",
+  "cronExpression": "string",
+  "jobKey": "string",
+  "jobGroup": "string"
+}
+```
+
+## ElementFilterRequestDTO
+
+Represents an element filter for notifications.
+
+```json
+{
+  "elementId": "string",
+  "elementType": "string"
+}
+```
+
+## AlertElementLink
+
+Represents a link between an alert and an element.
+
+```json
+{
+  "alertId": "string",
+  "elementId": "string",
+  "elementType": "string"
+}
+```
+
+## Enums
+
+### ScheduleType
+
+Defines the scheduling types for alerts:
+
+- `CRON` - Cron-based scheduling
+- `MANUAL` - Manual execution only
+- `SCHEDULED` - Scheduled execution
+- `DATA_CHANGE` - Triggered by data changes
+
+### ExecutionStatus
+
+Defines the execution status:
+
+- `SUCCESS` - Execution completed successfully
+- `FAILED` - Execution failed 

@@ -1,0 +1,34 @@
+---
+slug: append-replace-data-existing-workbooks
+tags: [API, Workbook, Curl]
+sidebar_position : 29
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+   
+You can **append new data** to existing workbooks or **replace entire sheets** with revised data. If you need to do any of the following, then appending the workbook with the required data or replacing the entire workbook is a good solution:
+
+-   **Periodic data updates:** You can upload monthly, weekly, or daily exports and append them to existing data.
+    
+-   **Bulk corrections:** You can clean and reformat data offline, then replace the entire workbook.
+    
+-   **Dashboard & Pipeline continuity:** When a workbook is used in dashboards or materialized view (MV) pipelines, replacing the data avoids the need to change the workbook reference. This allows you to refresh the full dataset without breaking downstream connections or reconfiguring linked components.
+    
+To append or replace data in a workbook, do the following:
+
+1.  In a workbook, click **Settings** from the top and select **Import Data**.
+
+    <ImagePopup src="/img/append-or-replace-data-workbooks/append-or-replace-data-in-existing-workbooks.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+
+2. In the **Import** dialog box, specify the type of file you want to upload and upload the file.
+
+    <ImagePopup src="/img/append-or-replace-data-workbooks/1append-or-replace-data-in-existing-workbooks.png" alt="Links-and-Joins" caption="Links and Joins" />
+
+
+3. In the **Import** dialog box, specify whether you want to append or replace by clicking the corresponding buttons.
+
+    <ImagePopup src="/img/append-or-replace-data-workbooks/Append-and-replace.gif" alt="Links-and-Joins" caption="Links and Joins" />
+
+4. Click **Append/Replace**.

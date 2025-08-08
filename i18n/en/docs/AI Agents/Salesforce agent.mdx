@@ -1,0 +1,102 @@
+---
+sidebar_position : 5
+tags : [AI, AI Agents,]
+slug : salesforce-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+## What is the Salesforce agent?
+
+The **Salesforce agent** is an AI-powered tool designed to integrate directly with your Salesforce CRM. It functions as an intelligent assistant, enabling you to interact with your Salesforce data and perform actions using natural language. Unlike traditional data connectors primarily used for data extraction and reporting, this agent is built to understand your intent and execute operations within Salesforce, such as retrieving lead information or creating new accounts, contacts, leads, and opportunities.
+
+<ImagePopup src="/img/agents/salesforce-agent.png" alt="Salesforce-agent" caption="Salesforce-agent"/>
+
+The Salesforce agent offers comprehensive key capabilities for conversational interaction with your CRM, streamlining workflows and improving data management.
+
+-   **Natural language understanding:** It can accurately interpret your questions and commands phrased in plain English, translating them into specific actions within Salesforce.
+    
+-   **Intelligent data retrieval:** The agent can fetch specific lead, contact, account, opportunity, or other CRM data, summaries, and lists based on your queries.
+    
+-   **Direct action execution:** You can instruct the agent to perform actions like creating new accounts, contacts, leads, or opportunities directly within Salesforce.
+    
+-   **Action preview and confirmation:** For critical actions such as creating a new record, the agent provides a preview of the proposed details, allowing you to review, modify, and confirm the information before it's committed to Salesforce.
+
+
+## Configuring the Salesforce agent
+
+Configuring the Salesforce agent requires setting up a connector to establish secure communication with your Salesforce CRM.
+
+1.  From the DataGOL Home page navigate to the **Connectors** page.
+    
+2.  Click on the **New Connector** button.
+    
+3.  Choose **Salesforce** from the list of available connector types.
+
+    <ImagePopup src="/img/agents/salesforce-credentials.png" alt="Salesforce-credentials" caption="Salesforce-credentials"/>
+    
+4.  Provide the following details for your Salesforce instance:
+    
+    -   **Connection name:** A descriptive name for this specific Salesforce connection (e.g., "My Salesforce Org").
+        
+    -   **Username:** Your Salesforce username.
+        
+    -   **Password:** Your Salesforce password.
+        
+    -   **Security token:** Your Salesforce security token. (You typically reset or generate this in your Salesforce personal settings).
+        
+5.  Click **Submit**.
+    
+
+## Using the Salesforce agent
+
+The Salesforce agent can perform various functions to help you manage your sales processes and customer relationships more effectively.
+
+-   **Retrieve information:**
+    
+    -   **Get leads by criteria:** Ask to see leads based on specific criteria or keywords.
+        -   _Example prompt:_ "Show me the leads which are related to the schema."
+            
+    -   **Query other objects:** Retrieve information about accounts, contacts, or opportunities.
+        -   _Example prompt:_ "List all open opportunities for ABC Corp."
+            
+-   **Create records:** The Salesforce agent is capable of creating various standard Salesforce objects.
+    
+    -   **Create leads:**
+        -   _Example prompt:_ "Create a new lead for Jane Doe, email jane.doe@example.com, company XYZ Solutions."
+            
+    -   **Create contacts:**
+        -   _Example prompt:_ "Create a new contact named Michael Scott, email michael.scott@dundermifflin.com."
+            
+    -   **Create accounts:**
+        -   _Example prompt:_ "Create a new account named 'Global Innovations Inc.' with industry 'Technology'."
+            
+    -   **Create opportunities:**
+        -   _Example prompt:_ "Create an opportunity for account 'Acme Corp' with name 'New Software License', amount $50,000, and close date 2025-12-31."
+            
+    -   The agent is designed to understand your intention based on the prompt and will present a preview of the record details. You can modify these details before approving. Upon approval, the record will be successfully created in Salesforce.
+        
+
+Once the Salesforce connector is configured, you can start interacting with the agent.
+
+1.  From the DataGOL Home page, navigate to the **Agents** section within the platform.
+    
+2.  Click on the **Salesforce Agent** from the list of available agents.
+    
+3.  Select the Salesforce connector you had configured. 
+    
+4.  In the chat or prompt area, type your questions or commands in natural language.
+    
+    -   **Examples of prompts:**
+        
+        -   "Show me all leads from California."
+            
+        -   "Create a new account for 'Innovate Solutions' in the 'Software' industry."
+            
+        -   "Find contacts associated with 'TechCorp.'"
+            
+        -   "Create an opportunity for 'Big Deal Inc.' for $100,000, expected close date end of next quarter."
+            
+5.  If you have requested an action like creating a lead, contact, account, or opportunity, the agent will present a preview of the details. Review this information carefully. You will have the option to modify fields before confirming the action. Once confirmed, the agent will execute the action in Salesforce, and you will receive a confirmation message.
+    By following these steps, you can efficiently use the Salesforce agent to retrieve information and manage various records directly through conversational commands.

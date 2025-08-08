@@ -1,0 +1,429 @@
+# Error Handling
+
+This section describes error handling and common error responses in the Pipeline API.
+
+## Common Error Codes
+
+| Status Code | Description |
+|-------------|-------------|
+| `400 Bad Request` | Invalid request parameters or malformed request body |
+| `401 Unauthorized` | Authentication required or invalid credentials |
+| `403 Forbidden` | Insufficient permissions to access the resource |
+| `404 Not Found` | Requested resource not found |
+| `409 Conflict` | Resource conflict (e.g., duplicate pipeline name) |
+| `422 Unprocessable Entity` | Validation errors in request data |
+| `429 Too Many Requests` | Rate limit exceeded |
+| `500 Internal Server Error` | Server error or unexpected exception |
+
+## Error Response Format
+
+All error responses follow a consistent format:
+
+```json
+{
+  "error": "string",
+  "message": "string",
+  "timestamp": "date",
+  "path": "string",
+  "details": {
+    "field": "string",
+    "value": "string",
+    "constraint": "string"
+  }
+}
+```
+
+### Error Response Fields
+
+- `error` - Error type or code
+- `message` - Human-readable error description
+- `timestamp` - When the error occurred
+- `path` - The API endpoint that was called
+- `details` - Additional error details (optional)
+
+## Common Error Scenarios
+
+### Authentication Errors
+
+```json
+{
+  "error": "UNAUTHORIZED",
+  "message": "Authentication required",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/"
+}
+```
+
+### Validation Errors
+
+```json
+{
+  "error": "VALIDATION_ERROR",
+  "message": "Request validation failed",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/",
+  "details": {
+    "field": "name",
+    "value": "",
+    "constraint": "must not be empty"
+  }
+}
+```
+
+### Resource Not Found
+
+```json
+{
+  "error": "NOT_FOUND",
+  "message": "Pipeline with ID '123' not found",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/123"
+}
+```
+
+### Conflict Errors
+
+```json
+{
+  "error": "CONFLICT",
+  "message": "Pipeline with name 'Daily Sales Report' already exists",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/"
+}
+```
+
+### Rate Limiting
+
+```json
+{
+  "error": "RATE_LIMIT_EXCEEDED",
+  "message": "Rate limit exceeded. Please try again later.",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/",
+  "details": {
+    "retryAfter": "60"
+  }
+}
+```
+
+### Job Execution Errors
+
+```json
+{
+  "error": "JOB_EXECUTION_FAILED",
+  "message": "Pipeline job execution failed",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v1/123/run",
+  "details": {
+    "jobId": "456",
+    "failureReason": "Query execution timeout",
+    "streamName": "sales_summary"
+  }
+}
+```
+
+## Pipeline-Specific Errors
+
+### Invalid Query Engine
+
+```json
+{
+  "error": "INVALID_QUERY_ENGINE",
+  "message": "Query engine 'INVALID_ENGINE' is not supported",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/",
+  "details": {
+    "supportedEngines": ["SPARK", "SNOWFLAKE", "BIGQUERY"]
+  }
+}
+```
+
+### Invalid Schedule Configuration
+
+```json
+{
+  "error": "INVALID_SCHEDULE",
+  "message": "Invalid cron expression format",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/",
+  "details": {
+    "field": "schedule.cronExpression",
+    "value": "invalid-cron",
+    "constraint": "must be a valid cron expression"
+  }
+}
+```
+
+### Data Source Connection Error
+
+```json
+{
+  "error": "DATASOURCE_CONNECTION_FAILED",
+  "message": "Failed to connect to data source",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/dataPipeline/api/v2/",
+  "details": {
+    "sourceId": "789",
+    "sourceName": "Sales Database",
+    "error": "Connection timeout"
+  }
+}
+```
+
+## Error Handling Best Practices
+
+### Retry Logic
+
+```javascript
+async function createPipeline(pipelineData, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const response = await fetch('/dataPipeline/api/v2/', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pipelineData)
+      });
+
+      if (response.ok) {
+        return await response.json();
+      }
+
+      const errorData = await response.json();
+      
+      if (response.status === 429) {
+        // Rate limiting - wait and retry
+        const retryAfter = parseInt(errorData.details?.retryAfter || 60);
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
+
+      if (response.status >= 500) {
+        // Server error - retry with exponential backoff
+        if (attempt < maxRetries - 1) {
+          await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+          continue;
+        }
+      }
+
+      throw new Error(`Error ${response.status}: ${errorData.message}`);
+    } catch (error) {
+      if (attempt === maxRetries - 1) {
+        throw error;
+      }
+    }
+  }
+}
+```
+
+### Error Handling (Python)
+
+```python
+import requests
+import time
+import json
+
+def create_pipeline(pipeline_data, token, max_retries=3):
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json'
+    }
+    
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(
+                '/dataPipeline/api/v2/',
+                json=pipeline_data,
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 429:
+                # Rate limiting - wait and retry
+                error_data = response.json()
+                retry_after = int(error_data.get('details', {}).get('retryAfter', 60))
+                time.sleep(retry_after)
+                continue
+            elif response.status_code >= 500:
+                # Server error - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)
+                    continue
+            else:
+                error_data = response.json()
+                raise Exception(f"Error {response.status_code}: {error_data.get('message', 'Unknown error')}")
+                
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries - 1:
+                raise Exception(f"Failed to create pipeline after {max_retries} attempts: {str(e)}")
+            time.sleep(2 ** attempt)
+    
+    raise Exception("Failed to create pipeline")
+
+# Usage with error handling
+try:
+    pipeline_data = {
+        "name": "Daily Sales Report",
+        "type": "STANDARD",
+        "description": "Generates daily sales reports",
+        "scheduleType": "CRON",
+        "schedule": {
+            "cronExpression": "0 2 * * *",
+            "timeZone": "UTC"
+        },
+        "sources": [
+            {
+                "id": 123,
+                "name": "Sales Database",
+                "type": "POSTGRESQL"
+            }
+        ],
+        "destination": {
+            "id": 456,
+            "name": "Data Warehouse",
+            "type": "SNOWFLAKE"
+        },
+        "streams": [
+            {
+                "name": "sales_summary",
+                "query": "SELECT date, SUM(amount) FROM sales GROUP BY date",
+                "outputTableName": "daily_sales_summary",
+                "syncMode": "FULL"
+            }
+        ],
+        "queryEngine": "SPARK"
+    }
+    
+    pipeline = create_pipeline(pipeline_data, 'your-jwt-token')
+    print(f"Pipeline created: {pipeline['id']}")
+    
+except Exception as e:
+    print(f"Error creating pipeline: {e}")
+```
+
+### Error Handling (JavaScript/TypeScript)
+
+```typescript
+interface PipelineError {
+  error: string;
+  message: string;
+  timestamp: string;
+  path: string;
+  details?: {
+    field?: string;
+    value?: string;
+    constraint?: string;
+    retryAfter?: string;
+  };
+}
+
+class PipelineAPIError extends Error {
+  constructor(
+    public statusCode: number,
+    public errorData: PipelineError,
+    message?: string
+  ) {
+    super(message || errorData.message);
+    this.name = 'PipelineAPIError';
+  }
+}
+
+async function handlePipelineError(response: Response): Promise<never> {
+  const errorData: PipelineError = await response.json();
+  
+  switch (response.status) {
+    case 400:
+      throw new PipelineAPIError(400, errorData, `Validation error: ${errorData.message}`);
+    case 401:
+      throw new PipelineAPIError(401, errorData, 'Authentication required');
+    case 403:
+      throw new PipelineAPIError(403, errorData, 'Insufficient permissions');
+    case 404:
+      throw new PipelineAPIError(404, errorData, 'Resource not found');
+    case 409:
+      throw new PipelineAPIError(409, errorData, `Conflict: ${errorData.message}`);
+    case 429:
+      throw new PipelineAPIError(429, errorData, 'Rate limit exceeded. Please try again later.');
+    case 422:
+      throw new PipelineAPIError(422, errorData, `Validation error: ${errorData.message}`);
+    default:
+      throw new PipelineAPIError(response.status, errorData, `Server error: ${errorData.message}`);
+  }
+}
+
+async function createPipeline(pipelineData: any, token: string): Promise<any> {
+  const response = await fetch('/dataPipeline/api/v2/', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(pipelineData)
+  });
+
+  if (!response.ok) {
+    await handlePipelineError(response);
+  }
+
+  return await response.json();
+}
+
+// Usage
+try {
+  const pipeline = await createPipeline(pipelineData, token);
+  console.log('Pipeline created:', pipeline);
+} catch (error) {
+  if (error instanceof PipelineAPIError) {
+    console.error(`Pipeline API Error (${error.statusCode}):`, error.message);
+    
+    if (error.statusCode === 429) {
+      const retryAfter = parseInt(error.errorData.details?.retryAfter || '60');
+      console.log(`Retry after ${retryAfter} seconds`);
+    }
+  } else {
+    console.error('Unexpected error:', error);
+  }
+}
+```
+
+## Monitoring and Alerting
+
+### Error Monitoring
+
+```javascript
+// Error monitoring function
+function logPipelineError(error, context) {
+  const errorLog = {
+    timestamp: new Date().toISOString(),
+    error: error.message,
+    statusCode: error.statusCode || 'unknown',
+    context: context,
+    userAgent: navigator.userAgent,
+    url: window.location.href
+  };
+
+  // Send to monitoring service
+  fetch('/api/error-logging', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(errorLog)
+  }).catch(console.error);
+
+  // Log to console in development
+  if (process.env.NODE_ENV === 'development') {
+    console.error('Pipeline Error:', errorLog);
+  }
+}
+```
+
+### Error Recovery Strategies
+
+1. **Retry with Exponential Backoff**: For transient errors (5xx, rate limits)
+2. **Circuit Breaker Pattern**: For repeated failures
+3. **Graceful Degradation**: Fallback to cached data or simplified operations
+4. **User Notification**: Inform users of errors and expected resolution times
+5. **Automatic Recovery**: Self-healing mechanisms for common issues
+

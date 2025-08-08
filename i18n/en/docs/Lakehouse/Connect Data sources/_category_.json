@@ -1,0 +1,8 @@
+{
+  "label": "Connect Data sources",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Connect to various data sources."
+  }
+}

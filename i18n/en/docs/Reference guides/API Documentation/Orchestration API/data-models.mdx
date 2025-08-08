@@ -1,0 +1,192 @@
+# Data Models
+
+This section describes the data models used in the Orchestration API.
+
+## DagDTO
+
+Represents a Directed Acyclic Graph (DAG) workflow configuration.
+
+```json
+{
+  "id": "number",
+  "name": "string",
+  "companyId": "number",
+  "createdAt": "date",
+  "createdBy": "UserDTO",
+  "nodes": ["DagNodeDTO"],
+  "edges": ["DagEdgeDTO"],
+  "latestRun": "DagRunDTO",
+  "metadata": {
+    "key": "value"
+  },
+  "scheduleType": "CRON | MANUAL | SCHEDULED | DATA_CHANGE",
+  "schedule": "ScheduleData",
+  "defaultParameters": {
+    "key": "value"
+  }
+}
+```
+
+## DagNodeDTO
+
+Represents a node (pipeline) within a DAG.
+
+```json
+{
+  "id": "number",
+  "dagId": "number",
+  "pipelineId": "number",
+  "metadata": {
+    "key": "value"
+  },
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+## DagEdgeDTO
+
+Represents a connection between two nodes in a DAG.
+
+```json
+{
+  "id": "number",
+  "dagId": "number",
+  "fromNodeId": "number",
+  "toNodeId": "number",
+  "metadata": {
+    "key": "value"
+  },
+  "createdAt": "date"
+}
+```
+
+## DagRunDTO
+
+Represents an execution instance of a DAG.
+
+```json
+{
+  "id": "number",
+  "dagId": "number",
+  "status": "DataPipelineJobStatus",
+  "startTime": "date",
+  "endTime": "date",
+  "type": "ScheduleType",
+  "createdBy": "UserDTO",
+  "parameters": {
+    "key": "value"
+  },
+  "jobMappings": ["DagRunJobDTO"],
+  "dagSnapshotId": "number"
+}
+```
+
+## DagRunJobDTO
+
+Represents a job execution within a DAG run.
+
+```json
+{
+  "id": "number",
+  "dagRunId": "number",
+  "dagNodeId": "number",
+  "jobId": "number",
+  "executionOrder": "number",
+  "job": "DataPipelineJobDTO",
+  "parameters": {
+    "key": "value"
+  }
+}
+```
+
+## ScheduleData
+
+Represents scheduling configuration for a DAG.
+
+```json
+{
+  "cronExpression": "string",
+  "basicSchedule": {
+    "timeUnit": "SECOND | MINUTE | HOUR | DAY | WEEK | MONTH | YEAR",
+    "units": "string"
+  }
+}
+```
+
+## UserDTO
+
+Represents a user in the system.
+
+```json
+{
+  "id": "number",
+  "email": "string",
+  "firstName": "string",
+  "lastName": "string"
+}
+```
+
+## DataPipelineJobDTO
+
+Represents a data pipeline job.
+
+```json
+{
+  "id": "number",
+  "name": "string",
+  "status": "DataPipelineJobStatus",
+  "startTime": "date",
+  "endTime": "date",
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+## Enums
+
+### ScheduleType
+
+```typescript
+enum ScheduleType {
+  CRON = 'CRON',           // Cron-based scheduling
+  MANUAL = 'MANUAL',       // Manual execution only
+  SCHEDULED = 'SCHEDULED', // Time-based scheduling
+  DATA_CHANGE = 'DATA_CHANGE' // Triggered by data changes
+}
+```
+
+### DataPipelineJobStatus
+
+```typescript
+enum DataPipelineJobStatus {
+  QUEUED = 'QUEUED',                     // Job is queued for execution
+  STARTED = 'STARTED',                   // Job has started
+  FAILED = 'FAILED',                     // Job execution failed
+  CANCELLED = 'CANCELLED',               // Job was cancelled
+  COMPLETED = 'COMPLETED',               // Job completed successfully
+  PENDING = 'PENDING',                   // Job is pending execution
+  RUNNING = 'RUNNING',                   // Job is currently running
+  INCOMPLETE = 'INCOMPLETE',             // Job execution was incomplete
+  SUCCEEDED = 'SUCCEEDED',               // Job succeeded
+  DELETED = 'DELETED',                   // Job was deleted
+  UNKNOWN = 'UNKNOWN',                   // Job status is unknown
+  PRE_VALIDATION_FAILED = 'PRE_VALIDATION_FAILED',   // Pre-validation failed
+  POST_VALIDATION_FAILED = 'POST_VALIDATION_FAILED'  // Post-validation failed
+}
+```
+
+### TimeUnit
+
+```typescript
+enum TimeUnit {
+  SECOND = 'SECOND',
+  MINUTE = 'MINUTE',
+  HOUR = 'HOUR',
+  DAY = 'DAY',
+  WEEK = 'WEEK',
+  MONTH = 'MONTH',
+  YEAR = 'YEAR'
+}
+```
+

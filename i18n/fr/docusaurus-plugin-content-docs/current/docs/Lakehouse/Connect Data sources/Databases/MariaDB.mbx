@@ -1,0 +1,28 @@
+---
+sidebar_position: 5
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-mariadb
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding MariaDB data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the MariaDB icon. 
+    
+3.  Specify the following details to add MariaDB. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+| Field | Description |
+|:---|:---|
+| **Connection name** | Enter a unique name for the connection. |
+| **Database name** | Specify the name of the existing database you want to connect to. |
+| **Hostname** | Provide the hostname or IP address of the server where the database resides. |
+| **Port** | Enter the port number used by the database server. |
+| **Username/Password** | Provide the credentials to access the database server. |
+| **Properties** | Specify additional settings by entering key/value pairs. Each pair represents a unique property and its value. |
+
+4.  Click **Submit**. 

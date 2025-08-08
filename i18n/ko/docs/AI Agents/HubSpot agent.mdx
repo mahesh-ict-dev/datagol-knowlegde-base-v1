@@ -1,0 +1,64 @@
+---
+sidebar_position : 4
+tags : [AI, AI Agents,]
+slug : hubspot-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+
+The HubSpot agent is an AI-powered tool designed to interact with your HubSpot CRM. It allows you to retrieve information and perform actions directly within your HubSpot environment by using natural language commands.
+
+ <ImagePopup src="/img/agents/hubspot-agent.png" alt="HubSpot agent" caption="HubSpot agent"/>
+
+The HubSpot agent streamlines your CRM operations by offering the following capabilities:
+
+-   **Retrieving CRM data**: You can ask the agent to fetch specific information from your HubSpot CRM, such as leads created within a certain timeframe, leads with high conversion potential, or leads from particular channels.
+    
+-   **Generating key insights and recommendations**: The agent can analyze your CRM data and provide valuable insights and recommendations, including probability scoring for leads.
+    
+-   **Creating leads**: You can directly create new leads in HubSpot by providing the necessary details through natural language prompts. The agent offers a preview of the lead information before creation, allowing for review and modification.
+    
+:::info
+The HubSpot agent is synced with the data in realtime.
+:::
+
+## **Configuring the HubSpot agent**
+
+To configure the HubSpot agent, you need to connect it to your HubSpot account by providing the necessary credentials. This process involves the following steps:
+
+1.  From the DataGOL Home page navigate to the **Connectors** page.
+2.  Click on the **New Connector** button.
+3.  Choose **HubSpot** from the list of available connector types.
+
+    <ImagePopup src="/img/agents/hubspot-configure.png" alt="HubSpot configure" caption="HubSpot configure"/>
+
+4.  Provide the following information:
+	-	**Connection name**: Provide a descriptive name for your HubSpot connection (e.g., "My HubSpot CRM").        
+    -   **API Key**: Specify Your HubSpot private app access token.
+    -   **Hub ID**: Specify your HubSpot Hub ID. 
+
+5. Click **Submit**.
+
+## **Using the HubSpot agent**
+
+Once configured, you can start interacting with the HubSpot agent by typing your requests.
+
+1.  From the DataGOL Home page, navigate to the **Agents** section within the platform.
+    
+2.  Click on the **HubSpot Agent** from the list of available agents.
+    
+3.  Select the HubSpot connector you had configured.
+    
+4.  In the chat or prompt area, type your questions or commands in natural language.
+    
+    **Examples of usage:**
+
+    -   **To retrieve leads**: "Show me the leads created this month and which channels converted."
+    -   **To create a lead**: "Create a lead with the name 'John Doe' and email 'johndoe@example.com'."
+
+    After you provide a prompt to create a lead, the agent will present a preview of the lead information. You can then review, modify, or approve the details before the lead is officially created in HubSpot.
+
+
+

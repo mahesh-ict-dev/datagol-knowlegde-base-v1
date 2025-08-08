@@ -1,0 +1,64 @@
+---
+sidebar_position: 3
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-sftp-bulk
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding SFTP Bulk as data source
+
+:::info **Prerequisite for adding SFTP Bulk**
+
+The following connector information is required from the client:
+
+-   Username
+    
+-   Password
+    
+-   Host
+    
+-   Port
+    
+-   File Type
+    
+-   Stream Name
+    
+-   Folder Path
+    
+-   CSV Separator
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Login to a SFTP server using your credentials.
+    
+2.  Create a folder in the server and drop your files there.
+:::
+
+To add SFTP Bulk as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the SFTP icon. 
+    
+3.  Specify the following details to add SFTP Bulk. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    <ImagePopup src="/img/Datasource/image-20250511-111209.png" alt="Add_SFTP_Hulk" caption="Add_SFTP_Hulk" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **File Type** | Currently, only CSV files are supported. |
+    | **Username / Password** | Specify the client credentials. |
+    | **Host Address** | Specify the SFTP server address. |
+    | **Port** | Specify the port number of the SFTP server. |
+    | **Stream Name** | Enter name of the output table you want to create. Specify the desired name for the data stream (table) in the destination warehouse. This can be any name and is independent of the actual CSV file names. Sync modes (incremental/full refresh) are configured at the _stream_ level, not at the pipeline level. |
+    | **Folder Path** | Provide the absolute path to the folder on the SFTP server containing the CSV files (e.g., `/home/Ubuntu/SFTP/credit`). Ensure this path is accurate. |
+    | **Start Date** | Specify the date from which to begin replicating data. This allows for historical data selection. |
+    | **CSV separator** | Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured. |
+
+4.  Click **Submit**. 

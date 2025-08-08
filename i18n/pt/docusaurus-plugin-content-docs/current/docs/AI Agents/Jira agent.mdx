@@ -1,0 +1,57 @@
+---
+sidebar_position : 3
+tags : [AI, AI Agents,]
+slug : jira-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## What is the Jira agent?
+
+The Jira agent is an AI-powered tool that facilitates interaction with your Jira instance. It allows you to query information and perform actions within Jira using natural language commands, similar to how you would interact with a human agent.
+
+<ImagePopup src="/img/agents/jira-agent.png" alt="Jira agent" caption="Jira agent"/>
+
+
+The Jira agent is designed to streamline your project management tasks in Jira with the following capabilities:
+
+-   **Retrieving Jira information**: You can ask the agent to fetch specific data from your Jira instance, such as recent releases, issue details, or project summaries.
+    
+-   **Creating Jira tickets**: The agent enables you to create new Jira tickets directly by providing the necessary information through natural language prompts. It offers a preview of the ticket details before creation, allowing for review and modification.
+    
+In short it is your intelligent assistant for searching, summarizing, and managing Jira tickets across projects and teams with natural language.
+
+## **Configuring the Jira agent**
+
+To configure the Jira agent, you need to establish a connection to your Jira instance by providing your credentials. Here's how:
+
+1.  From the DataGOL Home page navigate to the **Connectors** page.
+2.  Click on the **New Connector** button.
+    <ImagePopup src="/img/agents/jira-new-connector-config.png" alt="Jira connector" caption="Jira connector"/>
+3.  Choose **Jira** from the list of available connector types.
+4.  You will need to provide the following information:
+
+    -   **Connector name**: A descriptive name for your Jira connection (e.g., "My Company Jira")
+    -   **Jira username**: Your Jira username 
+    -   **API token**: Your Jira API token. Refer [here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) for creating the Jira API token.    
+    -   **Instance URL**: The base URL of your Jira instance (e.g., `https://yourcompany.atlassian.net`).
+        
+6.  Click **Submit**.
+    
+## **Using the Jira agent**
+
+Once the Jira agent is configured, you can start issuing commands in natural language.
+
+1.  From the DataGOL Home page, navigate to the **Agents** section within the platform.
+    
+2.  Click on the **Jira Agent** from the list of available agents.
+    
+3.  Select the Jira connector you had configured.
+    
+4.  In the chat or prompt area, type your questions or commands in natural language.
+    **Examples of usage:**
+
+    -   **To retrieve recent releases**: "Show me the recent five releases."
+    -   **To create a Jira ticket**: "Create a ticket in AI project with the summary 'AI test something' and not assign to anyone."
+    When you prompt the agent to create a ticket, it will provide a preview of the ticket details, including the project key, summary, description, and assignee. 
+    You can review and modify these details before approving the creation. Upon approval, the ticket will be generated in Jira with an allotted Jira number.

@@ -1,0 +1,521 @@
+# DAG Snapshot API
+
+The DAG Snapshot API provides endpoints for version control and historical tracking of DAG configurations.
+
+## Get DAG Snapshots
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/snapshots`
+
+Retrieves snapshots of a DAG for version control.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `snapshotId` | Long | No | Get specific snapshot |
+| `limit` | Integer | No | Maximum number of snapshots (default: 20) |
+| `offset` | Integer | No | Number of snapshots to skip (default: 0) |
+
+### Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "dagId": 1,
+      "version": "1.0.0",
+      "createdAt": "2024-01-15T10:30:00Z",
+      "createdBy": {
+        "id": 456,
+        "email": "user@example.com"
+      },
+      "description": "Initial DAG configuration",
+      "dagConfiguration": {
+        "name": "Data Processing Workflow",
+        "nodes": [
+          {
+            "id": 101,
+            "pipelineId": 789,
+            "metadata": {
+              "description": "Data extraction pipeline"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": 201,
+            "fromNodeId": 101,
+            "toNodeId": 102,
+            "metadata": {
+              "condition": "success"
+            }
+          }
+        ],
+        "scheduleType": "SCHEDULED",
+        "schedule": {
+          "basicSchedule": {
+            "timeUnit": "HOUR",
+            "units": "24"
+          }
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "total": 5,
+    "limit": 20,
+    "offset": 0
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Get Specific Snapshot
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/snapshots/{snapshotId}`
+
+Retrieves a specific DAG snapshot by ID.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `snapshotId` | Long | Yes | The snapshot ID |
+
+### Response
+
+```json
+{
+  "id": 1,
+  "dagId": 1,
+  "version": "1.0.0",
+  "createdAt": "2024-01-15T10:30:00Z",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "description": "Initial DAG configuration",
+  "dagConfiguration": {
+    "name": "Data Processing Workflow",
+    "nodes": [
+      {
+        "id": 101,
+        "pipelineId": 789,
+        "metadata": {
+          "description": "Data extraction pipeline"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 201,
+        "fromNodeId": 101,
+        "toNodeId": 102,
+        "metadata": {
+          "condition": "success"
+        }
+      }
+    ],
+    "scheduleType": "SCHEDULED",
+    "schedule": {
+      "basicSchedule": {
+        "timeUnit": "HOUR",
+        "units": "24"
+      }
+    },
+    "defaultParameters": {
+      "sourceTable": "raw_data",
+      "targetTable": "processed_data"
+    }
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/1" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Create Snapshot
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/snapshots`
+
+Creates a new snapshot of the current DAG configuration.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Request Body (optional)
+
+```json
+{
+  "description": "Updated DAG with new transformation pipeline",
+  "version": "1.1.0"
+}
+```
+
+### Response
+
+```json
+{
+  "id": 2,
+  "dagId": 1,
+  "version": "1.1.0",
+  "createdAt": "2024-01-15T11:00:00Z",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "description": "Updated DAG with new transformation pipeline",
+  "dagConfiguration": {
+    "name": "Data Processing Workflow",
+    "nodes": [
+      {
+        "id": 101,
+        "pipelineId": 789,
+        "metadata": {
+          "description": "Data extraction pipeline"
+        }
+      },
+      {
+        "id": 102,
+        "pipelineId": 790,
+        "metadata": {
+          "description": "Data transformation pipeline"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 201,
+        "fromNodeId": 101,
+        "toNodeId": 102,
+        "metadata": {
+          "condition": "success"
+        }
+      }
+    ],
+    "scheduleType": "SCHEDULED"
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "description": "Updated DAG with new transformation pipeline",
+    "version": "1.1.0"
+  }'
+```
+
+## Restore from Snapshot
+
+**Endpoint:** `POST /orchestration/api/v1/dags/{dagId}/snapshots/{snapshotId}/restore`
+
+Restores a DAG to a previous snapshot configuration.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `snapshotId` | Long | Yes | The snapshot ID to restore from |
+
+### Request Body (optional)
+
+```json
+{
+  "description": "Restored from snapshot 1.0.0 due to issues with new pipeline"
+}
+```
+
+### Response
+
+```json
+{
+  "id": 3,
+  "dagId": 1,
+  "version": "1.0.1",
+  "createdAt": "2024-01-15T11:30:00Z",
+  "createdBy": {
+    "id": 456,
+    "email": "user@example.com"
+  },
+  "description": "Restored from snapshot 1.0.0 due to issues with new pipeline",
+  "restoredFromSnapshotId": 1,
+  "dagConfiguration": {
+    "name": "Data Processing Workflow",
+    "nodes": [
+      {
+        "id": 101,
+        "pipelineId": 789,
+        "metadata": {
+          "description": "Data extraction pipeline"
+        }
+      }
+    ],
+    "edges": [],
+    "scheduleType": "SCHEDULED"
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/1/restore" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "description": "Restored from snapshot 1.0.0 due to issues with new pipeline"
+  }'
+```
+
+## Compare Snapshots
+
+**Endpoint:** `GET /orchestration/api/v1/dags/{dagId}/snapshots/compare`
+
+Compares two DAG snapshots to show differences.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+
+### Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `fromSnapshotId` | Long | Yes | Source snapshot ID |
+| `toSnapshotId` | Long | Yes | Target snapshot ID |
+
+### Response
+
+```json
+{
+  "fromSnapshot": {
+    "id": 1,
+    "version": "1.0.0",
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  "toSnapshot": {
+    "id": 2,
+    "version": "1.1.0",
+    "createdAt": "2024-01-15T11:00:00Z"
+  },
+  "differences": {
+    "nodes": {
+      "added": [
+        {
+          "id": 102,
+          "pipelineId": 790,
+          "metadata": {
+            "description": "Data transformation pipeline"
+          }
+        }
+      ],
+      "removed": [],
+      "modified": []
+    },
+    "edges": {
+      "added": [
+        {
+          "id": 201,
+          "fromNodeId": 101,
+          "toNodeId": 102,
+          "metadata": {
+            "condition": "success"
+          }
+        }
+      ],
+      "removed": [],
+      "modified": []
+    },
+    "schedule": {
+      "modified": false
+    },
+    "parameters": {
+      "added": {
+        "batchSize": 1000
+      },
+      "removed": {},
+      "modified": {}
+    }
+  }
+}
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/compare?fromSnapshotId=1&toSnapshotId=2" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Delete Snapshot
+
+**Endpoint:** `DELETE /orchestration/api/v1/dags/{dagId}/snapshots/{snapshotId}`
+
+Deletes a specific DAG snapshot.
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `dagId` | Long | Yes | The DAG ID |
+| `snapshotId` | Long | Yes | The snapshot ID |
+
+### Example Request
+
+```bash
+curl -X DELETE "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/3" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Snapshot Versioning
+
+### Version Numbering
+
+Snapshots use semantic versioning (MAJOR.MINOR.PATCH):
+
+- **MAJOR**: Breaking changes (e.g., 1.0.0 → 2.0.0)
+- **MINOR**: New features (e.g., 1.0.0 → 1.1.0)
+- **PATCH**: Bug fixes (e.g., 1.0.0 → 1.0.1)
+
+### Automatic Versioning
+
+If no version is specified, the system automatically increments:
+
+```json
+{
+  "description": "Added new transformation pipeline"
+}
+// Results in version 1.1.0 (if previous was 1.0.0)
+```
+
+### Manual Versioning
+
+You can specify custom version numbers:
+
+```json
+{
+  "version": "2.0.0",
+  "description": "Major refactor with new architecture"
+}
+```
+
+## Snapshot Triggers
+
+### Automatic Snapshots
+
+Snapshots are automatically created when:
+
+- DAG is first created
+- DAG configuration is significantly modified
+- DAG is restored from a snapshot
+- DAG run completes successfully
+
+### Manual Snapshots
+
+Manual snapshots can be created for:
+
+- Milestone releases
+- Before major changes
+- Testing configurations
+- Documentation purposes
+
+## Snapshot Retention
+
+### Retention Policy
+
+- **Automatic snapshots**: Kept for 30 days
+- **Manual snapshots**: Kept for 1 year
+- **Tagged snapshots**: Kept indefinitely
+- **Maximum snapshots per DAG**: 100
+
+### Cleanup Process
+
+```bash
+# Cleanup old snapshots
+curl -X POST "https://api.saasxl.com/orchestration/api/v1/dags/1/snapshots/cleanup" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "retentionDays": 30,
+    "keepTagged": true
+  }'
+```
+
+## Snapshot Metadata
+
+### Standard Metadata Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `version` | String | Semantic version number |
+| `description` | String | Human-readable description |
+| `tags` | Array | Tags for categorization |
+| `environment` | String | Target environment |
+| `author` | String | Author of the snapshot |
+| `changeLog` | String | Detailed change log |
+
+### Example Snapshot with Full Metadata
+
+```json
+{
+  "version": "1.2.0",
+  "description": "Added data validation pipeline",
+  "tags": ["production", "stable"],
+  "environment": "production",
+  "author": "data-team",
+  "changeLog": "Added new validation node to ensure data quality before processing"
+}
+```
+
+## Error Scenarios
+
+### Common Error Responses
+
+| Status Code | Error Type | Description |
+|-------------|------------|-------------|
+| 400 | Bad Request | Invalid snapshot data or version |
+| 404 | Not Found | DAG or snapshot not found |
+| 409 | Conflict | Version conflict or invalid restore |
+| 422 | Unprocessable Entity | Invalid snapshot configuration |
+
+### Example Error Response
+
+```json
+{
+  "error": {
+    "code": "VERSION_CONFLICT",
+    "message": "Version 1.1.0 already exists for this DAG",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+```
+

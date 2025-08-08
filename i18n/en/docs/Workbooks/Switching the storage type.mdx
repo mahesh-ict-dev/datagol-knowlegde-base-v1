@@ -1,0 +1,22 @@
+---
+sidebar_position : 12
+tags : [Workspace, Workbooks]
+slug: switching-the-storage-type
+---
+
+
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+1.  Open the published workbook. From the **Settings** menu, select **Storage and Provider settings**.
+2.  In the **Storage Type Settings** box, click the **Need to switch the storage type** link.
+3.  In the dialog box, the default storage layer is set to S3. You can switch it to DB. Switching to DB will enable you to use JDBC as a provider, expanding your options.
+    In case you change your mind, you will have the option to easily revert back to S3.
+4.  Click the **Switch** button. Your storage type change is initiated, and a link is displayed for tracking the progress.
+
+    <ImagePopup src="/img/image-20250513-075255.png" alt="Switch Storage Type Progress" caption="Switch Storage Type Progress" />
+
+:::info
+The [Last Mile Pipeline](last-mile-pipeline) automatically transfers data from S3 to DB. To ensure data integrity, Last Mile Pipelines cannot be edited. You can view both the initial data pipeline and the Last Mile Pipeline in the [**View Pipelines**](accessing-workbook-pipeline-information) section, providing transparency into the data flow.
+:::

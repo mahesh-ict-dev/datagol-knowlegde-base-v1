@@ -1,0 +1,17 @@
+---
+sidebar_position : 13
+tags : [Workspace, Workbooks]
+slug: last-mile-pipeline
+---
+
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+The Last Mile Pipeline transfers data from S3 storage to a database (DB), changing the storage type for easier access and use. Its primary function is to copy data from S3 into the designated DB.
+
+Initially, data pipelines automatically store processed data in S3. For faster querying with a database (DB), you can [switch the storage type to DB](switching-the-storage-type) via the Last Mile Pipeline. The Last Mile Pipeline is typically triggered automatically after the initial data pipeline run is completed. This ensures that the data in S3 is first updated before being copied to DB.
+
+You can view both the initial data pipeline and the Last Mile Pipeline in the [**View Pipelines**](accessing-workbook-pipeline-information) section, providing transparency into the data flow.
+
+<ImagePopup src="/img/image-20250513-084455.png" alt="Last Mile Pipeline" caption="Last Mile Pipeline" />

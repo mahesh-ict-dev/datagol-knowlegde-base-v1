@@ -1,0 +1,61 @@
+# Schema Management API
+
+The Schema Management API provides operations for managing and refreshing schemas for data sources.
+
+## Schema Operations
+
+### Get Latest Schema
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/schemas`
+
+Retrieves the latest schema for a datasource.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Response
+
+Returns a `SchemaDTO` object.
+
+### Refresh Schema
+
+**POST** `/dataSources/api/v1/dataSources/{dataSourceId}/schemas`
+
+Refreshes the schema for a datasource.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Response
+
+Returns a `SchemaRefreshResponseDTO` object.
+
+### Get Schema by ID
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/schemas/{schemaId}`
+
+Retrieves a specific schema by ID.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `schemaId` (string) - The ID of the schema
+
+### Response
+
+Returns a `SchemaDTO` object.
+

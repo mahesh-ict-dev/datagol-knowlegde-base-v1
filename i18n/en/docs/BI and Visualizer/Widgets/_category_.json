@@ -1,0 +1,8 @@
+{
+  "label": "Widgets",
+  "description": "Explore various Widgets that can be integrated with our system.",
+  "position": 2,
+  "link": {
+    "type": "generated-index"
+  }
+}

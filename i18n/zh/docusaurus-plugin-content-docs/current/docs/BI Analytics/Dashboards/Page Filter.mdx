@@ -1,0 +1,83 @@
+---
+title: Dashboard Filters
+sidebar_position: 3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+On each Dashboard page you can configure a set of filters that want to be applied to the widgets , we call these as Page Level Filters.
+
+## Creating a  Page Level Filters:
+
+From the setting option on the dashboard -> select the 'Manage Filters'
+
+select -> Add 'New Filter'
+
+## Types of Page Filters
+Similar to the Widget filters we have simialr options on the page filters , can be applied to three main types of columns:
+
+### 1. Dimension (Text Column)
+- **Description:** Categorical or textual columns (e.g., Payment Type, Country).
+- **How it works:**
+  - Any text column , which is configured as a 'Single select' column datatype in the workbooks , this will now appear as a list of options the user can select the filter option from
+
+
+### 2. Metric (Numeric Column)
+- **Description:** Columns containing numerical data (e.g., Sales Amount, Quantity).
+- **Available filter operations:**
+  - Greater than
+  - Less than
+  - Between
+  - Equal to
+  - Not equal to
+- **Example:**
+  - Show only records where "Total Sales" is greater than 1,000.
+
+
+### 3. Date Column
+- **Description:** Columns containing date or time values.
+- **Available filter options:**
+  - **Custom date range:** Manually select start and end dates on the calendar.
+  - **Rolling date ranges:** Predefined options like Today, This Week, Last Month, Year to Date, etc.
+  - **Dynamic date ranges:** Last N days/weeks/months/quarters/years, Next N days/weeks/months, etc.
+  - **Time buckets:** Filter by Month of Year, Day of Week, Quarter of Year, Week of Year, etc.
+- **Example:**
+  - Show data for "Last 30 Days" or "This Quarter".
+
+
+## Default values :
+Choose the workbook from which you want to add the filter and then select the filter column
+## Applicable to :
+You can set the widgets that you want this filter  to be particularly excluded / included on (by default it is applicable to all the widgets on the dashboard)
+## Link Filters :
+ If you have a same column across different workbooks powering the widgets on this dashboard ,then you can unfiy them by linking the workbook columns from this section
+ example : if there is a date column in 2 workbooks , you can link them so on the dashboard there is only one date filter option showing up , but will be working on widgets from both the workbooks
+<ImagePopup src="/img/manage-filters.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
+
+## Delete Page Filter:
+ next to each of the filter created on the manage filter section there is a delete icon , by selecting this you can delete that filter being applied to the dashboard
+
+ ## Dependent Filters :
+
+ By default all the added filters on DataGOL act as dependent filters , ie based on the hireracy / ordering of the filters set , they act as dependent filters
+ example: filters can be ordered as :
+ 1) Country
+ 2) State
+ 3) City
+ then the options would filter out as : on the Country filter drop down - it would show list of all the Country present
+ then based on the Country selected (example say United States of America) was selected then in the next drop down for State, it would only show the relevant states to USA (NC , NJ, CA, FL, AZ, TX)
+ Now if the user selects a particular state (example NC) then the City filter drop down would update accordingly , example : now it would only show options like Charlotte , Raleigh pertaining to that state only
+
+ ## Save a Set of Filters :
+
+ When there is a combination of filters that you particulary want to apply to your dashboard , you can save this set of filters , create a bunch of these sets , save them , come at a later point and simply select the filter set option and this would be applied to the dashboard page.
+
+ 1.  From a workspace, access a dashboard.
+
+ 2.  On the dashboard, from the upper right corner, click the filter settings icon.
+
+     <ImagePopup src="/img/visualizer/image-20250514-102809.png" alt="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" caption="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" />
+
+NOTE: Page filters on dashboard are exclusive to each user, ie if a user selects a set of filters, logs out and relogins , this would remain unaffected until he next changes, and selectios on filters of this user will not affect the other user.
+
+

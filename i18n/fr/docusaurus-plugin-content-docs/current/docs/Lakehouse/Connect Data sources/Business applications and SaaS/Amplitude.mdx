@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-amplitude
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Amplitude as data source
+
+:::info **Prequisites for adding Amplitude**
+
+The following connector information is required from the client:
+
+-   API Key
+    
+-   Secret Key
+    
+-   Start Date
+    
+
+Do the following:
+
+1.  Log on to your [Amplitude account](https://amplitude.com/ "https://amplitude.com/").
+    
+2.  Navigate to **Settings** > **Organization** **Settings** _>_ **Projects** and click the name of the project you want to view or edit. This opens the **General** tab, where you will find the following information about your project:
+    
+    -   API Key
+        
+    -   Secret Key
+        
+
+Create a project first, if you don’t have one already. Refer to [Create a project in Amplitude](https://amplitude.com/docs/get-started/create-project "https://amplitude.com/docs/get-started/create-project").
+
+:::
+
+To add Amplitude as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Amplitude icon. 
+    
+3.  Specify the following details to add Amplitude. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/image-20250511-100205.png" alt="Add_Amplitude" caption="Add_Amplitude" />
+    
+    Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Key** | Amplitude [project’s API ke](https://amplitude.com/docs/admin/account-management/manage-orgs-projects#view-and-edit-your-project-information)y. |
+    | **Secret Key** | Amplitude [project's secret key](https://amplitude.com/docs/admin/account-management/manage-orgs-projects#view-and-edit-your-project-information). |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. |
+
+4.  Click **Submit**. 
+
+
+## Supported sync modes
+
+Amplitude supports the following Sync modes:
+
+-   Full Refresh
+-   Incremental
+
+## Supported Streams
+
+Amplitude supports the following streams:
+
+-   Active Users Counts
+-   Annotations
+-   Average Session Length
+-   Cohorts
+-   Events
+-   Events List

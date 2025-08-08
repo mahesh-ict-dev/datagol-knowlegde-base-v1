@@ -1,0 +1,8 @@
+{
+  "label": "API Documentation",
+  "description": "Comprehensive API documentation for DataGOL platform integration.",
+  "position": 1,
+  "link": {
+    "type": "generated-index"
+  }
+} 

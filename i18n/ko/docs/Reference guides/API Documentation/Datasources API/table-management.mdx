@@ -1,0 +1,309 @@
+# Table Management API
+
+The Table Management API provides operations for managing tables, columns, and related metadata within data sources.
+
+## Table Operations
+
+### Get All Tables
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/tables`
+
+Retrieves all tables for a specific datasource.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Response
+
+Returns a `List<TableDTO>`.
+
+### Get Table by ID
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}`
+
+Retrieves a specific table by ID.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Response
+
+Returns a `TableDTO` object.
+
+### Add Table to DataSource
+
+**POST** `/dataSources/api/v1/dataSources/{dataSourceId}/tables`
+
+Adds a new table to a datasource.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "schema": "string",
+  "columns": [
+    {
+      "name": "string",
+      "type": "string",
+      "description": "string"
+    }
+  ]
+}
+```
+
+### Response
+
+Returns a `TableDTO` object.
+
+### Update Table
+
+**PUT** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}`
+
+Updates an existing table.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Request Body
+
+Same as Add Table
+
+### Response
+
+Returns a `TableDTO` object.
+
+### Delete Table
+
+**DELETE** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}`
+
+Deletes a table from a datasource.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Response
+
+`204 No Content`
+
+### Delete Multiple Tables
+
+**DELETE** `/dataSources/api/v1/dataSources/{dataSourceId}/tables`
+
+Deletes multiple tables from a datasource.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+
+### Request Body
+
+```json
+{
+  "tableIds": ["string"]
+}
+```
+
+### Response
+
+`204 No Content`
+
+## Column Operations
+
+### Update Column
+
+**PUT** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/columns/{columnId}`
+
+Updates a column in a table.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+- `columnId` (string) - The ID of the column
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "type": "string",
+  "description": "string"
+}
+```
+
+### Response
+
+Returns a `ColumnDTO` object.
+
+## Table Descriptions
+
+### Update Table Descriptions
+
+**PUT** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/descriptions`
+
+Updates descriptions for a table.
+
+### Required Roles
+- `ROLE_EDIT_LAKEHOUSE`
+- `ROLE_EDIT_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Request Body
+
+```json
+{
+  "description": "string",
+  "businessDescription": "string",
+  "technicalDescription": "string"
+}
+```
+
+### Response
+
+Returns a `TableDescriptionDTO` object.
+
+## Row Operations
+
+### Get Table Rows
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/rows`
+
+Retrieves rows from a table.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Query Parameters
+
+- `limit` (Long, optional) - Limit number of rows returned
+
+### Response
+
+Returns a `TableRowsDTO` object.
+
+## Partition Column Operations
+
+### Set Partition Column
+
+**GET** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/column/{columnId}/partitionCol`
+
+Sets a column as a partition column.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+- `columnId` (string) - The ID of the column
+
+### Query Parameters
+
+- `partitionSize` (int, default: 50000) - Partition size for column
+
+### Response
+
+Returns a `PartitionColumnDTO` object.
+
+### Remove Partition Column
+
+**DELETE** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/column/{columnId}/partitionCol`
+
+Removes partition column designation from a column.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+- `columnId` (string) - The ID of the column
+
+### Response
+
+`204 No Content`
+
+## Unique Column Operations
+
+### Mark Column as Unique
+
+**POST** `/dataSources/api/v1/dataSources/{dataSourceId}/tables/{tableId}/uniqueColumn`
+
+Marks a column as unique.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `dataSourceId` (string) - The ID of the datasource
+- `tableId` (string) - The ID of the table
+
+### Request Body
+
+```json
+{
+  "columnId": "string"
+}
+```
+
+### Response
+
+Returns a `UniqueColumnDTO` object.
+

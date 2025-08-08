@@ -1,0 +1,126 @@
+# Query Management API
+
+The Query Management API provides operations for managing queries, executing queries, and accessing supported functions.
+
+## Query CRUD Operations
+
+### Get All Queries
+
+**GET** `/dataSources/api/v1/queries`
+
+Retrieves all queries for the authenticated user.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<QueryDTO>`.
+
+### Create Query
+
+**POST** `/dataSources/api/v1/queries`
+
+Creates a new query.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "query": "string",
+  "dataSourceId": "string",
+  "parameters": [
+    {
+      "name": "string",
+      "type": "string",
+      "defaultValue": "string"
+    }
+  ]
+}
+```
+
+### Response
+
+Returns a `QueryDTO` object.
+
+### Get Query by ID
+
+**GET** `/dataSources/api/v1/queries/{queryId}`
+
+Retrieves a specific query by ID.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `queryId` (string) - The ID of the query
+
+### Response
+
+Returns a `QueryDTO` object.
+
+### Update Query
+
+**PUT** `/dataSources/api/v1/queries/{queryId}`
+
+Updates an existing query.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `queryId` (string) - The ID of the query to update
+
+### Request Body
+
+Same as Create Query
+
+### Response
+
+Returns a `QueryDTO` object.
+
+### Delete Query
+
+**DELETE** `/dataSources/api/v1/queries/{queryId}`
+
+Deletes a query.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Path Parameters
+
+- `queryId` (string) - The ID of the query to delete
+
+### Response
+
+`204 No Content`
+
+## Functions
+
+### Get Supported Functions
+
+**GET** `/dataSources/api/v1/formulas`
+
+Retrieves all supported functions.
+
+### Required Roles
+- `ROLE_VIEW_LAKEHOUSE`
+- `ROLE_VIEW_DATASOURCE`
+
+### Response
+
+Returns a `List<FunctionDTO>`.
+

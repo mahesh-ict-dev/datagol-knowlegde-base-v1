@@ -1,0 +1,205 @@
+# Error Handling
+
+This section describes error handling and common error responses in the Alerts API.
+
+## Common Error Codes
+
+| Status Code | Description |
+|-------------|-------------|
+| `400 Bad Request` | Invalid request parameters or malformed request body |
+| `401 Unauthorized` | Authentication required or invalid credentials |
+| `403 Forbidden` | Insufficient permissions to access the resource |
+| `404 Not Found` | Requested resource not found |
+| `409 Conflict` | Resource conflict (e.g., duplicate alert name) |
+| `422 Unprocessable Entity` | Validation errors in request data |
+| `500 Internal Server Error` | Server error or unexpected exception |
+
+## Error Response Format
+
+All error responses follow a consistent format:
+
+```json
+{
+  "error": "string",
+  "message": "string",
+  "timestamp": "date",
+  "path": "string",
+  "details": {
+    "field": "string",
+    "value": "string",
+    "constraint": "string"
+  }
+}
+```
+
+### Error Response Fields
+
+- `error` - Error type or code
+- `message` - Human-readable error description
+- `timestamp` - When the error occurred
+- `path` - The API endpoint that was called
+- `details` - Additional error details (optional)
+
+## Common Error Scenarios
+
+### Authentication Errors
+
+```json
+{
+  "error": "UNAUTHORIZED",
+  "message": "Authentication required",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/alerts/api/v1"
+}
+```
+
+### Validation Errors
+
+```json
+{
+  "error": "VALIDATION_ERROR",
+  "message": "Request validation failed",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/alerts/api/v1",
+  "details": {
+    "field": "name",
+    "value": "",
+    "constraint": "must not be empty"
+  }
+}
+```
+
+### Resource Not Found
+
+```json
+{
+  "error": "NOT_FOUND",
+  "message": "Alert with ID 'alert-123' not found",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/alerts/api/v1/alert-123"
+}
+```
+
+### Conflict Errors
+
+```json
+{
+  "error": "CONFLICT",
+  "message": "Alert with name 'High CPU Alert' already exists",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/alerts/api/v1"
+}
+```
+
+## Rate Limiting
+
+The API implements rate limiting to ensure fair usage. When rate limits are exceeded, you'll receive:
+
+```json
+{
+  "error": "RATE_LIMIT_EXCEEDED",
+  "message": "Rate limit exceeded. Please try again later.",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "path": "/alerts/api/v1"
+}
+```
+
+### Rate Limit Headers
+
+When rate limiting is active, the following headers are included in responses:
+
+- `X-RateLimit-Limit` - Maximum requests per time window
+- `X-RateLimit-Remaining` - Remaining requests in current window
+- `X-RateLimit-Reset` - Time when the rate limit resets
+
+## Best Practices
+
+### Error Handling in Applications
+
+1. **Always check HTTP status codes** before processing response data
+2. **Implement retry logic** for transient errors (5xx status codes)
+3. **Handle rate limiting** by implementing exponential backoff
+4. **Log error details** for debugging purposes
+5. **Provide user-friendly error messages** based on error types
+
+### Example Error Handling (JavaScript)
+
+```javascript
+async function createAlert(alertData) {
+  try {
+    const response = await fetch('/alerts/api/v1', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(alertData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      
+      switch (response.status) {
+        case 400:
+          throw new Error(`Validation error: ${errorData.message}`);
+        case 401:
+          throw new Error('Authentication required');
+        case 403:
+          throw new Error('Insufficient permissions');
+        case 404:
+          throw new Error('Resource not found');
+        case 409:
+          throw new Error(`Conflict: ${errorData.message}`);
+        case 429:
+          throw new Error('Rate limit exceeded. Please try again later.');
+        default:
+          throw new Error(`Server error: ${errorData.message}`);
+      }
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating alert:', error);
+    throw error;
+  }
+}
+```
+
+### Example Error Handling (Python)
+
+```python
+import requests
+import time
+
+def create_alert(alert_data, token, max_retries=3):
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json'
+    }
+    
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(
+                '/alerts/api/v1',
+                json=alert_data,
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 429:
+                # Rate limiting - wait and retry
+                retry_after = int(response.headers.get('Retry-After', 60))
+                time.sleep(retry_after)
+                continue
+            else:
+                error_data = response.json()
+                raise Exception(f"Error {response.status_code}: {error_data.get('message', 'Unknown error')}")
+                
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries - 1:
+                raise Exception(f"Failed to create alert after {max_retries} attempts: {str(e)}")
+            time.sleep(2 ** attempt)  # Exponential backoff
+    
+    raise Exception("Failed to create alert")
+``` 

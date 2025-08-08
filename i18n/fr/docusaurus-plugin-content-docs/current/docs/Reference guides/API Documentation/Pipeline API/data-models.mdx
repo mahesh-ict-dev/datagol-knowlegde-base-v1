@@ -1,0 +1,311 @@
+# Data Models
+
+This section describes the data models used in the Pipeline API.
+
+## PipelineDTO
+
+Represents a pipeline configuration.
+
+```json
+{
+  "id": "number",
+  "name": "string",
+  "type": "CUSTOM|STANDARD|DEDUP",
+  "description": "string",
+  "scheduleType": "MANUAL|CRON|SCHEDULED|DATA_CHANGE",
+  "schedule": {
+    "cronExpression": "string",
+    "timeZone": "string"
+  },
+  "sources": [
+    {
+      "id": "number",
+      "name": "string",
+      "type": "string"
+    }
+  ],
+  "destination": {
+    "id": "number",
+    "name": "string",
+    "type": "string"
+  },
+  "streams": [
+    {
+      "name": "string",
+      "query": "string",
+      "outputTableName": "string",
+      "syncMode": "FULL|INCREMENTAL",
+      "columns": ["string"],
+      "uniqueColumns": ["string"],
+      "requiredParams": ["string"]
+    }
+  ],
+  "processes": [
+    {
+      "name": "string",
+      "query": "string",
+      "processType": "PRE|POST",
+      "rank": "number"
+    }
+  ],
+  "parameters": {},
+  "workbookMetadata": {},
+  "queryEngine": "SPARK|SNOWFLAKE|BIGQUERY",
+  "isMvPipeline": "boolean",
+  "isLastMilePipeline": "boolean",
+  "parentId": "number",
+  "clonedParentId": "number",
+  "where": {
+    "condition": "string",
+    "parameters": {}
+  },
+  "createdBy": {
+    "id": "number",
+    "name": "string",
+    "email": "string"
+  },
+  "createdAt": "date",
+  "modifiedAt": "date",
+  "jobs": [],
+  "nextFireTimes": []
+}
+```
+
+## JobDTO
+
+Represents a pipeline job execution.
+
+```json
+{
+  "id": "number",
+  "jobGroupId": "string",
+  "status": "QUEUED|STARTED|FAILED|CANCELLED|COMPLETED|PENDING|RUNNING|INCOMPLETE|SUCCEEDED|DELETED|UNKNOWN|PRE_VALIDATION_FAILED|POST_VALIDATION_FAILED",
+  "startTime": "date",
+  "endTime": "date",
+  "startedBy": {
+    "id": "number",
+    "name": "string",
+    "email": "string"
+  },
+  "cancelledBy": {
+    "id": "number",
+    "name": "string",
+    "email": "string"
+  },
+  "parentId": "number",
+  "totalStats": "string",
+  "failureReason": "string",
+  "streams": [
+    {
+      "id": "number",
+      "name": "string",
+      "query": "string",
+      "status": "string"
+    }
+  ],
+  "processes": [
+    {
+      "id": "number",
+      "pipelineProcessId": "number",
+      "query": "string",
+      "status": "string",
+      "rank": "number",
+      "processName": "string",
+      "processType": "PRE|POST"
+    }
+  ],
+  "sparkJobInfo": [
+    {
+      "query": "string",
+      "submitTime": "number",
+      "startTime": "number",
+      "endTime": "number",
+      "waitTime": "number",
+      "stream": "string"
+    }
+  ],
+  "parameters": {}
+}
+```
+
+## PipelineRevisionDTO
+
+Represents a pipeline revision history entry.
+
+```json
+{
+  "pipeline": {
+    "id": "number",
+    "name": "string",
+    "type": "string",
+    "description": "string",
+    "scheduleType": "string",
+    "sources": [],
+    "destination": {},
+    "streams": [],
+    "processes": [],
+    "parameters": {},
+    "workbookMetadata": {},
+    "queryEngine": "string",
+    "isMvPipeline": "boolean",
+    "isLastMilePipeline": "boolean",
+    "parentId": "number",
+    "clonedParentId": "number",
+    "where": {},
+    "createdBy": {},
+    "createdAt": "date",
+    "modifiedAt": "date"
+  },
+  "modifiedBy": {
+    "id": "number",
+    "name": "string",
+    "email": "string"
+  },
+  "modifiedAt": "date"
+}
+```
+
+## JobHistoryDTO
+
+Represents job execution history with pipeline information.
+
+```json
+{
+  "pipelineInfo": {
+    "pipelineId": "number",
+    "name": "string"
+  },
+  "job": {
+    "id": "number",
+    "jobGroupId": "string",
+    "status": "string",
+    "startTime": "date",
+    "endTime": "date",
+    "startedBy": {},
+    "cancelledBy": {},
+    "parentId": "number",
+    "totalStats": "string",
+    "failureReason": "string",
+    "streams": [],
+    "processes": [],
+    "sparkJobInfo": [],
+    "parameters": {}
+  }
+}
+```
+
+## ErrorLogDTO
+
+Represents an error log entry.
+
+```json
+{
+  "timestamp": "date",
+  "level": "string",
+  "message": "string",
+  "details": {}
+}
+```
+
+## PipelineStatisticsDTO
+
+Represents pipeline execution statistics.
+
+```json
+{
+  "totalPipelines": "number",
+  "activePipelines": "number",
+  "failedJobs": "number",
+  "successfulJobs": "number",
+  "runningJobs": "number",
+  "averageExecutionTime": "number",
+  "successRate": "number"
+}
+```
+
+## PipelineMetricsDTO
+
+Represents performance metrics for a specific pipeline.
+
+```json
+{
+  "pipelineId": "number",
+  "executionCount": "number",
+  "successCount": "number",
+  "failureCount": "number",
+  "averageExecutionTime": "number",
+  "totalDataProcessed": "number",
+  "lastExecutionTime": "date",
+  "nextScheduledExecution": "date"
+}
+```
+
+## Enums
+
+### PipelineType
+
+Defines the types of pipelines:
+
+- `CUSTOM` - Custom pipeline with user-defined logic
+- `STANDARD` - Standard data replication pipeline
+- `DEDUP` - Deduplication pipeline
+
+### ScheduleType
+
+Defines the scheduling types for pipelines:
+
+- `MANUAL` - Manual execution only
+- `CRON` - Cron-based scheduling
+- `SCHEDULED` - Time-based scheduling
+- `DATA_CHANGE` - Triggered by data changes
+
+### JobStatus
+
+Defines the job execution status:
+
+- `QUEUED` - Job is queued for execution
+- `STARTED` - Job has started
+- `FAILED` - Job failed
+- `CANCELLED` - Job was cancelled
+- `COMPLETED` - Job completed successfully
+- `PENDING` - Job is pending
+- `RUNNING` - Job is currently running
+- `INCOMPLETE` - Job is incomplete
+- `SUCCEEDED` - Job succeeded
+- `DELETED` - Job was deleted
+- `UNKNOWN` - Job status is unknown
+- `PRE_VALIDATION_FAILED` - Pre-validation failed
+- `POST_VALIDATION_FAILED` - Post-validation failed
+
+### ProcessType
+
+Defines the process types:
+
+- `PRE` - Pre-processing step
+- `POST` - Post-processing step
+
+### QueryEngine
+
+Defines the available query engines:
+
+- `SPARK` - Apache Spark
+- `SNOWFLAKE` - Snowflake
+- `BIGQUERY` - Google BigQuery
+
+### SyncMode
+
+Defines the synchronization modes:
+
+- `FULL` - Full synchronization
+- `INCREMENTAL` - Incremental synchronization
+
+### TimeUnitType
+
+Defines the time unit types:
+
+- `HOUR` - Hourly time bucket
+- `DAY` - Daily time bucket
+- `WEEK` - Weekly time bucket
+- `MONTH` - Monthly time bucket
+- `YEAR` - Yearly time bucket
+

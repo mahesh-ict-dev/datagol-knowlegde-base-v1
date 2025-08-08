@@ -1,0 +1,316 @@
+# Version Migration Guide
+
+This guide helps you migrate between different versions of the NoCoDB API.
+
+## Version Comparison
+
+| Feature | v1 | v2 | v3 |
+|---------|----|----|----|
+| Workspace Support | ❌ | ✅ | ✅ |
+| Advanced BI | ❌ | ❌ | ✅ |
+| Enhanced Permissions | ❌ | ✅ | ✅ |
+| Interface Management | ❌ | ❌ | ✅ |
+| Modern Architecture | ❌ | ✅ | ✅ |
+| RESTful Design | ⚠️ | ✅ | ✅ |
+| Consistent Error Handling | ⚠️ | ✅ | ✅ |
+| Comprehensive Documentation | ⚠️ | ✅ | ✅ |
+
+## From v1 to v2
+
+### Key Changes
+
+#### 1. Workspace-Based Architecture
+**v1**: No workspace concept
+```bash
+# v1 - Direct table creation
+POST /noCo/api/v1/tables
+```
+
+**v2**: Workspace-scoped operations
+```bash
+# v2 - Workspace-scoped table creation
+POST /noCo/api/v2/workspaces/{workspaceId}/tables
+```
+
+#### 2. Enhanced Authentication
+**v1**: Basic JWT authentication
+**v2**: Enhanced JWT with workspace context
+
+#### 3. Improved Error Handling
+**v1**: Inconsistent error responses
+**v2**: Standardized error format with detailed information
+
+#### 4. Better API Structure
+**v1**: Flat API structure
+**v2**: Hierarchical, RESTful design
+
+### Migration Steps
+
+#### Step 1: Create Workspace
+```bash
+# Create a new workspace
+curl -X POST "noCo/api/v2/workspaces" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Migrated Workspace",
+    "description": "Workspace migrated from v1"
+  }'
+```
+
+#### Step 2: Migrate Tables
+```bash
+# v1: Get all tables
+GET /noCo/api/v1/tables
+
+# v2: Create tables in workspace
+POST /noCo/api/v2/workspaces/{workspaceId}/tables
+```
+
+#### Step 3: Migrate Data
+```bash
+# Export data from v1
+GET /noCo/api/v1/tables/{tableId}/data
+
+# Import data to v2
+POST /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/rows/bulk
+```
+
+#### Step 4: Update Permissions
+```bash
+# v2: Set up workspace permissions
+POST /noCo/api/v2/workspaces/{workspaceId}/addUser
+```
+
+### Deprecated APIs in v2
+
+| v1 Endpoint | v2 Replacement | Notes |
+|-------------|----------------|-------|
+| `/noCo/api/v1/bi` | `/noCo/api/v2/workspaces/{workspaceId}/biPage` | Enhanced BI functionality |
+| `/noCo/api/v1/tables` | `/noCo/api/v2/workspaces/{workspaceId}/tables` | Workspace-scoped |
+| `/noCo/api/v1/widgets` | `/noCo/api/v2/workspaces/{workspaceId}/biPage/{pageId}/widgets` | Page-scoped widgets |
+
+## From v2 to v3
+
+### Key Changes
+
+#### 1. Advanced BI Capabilities
+**v2**: Basic BI pages
+```bash
+# v2 - Simple BI page
+POST /noCo/api/v2/workspaces/{workspaceId}/biPage
+```
+
+**v3**: Hierarchical BI structure
+```bash
+# v3 - Create BI configuration
+POST /noCo/api/v3/workspaces/{workspaceId}/bi
+
+# v3 - Create interface
+POST /noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces
+
+# v3 - Create page within interface
+POST /noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces/{interfaceId}/pages
+```
+
+#### 2. Enhanced Widget Management
+**v2**: Basic widget configuration
+**v3**: Advanced widget configuration with positioning and layout
+
+#### 3. Interface Management
+**v2**: Single BI configuration per workspace
+**v3**: Multiple interfaces per BI configuration
+
+### Migration Steps
+
+#### Step 1: Create BI Configuration
+```bash
+# Create v3 BI configuration
+curl -X POST "noCo/api/v3/workspaces/{workspaceId}/bi" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Migrated BI Configuration",
+    "description": "BI configuration migrated from v2"
+  }'
+```
+
+#### Step 2: Migrate BI Pages to Interfaces
+```bash
+# v2: Get all BI pages
+GET /noCo/api/v2/workspaces/{workspaceId}/biPage
+
+# v3: Create interface for each page type
+POST /noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces
+```
+
+#### Step 3: Migrate Widgets
+```bash
+# v2: Get widgets from page
+GET /noCo/api/v2/workspaces/{workspaceId}/biPage/{pageId}/widgets
+
+# v3: Create widgets in interface pages
+POST /noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces/{interfaceId}/pages/{pageId}/config/{configId}/widgets
+```
+
+### Deprecated APIs in v3
+
+| v2 Endpoint | v3 Replacement | Notes |
+|-------------|----------------|-------|
+| `/noCo/api/v2/workspaces/{workspaceId}/biPage` | `/noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces/{interfaceId}/pages` | Hierarchical structure |
+| `/noCo/api/v2/workspaces/{workspaceId}/biPage/{pageId}/widgets` | `/noCo/api/v3/workspaces/{workspaceId}/bi/{biId}/interfaces/{interfaceId}/pages/{pageId}/config/{configId}/widgets` | Enhanced widget management |
+
+## Migration Tools and Scripts
+
+### Automated Migration Script
+
+```python
+import requests
+import json
+
+class NoCoDBMigrator:
+    def __init__(self, base_url, token):
+        self.base_url = base_url
+        self.token = token
+        self.headers = {
+            'Authorization': f'Bearer {token}',
+            'Content-Type': 'application/json'
+        }
+    
+    def migrate_v1_to_v2(self, workspace_id):
+        """Migrate from v1 to v2"""
+        # Get v1 tables
+        v1_tables = self.get_v1_tables()
+        
+        # Create tables in v2
+        for table in v1_tables:
+            self.create_v2_table(workspace_id, table)
+    
+    def migrate_v2_to_v3(self, workspace_id):
+        """Migrate from v2 to v3"""
+        # Create BI configuration
+        bi_config = self.create_v3_bi_config(workspace_id)
+        
+        # Get v2 BI pages
+        v2_pages = self.get_v2_bi_pages(workspace_id)
+        
+        # Create interfaces and pages in v3
+        for page in v2_pages:
+            interface = self.create_v3_interface(workspace_id, bi_config['id'])
+            self.create_v3_page(workspace_id, bi_config['id'], interface['id'], page)
+    
+    def get_v1_tables(self):
+        """Get all tables from v1"""
+        response = requests.get(f"{self.base_url}/noCo/api/v1/tables", headers=self.headers)
+        return response.json()
+    
+    def create_v2_table(self, workspace_id, table_data):
+        """Create table in v2"""
+        url = f"{self.base_url}/noCo/api/v2/workspaces/{workspace_id}/tables"
+        response = requests.post(url, headers=self.headers, json=table_data)
+        return response.json()
+    
+    def create_v3_bi_config(self, workspace_id):
+        """Create BI configuration in v3"""
+        url = f"{self.base_url}/noCo/api/v3/workspaces/{workspace_id}/bi"
+        data = {
+            "name": "Migrated BI Configuration",
+            "description": "Migrated from v2"
+        }
+        response = requests.post(url, headers=self.headers, json=data)
+        return response.json()
+    
+    def get_v2_bi_pages(self, workspace_id):
+        """Get BI pages from v2"""
+        url = f"{self.base_url}/noCo/api/v2/workspaces/{workspace_id}/biPage"
+        response = requests.get(url, headers=self.headers)
+        return response.json()
+    
+    def create_v3_interface(self, workspace_id, bi_id):
+        """Create interface in v3"""
+        url = f"{self.base_url}/noCo/api/v3/workspaces/{workspace_id}/bi/{bi_id}/interfaces"
+        data = {
+            "name": "Migrated Interface",
+            "description": "Migrated from v2",
+            "type": "DASHBOARD"
+        }
+        response = requests.post(url, headers=self.headers, json=data)
+        return response.json()
+    
+    def create_v3_page(self, workspace_id, bi_id, interface_id, page_data):
+        """Create page in v3"""
+        url = f"{self.base_url}/noCo/api/v3/workspaces/{workspace_id}/bi/{bi_id}/interfaces/{interface_id}/pages"
+        data = {
+            "name": page_data.get('name', 'Migrated Page'),
+            "description": page_data.get('description', ''),
+            "layout": "GRID",
+            "position": 1
+        }
+        response = requests.post(url, headers=self.headers, json=data)
+        return response.json()
+
+# Usage
+migrator = NoCoDBMigrator('https://api.example.com', 'your-jwt-token')
+migrator.migrate_v1_to_v2('workspace-id')
+migrator.migrate_v2_to_v3('workspace-id')
+```
+
+### Migration Checklist
+
+#### v1 to v2 Migration
+- [ ] Create workspace
+- [ ] Migrate tables
+- [ ] Migrate table data
+- [ ] Set up permissions
+- [ ] Update authentication
+- [ ] Test all functionality
+- [ ] Update client applications
+
+#### v2 to v3 Migration
+- [ ] Create BI configuration
+- [ ] Migrate BI pages to interfaces
+- [ ] Migrate widgets
+- [ ] Update widget configurations
+- [ ] Test BI functionality
+- [ ] Update client applications
+
+## Best Practices
+
+### Planning Migration
+1. **Assess Current Usage** - Identify all v1/v2 API usage
+2. **Create Migration Plan** - Plan migration steps and timeline
+3. **Test in Staging** - Test migration in staging environment
+4. **Backup Data** - Create backups before migration
+5. **Monitor Performance** - Monitor performance during migration
+
+### During Migration
+1. **Gradual Migration** - Migrate in phases, not all at once
+2. **Rollback Plan** - Have rollback plan ready
+3. **Communication** - Communicate changes to stakeholders
+4. **Documentation** - Update documentation as you migrate
+
+### Post Migration
+1. **Validation** - Validate all functionality works correctly
+2. **Performance Testing** - Test performance with new APIs
+3. **User Training** - Train users on new features
+4. **Monitoring** - Monitor for issues after migration
+
+## Support and Resources
+
+### Documentation
+- [NoCoDB v1 API Reference](./v1-apis)
+- [NoCoDB v2 API Reference](./v2-apis)
+- [NoCoDB v3 API Reference](./v3-apis)
+- [Common Features](./common-features)
+
+### Migration Support
+- Contact support for migration assistance
+- Join community forums for migration discussions
+- Access migration tools and scripts
+- Schedule migration consultation
+
+### Testing
+- Use staging environment for testing
+- Create comprehensive test suites
+- Validate all API endpoints
+- Test error scenarios and edge cases 

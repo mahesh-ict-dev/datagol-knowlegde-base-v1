@@ -1,0 +1,319 @@
+# Pipeline Jobs API
+
+The Pipeline Jobs API provides functionality for executing, monitoring, and managing pipeline jobs.
+
+## Run Pipeline
+
+**POST** `/dataPipeline/api/v1/{pipelineId}/run`
+
+Executes a pipeline immediately.
+
+### Path Parameters
+
+- `pipelineId` (number) - The ID of the pipeline to run
+
+### Request Body
+
+```json
+{
+  "parameter1": "value1",
+  "parameter2": "value2"
+}
+```
+
+### Response
+
+Returns a `JobDTO` object.
+
+## Get Pipeline Jobs
+
+**POST** `/dataPipeline/api/v2/job`
+
+Retrieves pipeline jobs based on specified criteria.
+
+### Request Body
+
+```json
+{
+  "status": "QUEUED|STARTED|FAILED|CANCELLED|COMPLETED|PENDING|RUNNING|INCOMPLETE|SUCCEEDED|DELETED|UNKNOWN|PRE_VALIDATION_FAILED|POST_VALIDATION_FAILED",
+  "time": {
+    "unit": "number",
+    "unitType": "HOUR|DAY|WEEK|MONTH|YEAR"
+  }
+}
+```
+
+### Response
+
+```json
+{
+  "jobs": [
+    {
+      "pipelineInfo": {
+        "pipelineId": "number",
+        "name": "string"
+      },
+      "job": {
+        "id": "number",
+        "jobGroupId": "string",
+        "status": "string",
+        "startTime": "date",
+        "endTime": "date",
+        "startedBy": {},
+        "cancelledBy": {},
+        "parentId": "number",
+        "totalStats": "string",
+        "failureReason": "string",
+        "streams": [
+          {
+            "id": "number",
+            "name": "string",
+            "query": "string",
+            "status": "string"
+          }
+        ],
+        "processes": [
+          {
+            "id": "number",
+            "pipelineProcessId": "number",
+            "query": "string",
+            "status": "string",
+            "rank": "number",
+            "processName": "string",
+            "processType": "PRE|POST"
+          }
+        ],
+        "sparkJobInfo": [
+          {
+            "query": "string",
+            "submitTime": "number",
+            "startTime": "number",
+            "endTime": "number",
+            "waitTime": "number",
+            "stream": "string"
+          }
+        ],
+        "parameters": {}
+      }
+    }
+  ],
+  "page": {
+    "pageNumber": "number",
+    "pageSize": "number",
+    "totalNumberOfRecords": "number",
+    "totalNumberOfPages": "number"
+  }
+}
+```
+
+## Get Job by ID
+
+**GET** `/dataPipeline/api/v1/{pipelineId}/job/{jobId}`
+
+Retrieves a specific job for a pipeline.
+
+### Path Parameters
+
+- `pipelineId` (number) - The ID of the pipeline
+- `jobId` (number) - The ID of the job
+
+### Response
+
+Returns a `JobDTO` object.
+
+## Cancel Job
+
+**GET** `/dataPipeline/api/v1/{dataPipelineId}/job/{jobId}/cancelSync`
+
+Cancels a running job.
+
+### Path Parameters
+
+- `dataPipelineId` (number) - The ID of the pipeline
+- `jobId` (number) - The ID of the job to cancel
+
+### Response
+
+`204 No Content`
+
+## Get Job Error Log
+
+**GET** `/dataPipeline/api/v1/{dataPipelineId}/job/{jobId}/errorLog`
+
+Retrieves error logs for a specific job.
+
+### Path Parameters
+
+- `dataPipelineId` (number) - The ID of the pipeline
+- `jobId` (number) - The ID of the job
+
+### Response
+
+```json
+{
+  "errorLogs": [
+    {
+      "timestamp": "date",
+      "level": "string",
+      "message": "string",
+      "details": {}
+    }
+  ]
+}
+```
+
+## Get All Failed Jobs in Time Range
+
+**GET** `/dataPipeline/api/v1/getAllFailedJobs/{unit}/{unitType}`
+
+Retrieves all failed jobs within a specified time range.
+
+### Path Parameters
+
+- `unit` (number) - Time unit value
+- `unitType` (string) - Time unit type (HOUR|DAY|WEEK|MONTH|YEAR)
+
+### Response
+
+```json
+{
+  "jobs": [
+    {
+      "pipelineInfo": {
+        "pipelineId": "number",
+        "name": "string"
+      },
+      "job": {
+        "id": "number",
+        "jobGroupId": "string",
+        "status": "string",
+        "startTime": "date",
+        "endTime": "date",
+        "startedBy": {},
+        "cancelledBy": {},
+        "parentId": "number",
+        "totalStats": "string",
+        "failureReason": "string",
+        "streams": [],
+        "processes": [],
+        "sparkJobInfo": [],
+        "parameters": {}
+      }
+    }
+  ],
+  "page": {
+    "pageNumber": "number",
+    "pageSize": "number",
+    "totalNumberOfRecords": "number",
+    "totalNumberOfPages": "number"
+  }
+}
+```
+
+## Get All Running Jobs
+
+**GET** `/dataPipeline/api/v1/getAllRunningJobs`
+
+Retrieves all currently running jobs.
+
+### Response
+
+```json
+{
+  "jobs": [
+    {
+      "pipelineInfo": {
+        "pipelineId": "number",
+        "name": "string"
+      },
+      "job": {
+        "id": "number",
+        "jobGroupId": "string",
+        "status": "string",
+        "startTime": "date",
+        "endTime": "date",
+        "startedBy": {},
+        "cancelledBy": {},
+        "parentId": "number",
+        "totalStats": "string",
+        "failureReason": "string",
+        "streams": [],
+        "processes": [],
+        "sparkJobInfo": [],
+        "parameters": {}
+      }
+    }
+  ],
+  "page": {
+    "pageNumber": "number",
+    "pageSize": "number",
+    "totalNumberOfRecords": "number",
+    "totalNumberOfPages": "number"
+  }
+}
+```
+
+## Get All Scheduled Jobs in Time Range
+
+**GET** `/dataPipeline/api/v1/getAllScheduledJobs/{unit}/{unitType}`
+
+Retrieves all scheduled jobs within a specified time range.
+
+### Path Parameters
+
+- `unit` (number) - Time unit value
+- `unitType` (string) - Time unit type (HOUR|DAY|WEEK|MONTH|YEAR)
+
+### Response
+
+```json
+[
+  {
+    "id": "number",
+    "name": "string",
+    "type": "string",
+    "scheduleType": "string",
+    "schedule": {},
+    "sources": [],
+    "destination": {},
+    "streams": [],
+    "processes": [],
+    "parameters": {},
+    "workbookMetadata": {},
+    "queryEngine": "string",
+    "isMvPipeline": "boolean",
+    "isLastMilePipeline": "boolean",
+    "parentId": "number",
+    "clonedParentId": "number",
+    "where": {},
+    "createdBy": {},
+    "createdAt": "date",
+    "modifiedAt": "date"
+  }
+]
+```
+
+## Migrate All Pipelines
+
+**POST** `/dataPipeline/api/v1/migrateAllPipelines`
+
+Migrates all pipelines to the new system (Deprecated).
+
+### Response
+
+`204 No Content`
+
+## Platform Pipeline Status Email
+
+**GET** `/dataPipeline/api/v1/platformPipeline/status/email/{token}`
+
+Sends platform pipeline status via email.
+
+### Path Parameters
+
+- `token` (string) - Secret token for authentication
+
+### Response
+
+`204 No Content`
+

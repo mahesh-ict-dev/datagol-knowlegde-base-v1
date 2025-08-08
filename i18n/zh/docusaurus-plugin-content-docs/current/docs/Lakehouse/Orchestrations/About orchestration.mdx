@@ -1,0 +1,15 @@
+---
+sidebar_position: 1
+tags: [Lakehouse, Dataources, Pipelines, Schema changes, Orchestration, Data catalog, Data transformation, Data Ingestion, Data lineage, Materialized view, Jobs]
+slug: about-orchestration
+---
+
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+Orchestration in DataGOL allows you to define and manage the execution order of multiple pipelines. This is crucial when you have dependencies between pipelines, where one pipeline needs to complete successfully before another can begin. Without orchestration, scheduling pipelines to run independently might lead to failures or unexpected results if a dependent pipeline runs before its required data is ready.
+
+Orchestration ensures a controlled and sequential execution of your data pipelines, less prone to undesirable data, and guarantees data availability for downstream processes like reporting and analysis.
+
+<ImagePopup src="/img/orchestration/image-20250505-132400.png" alt="about orchestration" caption="about orchestration" />
