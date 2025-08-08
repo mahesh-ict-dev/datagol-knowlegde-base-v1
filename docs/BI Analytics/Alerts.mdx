@@ -34,6 +34,7 @@ Creating an alert lets you define the conditions and notification settings for y
         * **Percentage change**: Triggers if the value changes by a certain percentage compared to a previous period (e.g., a 10% drop from the previous week).
         * **Absolute change**: Triggers if the value changes by a specific amount (e.g., a drop of 100).
     * **Comparison period**: If you choose a percentage or absolute change, you must define the comparison period. This can be "Previous Day," "Previous Week," or "Previous Month." This setting is only available when a relative date filter (like "Today" or "This Week") is applied to the widget.
+    :::tip[Note]
     
 3.  **Set the schedule**: Define how often the alert will run.
     * **On a schedule**: You can set a cron expression for the alert to run daily, weekly, or monthly. The shortest available duration is hourly.
@@ -67,7 +68,7 @@ After creating an alert, you can track its status and review its history.
 ### 2. Execution and notification history
 
 * Within the alerts, you will find the following tabs:
-*   **Alerts**: Displays the list of all alerts that are generated based on the set conditions. 
+* **Alerts**: Displays the list of all alerts that are generated based on the set conditions. 
 * **History**: Displays the records when the alert condition was met. One execution happens per alert. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
 * **Notification**: This records every time a notification was sent to a user. One execution can result in multiple notifications if there are multiple recipients.
 
