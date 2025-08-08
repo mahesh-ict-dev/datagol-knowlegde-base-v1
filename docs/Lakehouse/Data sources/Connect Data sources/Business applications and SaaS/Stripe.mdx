@@ -1,0 +1,83 @@
+---
+sidebar_position: 12
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-stripe
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Stripe as data source
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the New Data Source page, click the Stripe icon. 
+    
+3.  Specify the following details to add Stripe. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/stripe.png" alt="Add_Stripe" caption="Add_Stripe" />
+
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. The name must be at least 6 characters, may include letters, numbers, and underscores only, and cannot start with an underscore. |
+    | **Accound ID** | Specify your Stripe account ID (starts with acct_). |
+    | **Client Secret** | Specify your Stripe API Secret Key (starts with sk_live_). |
+    | **Start Date** | Specify the date from which to begin replicating extracting data. Enter the date in MM/DD/YYYY format. DataGOL will replicate data updated on or after this date. If left blank, DataGOL will default to replicating data from the past year. |
+
+4.  Click **Submit**. 
+
+## Supported sync modes
+
+-   Full Refresh
+-   Incremental
+
+## Supported Streams
+
+-   Accounts
+-   Application Fees (Incremental)
+-   Application Fee Refunds (Incremental)
+-   Authorizations (Incremental)
+-   Balance Transactions (Incremental)
+-   Bank accounts (Incremental)
+-   Cardholders (Incremental)
+-   Cards (Incremental)
+-   Charges (Incremental)
+-   Checkout Sessions (Incremental)
+-   Checkout Sessions Line Items (Incremental)
+-   Coupons (Incremental)
+-   Credit Notes (Incremental)
+-   Customer Balance Transactions (Incremental)
+-   Customers (Incremental)
+-   Disputes (Incremental)
+-   Early Fraud Warnings (Incremental)
+-   Events (Incremental)
+-   External Account Bank Accounts (Incremental)
+-   External Account Cards (Incremental)
+-   File Links (Incremental)
+-   Files (Incremental)
+-   Invoice Items (Incremental)
+-   Invoice Line Items
+-   Invoices (Incremental)
+-   Payment Intents (Incremental)
+-   Payment Methods (Incremental)
+-   Payouts (Incremental)
+-   Payout Balance Transactions (Incremental)
+-   Promotion Code (Incremental)
+-   Persons (Incremental)
+-   Plans (Incremental)
+-   Prices (Incremental)
+-   Products (Incremental)
+-   Refunds (Incremental)
+-   Reviews (Incremental)
+-   Setup Attempts (Incremental)
+-   Setup Intents (Incremental)
+-   Shipping Rates (Incremental)
+-   Subscription Items
+-   Subscription Schedule (Incremental)
+-   Subscriptions (Incremental)
+-   Top Ups (Incremental)
+-   Transactions (Incremental)
+-   Transfers (Incremental)
+-   Transfer Reversals
+-   Usage Records

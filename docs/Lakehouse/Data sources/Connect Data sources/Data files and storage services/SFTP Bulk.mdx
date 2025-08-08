@@ -62,3 +62,13 @@ To add SFTP Bulk as data source, do the following:
     | **CSV separator** | Specify the delimiter used in the CSV files (comma is the default). Other separators like spaces can also be configured. |
 
 4.  Click **Submit**. 
+
+## Supported Sync modes
+
+-   Full Refresh | Overwrite
+-   Full Refresh | Append 
+-   Sync Incremental | Append
+
+## Supported Streams
+
+This source provides a single stream per file with a dynamic schema. The current supported type files are Avro, CSV, JSONL, Parquet, and Document File Type Format.
