@@ -1,0 +1,60 @@
+---
+sidebar_position: 3
+tags: [Visualizer, Dashboards, Widgets]
+slug: bar-chart-widget-configuration-settings
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+## Configuring Bar chart widget
+
+To configure Bar chart widget do the following:
+
+1.  From the right side of the widget generation page, click the **Update Widget Column Configurations** icon.
+
+    <ImagePopup src="/img/visualizer/image-20250503-170512.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" />
+
+2.  Configure any of the following:
+
+
+| Items | Description |
+|:---|:---|
+| **X-Axis** | Click the field to change the title of the X-Axis. |
+| **Y-Axis** | Click the field and specify the following:<ul><li>**Title**: Change the title of the Y-Axis.</li><li>Check **Cumulative** to keep the values cumulative</li><li>**Top/Bottom analysis** pinpoints the highest (Top) or lowest (Bottom) performers within a dataset based on a chosen metric, displaying a specified number (N) of these entities for focused insights. You can set the direction which can be top or bottom and provide the number limit.</li><li>Toggle **Chart Data Label** to change the color of the labels within the chart.</li><li>Choose an option from the **Numeric Notions** to select how numerical values are displayed: <ul><li>**Auto:** The system automatically determines the most appropriate notation (standard, thousands, millions) based on the magnitude of the data.</li><li> **Thousands (K):** Displays values in thousands, abbreviated with K (e.g., 10,000 becomes 10K).</li><li>**Millions (M):** Displays values in millions, abbreviated with M (e.g., 1,000,000 becomes 1M).</li></ul></li><li>In **Decimal**, specify the number of digits to display after the decimal point.</li><li>Click the **+** button next to **Technical indicators** to add any of the following technical indicators: Linear Regression, Moving Average, Trend Line </li></ul> |
+| **Slice with color** | Contains the column data which is color coded and presented. You drag and drop items in this section from **Not Visualized** section to visualize corresponding data. |
+| **Not Visualized** | Drag and drop items in this section into the **Slice with color** section to view corresponding data in the canvas region. |
+
+:::info
+DataGOL supports plotting multiple metrics (Y-axis) against a single dimension (X-axis).
+
+For example:
+As shown in the image, for a single dimension such as **Yearly Hire Date** on the **X-axis**, our system can display multiple metrics such as **Average Remote Work Frequency**, **Average Employee Satisfaction score** and **Sum work hours per week** on the **Y-axis**. This would visualize a combination chart of bars and line.
+
+<ImagePopup src="/img/visualizer/image-20250508-130008.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" />
+:::
+
+## Setting Bar chart widget
+
+To set the Bar chart widget, do the following:
+
+1.  From the right side of the widget generation page, click the **Update settings** icon.
+
+    <ImagePopup src="/img/visualizer/image-20250503-170524.png" alt="configuring-setting-bar-widget" caption="configuring-setting-bar-widget" />
+
+2.  Set the following:
+
+    | Item | |Description |
+    |:---|:---|:----|
+    | **General** | |Set general details. |
+    | |**Title** | Edit the title of the chart. |
+    | |**Subtitle** | Edit the subtitle of the chart. |
+    | |**Help message** | Type the message that appears when you hover over the help icon. |
+    | **Display** | |Set the display details of the displayed Bar chart widget. |
+    | |**X-Axis Grid Lines** | Check this option to view the X-Axis grid lines. |
+    | |**Y-Axis Grid Lines** | Check this option to view the Y-Axis grid lines. |
+    | |**Horizontal** | Check this option to view the bars in the chart horizontally. |
+    | **Stacked** | |Select this option to view data in a stacked format. This is useful for visualizing how a total quantity is distributed among different categories. Also specify if you want to view the values in regular format or in percentage. |
+    | **Tooltip** | C|heck this option for the chart tooltip and choose either to share all values in a single tooltip, or show each point's value separately. |
+    | **Linked reports** | |Set the details of the dashboard reports you want to view from this widget. |
+    | |**Linked report URL** | Paste the URL of the dashboard that you want to view from this widget. |
+    | |**Open in New tab** | Specify if you want to view the linked report in a different tab.  |

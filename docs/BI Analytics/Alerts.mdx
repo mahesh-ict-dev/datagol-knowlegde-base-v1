@@ -7,9 +7,9 @@ title: Alerts
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-Alerting is a core feature in DataGOL that allows you to monitor your systems and get notified when metrics, logs, or other data cross a predefined threshold. It is a proactive way to manage the health of your environment, so you can respond to issues quickly and prevent them from becoming critical.
+Alerting is a core feature in DataGOL that allows you to create alerts and notifications in DataGOL for tracking key performance indicators (KPIs) effectively.
 
-Alerts are powered by monitors, which are the rules you create to track data. While you often use dashboards and widgets to visualize your data, the same underlying data and filters from those visualizations are used to build the alert conditions. For example, if you have a widget showing daily revenue, you can create an alert based on that widget that notifies you if the revenue drops below a certain amount.
+Alerts are powered by the conditions you create to track data. While you often use dashboards and widgets to visualize your data, the same underlying data and filters from those visualizations are used to build the alert conditions. For example, if you have a widget showing daily revenue, you can create an alert based on that widget that notifies you if the revenue drops below a certain amount.
 
 
 ## Creating alerts
@@ -29,19 +29,31 @@ Creating an alert lets you define the conditions and notification settings for y
 2.  **Define the alert conditions**:
     * **Alert name**: Give your alert a clear, descriptive name.
     * **Status**: Choose whether to keep the Alert in an active or inactive state. 
-    * **Thresholds**: Set the value that will trigger the alert. You can choose from different types of comparisons:
-        * **Standard threshold**: Triggers when the value is greater than, less than, or equal to a specific number.
-        * **Percentage change**: Triggers if the value changes by a certain percentage compared to a previous period (e.g., a 10% drop from the previous week).
-        * **Absolute change**: Triggers if the value changes by a specific amount (e.g., a drop of 100).
-    * **Comparison period**: If you choose a percentage or absolute change, you must define the comparison period. This can be "Previous Day," "Previous Week," or "Previous Month." This setting is only available when a relative date filter (like "Today" or "This Week") is applied to the widget.
-    :::tip[Note]
+    * **Confirm the metric and workbook details.** These are auto-populated and cannot be changed.
+    * **Thresholds**: 
+        *   **Decide if you want to enable a threshold:**
+            *   If you want daily notifications without a threshold, skip this step.
+            *   To set a threshold, click **Enable** and choose conditions (greater than, less than, etc.)
+        *   **Set the value that will trigger the alert. You can choose from different types of comparisons:**
+            * **Standard threshold**: Triggers when the value is greater than, less than, or equal to a specific number.
+            * **Percentage change**: Triggers if the value changes by a certain percentage compared to a previous period (e.g., a 10% drop from the previous week).
+            * **Absolute change**: Triggers if the value changes by a specific amount (e.g., a drop of 100).
+            * **Comparison period**: If you choose a percentage or absolute change, you must define the comparison period. This can be "Previous Day," "Previous Week," or "Previous Month." This setting is only available when a relative date filter (like "Today" or "This Week") is applied to the widget.
+                :::tip[Note]
+                **Absolute change**, **Percentage change**, **Percentage increase by**, and **Percentage decrease by** values are enabled only if there is a comparison period. 
+                ::: 
     
 3.  **Set the schedule**: Define how often the alert will run.
-    * **On a schedule**: You can set a cron expression for the alert to run daily, weekly, or monthly. The shortest available duration is hourly.
+    * **On a schedule**: You can set a cron expression for the alert to run daily, weekly, or monthly. The shortest available duration is hourly. 
+
+        :::info[Info]
+        Alerts are set in UTC standard time. You can add or subtract your time zone's offset from the UTC time to set the schedule as per your local time. 
+        :::
+
     * **On data change**: In future updates, you can configure the alert to run automatically whenever the underlying data changes, which is a good option for operations or data teams.
 
 4.  **Configure notifications**:
-    * **Recipients**: Specify who will receive the alert. The alert creator is automatically subscribed, and they can add others to the recipient list. Only subscribed users will receive notifications.
+    * **Subscribers**: Specify who will receive the alert. The alert creator automatically becomes the primary subscriber, and they can add other subscribers to the list by entering their email addresses. Only subscribed users will receive notifications.
     * **Message**: You can customize the notification message with details about the alert.
 
 5.  **Save the alert**: Once you have configured the settings, click **Save Alert**. The alert is now active and will begin monitoring the data according to your schedule and conditions.
@@ -50,34 +62,69 @@ Creating an alert lets you define the conditions and notification settings for y
     
     For example, with a threshold set at a 30% sales increase, an alert would be triggered if sales rose from 100 to 140, as this represents a 40% increase—exceeding the 30% threshold. However, an increase from 100 to 110 (a 10% increase) would not trigger an alert because it does not meet the minimum percentage. Similarly, a decrease in sales, such as from 100 to 80, would not trigger an alert either, since this type of alert only monitors positive growth.
 
+## Alert triggering 
 
-## Checking or viewing alerts
+The following types of alert notifications are triggered:
 
-After creating an alert, you can track its status and review its history.
+-   **Threshold-based notifications**
 
-### 1. The alerts home page
+    A notification is automatically sent the moment a predefined value, or threshold, is met or exceeded. For instance, you could set a threshold that sends an alert if a server's CPU usage climbs above 80%. This type of alert is event-driven; it only occurs when a specific condition is fulfilled. 
+
+    The following types of notifications are generated in threshold-based notifications:
+
+    -   An alert is sent when a specific threshold is met.
+
+        <ImagePopup src="/img/alerts/alerts-threshold-met-notification-sent.png" alt="Alerts" caption="Alerts" />
+
+    -   If the threshold is not met, no alert will be delivered.
+
+        <ImagePopup src="/img/alerts/alerts-threshold-not-met-notification-not-sent.png" alt="Alerts" caption="Alerts" />
+
+-   **Time-based notifications**
+
+    Notifications can also be delivered on a fixed schedule, regardless of any other conditions. If you configure a time-based alert, such as a daily or weekly report, the system will send it at the designated time even if no thresholds are set. This is useful for getting regular status updates or summaries.
+
+    If a daily or weekly notification is configured, it will always be sent at the scheduled time. 
+
+    <ImagePopup src="/img/alerts/alerts-threshold-not-set-notification-sent.png" alt="Alerts" caption="Alerts" />
+
+
+## Accessing saved alerts
+
+You can access saved alerts and its execution history as follows:
+
+### Alerts on home page
+
+Navigate to the main **Alerts** page from the **Home page** > Left navigation > **Alerts**. This is the central location where you can view all active alerts.
 
 <ImagePopup src="/img/alerts/alerts-home.png" alt="Alerts Home" caption="Alerts" />
 
-* Navigate to the main alerts page from the Home page > Left navigation > **Alerts**. This is the central location where you can view all active alerts.
-* Here, you can see a list of every alert that has been created.
+Here, you can view a list of every alert that has been created. You can edit, delete, deactivate, or unsubscribe an alert from here.
+
+    <ImagePopup src="/img/alerts/alerts-list.png" alt="Alerts" caption="Alerts" />
+
 * The creator of the alert has full control and can **deactivate**, **edit**, or **delete** it.
 * Subscribers to the alert can only **unsubscribe** from it if they no longer wish to receive notifications.
 * Deactivating an alert stops it from running but does not delete it.
 
-### 2. Execution and notification history
+### Execution and notification history
 
-* Within the alerts, you will find the following tabs:
-* **Alerts**: Displays the list of all alerts that are generated based on the set conditions. 
 * **History**: Displays the records when the alert condition was met. One execution happens per alert. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
 * **Notification**: This records every time a notification was sent to a user. One execution can result in multiple notifications if there are multiple recipients.
 
-### 3. Dashboard and widget notifications
+## Alert notifications
 
-* When an alert is triggered, a red notification icon will appear on your dashboard page.
-* The same red icon will also appear on the specific widget that triggered the alert.
-* Clicking on the icon on the dashboard will take you directly to the widget with the alert.
+You will receive alert notifications in an email as well as on the dashboard:
 
+### Email
+When an alert is generated based on the trigger conditions, an email is sent to all the subscribers. Emails will include title, current value, threshold details, and trigger time.
+
+<ImagePopup src="/img/alerts/alerts-email.png" alt="Alerts" caption="Alerts" />
+
+### Dashboard
+* When an alert is triggered, a red notification icon will appear on your dashboard page. The same red icon will also appear on the specific widget that triggered the alert. Clicking on the icon on the dashboard will take you directly to the widget with the alert.
+
+<ImagePopup src="/img/alerts/alerts-red-icon-dashboard.png" alt="Alerts" caption="Alerts" />
 
 ### Limitations
 

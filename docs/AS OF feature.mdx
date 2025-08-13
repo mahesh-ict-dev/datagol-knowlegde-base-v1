@@ -1,0 +1,62 @@
+---
+sidebar_position: 7
+tags: [User, Teams, Roles]
+slug : about-workspace
+title : AS OF - Time travel feature 
+---
+
+## What is AS OF - Time travel feature?
+
+DataGOL offers a unique time travel capability by providing a smart way to look at data from any specific point in time. In case you want to explore your data as it existed in the past, you can start the orchestration process with the corresponding date. Upon completion, your data will be updated to reflect the enriched information from that specific point in time.  
+This is similar to having one master time setting that governs all connected processes. Setting it once dictates the data version they all refer to.
+
+This data time travel is achieved by introducing parameters (a date or timestamp) into the pipeline, such as a `WHERE` clause filtering data based on a date.  
+When the orchestration is executed, the system prompts you to provide values for these parameters. Consequently, all pipelines within that orchestration will operate on the data corresponding to the specified time frame.
+
+This ensures consistency and allows for the analysis of historical data across multiple interconnected pipelines based on a single point-in-time definition.
+
+## Setting the AS OF - Time travel in DataGOL
+
+By following these steps, you can effectively implement DataGOL's time travel feature to analyze historical data consistently across your data pipelines:
+
+
+1.  **Create a Custom or Dedup pipeline**. 
+
+    -   Refer to [Creating Custom pipeline](</docs/Lakehouse/Pipelines/Creating Custom pipeline.mdx>)
+    -   Refer to [Creating Dedup pipeline](</docs/Lakehouse/Orchestrations/Creating Dedup pipeline.mdx>)
+
+    :::tip[Note]
+        The 'AS OF' feature, which allows you to query data as it existed at a specific point in time, is exclusively supported on **Custom** and **Dedup** pipelines. This is because these particular pipelines are designed to accept and process parameters directly from a query, which is how the 'AS OF' functionality is implemented.
+        :::
+    
+2.   **Define a parameter in your query**: In the query editor, you must define a parameter using curly braces `{}`. For example, if you want to filter data based on an employee ID, your query might look something like this: `SELECT * FROM employee WHERE id > {employee_id}`.
+    
+3.   **Save and publish**: Save the query and publish the pipeline.
+
+4.  **Create an Orchestration**
+    The "AS OF" feature is managed at the orchestration level. Create an orchestration that includes the pipeline(s) you just created. Refer to [Creating orchestrations](</docs/Lakehouse/Orchestrations/Creating orchestrations.mdx>)
+    
+5.  **Run the Orchestration to create a Snapshot**
+    To use the "AS OF" feature, you need to run the orchestration and create a "snapshot" of the data at that specific point in time, with the parameters you define. You can give the snapshot a descriptive name. This creates a versioned copy of the data based on the parameters you entered. Each time you run the orchestration with a new parameter value and as a snapshot, a new version is created.
+    
+6.  **Enter parameter values:**  When you run the orchestration, a prompt appears asking for the value of the parameter(s) you defined in your query. Provide values for the parameters.
+    
+    -   DataGOL will automatically apply the time parameter value you entered to all the pipelines in the orchestration. When you create the parameterized pipeline ensure to use the Manual option.
+        
+    -   Each pipeline in the chain will then process data according to this specified historical point. For example, if the first pipeline generated data as of "2025-03-15", any subsequent pipelines will use this specific output, effectively performing time travel consistently across the entire workflow.
+        
+    -   You can view the versions in workbook as well as in the Visualizer.
+
+
+## Viewing the AS OF versions from workbook
+
+After generating one or more snapshots, you can access them from the workbooks interface.
+
+To access the AS OF versions, do the following:
+1.  On the **Home** page, from the left navigation panel, click **Workspace**, and from the list of workspaces, open the workspace where the workbook that you want to edit is located.
+2.  Click the **Workbook** tab and select the required workbook.
+3.  Click the **Settings** button on the top and select **AS OF Versions**. 
+4.  Select a AS OF version. You will see a list of available versions listed in the right pane.
+5.  Click a specific version to view the data as it was at the time of that snapshot. You can also view the parameters that were used to generate that version. This process essentially allows you to "time-travel" back to a previous state of your data by using the versioned snapshots created through the orchestration.
+
+## Viewing the AS OF versions from Visualizer
