@@ -29,8 +29,13 @@ Creating an alert lets you define the conditions and notification settings for y
 2.  **Define the alert conditions**:
     * **Alert name**: Give your alert a clear, descriptive name.
     * **Status**: Choose whether to keep the Alert in an active or inactive state. 
-    * **Confirm the metric and workbook details.** These are auto-populated and cannot be changed.
+    * **Alert Metric**: Displays the details of the alert metric. Confirm the metric and workbook details. These are auto-populated and cannot be changed. This section displays the workbook and columns used to set the alert alongwith the filters added to the widget and the period for the data. 
     * **Thresholds**: 
+    
+    :::info
+    Threshold is not a mandatory field. You can skip this step to receive alerts for daily notifications.
+    :::
+
         *   **Decide if you want to enable a threshold:**
             *   If you want daily notifications without a threshold, skip this step.
             *   To set a threshold, click **Enable** and choose conditions (greater than, less than, etc.)
@@ -39,15 +44,16 @@ Creating an alert lets you define the conditions and notification settings for y
             * **Percentage change**: Triggers if the value changes by a certain percentage compared to a previous period (e.g., a 10% drop from the previous week).
             * **Absolute change**: Triggers if the value changes by a specific amount (e.g., a drop of 100).
             * **Comparison period**: If you choose a percentage or absolute change, you must define the comparison period. This can be "Previous Day," "Previous Week," or "Previous Month." This setting is only available when a relative date filter (like "Today" or "This Week") is applied to the widget.
+                
                 :::tip[Note]
-                **Absolute change**, **Percentage change**, **Percentage increase by**, and **Percentage decrease by** values are enabled only if there is a comparison period. 
+                **Absolute change**, **Percentage change**, **Percentage increase by**, and **Percentage decrease by** values are enabled only if there is a period comparison. 
                 ::: 
     
 3.  **Set the schedule**: Define how often the alert will run.
     * **On a schedule**: You can set a cron expression for the alert to run daily, weekly, or monthly. The shortest available duration is hourly. 
 
         :::info[Info]
-        Alerts are set in UTC standard time. You can add or subtract your time zone's offset from the UTC time to set the schedule as per your local time. 
+        Alerts are set in UTC standard time. When you set the UTC time, the local time is displayed with the schedule instructions. You can add or subtract your time zone's offset from the UTC time to set the schedule as per your local time. 
         :::
 
     * **On data change**: In future updates, you can configure the alert to run automatically whenever the underlying data changes, which is a good option for operations or data teams.
@@ -60,7 +66,12 @@ Creating an alert lets you define the conditions and notification settings for y
     
     An alert with a "Percentage Increase By" threshold is triggered when a value increases by more than a specified percentage. 
     
-    For example, with a threshold set at a 30% sales increase, an alert would be triggered if sales rose from 100 to 140, as this represents a 40% increase—exceeding the 30% threshold. However, an increase from 100 to 110 (a 10% increase) would not trigger an alert because it does not meet the minimum percentage. Similarly, a decrease in sales, such as from 100 to 80, would not trigger an alert either, since this type of alert only monitors positive growth.
+    For example, with a threshold set at a 30% sales increase, an alert wold be triggered if sales rose from 100 to 140, as this represents a 40% increase—exceeding the 30% threshold. However, an increase from 100 to 110 (a 10% increase) would not trigger an alert because it does not meet the minimum percentage. Similarly, a decrease in sales, such as from 100 to 80, would not trigger an alert either, since this type of alert only monitors positive growth.
+
+:::caution[Caution]
+-   Ensure that the correct email addresses are entered for notifications to avoid missing important alerts.
+-   Be mindful of the time zone settings when scheduling alerts.
+:::
 
 ## Alert triggering 
 
@@ -68,9 +79,9 @@ The following types of alert notifications are triggered:
 
 -   **Threshold-based notifications**
 
-    A notification is automatically sent the moment a predefined value, or threshold, is met or exceeded. For instance, you could set a threshold that sends an alert if a server's CPU usage climbs above 80%. This type of alert is event-driven; it only occurs when a specific condition is fulfilled. 
+    A notification is automatically sent the moment a predefined value, or threshold, is met or exceeded. For instance, you could set a threshold that sends an alert if a server's CPU usage goes above 80%. This type of alert is event-driven; it only occurs when a specific condition is fulfilled. 
 
-    The following types of notifications are generated in threshold-based notifications:
+    In threshold-based notification systems, the following two situations occur:
 
     -   An alert is sent when a specific threshold is met.
 
@@ -95,22 +106,31 @@ You can access saved alerts and its execution history as follows:
 
 ### Alerts on home page
 
-Navigate to the main **Alerts** page from the **Home page** > Left navigation > **Alerts**. This is the central location where you can view all active alerts.
+From the **Home page**, on the left navigation panel, click **Alerts**. The **Alerts Management** page is displayed. This is the central location where you can view all the alerts to which you have subscribed.
 
-<ImagePopup src="/img/alerts/alerts-home.png" alt="Alerts Home" caption="Alerts" />
+The following tabs are displayed on the **Alerts Management** page:
 
-Here, you can view a list of every alert that has been created. You can edit, delete, deactivate, or unsubscribe an alert from here.
+-   **Alerts**
 
-    <ImagePopup src="/img/alerts/alerts-list.png" alt="Alerts" caption="Alerts" />
+    <ImagePopup src="/img/alerts/alerts-home.png" alt="Alerts Home" caption="Alerts" />
 
-* The creator of the alert has full control and can **deactivate**, **edit**, or **delete** it.
-* Subscribers to the alert can only **unsubscribe** from it if they no longer wish to receive notifications.
-* Deactivating an alert stops it from running but does not delete it.
+    Here, you can view a list of every alert that has been created. Details such as when was the alert last triggered, when was the alert created, who created the alert,when the alert was created, and how many recipients are there for each alert are shown here.  You can edit, delete, deactivate, or unsubscribe an alert from here.
 
-### Execution and notification history
+    * The creator of the alert has full control and can **deactivate**, **edit**, or **delete** an alert. 
 
-* **History**: Displays the records when the alert condition was met. One execution happens per alert. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
-* **Notification**: This records every time a notification was sent to a user. One execution can result in multiple notifications if there are multiple recipients.
+         <ImagePopup src="/img/alerts/alerts-list.png" alt="Alerts" caption="Alerts" />
+
+    * Subscribers to the alert can **unsubscribe** from it if they no longer wish to receive notifications and view the alert history. 
+    
+         <ImagePopup src="/img/alerts/alert-subscriber.png" alt="Alerts" caption="Alerts" />
+    
+    * Deactivating an alert stops it from running but does not delete it.
+
+-   **History**
+    Displays the execution history of all the alerts. The history log provides details such as the current value of the metric, the set threshold, and whether the threshold was met.
+
+
+-   **Notification**: Displays all the notifications for the alerts that have been triggered. This records every time a notification was sent to a user. One execution can result in multiple notifications if there are multiple recipients.
 
 ## Alert notifications
 
@@ -125,6 +145,55 @@ When an alert is generated based on the trigger conditions, an email is sent to 
 * When an alert is triggered, a red notification icon will appear on your dashboard page. The same red icon will also appear on the specific widget that triggered the alert. Clicking on the icon on the dashboard will take you directly to the widget with the alert.
 
 <ImagePopup src="/img/alerts/alerts-red-icon-dashboard.png" alt="Alerts" caption="Alerts" />
+
+:::tip[Tip]
+-   Regularly review and update alert thresholds to ensure they remain relevant.
+-   Utilize the history section to analyze past alert performance and adjust settings accordingly.
+:::
+
+## Editing an alert 
+
+:::tip[Note]
+Only the Alert creator can edit an alert. 
+:::
+
+1. From the **Home page**, on the left navigation panel, click **Alerts**. The **Alerts Management** page is displayed.
+2. Click the edit icon corresponding to the alert you want to edit and edit the details. 
+
+    <ImagePopup src="/img/alerts/alerts-edit.png" alt="Alerts" caption="Alerts" />
+
+## Deleting an alert 
+
+:::tip[Note]
+Only the Alert creator can delete an alert. 
+:::
+
+1. From the **Home page**, on the left navigation panel, click **Alerts**. The **Alerts Management** page is displayed.
+2. Click the delete icon corresponding to the alert you want to delete to delete the alert.
+
+    <ImagePopup src="/img/alerts/alerts-delete.png" alt="Alerts" caption="Alerts" />
+
+## Activating / Deactivating an alert
+
+:::tip[Note]
+Only the Alert creator can activate or deactivate an alert. 
+:::
+
+1. From the **Home page**, on the left navigation panel, click **Alerts**. The **Alerts Management** page is displayed.
+2. Click the activate/deactivate icon corresponding to the alert you want to activate/deactivate.
+    
+    <ImagePopup src="/img/alerts/alerts-activate-deactivate.png" alt="Alerts" caption="Alerts" />
+
+## Viewing history of an alert
+
+:::tip[Note]
+The alert creator as well as the alert subscribers can view the alert history details.
+:::
+
+1. From the **Home page**, on the left navigation panel, click **Alerts**. The **Alerts Management** page is displayed.
+2. Click the history icon corresponding to the alert for which you want to view the history details. The alert record details are shown. 
+
+    <ImagePopup src="/img/alerts/alerts-view-history.png" alt="Alerts" caption="Alerts" />
 
 ### Limitations
 

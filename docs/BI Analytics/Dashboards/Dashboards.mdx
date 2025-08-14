@@ -1,6 +1,7 @@
 ---
+sidebar_position: 1
+tags: [Visualizer, Dashboards, Widgets]
 title: Dashboards
-sidebar_position: 3
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
@@ -8,73 +9,156 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 Dashboards are interactive visual interfaces that consolidate and present key data points in a clear, accessible format. They enable users to monitor performance, uncover trends, and make informed decisions by visualizing complex datasets through charts, tables, and key performance indicators (KPIs).
 
-# Creating a dashboard
+## Creating a dashboard
 
-Within each workspace along with Workbooks there are two modules for BI: **Visualizer** and **Dashboards**.
-Each dashboard is independent to that workspace until [externally shared](/docs/BI%20Analytics/Sharing/External%20Dashboards).
+Within each workspace along with [Workbooks](</docs/Workbooks/About workbook.mdx>) module there are two modules specifically for BI: [**Visualizer**](</docs/BI Analytics/Visualizer/About Visualizer.mdx>) and **Dashboards**. 
+Each dashboard is indeßpendent to that workspace until [externally shared](/docs/BI%20Analytics/Sharing/External%20Dashboards). 
+When you create a dashboard, you are building a single page to hold multiple [widgets](</docs/BI Analytics/Widgets/Widget Types.mdx>). This allows you to quickly visualize business intelligence through charts, graphs, and other data displays.
 
-To Create a new page, on the Dashboard section on the bottom left there is option to create new page.
-<ImagePopup src="/img/create-new-dashboard.gif" alt="switch-workbooks-in-a-dashboard" caption="dashboard" />
+To create a dashboard, do the following: 
 
-You can start creating widgets from 'Create Widget' option available on dashboard or create widgets directly from the visualizer to then pin it to the respective dashboard pages
-# Editing Dashboard:
+1.  Access a workspace and click **Dashboard** tab from the top.
 
-on the top right there is a gear icon,from here we can manage/ edit the Dashboard
+2. From the bottom of left navigation panel, click **Create page**. The **New Dashboard Page** is displayed.
 
- ## Editing Widgets on a Dashboard
-   In the setting panel select the second option that says :
--> "Manage Layout and Widgets"
-now hover over any widget that you want to edit and select the edit icon under that widget
-by selecting edit , a pop up comes where it goes into edit mode of the visualizer , make changes to your chart and hit 'Save' option on the chart
-<ImagePopup src="/img/manage-layouts.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
-
-User can also **re arrange** or edit the size of the layout of the widget by simply dragging and dropping to necessary size and place
-
-**Duplicating widgets** If you like any widget but want to make minimal changes on it and need a copy of the widget , you can simply select the Duplicate widget option and later edit from the edit mode.
+  <ImagePopup src="/img/create-new-dashboard.gif" alt="switch-workbooks-in-a-dashboard" caption="dashboard" />
+    
+3.  Enter a unique name and meaningful description for the dashboard.
+    
+4.  Click **Create**.
+    
+5. [Create a visualization/widget](</docs/BI Analytics/Visualizer/Creating visualization or widget.mdx>) and [pin the widget](</docs/BI Analytics/Visualizer/Save widget/Pinning visualization to dashboard.mdx>) that to a dashboard. The Dashboards are then populated with widgets. 
 
 
-# Understanding Icons on Widget on a Dashboard:
+## Editing dashboards
 
-<img src="/img/Icons-image.png" alt="dashboard" style={{ width: '300px' }} />
+When you edit a dashboard, you can do the following:
 
-### 1) Linked Report:
- You can add a link/ URL to any dashboard page / workbook / Report that would give more insights about the data being pulled
-### 2) Help Message:
- On each widget you can add a small help text that give a short description about the widget. You can configure this from the visusalizer while creating widget or from edit mode as well.
- on the settings panel of each widget under the title and subtitle , we can include the Help Message.
-### 3) Explore Mode:
- Explore mode on a widget helps you get a more focused view of the widget , on this mode by default on the right hand side there are a list of auto populated / system geenrated filters that the user can add. additionally he can also choose these manually from choose filter option on the top right.
- - you can also [Drill Down](/docs/BI%20Analytics/Drill%20Down/Drill%20Down.mdx) on the widgets from this view
- - Show Point Data :
- on the right click on a particular point and select show point data option from the list , this will show all the indiviual records of the dataset leading to the final value that we see on the widget
- -Show Raw Data:
- once you do the right click on the widget there is another option called Show Raw Data , this would show all the records of the workbook powering this widget
- - Show as Table:
- Using this option , the user can see the content of the data that he is seeing on the visual in the form of a tabular representation
- - Undo / Redo / Reset:
- on the top right of the explore mode on the widget , there are three options :
-  - undo : whatever current change made is lost and user is navigated to the prior screen
-  - redo : helps in redo / go to the next step user had already performed
-  - reset: helps in taking the widget visual to the original form
- Note : Any changes made on the explore mode of the widget are just for deeper analysis purpose to slice and dice the data better , hence these changes will not be saved / retained on the original widget
-### 4) [Widget Level Filter](/docs/BI%20Analytics/Widgets/Widget%20Filters.mdx) :
-Hovering on this icon will show the list of all the widget level filters that were added on this widget from the visualizer.
-### 5) [Page Level Filter](/docs/BI%20Analytics/Dashboards/Page%20Filter.mdx) :
-Hovering on this icon displays the list of page level filters that were configured and applied to this widget from the dashboard page.
+- Change the layout of dashboards 
+- Edit widget data
+- Delete the widgets in a dasbboard
+- Duplicate a widget 
 
-Note : Incase there is a page level and widget level filter applied on the same column on a widget , then the Widget level filter takes precedence over the selection on the page level filter for the same column.
+## Change the layout of dashboards 
 
-### 6) Show SQL :
-at any point you would like to understand the underlying query powering this widget , you can select the show SQL , this explains about the page level / widget level filters being applied , any formula column or parameter currenlty being rendered on this widget.
-Note: this is just a view only option , user will not be able to edit query from here to modify the widget.
+You can change the layout of your dashboards by changing the order of the widgets in the dashboard. Do the following:
 
+1.  From a workspace, on the top, click Dashboard and access a dashboard.
+    
+2.  On the dashboard, from the upper right corner, click the **Settings** icon and then choose **Manage Layouts & Widgets.**
+    
+    <ImagePopup src="/img/visualizer/image-20250514-144000.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+    
+3.  Edit the dashboard details or rearrange and edit the size of the layout of the widget by simply dragging and dropping to necessary size and place
+and then click the **Save** icon. 
 
+    <ImagePopup src="/img/dashboard-edit-reorder-widgets.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
+    
+4.  From the upper right corner, click **Done** button.
 
-# Switch Workbook:
+## Editing widget data
 
-If you want to replace the existing workbook powering the widgets on the dashboard with a new workbook from within the workspace , you can use the 'Switch Workbook' option.
-Understand the impact , make sure that there are relevant columns matching to ensure that the dashboard doesnt break due to loss in columns / information.
+1.  From a workspace, on the top, click **Dashboard** and access a dashboard you want to edit.
+    
+2.  On the dashboard, from the upper right corner, click the **Settings** icon and then choose **Manage Layouts & Widgets.**
+
+3. Hover over any widget that you want to edit and select the edit icon under that widget. 
+
+    <ImagePopup src="/img/edit-dashboards2.png" alt="/img/edit-dashboard.gif" caption="dashboard" />
+
+4. Make changes to your chart and click **Save** button on the chart. and then click **Done**. 
+
+    <ImagePopup src="/img/manage-layouts.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
 
 
+## Deleting a widget in the dashboard
+
+
+1.  From a workspace, on the top, click **Dashboard** and access a dashboard you want to edit.
+    
+2.  On the dashboard, from the upper right corner, click the **Settings** icon and then choose **Manage Layouts & Widgets.**
+
+3. Hover over any widget that you want to delete and select the delete icon under that widget. 
+
+    <ImagePopup src="/img/delete-widgets-dashboards.png" alt="/img/delete-dashboard.gif" caption="dashboard" />
+
+4. Click **Delete** to confirm. 
+
+
+## Duplicating widgets on a dashboard
+
+To make minimal changes to a widget you like, you can duplicate it and then edit the copy.
+
+1.  From a workspace, on the top, click **Dashboard** and access a dashboard you want to edit.
+    
+2.  On the dashboard, from the upper right corner, click the **Settings** icon and then choose **Manage Layouts & Widgets.**
+
+3.  Hover over any widget that you want to delete and select the duplicate icon under that widget. The copy of the widget is added to the dashboard. 
+
+    <ImagePopup src="/img/duplicate-widgets-dashboards.png" alt="/img/duplicate-dashboard.png" caption="dashboard" />
+
+
+## Understanding widget icons on dashboard
+
+<ImagePopup src="/img/Icons-image.png" alt="/img/dashboard" caption="dashboard" />
+
+The table below provides a description for each item, corresponding to the number shown in the image.
+
+No.| Item| Description|
+  |:---:|:----|:---|
+ |1|**Linked Report**|You can add a link or URL to any dashboard page, workbook, or report to provide further insights into the data being displayed.|
+ |2|**Help Message**|You can add a small help text to each widget to provide a brief description. This can be configured either during the widget creation process in the visualizer or later in edit mode.|
+ |3|**Explore Mode**| In this mode, a list of auto-populated filters is available on the right side by default. You can add these system-generated filters or manually select others using the **Choose filter** option at the top right. Moreover, you can also perform other tasks. Refer to [Explore Mode](#Explore-Mode)|
+ |4|**[Widget Level Filter](</docs/BI Analytics/Widgets/Widget Filters.mdx>)**|Hovering on this icon will show the list of all the widget level filters that were added on this widget from the visualizer.|
+ |5|**[Page Level Filter](</docs/BI Analytics/Dashboards/Page Filter.mdx>)**|Hovering on this icon displays the list of page level filters that were configured and applied to this widget from the dashboard page.|
+ |6|**Show SQL**|To understand the underlying query that powers a widget, you can select **Show SQL**. This will provide details about the page and widget-level filters applied, as well as any formula columns or parameters currently being used.|
+
+### Explore mode
+
+Explore mode on a widget helps you get a more focused view of the widget, on this mode by default on the right hand side there are a list of auto populated / system geenrated filters that the user can add. additionally he can also choose these manually from choose filter option on the top right.
+ -  Right click on the widget and select the **Drill Down** option to [drill down](/docs/BI%20Analytics/Drill%20Down/Drill%20Down.mdx) into the data.
+ -  **Show Point Data**: Right click a specific point and select show point data option from the list. This will show all the indiviual records of the dataset, which led to the final value on the widget.
+ -  **Show Raw Data**: Right click on the widget and select the **Show Raw Data** option to view all the records of the workbook powering this widget.
+ -  **Show as Table**: Using this option, you can view the underlying data in a tabular representation.
+ -  **Undo / Redo / Reset**: On the top right of the explore mode on the widget, there are following three options:
+    - Undo: Reverts the last change made and returns the user to the previous screen.
+    - Redo: Reapplies the last action that was undone, advancing the user to the next step.
+    - Reset: Restores the widget's visual to its original, default state.
+ 
+ :::tip[Note]
+ Changes made in Explore Mode are for analysis only and will not be saved to the original widget.
+ :::
+
+## Switching workbooks
+
+You can change the underlying data source of a dashboard from one workbook to another. To replace the workbook currently powering your dashboard, use the Switch Workbook option. Before you proceed, ensure that the new workbook contains all the necessary columns to prevent any data loss or errors on your dashboard.
+
+:::warning [CAUTION]
+Before switching dashboards to a new workbook, it's crucial to ensure the new workbook is compatible to prevent errors.
+
+This involves verifying that the **column names and data types** in the new workbook are consistent with the previous one. The application often flags discrepancies like incorrect names or data types with an error indicator, requiring correction before the new workbook is attached.
+
+This proactive check ensures a smoother transition and that the dashboard functions as expected with the updated data source.
+
+**Workbooks with consistent column names**
+<ImagePopup src="/img/visualizer/image-20250509-122736.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+
+**Workbooks with inconsistent column names**
+<ImagePopup src="/img/visualizer/image-20250509-122725.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+:::
+
+Do the following to switch workbooks in a dashboard:
+
+1.  From a workspace, access a dashboard.
+    
+2.  On the dashboard, from the upper right corner, click settings and then choose **Switch Workbooks**. The **Switch Workbooks** box is displayed.
+    
+    <ImagePopup src="/img/visualizer/image-20250504-183842.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" />
+    
+3.  Select the existing workbook and the workbook you want to replace.
+    
+     <ImagePopup src="/img/visualizer/image-20250504-184035.png" alt="switch-workbooks-in-a-dashboard" caption="switch-workbooks-in-a-dashboard" /> 
+    
+4.  Click **Save**.
 
 

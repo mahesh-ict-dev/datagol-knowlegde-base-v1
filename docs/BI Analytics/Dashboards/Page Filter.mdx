@@ -1,28 +1,41 @@
 ---
-title: Dashboard Filters
-sidebar_position: 3
+title: Dashboard filters
+sidebar_position: 2
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-On each Dashboard page you can configure a set of filters that want to be applied to the widgets , we call these as Page Level Filters.
+For each dashboard page, you can configure a set of filters that apply to all widgets on that page. These are known as **Page level** filters.
 
-## Creating a  Page Level Filters:
+## Creating dashboard filters
 
-From the setting option on the dashboard -> select the 'Manage Filters'
+Do the following to add page level or dashboard level filters:
 
-select -> Add 'New Filter'
+1.  From a workspace, access a dashboard.
+2.  On the dashboard, from the upper right corner, click the **Settings** icon and then choose **Manage filters.**
+3.  In the **Manage Filters** box, click **New filter**.
+4.  In the **New Filter** box, specify the following details.
+    
+    <ImagePopup src="/img/manage-filters.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
+    
+    - **Default values:** Choose a workbook and then select the filter column you want to add.
+      - Select workbook
+      - Filter column           
+      - Value
+    - **Applicable to:** Control where your filter is applied to fine-tune your dashboard. Choose whether this filter should apply to some widgets but not others. By default, it applies to all widgets on the dashboard.
+    - **Link filters:** Choose a filter from one workbook to filter widgets across multiple workbooks. If the same column exists in different workbooks on the dashboard, you can unify them here. For example, linking a "Date" column across two workbooks will result in a single date filter on the dashboard that works for widgets from both workbooks.
 
-## Types of Page Filters
-Similar to the Widget filters we have simialr options on the page filters , can be applied to three main types of columns:
+5.  Click **Apply**.
 
-### 1. Dimension (Text Column)
+## Types of dashboard filters
+
+Similar to the [Widget filters](</docs/BI Analytics/Widgets/Widget Filters.mdx>), there are options for page filters, which can be applied to three main types of columns:
+
+### Dimension (Text columns)
 - **Description:** Categorical or textual columns (e.g., Payment Type, Country).
-- **How it works:**
-  - Any text column , which is configured as a 'Single select' column datatype in the workbooks , this will now appear as a list of options the user can select the filter option from
+- **How it works:** If a text column is configured as a Single Select data type in your workbooks, it will appear as a list of options that you can select as filter.
 
-
-### 2. Metric (Numeric Column)
+### Metric (Numeric columns)
 - **Description:** Columns containing numerical data (e.g., Sales Amount, Quantity).
 - **Available filter operations:**
   - Greater than
@@ -30,54 +43,96 @@ Similar to the Widget filters we have simialr options on the page filters , can 
   - Between
   - Equal to
   - Not equal to
-- **Example:**
-  - Show only records where "Total Sales" is greater than 1,000.
+- **Example:** Show only records where "Total Sales" is greater than 1,000.
 
-
-### 3. Date Column
+### Date column 
 - **Description:** Columns containing date or time values.
 - **Available filter options:**
   - **Custom date range:** Manually select start and end dates on the calendar.
   - **Rolling date ranges:** Predefined options like Today, This Week, Last Month, Year to Date, etc.
   - **Dynamic date ranges:** Last N days/weeks/months/quarters/years, Next N days/weeks/months, etc.
   - **Time buckets:** Filter by Month of Year, Day of Week, Quarter of Year, Week of Year, etc.
-- **Example:**
-  - Show data for "Last 30 Days" or "This Quarter".
+- **Example:** Show data for "Last 30 Days" or "This Quarter".
 
+## Dependent filters
 
-## Default values :
-Choose the workbook from which you want to add the filter and then select the filter column
-## Applicable to :
-You can set the widgets that you want this filter  to be particularly excluded / included on (by default it is applicable to all the widgets on the dashboard)
-## Link Filters :
- If you have a same column across different workbooks powering the widgets on this dashboard ,then you can unfiy them by linking the workbook columns from this section
- example : if there is a date column in 2 workbooks , you can link them so on the dashboard there is only one date filter option showing up , but will be working on widgets from both the workbooks
-<ImagePopup src="/img/manage-filters.gif" alt="/img/create-new-dashboard.gif" caption="dashboard" />
+By default, page-level filters operate with a dependency hierarchy. Consider a scenario with "Country," "State," and "City" filters. With this dependency structure, upon selecting a specific country in the first filter, the subsequent "State" filter will dynamically display only the states within that chosen country.
+Similarly, upon selecting a particular state, the "City" filter will then present only the cities located within that selected state in its drop-down menu.
+When using single-select drop-down filters, the available options in the subsequent filters will dynamically update based on the selection made in the preceding filter.
 
-## Delete Page Filter:
- next to each of the filter created on the manage filter section there is a delete icon , by selecting this you can delete that filter being applied to the dashboard
+When a user selects an option in a single-select drop-down filter, the system automatically filters the data and updates the available options in any subsequent single-select drop-down filters that are dependent on the initial selection. This ensures that users only see options that are valid within the context of their current filter choices.
 
- ## Dependent Filters :
+For example, a dashboard exists with filters for **Date Range**, **Hotel Code**, and **Payment Type**.
 
- By default all the added filters on DataGOL act as dependent filters , ie based on the hireracy / ordering of the filters set , they act as dependent filters
- example: filters can be ordered as :
- 1) Country
- 2) State
- 3) City
- then the options would filter out as : on the Country filter drop down - it would show list of all the Country present
- then based on the Country selected (example say United States of America) was selected then in the next drop down for State, it would only show the relevant states to USA (NC , NJ, CA, FL, AZ, TX)
- Now if the user selects a particular state (example NC) then the City filter drop down would update accordingly , example : now it would only show options like Charlotte , Raleigh pertaining to that state only
+1.  You first select a **Date Range** (e.g., "Last Month").
+    
+2.  The **Hotel Code** filter then _only_ shows hotel codes that had transactions within that last month.
+    
+3.  Finally, if you select a specific **Hotel Code**, the **Payment Type** filter will _only_ display payment types used at that particular hotel during the last month.
+    
 
- ## Save a Set of Filters :
+In this case, **Hotel Code** and **Payment Type** are dependent filters because their available options change based on the selection in the primary **Date Range** filter.  
 
- When there is a combination of filters that you particulary want to apply to your dashboard , you can save this set of filters , create a bunch of these sets , save them , come at a later point and simply select the filter set option and this would be applied to the dashboard page.
+Another example:
 
- 1.  From a workspace, access a dashboard.
+If the filters are ordered as:
 
- 2.  On the dashboard, from the upper right corner, click the filter settings icon.
+1.  Country
+2.  State
+3.  City
 
-     <ImagePopup src="/img/visualizer/image-20250514-102809.png" alt="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" caption="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" />
+-   The **Country** filter dropdown will show all available countries.
+    
+-   If you select **United States of America**, the **State** filter will automatically update to show only states within the USA (e.g., NC, NJ, CA, FL, AZ, TX).
+    
+-   If you then select **NC**, the **City** filter will update to display only cities within that state (e.g., Charlotte, Raleigh).
 
-NOTE: Page filters on dashboard are exclusive to each user, ie if a user selects a set of filters, logs out and relogins , this would remain unaffected until he next changes, and selectios on filters of this user will not affect the other user.
+This enhancement presents the following benefits:
 
+-   **Improved data exploration:** You will only see relevant filter options based on their current selections, making it easier to narrow down data and identify key insights.
+    
+-   **Reduced confusion:** Eliminates the display of irrelevant or invalid filter combinations, preventing user confusion and potential errors.
+    
+-   **Streamlined workflow:** Simplifies the filtering process by guiding users through logical selection steps.
+    
+-   **Cleaner interface:** Presents a more organized and contextually aware filtering panel.
 
+ 
+ ## Saving a set of filters
+
+ When you have a specific combination of filters that you want to apply to your dashboard, you can save this as a filter set. This allows you to create multiple saved sets and easily apply them to your dashboard page at any time by simply selecting the desired set.
+
+To save a set of page level/dashboard level filters, do the following:
+
+1.  From a workspace, access a dashboard.
+    
+2.  On the dashboard, from the upper right corner, click the **Settings** icon, choose **Manage filters** and add page level/dashboard level filters.
+    
+3.  From the upper right corner, click the filter settings icon.
+    
+    <ImagePopup src="/img/visualizer/image-20250514-102809.png" alt="saving-set-of-page-level-or-dashboard-level-filters1" caption="saving-set-of-page-level-or-dashboard-level-filters1" />
+    
+4.  In the **Page Filter Settings** box, in the **Current** filters tab, check the filters and click **Save**.
+    
+    <ImagePopup src="/img/visualizer/image-20250514-104931.png" alt="saving-set-of-page-level-or-dashboard-level-filters1" caption="saving-set-of-page-level-or-dashboard-level-filters1" />
+    
+5.  Add a title and description for the filters and click **Confirm**.
+
+    <ImagePopup src="/img/visualizer/image-20250514-102809.png" alt="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" caption="accessing-the-saved-set-of-page-level-or-dashboard-level-filters1" />
+
+    
+    <ImagePopup src="/img/visualizer/image-20250514-105047.png" alt="saving-set-of-page-level-or-dashboard-level-filters1" caption="saving-set-of-page-level-or-dashboard-level-filters1" /> 
+    
+    These filters are listed in the **Saved filters** tab.
+
+:::tip[Note]
+Dashboard filters are specific to each user. If you select a set of filters, log out, and then log back in, your selections will remain unchanged. Your filter choices will also not affect other users.
+:::
+
+## Deleting dashboard filter
+    
+1.  On the dashboard, from the upper right corner, click the **Settings** icon, choose **Manage filters** and add page level/dashboard level filters. A delete icon is displayed next to each filter.
+
+    <ImagePopup src="/img/filters-delete.png" alt="/img/delete-filter" caption="delete-filter" />
+
+2. Click the delete icon and then click the **Remove** button to confirm.

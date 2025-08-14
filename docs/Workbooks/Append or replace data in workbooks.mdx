@@ -14,6 +14,9 @@ You can **append new data** to existing workbooks or **replace entire sheets** w
 -   **Bulk corrections:** You can clean and reformat data offline, then replace the entire workbook.
     
 -   **Dashboard & Pipeline continuity:** When a workbook is used in dashboards or materialized view (MV) pipelines, replacing the data avoids the need to change the workbook reference. This allows you to refresh the full dataset without breaking downstream connections or reconfiguring linked components.
+    :::tip[Note]
+    This functionality is not available for static tables.
+    :::
     
 To append or replace data in a workbook, do the following:
 
@@ -21,13 +24,11 @@ To append or replace data in a workbook, do the following:
 
     <ImagePopup src="/img/append-or-replace-data-workbooks/append-or-replace-data-in-existing-workbooks.png" alt="Links-and-Joins" caption="Links and Joins" />
 
-
 2. In the **Import** dialog box, specify the type of file you want to upload and upload the file.
 
     <ImagePopup src="/img/append-or-replace-data-workbooks/1append-or-replace-data-in-existing-workbooks.png" alt="Links-and-Joins" caption="Links and Joins" />
 
-
-3. In the **Import** dialog box, specify whether you want to append or replace by clicking the corresponding buttons.
+3. In the **Import** dialog box, specify whether you want to append or replace by clicking the corresponding buttons. Here, you can also modify the column mapping. 
 
     <ImagePopup src="/img/append-or-replace-data-workbooks/Append-and-replace.gif" alt="Links-and-Joins" caption="Links and Joins" />
 

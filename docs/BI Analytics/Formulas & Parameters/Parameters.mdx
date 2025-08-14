@@ -10,26 +10,24 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 In DataGOL,**Parameters** are dynamic input placeholders—such as a number, text, date, or boolean—that **replace hardcoded values in formulas or BI Workbooks**. They allow users to **adjust values on the fly** in dashboards or visualizations without editing the actual SQL or underlying dataset.
 
-Think of a parameter as a control knob for your analysis:
-Instead of rewriting a formula to test different targets, dates, or metrics, you just **change the parameter value** and see the results update instantly.
-Parameters in BI tools empower users to dynamically control data views and interact with dashboards without altering the underlying data. Thus enhancing flexibility by enabling what-if analysis and metric switching
+A parameter acts as a control lever for your analysis. Instead of rewriting a formula to test different targets, dates, or metrics, you just **change the parameter value** and see the results update instantly.
+Parameters empowers you to dynamically control data views and interact with dashboards without altering the underlying data. Thus enhancing flexibility by enabling what-if analysis and metric switching.
 
-This is a Widget created using the above example Formula & Parameter.
- This Compares **'This Year' and 'Last Year'** Revenue performance across various months, the definition of what 'This Year' and 'Last Year' changes dynamically based on the parameter selected on the dashboard
-
+**For example**, using the formula and a parameter, a widget was created to compare the revenue performance of 'This Year' and 'Last Year' across various months. The specific years defined as 'This Year' and 'Last Year' automatically adjust based on the parameter selected on the dashboard.
     <ImagePopup src="/img/sales-comparison.gif" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
 
 
-### Key Characteristics
+### Key characteristics of parameters
+
 **Interactive**: Users can input values directly on dashboards.
 
 **Reusable**: Parameters can be referenced across multiple formulas and widgets.
 
-**Flexible Types**: Support for Text, Number, Boolean, Date, Date Range, Static Enum, and Dynamic Enum.
+**Flexible**: Support for Text, Number, Boolean, Date, Date Range, Static Enum, and Dynamic Enum.
 
-**Formula-Compatible**: Must be used within a formula to affect analysis or visualization.
+**Formula-compatible**: Must be used within a formula to affect analysis or visualization.
 
-### How to Create a Parameter ?
+## Creating a parameter
 
 1.  From **Visualizer**, adjacent to list of columns on the lower left, click the **Create Parameter** button.
 
@@ -49,17 +47,21 @@ This is a Widget created using the above example Formula & Parameter.
 
 3.  Click **Create**. The created parameters are listed in the **Parameters** section.
 
-Note : For the parameters to be effective , they need to be passed as part of a formula column
+:::tip[Note]
+For the parameters to be effective, they need to be passed as part of a formula column.
+:::
 
-### Best Practices
+:::tip[Best practices]
+
 - Use clear parameter names so business users understand what to input.
 - Add default values to avoid empty results.
 - Validate your formula logic when combining with parameters.
 - Reuse parameters across multiple widgets for consistency.
+:::
 
-### How to Implement a Parameter :
+## Implementing a parameter
 
-To make the parameter functional:
+To make the parameter functional, do the following:
 
 1. Go to the **Formulas** section.
 2. Create a new formula that references the parameter.
@@ -76,7 +78,7 @@ END
   ```
 
 
-### Using Parameters on Dashboards
+## Using parameters on dashboards
 
 - Identify the Parameter on dashboard page
 

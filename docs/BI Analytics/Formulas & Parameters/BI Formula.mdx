@@ -12,8 +12,7 @@ Formulas in DataGOL are user-defined expressions that allow you to derive new in
 
 Unlike hardcoded metrics, formulas are dynamic, reusable, and visually configurable within the DataGOL Visualizer—making them accessible even to non-technical users.
 
-## **Creating formulas**
-
+## Creating formulas
 
 -   Only users with **Creator** or **Editor** permissions for the workspace can add a formula column.
 
@@ -32,26 +31,29 @@ To add a **Formula** column directly from Visualizer, do as follows:
     <ImagePopup src="/img/image-20250203-142026.png" alt="formulas-and-parameters-in-visualizer" caption="formulas-and-parameters-in-visualizer" />
 
 3. Validate the Formula
-    By clicking on the **Validate** option on the pop up , you can quickly validate your formula and see the sample output
+    By clicking on the **Validate** option on the pop up, you can quickly validate your formula and see the sample output.
 
 4.  Click **Create**.
     The new formula appears in the data panel, categorized as a metric or dimension.
 >  You can use autocomplete suggestions for column names and supported functions, reducing errors during creation.
 
 
-## ️ How to Edit a Formula?
+## ️ Editing a Formula
+
+Do the following to edit a formula:
 
 1. Hover over the formula in the data panel.
 2. Click the **Edit icon** next to the formula name.
 3. Modify the logic, aggregation, or formatting.
 4. Re-validate and **Save** the changes.
 
->  If the formula is used in multiple widgets, edits will propagate and may impact downstream visuals.
+:::caution[Caution]
+If the formula is used in multiple widgets, edits will propagate and may impact downstream visuals.
+:::
 
+##  Using Formulas in the Visualizer
 
-##  How to Use Formulas in the Visualizer?
-
-- Select the formula column into charts, tables, or KPIs just like a regular column.
-- Apply filters or sorting using formula fields.
-- Use formulas in combination with **drill-downs**, **alerts**, or **widget-level filters**.
-- Formulas can also be layered inside **BI Workbook SQL logic** for advanced modeling.
+1.  Select the formula column into charts, tables, or KPIs just like a regular column.
+2.  Apply filters or sorting using formula fields.
+3.  Use formulas in combination with **drill-downs**, **alerts**, or **widget-level filters**.
+4.  Formulas can also be layered inside **BI Workbook SQL logic** for advanced modeling.

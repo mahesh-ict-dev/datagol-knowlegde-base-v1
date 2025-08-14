@@ -1,7 +1,7 @@
 {
   "label": "BI Analytics",
   "description": "Explore BI Layer in DataGOL",
-  "position": 5,
+  "position": 8,
   "link": {
     "type": "generated-index"
   }
