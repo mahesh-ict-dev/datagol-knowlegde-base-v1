@@ -23,7 +23,7 @@ By following these steps, you can effectively implement DataGOL's time travel fe
 1.  **Create a Custom or Dedup pipeline**. 
 
     -   Refer to [Creating Custom pipeline](</docs/Lakehouse/Pipelines/Creating Custom pipeline.mdx>)
-    -   Refer to [Creating Dedup pipeline](</docs/Lakehouse/Orchestrations/Creating Dedup pipeline.mdx>)
+    -   Refer to [Creating Dedup pipeline](</docs/Lakehouse/Pipelines/Creating Dedup pipeline.mdx>)
 
     :::tip[Note]
         The 'AS OF' feature, which allows you to query data as it existed at a specific point in time, is exclusively supported on **Custom** and **Dedup** pipelines. This is because these particular pipelines are designed to accept and process parameters directly from a query, which is how the 'AS OF' functionality is implemented.
@@ -58,5 +58,3 @@ To access the AS OF versions, do the following:
 3.  Click the **Settings** button on the top and select **AS OF Versions**. 
 4.  Select a AS OF version. You will see a list of available versions listed in the right pane.
 5.  Click a specific version to view the data as it was at the time of that snapshot. You can also view the parameters that were used to generate that version. This process essentially allows you to "time-travel" back to a previous state of your data by using the versioned snapshots created through the orchestration.
-
-## Viewing the AS OF versions from Visualizer

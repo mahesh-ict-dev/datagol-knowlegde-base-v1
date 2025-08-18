@@ -36,7 +36,11 @@ Whether you're an analyst or an advanced business user, BI workbooks offer the f
 2. Click on **New Query**.
  <ImagePopup src="/img/new-query.gif" alt="bi-query" caption="bi-query" />
 3. Choose the appropriate **Data Provider** from the top-right corner.
-   > ⚠️ *Note: This selection is permanent and cannot be changed later.*
+  
+   :::caution[Caution] 
+   This selection is permanent and cannot be changed later.
+   :::
+
 4. Start writing your **SQL query**. The editor includes auto-complete suggestions for available workbooks, columns, formulas, and parameters within the workspace.
 5. Click **Run** to execute your query. If successful, the resulting columns (Dimensions, Metrics, Dates) will be available for use.
 6. Use these columns to start building widgets like charts, tables, or KPIs.
@@ -44,32 +48,29 @@ Whether you're an analyst or an advanced business user, BI workbooks offer the f
 
 ##  SQL editor autocomplete
 
-The **SQL editor** in DataGOL offers intelligent autocomplete functionality to help speed up query building and reduce errors. Suggestions are based on the tables, columns, formulas, and parameters available within your selected data connection.
+The **SQL editor** in DataGOL offers intelligent autocomplete functionality to help speed up query building and reduce errors. Suggestions are based on the tables, columns, formulas, and parameters available within your selected data connection. This is how it works:
 
-###  How It Works
-
-- As you begin typing your SQL query (e.g., `SELECT * FROM`), the editor will automatically suggest relevant tables available in the current connection.
+- As you begin typing your SQL query (e.g., `SELECT * FROM`), the editor automatically suggests relevant tables available in the current connection.
 - Once a table is selected, the system autocompletes the query by assigning its internal reference name.
 
    <ImagePopup src="/img/bi-query-writing.gif" alt="bi-query" caption="bi-query" />
+   
+   **Example:**
 
+   ```sql
+   -- User input:
+   SELECT * FROM pms_data-pms_data.csv
 
-###  In the given Example
+   -- Autocompleted as:
+   SELECT * FROM app_connection_read.table_1663904
 
-```sql
--- User input:
-SELECT * FROM pms_data-pms_data.csv
+   ```
 
--- Autocompleted as:
-SELECT * FROM app_connection_read.table_1663904
+   This maps the selected table to its internal reference and completes the syntax for immediate execution.
 
-```
-
-This maps the selected table to its internal reference and completes the syntax for immediate execution.
-
-:::tip[TIP]
-You can also use autocomplete to reference columns, saved formulas, and parameters, making query building faster and more reliable.
-:::
+   :::tip[TIP]
+   You can also use autocomplete to reference columns, saved formulas, and parameters, making query building faster and more reliable.
+   :::
 
 ## How to edit an existing BI workbook?
 
@@ -89,16 +90,16 @@ Do the following to edit an existing BI workbook:
  Always validate that your existing widgets columns reflect the updated structure of the workbook and no data is lost.
  :::
 
-## How to identify a BI Workbook?
+## How to identify a BI workbook?
 
 Once created, BI workbooks are accessible and reusable like any other workbook:
 
 1. Click **Select Source** in the Visualizer.
 <ImagePopup src="/img/identifyBIWB.png" alt="bi-query" caption="bi-query" />
-2. Your newly created BI Workbook will appear in the list alongside regular workbooks.
-3. BI workbooks are clearly labeled with a distinct **BI Workbook tag** to differentiate them.
-4. Upon selecting a BI Workbook, you can view the **underlying SQL query** directly in the editor.
-5. Click **Select** to begin creating widgets with the chosen BI Workbook.
+   -  Your newly created BI Workbook will appear in the list alongside regular workbooks.
+   -  BI workbooks are clearly labeled with a distinct **BI Workbook tag** to differentiate them.
+   -  Upon selecting a BI Workbook, you can view the **underlying SQL query** directly in the editor.
+2. Click **Select** to begin creating widgets with the chosen BI Workbook.
 
 :::note[Limitations]
 -  Currently supported datatypes on BI workbooks include single line text, date, boolean, and number. This means
