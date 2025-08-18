@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 
 export default function GiscusComments() {
   useEffect(() => {
-    // if (process.env.NODE_ENV === 'production') {
-    //   // Don't show comments in production
-    //   return;
-    // }
+    if (process.env.NODE_ENV === 'production') {
+     // Don't show comments in production
+       return;
+     }
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', 'mahesh-ict-dev/datagol-knowlegde-base-v1');
