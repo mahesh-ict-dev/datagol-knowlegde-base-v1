@@ -1,0 +1,42 @@
+---
+sidebar_position: 2
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-aapsflyer
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding AppsFlyer as data source
+
+Do the following to add AppsFlyer as data source:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the **New Data Source** page, click the **AppsFlyer** icon. 
+    
+3.  Specify the following details to add AppsFlyer. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/appsflyer.png" alt="AppsFlyer" caption="AppsFlyer" />
+    
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Token** | Specify the AppsFlyer API token. If you change the account admin, the token changes, and you must update scripts with the new token. See AppsFlyer docs for help retrieving this token.Refer to [AppsFlyer documentation](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens) to generate API token. |
+    | **APP ID** | Specify the AppsFlyer App ID. See AppsFlyer docs for help retrieving this ID.|
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. This will apply only to the Incremental streams. |
+    | **Timezone** | Specify the time zone in which date times are stored. The project timezone may be found in the App settings in the AppsFlyer console. Example values: US/Pacific or UTC|
+    
+4.  Click **Submit**.    
+
+## Supported Streams
+
+-   Raw Data (Non-Organic)
+-   Raw Data (Organic)	
+-   Raw Data (Retargeting)	
+-   Ad Revenue
+-   Postback	
+-   Protect360 Fraud	
+-   Aggregate Report	
+-   Aggregate Retargeting Report

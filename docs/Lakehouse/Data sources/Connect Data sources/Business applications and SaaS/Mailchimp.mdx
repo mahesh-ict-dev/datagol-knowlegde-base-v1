@@ -1,0 +1,61 @@
+---
+sidebar_position: 4
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-mailchimp
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Adding Mailchimp as data source
+
+:::info **Prerequisite for adding Mailchimp**
+
+You require a valid Mailchimp API Key. Do the following:
+
+### Creating a Mailchimp API Key
+
+1.  Log into your Mailchimp account and go to the **API Keys** section.
+    
+2.  Select **Create New Key**.
+    
+3.  Assign a recognizable name to the key.
+    
+4.  Copy the new key and save it in a safe place. You will not be able to view or copy the key again after you close this page.
+
+If you would like more detailed information on Mailchimp API keys, you can check the [Mailchimp documentation](https://mailchimp.com/help/about-api-keys/#api+key+security).
+:::
+
+To add Mailchimp as data source, do the following:
+
+1.  From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+    
+2.  From the upper right corner of the page, click the **+ New Database** button to start the process of adding a new database.
+
+3. In the **New Data Source** page, click the **Mailchimp** icon. 
+    
+3.  Specify the following details to add Mailchimp. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+    
+    <ImagePopup src="/img/Datasource/mailchimp.png" alt="Mailchimp" caption="Mailchimp" />
+    
+    | Field | Description |
+    |---|---|
+    | **Connection Name** | Enter a unique name for the connection. |
+    | **API Key** | Specify the Mailchimp API Key. Refer to [Mailchimp documentation](https://mailchimp.com/help/about-api-keys/#api+key+security) to generate API key. |
+    | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for last two years. This will apply only to the Incremental streams. |
+    
+4.  Click **Submit**.    
+
+## Supported Streams
+
+-   Automations
+-   Campaigns
+-   Email Activity
+-   Interests
+-   Interest Categories	
+-   Lists
+-   List Members
+-   Reports
+-   Segments
+-   Segment Members
+-   Tags
+-   Unsubscribes
