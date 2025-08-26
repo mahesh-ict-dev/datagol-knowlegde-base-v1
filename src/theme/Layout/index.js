@@ -9,9 +9,9 @@ export default function LayoutWrapper(props) {
       script.id = 'letzask-chatbot';
       script.src = 'https://d3ua5pgefbvm1i.cloudfront.net/chatbot.js';
       script.async = true;
-      script.setAttribute('data-host', 'https://app.datagol.ai');
-      script.setAttribute('data-agent-id', '4fb1a149-fe5c-4e73-94e2-a2b872072adc'); // <-- replace with actual ID
-      script.setAttribute('data-app-id', '6bff5a98-8764-48eb-af76-b2b1fc849947');     // <-- replace with actual ID
+      script.setAttribute('data-host', 'https://testing.datagol.ai');
+      script.setAttribute('data-agent-id', '3ab4f616-814a-4bc7-9b2f-9d0d89b9a83b'); // <-- replace with actual ID
+      script.setAttribute('data-app-id', 'fc59016f-49b6-43c2-8fc2-c9ca958c6dab');     // <-- replace with actual ID
       document.body.appendChild(script);
     }
   }, []);
