@@ -3,7 +3,7 @@
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
-
+// Checking some more changes
 import {themes as prismThemes} from 'prism-react-renderer';
     
 
@@ -34,7 +34,7 @@ const config = {
   projectName: 'datagol-knowlegde-base-v1', // Usually your repo name.
   deploymentBranch: 'new_version',
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -89,7 +89,7 @@ const config = {
           editUrl: undefined, // Disable edit links for better performance
         },
         // blog: {
-        //   showReadingTime: true,
+        //   showReadingTime: true,modu
         //   feedOptions: {
         //     type: ['rss', 'atom'],
         //     xslt: true,
