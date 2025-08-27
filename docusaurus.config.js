@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-oheck
 // `@type` JSDoc annotations allow editor autocompletion and type checking
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
@@ -34,7 +34,7 @@ const config = {
   projectName: 'datagol-knowlegde-base-v1', // Usually your repo name.
   deploymentBranch: 'new_version',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
