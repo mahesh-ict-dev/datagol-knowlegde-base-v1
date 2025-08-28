@@ -9,10 +9,13 @@ slug : conditional-format
 import ImagePopup from '@site/src/components/ImagePopup';
 
 
-Conditional formatting allows you to visually highlight and analyze your data by applying specific rules. You can enhance data analysis with the conditional formatting feature for **tables** and **pivot tables**. This powerful tool allows you to define custom rules to dynamically color-code cells based on their values. It provides a strong reasoning for its use by enabling **quick visual identification of key data points** that meet specific thresholds or criteria, which is a far more efficient method of data comprehension than manual inspection.
+Conditional formatting allows you to visually highlight and analyze your data by applying specific rules. You can enhance data analysis with the conditional formatting feature for **tables** and **pivot tables**. This powerful tool allows you to define custom rules to dynamically color-code cells based on their values. It provides a strong reasoning for its use by enabling **quick visual identification of key data points** that meet specific thresholds or criteria, which is a far more efficient method of data comprehension than manual inspection. 
+
 
 :::tip[Note]
-This capability is exclusively available for **Table** and **Pivot table** widgets.
+-   The conditional formatting capability is exclusively available for **Table** and **Pivot table** widgets.
+-   Conditional formatting can be done for **numeric columns** as well as for **text columns**. For example, for a Payment type column, you can add conditions to add blue color to all payments done using Credit Card. 
+
 :::
 
 The key features of conditional formatting in DataGOL includes:
@@ -24,7 +27,11 @@ The key features of conditional formatting in DataGOL includes:
             
             For instance, you could highlight revenue cells in **green** if they exceed $10,000, **yellow** if they fall between $5,000 and $10,000, and **red** if they are below $5,000.
 
-    
+    :::info[Note]
+    -   If multiple rules are created, the first rule takes preference over the second. The system checks the first rule, and if it is a match, it is applied, and the other rules are ignored. f the first rule does not match, the system moves on to the second rule.
+    -   You can change the priority of the rules by moving them up or down.
+    :::
+
 -   **Data Bars:** These rules add a bar inside each cell to visually represent its value relative to other values in the column.
 
 -   **Column Comparison:** Column comparison is a conditional formatting feature that allows you to compare values in one column to another. It's a more dynamic and advanced option than a standard value comparison, which only compares a column's values against a fixed value. 
@@ -33,8 +40,6 @@ The key features of conditional formatting in DataGOL includes:
 
     For example, you can highlight revenue cells in green if they exceed $10,000, yellow if they fall between $5,000 and $10,000, and red if they are below $5,000.
 
-        <ImagePopup src="/img/visualizer/conditional-format-color.gif" alt="conditional-format" caption="conditional-format" />
-
 
 ## How to set rules for conditional formatting?
 
@@ -42,12 +47,33 @@ To apply conditional formatting, you need to set up rules that will highlight sp
 
 1.  From a workspace, navigate to the **visualizer** and generate a Table or Pivot table widget. From a table or pivot table, you can create new rules and manage existing ones.
 2.  From the right panel, click **Update Widget Column Configurations**icon and click the column where you want to apply the conditions or rules. 
-3.  From the slide-out menu, in the Conditional Formatting section, click **Manage Rules** button. The **Conditions Formatting Rules** pane is displayed. 
+3.  From the slide-out menu, in the **Conditional Formatting** section, click **Add Rules** button. The **Conditions Formatting Rules** pane is displayed. 
 4.  Click **Conditions**. The **Conditions Formatting Rules** dialog box is displayed with Rule type auto-selected as **Conditions**. Do the following:
     -   Select the logic: **AND** condition or the **OR** condition.
     -   **Choose a Comparison Type:** You have two options for your comparison:
-        -   **Value Comparison:** Compare the column's value against a static, fixed value (e.g., `is greater than 500`).
-        -   **Column Comparison:** Lets you compare the column's value against the value of another column in your report. For this to work, you can only compare metric columns with other metric columns, and dimension columns with other dimension columns.
+
+        -   **Value Comparison:** Compare the column's value against a static, fixed value (e.g., `is greater than 500`). You can compare using the following operands:
+                -   Greater Than 
+                -   Less Than 
+                -   Equal To
+                -   Not Equal To
+                -   Greater Than or Equal To
+                -   Less Than or Equal To
+                -   Between
+                -   Is Null
+                -   Is Not Null
+                -   In
+                -   Not In
+
+        -   **Column Comparison:** Lets you compare the column's value against the value of another column in your report. For this to work, you can only compare metric columns with other metric columns, and dimension columns with other dimension columns. You can compare using the following operands:
+                
+                -   Equal To
+                -   Not Equal To
+                -   Contains 
+                -   Not Contains 
+                -   Starts With 
+                -   Ends With
+
     -   Set complex rules (Optional):** You can combine multiple conditions using **AND** or **OR** logic. This allows you to create more sophisticated rules, such as "value is greater than 100 AND less than 200."
     -   Define Formatting:** Choose the colors, font styles, and other visual options to apply to cells that meet your defined conditions.
 

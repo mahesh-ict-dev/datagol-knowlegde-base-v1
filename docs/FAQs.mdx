@@ -20,12 +20,12 @@ Athena is supported for faster data retrieval and applicable only for S3 data.
 
 ### How does the BI dashboard layer operate in DataGOL?
 Dashboards are built on top of workbooks using a Visualizer. They support:
--   [KPIs, Line chart, Bar chart, Donut chart, Pivot tables,](</docs/BI and Visualizer/Widgets/Widget types.mdx>) etc.   
--   [Drill-downs](</docs/BI and Visualizer/Drill Down.mdx>), [Filters](</docs/BI and Visualizer/Filters/About filters.mdx>), and exploration mode.  
+-   [KPIs, Line chart, Bar chart, Donut chart, Pivot tables,](</docs/BI Analytics/Widgets/Widget Types.mdx>) etc.   
+-   [Drill-downs](</docs/BI and Visualizer/Drill Down.mdx>), [Filters](</docs/BI Analytics/Widgets/Widget Filters.mdx>), and exploration mode.  
 
 **Key Points:**
 
--   Widgets use [formulas and parameters](</docs/BI and Visualizer/creating-formulas-and-parameters-in-visualizer>).   
+-   Widgets use [formulas](</docs/BI Analytics/Formulas & Parameters/BI Formula.mdx>) and [parameters](</docs/BI Analytics/Formulas & Parameters/Parameters.mdx>) 
 -   Widget-level filters override page-level filters.      
 -   Drill-downs can be column-based or widget-defined.  
       
@@ -79,7 +79,7 @@ Give the path up to the base folder. DataGOL processes each subfolder (e.g., tab
 ### How to onboard 3rd party connectors (PostHog, HubSpot, etc.)?
 Do the following to onboard 3rd party connectors:
 1.  Contact support team to whitelist connectors.
-2.  Once whitelisted, you can create a new data source from the [**Data Sources**](</docs/Lakehouse/%20Data%20sources/adding-data-sources>) page with the appropriate connector and active credentials. 
+2.  Once whitelisted, you can create a new data source from the [**Data Sources**](</docs/Lakehouse/Data sources/About Data sources.mdx>) page with the appropriate connector and active credentials. 
     
     :::caution
      Please provide the start date wherever applicable else DataGOL will default to replicating data from the past year.

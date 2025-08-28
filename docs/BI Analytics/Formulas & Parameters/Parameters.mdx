@@ -51,7 +51,7 @@ Parameters empowers you to dynamically control data views and interact with dash
 For the parameters to be effective, they need to be passed as part of a formula column.
 :::
 
-:::tip[Best practices]
+:::info[Best practices]
 
 - Use clear parameter names so business users understand what to input.
 - Add default values to avoid empty results.
@@ -65,17 +65,17 @@ To make the parameter functional, do the following:
 
 1. Go to the **Formulas** section.
 2. Create a new formula that references the parameter.
+    
+    **Example: Parameter usage in a formula**
 
-Example: Parameter usage in a formula
+      ```sql
+    CASE
+        WHEN date_part('year', year_month)={{YEAR}} THEN 'This year'
+        WHEN date_part ('year', year_month)={{YEAR}}-1 THEN 'last year'
+        ELSE NULL
+    END
 
-  ```sql
-CASE
-    WHEN date_part('year', year_month)={{YEAR}} THEN 'This year'
-    WHEN date_part ('year', year_month)={{YEAR}}-1 THEN 'last year'
-    ELSE NULL
-END
-
-  ```
+      ```
 
 
 ## Using parameters on dashboards
