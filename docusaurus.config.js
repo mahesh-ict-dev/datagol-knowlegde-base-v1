@@ -1,9 +1,4 @@
-// @ts-oheck
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-// Checking some more changes
+// @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
     
 
@@ -13,20 +8,15 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'DataGOL Documentation',
   tagline: 'Knowledge Base',
-  // Set the title for the homepage
-
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here , Uncomment these two lines before pushing to production
+  // Production URL - uncomment for production deployment
   url: 'https://docs.datagol.ai',
   baseUrl: '/',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   
-
-  // comment these 2 lines before pushing to production
-   //url: 'https://mahesh-ict-dev.github.io',
-   //baseUrl: '/datagol-knowlegde-base-v1/',
+  // Development URL - comment out for production
+  // url: 'https://mahesh-ict-dev.github.io',
+  // baseUrl: '/datagol-knowlegde-base-v1/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -57,21 +47,6 @@ const config = {
     },
   },
 
-  // // Webpack optimizations
-  // webpack: {
-  //   jsLoader: (isServer) => ({
-  //     loader: require.resolve('swc-loader'),
-  //     options: {
-  //       jsc: {
-  //         parser: {
-  //           syntax: 'typescript',
-  //           tsx: true,
-  //         },
-  //         target: 'es2017',
-  //       },
-  //     },
-  //   }),
-  // },
 
   presets: [
     [
@@ -88,21 +63,21 @@ const config = {
           // Disable heavy features if not needed
           editUrl: undefined, // Disable edit links for better performance
         },
-        // blog: {
-        //   showReadingTime: true,modu
-        //   feedOptions: {
-        //     type: ['rss', 'atom'],
-        //     xslt: true,
-        //   },
-        //   // Please change this to your repo.
-        //   // Remove this to remove the "edit this page" links.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        //   // Useful options to enforce blogging best practices
-        //   onInlineTags: 'warn',
-        //   onInlineAuthors: 'warn',
-        //   onUntruncatedBlogPosts: 'warn',
-        // },
+        blog: {
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl:
+            'https://github.com/mahesh-ict-dev/datagol-knowlegde-base-v1/tree/main/',
+          // Useful options to enforce blogging best practices
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'ignore',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -171,6 +146,11 @@ const config = {
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Documentation',
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
           },
           //{to: 'https://app.datagol.ai', label: 'Visit DataGOL', position: 'right'},
           {to: 'https://www.datagol.ai/', label: 'Visit DataGOL', position: 'right'},
@@ -343,9 +323,7 @@ const config = {
         },
       ],
       
-      // Sitemap plugin (now configured in presets for better performance)
-      
-      // Performance: PWA Plugin (optional - for offline support)
+      // PWA Plugin for offline support
       [
         '@docusaurus/plugin-pwa',
         {
