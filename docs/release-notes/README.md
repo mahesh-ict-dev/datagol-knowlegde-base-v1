@@ -38,7 +38,6 @@ docs/release-notes/
 │   └── 01/ (January)
 │       ├── v1-2-0-major-release.mdx
 │       └── v1-2-1-patch-release.mdx
-├── release-template.mdx
 └── README.md (this file)
 ```
 
@@ -68,7 +67,7 @@ node create-release-notes.js 2.0.0 major 2025-11-01 2025 11
 
 1. Navigate to the appropriate year/month directory
 2. Create a new `.mdx` file following the naming convention: `v{version}-{type}-release.mdx`
-3. Copy the content from `release-template.mdx`
+3. Copy the content from `release-template.mdx` (located in the project root)
 4. Replace all placeholder variables with actual values
 5. Update the `sidebar_position` in the frontmatter
 

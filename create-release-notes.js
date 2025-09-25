@@ -47,7 +47,7 @@ function createReleaseNotes(version, type, date = new Date().toISOString().split
   const filepath = path.join(releaseDir, filename);
 
   // Read template
-  const templatePath = path.join(__dirname, 'docs', 'release-notes', 'release-template.mdx');
+  const templatePath = path.join(__dirname, 'release-template.mdx');
   let template = fs.readFileSync(templatePath, 'utf8');
 
   // Get next position number
