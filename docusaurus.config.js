@@ -11,12 +11,12 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Production URL - uncomment for production deployment
-  url: 'https://docs.datagol.ai',
-  baseUrl: '/',
+  //url: 'https://docs.datagol.ai',
+ // baseUrl: '/',
   
   // Development URL - comment out for production
-  // url: 'https://mahesh-ict-dev.github.io',
-  // baseUrl: '/datagol-knowlegde-base-v1/',
+   url: 'https://mahesh-ict-dev.github.io',
+   baseUrl: '/datagol-knowlegde-base-v1/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

@@ -1,0 +1,34 @@
+---
+title: v1.0.155 
+description: v1.0.155 Release notes September 2025
+sidebar_position: 9
+---
+
+**Date released: August 14, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are in this release:
+
+### Backend
+
+-   **Spark job property renamed in multi-catalog**: The property name for Spark jobs under the multi-catalog feature is updated.
+    
+    -   **Old property name:** `spark.jobGroup.id`
+        
+    -   **New property name:** `spark.datagol.jobGroup.id`
+        
+
+This change standardizes our property naming conventions for improved clarity and consistency.
+
+-   **Spark execution time added to API**: The backend API for Spark queries now includes Spark execution time. The `executionTime` field is now included in the API response for any Spark query.
+    
+
+## Bug Fixes
+
+This release contains the following bug fixes:
+
+### Backend
+
+**Inconsistent table synchronization:** The fix corrected inconsistent table counts during sync runs. It ensures that all table schema queries are now executed sequentially on a single driver. This ensures all tables sync completely and correctly, resulting in a stable and consistent total table count after every sync run.
+

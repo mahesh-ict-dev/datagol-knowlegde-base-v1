@@ -1,0 +1,47 @@
+---
+title: v1.0.170 
+description: v1.0.170 Release notes September 2025
+sidebar_position: 4
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: September 12, 2025**
+
+### New features and enhancements
+
+The following new features and improvements are included in this release:
+
+#### Pipelines
+
+-   **Pipeline notifications:** Previously, you got alerts for all (successful, failed, cancelled) pipelines. Now, a new backend setting allows you to receive notifications only for **failed** pipelines.
+    
+    <ImagePopup src="/img/release-notes/image_4_2.png" alt="*Pipeline notifications" caption="*Pipeline notifications" />
+
+
+#### Data Sources
+
+-   **Table schema:** You can now export a table's schema as a **JSON** file. This new feature allows you to download the table schema in JSON format.
+    
+    <ImagePopup src="/img/release-notes/image_4_3.png" alt="*Table schema" caption="*Table schema" />
+
+-   **Mixpanel connector:** A new Mixpanel connector is now available in the data sources. You can now connect to Mixpanel, which is an enterprise-level platform for event and product analytics. This integration allows you to bring your data into Datagol for analysis of user behavior.
+    
+    <ImagePopup src="/img/release-notes/image_5_1.png" alt="*Mixpanel connector" caption="*Mixpanel connector" />
+
+
+### Bug Fixes
+
+The following bug fixes are included in this release:
+
+#### AI Enrichment
+
+-   An issue with **AI enrichment** has been resolved. Previously, an incorrect column was added to the editor after selecting from the dropdown, especially when you had entered `{}` to auto-select field names. The correct column is now added to the editor regardless of how you enter the information.
+    
+
+#### Workbooks
+
+-   An issue where **bulk row addition** was failing for **dynamic workbooks** has been resolved. You can now add rows in bulk to these workbooks without any problems.
+    
+-   An issue with **workbook forms** has been resolved. You can now edit cell values in the form.
+    

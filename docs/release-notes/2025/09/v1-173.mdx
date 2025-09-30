@@ -1,0 +1,35 @@
+---
+title: v1.0.173
+description: v1.0.173 Release notes September 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: September 17, 2025**
+
+### New features and enhancements
+
+#### Workbook
+
+**Email notifications for a user assigned to a row:** The workbook feature now sends email notifications whenever a user is assigned to a row.
+
+<ImagePopup src="/img/release-notes/image_1_1.png" alt="Email notifications for a user assigned to a row" caption="Email notifications for a user assigned to a row" />
+
+-   **Email notifications**: Users will now get an email when they are assigned to a row in a workbook.
+    
+-   **Self-assignment**: To avoid unnecessary emails, notifications are not sent when a user assigns a row to themselves.
+    
+-   **Bulk assignment**: If a user is assigned to multiple rows at once, they will receive only a single email notification to prevent inbox clutter.
+    
+-   **User control**: An option is now available for users to **enable or disable these notifications**, giving them control over their preferences.
+    
+    <ImagePopup src="/img/release-notes/image_2_1.png" alt="*Auto join conditions" caption="*Auto join conditions" />
+
+
+### Bug Fixes
+
+The following bug fixes are included in this release:
+
+-   A bug was fixed where an **exception** would occur while the system was generating a response for a pivot table. This issue caused the process to fail, preventing the pivot table from being displayed. You can now reliably generate and view pivot tables without encountering unexpected errors.
+    

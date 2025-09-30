@@ -1,0 +1,81 @@
+---
+title: v1.0.156  
+description: v1.0.156 Release notes September 2025
+sidebar_position: 8
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 15, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are in this release:
+
+## BI
+
+### Conditional Formatting V2
+
+This release introduces an updated version of conditional formatting with more advanced capabilities, primarily for tables and pivots.
+
+**Key improvements:**
+
+-   **Complex conditions:** You can now create complex rules with multiple conditions using **AND** or **OR** logic.
+    
+    <ImagePopup src="/img/release-notes/aug/image_7_1.png" alt="Conditional Formatting V2" caption="Conditional Formatting V2" />
+    
+-   **Column comparison:** In addition to comparing with a static value, you can now compare a column's value against another column within the same table. This works for both metric (number) and dimension (text) columns.
+    
+-   **Data bars:** Define rules to highlight numeric data based on specific conditions. You can add data bars to cells to visually represent a column's value. Data bars have options for positive and negative color modes, and the same formatting will apply across all combinations of that value column.
+    
+    <ImagePopup src="/img/release-notes/aug/image_8_1.png" alt="Conditional Formatting V2" caption="Conditional Formatting V2" />
+
+
+Data Bar
+
+**Conditions**
+
+**Known considerations:**
+
+-   The conditional formatting V1 for single-condition conditional formatting is still available to support existing configurations, but will eventually be removed.
+    
+-   Currently, percentage-based comparisons are not supported. This feature will be deployed in future versions.
+    
+
+### Dashboard
+
+**Dashboard filters for single-line text:** The single-line text data type in dashboard filters now supports a drop-down list view, similar to single-select options. This new functionality allows you to choose multiple values easily at once using a list view with checkboxes, or select a single value using the **equals** option.
+
+This feature is available only on the Dashboard page and not in the Visualizer.
+
+<ImagePopup src="/img/release-notes/aug/image_9_1.png" alt="Dashboard filters for single-line text" caption="Dashboard filters for single-line text" />
+
+
+**Sorting for single-select and single-line text filters:** You can now sort the values in single-select and single-line text filters. This new feature lets you change the order of filter options to be either ascending or descending. You can set the sorting order from Manage filters.
+
+<ImagePopup src="/img/release-notes/aug/image_9_2.png" alt="Sorting for single-select and single-line text filters" caption="Sorting for single-select and single-line text filters" />
+
+**New "more actions" widget icon:** Improved the dashboard user interface by consolidating widget-level actions into a new **More Actions** icon. When you hover over this icon, you will see all available actions for that widget, including a new **Workbook Info** icon. This new icon provides a direct link to the workbook that powers the widget, streamlining your workflow.
+
+<ImagePopup src="/img/release-notes/aug/image_9_3.png" alt="New more actions widget icon" caption="New more actions widget icon" />
+
+**Customizable alignments for KPI widget:** You now have more flexibility in styling the KPI widget. This improvement allows you to change the alignment of KPI numbers.
+
+**With time series**
+
+<ImagePopup src="/img/release-notes/aug/image_10_1.png" alt="New more actions widget icon With time series" caption="New more actions widget icon With time series" />
+
+**Without time series**
+
+<ImagePopup src="/img/release-notes/aug/image_10_2.png" alt="New more actions widget icon Without time series" caption="New more actions widget icon Without time series" />
+
+-   **With time series:** The number can be aligned to the left, center, or right.
+    
+-   **Without time series:** You can choose from up to nine unique positions to place the number.
+    
+
+**Direct editing for widget titles and subtitles:** Titles and subtitles on all widgets can now be edited directly on the widget itself by simply clicking on the title text. In addition to renaming, you can also change the alignment of the title.
+
+Editing widget titles directly is not supported from the **Dashboard** page. This is supported only in the **Visualizer**.
+
+<ImagePopup src="/img/release-notes/aug/image_10_3.png" alt="Direct editing for widget titles and subtitles" caption="Direct editing for widget titles and subtitles" />

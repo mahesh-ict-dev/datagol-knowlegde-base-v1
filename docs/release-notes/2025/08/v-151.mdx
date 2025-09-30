@@ -1,0 +1,19 @@
+---
+title: v1.0.151 
+description: v1.0.151 Release notes September 2025
+sidebar_position: 12
+---
+
+**Date released: August 7, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are included in this release:
+
+## Backend
+
+### Transition to Kyuubi REST API for Spark connection
+
+We have transitioned from using **JDBC** to the **Kyuubi REST API** for connecting Spark. This change provides enhanced flexibility, security, and maintainability.
+
+The new approach uses **REST endpoints** for authentication and session management, eliminating the need to embed static credentials in the connection URL. Kyuubi's **REST APIs** are used to programmatically establish sessions and submit Spark SQL queries.

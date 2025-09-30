@@ -1,0 +1,40 @@
+---
+title: v1.0.150  
+description: v1.0.150 Release notes September 2025
+sidebar_position: 13
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 6, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are included in this release:
+
+## BI
+
+### Column width configuration for Pivot tables
+
+Users can now configure and change the width of columns on Pivot tables. This feature is available in the **Visualizer**, **Edit mode**, **Dashboard page**, and **Explore mode**. This new functionality provides greater control over the visual presentation of data, allowing for improved readability and customization.
+
+This enhancement is specifically for the **Flat View** of pivot tables and does not apply to the **Tree View**.
+
+### Alerting and signals on BI widgets
+
+You can now set up **alerts and signals** directly on your Business Intelligence (BI) widgets, empowering you to stay informed about critical data changes. This new feature allows you to create alerts that notify you when specific data criteria are met.
+
+ <ImagePopup src="/img/release-notes/aug/image_13_1.png" alt="*Alerting and signals on BI widgets" caption="*Alerting and signals on BI widgets" />
+
+
+This enhancement is designed to help users stay informed about critical data changes without needing to manually monitor their dashboards. The following are the key features:
+
+-   **Direct alert creation:** Easily create alerts directly from any BI widget.
+    
+-   **Flexible triggering:** Choose to trigger alerts based on a **CRON job** for scheduled checks or whenever data changes.
+    
+-   **Dynamic notifications:** Get instant notifications for each execution where your data meets the specified criteria.
+    
+-   **Comparison-based alerts:** Set up alerts that compare current data against a predefined baseline or another metric.
+    
+-   **Dynamic filtering:** The alert system automatically adapts filter queries (e.g., "TODAY," "TOMORROW") based on the date and time of execution, ensuring your alerts are always relevant.
