@@ -1,0 +1,44 @@
+---
+title: v1.0.166
+description: v1.0.166 Release notes September 2025
+sidebar_position: 8
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: September 4, 2025**
+
+### New features and enhancements
+
+The following new features and enhancements are included in this release:
+
+#### Permissions
+
+An issue has been fixed where account admins could view all pipelines and data sources. Account admins no longer have holistic access to all Lakehouse modules, ensuring that permissions are correctly applied.
+
+#### Workbooks
+
+-   **Filtering and sorting on the 'User' column type:** Support for filtering and sorting on the **User** column type is added, which gives you more control over how you organize and analyze your data.
+    
+-   **Improved layout for the 'Edit Row' form**
+    
+    The layout of the 'Edit Row' form has been updated to be more compact and efficient. Now, fields will arrange automatically based on their data type and screen size, allowing for multiple fields to be displayed on a single row. This change reduces unnecessary vertical space and makes editing your data a smoother experience. Larger fields, such as 'Long Text' and 'Attachments,' will continue to span the full width of the form.
+    
+-   **Highlighting first column in newly added rows:** The first column of any newly added row is now highlighted to help you quickly identify it. This highlight will appear whether you are adding a single row, multiple rows in bulk, or inserting a row above or below an existing one. The highlight will remain until you interact with the row, such as by editing it or clicking away.
+    
+-   **Add rows from existing records:** The **Add Rows** feature has been enhanced to give you more flexibility. Now, in addition to creating new, empty rows, you can also import and link existing records from a linked column. This allows you to quickly populate your table with relevant data, saving you time and effort. You can select multiple records at once, and each one will create a new row in your current table.
+    
+    <ImagePopup src="/img/release-notes/image_8_1.png" alt="*Add rows from existing records" caption="*Add rows from existing records" />
+
+### Bug Fixes
+
+The following bug fixes are included in this release:
+
+#### Workbooks
+
+-   Resolved an issue where the **Add Row** button was incorrectly displayed for hybrid tables. **Add Row** button applies only to dynamic tables.
+    
+-   Fixed an issue that prevented you from using standard text-editing commands, like double-clicking or selecting all text, to quickly remove a filter value. You can now easily clear or change your filter selections in a workbook.
+    
+-   You can now scroll more easily through table widgets on dashboards. An issue that made scrolling difficult when there was whitespace present has been fixed.
+    

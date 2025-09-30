@@ -1,0 +1,40 @@
+---
+title: v1.0.162 
+description: v1.0.162 Release notes September 2025
+sidebar_position: 2
+---
+**Date released: August 28, 2025**
+
+## New features and enhancements
+
+The following new features and improvements are in this release:
+
+### AI
+
+**Python agent:** The Python agent now has integrated Bamboo AI agent functionalities, giving you more insight and control over its performance.
+
+Now, you can see the agent's **thinking and planning steps** for each query, offering a clear view of its logic and how it plans to arrive at a solution. Also, the agent will now request clarification or feedback if it needs more information to understand a question fully. This helps to prevent misunderstandings and ensures the agent delivers accurate and relevant responses.
+
+### Workbooks
+
+**Preserving field properties during data type changes:** Improved the system's handling of data type conversions for columns. Now, when you change a column's data type, the system intelligently preserves common properties to prevent data loss and save you time.
+
+Here are a few examples:
+
+-   **Multi-select to Single-select:** Converting a Multi-Select field to a Single-Select field will now retain all previously defined options. This ensures that no choices are lost, even though the field can now only hold a single value.
+    
+-   **Currency and number:** When you change a Currency field to a Number field and then back to Currency, the original currency symbol (e.g., $) is now preserved. This eliminates the need to reconfigure the currency settings after a type conversion manually.
+    
+
+## Bug Fixes
+
+This release contains the following bug fixes:
+
+### Workbooks
+
+-   Addressed an issue where the AI-generated autocomplete text was not fully displayed. The fix ensures that the full suggestion is now visible, preventing the text from being cut off.
+    
+-   Addressed an issue where attempting to highlight text in the AI Generate window would cause the entire pop-up to drag. Users can now highlight and copy text as expected without accidentally moving the window.
+    
+-   Resolved an issue where changing the data type of a formula column would incorrectly trigger a **'Formula is required'** error. The formula is now automatically inferred and preserved after the data type is updated, preventing the error.
+    

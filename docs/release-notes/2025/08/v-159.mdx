@@ -1,0 +1,26 @@
+---
+title: v1.0.159 
+description: v1.0.159 Release notes September 2025
+sidebar_position: 5
+---
+**Date released: August 20, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are in this release:
+
+### AI Agents
+
+-   **Custom Agent: Date time tool**  
+    Introducing a **Date Time tool** for the Custom Agent to interpret and resolve time-based expressions. The tool enables the agent to determine the current date/time and translate natural language terms (e.g., _today, yesterday, next week, next month_) into precise datetime values or ranges. This improves the agent’s ability to handle scheduling, filtering, and contextual reasoning where temporal references are used.
+    
+-   **RAG Agent: Fetch title and file URL based on file ID**  
+    Workspace documents are now stored by file ID, which were previously stored by file name.  
+    The backend has been improved to fetch the title and file URL based on the file ID, which will be useful for citations and references in RAG agent answers.
+    
+-   **Custom Agent | MCP Enablement**  
+    Enabling **MCP (Model Context Protocol) support** in the Custom Agent. It involves building the necessary integration to allow the agent to connect with MCP-compliant services, manage communication, and extend its functionality. The goal is to improve interoperability, flexibility, and support for external system interactions within the Custom Agent framework.
+    
+-   **Custom Agent | Checkpointer changes**  
+    The Custom Agent's checkpointer is upgraded to use **Postgres**, a more robust backing store. This new capability provides long-term, thread-specific memory, which guarantees reliable recovery and seamless continuity across all conversations.
+    

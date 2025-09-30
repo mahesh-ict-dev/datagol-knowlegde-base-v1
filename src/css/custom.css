@@ -154,3 +154,51 @@ If you want to make only certain links italic, add a class in your Markdown usin
     width: 150px !important;
   }
 }
+
+/* Simple release badge styling for blog posts */
+.release-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid;
+  margin-right: 0.5rem;
+}
+
+.release-badge--major {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.release-badge--minor {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.release-badge--patch {
+  background-color: #f0fdf4;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+[data-theme='dark'] .release-badge--major {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  border-color: #991b1b;
+}
+
+[data-theme='dark'] .release-badge--minor {
+  background-color: #1e3a8a;
+  color: #bfdbfe;
+  border-color: #1e40af;
+}
+
+[data-theme='dark'] .release-badge--patch {
+  background-color: #14532d;
+  color: #bbf7d0;
+  border-color: #166534;
+}

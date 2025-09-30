@@ -1,0 +1,39 @@
+---
+title: v1.0.154 
+description: v1.0.154 Release notes September 2025
+sidebar_position: 10
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 13, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are in this release:
+
+### Lakehouse
+
+-   **Enhanced Lakehouse permissions:** DataGOL has implemented a new permissions model for Lakehouse modules (Data Sources, Pipelines, and Orchestration), aligning with the existing workspace permissions. This enhancement introduces two distinct roles to better manage access and control. The permission roles are as follows:
+    
+    -   **Lakehouse admin:** This role has comprehensive access, including the ability to view and create all data sources, pipelines, and orchestrations within the company.
+        
+    -   **Lakehouse member:** This role allows users to create their own data sources, pipelines, and orchestrations. They can also view their modules and any modules to which they have specific access.
+        
+
+### Search
+
+-   The **Search** bar is now wider to show full names without any text getting cut off, helping you get to the right information quickly, especially with large datasets.
+    
+-   You can now refine your searches by filtering results by either **Column Name** or **Table Name**. This allows for more targeted searches.
+    
+    <ImagePopup src="/img/release-notes/aug/image_11_1.png" alt="*Search" caption="*Search" />
+
+
+## Bug Fixes
+
+This release contains the following bug fixes:
+
+### Workbook
+
+Resolved an issue where options like **Freeze** and **Hide** were repeating in the workbook’s column menu.

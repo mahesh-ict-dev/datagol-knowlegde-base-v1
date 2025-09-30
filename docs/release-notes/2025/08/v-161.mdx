@@ -1,0 +1,46 @@
+---
+title: v1.0.161 
+description: v1.0.161 Release notes September 2025
+sidebar_position: 3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 27, 2025**
+
+## New features and enhancements
+
+The following new features and enhancements are in this release:
+
+### BI
+
+-   The **page filters** have been improved to show selected options at the top of each list. This makes it easier to quickly see and manage your active filters without having to scroll.
+    
+-   **Timeout for collapse menu on widgets:** The timeout for the collapse menu on dashboard widgets has been increased. This improvement ensures that the menu remains visible for longer, providing users with more time to interact with it before it automatically hides.
+    
+-   **Consistent filter icon display:** Filter icons on widgets are now consistent for both page-level and widget-level filters. The icon will now appear in **blue** when a filter is applied and in **grey** when it is not. This makes it easier to quickly see which widgets have active filters.
+    
+-   **Enhanced filter display for widgets:** The display of widget-level filters can now be saved based on your preference. You can hide or show the filters applied to each widget, and your selection will be saved and retained on the dashboard until you change it.
+    
+-   **Dashboard table sorting:** You can now sort columns in Table widgets directly from the dashboard. Sorting options are available from both the column header and the column settings. The chosen sort order is saved as your preference and will be preserved automatically when you return to the dashboard. This preference takes precedence over any sorting set in the visualizer.
+    
+    **Note:** This functionality is only available for Table widgets and does not apply to Pivot tables.
+    
+-   **Column freeze on Tables and Pivot tables:** You can now freeze or unfreeze columns directly from the column header and column settings on both Table and Pivot Table widgets. Your freezing preferences will be saved automatically, ensuring that when you return to the dashboard, your chosen column layout is preserved. This setting will also override any freeze/unfreeze settings from the visualizer.
+    
+-   **Filter display enhancement:** The display of filters on dashboards has been improved for better visibility. Widget-level and page-level filters will now always be shown directly on each widget, while other options will remain consolidated under the three-dot menu. This change ensures that key filters are easily accessible and visible at all times.
+    
+-   **Hide/Unhide columns on tables:** You can now hide or unhide columns directly from the column header on both Table and Pivot table widgets. This setting is saved as a user preference, which means your chosen column visibility will be preserved and automatically applied whenever you return to the dashboard. Your preference will also override any column visibility settings made in the visualizer.
+    
+
+### Backend
+
+**Formulas on enriched hybrid table columns:** You can now apply formulas to enriched columns in hybrid tables.
+
+## Bug Fixes
+
+This release contains the following bug fixes:
+
+### AI
+
+Fixed an issue where the documentation agent could not retrieve chunks from the vector database. This restores document retrieval from the vector database.

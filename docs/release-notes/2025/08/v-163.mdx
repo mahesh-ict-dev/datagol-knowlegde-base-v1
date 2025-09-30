@@ -1,0 +1,16 @@
+---
+title: v1.0.163 
+description: v1.0.163 Release notes September 2025
+sidebar_position: 1
+---
+
+**Date released: August 28, 2025**
+
+
+## Bug Fixes
+
+This release contains the following bug fixes:
+
+### Backend
+
+Resolved an issue that caused data copy operations from S3 to a database to fail when the workbook contained JSON data. Now, JSON data is automatically cast to text before being stored in the database, ensuring a successful and smooth data transfer.
