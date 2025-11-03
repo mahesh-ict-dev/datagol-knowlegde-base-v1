@@ -1,0 +1,42 @@
+---
+title: v1.0.174
+description: v1.0.174 Release notes September 2025
+sidebar_position: 9
+---
+
+**Date released: September 17, 2025**
+
+## New features and enhancements
+
+### Workbooks
+
+-   **Peek a link enhancememnts**
+    
+    -   **Create new records in linked table from Peek view:** You can now create new records in a linked table directly from the Peek View modal, as long as you have the required permissions and the columns are editable. This new feature enables you to insert new rows without leaving the modal, providing a more streamlined workflow. A new Add New Record" button will appear in the Peek View modal, and clicking it will open a row editor.
+        
+    -   **Inline editing for linked tables in Peek View:** When reviewing linked table data, you can now modify rows instantly without navigating away from your current view. This capability is permissions-aware and context-specific: editing becomes available only if you possess the required **permissions** for the linked workbook, and the target column (such as **hybrid** or **dynamic** types) supports modification. If editing is not supported, the data remains safely read-only.
+        
+-   **Seamless data cloning with 'Push to Workbook':** Introduced the **Push to Workbook** action type, enabling users to clone rows of data from one workbook to another with unprecedented ease. This feature is perfect for creating follow-up tasks, escalating issues, or migrating data for specialized processing, ensuring your data is always exactly where it needs to be. The following are the key features:
+    
+    -   **Individual row action:** A new **Add multiple rows** button appears on supported columns. A single click opens a streamlined modal, allowing you to select a target workbook and instantly clone the row.
+        
+    -   **Bulk operations:** Boost productivity by multi-selecting rows. The action intelligently handles bulk operations, applying the chosen target workbook to all selected records simultaneously.
+        
+    -   Built-in reliability: The **Add multiple rows** action includes robust validation and user feedback:
+        
+        -   **Smart configuration:** Workbook admins can pre-configure a list of available target workbooks and set a default for quick, standardized pushes.
+            
+        -   **Permissions and mapping:** The system automatically respects user **permissions** for both the source and target workbooks. It also validates that all required **column mappings** exist, preventing incomplete or failed transfers.
+            
+        -   **Clear feedback:** A confirmation dialog shows the list of rows being processed, and success or error messages are provided for _each_ row, giving you confidence that your data transfer was successful.
+            
+-   **Enhanced search and filtering:** Improved how you find and refine your data with a new intuitive UI for search and column-level filtering.
+    
+    -   **Search:** Use the new dedicated search bar to dynamically query across all visible **string** and **numeric** columns. Results display up to 500 matches, navigable via arrow keys.
+        
+    -   **Column filters:** Each column features a dedicated filter button. Applied column filters are logically grouped and added to the main filter condition.
+        
+
+:::info [Limitations]
+Filtering is not yet supported for User, Attachment, Link, Lookup, or Link to another record column types. Multi-select fields do not show individual item suggestions.
+:::

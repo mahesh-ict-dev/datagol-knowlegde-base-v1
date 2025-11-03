@@ -1,0 +1,37 @@
+---
+title: v1.0.179
+description: v1.0.179 Release notes September 2025
+sidebar_position: 4
+---
+
+**Date released: September 23, 2025**
+
+## New features and enhancements
+
+### Workbook
+
+**Peek a view feature improvements:** The following small enhancements are provided for the Peek a link feature:
+
+-   Hidden fields are now correctly excluded from the view.
+    
+-   The **Add new record** button is now hidden on static/hybrid tables where it is not applicable.
+    
+
+## Bug fixes
+
+The following bug fixes are included in this release:
+
+### Workbook
+
+-   **Peek a link feature bug fixes:** The following fixes are provided for the Peek a link feature:
+    
+    -   Fixed rendering issues for complex columns (user/lookup) that appeared as [Obj, obj]
+        
+    -   Fixed an issue in the Peek a link feature settings, where the Peek link **Save** button was incorrectly disabled after only changing the link order.
+        
+-   **Column Order Fix:** Resolved a bug where duplicated views lost their column arrangement. Now, when you duplicate a view, the new view will retain the exact custom column order you set in the original.
+    
+
+### Dashboard
+
+-   The **Duplicate** option in the dashboard page settings will no longer be permanently visible. This option is now correctly conditional and will only appear when the user has the permissions required to duplicate the page.

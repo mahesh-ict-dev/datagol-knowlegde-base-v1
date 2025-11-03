@@ -1,0 +1,68 @@
+---
+title: v1.0.193
+description: v1.0.193 Release notes September 2025
+sidebar_position: 3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: October 24, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### AI Agents
+
+-   **Direct download for generated files in Python agent:** A new response chunk type, generated_datasets, has been implemented within the Python Agent's output. This chunk explicitly provides users with the paths to any datasets or files generated during the agent's execution. The actual file paths are listed under the data field within the content of the response. A new dedicated download endpoint has been introduced to simplify the retrieval of generated files:
+    
+    -   **Download URL:** A new endpoint, /ai/api/v2/python-agent/download-data, is now included in the response metadata as downloadurl.
+        
+    -   **Input:** This endpoint accepts a list of the generated output file paths (found in the data field) in its request body.
+        
+    -   **Download Behavior:**
+        
+        -   **Multiple files:** If the request includes multiple output file paths, the agent will package all specified files into a single ZIP file for download.
+            
+        -   **Single file:** If the request includes only one file path, the agent will initiate a direct download of that file in its original extension (e.g., .csv, .json).
+            
+    -   **Benefits:**  
+        This change addresses the previous limitation where the Python agent generated output files but lacked an easy download mechanism. Users can now:
+        
+        -   **View output paths:** Immediately see the generated file paths directly within the agent's response.
+            
+        -   **Effortless download:** Easily download single or multiple result files in a streamlined process.
+            
+-   **Optimized plotly chart rendering for Python agent:** Slow performance, UI lag, and visual glitches were occurring on the Python Agent page when large Plotly charts were rendered directly in the browser.  
+    With the new mechanism, the UI now displays the static image instead of rendering the full interactive Plotly chart, which reduces the frontend rendering load and prevents lag or freeze when visualizing complex, data-heavy results.  
+    If the user wants to explore the chart interactively, they can click **Explore**, which then loads the original Plotly chart for detailed inspection.
+    
+-   **Enhanced message tracking in Python agent streaming:** This enhancement improves the synchronization and tracking of Python Agent responses by introducing an immediate message_id and thread_id pre-chunk stream.  
+    The streaming response now starts with two distinct, immediate messages:
+    
+    -   message_id**:** Provides a unique ID for the current message exchange.
+        
+        `JSON`
+        
+        `{
+            "content": 3128,
+            "response_type": "message_id",
+            "metadata": null
+        }` 
+        
+    -   thread_id**:** Provides the unique session or conversation ID.
+        
+        `JSON`
+        
+        `{
+            "content": "570d04f7-c127-4d75-ba65-c89b70d5b4c0",
+            "response_type": "thread_id",
+            "metadata": {
+                "chain_id": "1761252134",
+                "session_id": "570d04f7-c127-4d75-ba65-c89b70d5b4c0",
+                "agent_type": "NewPythonAgent"
+            }
+        }`
+        
+    
+    This change significantly improves tracking, logging, and synchronization between the backend service and the frontend application, allowing for more robust error handling and event management.

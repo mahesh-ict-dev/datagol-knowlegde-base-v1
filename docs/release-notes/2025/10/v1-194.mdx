@@ -1,0 +1,23 @@
+---
+title: v1.0.194
+description: v1.0.194 Release notes September 2025
+sidebar_position: 2
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: October 24, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### Backend
+
+**Spot instance configuration for Spark ETL flows:** This enhancement enables a new layer of control and cost optimization for running large-scale data transformations.
+
+-   **Smart resource allocation:** Introduced a mechanism to automatically configure Spark jobs to utilize spot instances for executors and dedicated nodes for drivers within Kubernetes.
+    
+-   **Cost optimization:** This is achieved by mapping pipeline-specific or company-level node group selections (e.g., "medium," "large") to specific Kubernetes node selectors (e.g., mixedmedium) in the Spark configuration.
+    
+-   **Benefit:** Users can now seamlessly leverage cheaper compute resources for ETL workloads, resulting in significant cost savings without manually managing complex Kubernetes configurations.

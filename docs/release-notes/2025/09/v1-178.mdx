@@ -1,0 +1,17 @@
+---
+title: v1.0.178
+description: v1.0.178 Release notes September 2025
+sidebar_position: 5
+---
+
+**Date released: September 23, 2025**
+
+## Bug fixes
+
+The following bug fixes are included in this release:
+
+### Workbook
+
+**Lookup fields show unique values only:** An issue is resolved where duplicate values would incorrectly appear in lookup fields when a parent record was mapped to multiple child records sharing the same data in the relevant column.
+
+The backend query has been updated to ensure it fetches and coalesces only distinct values, preventing these duplicates from being displayed in the workbook.
