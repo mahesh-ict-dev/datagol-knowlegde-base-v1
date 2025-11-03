@@ -1,0 +1,42 @@
+---
+title: v1.0.187
+description: v1.0.187 Release notes September 2025
+sidebar_position: 9
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: October 14, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### AI
+
+**Structured AI output:** AI-generated columns and data now output directly in a Markup/Rich Text format (like Markdown).
+
+### Playground
+
+-   **Inline code difference viewer in Playground:** This release introduces an inline code difference viewer within the Playground's Codemirror component, providing a GitHub-style comparison when the AI suggests modifications or answers. This feature significantly improves transparency and streamlines the process of reviewing and understanding AI-driven code changes.
+    
+    -   **Visual comparison:** When using actions such as Rewrite/Fix or accepting Autocomplete suggestions, the new diff viewer will visually highlight the changes made by the AI.
+        
+    -   **GitHub-style interface:** The interface uses familiar colors and symbols to clearly show what was **deleted** from the original user code and what was added by the AI.
+        
+    -   **Immediate feedback:** The diff view appears inline with the code, giving you immediate, clear, and comprehensive feedback on the AI-generated modifications.
+        
+-   **Integrated powerful AI editing capabilities** directly into the Playground's CodeMirror component, enabling faster code writing and iteration with simple keyboard shortcuts. These new shortcuts place sophisticated AI assistance right at your fingertips, significantly accelerating your development workflow within the Playground.  
+    The following three commands provide intelligent, keyboard-driven assistance for code creation and modification:
+    
+    -   **Continue / Autocomplete:** Use the following command to extend your current code quickly. The AI will provide instant completion or continuation of your function, loop, or code block.
+        
+        `Cmd/Ctrl + J`
+        
+    -   **Rewrite / Fix:** Use the following command to ask AI to rewrite, fix bugs, or improve the clarity and grammar of the selected code or the current line.
+        
+        `Cmd/Ctrl+ K`
+        
+    -   **Explain Selection / Line:** Select a piece of code and use the following command to generate an immediate explanation of its logic and purpose.
+        
+        `Cmd/Ctrl + Shift + L`

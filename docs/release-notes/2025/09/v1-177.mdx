@@ -1,0 +1,15 @@
+---
+title: v1.0.177
+description: v1.0.177 Release notes September 2025
+sidebar_position: 6
+---
+
+**Date released: September 23, 2025**
+
+## New features and enhancements
+
+### Backend
+
+**Pipeline permission propagation:** When sharing an orchestration (pipeline) with a user, the logic is enhanced to automatically grant the user the necessary permissions for all the associated data sources. Previously, pipeline-level access was often insufficient for successful execution.
+
+Sharing a pipeline now automatically grants the minimum required read permissions (or equivalent pipeline permissions) to all referenced datasources. The backend will now parse user queries from the playground, fetch associated datasources, and validate permissions against them before execution.
