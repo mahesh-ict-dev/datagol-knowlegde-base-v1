@@ -8,32 +8,33 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 **Date released: October 23, 2025**
 
-New features and enhancements
+## New features and enhancements
 
 The following new features are included in this release:
 
-Platform
+### Platform
 
-Enhanced Link Previews for DataGol Platform: When pasting links that lead to the DataGol platform into chat interfaces or other supporting areas, users will now see a properly formatted rich link preview (e.g., in Slack, Teams, or other applications that support link unfurling).
+**Enhanced Link Previews for DataGol Platform:** When pasting links that lead to the DataGol platform into chat interfaces or other supporting areas, users will now see a properly formatted rich link preview (e.g., in Slack, Teams, or other applications that support link unfurling).  
 The preview will correctly display the platform's title and/or logo, providing a professional and recognizable visual context for the shared link.
 
-Bug Fixes
+## Bug Fixes
 
 The following issues are resolved in this release:
 
-AI 
+### AI
 
-Generate dashboard issue: Questions were being generated successfully, however, the corresponding widgets on the dashboard were missing their necessary configuration, rendering them unusable or incomplete. Widgets for generated questions will now have their configurations fully and correctly populated.
+-   **Generate dashboard issue:** Questions were being generated successfully, however, the corresponding widgets on the dashboard were missing their necessary configuration, rendering them unusable or incomplete. Widgets for generated questions will now have their configurations fully and correctly populated.
+    
+-   **RAG (Retrieval-Augmented Generation) agent issue:** When a response was streamed from the RAG (Retrieval-Augmented Generation) system and there were no images to display, a blank list of images was included in the response. This caused the UI to incorrectly display a "No images" message to the user, even though no image component should have been present.  
+    The backend will now only send image data or an image field when actual images are available. A blank image list will no longer be transmitted, preventing the spurious "No images" message from appearing in the UI.
+    
+-   **Improper file citation in RAG agent answers:** In RAG answers, citations sometimes displayed the internal file ID instead of the correct and user-friendly file title or name. This made it difficult to properly trace the source of the information.  
+    The pipeline has been updated to correctly process the file extension and leverage file metadata.  
+    Citations for RAG answers will now consistently show the proper file title instead of the raw file ID.
+    
 
-RAG (Retrieval-Augmented Generation) agent issue:  When a response was streamed from the RAG (Retrieval-Augmented Generation) system and there were no images to display,  a blank list of images was included in the response. This caused the UI to incorrectly display a "No images" message to the user, even though no image component should have been present.
-The backend will now only send image data or an image field when actual images are available. A blank image list will no longer be transmitted, preventing the spurious "No images" message from appearing in the UI.
-
-Improper file citation in RAG agent answers: In RAG answers, citations sometimes displayed the internal file ID instead of the correct and user-friendly file title or name. This made it difficult to properly trace the source of the information.  
-The pipeline has been updated to correctly process the file extension and leverage file metadata.
-Citations for RAG answers will now consistently show the proper file title instead of the raw file ID. 
-
-Known issues
+## Known issues
 
 The following known issues are included in this release:
 
-Users are currently unable to perform actions (such as deleting a message or submitting feedback) on a chat message while its response is being streamed into the chat window.
+-   Users are currently unable to perform actions (such as deleting a message or submitting feedback) on a chat message while its response is being streamed into the chat window.
