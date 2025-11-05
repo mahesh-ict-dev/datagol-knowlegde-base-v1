@@ -8,20 +8,21 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 ## What is a RAG agent?
 
-The RAG (Retrieval-Augmented Generation) Agent is an AI-powered tool designed to understand and answer questions based on the content of unstructured documents. You can ask questions across your uploaded documents, workspace files, or indexed knowledge sources. The agent reads, retrieves, and summarizes intelligently. It excels at document understanding and providing contextual answers by retrieving relevant information from a knowledge base of uploaded files. 
+The RAG Agent is designed to answer user questions using knowledge extracted from unstructured documents (like manuals, reports, or résumés) you provide. It is AI-powered and designed to understand and answer questions based on the content of unstructured documents. You can ask questions across your uploaded documents, workspace files, or indexed knowledge sources. The agent reads, retrieves, and summarizes intelligently. It excels at document understanding and providing contextual answers by retrieving relevant information from a knowledge base of uploaded files. 
 
 <ImagePopup src="/img/agents/rag-agent.png" alt="rag-agent" caption="RAG agent"/>
 
 The RAG agent enhances your ability to quickly extract information from documents with the following key capabilities:
 
--   **Document understanding**: The agent can process and understand the content within various unstructured documents. RAG agent reads from PDFs, Google Docs, Notion exports, and more, understands context, and retrieves exact answers.
+-   **Document understanding:** It answers questions based only on the content of the indexed documents, ensuring responses are factual and grounded in your data.
     
--   **Contextual answers**: It provides answers to your questions based on the specific text and context retrieved from the indexed documents in its knowledge base. The agent generates precise, cited answers with source references.
+-   **Contextual retrieval:** It retrieves and synthesizes relevant passages from the document set to formulate a precise answer.
     
--   **Support for multiple file types**: The RAG agent supports a variety of document formats, including PDFs, Microsoft Word documents (`.doc`, `.docx`), CSVs, and XML files.
+-   **Source citation:** It provides clickable links next to the answer, showing the exact source document (or section) the information was pulled from.
     
--   **Image retrieval**: The RAG agent can also retrieve and display relevant images from your PDF documents that were referred to during the answering of your query, providing a richer contextual understanding.
+-   **Multi-format support:** It supports various file types for ingestion, including **PDFs, DOC files, CSVs, and XML files**.
     
+-   **Image retrieval (advanced):** It can retrieve and display relevant images, diagrams, or flowcharts from the source documents (especially PDFs) alongside the text response to fully illustrate the context.
 
 ## **Configuring the RAG agent**
 
@@ -39,10 +40,10 @@ The RAG agent configuration primarily involves uploading and indexing your docum
 
 Once your documents are indexed, you can start asking questions to the RAG agent. 
 
-1.  From the DataGOL Home page, navigate to the **Agents** section within the platform.
-2.  Click **RAG agent**.
-3. On the RAG agent's chat page, ensure the correct workspace (the one containing your indexed documents) is selected. This is indicated by a green tag showing the workspace name.
-4. Type your question into the chat interface. The agent will then retrieve information from the indexed documents within the selected workspace to provide an answer.
+1.	From the DataGOL Home page, navigate to the **Agents** section within the platform.
+2.	Click **RAG agent**.
+3.	On the RAG agent's chat page, ensure the correct workspace (the one containing your indexed documents) is selected. This is indicated by a green tag showing the workspace name.
+4.	Type your question into the chat interface. The agent will then retrieve information from the indexed documents within the selected workspace to provide an answer.
 
 	**Examples of usage:**
 	-   "What is John Doe's educational background?" (If "John Doe's resume" is indexed)  
