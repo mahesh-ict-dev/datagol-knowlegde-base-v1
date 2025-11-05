@@ -1,0 +1,90 @@
+---
+title: v1.0.182
+description: v1.0.182 Release notes September 2025
+sidebar_position: 14
+---
+
+**Date released: October 3, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### AI Agent
+
+#### Agent page access and permissions refinement
+
+The **Agent page is** refined with visibility and granular access control, ensuring users only interact with agents relevant to their work while maintaining the ability for all authorized users to interact with the AI. The primary rule for accessing and viewing agents is now defined by ownership and sharing:
+
+Users with the CopilotHub Admin or CopilotHub Member role will only see agents that meet one of the following criteria:
+
+-   Agents they created.
+    
+-   Agents that were explicitly shared with them.
+    
+
+When an agent creator shares an agent with other CopilotHub users, they can assign one of two distinct roles:
+
+| Sharing role | Permission level | Capabilities |
+| :--- | :--- | :--- |
+| **Creator Access** | Full Access | Can view, modify, and manage the agent configuration (e.g., updating prompts, settings, or connected data sources). |
+| **Viewer Access** | Read-Only | Can view the agent configuration and details but cannot modify any part of the agent. |
+
+-   **Visibility:** Users cannot see or interact with any agents that they did not create or that were not explicitly shared with them.
+    
+-   **Interaction (AI Chat):** All users who have access to an agent (via creation, Creator Access, or Viewer Access) will still be able to interact with the agent and ask the AI questions, regardless of their sharing permission level.
+    
+-   **Configuration**: Only the creator and users with Creator Access can modify the agent's configuration.
+    
+
+#### Hubspot agent improvements and fixes
+
+The HubSpot Agent has received several updates focused on better integration, cleaner output, and enhanced performance.
+
+-   **Functional enhancements**
+    
+    -   **Access token management:** Added new functionality to reliably fetch and manage the HubSpot access token, ensuring a more robust and persistent connection for agent operations.
+        
+    -   **Analysis code persistence:** The Python code generated during the agent's analysis is now saved in the database, allowing for better auditing, debugging, and reproducibility of results.
+        
+-   **Performance and output**
+    
+    -   **Improved inference handling:** Integrated a LiteLLM instance to manage language model inference, leading to more consistent and efficient handling of complex requests.
+        
+    -   **Cleaner summary output:** Removed emojis from the summary output to provide a cleaner, more professional, and standardized text response.
+### Datasources
+
+DataGol includes the following new data connectors:
+
+-   **Attio Rest Connector:** Provides real-time data access to the Attio CRM platform using its public REST API for integrations and automations.
+    
+-   **Snapchat Marketing Connector:** Pulls comprehensive ad campaign data, including impressions, cost, and conversions, from Snapchat Ads for reporting and analysis.
+    
+-   **Apple Ads Connector:** Integrates advertising data from Apple Search Ads to analyze campaign performance, downloads, and key app store metrics.
+    
+
+### Workbook
+
+**View filters protection and personalization**
+
+The Workbook view functionality is enhanced to introduce filter protection and user-level personalization, ensuring the integrity of shared views while allowing users flexibility in data analysis.
+
+-   **Protected view filters (Base filters)**: Filters saved on a named view (e.g., "High Priority Items") are now locked as base filters.
+    
+    -   Only the view creator or an admin can edit or delete these base filters.
+        
+    -   These base filters are always applied for every user viewing that specific workbook view (e.g., all users see `priority='High'`).
+        
+-   **User-level personal filters:** All other users can add personal filters on top of the base filters for their analysis.
+    
+    -   User-added filters are saved **per user preference** and affect only that individual's view of the data.
+        
+    -   The final data displayed is determined by the combination: **Base Filters (Creator) + User's Personal Filters.**
+        
+-   **Master view:** The default Master view included in every workbook will not have any shared base filters. Filters applied in the Master view are always stored and applied per user preference, ensuring each user sees only their own saved filters in this default view.
+    
+-   **Downloads and exports:** All downloads now use the effective filters applied to the user's current workbook view:
+    
+    -   **Named Views:** Downloads will include data filtered by the view's Base Filters (set by the creator) PLUS the current user's Personal Filters.
+        
+    -   **Master View:** Downloads will use only the current user's Personal Filters, as the Master View has no shared base filters.

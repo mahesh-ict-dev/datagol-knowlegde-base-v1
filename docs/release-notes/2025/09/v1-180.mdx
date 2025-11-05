@@ -1,0 +1,35 @@
+---
+title: v1.0.180
+description: v1.0.180 Release notes September 2025
+sidebar_position: 3
+---
+
+**Date released: September 27, 2025**
+
+## New features and enhancements
+
+### AI Agents
+
+#### Python agent
+
+**Enhanced guardrails for non-data queries:** The agent now focuses strictly on data analysis. It will no longer answer general knowledge questions, such as requests for recipes. Any off-topic query now triggers the predefined response: _"I am designed to provide analysis related to data only."_ This keeps the agent efficient and focused on the topic.
+
+#### SQL Agent
+
+The core enhancement for the **SQL Agent V2** is the addition of support for streaming responses. This change allows the agent's detailed processing steps (context detection, analysis, plan generation, and final query) to be delivered to the user incrementally as they are generated, improving the user experience by providing quicker feedback and a perception of faster execution.
+
+### Backend
+
+-   **Sync schema run policy enhancement:** The Sync Schema policy is updated to prevent indefinite blocking caused by long-pending requests. A new Sync Schema request is now permitted to run if the immediately preceding Sync Schema request has been pending for more than 30 minutes. This ensures the timely processing of schema updates, prevents potential system stalls, and improves overall efficiency by allowing users to retry or initiate a fresh synchronization when the previous attempt is delayed.
+    
+-   **Direct save to workbook after advanced extraction:** The extracted, structured data from an advanced extraction process can now be directly saved to a workbook.
+    
+-   **Automatic folder-based extraction and data deposit:** You can now configure automatic data extraction for specific workspace folders. Newly uploaded files in the monitored folder will be processed immediately upon schedule, and their extracted, structured data will be automatically deposited into a designated workbook. To help you track your automation, the system will now display information about when the extraction was last executed. This provides transparency and confidence in the recurring processing schedule.  
+    You can set up two distinct options for initiating the data extraction process:
+    
+    -   **Manual:** You can trigger the extraction on demand.
+        
+    -   **Schedule via CRON:** You can set a recurring schedule using a CRON expression.
+        
+
+All CRON schedules are set and executed in Coordinated Universal Time (UTC).

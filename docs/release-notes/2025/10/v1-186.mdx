@@ -1,0 +1,29 @@
+---
+title: v1.0.186
+description: v1.0.186 Release notes September 2025
+sidebar_position: 10
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: October 13, 2025**
+
+## Bug fixes
+
+The following bug fixes are included in this release:
+
+### Lakehouse
+
+-   **Synchronized pipeline cancellation status:** A race condition allowed users to cancel a third-party job _after_ it had already completed or been cancelled. This caused an exception in DataGOL with the error: "_**Internal Server Error: Could not find job with id: -1**_."
+    
+    DataGOL now attempts to cancel the job, and if the third party reports the job is not found (due to being already finished), the error is silently ignored to prevent an exception for the user.
+    
+-   **Kyuubi/Spark job cancellation sync:** Fixed an issue where canceling a pipeline **before** its query was submitted to Kyuubi resulted in a synchronization failure. The pipeline showed as canceled in the UI, but the corresponding Spark job still appeared as running in the Spark UI.  
+    The cancellation flow is enhanced to ensure proper interception and termination before Kyuubi submission. Pipeline status is now correctly synchronized; no orphaned "Running" jobs will appear in the Spark UI upon early cancellation.
+    
+
+### Data lineage
+
+Resolved an issue causing failures during the lineage synchronization process. The Lineage sync event would occasionally fail with a NullPointerException. This error prevented the successful capture and update of data lineage information.  
+Lineage sync events are now stable and reliably completed, ensuring the accurate and complete mapping of your data dependencies.
+

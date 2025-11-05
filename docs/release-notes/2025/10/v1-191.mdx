@@ -1,0 +1,34 @@
+---
+title: v1.0.191
+description: v1.0.191 Release notes September 2025
+sidebar_position: 5
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: October 21, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### AI Agent
+
+-   **Retrieval-Augmented Generation (RAG) agent integration with workbook interface:** Integrated the Retrieval-Augmented Generation (RAG) Agent functionality into the Workbooks interface, allowing users to instantly leverage their data and documents stored in workbooks to get context-aware answers without needing to navigate to a separate agent interface.  
+    
+-   **Knowledge Graph agent with refined prompt:** Refined the underlying prompt used by the Knowledge Graph (KG) Agent to significantly enhance its ability to generate multi-hop queries. The updated prompt now guides the agent's large language model (LLM) to better understand and map sophisticated natural language questions into the necessary, multi-step query logic.
+    
+    -   **Improved accuracy:** The agent can now successfully answer more complex, analytical questions that require aggregating data or linking facts across multiple nodes.
+        
+    -   **Wider scope of inquiry:** Users can ask deeper, more nuanced questions without needing to manually break them down into simpler steps.
+        
+    -   **Increased reliability:** Reduced instances of failure when asking questions that require extensive traversal of the knowledge graph.
+        
+
+## Bug Fixes
+
+The following issues are resolved in this release:
+
+### AI Agents
+
+**RAG agent no longer suggests external information sources:** Resolved an issue in the Retrieval-Augmented Generation (RAG) agent, which ensures that the RAG Agent strictly relies on the provided context and knowledge base for its answers, preventing the suggestion of external or non-curated information sources for generic user queries. The agent will now adhere solely to the information available in its dedicated retrieval system.
