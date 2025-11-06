@@ -241,6 +241,13 @@ const config = {
         {
           tagName: 'meta',
           attributes: {
+            'http-equiv': 'Permissions-Policy',
+            content: 'microphone=*, camera=*, autoplay=*, display-capture=*',
+          },
+        },
+        {
+          tagName: 'meta',
+          attributes: {
             property: 'og:image',
             content: 'https://docs.datagol.ai/img/datagol-social-card.jpg',
           },
@@ -307,6 +314,7 @@ const config = {
     }),
     
     plugins: [
+      './src/plugins/iframe-permissions-plugin.js',
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
