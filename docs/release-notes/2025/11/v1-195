@@ -1,0 +1,27 @@
+---
+title: v1.0.195
+description: v1.0.195 Release notes September 2025
+sidebar_position: 5
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: November 7, 2025**
+
+## New features and enhancements
+
+The following new features are included in this release:
+
+### AI Agents
+
+**Edit and run SQL query in SQL agent:** This enhancement allows users to directly edit the generated SQL query within the SQL agent interface. Users can modify the query and then run the updated query immediately, followed by the option to save the results for future reference or use. This provides flexibility, allowing users to quickly debug, refine, or customize the agent's generated SQL without leaving the Agents page.
+
+### Workbook
+
+**Workbook reload option:** This improvement introduces a **Reload** option to workbooks, giving users the ability to manually refresh both the underlying data and its schema. Users no longer have to wait for automated background updates or manually re-import data to ensure they are working with the most up-to-date schema and information.
+
+Selecting this option performs a complete refresh, executing the following actions:
+
+-   **Schema Refresh:** Updates the workbook's internal definition to incorporate any recent changes to the source table/view structure (e.g., new columns, modified data types).
+    
+-   **Data Refresh:** Fetches the latest data from the source, ensuring all subsequent analyses and visualizations in the workbook reflect the most current state of the data.
