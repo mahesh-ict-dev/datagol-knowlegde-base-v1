@@ -1,9 +1,0 @@
----
-title: v1.0.194
-description: v1.0.194 Release notes September 2025
-sidebar_position: 2
----
-
-import ImagePopup from '@site/src/components/ImagePopup';
-
-**Date released: October 24, 2025**
