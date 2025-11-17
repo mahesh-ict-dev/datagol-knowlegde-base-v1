@@ -1,0 +1,40 @@
+---
+title: v1.0.202
+description: v1.0.202 Release notes November 2025
+sidebar_position: 2
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: November 12, 2025**
+
+## New features and enhancements 
+
+## Agents 
+
+### MongoDB agent 
+
+The **MongoDB Agent** is an AI-powered system designed to answer **natural language queries** by interacting directly with MongoDB databases.
+
+#### Core functionality
+
+-   **Schema collection:** It gathers schema information from designated MongoDB collections using the Datagol API or by directly inspecting the MongoDB instance.
+    
+-   **Query generation:** The system uses **Large Language Models (LLMs)** to identify schema gaps and then generate optimized **Python data collection scripts**.
+    
+-   **Efficient data retrieval:** These scripts execute MongoDB queries using flexible string matching, filters, and complex **aggregation pipelines** for high efficiency.
+    
+-   **Data processing:** Retrieved data is loaded into **pandas DataFrames** for subsequent LLM-based analysis.
+    
+
+#### Output and experience
+
+-   **Results presentation:** The final results are returned as **formatted tables** accompanied by relevant metadata.
+    
+-   **Visual cards:** For smaller datasets (fewer than 10 rows), the agent automatically generates **visual cards** to enhance readability.
+    
+-   **Advanced features:** The agent supports **schema caching**, handles **cross-collection joins**, and provides a superior user experience through **streaming responses** with progress updates throughout the entire workflow.
+
+### Web Connector
+
+The Web Connector has been upgraded to enhance its ability to extract rich content from web URLs by integrating the **`unstructured` library**. This enhancement ensures that web data sources provide more comprehensive and structured inputs for subsequent analysis, including both extracted text and image descriptions.
