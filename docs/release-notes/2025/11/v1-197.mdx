@@ -1,9 +1,35 @@
 ---
 title: v1.0.197
-description: v1.0.197 Release notes September 2025
-sidebar_position: 3
+description: v1.0.197 Release notes November 2025
+sidebar_position: 6
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-**Date released: November 7, 2025**
+**Date released: November 4, 2025**
+
+## New features and enhancements 
+
+### AI Agents 
+
+Enhanced the user experience on the Agents page by making the **Share Thread** option more accessible and intuitive. Now the Share Thread option has been moved from the less visible three-dot more options menu to the top of the chat interface.
+
+### Lakehouse
+
+The new **Airbyte TikTok Marketing Connector**has been added, expanding your data integration capabilities for social media marketing analysis. 
+
+### Orchestration
+
+The **Run** button is now automatically disabled (grayed out and unresponsive) when there are no active pipelines present in the orchestration view. This enhancement clearly communicates the system's operational state, guiding users to first configure a pipeline before attempting to initiate a run.
+
+### Pipeline
+
+The **Source Filter** list in the pipelines view now only displays connectors that are currently active and exist within your company's environment. This refinement removes unused or irrelevant connector options, making it faster and easier to find and select available data sources for pipeline creation and management.
+
+## Bug Fixes
+
+### Workspaces
+
+Fixed an issue where the **Notify users** feature failed to display results if the input contained accidental leading or trailing spaces. The system now correctly trims the whitespace from the input (email or username) before searching. 
+Users will now see matching suggestions even if they accidentally add a space before or after the text, ensuring a smooth notification workflow.
+

@@ -1,9 +1,40 @@
 ---
 title: v1.0.196
-description: v1.0.196 Release notes September 2025
-sidebar_position: 4
+description: v1.0.196 Release notes November 2025
+sidebar_position: 7
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-**Date released: November 7, 2025**
+**Date released: November 3, 2025**
+
+## New features and enhancements
+
+### AI Agents 
+
+#### Data Conversation Agent (DCA)
+
+-   The new **Cohort Analysis Capability** has been added to the DCA agent. This significant enhancement allows users to perform in-depth analysis of cohorts (groups of users sharing a common characteristic, often a start date), enabling better tracking and understanding of user behavior, retention, and long-term value over time.
+    <ImagePopup src="/img/release-notes/nov/cohort-analysis.png" alt="*refresh embeddings" caption="*cohort-analysis.png" />
+
+
+#### Python Agent 
+
+A new API is implemented to automatically **identify and clear stale Python Agent sessions**.
+
+-   **Inactive sessions** (those inactive for over 10 minutes) are now automatically identified and their associated agent instances are removed.
+    
+-   This enhancement directly **prevents memory bloat** and **optimizes resource utilization** by freeing up memory previously held unnecessarily by long-running or inactive sessions.
+    
+-   The result is **improved system stability**, prevention of potential memory leaks, and maintenance of **consistent agent performance** during continuous and concurrent multi-session operations.
+
+## Known issues
+
+
+### AI Agents 
+
+Enhanced the internal logic to specifically prevent the generation of queries for unsupported operations (e.g., **Update**, **Delete**, and **Create**). This change ensures that the system focuses only on supported operations.
+
+
+
+

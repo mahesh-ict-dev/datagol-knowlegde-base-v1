@@ -1,0 +1,92 @@
+---
+title: v1.0.203
+description: v1.0.200 Release notes November 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: November 14, 2025**
+
+## New features and enhancements 
+
+### Agents
+
+#### SQL Agent
+
+The SQL Agent now automatically determines and sets the most appropriate **default data provider** based on the selected data source's supported query engine. This enhancement standardizes the query execution environment and improves the user experience.
+
+The system now implements conditional logic to set the default provider immediately upon data source selection:
+
+-   **If the data source supports JDBC** as a query engine, the default data provider is automatically set to **JDBC**.
+    
+-   **If the data source does not support JDBC**, the default data provider is automatically set to **Spark**.
+    
+**Key features**
+
+-   **Consistent setup:** This ensures the agent starts with the optimal provider setting, preventing users from manually selecting an incorrect or incompatible option.
+    
+-   **Immediate UI reflection:** The user interface reflects the correct default selection immediately upon data source change.
+    
+-   **Agent usage:** The agent utilizes this automatically selected provider when generating or executing SQL queries (unless the user manually overrides it).
+    
+-   **Non-breaking change:** No changes were made that impact existing messages or historical data.
+
+
+### Backend
+
+-    **Updated the logging system to capture and record the SQL query executed by the query engine**. The logs now capture the complete SQL query used by the query engine. This enhancement provides essential data for troubleshooting, auditing, and analyzing query performance within the system. 
+-   Loggers have been implemented across all query engines to accurately capture and record the execution time for every query.
+
+### Workspace 
+
+Improvements were made to the Workspace Documents UI and backend processing to enhance stability, accuracy, and user clarity, particularly concerning file indexing and large uploads. The following changes were implemented:
+
+-   **Upload concurrency queue updated:** The maximum number of simultaneous file uploads has been significantly reduced from **50 to 10**. This change is necessary to **reduce backend load**, prevent timeouts, and **stabilize large folder uploads**.
+    
+-   **Index status UI improvements:** The index status displayed on the `/workspaces/{id}/documents` page is now more informative and uses clearer color-coding:
+    
+    -   The status now shows the **number of files indexed / total files**.
+        
+    -   **Dynamic color-coding** based on progress:
+        
+        -   Less than 10% indexed $\to$ **Red**
+            
+        -   More than 80% indexed $\to$ **Green**
+            
+        -   Progress between $10\%$ and $80\%$ remains the existing **Yellow** color.
+
+
+
+## Bug fixes
+
+### AI Agents 
+
+#### DCA Agent 
+
+**Corrected date values from DCA response**: Resolved an issue where dates returned from the Data Catalog Agent (DCA) were incorrectly displayed as January 1970.
+The underlying date parsing logic has been corrected, ensuring that all dates retrieved via the DCA response are now accurately displayed.
+
+#### SQL Agent 
+
+Resolved a critical issue where **new sessions were incorrectly loading stale S3 cached data from previous sessions**, leading to inconsistent results and intermittent runtime errors. The SQL Agent now consistently uses fresh Parquet data, and the related runtime error no longer occurs.
+
+### Data Source
+
+#### MongoDB 
+
+**Enhanced MongoDB schema synchronization speed:** The schema synchronization process for MongoDB data sources has been optimized to significantly reduce processing time, especially for data sources with a high number of tables.
+-   **Issue:** Previously, schema synchronization was handled **sequentially** (one table at a time). With over 250 tables, this linear process caused long delays.
+-   **Fix:** The synchronization logic has been enhanced to process tables **in parallel**. Synchronization is now executed in **batches** instead of sequentially, drastically reducing the overall sync duration and improving system performance.
+
+### Onboarding
+
+Fixed an issue where **updating a personal profile incorrectly caused the user to be redirected back to the onboarding page**.
+
+-   **Issue:** When a user updated their profile, the UI was not consistently passing the entire data transfer object (DTO). The critical onboarding flag was sometimes missing, causing the backend to save the partial DTO, which reset the flag to false.
+
+-   **Fix:** The backend logic has been updated to only modify the onboarding flag if the new value is explicitly provided (not null). This ensures the user's progress is retained, preventing unnecessary redirection to the onboarding flow after a profile update.
+
+
+
+            

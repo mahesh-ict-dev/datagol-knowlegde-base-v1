@@ -1,9 +1,99 @@
 ---
 title: v1.0.198
-description: v1.0.198 Release notes September 2025
-sidebar_position: 2
+description: v1.0.198 Release notes November 2025
+sidebar_position: 5
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
 **Date released: November 6, 2025**
+
+## New features and enhancements
+
+AI Agents 
+
+upgraded the SQL Agent to support streaming responses, which significantly improves the user experience for processing large datasets and long-running queries.
+
+Key improvements
+
+-   **Real-time feedback:** Instead of waiting for a complete result, users now receive the output and status updates from the SQL Agent incrementally and in real-time.
+
+-   **Faster perceived performance:** For complex queries or large data retrievals, the perceived latency is dramatically reduced as results begin displaying immediately.
+
+-   **Improved user interaction:** This feature enables more interactive experiences, especially when generating long analyses or processing extensive code blocks.
+
+This update involves modifying the agent's communication protocol to transmit data chunks as they are generated, rather than buffering the entire output before delivery.
+
+### Onboarding
+
+Implemented a new, guided onboarding flow for all new signups to improve first-session activation and demonstrate product value immediately. This process ensures new users are presented with relevant demo data and starter questions based on their professional role. This flow is divided into the following key steps, tailored to the user's status within a company:
+
+**Step 1: Company Profile (First User Only)**
+
+**Goal:** Capture basic organizational context.
+
+This step is displayed **only** to the first user who signs up from a new company or organization, and the data is stored on the company/organization record.
+
+**Step 2: User Role Selection (All New Users)**
+
+ **Goal:** Understand the user's perspective for role-based content.
+
+User selects from predefined roles (e.g., CEO / Founder / Exec, Marketing, Business Analyst). This role is stored on the user's profile.
+
+**Step 3: Demo Data Selection**
+
+**Goal:** Immediately populate the user's workspace so the product is not an "empty state."
+
+User is presented with a picker of available demo datasets (e.g., Churn / Retention, CRM / Pipeline, Employee / HR, Telecom, etc.).
+Each dataset tile displays a short description.
+ -   Example questions are dynamically shown based on the user's selected **Role (from Step 2)** and the specific **Demo Dataset**.
+ > **Example:** If Role is Marketing and the user selects the CRM / Pipeline dataset, sample questions like "Which channels brought in the highest quality leads this week?" will appear.
+
+**Step 4: Automated Workspace creation**
+-   **If Demo Data is selected:** The system automatically creates the user's default workspace and seeds it with the chosen demo dataset's tables and example workbooks, enabling instant exploration.
+-   **If Demo Data is skipped:** The default workspace is created, but it remains empty (current behavior).
+
+
+### Workbooks
+
+#### Email Campaign
+
+-   Increased the **limit on the number of recipients for a single email campaign**. Users can now send campaigns to more than 250 recipients per send operation. Front-end checks are included to guide users and validate campaign parameters before the campaign is submitted.
+-   Introduced a new **Email Campaign Tracker** to provide full visibility and detailed logging for every message sent during a campaign. This tracker captures critical delivery information and diagnostics, allowing for better monitoring and troubleshooting of campaigns.
+    The new tracker records the following information for each email attempt:
+
+    -   **Sender Email:** The address used to send the campaign email.
+    -   **Receiver Email:** The intended recipient's email address.  
+    -   **Date/Time:** The exact time the email sending attempt occurred.
+    -   **Table ID:** The identifier of the data table associated with the campaign.    
+    -   **Campaign ID:** The unique identifier for the specific email campaign.
+    -   **Message ID:** The unique system identifier for the individual email message.
+    -   **No. of Attempts:** The total number of times the system attempted to send the email to the recipient. 
+    -   **Exception Message:** Any error or diagnostic message is recorded if the delivery attempt failed.
+
+-   Enhanced the Email Campaign feature to allow users to attach files and dynamic content directly from their workbooks, supporting both **Dynamic** and **Static** workbook types. 
+    Users can now select the following column types to be included as attachments in their emails:
+
+    -   **Attachment Column (File Types):** Supports columns containing file paths for standard document and image formats, including **PDF, Word documents,** and various **Image files**.
+    -   **Single Line Text:** Allows the content of a single-line text column (which may contain a file path or direct text content) to be treated as a small attachment or used in the body.  
+    -   **AI Generated Columns:** Supports dynamic content or file paths generated by our **AI features** to be attached to the campaign emails.
+  
+
+
+## Bug Fixes
+
+### AI Agents 
+
+- **Python Agent bug fix**: The Python Agent failed to load data for workbooks using STATIC table types. The agent's logic was designed to use SQL queries only for DYNAMIC tables. Now, added a separate handling for STATIC table types. This change ensures the dataframe is correctly initialized, resolving the data retrieval error for all table types.
+
+### Data Extraction
+
+Resolved a critical validation error that occurred when attempting to **re-run a document extraction** after modifying its configuration to include the **JSON checkbox** and setting a **unique column**.
+
+-   **Issue:** Users were blocked by the validation error, `"Duplicate column : datagol_extracted_file_data passed"`, even when re-running the extraction with no new files.
+    
+-   **Fix:** The underlying logic has been corrected to properly handle the internal structure of extraction configurations. Users can now successfully **edit and re-run extractions** with JSON and unique column settings without encountering this duplicate column error.
+
+
+
+
