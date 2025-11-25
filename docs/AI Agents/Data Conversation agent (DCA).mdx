@@ -10,38 +10,117 @@ The DCA enables users to quickly retrieve and analyze data from workbooks using 
 
 <ImagePopup src="/img/AI/DCA.png" alt="DCA" caption="DCA" />
 
-### **Key features of a DCA**
 
--   **Natural language querying:** Users can ask questions in plain English (e.g., "What are the top 3 denial categories?").
--   **SQL query generation:** The agent translates natural language into SQL queries to retrieve data.
--   **Tabular Output:** Results are presented in a structured table format. 
--   **Transparency:** Users can view the generated SQL query to understand how the results were obtained. 
--   **Filtering, sorting, and aggregation:** Supports queries involving filtering, sorting, grouping, and aggregation of data.
--   **Outlier Detection:** Can identify and display outlier records based on user-defined criteria (e.g., "show me records where the build amount is more than twice the average").   
--   **Automatic Agent Routing:** Will route to the chart agent, if chart related keywords are detected.
+
+## What is DCA (Data Conversation Agent)?
+
+The DCA is an intelligent agent designed to help you analyze and interact with your data using natural language. It functions as a **Workbook Agent**, meaning it works directly with the data inside your workbooks and within the broader workspace context.
+
+**Key Capabilities:**
+
+-   **Data Querying:** Ask questions about your data in plain English.
+    
+-   **Contextual Awareness:** Understands queries across different workbooks within the same workspace.
+    
+-   **Dynamic Results:** Generates tables, charts, and text-based responses.
     
 
-### **Use cases**
+## Accessing DCA
 
--   Quickly finds specific data points.
--   Analyzies trends and patterns in data.   
--   Generates reports and summaries.   
--   Identifies outliers and anomalies.
+The DCA is typically accessed directly from within a workbook interface.
+
+-   **Location:** The agent usually appears as a chat panel or interface within your workbook environment.
     
 
-### **Limitations**
+## How to use the DCA?
 
--   Primarily designed for structured data.
--   Relies on SQL query generation.
--   Routing of agents based on keywords is not perfect.
+### Asking general and schema-based questions
+
+The DCA can provide general guidance on your data schema.
+
+1.  Open the DCA chat panel while viewing a workbook (e.g., "Sales Data").
+    
+2.  Ask a general question, such as:
+    
+    -   "How can I ask questions on this schema to understand where my sales are going?"
+        
+    -   "Suggest questions for analyzing this data."
+        
+3.  **Result:** DCA will provide **text-based responses** and suggestions (e.g., "See sales by region," "sales by time period").
     
 
-### **User interaction**
+### Leveraging workspace-level context
 
--   Users enter questions in a text-based chat interface.
--   Results are displayed in text or a table format based on the query.
--   Ability to view the generated SQL code.  
--   Offers flexibility in visualizing data by providing relevant, predefined charts based on the user’s questions to DCA. 
--   Users have the ability to download the generated results.
--   Users can create focused subviews derived from the initial result set.   
--   DCA offers a human-in-the-loop feature, allowing users to directly edit and rerun the query.
+DCA can answer questions about one workbook even when you are currently focused on another.
+
+1.  Navigate to a primary workbook (e.g., you are on the "Sales Data" tab).
+    
+2.  Ask a question about a different workbook in the same workspace:
+    
+    -   "How does travel affect employee attrition?"
+        
+3.  **Verification:** Check the **Info Tab** or context box associated with the answer. It will correctly show the source of the data (e.g., "Employee Attrition" workbook) used to generate the result.
+    
+
+### Building on previous queries (History and Context)
+
+The DCA remembers the context of the conversation, allowing you to refine your analysis incrementally.
+
+1.  Ask an initial query: "Show me month-to-date and year-to-date sales."
+    
+2.  Ask a follow-up query without repeating the full context: "Now show me sales by month for **this year**."
+    
+3.  **Context Awareness:** DCA understands the implied context and automatically adds the necessary filters (a `WHERE` clause for "this year") to the new query.
+    
+4.  **Time Awareness:** DCA now understands relative time terms like "**today**," "**last year**," and "**previous quarter**."
+    
+
+## Saving results as a Subview (Live Data)
+
+You can save the result of a DCA query as a permanent, dynamic view within the source workbook.
+
+-   **Option 1: Using the Button**
+    
+    1.  Click the dedicated "**Create Subview**" button associated with the query result.
+        
+-   **Option 2: Using the Chat**
+    
+    1.  Type a command into the chat, such as: "Create this as a subview."
+        
+    2.  DCA will intelligently identify the source workbook (e.g., "Employee Attrition") that provided the data and create the subview there.
+        
+-   **Result:** The subview is created in the appropriate source workbook and remains **live**; it will update as the underlying data changes.
+    
+
+## Managing your conversation history
+
+Your query threads are automatically saved in the left panel.
+
+-   **Rename:** Click on the thread name to rename it (e.g., "Sales Analysis - May").
+    
+-   **Privacy:** To ensure only you can access a thread:
+    
+    1.  Select the thread.
+        
+    2.  Mark it as **Private**.  It will then appear in the **Mine** tab and be hidden from other users in the workspace.
+        
+-   **Deletion:** You can only delete the threads and individual questions _you_ have created.
+    
+
+## Pinning and Downloading Results
+
+-   **Pin:** Use the **Pin** button on a result to highlight it. Pinned messages are visible to other users.
+    
+-   **Download:** Use the **Download** button to save the result set as a local file, typically a **CSV**.
+    
+    -   _Note: Downloaded data is static and will not update if the source data changes._
+        
+
+### 3.7. Providing Feedback
+
+You can help improve the DCA's performance by providing feedback on its responses.
+
+-   Use the **Like** 👍 or **Dislike** 👎 options below a result set.
+    
+-   This feedback is collected by the development team to understand and fix issues with agent accuracy and experience.
+    
