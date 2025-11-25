@@ -1,0 +1,73 @@
+---
+sidebar_position: 9
+tags: [Lakehouse, Connector, Jobs, Pipeline]
+slug: agent ops
+---
+
+Agent ops is a feature designed for company administrators or super admins to monitor, manage, and analyze the usage and cost associated with your company's large language model (LLM) providers (e.g., OpenAI, Anthropic, Gemini).
+
+### Access and key configuration for Agent ops
+
+-   **Availability:** Agent ops is generally available at all times, but typically only accessible to super admins or users with specific platform-level permissions.
+    
+-   **Interaction requirement:** To ensure agents (like DCA, Python, or chart agents) can interact with LLM providers, you **must configure the provider keys** (e.g., anthropic key, gemini key, openai key) in the dedicated settings section (e.g., under **Company** settings).
+    
+:::tip [Note]
+If keys are not configured, all agent requests to that provider will fail.
+:::
+        
+### Monitoring usage with logs in Agent ops
+
+The logs section provides a detailed, call-by-call record of every interaction with your LLM providers.
+
+| Metric | Description |
+| :--- | :--- |
+| **Token consumption** | The number of tokens consumed per call. |
+| **Cost** | The approximate cost of the individual call. |
+| **Provider/model used** | The specific LLM provider (e.g., OpenAI) and model (e.g., GPT-4o) used. |
+| **Timestamp** | The exact time of the API call. |
+| **Status** | Whether the call was a success or failure. |
+| **Details (expandable)** | Includes total tokens consumed, team ID, and key information for a deeper look. |
+
+-   **Filtering:** You can filter the logs by time range, including preset options (e.g., last 7 days, last 30 days) or a custom date range.
+    
+
+### Analyzing usage with analytics in Agent ops
+
+The analytics dashboard provides aggregated data and visualizations to understand overall LLM expenditure and performance.
+
+#### Model metrics
+
+This tab focuses on the usage of individual LLM models across all providers.
+
+-   **Total tokens/expenditure:** View which models are consuming the most tokens and incurring the highest cost.
+    
+-   **Tokens per request:** See the average number of tokens consumed per request for each model.
+    
+-   **Graphs:** Visualizations include:
+    
+    -   Model tokens over time
+        
+    -   Model cost over time
+        
+    -   Request success/failure rate over time (per model)
+        
+
+####  Provider metrics
+
+This tab aggregates data by the LLM service provider (e.g., OpenAI, Anthropic, Gemini).
+
+-   **Total expenditure:** See the total dollar amount spent with each provider.
+    
+-   **Token count:** View the total tokens consumed per provider.
+    
+-   **Graphs:** Visualizations include:
+    
+    -   Provider requests over time
+        
+    -   Provider cost over time
+        
+    -   Provider success/failure rate
+        
+-   **Filtering:** Analytics data can also be filtered by a custom or preset date range (e.g., last 7/30/90 days).
+    

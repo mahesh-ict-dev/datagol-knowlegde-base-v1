@@ -15,7 +15,7 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 Addressed multiple UI issues on the **Documents** page to ensure **reliable file uploads** and **consistent file previews**. These fixes significantly enhance the stability and usability of the document management system.
 
--   **Enhanced upload stability and concurrency:** Uploads are now limited to a maximum of 50 concurrent requests to prevent backend overload and intermittent upload failures when handling large folders.
+-   **Enhanced upload stability and concurrency:** Uploads are now limited to a maximum of 10 concurrent requests to prevent backend overload and intermittent upload failures when handling large folders.
     
 -   **Resolved folder path conflicts:** Improved path resolution allows uploads to succeed consistently, even when different subfolders share the same name (e.g., `/A/common/` and `/B/common/`).
     
