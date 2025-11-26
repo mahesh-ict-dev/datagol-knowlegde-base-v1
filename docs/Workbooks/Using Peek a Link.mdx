@@ -1,0 +1,81 @@
+##  What is Peek-a-Link?
+
+Peek-a-Link is a feature designed to provide a **"bird's eye view"** of data from **multiple workbooks in a single location**.
+
+-   **Core function:** It allows users to link data across different workbooks using a **common matching field** (like a primary key or join field), eliminating the need to constantly switch between sheets to view related information.
+    
+-   **Problem solved:** When working across multiple workbooks (e.g., Workbook 1 for Test Cases, Workbook 2 for Release Execution, Workbook 3 for Summary), switching between them to find correlated data is time-consuming and causes delays. PAL Link lets you see the related data instantly within your current sheet.
+    
+-   **Scope:** The linking works **irrespective** of the workspace the workbooks belong to.
+    
+
+
+## How to Use Peek-a-Link
+
+PAL Link functions by creating a permanent link based on a match between two data fields (columns) in different workbooks.
+
+### 1. Identifying the Link Option
+
+The Peek-a-Link option is available on columns for **all data types** **except** for lookup fields.
+
+-   You will see an option called "**Link**" when you click on a cell within the column you want to use for linking (the primary key).
+    
+
+### 2. Creating a New Peek-a-Link
+
+To set up the link:
+
+1.  In your current workbook (Workbook A), click on the header in the column you want to use as the matching key and select the **Peek a Link** option.
+    
+2.  Select the option to **Create a new link**.
+    
+3.  Give the link a descriptive name (e.g., "Test Link").
+    
+4.  Choose the **Workbook B** that you want to link to.
+    
+5.  Map the column from **Workbook A** (the sheet you are currently in) to the corresponding, matching column in **Workbook B**.
+        
+    :::tip [Important]
+    The data in these two mapped columns **must match** for the link to successfully show the related records (e.g., if you map by 'Company,' the company name must be identical in both sheets).
+    :::
+        
+6.  Click **Create**. Once created, you must click **Save a link** to make it permanent.
+    
+
+### 3. Viewing Linked Data
+
+Once the link is saved, you can view the linked data instantly:
+
+1.  Go to the linked column in **Workbook A**. Where data matches an entry in **Workbook B**, you will see a small **PAL Link symbol** (a number indicating how many workbooks are linked).
+    
+2.  Click the symbol. A window will open showing all the related column information for that specific entry from **Workbook B**.
+    
+    :::info
+    **Zero Records:** If the matching key (e.g., company name) does **not** exist in Workbook B, the link will show "**zero records found**."
+    :::
+    
+
+## CRUD Operations through Peek-a-Link
+
+PAL Link allows you to perform basic Create, Read, and Delete (CRUD) operations on the linked workbook (Workbook B) while staying in Workbook A.
+
+### 1. Adding a New Record
+
+-   While viewing the linked data, there is an option to **Add** a new record.
+    
+-   Clicking this allows you to input data for the fields in **Workbook B** directly from Workbook A.
+    
+-   **Automatic Linking:** When a new record is added to either sheet, or if an existing record's linking field is updated to match the other sheet, the link will be **automatically generated**.
+    
+
+### 2. Deleting a Record
+
+You can choose to **Delete** a record while viewing the linked data in Workbook A. This action will delete the corresponding entry from the linked workbook (Workbook B).
+    
+
+## Important Considerations (Permissions) for PAL link
+
+-   **Access is Required:** To use Peek-a-Link and perform any operations (view, add, delete), you **must have the proper permissions** (e.g., edit or admin permissions) for **both** the current workbook (Workbook A) and the linked workbook (Workbook B).
+    
+-   If you lack permissions for the target workbook, the link will not work correctly, or it will be blocked.
+    
