@@ -10,33 +10,20 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 ## New features and enhancements 
 
-### AI Agent 
+### AI Agents 
 
-#### Python agent
+**Python agent: User review before code execution**
+    
+Added a  **mandatory user feedback step** before the Python Agent executes any code. The agent will now display the generated  **plan (pseudo-code) and the resulting code**  for user review. Execution only proceeds after the user confirms or provides corrections. This ensures  **higher code accuracy**  and better alignment with user intent, preventing the execution of unnecessary or incorrect logic.
 
--   **Plotly handling updates (Python agent)**
-
-    -   **Plotly Configs Saved to S3:** Plotly JSON configurations are now saved to S3, referenced by conversation and message ID (e.g., `python_agent/plotly_configs/{conversation_id}/{message_id}/...`).
-        
-    -   **Response Streaming Simplified:** The separate `plotly_config` streaming type is removed. All charts now stream as the **`image`** response type.
-        
-    -   **`getPlotly` Metadata Added:** Streaming and database responses now include a **`getPlotly` metadata block** containing the API URL and the S3 key needed to fetch the underlying Plotly JSON.
-        
-    -   **Database Storage Standardized:** Database records now use the **`IMAGES`** type and include the `getPlotly` metadata.
-        
-    -   **New Fetch API:** A dedicated endpoint, `/ai/api/v2/python-agent/get-plotly`, is available to retrieve the full Plotly JSON config using the provided S3 key.
-
--   **Python agent: User review before code execution**
-
-    Added a **mandatory user feedback step** before the Python Agent executes any code. The agent will now display the generated **plan (pseudo-code) and the resulting code** for user review. Execution only proceeds after the user confirms or provides corrections. This ensures **higher code accuracy** and better alignment with user intent, preventing the execution of unnecessary or incorrect logic.
 
 ### Email campaign
 
 **Automatic save and reuse for email campaigns**
 
-Introduced automatic save and reuse for previously configured email campaign settings (subject, body, recipients, data mapping, etc.)., thus reducing manual effort on recurring actions.
+Introduced automatic save and reuse for previously configured email campaign settings (subject, body, recipients, data mapping, etc.), thus reducing manual effort on recurring actions.
 
-## Workbooks
+### Workbooks
 
 **New UI for managing web service / API actions**
 
@@ -46,7 +33,7 @@ Introduced a dedicated UI within Workbooks to simplify the creation and manageme
 
 <ImagePopup src="/img/actions-library-create-new-action.png" alt="*actions library" caption="*actions library" />
 
-** ⚠️ Known limitations**
+:::tip [Known limitations]
 
 The following limitations have been identified during initial testing and are targeted for resolution in the next release:
 
@@ -55,8 +42,9 @@ The following limitations have been identified during initial testing and are ta
 -   **Missing test API:** A dedicated test API endpoint to validate the connection between DataGOL and the connector is currently unavailable. This will be added soon.
     
 -   **Path parameters unsupported:** The current API implementation does not include support for path parameters.
+:::
 
-## Lakehouse
+### Lakehouse
 
 **New connector: Asana REST connector**
 
