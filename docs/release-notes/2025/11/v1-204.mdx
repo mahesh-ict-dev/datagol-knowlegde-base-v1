@@ -20,11 +20,5 @@ To provide faster access to source material, the Custom Agent now renders websit
 
 **PDF Parsing Improvement: Simplified Auto-Extraction**
 
-Streamlined the PDF parsing workflow in the **Unstructured Pipeline** by standardizing the function call for auto-extraction.
-
--   **What's New:** You can now use the general-purpose **`partition`** function directly in place of the previously recommended **`partition_pdf`** for performing auto-extraction on PDF documents.
-    
--   **Benefit:** This change improves **consistency** and **simplicity** across the library. Users no longer need to import or use a specific PDF function, as the core **`partition`** function will automatically handle PDF processing and element extraction when a PDF file is passed to it.
-
-
+Replaced the fixed `partition_pdf` approach with the `partition` function to enable automatic detection of PDF encodings, formats, and document characteristics. The `partition` function will intelligently route each PDF to the optimal processing strategy, automatically selecting the appropriate encoder-decoder pair based on the document's properties rather than using a one-size-fits-all approach.
 
