@@ -1,0 +1,30 @@
+---
+title: v1.0.204
+description: v1.0.204 Release notes November 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: November 20, 2025**
+
+## New features and enhancements 
+
+### AI Agents
+
+**Custom agent citations** 
+
+To provide faster access to source material, the Custom Agent now renders website citations as hyperlinked markdown text. This makes it easier to verify information by clicking directly on the citation link. 
+
+### Pipelines
+
+**PDF Parsing Improvement: Simplified Auto-Extraction**
+
+Streamlined the PDF parsing workflow in the **Unstructured Pipeline** by standardizing the function call for auto-extraction.
+
+-   **What's New:** You can now use the general-purpose **`partition`** function directly in place of the previously recommended **`partition_pdf`** for performing auto-extraction on PDF documents.
+    
+-   **Benefit:** This change improves **consistency** and **simplicity** across the library. Users no longer need to import or use a specific PDF function, as the core **`partition`** function will automatically handle PDF processing and element extraction when a PDF file is passed to it.
+
+
+
