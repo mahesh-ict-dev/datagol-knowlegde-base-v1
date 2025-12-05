@@ -1,0 +1,24 @@
+---
+title: v1.0.204
+description: v1.0.204 Release notes November 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: November 20, 2025**
+
+## New features and enhancements 
+
+### AI Agents
+
+**Custom agent citations** 
+
+To provide faster access to source material, the Custom Agent now renders website citations as hyperlinked markdown text. This makes it easier to verify information by clicking directly on the citation link. 
+
+### Pipelines
+
+**PDF Parsing Improvement: Simplified Auto-Extraction**
+
+Replaced the fixed `partition_pdf` approach with the `partition` function to enable automatic detection of PDF encodings, formats, and document characteristics. The `partition` function will intelligently route each PDF to the optimal processing strategy, automatically selecting the appropriate encoder-decoder pair based on the document's properties rather than using a one-size-fits-all approach.
+

@@ -1,0 +1,63 @@
+---
+title: v1.0.205
+description: v1.0.205 Release notes November 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 01, 2025**
+
+## New features and enhancements 
+
+### AI Agents 
+
+**Python agent: User review before code execution**
+    
+Added a  **mandatory user feedback step** before the Python Agent executes any code. The agent will now display the generated  **plan (pseudo-code) and the resulting code**  for user review. Execution only proceeds after the user confirms or provides corrections. This ensures  **higher code accuracy**  and better alignment with user intent, preventing the execution of unnecessary or incorrect logic.
+
+
+### Email campaign
+
+**Automatic save and reuse for email campaigns**
+
+Introduced automatic save and reuse for previously configured email campaign settings (subject, body, recipients, data mapping, etc.), thus reducing manual effort on recurring actions.
+
+### Workbooks
+
+**New UI for managing web service / API actions**
+
+Introduced a dedicated UI within Workbooks to simplify the creation and management of Web Service / API Actions (Reverse ETL). This enhancement allows users to define, modify, and delete custom API actions directly within the Workbook settings.
+
+<ImagePopup src="/img/actions-library.png" alt="*actions library" caption="*actions library" />  
+
+<ImagePopup src="/img/actions-library-create-new-action.png" alt="*actions library" caption="*actions library" />
+
+:::tip [Known limitations]
+
+The following limitations have been identified during initial testing and are targeted for resolution in the next release:
+
+-   **Connector access on sharing:** When sharing a workspace, members (internal or external) who lack access to the configured connector may be unable to successfully run the custom API actions.
+    
+-   **Missing test API:** A dedicated test API endpoint to validate the connection between DataGOL and the connector is currently unavailable. This will be added soon.
+    
+-   **Path parameters unsupported:** The current API implementation does not include support for path parameters.
+:::
+
+### Lakehouse
+
+**New connector: Asana REST connector**
+
+Added **Asana REST Connector** to DataGOL, significantly expanding our data integration ecosystem. This new connector enables users to seamlessly interact with the Asana platform, facilitating reliable data synchronization for project management, task tracking, and workflow analysis.
+
+
+
+
+
+
+
+
+
+
+
+
