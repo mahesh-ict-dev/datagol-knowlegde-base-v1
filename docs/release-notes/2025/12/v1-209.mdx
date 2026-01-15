@@ -1,0 +1,35 @@
+---
+title: v1.0.209
+description: v1.0.209 Release notes December 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 10, 2025**
+
+## New features and enhancements 
+
+### AI Agent
+
+#### Ambiguous date filtering for "Last Week" vs. "Last 7 Days"**
+
+In the DC Agent, the date filtering logic has been updated to distinguish between calendar periods and rolling windows. Previously, terms like "last week" or "last year" defaulted to a rolling window (e.g., the last 7 or 365 days). Now, the system recognizes "last week" as the specific Monday to Sunday calendar week and "last year" as January 1st to December 31st. Rolling windows are now only triggered when the user explicitly specifies a number of days (e.g., "last 7 days").
+
+For example,  a request for "**last week**" should return data from the most recent completed Monday–Sunday cycle. Instead, if asked on a Wednesday, the system would return data from the previous Wednesday to the current Tuesday.
+    Similarly, a request for "**last year**" was being treated as "**past 365 days**" rather than the specific calendar period of January 1st to December 31st of the previous year.
+  
+
+This has been corrected to distinguish between Calendar Periods (e.g., "last week" now fetches Monday to Sunday) and Rolling Windows (e.g., "last 7 days" fetches the previous 168 hours). Similarly, "last year" now correctly maps to the previous calendar year rather than a rolling 365-day count.
+
+-	**Calendar Periods ("Last Week", "Last Year"):**
+    
+    -   **Last Week:** Now strictly filters from **Monday to Sunday** of the previous week.
+        
+    -   **Last Year:** Now strictly filters from **January 1st to December 31st** of the previous year.
+        
+-	**Rolling Windows ("Last 7 Days", "Last 365 Days"):**
+    
+    -   The system will only use a rolling window from the current timestamp if the user explicitly specifies the **number of days** (e.g., "last 7 days" or "last 365 days").
+       
+ 
