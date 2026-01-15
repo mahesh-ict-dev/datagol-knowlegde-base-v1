@@ -29,9 +29,3 @@ import ImagePopup from '@site/src/components/ImagePopup';
         
     -   **New API for JSON Retrieval:** Responses now include a **`getPlotly` metadata block** with a key and a new dedicated API endpoint (`/ai/api/v2/python-agent/get-plotly`) to fetch the original, full Plotly JSON configuration on demand.
 
-## Bug Fixes
-
-### AI agents 
-
--  Resolved an `OverflowError: date value out of range` error in the Python agent when using pandas. This fix ensures robust handling and processing of date values that may exceed standard limits, preventing crashes and ensuring correct data operations.
-
