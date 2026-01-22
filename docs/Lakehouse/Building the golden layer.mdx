@@ -1,0 +1,74 @@
+---
+sidebar_position: 1
+tags: [Lakehouse, Data sources]
+Slug: building-golden-layer
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+In the DataGOL ecosystem, the Golden Layer represents the pinnacle of data maturity. It is the transition from raw, noisy information into a polished, high-performance asset. Creating this layer is a journey that begins in the Lakehouse, matures in the Playground, and culminates in the Workbook.
+
+This guide explores the end-to-end process of architecting a reliable source of truth.
+
+
+## 1. The foundation: Lakehouse and data ingestion
+
+The journey to the Golden Layer begins in the Lakehouse, a hybrid architecture that combines the flexibility of a data lake with the management of a data warehouse. This is where diverse data—structured, semi-structured, and unstructured—is first unified.
+
+-   **Simplified ingestion**: Move data seamlessly from APIs, databases, and files.
+    
+-   **Pipeline orchestration**: Use the drag-and-drop interface to build complex pipelines. You can manage how data is handled—whether you need to overwrite, append (full or incremental), or deduplicate records for optimal control.
+    
+-   **Governance and tracking**: The Lakehouse provides schema change detection to proactively track alterations in source structures and data lineage to visualize the origin and movement of every data point.
+    
+-   **Automated insights**: The system automatically infers relationships to generate ER diagrams, providing an immediate visual map of your data landscape.
+
+## 2. The refinement: Precision cleaning in the playground
+
+Before data can be considered "Golden," it must be vetted. The Playground serves as your interactive laboratory. Rather than pulling massive, inefficient datasets, the Playground allows you to selectively retrieve and analyze subsets of data.
+
+#### The Mandatory Cleanup
+
+To maintain a clean data model, you must address inconsistencies directly in the Playground using SQL queries. If you find mismatched table column names or incorrect data types, you are required to resolve them here.
+
+-   **SQL Co-pilot**: If you are unsure of the syntax, the AI-powered SQL co-pilot assists in generating queries to transform your data.
+    
+-   **Materialized views**: For complex logic, use materialized views to accelerate query performance.
+    
+-   **Validation**: Use the **Playground** to ensure your logic is sound before "publishing" your results to the final layer.
+
+## 3. The destination: The workbook as the key
+
+The **Workbook** is the final stage of the Golden Layer. It provides the framework for organizing, analyzing, and visualizing the refined data. In DataGOL, your workspace acts as the central hub for these assets.
+
+### Types of workbooks
+
+DataGOL categorizes workbooks into two distinct types to balance stability with flexibility:
+Workbook type | Nature | Technical Engine | Best Use Case | 
+|-------|----------|------------|--------| 
+| **Static (Locked)** | Non-editable; updates automatically from the source. | **Spark functions** | High-performance, "Always-on" reporting. | 
+| **Dynamic (Editable)** | Fully customizable; manually created or uploaded. | **JDBC functions** | Ad-hoc analysis and manual data entry. |
+
+### Key workbook capabilities
+
+-   **Publish from playground**: The most common path for the Golden Layer is publishing a refined query from the Playground directly into a Workbook.
+    
+-   **Advanced formulas**: Workbooks allow you to create custom formulas and generate distinct subviews tailored for specific BI visualizations.
+    
+-   **Granular access control**: Ensure that only authorized users can view or edit the Golden Layer, maintaining the integrity of your "source of truth."
+
+
+### Summary of the golden workflow
+
+1.  **Ingest via Lakehouse pipelines**, ensuring schema detection and lineage are active.
+    
+2.  **Transform in the Playground**, using SQL or AI assistance to fix naming conventions and data types.
+    
+3.  **Publish to a Static Workbook** to lock in the "Golden" logic.
+    
+4.  **Visualize in BI tools**, confident that the data model is clean, typed, and consistent.
+    
+:::tip [Note]
+Note: By resolving all inconsistencies in the Playground before they reach the Workbook, you eliminate "data debt" and ensure a seamless integration with your downstream BI tools.
+:::

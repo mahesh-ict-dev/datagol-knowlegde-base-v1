@@ -1,10 +1,95 @@
 ---
 sidebar_position : 3
-tags : [AI, AI Agents,]
+tags : [AI, AI Agents, BI agents]
 slug : business-intelligence-BI-agent-Chart-agent
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
+
+# Interacting with the Chart agent
+Interacting with the Chart agent in DataGOL is a streamlined process designed to move you from raw data to visual insights quickly. Based on the platform walkthrough, here are the step-by-step instructions:
+
+## 1. Prerequisite: Prepare your data (The golden layer)
+Before starting, ensure your data is ready for the Chart agent to analyze. The foundation of a successful Chart agent use case is a well-defined [golden layer](https://docs.google.com/document/u/0/d/1GkQOsguU2j4vlINm1enD9w4hip2XPd4VZlAFkZK-uEI/edit), which is the final, most refined stage of a data pipeline. To create a golden layer:
+
+-    **Define the workbook: ** Select or upload your dataset (e.g., e-commerce or sales data) into a DataGOL workbook. 
+    
+-   **Establish the golden layer:** Ensure your columns (like date, revenue, and categories) are clearly labeled.
+    
+-    **Add custom formulas: ** For critical business metrics, always create formula columns (e.g., Total Revenue = Profit + Sales) directly within your Workbook. This practice ensures high data accuracy and allows the DataGOL Chart Agent to automatically recognize the column's significance, enabling it to instantly generate relevant widgets and visualizations for your dashboards.
+    
+
+## 2. Launch the Chart agent
+
+Based on your workflow, the agent could be accessed from two primary locations:
+
+-	**Workspace level: ** Click the AI icon located directly on the workbook page. This is best if you are already looking at your data.
+-	**Agents page:** Navigate to the ** Agents**  tab on the homepage and select ** Chart Agent** . You will then be prompted to choose which workbook you want to query.**
+ 
+ :::note [TIP]
+Threads are synced across both locations to ensure a seamless workflow.
+ :::
+## 3. Query the Chart agent using natural language
+
+Type your question into the chat thread just like you are talking to a person. The Chart agent is conversational, so you can adjust your results without starting over.
+
+-   **Basic queries:** "Show me total sales by region for the last year."
+    
+-   **Specific visualizations:** "Show me top 10 products as a tree map" or "Create a KPI for total shipping costs."
+    
+-   **Comparative analysis:** "Compare budget vs. actuals by month."
+    
+The agent automatically selects the best chart type based on the query, or follows specific user instructions:
+
+-   **Auto-selection**: If a user asks for **sales over the last 5 years**, the agent defaults to a line chart (best for time series).  
+    Video
+    https://drive.google.com/file/d/1uAj-gBVMYLvQ18DXkp7RrNw6gRPUMebk/view?usp=sharing  
+      
+https://drive.google.com/file/d/1uAj-gBVMYLvQ18DXkp7RrNw6gRPUMebk/view?usp=sharing
+    
+-   **Explicit requests**: Users can specify types like KPI, bar, area, scatter, donut, tree map, pivot tables, or tables.
+- **Top/bottom analysis**: Users can request **top 5 cities based on sales**, and the agent will generate a descending bar chart.  
+
+### Advanced charting and manipulation
+
+-	**Combination charts**: Visualizing two metrics at once (e.g., shipping costs on a bar chart and sales on a line chart with dual axes).
+-	**Stacking vs. unstacking**: Users can toggle how data is layered. For example, viewing revenue by "category" stacked on top of each other, or "unstacked" to see them side-by-side.  
+-	**Dynamic filtering**: Users can apply filters through chat (e.g., "show only furniture category" or "filter for the last 3 quarters").  
+-	**Adjust granularity**: Change the time view from daily to monthly.
+
+## 4. Use the Explore mode
+
+The generated charts can be opened in explore mode. You can apply the filters there and operate the chart in a regular mode. However,  the settings you make in an explore mode are temporary.  
+Video  
+https://drive.google.com/file/d/1ClbBxkhzHSXPD_vbOVKRjAqtY-cys2QK/view?usp=sharing
+https://drive.google.com/file/d/1ClbBxkhzHSXPD_vbOVKRjAqtY-cys2QK/view?usp=sharing
+
+## 5. Collaborate and share
+
+Once you have the insights, you can pin a chart to the dashboard. An AI-generated chart can be immediately pinned to a dashboard for future reference. Click Pin to Dashboard.  
+https://docs.datagol.ai/docs/BI%20Analytics/Visualizer/Save%20widget/pin-widget-to-dashboard
+
+Share the thread: Use the share button to send the entire conversation to team members. [Refer to Sharing section](https://docs.datagol.ai/docs/AI%20Agents/about-ai-agent#sharing-ai-agent-threads)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+___________________
 
 BI or Chart agent allows you to visualize data from structured datasets using various chart types and provides insights through graphical representations of data.
 
