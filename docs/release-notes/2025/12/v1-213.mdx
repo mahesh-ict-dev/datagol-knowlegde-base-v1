@@ -1,0 +1,49 @@
+---
+title: v1.0.213
+description: v1.0.213 Release notes December 2025
+sidebar_position: 2
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 20, 2025**
+
+## New features and enhancements 
+
+## AI agents
+
+### Governance, Risk, and Compliance (GRC) agent 
+
+Introduced the GRC (Governance, Risk, and Compliance) Agent, a powerful AI collaborator designed to automate and simplify the auditing process. The GRC Agent enables organizations to evaluate their internal policies or third-party vendor documents against established industry standards and regulatory frameworks. By automatically identifying compliance gaps and providing a scored risk report, the agent reduces the manual effort required for complex security and governance assessments.
+
+#### GRC use cases
+
+The following are some use cases of the GRC agent:
+
+-   **Access control audits:** Verifying if a company follows the "Principle of Least Privilege" or if Multi-Factor Authentication (MFA) is strictly enforced.
+    
+-   **Password policy evaluation:** Checking if a company's password requirements (length, complexity, rotation) match the master standard.
+    
+-   **Vendor risk management:** A governing body or large corporation can use the agent to evaluate the security policies of third-party vendors before onboarding them.
+    
+-   **Internal compliance health checks:** Companies can run their own policies against updated international standards to find and fix "gaps" before a formal audit.
+
+  #### Key features
+
+-   **Automated rule extraction:** Upload a control file (a list of requirements), and the agent will automatically parse and extract individual compliance rules to be tested.
+    
+-   **Dual-source comparison:** The agent performs a side-by-side analysis between your **Standards** (the source of truth) and your **Target Documents** (the policies being audited).
+    
+-   **AI-generated gap analysis:** For every non-compliant or partially compliant rule, the agent provides a detailed description of the gap explaining exactly what is missing or insufficient in the target document.
+    
+-   **Evidence-based reporting:** Every result includes **Key Evidences**, providing direct references and excerpts from the analyzed documents to support audit findings.
+    
+-   **Risk scoring dashboard:** Get an immediate high-level view of your compliance health with an overall percentage score and a breakdown of Critical, High, and Low-priority risks.
+
+## Bug Fixes
+
+### Workbooks
+
+#### Link lookup filter options
+
+Fixed an issue where the filter dropdown failed to display options for single-select columns created via link lookups.

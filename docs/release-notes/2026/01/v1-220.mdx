@@ -1,0 +1,71 @@
+---
+title: v1.0.220
+description: v1.0.220 Release notes January 2026
+sidebar_position: 2
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: January 17, 2026**
+
+## New features and enhancements 
+
+### AI agents 
+
+#### DCA agent 
+
+Expanded the DCA agent's compatibility to include support for additional database dialects based on your workbook configuration. This ensures that the agent can accurately generate and execute queries across a wider variety of data sources.
+
+### AI 
+
+#### AI autofill for all column types
+
+The AI Generate feature has been transformed from a single-column type into a powerful capability available across almost all data formats. You can now use AI to automatically populate structured data, ensuring that generated values match the specific requirements of your workflow.
+
+-   **Universal AI integration:** AI generation is no longer restricted to text. You can now enable AI autofill on diverse column types, including numbers, currency, percentages, select lists, dates, and more.
+    
+-   **Structured data output:** The AI now intelligently conforms its responses to your chosen column format. For example, it can select specific options from a dropdown menu or provide purely numeric values for financial columns.
+    
+-   **Flexible configuration:** Each column can be individually configured with custom prompts, model selection, and internet access, allowing for highly specialized data generation tailored to that column's purpose.
+    
+-   **Seamless migration:** All existing "AI Generate" columns have been automatically converted to text columns with AI autofill enabled, ensuring your current workflows continue to run without interruption.
+
+### Backend
+
+#### System resiliency and stability improvements
+
+Updated the application's core infrastructure to ensure that essential services, such as login and data retrieval, remain fully operational even during internal cache interruptions. This enhancement prioritizes system uptime and a seamless user experience.
+
+Key updates:
+
+-   **Graceful fallback mechanism: The system now automatically bypasses the internal cache if it becomes unavailable, directing requests to primary services to prevent service disruptions.
+
+-   Uninterrupted core functionality: Critical workflows, including user login and API access, are now shielded from backend connection timeouts, ensuring you can continue working without seeing technical error messages.
+
+-   Enhanced background monitoring: While these fail-safes keep the application running smoothly for users, the system still generates internal alerts.
+
+#### Athena support for materialized view pipelines
+
+Expanded pipeline flexibility by adding Amazon Athena as a supported query engine for materialized views. When publishing to a workspace, you can now select Athena as your query engine alongside Spark and JDBC. 
+The system now supports direct data retrieval through Athena, allowing you to query your source data in real time without the need for intermediate data copies.
+
+### Documents
+
+#### Advanced RAG extraction and scheduling support
+
+Introduced an advanced RAG (Retrieval-Augmented Generation) extraction mode to provide more sophisticated data processing alongside the standard flow. This update allows for highly structured data extraction using custom schemas to meet complex information needs.
+
+-   **Standard and advanced RAG modes:** You can now choose between two extraction levels. The new advanced mode allows the system to follow specific JSON schemas, enabling the capture of nested data, arrays, and complex field definitions.
+    
+-   **Intelligent schema application:** When using advanced mode, the system utilizes a dedicated AI service to ensure extracted information conforms precisely to your predefined structure and data types.
+    
+-   **Scheduled extraction and status tracking:** Enhanced the background processing logic to support the scheduling of these extractions. You can now monitor the real-time status of RAG workflows to ensure your data is consistently up to date.
+    
+-   **Seamless backward compatibility:** Existing configurations default to the standard mode, ensuring your current RAG workflows continue to operate without requiring any manual adjustments.
+
+## Bug Fixes 
+
+### AI agent
+
+Fixed a SQL compilation error where the DCA agent failed to recognize or access snowflake tables (e.g., table_0f1834b6), resulting in "object does not exist or not authorized" messages.
+
