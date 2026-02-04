@@ -1,0 +1,34 @@
+---
+title: v1.0.221
+description: v1.0.221 Release notes January 2026
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: January 22, 2026**
+
+## New features and enhancements 
+
+## AI
+
+-   Optimized the agent's page responsiveness specifically for LHC data environments.
+
+## Connectors
+
+
+- **Authentication support for generic HTTP connector:** Added a dedicated interface for configuring authentication credentials within the **generic HTTP connector**. This update allows you to securely connect to external APIs using industry-standard authentication methods, ensuring your data transfers are both authorized and encrypted.
+
+### Workbooks
+
+#### Reverse ETL via generic HTTP connector
+
+Launched **Reverse ETL** capabilities, which allows you to push workbook data directly back into your external systems. Using our new **generic HTTP connector**, you can automate downstream updates and keep your entire tech stack in sync with your latest analysis.
+
+-   **Universal integration:** Connect to almost any external API without needing specialized plugins.
+    
+-   **Smart record updates:** Our logic identifies and modifies only changed data points, ensuring faster, more reliable synchronization than full-record overrides.
+    
+-   **Dynamic endpoint resolution:** The connector automatically injects record IDs from your workbook into destination URLs for precise, individualized updates.
+    
+-   **Seamless automation:** Trigger data pushes directly from your workbook to keep external tools and databases updated in real-time.
