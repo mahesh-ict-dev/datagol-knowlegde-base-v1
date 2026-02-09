@@ -31,43 +31,42 @@ The process of configuring a Custom agent involves both creation and detailed se
 
     <ImagePopup src="/img/agents/custom-agent-explore-create.png" alt="custom agent create" caption="custom agent create"/>
 
-2. In the Explore page, click **Create agent**.
+2. In the **Explore** page, click **Create agent**. The **Create Agent** page is displayed.
 
-3.  Provide the following details:
+4. Enter the following details:
+    
+    -	**Basic Info:**
 
-    <ImagePopup src="/img/agents/custom-agent-new.png" alt="custom agent new" caption="custom agent new"/>
+		<ImagePopup src="/img/agents/custom-agent/custom-agent-basic-info.png" alt="custom agent new" caption="custom agent new"/>
+    
+	    -   **Name and Description:** Give your agent a clear identity with a unique name and description. 
+        
+	    -   **Upload Logo:** Upload your company logo. This unlocks additional customizability, allowing you to set specific **background and text colors** so the interface feels like an extension of your brand.
 
-    
-    -   **Name**: Give your agent a unique name.
+	-	**Deep Research:** Toggle the **Deep Research** option if your agent needs to perform complex, multi-step analysis or browse the web for real-time information.
         
-    -   **Description**: Provide a brief description of what your agent does.
-        
-    -   **Logo**: Upload a logo to personalize your agent's appearance.
-   
-4.	 In the **Best for** section, click **Add item** and specify the  tasks or scenarios the agent is best suited for.
-        
-4.  In the **Conversation starters**, you can add suggested questions or topics that users can click to start a conversation.
-    
-5.  In the **System prompt ** section, set the following:
-    
-    -   **Prompt**: Specify the system prompt.  This defines the agent's core behavior (e.g., "Answer as per the documents and only answer questions related to [Your Product/Topic]").
-        
-    -   **Instructions**: Specify how the agent should structure its responses (e.g., "Response in nicely formatted bullet points whenever needed.").
+	-	**Advance Settings:**  Configure the following:
 
-	-	**Examples**: Add example outputs that can guide the agent responses. 
-        
-6.  In the **Sources** section, you can add data sources for your agent to perform tasks and integrations. Click **+ New Source** and select any of the following: 
-    
-    -   **Workspaces**: Select one or more existing workspaces that contain documents relevant to your agent's purpose.
-        
-    -   **Websites**: Add URLs of websites that the agent should refer to for information.
-        
-7.  **Save or publish** the agent. 
-    
-    -   **Save as draft**: If you are still working on the agent, saving it as a draft will make it visible only in the **Explore** page within the platform.
-        
-    -   **Publish**: Publishing the agent allows you to integrate it onto an external website. Once published, you can access integration scripts to embed the agent on your site.
-        
+		<ImagePopup src="/img/agents/custom-agent/custom-agent-deep-search-advanced-settings.png" alt="custom agent new" caption="custom agent new"/>
+	
+			-	Enable and configure which LLM models users can select for this agent.
+		    -	Enable voice features like **Speech-to-Text** or **Text-to-Speech** if you want to allow your agent to process speech input and generate speech output.
+			-	Provide the place holder text to be shown in the chat input box. 
+ 
+	-	**System Prompting:** Define the agent’s personality. This is where you instruct it on how to speak and how to handle specific client inquiries.
+
+		<ImagePopup src="/img/agents/custom-agent/custom-agent-system-prompt.png" alt="custom agent new" caption="custom agent new"/>
+
+	- 	**Tools & Capabilities:** Configure MCP servers and other tools for your agent. 
+
+		<ImagePopup src="/img/agents/custom-agent/custom-agent-tool-capabilities.png" alt="custom agent new" caption="custom agent new"/>
+
+
+			-	To make your agent useful, you must give it a source of truth. Scroll to the **Workspaces** section. Select the workspace containing your documents. The agent will now be able to search these documents and provide **citations** (links to the exact source) in its responses.
+			- 	Select the required Connectors. You can also click the **New Connector** button and create new credentials for the reviewed and recommended tools.
+			-	Add Model Context Protocol (MCP)servers that provide additional capabilities to your agent.
+			- 	Turn on the **Web Search** button to enable web search and browser capabilities for your agent to access live internet information.
+
 
 ### **Using the Custom agent**
 
