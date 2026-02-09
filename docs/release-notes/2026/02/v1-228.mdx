@@ -1,0 +1,44 @@
+---
+title: v1.0.228
+description: v1.0.228 Release notes February 2026
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 06, 2026**
+
+## New features and enhancements 
+
+### Orchestrations
+
+#### **Graph and visualization enhancements**
+
+-   **Resolved initial zoom issues:** Fixed an intermittent bug where the graph failed to zoom in correctly upon loading.
+    
+-   **Stable connection zoom:** The graph will no longer automatically zoom out when a user connects an edge between nodes.
+    
+-   **Fixed "ghost edges":** Resolved a rendering bug where edge artifacts remained in place while dragging and moving nodes.
+    
+-   **New default view:** The default run view has been updated to **tabular** instead of graph for better data clarity.
+    
+-   **Renamed "overview":** The "Overview" tab has been renamed to **"Full orchestration"** to better reflect its scope.
+    
+
+#### **Orchestration and data management**
+
+-   **Orchestration editing:** Fixed an issue where the edit button was hidden while an orchestration was running, allowing for mid-run adjustments.
+    
+-   **Enhanced data source panel:** Added visibility for column types (e.g., `int`, `bigint`, `varchar`) directly within the data source panel.
+    
+-   **Filtered MV data sources:** Views in materialized view (MV) data sources are now filtered based on the specific requirements of the current orchestration.
+    
+-   **Logic correction:** Fixed the **"Sort by execution order"** logic to ensure nodes are sequenced correctly.
+    
+
+#### **UI and performance improvements**
+
+-   **Navigation tooltips:** Chrome tooltips in the left navigation menu now display the **pipeline ID**.
+    
+-   **Improved search performance:** Increased the debounce rate for the pipeline search API to reduce unnecessary server load and improve responsiveness.
+
