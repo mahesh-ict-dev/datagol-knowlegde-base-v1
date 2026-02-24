@@ -1,0 +1,43 @@
+---
+title: v1.0.212
+description: v1.0.212 Release notes December 2025
+sidebar_position: 3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 19, 2025**
+
+## New features and enhancements 
+
+### AI agents
+
+#### Data Science agent context memory
+
+Enhanced the Data Science agent's reasoning capabilities by introducing structured context memory. This update allows the agent to maintain continuity during multi-turn conversations, resulting in more accurate and relevant responses to follow-up questions.
+
+-   **Enhanced conversation history:** The Data Science agent now processes the immediate history of your interaction, including previous questions and the specific logic used to solve them. This prevents the agent from losing track of the conversation flow.
+    
+-   **Integrated execution memory:** By remembering previous code outputs and technical steps, the agent can now build upon prior results rather than starting from scratch for every query.
+    
+-   **Intelligent interaction summaries:** A consolidated summary of the entire conversation is now factored into the Data Science agent's decision-making process. This helps the agent better understand your intent and provide consistent, non-contradictory answers.
+    
+-   **Improved planning and accuracy:** With a better grasp of the broader context, the agent generates more precise plans and code, specifically tailored to the evolving requirements of your session.
+
+
+## Bug Fixes 
+
+### AI agents 
+
+#### Agent execution on clarification
+
+-   **Issue:** Brief or ambiguous feedback caused the agent to crash with a `NoneType is not subscriptable` error.
+    
+-   **Fix:** Implemented a retry mechanism and safety checks to re-prompt for clarity or fail gracefully instead of stopping. The agent now maintains conversation flow and stability regardless of input quality.
+
+### Workbooks
+
+Fixed a database error that occurred when duplicating rows in workbooks containing link lookup columns.
+
+
+  

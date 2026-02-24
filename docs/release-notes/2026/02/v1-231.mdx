@@ -1,0 +1,84 @@
+---
+title: v1.0.231
+description: v1.0.231 Release notes February 2026
+sidebar_position: 4
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 14, 2026**
+
+
+## New features and enhancements 
+
+### AI
+
+#### GTM agent 
+
+Introduced the **GTM Research Agent**, a powerful new tool designed to automate deep-dive company research directly from your browser. The GTM Agent works in real-time, accessing the live web to give you the most current insights available. Following are the core features:
+
+-   **Live browser integration:** Utilizing a dedicated Chrome extension, the agent operates within the user's active browser session. This enables the secure retrieval of data from premium, authenticated platforms such as **linkedin, crunchbase, and g2**—sources typically inaccessible to standard automated scrapers.
+    
+-   **Autonomous lead enrichment:** The agent can process high-volume lead lists sequentially. It autonomously navigates relevant web entities to extract executive profiles, firmographic data, and market sentiment, populating internal workbooks in real-time.
+    
+-   **Strategic workflow orchestration:** The GTM agent is designed for "human-in-the-loop" functionality. Users may configure the system to identify ideal customer profile (icp) alignment and pause for manual verification before proceeding with downstream actions, such as personalized outreach generation.
+    
+-   **Operational connectivity:** Research outputs are fully compatible with enterprise crm systems, including **salesforce and hubspot**. This ensures that enriched intelligence is immediately available to sales representatives for informed prospecting.
+    
+To get started with the GTM agent, do the following:
+
+1.  **Install the extension:** Download and install the new Chrome extension.
+    
+2.  **Select your leads:** Open a workbook and highlight the companies you want to research.
+    
+3.  **Run the GTM agent:** Watch as it autonomously gathers intelligence and populates your workspace in real-time.
+    
+
+#### Added newer Claude and GPT model support
+
+This update introduces support for **Claude Opus 4.6**, which features a 1M-token context window and industry-leading performance for agentic workflows. Also added support for the **GPT-5.2** series, providing enhanced logical reasoning for complex development tasks.#### Upgrade HubSpot Agent to official HubSpot MCP server
+
+### HubSpot agent upgrade
+
+The HubSpot agent is migrated to the **Official HubSpot Model Context Protocol (MCP) Server**, ensuring parity with the Atlassian MCP standards utilized by the JIRA agent.  This transition ensures a robust, standardized interface for all HubSpot operations, including:
+
+-   **Core objects:** Optimized handling of Contacts, Companies, Deals, and Tickets.
+    
+-   **Extended functionality:** Enhanced support for Engagements and Custom objects.
+    
+-   **Protocol compliance:** All interactions now execute via MCP-compliant tool calls, increasing reliability and data integrity.
+
+-	**Advanced reasoning and operational transparency:** The agent now employs an enhanced cognitive framework to manage intricate CRM workflows.
+
+-   **Deterministic planning:** The HubSpot agent generates a comprehensive execution plan now before performing any actions.
+    
+-   **Process visibility:** Users can now monitor the HubSpot agent's thinking steps and the specific MCP tool calls initiated, providing a clear audit trail of the logic used to address complex queries such as funnel analyses or time-based trends.
+
+- **Computational analysis via Python and Bash:** To facilitate high-level reporting, the HubSpot agent now utilizes a **Bash tool** for the dynamic generation of **Python scripts**. This enables:
+
+	-   **Complex data transformation:** Programmatic calculation of deal stage metrics and owner performance.
+	    
+	-   **Custom analytics:** Execution of sophisticated CRM logic to prepare datasets for advanced reporting.
+
+- **Data visualization and portability:** To improve the interpretability of CRM data, this version introduces native support for **Chart Generation** and **Data Downloads**:
+
+	-   **Visual analytics:** Automatic generation of Bar, Line, and Pie charts to illustrate revenue trends, deal distributions, and ticket categories.
+	    
+	-   **Export capabilities:** All processed or raw datasets can be exported directly as **CSV** files, ensuring seamless integration with external business intelligence tools.
+    
+## Bug Fixes 
+
+### Backend
+
+#### Redshift LISTAGG character limit resolution
+
+**Issue:** The system previously utilized the `LISTAGG` function to retrieve distinct values for single-select UI filters. However, Amazon Redshift imposes a **65,535-character limit** on `LISTAGG` outputs. Queries exceeding this threshold failed, preventing filter values from loading in the interface.
+
+**Resolution:** The data retrieval logic has been refactored to bypass database-level string aggregation:
+
+-   **Query Update:** Replaced `LISTAGG` with a standard `SELECT DISTINCT` query.
+    
+-   **Backend Processing:** The concatenation and `::` separation are now handled within the application backend.
+    
+
+**Impact:** This change eliminates query failures for high-cardinality columns, ensuring stable and scalable filter loading regardless of the volume of distinct values.

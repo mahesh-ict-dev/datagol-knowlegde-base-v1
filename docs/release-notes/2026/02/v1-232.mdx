@@ -1,0 +1,22 @@
+---
+title: v1.0.232
+description: v1.0.231 Release notes February 2026
+sidebar_position: 3
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 18, 2026**
+
+## Bug Fixes
+
+### Backend 
+
+#### Security update: Apache Parquet Java vulnerability fix
+
+**Issue:** A critical security vulnerability was identified in the `parquet-avro` module. The flaw allowed for **arbitrary code execution** when reading Avro schemas from Parquet file metadata. 
+
+**Resolution:**
+ Updated `parquet-avro` and core `parquet` dependencies to the patched versions and verified that the updated library properly sanitizes and validates Avro schemas embedded in metadata to prevent malicious injection.
+   
+**Impact:** Mitigates the risk of Remote Code Execution (RCE) and ensures the integrity of the data processing pipeline when handling Parquet files from external or untrusted sources.

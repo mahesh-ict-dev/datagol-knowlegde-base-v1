@@ -1,0 +1,29 @@
+---
+title: v1.0.226
+description: v1.0.226 Release notes February 2026
+sidebar_position: 9
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 04, 2026**
+
+## New features and enhancements 
+
+### Admin 
+
+Introduced a new configuration setting in the platform-configs admin page that allows administrators to enable or disable specific data providers, such as Spark, JDBC, and Athena. This provides centralized control over feature rollouts and allows you to streamline the user interface by hiding unsupported or unnecessary services.
+
+## Bug Fixes 
+
+### AI
+
+-   **Issue:** The execution panel failed to reflect new details or reopen automatically after the first message in a conversation. Subsequent questions would process without updating the panel's content.
+    
+-   **Fix:** Updated the execution panel logic to ensure it triggers and displays fresh execution details for every message sent within a chat thread.
+
+### pipelines
+
+-   **Issue:** Columns in the pipelines table were constrained by fixed width limits, causing data like names and tags to remain truncated even after attempting to resize.
+    
+-   **Fix:** Removed max-width constraints and updated column configurations to allow free resizing for both headers and row cells, ensuring full content visibility.

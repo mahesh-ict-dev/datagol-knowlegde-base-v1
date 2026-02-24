@@ -1,0 +1,25 @@
+---
+title: v1.0.210
+description: v1.0.210 Release notes December 2025
+sidebar_position: 5
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 13, 2025**
+
+## New features and enhancements 
+
+### Pipeline configuration improvements
+
+Enhanced validation logic within the pipeline setup ensures smoother data processing and prevents configuration errors before they occur. These updates streamline the setup process by providing real-time feedback when certain settings are incompatible.
+
+-   **Custom query guardrails:** To ensure query stability, the system now validates input when a custom query is defined. The interface prevents the use of restricted SQL clauses and semicolons, providing clear inline error messages to guide your input.
+    
+-   **Destination compatibility:** A new validation check prevents selecting Iceberg as a destination when a custom query is active, ensuring the data flow remains consistent with supported formats.
+    
+-   **Rest source optimization:** The custom query option is now intelligently disabled when using a REST source, aligning the interface with supported source capabilities and preventing invalid configurations.
+    
+-   **Real-time feedback:** Immediate validation alerts now appear during the setup process, preventing the saving or advancing of pipelines with incompatible settings.
+
+    <ImagePopup src="/img/release_notes/dec/pipeline-config-improv.png" alt="*actions library" caption="*pipeline-config-improv" />  

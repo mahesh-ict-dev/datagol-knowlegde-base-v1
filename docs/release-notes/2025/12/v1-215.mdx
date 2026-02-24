@@ -1,0 +1,52 @@
+---
+title: v1.0.215
+description: v1.0.215 Release notes December 2025
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: December 24, 2025**
+
+## New features and enhancements 
+
+### AI agent
+
+#### Knowledge Graph agent planning and search enhancements
+
+Enhanced the Knowledge Graph agent to improve how it navigates complex data structures. By integrating structured planning and semantic search, the agent can now provide more precise answers even when queries involve nuanced or indirect relationships within your data.
+
+-   **Multi-step planning:** The Knowledge Graph agent now breaks down complex questions into logical execution steps. This ensures that the agent follows a clear path to find the right data points rather than attempting to retrieve information in a single, unstructured pass.
+    
+-   **Semantic search integration:** Beyond simple keyword matching, the agent now utilizes semantic search to understand the intent and context behind your queries. This allows it to identify relevant concepts and entities even if the exact terms are not present in your dataset.
+    
+-   **Improved relationship mapping:** The agent’s enhanced planning capability allows it to better traverse deep connections within the graph, making it more effective at answering "how" and "why" questions based on your connected data.
+    
+-   **Refined result accuracy:** By combining strategic planning with contextual search, the agent reduces irrelevant results and focuses on providing the most accurate and well-supported information available in the knowledge graph.
+
+## Backend
+
+Optimized the BI backend by removing redundant calculation layers in aggregation functions. This improvement increases query efficiency and ensures faster, more consistent data retrieval.
+
+
+## Bug Fixes 
+
+### Data Source 
+
+Fixed intermittent transaction failures caused by PostgreSQL terminating idle sessions before a commit could occur.
+
+### AI agent 
+
+#### Data Science agent 
+
+-   Fixed a `nonetype` error where the Data Science agent would crash when attempting to call `.split()` on an empty or null string attribute.
+
+-  Fixed an issue where the inline dataset and the CSV download option disappears from the chat thread after a page refresh. The response model is updated to persist dataset metadata, ensuring the inline dataset and CSV download options remain available across sessions.
+
+
+
+
+
+
+
+

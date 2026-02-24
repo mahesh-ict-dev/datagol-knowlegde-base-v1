@@ -1,0 +1,61 @@
+---
+title: v1.0.227
+description: v1.0.227 Release notes February 2026
+sidebar_position: 8
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 05, 2026**
+
+## New features and enhancements 
+
+### Backend
+
+To enhance the reliability and performance of metadata operations, the platform has transitioned from the ETL-LITE driver to JDBC for schema synchronization across all SQL-based data sources. This targeted update ensures more robust connectivity and native compatibility for traditional relational databases.
+
+### Orchestration
+
+-   To ensure the integrity of financial dashboards and eliminate stale metrics, an automated retry mechanism has been implemented for data pipelines. This enhancement addresses intermittent failures caused by system restarts and orchestrator stalls, reducing the need for manual monitoring and intervention.
+
+    -  Pipelines will now automatically attempt to re-run up to **three times** upon encountering a failure or timeout.
+    
+    -   Retries are executed with increasing delays between attempts to mitigate issues caused by temporary service unavailability or "stuck" states.
+    
+    -  The system logs specific failure reasons alongside the retry attempt count for improved diagnostic tracking.
+    
+    -   If a pipeline fails to complete successfully after the third attempt, the system triggers an immediate email notification to stakeholders.
+
+### BI
+
+Introduced native support for **MySQL** as a backend provider for BI workbooks. This allows users to leverage the performance and scalability of MySQL directly within the BI platform for real-time data analysis and reporting.
+
+With the introduction of the MySQL provider, the BI backend can now interface directly with MySQL instances. This integration is designed to handle standard SQL operations natively, ensuring that complex queries and aggregations are processed efficiently at the data source level.
+
+### Pipeline
+
+To improve query efficiency and reduce cross-platform overhead, the calculation of the maximum cursor field has been migrated from Kyuubi Spark to Amazon Athena. This update optimizes the execution path for standard pipelines utilizing the Incremental Append sync mode.
+
+### Workbooks
+
+**Upgraded the CSV export functionality** to provide a more reliable and consistent experience. This update ensures that whether you are exporting to Excel or CSV, you have access to your complete dataset without interruptions.
+
+**Key improvements**
+
+-   **Removal of record limits:** Users are no longer restricted to 10,000 rows. The new streaming method allows for the export of the full workbook content, regardless of dataset size.
+    
+-   **Athena-based workbook stability:** By processing data in incremental chunks, the system bypasses the limitations of Athena-based datasets, preventing the crashes and timeouts previously experienced with large files.
+    
+-   **Format parity:** CSV exports now offer the same comprehensive data coverage as Excel downloads, providing a consistent experience across all available export types.
+    
+-   **Optimized performance:** The chunked delivery method reduces the load on system resources, resulting in a more reliable download experience for high-volume data.
+
+
+## Bug Fix
+
+Workbooks 
+
+-   Fixed an issue where disabled data providers were incorrectly visible in the Playground. 
+-   Resolved an issue where Snowflake `TIMESTAMPNTZ` columns were incorrectly imported as Text. These fields now correctly map to the Timestamp data type, restoring full date-time functionality and sorting in workbooks.
+-   Resolved a data type mapping issue where BigQuery Float64 columns were converted to Text when publishing to a workbook via JDBC. Numerical columns now retain their decimal format, restoring the ability to use numerical filters, aggregations, and calculations.
+-   Resolved an issue where Date Filters were failing on workbooks using AWS Athena. Improved the SQL generator to correctly format date and timestamp predicates for Athena’s syntax, ensuring Page-Level filters, Sorting, and Time-Series analysis work across all BI components.
