@@ -1,0 +1,72 @@
+---
+title: v1.0.229
+description: v1.0.229 Release notes February 2026
+sidebar_position: 6
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 12, 2026**
+
+## New features and enhancements 
+
+### AI agents 
+
+#### SQL agent
+
+Previously, saving a workbook would end the active session, requiring users to manually navigate back to start a pipeline. Users can now immediately **Create a new pipeline** or **Add to an existing pipeline** directly after saving a workbook, without leaving the page.
+
+### Sharing agent thread
+
+Redesigned the sharing UI to mirror Google Drive’s **General Access** model, enabling one-click public access via an **Anyone with the link** drop-down.
+
+<ImagePopup src="/img/release_notes/feb26/sharing-public-anyone-with-link.png" alt="*sharing agents publicly" caption="*sharing agents publicly" />
+
+#### Improved AI generation interface
+
+Relocated **AI Generate** function from the bottom bar into a dedicated two-tab layout (**Settings** and **AI Generate**) to reduce UI clutter and increase feature discoverability.
+
+<ImagePopup src="/img/release_notes/feb26/ai-generate-new-tab.png" alt="*ai-generate-new-tab" caption="*ai-generate-new-tab" />
+
+### Onboarding 
+
+Implemented a maximum file size limit for onboarding uploads to ensure faster processing, smoother previews, and a more responsive setup experience. Users now receive immediate, helpful feedback if a file exceeds the limit, preventing failed uploads across all supported formats (Excel, CSV, PDF).
+
+### Orchestration 
+
+The Edit button is disabled while an orchestration is **Running** status.  This eliminates the risk of mid-run errors or data mismatches and workflows run exactly as planned, every time.
+
+
+## Bug fixes
+
+### BI
+
+-   **Issue:** Users encountered errors when attempting to edit **BI queries** connected to Redshift (TSL). Specifically, the connection type would default to a blank value, triggering a "Spark error" and preventing the query from running.
+    
+-   **Fix:** We resolved a synchronization issue to ensure that the **JDBC provider type** remains correctly mapped when a workbook is opened for editing.
+    
+-   **Impact:** This restores the ability to modify and test Redshift-based queries without manual reconfiguration or system errors, ensuring your data reporting remains agile and accurate.
+
+### Column extraction 
+
+-   **Issue:** Fixed an issue where **Extraction Flows** would remain stuck in a **Running** status indefinitely if they encountered a duplicate column error.
+    
+-   **Fix:** The system now correctly detects duplicate column failures and updates the flow status to **Failed**.
+    
+-   **Impact:** This resolves an issue where the **Run** button remained disabled, preventing users from initiating subsequent extractions.
+
+### Platform 
+
+-   **Issue:** When a new user was invited but had not yet completed their account setup, their name appeared as **undefined undefined** across various pages in the platform.
+    
+-   **Fix:** Updated how the system handles pending accounts. The interface will now correctly display the user’s **email address** or a **placeholder name** until they complete their profile registration.
+    
+-   **Impact:** This ensures that the team dashboards and user lists remain clean, professional, and easy to read, even while waiting for new members to join.
+
+
+
+
+
+
+
+

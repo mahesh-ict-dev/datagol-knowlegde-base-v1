@@ -33,9 +33,9 @@ Evaluating compliance manually is time-consuming and prone to human error. The G
 GRC agent compares your company's actual practices (**Target**) against a master set of rules (**Standards**) by extracting specific requirements from a **Control File**.
 The GRC agent operates by analyzing the following types of inputs:
 
-1.  **Standards folder:** The **Source of Truth** containing documents that define the ideal rules (e.g., ISO standards, internal IT governance).
+1.  **Standards Policy folder:** The **Source of Truth** containing documents that define the ideal rules (e.g., ISO standards, internal IT governance).
     
-2.  **Evaluate (Target) folder:** The documents belonging to the company being audited (e.g., their specific password policy or access logs).
+2.  **Target Policy folder:** The documents belonging to the company being audited (e.g., their specific password policy or access logs).
     
 3.  **Control file:** A specific document that tells the agent which rules to look for during a specific run (e.g., an "Access Control" requirements file).
 
@@ -79,7 +79,7 @@ The Control file acts as the "rubric" for the audit. It is a text document listi
 Within the Agent interface:
 
 1.	Under the **Standard Policy Folder**, select the **Standard Document Set** to use as the reference.
-2.	Under the ** Target Policy Folder** select the **Target Document Set** (the company/policy you are evaluating).
+2.	Under the **Target Policy Folder** select the **Target Document Set** (the company/policy you are evaluating).
     
 Review the **Extracted Controls** to ensure the agent correctly identified the rules from your Control File.
     
@@ -97,7 +97,7 @@ Click **Start Analysis**. The Agent will perform the following background tasks:
 
 ### Step 5: Review the Compliance Report
 
-Once the analysis is complete (usually indicated by a progress bar reaching 100%), review the generated summary:
+Once the analysis is complete, review the generated summary:
 
 -   **Overall Score:** A percentage representing total compliance.
     
