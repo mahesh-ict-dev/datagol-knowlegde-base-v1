@@ -1,0 +1,48 @@
+---
+title: v1.0.234
+description: v1.0.234 Release notes February 2026
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 22, 2026**
+
+## New features and enhancements 
+
+### Agents
+
+-   **Simplified workbook binding for Custom agents:** Introduced direct workbook binding.To streamline workflows for teams less familiar with manual workbook selection.  
+    Users can now link a specific, indexed workbook directly to a Custom Agent during the setup process. This removes the need for end-users to manually select data sources, providing a "plug-and-play" experience for analyzing transcript data.
+
+## Bug Fix
+
+### Agents 
+
+-   Resolved a UI flickering and "auto-scroll" conflict in the BI RAG agent that caused the screen to jump unexpectedly during manual scrolling.
+
+### Data Sources
+
+-   Fixed an issue where Redshift materialized views were not appearing on the Datasources page, ensuring all synchronized view types are correctly listed and accessible.
+
+## Known Issues
+
+### Workspace 
+
+
+#### Querying on Salesforce or HubSpot directly results in an error or a failed validation check
+
+Currently, the SQL Playground allows users to select REST API-based data sources directly. However, because these platforms (Salesforce, HubSpot, etc.) are built on REST APIs rather than standard SQL databases, direct SQL execution is not supported and will result in an error or a failed validation check.
+
+##### Why this happens
+
+REST connectors act as bridges to pull data; they do not function as queryable database engines. To perform SQL analysis on data from these sources, you must follow the standard ELT (Extract, Load, Transform) workflow:
+
+-   **Extract and load:** Use an **Airbyte** sync to pull data from the REST API source.
+    
+-   **Move to supported destination:** Move that data into a supported destination warehouse (such as **Parquet** or **Iceberg**).
+    
+-   **Run query:** Navigate to the SQL Playground and run your queries against the **Warehouse tables**, not the raw Source connectors.
+    
+
+Currenlty a validation check is implemented within the Playground to prevent users from attempting direct queries on these sources. This will provide clearer feedback and guide users toward the correct data warehouse tables.
