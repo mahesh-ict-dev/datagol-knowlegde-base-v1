@@ -1,0 +1,202 @@
+---
+title: Authentication
+sidebar_position: 2
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import ApiPlayground from "@site/src/components/ApiPlayground";
+
+## 🔐 Authentication & Identity (IdP)
+
+This section covers how to authenticate with the DataGOL platform and manage service accounts for automated access.
+
+### Authentication Overview
+
+<div className="auth-flow-diagram">
+  <div className="auth-step">
+    <div className="step-number">1</div>
+    <div className="step-content">
+      <h4>User Login (JWT)</h4>
+      <p>Authenticate with email/password to get JWT token</p>
+    </div>
+  </div>
+  <div className="auth-arrow">→</div>
+  <div className="auth-step">
+    <div className="step-number">2</div>
+    <div className="step-content">
+      <h4>Service Account</h4>
+      <p>Create or manage service account tokens</p>
+    </div>
+  </div>
+  <div className="auth-arrow">→</div>
+  <div className="auth-step">
+    <div className="step-number">3</div>
+    <div className="step-content">
+      <h4>Data Access</h4>
+      <p>Use service token to access data APIs</p>
+    </div>
+  </div>
+</div>
+
+### User Authentication (IdP)
+
+To interact with the API, you first need to obtain a JWT (JSON Web Token) by logging in with your user credentials.
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/idp/api/v1/user/login</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Authenticates a user and returns a session token. Use this token for all subsequent Identity (IdP) requests.</p>
+    
+    <h4>Request Body</h4>
+    ```json
+    {
+      "email": "<your-email>",
+      "password": "<your-password>"
+    }
+    ```
+
+    <h4>Response</h4>
+    <div className="response-info">
+      <p>✅ <strong>Success:</strong> Returns <code>Authorization: Bearer &lt;JWT&gt;</code> header</p>
+      <p>📝 <strong>Note:</strong> Extract only the token value (remove "Bearer " prefix) for use in subsequent headers.</p>
+    </div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="POST"
+        endpoint="/idp/api/v1/user/login"
+        defaultBody={{ email: "user@example.com", password: "password123" }}
+        successResponse={{
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          user: { name: "John Doe", role: "ADMIN" }
+        }}
+        errorResponse={{
+          error: "Unauthorized",
+          message: "Invalid email or password",
+          code: "AUTH_FAILED"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+### Service Account Management (IdP)
+
+Service accounts allow automated systems to interact with DataGOL without requiring interactive user login.
+
+:::warning Authentication Required
+All IdP endpoints require the JWT token from login: `Authorization: Bearer &lt;JWT&gt;`
+:::
+
+### Create Service Account
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/idp/api/v1/company/serviceAccount</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <h4>Request Body</h4>
+    ```json
+    {
+      "name": "<service-account-name>",
+      "description": "<optional-description>"
+    }
+    ```
+    
+    <h4>Response Example</h4>
+    ```json
+    {
+      "token": "<service-account-token>",
+      "expiryInSeconds": 31536000
+    }
+    ```
+    
+    <div className="important-note">
+      <strong>💾 Save this token!</strong> You'll use it as <code>x-auth-token</code> for data APIs.
+    </div>
+  </div>
+</div>
+
+### Reset Service Account Token
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-get">GET</span>
+    <code className="endpoint-url">/idp/api/v1/company/serviceAccount/:id/token/reset</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Resets the access token for a specific service account. This is useful for rotating credentials or recovering lost tokens.</p>
+    
+    <h4>Query Parameters</h4>
+    <ul>
+      <li><code>neverExpires</code> (optional): Set to <code>true</code> for non-expiring tokens. Default is <code>false</code>.</li>
+    </ul>
+
+    <h4>Response Examples</h4>
+
+    <div className="response-example">
+      <h5>With Expiry</h5>
+      ```json
+      {
+        "token": "<new-token>",
+        "expiryInSeconds": 31536000,
+        "expiryDate": "2026-08-05T15:19:01.851+0000"
+      }
+      ```
+    </div>
+
+    <div className="response-example">
+      <h5>Non-Expiring</h5>
+      ```json
+      {
+        "token": "<new-token>",
+        "neverExpires": true
+      }
+      ```
+    </div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="GET"
+        endpoint="/idp/api/v1/company/serviceAccount/:id/token/reset"
+        defaultBody={{ neverExpires: false }}
+        successResponse={{
+          token: "sa_new_token_12345",
+          expiryInSeconds: 31536000
+        }}
+        errorResponse={{
+          error: "Not Found",
+          message: "Service account ID not found",
+          code: "SA_NOT_FOUND"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+### Delete Service Account
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-delete">DELETE</span>
+    <code className="endpoint-url">/idp/api/v1/company/serviceAccount/:id</code>
+  </div>
+
+  <div className="endpoint-body">
+    <p>
+      <strong>Response:</strong> 200 OK with empty body on success
+    </p>
+  </div>
+</div>

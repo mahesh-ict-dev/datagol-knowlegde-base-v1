@@ -1,0 +1,261 @@
+---
+title: Workbooks
+sidebar_position: 4
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import ApiPlayground from "@site/src/components/ApiPlayground";
+
+## 📓 Workbooks
+
+Workbooks are interactive documents within a Workspace where you can perform data analysis, visualization, and modeling. You can create multiple workbooks to organize different projects or analyses.
+
+### Create Table in Workspace
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Initializes a new table within a specific workspace. You can optionally include columns in the same request.</p>
+    
+    <h4>Query Parameters</h4>
+    <ul>
+      <li><code>isIncludeColumns</code> (optional): Set to <code>true</code> to return column details in response.</li>
+    </ul>
+
+    <h4>Example cURL</h4>
+    ```bash
+    curl --location 'https://{{base_url}}/noCo/api/v2/workspaces/{{workspace_id}}/tables?isIncludeColumns=true' \
+    --header 'x-auth-token: {{token}}'
+    ```
+
+  </div>
+</div>
+
+### Get Table Schema
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-get">GET</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Retrieves the structure, constraints, and column definitions of a specific table.</p>
+
+    <h4>Example cURL</h4>
+    ```bash
+    curl --location 'https://{{base_url}}/noCo/api/v2/workspaces/{{workspace_id}}/tables/{{table_id}}' \
+    --header 'x-auth-token: {{token}}'
+    ```
+
+  </div>
+</div>
+
+### Get Table Data
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Fetches rows from a table with support for complex filtering, sorting, and pagination.</p>
+
+    <h4>Request Body (JSON)</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>requestPageDetails</code></td>
+          <td>object</td>
+          <td>Yes</td>
+          <td>Pagination settings (pageNumber, pageSize)</td>
+          <td><code>{'{"pageNumber": 1, "pageSize": 50}'}</code></td>
+        </tr>
+        <tr>
+          <td><code>whereClause</code></td>
+          <td>string</td>
+          <td>No</td>
+          <td>SQL-like filter condition</td>
+          <td><code>"age > 25"</code></td>
+        </tr>
+        <tr>
+          <td><code>sortOptions</code></td>
+          <td>array</td>
+          <td>No</td>
+          <td>List of sorting rules</td>
+          <td><code>{'[{"columnName": "name", "direction": "ASC"}]'}</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="POST"
+        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
+        defaultBody={{
+          requestPageDetails: { pageNumber: 1, pageSize: 50 },
+        }}
+        successResponse={{
+          pageDetails: { totalRows: 1250, pageNumber: 1 },
+          rows: [
+            { id: 1, name: "Sample Item", value: 100 },
+            { id: 2, name: "Another Item", value: 200 },
+          ],
+        }}
+        errorResponse={{
+          error: "Forbidden",
+          message: "You do not have permission to access this table",
+          code: "WS_PERMISSION_DENIED",
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+---
+
+### 📊 Column Data Types
+
+When creating columns, use the following `uiDataType` values to define the behavior and validation of your data.
+
+| `uiDataType`       | Description                         | Example Value                     |
+| :----------------- | :---------------------------------- | :-------------------------------- |
+| `SINGLE_LINE_TEXT` | Short text values.                  | `"Jane Doe"`                      |
+| `LONG_TEXT`        | Multi-line text or descriptions.    | `"This is a long description..."` |
+| `NUMBER`           | Numeric values (integer/decimal).   | `1250.50`                         |
+| `DATE`             | Calendar dates.                     | `"2025-12-31"`                    |
+| `CHECKBOX`         | Boolean true/false values.          | `true`                            |
+| `FORMULA`          | Calculated values using SQL syntax. | `price * quantity`                |
+| `SINGLE_SELECT`    | One value from a predefined list.   | `"Active"`                        |
+
+---
+
+### Create Column
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Adds a new column to a table. Supports various data types including Standard and Formula columns.</p>
+
+    <Tabs>
+    <TabItem value="standard" label="Standard Column">
+
+    ```json
+    {
+        "uiDataType": "SINGLE_LINE_TEXT",
+        "uiMetadata": {
+            "title": "Contact Name"
+        },
+        "name": "contact_name"
+    }
+    ```
+
+    </TabItem>
+    <TabItem value="formula" label="Formula Column">
+
+    ```json
+    {
+        "uiDataType": "FORMULA",
+        "uiMetadata": {
+            "title": "Description Length"
+        },
+        "formula": "length(description)",
+        "formulaType": "SQL",
+        "name": "desc_length"
+    }
+    ```
+
+    </TabItem>
+    </Tabs>
+
+  </div>
+</div>
+
+### Add Row to Workbook
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-post">POST</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Inserts a new record into the specified table.</p>
+
+    <h4>Request Body (JSON)</h4>
+    ```json
+    {
+        "cellValues": {
+            "name": "Sample Project",
+            "status": "In Progress",
+            "priority": "High"
+        }
+    }
+    ```
+
+  </div>
+</div>
+
+### Delete Rows
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-delete">DELETE</span>
+    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <p>Deletes one or more rows from a specific table within a workspace.</p>
+
+    <h4>Request Body (JSON)</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>rowIds</code></td>
+          <td>array</td>
+          <td>Yes</td>
+          <td>List of internal row IDs to delete</td>
+          <td><code>{'[5, 4, 3]'}</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Example Request</h4>
+    ```json
+    {
+        "rowIds": [5, 4, 3]
+    }
+    ```
+
+  </div>
+</div>
