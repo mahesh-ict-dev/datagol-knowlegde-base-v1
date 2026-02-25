@@ -7,6 +7,8 @@ export default function ApiPlayground({ method = 'POST', endpoint, defaultBody =
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
+
+  // adding the commnts 
   const simulateRequest = (type) => {
     setLoading(true);
     setResponse(null);
