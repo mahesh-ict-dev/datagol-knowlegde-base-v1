@@ -189,7 +189,7 @@
 					}
 				},
 				{
-					"name": "Create Column",
+					"name": "Create Column (Standard)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -212,6 +212,72 @@
 					}
 				},
 				{
+					"name": "Create Column (AI Generated)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uiDataType\": \"SINGLE_LINE_TEXT\",\n    \"name\": \"ai_col\",\n    \"uiMetadata\": {\"title\": \"AI Column\"},\n    \"settings\": {\n        \"aiSettings\": {\n            \"enabled\": true,\n            \"prompt\": \"Extract data from name field\",\n            \"model\": \"gpt-4o-mini\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "column"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Column",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"updated_col\",\n    \"uiMetadata\": {\"title\": \"Updated Title\"}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "columns", ":columnId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "columnId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Column",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "columns", ":columnId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "columnId", "value": "" }
+							]
+						}
+					}
+				},
+				{
 					"name": "Add Row",
 					"request": {
 						"method": "POST",
@@ -222,6 +288,48 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"cellValues\": {\n        \"column_name\": \"value\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Row by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/:rowId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows", ":rowId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "rowId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Existing Row",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"cellValues\": {\n        \"column_name\": \"new-value\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
