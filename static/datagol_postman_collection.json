@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "d1e2f3a4-b5c6-4d7e-8f90-1234567890ab",
+		"name": "DataGOL API Collection",
+		"description": "Comprehensive Postman collection for DataGOL APIs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/idp/api/v1/user/login",
+							"host": ["{{base_url}}"],
+							"path": ["idp", "api", "v1", "user", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Identity (IdP)",
+			"item": [
+				{
+					"name": "Create Service Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new-service-account\",\n    \"description\": \"For automated data access\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/idp/api/v1/company/serviceAccount",
+							"host": ["{{base_url}}"],
+							"path": ["idp", "api", "v1", "company", "serviceAccount"]
+						}
+					}
+				},
+				{
+					"name": "Reset Service Account Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/idp/api/v1/company/serviceAccount/:id/token/reset?neverExpires=false",
+							"host": ["{{base_url}}"],
+							"path": ["idp", "api", "v1", "company", "serviceAccount", ":id", "token", "reset"],
+							"query": [{ "key": "neverExpires", "value": "false" }],
+							"variable": [{ "key": "id", "value": "" }]
+						}
+					}
+				},
+				{
+					"name": "Delete Service Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/idp/api/v1/company/serviceAccount/:id",
+							"host": ["{{base_url}}"],
+							"path": ["idp", "api", "v1", "company", "serviceAccount", ":id"],
+							"variable": [{ "key": "id", "value": "" }]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Workspaces",
+			"item": [
+				{
+					"name": "Create Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Interactive Workspace\",\n    \"description\": \"Workspace created via Postman\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces"]
+						}
+					}
+				},
+				{
+					"name": "Add Users to Workspace (Bulk)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"workSpaceUsers\": [\n        {\n            \"email\": \"user@example.com\",\n            \"role\": \"EDITOR\"\n        }\n    ],\n    \"message\": \"Welcome to the workspace!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/bulkUsers",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "bulkUsers"],
+							"variable": [{ "key": "workspaceId", "value": "" }]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Workbooks & Tables",
+			"item": [
+				{
+					"name": "Create Table",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables?isIncludeColumns=true",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables"],
+							"query": [{ "key": "isIncludeColumns", "value": "true" }],
+							"variable": [{ "key": "workspaceId", "value": "" }]
+						}
+					}
+				},
+				{
+					"name": "Get Table Schema",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Table Data (External)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestPageDetails\": {\n        \"pageNumber\": 1,\n        \"pageSize\": 50\n    },\n    \"whereClause\": \"\",\n    \"sortOptions\": []\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "data", "external"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Column",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new_column\",\n    \"uiDataType\": \"SINGLE_LINE_TEXT\",\n    \"uiMetadata\": {\n        \"title\": \"New Column Title\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "column"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Add Row",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cellValues\": {\n        \"column_name\": \"value\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Rows",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rowIds\": [1, 2, 3]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{ "key": "base_url", "value": "https://www.example.com" },
+		{ "key": "email", "value": "user@example.com" },
+		{ "key": "password", "value": "password123" },
+		{ "key": "jwt_token", "value": "<insert-jwt-from-login-here>" },
+		{ "key": "service_token", "value": "<insert-service-account-token-here>" }
+	]
+}

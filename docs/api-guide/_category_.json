@@ -1,0 +1,8 @@
+{
+  "label": "API Guide",
+  "position": 14,
+  "link": {
+    "type": "generated-index",
+    "description": "Comprehensive guide for DataGOL APIs including Authentication, Workspaces, and Workbooks."
+  }
+}
