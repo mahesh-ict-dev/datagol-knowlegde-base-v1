@@ -14,11 +14,11 @@ import ApiPlayground from "@site/src/components/ApiPlayground";
   </div>
 
   <div className="api-intro">
-    <p className="api-description">
+    <div className="api-description">
       Master the API with our comprehensive guide covering authentication,
       service account management, and data querying. Includes production-ready
       code samples in multiple programming languages.
-    </p>
+    </div>
 
     <div className="language-support">
       <span className="language-badge">React</span>
@@ -48,9 +48,9 @@ This guide is structured to help you build applications quickly:
     <strong>Base URL:</strong>
     <code className="base-url">https://be.datagol.ai</code>
   </div>
-  <p className="base-url-note">
+  <div className="base-url-note">
     All endpoints below are relative to this base URL.
-  </p>
+  </div>
 </div>
 
 ---
@@ -62,10 +62,10 @@ This guide is structured to help you build applications quickly:
     <div className="step-icon">🔐</div>
     <div className="step-content">
       <h4>Step 1: Login</h4>
-      <p>
+      <div>
         <code>POST /idp/api/v1/user/login</code> → Extract JWT from{" "}
         <code>Authorization</code> header
-      </p>
+      </div>
     </div>
   </div>
 
@@ -73,7 +73,7 @@ This guide is structured to help you build applications quickly:
   <div className="step-icon">🔑</div>
   <div className="step-content">
     <h4>Step 2: Create Service Account</h4>
-    <p>Use JWT to create or reset a service account token</p>
+    <div>Use JWT to create or reset a service account token</div>
   </div>
 </div>
 
@@ -81,10 +81,10 @@ This guide is structured to help you build applications quickly:
     <div className="step-icon">📊</div>
     <div className="step-content">
       <h4>Step 3: Access Data</h4>
-      <p>
+      <div>
         Use service account token as <code>x-auth-token</code> for noCo
         endpoints
-      </p>
+      </div>
     </div>
   </div>
 </div>
@@ -98,7 +98,7 @@ Leverage these resources to integrate DataGOL APIs into your workflow or allow A
 <div className="next-steps">
   <div className="step-card">
     <h4>🤖 AI Compatibility (OpenAPI)</h4>
-    <p>Using <strong>Claude Code</strong> or <strong>Cursor</strong>? Feed them this spec to make the API "self-understandable".</p>
+    <div>Using <strong>Claude Code</strong> or <strong>Cursor</strong>? Feed them this spec to make the API "self-understandable".</div>
     <a href="/datagol-knowlegde-base-v1/openapi.yaml" download className="button button--primary button--outline button--sm">
       Download OpenAPI Spec
     </a>
@@ -106,10 +106,10 @@ Leverage these resources to integrate DataGOL APIs into your workflow or allow A
 
 <div className="step-card">
   <h4>📬 Postman Collection</h4>
-  <p>
+  <div>
     Test all endpoints instantly. Includes pre-configured environment variables
     and example bodies.
-  </p>
+  </div>
   <a
     href="/datagol-knowlegde-base-v1/datagol_postman_collection.json"
     download
@@ -121,7 +121,7 @@ Leverage these resources to integrate DataGOL APIs into your workflow or allow A
 
   <div className="step-card">
     <h4>🔄 Application Lifecycle</h4>
-    <p>Understand the step-by-step sequence of API calls required to build a full application.</p>
+    <div>Understand the step-by-step sequence of API calls required to build a full application.</div>
     <a href="/datagol-knowlegde-base-v1/docs/api-guide/api-flow" className="button button--info button--outline button--sm">
       View API Flow
     </a>

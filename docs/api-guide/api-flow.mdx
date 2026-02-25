@@ -14,17 +14,17 @@ This guide outlines the standard lifecycle for building applications using the D
 
 The following diagram illustrates the dependency and execution order of the DataGOL API suite.
 
-```mermaid
+```text
 graph TD
-    A[🔐 Login https://be.datagol.ai/idp/api/v1/user/login] -->|Extract JWT| B[🔑 Create Service Account https://be.datagol.ai/idp/api/v1/company/serviceAccount]
-    B -->|Use x-auth-token| C[🏢 Create Workspace https://be.datagol.ai/noCo/api/v2/workspaces]
-    C -->|Extract workspaceId| D[📊 Create Table https://be.datagol.ai/noCo/api/v2/workspaces/:id/tables]
+    A[🔐 Login] -->|Extract JWT| B[🔑 Create Service Account]
+    B -->|Use x-auth-token| C[🏢 Create Workspace]
+    C -->|Extract workspaceId| D[📊 Create Table]
     D -->|Extract tableId| E[📝 Add Rows & Columns]
     E --> F{🤖 AI Enrichment?}
-    F -->|Yes| G[✨ Create AI Column with aiSettings]
+    F -->|Yes| G[✨ Create AI Column]
     F -->|No| H[🚀 Ready to Fetch Data]
     G --> H
-    H --> I[📥 Get Table Data https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external]
+    H --> I[📥 Get Table Data]
 ```
 
 ---
@@ -100,7 +100,7 @@ Once the structure is set, you can push row data. The AI column will populate au
 
 If you are using **Claude Code**, **Cursor**, or any other LLM-based developer tool:
 
-1.  **Feed the Spec**: <a href="/datagol-knowlegde-base-v1/openapi.yaml" download>Download the OpenAPI Spec</a>
+1.  **Feed the Spec**: <div><a href="/datagol-knowlegde-base-v1/openapi.yaml" download>Download the OpenAPI Spec</a></div>
 2.  **Context Injection**: Tell the AI: _"I want to create a Workspace, then a Table, then an AI column. Follow the flow documented in DataGOL API Flow."_
 3.  **No Manual Work**: The AI will use the spec to generate the exact cURL or Fetch commands needed for your specific language.
 
