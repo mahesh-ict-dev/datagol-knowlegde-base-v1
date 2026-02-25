@@ -175,7 +175,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"requestPageDetails\": {\n        \"pageNumber\": 1,\n        \"pageSize\": 50\n    },\n    \"whereClause\": \"\",\n    \"sortOptions\": []\n}"
+							"raw": "{\n    \"requestPageDetails\": {\n        \"pageNumber\": 1,\n        \"pageSize\": 500\n    },\n    \"sortOptions\": [{\n      \"columnName\": \"first_name\",\n      \"direction\": \"DESC\"\n    }],\n    \"whereClause\": \"(`first_name` like '%d%' and `years_of_experience` > 4 and `start_date` between '2004-01-01' and '2009-12-31' and `is_active` = true)\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external",
@@ -278,7 +278,31 @@
 					}
 				},
 				{
-					"name": "Add Row",
+					"name": "Create Formula Column",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "accept", "value": "*/*" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uiDataType\": \"FORMULA\",\n    \"uiMetadata\": {\n        \"title\": \"sample demo formula\"\n    },\n    \"formula\": \"length(name)\",\n    \"formulaType\": \"SQL\",\n    \"name\": \"sample_demo_formula\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "column"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Rows",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -369,7 +393,7 @@
 		}
 	],
 	"variable": [
-		{ "key": "base_url", "value": "https://www.example.com" },
+		{ "key": "base_url", "value": "https://be.datagol.ai" },
 		{ "key": "email", "value": "user@example.com" },
 		{ "key": "password", "value": "password123" },
 		{ "key": "jwt_token", "value": "<insert-jwt-from-login-here>" },
