@@ -40,7 +40,8 @@ const config = {
   },
 
   // Performance Optimizations
- future: {
+  /* 
+  future: {
     experimental_faster: {
       swcJsLoader: true,
       swcJsMinimizer: true,
@@ -50,6 +51,7 @@ const config = {
       mdxCrossCompilerCache: true,
     },
   },
+  */
 
 
   presets: [
@@ -132,6 +134,9 @@ const config = {
         defaultMode: 'light',
         disableSwitch: false, // Set to true to disable dark mode for better performance
         respectPrefersColorScheme: true,
+      },
+      mermaid: {
+        theme: {light: 'neutral', dark: 'forest'},
       },
       
       navbar: {
