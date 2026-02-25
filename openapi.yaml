@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  title: DataGOL API
+  description: Comprehensive API for DataGOL platform authentication, workspaces, and workbooks.
+  version: 2.0.0
+servers:
+  - url: https://www.example.com
+    description: Production server
+
+components:
+  securitySchemes:
+    JWTAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ServiceTokenAuth:
+      type: apiKey
+      in: header
+      name: x-auth-token
+
+paths:
+  # --- Authentication & IdP ---
+  /idp/api/v1/user/login:
+    post:
+      summary: User Login
+      description: Authenticate with email and password to receive a JWT.
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, example: "user@example.com" }
+                password: { type: string, example: "password123" }
+      responses:
+        '200':
+          description: OK
+          headers:
+            Authorization:
+              description: Bearer <JWT>
+              schema: { type: string }
+
+  /idp/api/v1/company/serviceAccount:
+    post:
+      summary: Create Service Account
+      tags: [Identity (IdP)]
+      security: [{ JWTAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string }
+                description: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+                  expiryInSeconds: { type: integer }
+
+  /idp/api/v1/company/serviceAccount/{id}/token/reset:
+    get:
+      summary: Reset Service Account Token
+      tags: [Identity (IdP)]
+      security: [{ JWTAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+        - name: neverExpires
+          in: query
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: OK
+
+  /idp/api/v1/company/serviceAccount/{id}:
+    delete:
+      summary: Delete Service Account
+      tags: [Identity (IdP)]
+      security: [{ JWTAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+
+  # --- Workspaces ---
+  /noCo/api/v2/workspaces:
+    post:
+      summary: Create Workspace
+      tags: [Workspaces]
+      security: [{ ServiceTokenAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string }
+                description: { type: string }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/bulkUsers:
+    post:
+      summary: Add Users to Workspace (Bulk)
+      tags: [Workspaces]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workSpaceUsers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email: { type: string }
+                      role: { type: string, enum: [ADMIN, CREATOR, EDITOR, VIEWER] }
+                message: { type: string }
+      responses:
+        '200':
+          description: OK
+
+  # --- Workbooks & Tables ---
+  /noCo/api/v2/workspaces/{workspaceId}/tables:
+    get:
+      summary: List Tables
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create Table
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: isIncludeColumns
+          in: query
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}:
+    get:
+      summary: Get Table Schema
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/data/external:
+    post:
+      summary: Get Table Data
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestPageDetails:
+                  type: object
+                  properties:
+                    pageNumber: { type: integer, default: 1 }
+                    pageSize: { type: integer, default: 50 }
+                whereClause: { type: string }
+                sortOptions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      columnName: { type: string }
+                      direction: { type: string, enum: [ASC, DESC] }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/column:
+    post:
+      summary: Create Column
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                uiDataType: { type: string }
+                uiMetadata:
+                  type: object
+                  properties:
+                    title: { type: string }
+                formula: { type: string }
+                formulaType: { type: string, enum: [SQL] }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/rows:
+    post:
+      summary: Add Row
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cellValues: { type: object }
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete Row(s)
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rowIds]
+              properties:
+                rowIds:
+                  type: array
+                  items: { type: integer }
+      responses:
+        '200':
+          description: OK
