@@ -35,17 +35,20 @@
   color: #fff;
 }
 
-.methodPOST {
+.methodpost {
   background: #28a745;
 }
-.methodGET {
+.methodget {
   background: #007bff;
 }
-.methodDELETE {
+.methoddelete {
   background: #dc3545;
 }
-.methodPUT {
-  background: #f0ad4e;
+.methodput {
+  background: #f39c12;
+}
+.methodpatch {
+  background: #e67e22;
 }
 
 .endpoint {

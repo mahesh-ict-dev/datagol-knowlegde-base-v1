@@ -30,7 +30,7 @@ export default function ApiPlayground({ method = 'POST', endpoint, defaultBody =
   return (
     <div className={styles.playgroundContainer}>
       <div className={styles.header}>
-        <span className={`${styles.method} ${styles[`method${method}`]}`}>{method}</span>
+        <span className={`${styles.method} ${styles[`method${method.toLowerCase()}`]}`}>{method}</span>
         <code className={styles.endpoint}>{endpoint}</code>
       </div>
 

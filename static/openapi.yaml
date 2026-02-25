@@ -264,6 +264,71 @@ paths:
                     title: { type: string }
                 formula: { type: string }
                 formulaType: { type: string, enum: [SQL] }
+                settings:
+                  type: object
+                  properties:
+                    aiSettings:
+                      type: object
+                      properties:
+                        enabled: { type: boolean }
+                        prompt: { type: string }
+                        model: { type: string }
+                        webAccess: { type: boolean }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/columns/{columnId}:
+    put:
+      summary: Update Column
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: columnId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                uiDataType: { type: string }
+                uiMetadata:
+                  type: object
+                  properties:
+                    title: { type: string }
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete Column
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: columnId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         '200':
           description: OK
@@ -293,6 +358,32 @@ paths:
       responses:
         '200':
           description: OK
+    put:
+      summary: Update Row
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: integer }
+                cellValues: { type: object }
+      responses:
+        '200':
+          description: OK
     delete:
       summary: Delete Row(s)
       tags: [Workbooks]
@@ -317,6 +408,28 @@ paths:
                 rowIds:
                   type: array
                   items: { type: integer }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/rows/{rowId}:
+    get:
+      summary: Get Row by ID
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: rowId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         '200':
           description: OK
