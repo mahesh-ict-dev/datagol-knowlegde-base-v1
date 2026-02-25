@@ -9,10 +9,6 @@ const config = {
   title: 'DataGOL Documentation',
   tagline: 'Knowledge Base',
   favicon: 'img/favicon.ico',
-  markdown: {
-    mermaid: true,
-  },
-  themes: ['@docusaurus/theme-mermaid'],
 
   // Production URL - uncomment for production deployment
   //url: 'https://docs.datagol.ai',
@@ -133,10 +129,7 @@ const config = {
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false, // Set to true to disable dark mode for better performance
-        respectPrefersColorScheme: true,
-      },
-      mermaid: {
-        theme: {light: 'neutral', dark: 'forest'},
+        respectPrefersColorScheme: false,
       },
       
       navbar: {
