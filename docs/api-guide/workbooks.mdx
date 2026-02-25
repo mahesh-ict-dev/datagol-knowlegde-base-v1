@@ -20,7 +20,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
   </div>
   
   <div className="endpoint-body">
-    <p>Initializes a new table within a specific workspace. You can optionally include columns in the same request.</p>
+    <div>Initializes a new table within a specific workspace. You can optionally include columns in the same request.</div>
     
     <h4>Query Parameters</h4>
     <ul>
@@ -45,7 +45,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
   </div>
   
   <div className="endpoint-body">
-    <p>Retrieves the structure, constraints, and column definitions of a specific table.</p>
+    <div>Retrieves the structure, constraints, and column definitions of a specific table.</div>
 
     <h4>Example cURL</h4>
     ```bash
@@ -65,7 +65,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
   </div>
   
   <div className="endpoint-body">
-    <p>Fetches rows from a table with support for complex filtering, sorting, and pagination.</p>
+    <div>Fetches rows from a table with support for complex filtering, sorting, and pagination.</div>
 
     <h4>Request Body (JSON)</h4>
     <table>
@@ -140,7 +140,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
   </div>
   
   <div className="endpoint-body">
-    <p>Retrieves a single record by its internal unique identifier.</p>
+    <div>Retrieves a single record by its internal unique identifier.</div>
 
     <div className="playground-section">
       <h4>Try it out</h4>
@@ -187,7 +187,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Adds a new column to a table. Supports various data types including Standard and Formula columns.</p>
+    <div>Adds a new column to a table. Supports various data types including Standard and Formula columns.</div>
 
     <Tabs>
     <TabItem value="standard" label="Standard Column">
@@ -252,7 +252,7 @@ When creating columns, use the following `uiDataType` values to define the behav
         <li><strong>model</strong>: Choose between <code>gpt-4o-mini</code> or <code>gpt-4o</code>.</li>
         <li><strong>webAccess</strong>: (Optional) Set to <code>true</code> if the AI needs to browse the internet to find information.</li>
       </ul>
-      <p><em>Note: AI columns automatically re-process whenever the source fields they depend on are updated.</em></p>
+      <div><em>Note: AI columns automatically re-process whenever the source fields they depend on are updated.</em></div>
     </div>
 
     <div className="playground-section">
@@ -292,7 +292,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Updates an existing column's definition, such as its title, description, or data type settings.</p>
+    <div>Updates an existing column's definition, such as its title, description, or data type settings.</div>
 
     <h4>Request Body (JSON)</h4>
     ```json
@@ -335,7 +335,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Permanently removes a column and all its associated data from the table.</p>
+    <div>Permanently removes a column and all its associated data from the table.</div>
 
     <div className="playground-section">
       <h4>Try it out</h4>
@@ -360,7 +360,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Inserts a new record into the specified table.</p>
+    <div>Inserts a new record into the specified table.</div>
 
     <h4>Request Body (JSON)</h4>
     ```json
@@ -385,7 +385,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Updates an existing record. You must provide the row <code>id</code> along with the new <code>cellValues</code>.</p>
+    <div>Updates an existing record. You must provide the row <code>id</code> along with the new <code>cellValues</code>.</div>
 
     <h4>Request Body (JSON)</h4>
     ```json
@@ -426,7 +426,7 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
   
   <div className="endpoint-body">
-    <p>Deletes one or more rows from a specific table within a workspace.</p>
+    <div>Deletes one or more rows from a specific table within a workspace.</div>
 
     <h4>Request Body (JSON)</h4>
     <table>
