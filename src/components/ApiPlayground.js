@@ -29,7 +29,6 @@ export default function ApiPlayground({ method = 'POST', endpoint, defaultBody =
             headers['Authorization'] = `Bearer ${token}`;
           }
         }
-
         const options = {
           method,
           headers,
@@ -39,7 +38,10 @@ export default function ApiPlayground({ method = 'POST', endpoint, defaultBody =
           options.body = requestBody;
         }
 
-        const res = await fetch(endpoint, options);
+        const baseUrl = 'https://be.datagol.ai';
+        const absoluteUrl = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint}`;
+
+        const res = await fetch(absoluteUrl, options);
         setStatus(res.status);
         const data = await res.json();
         setResponse(data);

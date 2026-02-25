@@ -40,6 +40,7 @@ const config = {
   },
 
   // Performance Optimizations
+  /*
   future: {
     experimental_faster: {
       swcJsLoader: true,
@@ -50,6 +51,7 @@ const config = {
       mdxCrossCompilerCache: true,
     },
   },
+  */
 
 
   presets: [

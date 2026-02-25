@@ -107,7 +107,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
       <h4>Try it out</h4>
       <ApiPlayground
         method="POST"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
         defaultBody={{
           requestPageDetails: { pageNumber: 1, pageSize: 500 },
           sortOptions: [{ columnName: "first_name", direction: "DESC" }],
@@ -146,7 +146,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
       <h4>Try it out</h4>
       <ApiPlayground
         method="GET"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/1"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/1"
         successResponse={{
           id: 1,
           cellValues: {
@@ -259,7 +259,7 @@ When creating columns, use the following `uiDataType` values to define the behav
       <h4>Try it out</h4>
       <ApiPlayground
         method="POST"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column"
         defaultBody={{
           uiDataType: "FORMULA",
           uiMetadata: { title: "sample demo formula" },
@@ -309,7 +309,7 @@ When creating columns, use the following `uiDataType` values to define the behav
       <h4>Try it out</h4>
       <ApiPlayground
         method="PUT"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
         defaultBody={{
           name: "question",
           uiDataType: "SINGLE_LINE_TEXT",
@@ -341,7 +341,7 @@ When creating columns, use the following `uiDataType` values to define the behav
       <h4>Try it out</h4>
       <ApiPlayground
         method="DELETE"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
         successResponse={{
           message: "Column deleted successfully"
         }}
@@ -401,7 +401,7 @@ When creating columns, use the following `uiDataType` values to define the behav
       <h4>Try it out</h4>
       <ApiPlayground
         method="PUT"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows"
         defaultBody={{
           id: 1,
           cellValues: { name: "dega" }
