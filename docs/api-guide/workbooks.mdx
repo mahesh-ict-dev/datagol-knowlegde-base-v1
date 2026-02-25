@@ -16,7 +16,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables</code>
   </div>
   
   <div className="endpoint-body">
@@ -41,7 +41,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-get">GET</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId</code>
   </div>
   
   <div className="endpoint-body">
@@ -61,7 +61,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external</code>
   </div>
   
   <div className="endpoint-body">
@@ -82,23 +82,23 @@ Workbooks are interactive documents within a Workspace where you can perform dat
         <tr>
           <td><code>requestPageDetails</code></td>
           <td>object</td>
-          <td>Yes</td>
+          <td>No</td>
           <td>Pagination settings (pageNumber, pageSize)</td>
-          <td><code>{'{"pageNumber": 1, "pageSize": 50}'}</code></td>
+          <td><code>{ '{"pageNumber": 1, "pageSize": 500}' }</code></td>
         </tr>
         <tr>
           <td><code>whereClause</code></td>
           <td>string</td>
           <td>No</td>
-          <td>SQL-like filter condition</td>
-          <td><code>"age > 25"</code></td>
+          <td>SQL-like filter condition. Dates must be in <code>YYYY-MM-DD</code> format.</td>
+          <td><code>{"(`first_name` like '%d%' and `years_of_experience` > 4)"}</code></td>
         </tr>
         <tr>
           <td><code>sortOptions</code></td>
           <td>array</td>
           <td>No</td>
           <td>List of sorting rules</td>
-          <td><code>{'[{"columnName": "name", "direction": "ASC"}]'}</code></td>
+          <td><code>{'[{"columnName": "first_name", "direction": "DESC"}]'}</code></td>
         </tr>
       </tbody>
     </table>
@@ -109,13 +109,15 @@ Workbooks are interactive documents within a Workspace where you can perform dat
         method="POST"
         endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
         defaultBody={{
-          requestPageDetails: { pageNumber: 1, pageSize: 50 },
+          requestPageDetails: { pageNumber: 1, pageSize: 500 },
+          sortOptions: [{ columnName: "first_name", direction: "DESC" }],
+          whereClause: "(`first_name` like '%d%' and `years_of_experience` > 4 and `start_date` between '2004-01-01' and '2009-12-31' and `is_active` = true)"
         }}
         successResponse={{
           pageDetails: { totalRows: 1250, pageNumber: 1 },
           rows: [
-            { id: 1, name: "Sample Item", value: 100 },
-            { id: 2, name: "Another Item", value: 200 },
+            { id: 1, first_name: "Daniel", years_of_experience: 5, start_date: "2005-06-15", is_active: true },
+            { id: 2, first_name: "David", years_of_experience: 8, start_date: "2008-01-20", is_active: true },
           ],
         }}
         errorResponse={{
@@ -134,7 +136,7 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-get">GET</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/:rowId</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/:rowId</code>
   </div>
   
   <div className="endpoint-body">
@@ -181,7 +183,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column</code>
   </div>
   
   <div className="endpoint-body">
@@ -207,11 +209,11 @@ When creating columns, use the following `uiDataType` values to define the behav
     {
         "uiDataType": "FORMULA",
         "uiMetadata": {
-            "title": "Description Length"
+            "title": "sample demo formula"
         },
-        "formula": "length(description)",
+        "formula": "length(name)",
         "formulaType": "SQL",
-        "name": "desc_length"
+        "name": "sample_demo_formula"
     }
     ```
 
@@ -241,6 +243,43 @@ When creating columns, use the following `uiDataType` values to define the behav
     </TabItem>
     </Tabs>
 
+    <div className="important-note">
+      <h4>🛠️ How to Enable AI Features</h4>
+      <p>To turn a standard column into an AI-powered one, you must include the <code>settings.aiSettings</code> object in your request:</p>
+      <ul>
+        <li><strong>enabled</strong>: Set to <code>true</code> to activate AI processing.</li>
+        <li><strong>prompt</strong>: The "instruction" for the AI (e.g., "Summarize this row").</li>
+        <li><strong>model</strong>: Choose between <code>gpt-4o-mini</code> or <code>gpt-4o</code>.</li>
+        <li><strong>webAccess</strong>: (Optional) Set to <code>true</code> if the AI needs to browse the internet to find information.</li>
+      </ul>
+      <p><em>Note: AI columns automatically re-process whenever the source fields they depend on are updated.</em></p>
+    </div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="POST"
+        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column"
+        defaultBody={{
+          uiDataType: "FORMULA",
+          uiMetadata: { title: "sample demo formula" },
+          formula: "length(name)",
+          formulaType: "SQL",
+          name: "sample_demo_formula"
+        }}
+        successResponse={{
+          id: "col_98765",
+          name: "sample_demo_formula",
+          status: "CREATED"
+        }}
+        errorResponse={{
+          error: "Bad Request",
+          message: "Invalid formula syntax",
+          code: "INVALID_FORMULA"
+        }}
+      />
+    </div>
+
   </div>
 </div>
 
@@ -249,7 +288,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-put">PUT</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
   </div>
   
   <div className="endpoint-body">
@@ -292,7 +331,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-delete">DELETE</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
   </div>
   
   <div className="endpoint-body">
@@ -317,7 +356,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
   </div>
   
   <div className="endpoint-body">
@@ -342,7 +381,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-put">PUT</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
   </div>
   
   <div className="endpoint-body">
@@ -383,7 +422,7 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-delete">DELETE</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
   </div>
   
   <div className="endpoint-body">

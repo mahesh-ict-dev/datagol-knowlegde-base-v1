@@ -32,10 +32,11 @@ import ApiPlayground from "@site/src/components/ApiPlayground";
 </div>
 
 :::info Quick start
-This guide covers two main authentication flows:
+This guide is structured to help you build applications quickly:
 
-1. **User Authentication** - JWT-based login for identity management
-2. **Service Account Authentication** - Token-based access for data operations
+1. **[Complete API Flow](/docs/api-guide/api-flow)** - Visual flowchart and step-by-step app building sequence.
+2. **Authentication** - JWT-based login and Service Account management.
+3. **Workspaces & Workbooks** - Core data operations.
    :::
 
 ---
@@ -45,7 +46,7 @@ This guide covers two main authentication flows:
 <div className="base-url-container">
   <div className="base-url-badge">
     <strong>Base URL:</strong>
-    <code className="base-url">https://www.example.com</code>
+    <code className="base-url">https://be.datagol.ai</code>
   </div>
   <p className="base-url-note">
     All endpoints below are relative to this base URL.
@@ -103,11 +104,26 @@ Leverage these resources to integrate DataGOL APIs into your workflow or allow A
     </a>
   </div>
 
+<div className="step-card">
+  <h4>📬 Postman Collection</h4>
+  <p>
+    Test all endpoints instantly. Includes pre-configured environment variables
+    and example bodies.
+  </p>
+  <a
+    href="/datagol-knowlegde-base-v1/datagol_postman_collection.json"
+    download
+    className="button button--secondary button--outline button--sm"
+  >
+    Download Postman Collection
+  </a>
+</div>
+
   <div className="step-card">
-    <h4>📮 Postman Collection</h4>
-    <p>Test all endpoints instantly. Includes pre-configured environment variables and example bodies.</p>
-    <a href="/datagol-knowlegde-base-v1/datagol_postman_collection.json" download className="button button--secondary button--outline button--sm">
-      Download Postman Collection
+    <h4>🔄 Application Lifecycle</h4>
+    <p>Understand the step-by-step sequence of API calls required to build a full application.</p>
+    <a href="/datagol-knowlegde-base-v1/docs/api-guide/api-flow" className="button button--info button--outline button--sm">
+      View API Flow
     </a>
   </div>
 </div>
@@ -221,7 +237,7 @@ export default function QueryTable() {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://www.example.com/noCo/api/v2/workspaces/${workspaceId}/tables/${tableId}/executeQuery`,
+          `https://be.datagol.ai/noCo/api/v2/workspaces/${workspaceId}/tables/${tableId}/executeQuery`,
           {
             method: "POST",
             headers: {
@@ -267,7 +283,7 @@ export default function QueryTable() {
 import os
 import requests
 
-BASE = "https://www.example.com"
+BASE = "https://be.datagol.ai"
 
 # 1) Login (JWT)
 login = requests.post(
@@ -300,7 +316,7 @@ print(q.json())
 <TabItem value="javascript" label="JavaScript">
 
 ```js
-const BASE = "https://www.example.com";
+const BASE = "https://be.datagol.ai";
 
 async function login(email, password) {
   const res = await fetch(`${BASE}/idp/api/v1/user/login`, {
@@ -360,7 +376,7 @@ import (
 type TokenResp struct { Token string `json:"token"` }
 
 func main() {
-  base := "https://www.example.com"
+  base := "https://be.datagol.ai"
 
   loginBody := []byte(`{"email":"YOUR_EMAIL","password":"YOUR_PASSWORD"}`)
   req, _ := http.NewRequest("POST", base+"/idp/api/v1/user/login", bytes.NewBuffer(loginBody))
@@ -407,7 +423,7 @@ static size_t WriteCB(void* contents, size_t size, size_t nmemb, void* userp) {
 }
 
 int main() {
-  const std::string BASE = "https://www.example.com";
+  const std::string BASE = "https://be.datagol.ai";
   const std::string SERVICE_TOKEN = "YOUR_SERVICE_TOKEN";
   const std::string WORKSPACE = "YOUR_WORKSPACE_ID";
   const std::string TABLE = "YOUR_TABLE_ID";
