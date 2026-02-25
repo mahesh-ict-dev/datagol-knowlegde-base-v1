@@ -40,7 +40,6 @@ const config = {
   },
 
   // Performance Optimizations
-  /* 
   future: {
     experimental_faster: {
       swcJsLoader: true,
@@ -51,7 +50,6 @@ const config = {
       mdxCrossCompilerCache: true,
     },
   },
-  */
 
 
   presets: [
@@ -324,12 +322,13 @@ const config = {
     
     plugins: [
       './src/plugins/iframe-permissions-plugin.js',
+      /*
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
           hashed: true,
           indexDocs: true,
-          indexBlog: false,
+          indexBlog: true,
           indexPages: true,
           docsRouteBasePath: '/docs',
           language: ['en'],
@@ -339,6 +338,7 @@ const config = {
           explicitSearchResultPath: true,
         },
       ],
+      */
       
       // PWA Plugin for offline support
       [
