@@ -9,6 +9,10 @@ const config = {
   title: 'DataGOL Documentation',
   tagline: 'Knowledge Base',
   favicon: 'img/favicon.ico',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 
   // Production URL - uncomment for production deployment
   //url: 'https://docs.datagol.ai',
