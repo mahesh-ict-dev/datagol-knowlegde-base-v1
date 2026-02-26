@@ -1,7 +1,7 @@
 ---
 title: v1.0.229
 description: v1.0.229 Release notes February 2026
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
@@ -41,7 +41,7 @@ The Edit button is disabled while an orchestration is **Running** status.  This 
 
 ### BI
 
--   **Issue:** Users encountered errors when attempting to edit **BI queries** connected to Redshift (TSL). Specifically, the connection type would default to a blank value, triggering a "Spark error" and preventing the query from running.
+-   **Issue:** Users encountered errors when attempting to edit **BI queries** connected to Redshift. Specifically, the connection type would default to a blank value, triggering a "Spark error" and preventing the query from running.
     
 -   **Fix:** We resolved a synchronization issue to ensure that the **JDBC provider type** remains correctly mapped when a workbook is opened for editing.
     

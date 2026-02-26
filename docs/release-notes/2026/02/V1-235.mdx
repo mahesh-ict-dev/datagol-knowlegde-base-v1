@@ -1,0 +1,43 @@
+---
+title: v1.0.235
+description: v1.0.235 Release notes February 2026
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 24, 2026**
+
+## New features and enhancements 
+
+### AI agents 
+
+-   **Automated service account integration for public agents:** The process for managing agent permissions has been streamlined. When a custom agent is configured for external access, the system now automatically creates the service account and attaches the workspace, eliminating manual configuration.
+
+    -   **Automatic provisioning:** Enabling external access triggers the immediate creation of a dedicated service account.
+        
+    -   **Workspace synchronization:** The service account is automatically attached to all workspaces associated with the agent.
+        
+    -   **Dynamic updates:** When an agent is updated with new workspaces, the service account permissions are silently refreshed to include the latest workspace list.
+        
+    -   **Clean interface:** Service accounts remain hidden from the **Team** and **Workspace** views to maintain a decluttered administrative environment.
+
+-   **Support for Claude 3.6 Sonnet** is now available. This update provides a significant boost in reasoning, coding proficiency, and instruction following while maintaining high execution speeds.
+
+-   **Expanded file support for knowledge graph creation:** The Knowledge Graph agent is updated to support a wider range of file formats. This expansion allows for more comprehensive data ingestion and more detailed entity relationship mapping.
+    Following are the new supported formats:
+
+    -   **Structured data:** Full support for **Excel (.xlsx)** and improved parsing for large **JSON** and **CSV** datasets.
+        
+    -   **Document types:** Added support for **Rich Text (.rtf)** and **OpenDocument (.odt)** files.
+
+-   **Concurrent public link support**: Enhanced session management now enables the opening of multiple public links within the same browser. This update introduces multi-session support for public links, allowing multiple agent or application instances to run simultaneously in the same browser without session conflicts.
+
+
+## Bug Fixes 
+
+### Agents
+
+-   Fixed an issue where selecting a specific model within a Custom Agent configuration would fail to propagate to the chat interface. Chats will now correctly honor the model parameters defined at the agent level rather than defaulting to the system standard.
+
+-   Fixed Broken Agent Share Links: Resolved a critical issue where public thread links generated for Custom Agents were resulting in a 404 "We could not find a match" error.
