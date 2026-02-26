@@ -36,7 +36,8 @@ const config = {
   },
 
   // Performance Optimizations
- future: {
+  /*
+  future: {
     experimental_faster: {
       swcJsLoader: true,
       swcJsMinimizer: true,
@@ -46,6 +47,7 @@ const config = {
       mdxCrossCompilerCache: true,
     },
   },
+  */
 
 
   presets: [
@@ -127,7 +129,7 @@ const config = {
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false, // Set to true to disable dark mode for better performance
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
       
       navbar: {
@@ -315,12 +317,13 @@ const config = {
     
     plugins: [
       './src/plugins/iframe-permissions-plugin.js',
+      /*
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
           hashed: true,
           indexDocs: true,
-          indexBlog: false,
+          indexBlog: true,
           indexPages: true,
           docsRouteBasePath: '/docs',
           language: ['en'],
@@ -330,6 +333,7 @@ const config = {
           explicitSearchResultPath: true,
         },
       ],
+      */
       
       // PWA Plugin for offline support
       [

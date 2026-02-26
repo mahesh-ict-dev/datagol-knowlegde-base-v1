@@ -4,7 +4,7 @@ info:
   description: Comprehensive API for DataGOL platform authentication, workspaces, and workbooks.
   version: 2.0.0
 servers:
-  - url: https://www.example.com
+  - url: https://be.datagol.ai
     description: Production server
 
 components:
@@ -216,7 +216,6 @@ paths:
         content:
           application/json:
             schema:
-              type: object
               properties:
                 requestPageDetails:
                   type: object
@@ -231,6 +230,14 @@ paths:
                     properties:
                       columnName: { type: string }
                       direction: { type: string, enum: [ASC, DESC] }
+              example:
+                requestPageDetails:
+                  pageNumber: 1
+                  pageSize: 500
+                sortOptions:
+                  - columnName: first_name
+                    direction: DESC
+                whereClause: "(`first_name` like '%d%' and `years_of_experience` > 4 and `start_date` between '2004-01-01' and '2009-12-31' and `is_active` = true)"
       responses:
         '200':
           description: OK
@@ -264,6 +271,78 @@ paths:
                     title: { type: string }
                 formula: { type: string }
                 formulaType: { type: string, enum: [SQL] }
+                settings:
+                  type: object
+                  properties:
+                    aiSettings:
+                      type: object
+                      properties:
+                        enabled: { type: boolean }
+                        prompt: { type: string }
+                        model: { type: string }
+                        webAccess: { type: boolean }
+              example:
+                uiDataType: FORMULA
+                uiMetadata:
+                  title: sample demo formula
+                formula: length(name)
+                formulaType: SQL
+                name: sample_demo_formula
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/columns/{columnId}:
+    put:
+      summary: Update Column
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: columnId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                uiDataType: { type: string }
+                uiMetadata:
+                  type: object
+                  properties:
+                    title: { type: string }
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete Column
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: columnId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         '200':
           description: OK
@@ -293,6 +372,32 @@ paths:
       responses:
         '200':
           description: OK
+    put:
+      summary: Update Row
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: integer }
+                cellValues: { type: object }
+      responses:
+        '200':
+          description: OK
     delete:
       summary: Delete Row(s)
       tags: [Workbooks]
@@ -317,6 +422,28 @@ paths:
                 rowIds:
                   type: array
                   items: { type: integer }
+      responses:
+        '200':
+          description: OK
+
+  /noCo/api/v2/workspaces/{workspaceId}/tables/{tableId}/rows/{rowId}:
+    get:
+      summary: Get Row by ID
+      tags: [Workbooks]
+      security: [{ ServiceTokenAuth: [] }]
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tableId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: rowId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         '200':
           description: OK

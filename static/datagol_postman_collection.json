@@ -175,7 +175,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"requestPageDetails\": {\n        \"pageNumber\": 1,\n        \"pageSize\": 50\n    },\n    \"whereClause\": \"\",\n    \"sortOptions\": []\n}"
+							"raw": "{\n    \"requestPageDetails\": {\n        \"pageNumber\": 1,\n        \"pageSize\": 500\n    },\n    \"sortOptions\": [{\n      \"columnName\": \"first_name\",\n      \"direction\": \"DESC\"\n    }],\n    \"whereClause\": \"(`first_name` like '%d%' and `years_of_experience` > 4 and `start_date` between '2004-01-01' and '2009-12-31' and `is_active` = true)\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external",
@@ -189,7 +189,7 @@
 					}
 				},
 				{
-					"name": "Create Column",
+					"name": "Create Column (Standard)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -212,7 +212,97 @@
 					}
 				},
 				{
-					"name": "Add Row",
+					"name": "Create Column (AI Generated)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uiDataType\": \"SINGLE_LINE_TEXT\",\n    \"name\": \"ai_col\",\n    \"uiMetadata\": {\"title\": \"AI Column\"},\n    \"settings\": {\n        \"aiSettings\": {\n            \"enabled\": true,\n            \"prompt\": \"Extract data from name field\",\n            \"model\": \"gpt-4o-mini\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "column"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Column",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"updated_col\",\n    \"uiMetadata\": {\"title\": \"Updated Title\"}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "columns", ":columnId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "columnId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Column",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "columns", ":columnId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "columnId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Formula Column",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "accept", "value": "*/*" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uiDataType\": \"FORMULA\",\n    \"uiMetadata\": {\n        \"title\": \"sample demo formula\"\n    },\n    \"formula\": \"length(name)\",\n    \"formulaType\": \"SQL\",\n    \"name\": \"sample_demo_formula\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "column"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Rows",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -222,6 +312,48 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"cellValues\": {\n        \"column_name\": \"value\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Row by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/:rowId",
+							"host": ["{{base_url}}"],
+							"path": ["noCo", "api", "v2", "workspaces", ":workspaceId", "tables", ":tableId", "rows", ":rowId"],
+							"variable": [
+								{ "key": "workspaceId", "value": "" },
+								{ "key": "tableId", "value": "" },
+								{ "key": "rowId", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Existing Row",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "x-auth-token", "value": "{{service_token}}" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"cellValues\": {\n        \"column_name\": \"new-value\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows",
@@ -261,7 +393,7 @@
 		}
 	],
 	"variable": [
-		{ "key": "base_url", "value": "https://www.example.com" },
+		{ "key": "base_url", "value": "https://be.datagol.ai" },
 		{ "key": "email", "value": "user@example.com" },
 		{ "key": "password", "value": "password123" },
 		{ "key": "jwt_token", "value": "<insert-jwt-from-login-here>" },

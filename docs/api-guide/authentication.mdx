@@ -18,7 +18,7 @@ This section covers how to authenticate with the DataGOL platform and manage ser
     <div className="step-number">1</div>
     <div className="step-content">
       <h4>User Login (JWT)</h4>
-      <p>Authenticate with email/password to get JWT token</p>
+      <div>Authenticate with email/password to get JWT token</div>
     </div>
   </div>
   <div className="auth-arrow">→</div>
@@ -26,7 +26,7 @@ This section covers how to authenticate with the DataGOL platform and manage ser
     <div className="step-number">2</div>
     <div className="step-content">
       <h4>Service Account</h4>
-      <p>Create or manage service account tokens</p>
+      <div>Create or manage service account tokens</div>
     </div>
   </div>
   <div className="auth-arrow">→</div>
@@ -34,7 +34,7 @@ This section covers how to authenticate with the DataGOL platform and manage ser
     <div className="step-number">3</div>
     <div className="step-content">
       <h4>Data Access</h4>
-      <p>Use service token to access data APIs</p>
+      <div>Use service token to access data APIs</div>
     </div>
   </div>
 </div>
@@ -46,11 +46,11 @@ To interact with the API, you first need to obtain a JWT (JSON Web Token) by log
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/idp/api/v1/user/login</code>
+    <code className="endpoint-url">https://be.datagol.ai/idp/api/v1/user/login</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Authenticates a user and returns a session token. Use this token for all subsequent Identity (IdP) requests.</p>
+    <div>Authenticates a user and returns a session token. Use this token for all subsequent Identity (IdP) requests.</div>
     
     <h4>Request Body</h4>
     ```json
@@ -62,15 +62,15 @@ To interact with the API, you first need to obtain a JWT (JSON Web Token) by log
 
     <h4>Response</h4>
     <div className="response-info">
-      <p>✅ <strong>Success:</strong> Returns <code>Authorization: Bearer &lt;JWT&gt;</code> header</p>
-      <p>📝 <strong>Note:</strong> Extract only the token value (remove "Bearer " prefix) for use in subsequent headers.</p>
+      <div>✅ <strong>Success:</strong> Returns <code>Authorization: Bearer &lt;JWT&gt;</code> header</div>
+      <div>📝 <strong>Note:</strong> Extract only the token value (remove "Bearer " prefix) for use in subsequent headers.</div>
     </div>
 
     <div className="playground-section">
       <h4>Try it out</h4>
       <ApiPlayground
         method="POST"
-        endpoint="/idp/api/v1/user/login"
+        endpoint="https://be.datagol.ai/idp/api/v1/user/login"
         defaultBody={{ email: "user@example.com", password: "password123" }}
         successResponse={{
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -100,7 +100,7 @@ All IdP endpoints require the JWT token from login: `Authorization: Bearer &lt;J
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/idp/api/v1/company/serviceAccount</code>
+    <code className="endpoint-url">https://be.datagol.ai/idp/api/v1/company/serviceAccount</code>
   </div>
   
   <div className="endpoint-body">
@@ -131,11 +131,11 @@ All IdP endpoints require the JWT token from login: `Authorization: Bearer &lt;J
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-get">GET</span>
-    <code className="endpoint-url">/idp/api/v1/company/serviceAccount/:id/token/reset</code>
+    <code className="endpoint-url">https://be.datagol.ai/idp/api/v1/company/serviceAccount/:id/token/reset</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Resets the access token for a specific service account. This is useful for rotating credentials or recovering lost tokens.</p>
+    <div>Resets the access token for a specific service account. This is useful for rotating credentials or recovering lost tokens.</div>
     
     <h4>Query Parameters</h4>
     <ul>
@@ -169,7 +169,7 @@ All IdP endpoints require the JWT token from login: `Authorization: Bearer &lt;J
       <h4>Try it out</h4>
       <ApiPlayground
         method="GET"
-        endpoint="/idp/api/v1/company/serviceAccount/:id/token/reset"
+        endpoint="https://be.datagol.ai/idp/api/v1/company/serviceAccount/:id/token/reset"
         defaultBody={{ neverExpires: false }}
         successResponse={{
           token: "sa_new_token_12345",
@@ -191,12 +191,12 @@ All IdP endpoints require the JWT token from login: `Authorization: Bearer &lt;J
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-delete">DELETE</span>
-    <code className="endpoint-url">/idp/api/v1/company/serviceAccount/:id</code>
+    <code className="endpoint-url">https://be.datagol.ai/idp/api/v1/company/serviceAccount/:id</code>
   </div>
 
   <div className="endpoint-body">
-    <p>
+    <div>
       <strong>Response:</strong> 200 OK with empty body on success
-    </p>
+    </div>
   </div>
 </div>

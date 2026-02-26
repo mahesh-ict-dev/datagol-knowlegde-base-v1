@@ -343,9 +343,11 @@ If you want to make only certain links italic, add a class in your Markdown usin
   color: white !important;
 }
 
-.method-post { background: #28a745; }
-.method-get { background: #007bff; }
-.method-delete { background: #dc3545; }
+.method-post { background: #28a745 !important; }
+.method-get { background: #007bff !important; }
+.method-put { background: #f39c12 !important; }
+.method-patch { background: #e67e22 !important; }
+.method-delete { background: #dc3545 !important; }
 
 .endpoint-url {
   font-family: inherit;

@@ -33,19 +33,23 @@
   font-weight: 700;
   font-size: 0.85rem;
   color: #fff;
+  flex-shrink: 0;
 }
 
-.methodPOST {
+.methodpost {
   background: #28a745;
 }
-.methodGET {
+.methodget {
   background: #007bff;
 }
-.methodDELETE {
+.methoddelete {
   background: #dc3545;
 }
-.methodPUT {
-  background: #f0ad4e;
+.methodput {
+  background: #f39c12;
+}
+.methodpatch {
+  background: #e67e22;
 }
 
 .endpoint {
@@ -53,8 +57,77 @@
   font-size: 0.9rem;
   color: #444;
 }
-
 [data-theme="dark"] .endpoint {
+  color: #c9d1d9;
+}
+
+.modeToggle {
+  display: flex;
+  background: #f1f3f5;
+  padding: 0.25rem;
+  border-radius: 8px;
+  margin-left: auto;
+}
+
+[data-theme="dark"] .modeToggle {
+  background: #21262d;
+}
+
+.toggleBtn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #4b5563;
+  transition: all 0.2s;
+}
+
+[data-theme="dark"] .toggleBtn {
+  color: #8b949e;
+}
+
+.activeToggle {
+  background: #ffffff;
+  color: #1a73e8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .activeToggle {
+  background: #30363d;
+  color: #58a6ff;
+}
+
+.authSection {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #d1d5da;
+}
+
+[data-theme="dark"] .authSection {
+  background: #0d1117;
+  border-color: #30363d;
+}
+
+.tokenInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+  font-family: "Fira Code", monospace;
+  font-size: 0.8rem;
+  background: #ffffff;
+  color: #24292e;
+  margin-top: 0.5rem;
+}
+
+[data-theme="dark"] .tokenInput {
+  background: #0d1117;
+  border-color: #30363d;
   color: #c9d1d9;
 }
 
@@ -157,9 +230,11 @@
   color: #e1e4e8;
   padding: 1rem;
   border-radius: 8px;
+  max-height: 400px;
   overflow: auto;
   font-size: 0.85rem;
   margin: 0;
+  border: 1px solid #30363d;
 }
 
 .statusBadge {

@@ -16,11 +16,11 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Initializes a new table within a specific workspace. You can optionally include columns in the same request.</p>
+    <div>Initializes a new table within a specific workspace. You can optionally include columns in the same request.</div>
     
     <h4>Query Parameters</h4>
     <ul>
@@ -41,11 +41,11 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-get">GET</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Retrieves the structure, constraints, and column definitions of a specific table.</p>
+    <div>Retrieves the structure, constraints, and column definitions of a specific table.</div>
 
     <h4>Example cURL</h4>
     ```bash
@@ -61,11 +61,11 @@ Workbooks are interactive documents within a Workspace where you can perform dat
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Fetches rows from a table with support for complex filtering, sorting, and pagination.</p>
+    <div>Fetches rows from a table with support for complex filtering, sorting, and pagination.</div>
 
     <h4>Request Body (JSON)</h4>
     <table>
@@ -82,23 +82,23 @@ Workbooks are interactive documents within a Workspace where you can perform dat
         <tr>
           <td><code>requestPageDetails</code></td>
           <td>object</td>
-          <td>Yes</td>
+          <td>No</td>
           <td>Pagination settings (pageNumber, pageSize)</td>
-          <td><code>{'{"pageNumber": 1, "pageSize": 50}'}</code></td>
+          <td><code>{ '{"pageNumber": 1, "pageSize": 500}' }</code></td>
         </tr>
         <tr>
           <td><code>whereClause</code></td>
           <td>string</td>
           <td>No</td>
-          <td>SQL-like filter condition</td>
-          <td><code>"age > 25"</code></td>
+          <td>SQL-like filter condition. Dates must be in <code>YYYY-MM-DD</code> format.</td>
+          <td><code>{"(`first_name` like '%d%' and `years_of_experience` > 4)"}</code></td>
         </tr>
         <tr>
           <td><code>sortOptions</code></td>
           <td>array</td>
           <td>No</td>
           <td>List of sorting rules</td>
-          <td><code>{'[{"columnName": "name", "direction": "ASC"}]'}</code></td>
+          <td><code>{'[{"columnName": "first_name", "direction": "DESC"}]'}</code></td>
         </tr>
       </tbody>
     </table>
@@ -107,21 +107,52 @@ Workbooks are interactive documents within a Workspace where you can perform dat
       <h4>Try it out</h4>
       <ApiPlayground
         method="POST"
-        endpoint="/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/data/external"
         defaultBody={{
-          requestPageDetails: { pageNumber: 1, pageSize: 50 },
+          requestPageDetails: { pageNumber: 1, pageSize: 500 },
+          sortOptions: [{ columnName: "first_name", direction: "DESC" }],
+          whereClause: "(`first_name` like '%d%' and `years_of_experience` > 4 and `start_date` between '2004-01-01' and '2009-12-31' and `is_active` = true)"
         }}
         successResponse={{
           pageDetails: { totalRows: 1250, pageNumber: 1 },
           rows: [
-            { id: 1, name: "Sample Item", value: 100 },
-            { id: 2, name: "Another Item", value: 200 },
+            { id: 1, first_name: "Daniel", years_of_experience: 5, start_date: "2005-06-15", is_active: true },
+            { id: 2, first_name: "David", years_of_experience: 8, start_date: "2008-01-20", is_active: true },
           ],
         }}
         errorResponse={{
           error: "Forbidden",
           message: "You do not have permission to access this table",
           code: "WS_PERMISSION_DENIED",
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+### Get Row by ID
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-get">GET</span>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/:rowId</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <div>Retrieves a single record by its internal unique identifier.</div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="GET"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows/1"
+        successResponse={{
+          id: 1,
+          cellValues: {
+            name: "De-ga Project",
+            status: "Active"
+          }
         }}
       />
     </div>
@@ -152,11 +183,11 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Adds a new column to a table. Supports various data types including Standard and Formula columns.</p>
+    <div>Adds a new column to a table. Supports various data types including Standard and Formula columns.</div>
 
     <Tabs>
     <TabItem value="standard" label="Standard Column">
@@ -178,16 +209,144 @@ When creating columns, use the following `uiDataType` values to define the behav
     {
         "uiDataType": "FORMULA",
         "uiMetadata": {
-            "title": "Description Length"
+            "title": "sample demo formula"
         },
-        "formula": "length(description)",
+        "formula": "length(name)",
         "formulaType": "SQL",
-        "name": "desc_length"
+        "name": "sample_demo_formula"
+    }
+    ```
+
+    </TabItem>
+    <TabItem value="ai" label="AI Generated Column">
+
+    ```json
+    {
+        "uiDataType": "SINGLE_LINE_TEXT",
+        "name": "ai_summary",
+        "description": "Auto-generated summary",
+        "uiMetadata": {
+            "title": "AI Summary"
+        },
+        "required": false,
+        "settings": {
+            "aiSettings": {
+                "enabled": true,
+                "prompt": "Summarize the 'description' field in 10 words",
+                "model": "gpt-4o-mini",
+                "webAccess": false
+            }
+        }
     }
     ```
 
     </TabItem>
     </Tabs>
+
+    <div className="important-note">
+      <h4>🛠️ How to Enable AI Features</h4>
+      <p>To turn a standard column into an AI-powered one, you must include the <code>settings.aiSettings</code> object in your request:</p>
+      <ul>
+        <li><strong>enabled</strong>: Set to <code>true</code> to activate AI processing.</li>
+        <li><strong>prompt</strong>: The "instruction" for the AI (e.g., "Summarize this row").</li>
+        <li><strong>model</strong>: Choose between <code>gpt-4o-mini</code> or <code>gpt-4o</code>.</li>
+        <li><strong>webAccess</strong>: (Optional) Set to <code>true</code> if the AI needs to browse the internet to find information.</li>
+      </ul>
+      <div><em>Note: AI columns automatically re-process whenever the source fields they depend on are updated.</em></div>
+    </div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="POST"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/column"
+        defaultBody={{
+          uiDataType: "FORMULA",
+          uiMetadata: { title: "sample demo formula" },
+          formula: "length(name)",
+          formulaType: "SQL",
+          name: "sample_demo_formula"
+        }}
+        successResponse={{
+          id: "col_98765",
+          name: "sample_demo_formula",
+          status: "CREATED"
+        }}
+        errorResponse={{
+          error: "Bad Request",
+          message: "Invalid formula syntax",
+          code: "INVALID_FORMULA"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+### Update Column
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-put">PUT</span>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <div>Updates an existing column's definition, such as its title, description, or data type settings.</div>
+
+    <h4>Request Body (JSON)</h4>
+    ```json
+    {
+        "name": "updated_column_name",
+        "uiDataType": "SINGLE_LINE_TEXT",
+        "uiMetadata": {
+            "title": "New Column Title"
+        }
+    }
+    ```
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="PUT"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
+        defaultBody={{
+          name: "question",
+          uiDataType: "SINGLE_LINE_TEXT",
+          uiMetadata: { title: "Updated Question Title" }
+        }}
+        successResponse={{
+          id: "col_12345",
+          name: "question",
+          status: "UPDATED"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
+### Delete Column
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-delete">DELETE</span>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <div>Permanently removes a column and all its associated data from the table.</div>
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="DELETE"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/columns/:columnId"
+        successResponse={{
+          message: "Column deleted successfully"
+        }}
+      />
+    </div>
 
   </div>
 </div>
@@ -197,11 +356,11 @@ When creating columns, use the following `uiDataType` values to define the behav
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-post">POST</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Inserts a new record into the specified table.</p>
+    <div>Inserts a new record into the specified table.</div>
 
     <h4>Request Body (JSON)</h4>
     ```json
@@ -217,16 +376,57 @@ When creating columns, use the following `uiDataType` values to define the behav
   </div>
 </div>
 
+### Update Existing Row
+
+<div className="endpoint-card">
+  <div className="endpoint-header">
+    <span className="method-badge method-put">PUT</span>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+  </div>
+  
+  <div className="endpoint-body">
+    <div>Updates an existing record. You must provide the row <code>id</code> along with the new <code>cellValues</code>.</div>
+
+    <h4>Request Body (JSON)</h4>
+    ```json
+    {
+        "id": 1,
+        "cellValues": {
+            "name": "Updated Project Name"
+        }
+    }
+    ```
+
+    <div className="playground-section">
+      <h4>Try it out</h4>
+      <ApiPlayground
+        method="PUT"
+        endpoint="https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows"
+        defaultBody={{
+          id: 1,
+          cellValues: { name: "dega" }
+        }}
+        successResponse={{
+          id: 1,
+          cellValues: { name: "dega" },
+          status: "UPDATED"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
 ### Delete Rows
 
 <div className="endpoint-card">
   <div className="endpoint-header">
     <span className="method-badge method-delete">DELETE</span>
-    <code className="endpoint-url">/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
+    <code className="endpoint-url">https://be.datagol.ai/noCo/api/v2/workspaces/:workspaceId/tables/:tableId/rows</code>
   </div>
   
   <div className="endpoint-body">
-    <p>Deletes one or more rows from a specific table within a workspace.</p>
+    <div>Deletes one or more rows from a specific table within a workspace.</div>
 
     <h4>Request Body (JSON)</h4>
     <table>
