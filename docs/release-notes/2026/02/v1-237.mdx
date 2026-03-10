@@ -1,0 +1,50 @@
+---
+title: v1.0.237
+description: v1.0.237 Release notes February 2026
+sidebar_position: 1
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 27, 2026**
+
+## New features and enhancements 
+
+### Agents
+
+#### Introduction of DAVE: Unified conversational agent
+
+Introduced **DAVE**, a sophisticated routing agent designed to provide a single, seamless interface for data interaction. DAVE serves as a unifying layer that eliminates the need for users to switch between different specialized agents manually. By analyzing the intent of a user’s query, DAVE automatically directs the request to the appropriate underlying service to deliver the most relevant response.
+
+**Key capabilities and functional highlights**
+
+-   **Intelligent routing:** DAVE acts as a central hub, routing queries to the **Data Conversation Agent (DCA)** for data-specific questions or the **Chart Agent** when a visual representation is required.
+    
+-   **Conversational query building:** Users can iteratively refine their data requests through natural dialogue. DAVE maintains conversation history to apply additional filters, breakdowns, or transformations (e.g., converting a data summary into a specific chart type) without requiring the user to restate the entire context.
+    
+-   **Advanced data transformation:** Unlike previous standalone agents, DAVE can identify when a dataset lacks a specific required field. It can autonomously derive logic to perform necessary transformations—such as splitting a "City, State" string into individual columns—to fulfill the user’s request.
+    
+-   **Enhanced execution transparency:** The interface now includes a dedicated **Execution Panel**. This allows users to view intermediate steps, "thinking" outputs, and the specific analytical logic DAVE employs before presenting the final result.
+    
+
+**Future roadmap for DAVE**
+
+While specialized agents remain available in the current UI, the long-term vision for the platform is to consolidate these capabilities under the DAVE interface. Future updates will include the integration of the **SQL Agent** and other domain-specific agents, further simplifying the user experience into a single conversational entry point.
+
+
+## Bug Fixes
+
+### AI 
+
+-   Fixed an issue where clicking the **Download** icon would occasionally trigger an error message. Data downloads are now working correctly and routing through our updated systems for better reliability.
+
+
+### Dashboards 
+
+**Issue:** Dashboard folders and pages were not maintaining their expected positions after deletion or creation events.
+
+**Fix:**
+
+-   **Folder creation:** Newly created folders now default to the **top** of the list for immediate visibility.
+    
+-   **Post-deletion retention:** When a dashboard page is deleted from a folder containing multiple pages, the remaining pages now **retain their position at the top** of the structure instead of shifting to the bottom.
