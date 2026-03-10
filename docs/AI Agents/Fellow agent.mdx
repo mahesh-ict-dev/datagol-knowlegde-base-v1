@@ -1,0 +1,118 @@
+---
+sidebar_position : 8
+tags : [AI, AI Agents,]
+slug : fellow-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+The DataGOL Fellow agent acts as your personal intelligent layer, ensuring that meeting data is never lost and is always ready to serve your specific project needs. Here is how the agent improves your daily workflow:
+
+-   **Eliminates manual information retrieval:** Instead of you spending time navigating external apps or hunting for specific meeting recordings, the agent allows you to pull exact details directly into your DataGOL chat. It does the "heavy lifting" of searching through hours of audio and text for you.
+    
+-   **Consolidates your professional context:** By connecting your meetings to DataGOL, the agent ensures your conversation history is no longer siloed. It provides you with a single point of truth where meeting insights live alongside your other data agents, such as Jira or HubSpot.
+    
+-   **Guarantees post-meeting accountability:** The agent identifies and tracks action items for you. This ensures that you never miss a follow-up task discussed during a call, effectively acting as your automated project coordinator.
+    
+-   **Provides instant catch-up capabilities:** If you miss a meeting or join late, the agent provides you with immediate, high-level summaries and attendance insights. This allows you to stay aligned with your team’s progress without needing to watch a full replay.
+    
+-   **Maintains organizational boundaries:** Through the MCP configuration, the agent ensures that your data interactions remain secure. You can define the specific rules and "tools" the agent is allowed to use, giving you total control over how your meeting data is handled or modified.
+
+## Connect to Fellow workspace 
+
+Integrating your Fellow workspace with DataGOL allows the agent to access your meeting records. Follow these steps to establish a secure connection and authorize the agent.
+
+:::tip [Prerequisite]
+Before you begin, ensure you have an active Fellow account and that your meetings are being recorded or synced within a Fellow workspace.
+:::
+
+1.	On the DataGOL platform, navigate to **Home** > **Agents** and select **Fellow agent**.
+2.	On the right panel, click the **here** link to configure a Fellow connector. 
+3.	In the **Configure Credentials**, you can either select a credential to use for this conversation or create a new credential. You can also make it the default for all your Fellow agents.
+4.	To create a new credential, click the **Create New Credential** button, enter a new connection name, and click **Connect with Fellow**. This action will redirect you to a secure Fellow authentication page.
+5.	Select and log into a workspace. In case you do not have a workspace, you can sign in using a login method (Google, Microsoft). 
+6.	Click **Authorize** to authenticate and grant the DataGOL agent permission to retrieve your meeting data. After authorization, you will be redirected back to the DataGOL interface:
+	-	Look for a confirmation message such as "Authentication successful" or "Connected."
+	-	The UI will automatically display your selected workspace as the active source for the agent.
+
+## Configure agent permissions (Optional)
+
+You can optionally configure the agent permissions to control how the agent interacts with your meeting data:
+
+1.	On the DataGOL platform, click the **Explore** tab on the left panel.
+2.	Locate the **Fellow agent** from the list of available agents. 
+3.	Select the **three-dot menu (...)** on the agent tile and choose **Settings**.
+4.	In the Agent settings, you can do the following:
+	-	Set high-level behavior and context for this agent. For example, Focus on workbook data only. Prefer concise answers. 
+	-  **Apply rules:** Use the **Instructions** section to provide custom guidelines, such as "Do not disclose internal project names in meeting summaries."
+    -   **View available tools:** See the specific functions the agent can perform, such as `get_meeting_info` or `list_action_items`.
+    -   **Set Rules/boundaries:** Add, remove, or reorder rules. The order defines the priority of the rules.
+    - **Enable or disable specific tools**: From the **MCP Tools**: Enable or disable specific tools. For instance, if you want the agent to only read information but not perform mutations (like deleting or updating notes), you can toggle those specific tools off.
+
+## Case study: Retrieving meeting intelligence with the Fellow agent
+
+### Scenario
+
+A user needs to verify the details of a Google Meet session that occurred on February 20th. They specifically need to confirm the meeting's purpose, identify who attended, and pinpoint any action items discussed during that session.
+
+### Challenge
+
+-   **Time constraints:** The user has multiple meetings recorded in their Fellow workspace and cannot manually review each recording to find the February 20th session.
+    
+-   **Data fragmentation:** The user is currently working within the DataGOL platform and does not want to switch between different applications to find meeting notes.
+    
+-   **Detail accuracy:** The user needs exact information regarding participation and the meeting summary to ensure their report is accurate.
+    
+
+### Solution: Using the DataGOL Fellow agent
+
+The user interacts with the Fellow agent directly through the DataGOL chat interface to retrieve the data.
+
+**1. Locating the specific meeting**
+
+The user begins by asking the agent to find the relevant meeting based on the date.
+
+-   **Query:** "Give me the February 20th Google meeting information."
+    
+-   **Agent action:** The agent initiates a "thinking" process, calling the Fellow MCP tool to search the connected workspace. It identifies that there was exactly one call on that date.
+    
+
+**2. Analyzing meeting insights**
+
+Once the meeting is identified, the user asks for the core outcomes.
+
+-   **Query:** "What were the action insights and key takeaways from this meeting?"
+    
+-   **Agent action:** The agent scans the transcript and provides a structured summary of the "Action Insights," including specific tasks and decisions made during the call.
+    
+
+**3. Verifying participation**
+
+To ensure the right stakeholders were involved, the user queries the attendance records.
+
+-   **Query:** "How many participants were on this call and who was late?"
+    
+-   **Agent action:** The agent retrieves the metadata for the meeting, listing the total number of attendees and noting any late arrivals or early departures.
+    
+
+### Results
+
+By leveraging the Fellow agent within DataGOL, the user achieved the following:
+
+-   **Efficiency:** The user retrieved specific meeting data in seconds without leaving the DataGOL environment.
+    
+-   **Clarity:** The agent provided a structured list of action items, removing the need for the user to transcribe notes manually.
+    
+-   **Verification:** The user confirmed the attendance details required for their project audit.
+    
+
+### Best practices for queries
+
+To get the best results from the Fellow agent, follow these tips derived from the transcript:
+
+-   **Mention the date:** Always include the date of the meeting (e.g., "February 20th") to help the agent filter results.
+    
+-   **Specify the platform:** If you have many meetings, specifying "Google Meet" or "Teams" can refine the search.
+    
+-   **Request specific links:** You can ask the agent for the "recording link" or the "full transcription" if you need to perform a deeper manual review.
+    
