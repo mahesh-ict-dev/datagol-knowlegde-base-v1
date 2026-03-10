@@ -1,0 +1,22 @@
+---
+title: v1.0.239
+description: v1.0.239 Release notes February 2026
+sidebar_position: 2
+---
+
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: March 05, 2026**
+
+## Bug fixes 
+
+### AI 
+
+
+-  Fixed a critical bug where `create_dataframe` would fail with a `401 Unauthorized` error when executed via a background worker thread (`ThreadPoolExecutor`).
+    The background worker threads now correctly inherit the necessary **Authorization headers**, ensuring that internal API calls succeed regardless of which thread executes the task.
+
+-  Addressed a sorting anomaly where tickets marked as Deployed were being incorrectly categorized or omitted from specific status buckets.
+
+-   Fixed an issue where the Jira Agent would occasionally conflate details between different tickets or user sessions. The agent now maintains a clean, accurate memory state.

@@ -1,0 +1,87 @@
+---
+title: v1.0.236
+description: v1.0.236 Release notes February 2026
+sidebar_position: 2
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: February 27, 2026**
+
+## New features and enhancements 
+
+### AI Agents 
+
+#### Fellow agent integration
+
+The **Fellow agent** is now available to help you manage and extract value from your meetings. By connecting to your Fellow workspace, this agent can analyze transcripts, summarize discussions, and track action items across platforms like Google Meet and Microsoft Teams.
+
+**Key capabilities**
+
+-   **Meeting insights and summaries.** The agent can provide detailed information about specific meetings, including summaries, participant lists, and key discussion points.
+    
+-   **Action item tracking.** You can ask the agent to identify and list specific action items or tasks mentioned during a call to ensure no follow-ups are missed.
+    
+-   **Transcript and recording access.** Quickly retrieve meeting transcripts or request recording links for easy download and review. **
+    
+-   **Cross-platform support.** The agent works with meeting data recorded via Fellow from various sources, including Google Meet and Teams.
+    
+
+**How to get started with Fellow agent**
+
+-   **Connect your account.** Navigate to the agent settings and select the Fellow connector. You will be redirected to authorize the connection and select your preferred Fellow workspace.
+    
+-   **Configure tool access.** Within the agent settings, you can view the available tools for the Fellow agent and enable or disable specific functions based on your organization’s needs.
+    
+-   **Query your meetings.** Once connected, you can ask the agent natural language questions such as, "Who was late to the meeting on Feb 20th?" or "Give me the action items from yesterday’s sync."
+### AI
+
+**Dynamic MCP tool configuration for agents:** Overhauled the **Model Context Protocol (MCP)** integration to simplify how agents discover and interact with external tools. The core improvement shifts from manual, static setups to a dynamic, ecosystem-based configuration that reduces overhead and enhances security.
+
+-   **Dynamic tool discovery:** Agents now support **self-describing MCP servers**. Instead of manually defining every tool in your code, the agent can query the server to automatically learn its capabilities, reducing token consumption by up to 90% through "Code Mode" execution.
+    
+-   **Remote & managed Servers:** We’ve introduced support for **Remote MCP Servers** (e.g., Figma, Notion, and AWS-managed servers). This allows you to connect to cloud-based tools without hosting the MCP server locally.
+    
+-   **Centralized tool governance:** A new **allowlist policy** layer has been added, allowing administrators to restrict which MCP servers an agent can connect to at the organizational level.
+
+### Data Sources
+
+-   **Support for AVRO format in Azure file datasource:**
+
+    Expanded the capabilities of the **Azure File Datasource** to include native support for the **AVRO** file format. This update enables users to ingest row-oriented binary data alongside existing formats, such as CSV, Excel, and Parquet.
+
+    -   **Recursive scanning:** The datasource now supports recursive directory scanning to identify and load all `.avro` files within a specified path.
+        
+    -   **Data consolidation:** Multiple AVRO files under a single path are automatically merged into a unified destination table.
+        
+    -   **Configuration:** Users can now explicitly select **AVRO** from the file format dropdown menu during datasource setup.
+
+-   **Automatic partition column inference:** The Azure File Datasource now includes **Automatic Partition Inference**, which detects folder-based partitioning patterns (e.g., `column=value`) and reflects them as columns in the output table. This eliminates the need for manual schema adjustments when loading data from structured data lakes.
+
+    -   **Dynamic Column Mapping:** The system extracts the folder name as the **Column Name** and the folder content as the **Value**.
+        
+    -   **Intelligent Type Inference:**
+    
+        -   **Date:** Values matching `yyyy-MM-dd` are automatically assigned the **DATE** type.
+            
+        -   **Integer:** Numeric values (e.g., `year=2025`) are inferred as **INTEGER**.
+            
+        -   **String:** Used as the default fallback for non-standard formats.
+        
+    -   **Multi-Level Support:** The implementation handles nested hierarchies, such as `year=2025/month=02/day=22/`, creating a separate typed column for each level.
+
+## Bug Fixes
+
+### Agents 
+
+-   **Custom agent:** Fixed an issue where document downloads would fail or return a 404 error; files are now consistently accessible and downloadable from the agent page.
+-   **Python agent:** Fixed a bug where `downloadparquet` would return an empty (0 bytes) file if column names contained spaces or special characters.
+-   **HubSpot agent:** The HubSpot agent was inconsistently following the user-defined rules and instructions. Mandatory constraints were occasionally treated as optional guidance, leading to outputs that conflicted with user configurations and reduced system reliability. 
+    The underlying prompt structure is updated to categorize user-defined rules as **"Mandatory and Non-Negotiable explicitly."** The agent now strictly enforces user-defined rules and mandatory instructions, ensuring consistent alignment with your specific workflow constraints.
+
+### Backend
+
+-   **Formulas:** Resolved an issue where formula evaluation would fail when using special characters; symbols like @, #, $, and others are now fully supported.
+
+
+

@@ -1,7 +1,7 @@
 ---
 title: v1.0.229
 description: v1.0.229 Release notes February 2026
-sidebar_position: 7
+sidebar_position: 9
 ---
 
 import ImagePopup from '@site/src/components/ImagePopup';
@@ -26,15 +26,13 @@ Redesigned the sharing UI to mirror Google Drive’s **General Access** model, e
 
 Relocated **AI Generate** function from the bottom bar into a dedicated two-tab layout (**Settings** and **AI Generate**) to reduce UI clutter and increase feature discoverability.
 
-<ImagePopup src="/img/release_notes/feb26/ai-generate-new-tab.png" alt="*ai-generate-new-tab" caption="*ai-generate-new-tab" />
-
 ### Onboarding 
 
-Implemented a maximum file size limit for onboarding uploads to ensure faster processing, smoother previews, and a more responsive setup experience. Users now receive immediate, helpful feedback if a file exceeds the limit, preventing failed uploads across all supported formats (Excel, CSV, PDF).
+Implemented a maximum file size limit for onboarding uploads to ensure faster processing, smoother previews, and a more responsive setup experience. If file size exceeds the maximum limit of 15 MB. Please upload a smaller file. Users now receive immediate, helpful feedback if a file exceeds the limit, preventing failed uploads across all supported formats (Excel, CSV, PDF).
 
 ### Orchestration 
 
-The Edit button is disabled while an orchestration is **Running** status.  This eliminates the risk of mid-run errors or data mismatches and workflows run exactly as planned, every time.
+The **Edit** button is disabled while an orchestration is **Running** status.  This eliminates the risk of mid-run errors or data mismatches and workflows run exactly as planned, every time.
 
 
 ## Bug fixes
