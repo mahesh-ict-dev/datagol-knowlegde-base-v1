@@ -1,0 +1,47 @@
+---
+sidebar_position: 17
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-mixpanel
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+# Mixpanel
+
+## Adding Mixpanel as data source
+
+Do the following to add Mixpanel as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **Mixpanel** icon.
+4. Specify the following details to add Mixpanel. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Username** | Specify your Mixpanel Service Account Username. |
+| **Secret** | Specify your Mixpanel Service Account Secret. |
+| **Project ID** | Specify your Mixpanel Project ID. This can be found in your Project Settings. |
+| **Project Timezone** | Specify the timezone for your Mixpanel project (e.g., `UTC`). The project timezone can be found in the project settings in the Mixpanel console. |
+| **Region** | Specify the region for your Mixpanel project. Typical values are `US` or `EU`. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate data for the last year by default. This will apply only to the Incremental streams. |
+
+5. Click **Submit**.
+
+## Supported sync modes
+
+* Full Refresh - Overwrite
+* Full Refresh - Append
+* Incremental - Append
+* Incremental - Append + Deduped
+
+## Supported streams
+
+* Export (Incremental)
+* Engage (Incremental)
+* Funnels (Incremental)
+* Revenue (Incremental)
+* Annotations (Full table)
+* Cohorts (Incremental)
+* Cohort Members (Incremental)

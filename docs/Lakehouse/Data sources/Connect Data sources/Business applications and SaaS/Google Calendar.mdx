@@ -1,0 +1,39 @@
+---
+sidebar_position: 13
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-google_calendar
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+# Google Calendar
+
+## Adding Google Calendar as data source
+
+Do the following to add Google Calendar as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **Google Calendar** icon.
+4. Specify the following details to add Google Calendar. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Calendar ID** | Specify the Google Calendar ID you wish to sync (e.g., `primary` or an email address). |
+| **Client ID** | Enter your Google OAuth Client ID. This is obtained from the [Google Cloud Console](https://console.cloud.google.com/). |
+| **Client Secret** | Enter your Google OAuth Client Secret. |
+| **Refresh Token** | Provide the OAuth refresh token generated for your Google account to allow persistent access. |
+
+5. Click **Submit**.
+
+## Supported streams
+
+* **Calendars**: Metadata for the calendars in the user's account.
+* **Calendar List**: The list of calendars that appear on the user's calendar interface.
+* **Events**: Individual events and appointments from the specified calendar.
+* **ACL**: Access control lists defining permissions for the calendar.
+* **Settings**: User settings for the calendar service.
+* **Free/Busy**: Times when the calendar is blocked (calculated based on events).
+

@@ -1,0 +1,31 @@
+---
+sidebar_position: 8
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-facebook-marketing
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+# Facebook Marketing
+
+## Adding Facebook Marketing as data source
+
+Do the following to add Facebook Marketing as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** to start the process of adding a new database.
+3. In the **New Data Source** page, click the **Facebook Marketing** icon.
+4. Specify the following details to add Facebook Marketing. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Ad Account ID(s)** | Specify the Facebook Ad Account IDs you want to sync. Multiple IDs should be separated by commas. |
+| **Access Token** | Enter a valid Facebook Marketing API Access Token. It is recommended to use a System User Long-lived token for persistent access. |
+| **Campaign Statuses** | Select the campaign statuses to include (e.g., ACTIVE, PAUSED, DELETED). If left blank, all statuses are included. |
+| **AdSet Statuses** | Select the AdSet statuses to include in the sync. |
+| **Ad Statuses** | Select the Ad statuses to include in the sync. |
+| **Start Date** | Enter the date in the YYYY-MM-DD format. DataGOL will replicate the data updated on and after this date. |
+| **Fetch Thumbnail Images from Ad Creative** | A toggle to enable fetching of thumbnail URLs for your Ad Creatives. |
+
+5. Click **Submit**.

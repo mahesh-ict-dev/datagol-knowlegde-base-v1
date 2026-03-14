@@ -1,0 +1,66 @@
+---
+sidebar_position: 27
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-snapchat-marketing
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+# Snapchat Marketing
+
+## Adding Snapchat Marketing as data source
+
+Do the following to add Snapchat Marketing as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the ***+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **Snapchat Marketing** icon.
+4. Specify the following details to add Snapchat Marketing. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Client ID** | Enter your Snapchat OAuth Client ID. |
+| **Client Secret** | Enter your Snapchat OAuth Client Secret. |
+| **Refresh Token** | Provide the OAuth refresh token for persistent API access. |
+| **Action Report Time** | Specify how conversions are reported. Options typically include `conversion` (default) or `impression`. |
+| **Swipe Up Attribution Window** | Length of the attribution window for swipe-up actions (e.g., `28d`, `7d`, `1d`). Default is `28d`. |
+| **View Attribution Window** | Length of the attribution window for views (e.g., `28d`, `1d`). Default is `28d`. |
+| **Organization IDs** | (Optional) List specific Organization IDs to sync. If empty, all accessible organizations will be synced. |
+| **Ad Account IDs** | (Optional) List specific Ad Account IDs to sync. If empty, all accounts within the organizations will be synced. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If blank, all available records will be synced. |
+
+5. Click **Submit**.
+
+
+## Supported sync modes
+
+* Full Refresh - Overwrite
+* Full Refresh - Append
+* Incremental - Append
+* Incremental - Append + Deduped
+
+
+## Supported streams
+
+* **AdAccounts** (Incremental)
+* **Ads** (Incremental)
+* **AdSquads** (Incremental)
+* **Campaigns** (Incremental)
+* **Creatives** (Incremental)
+* **Media** (Incremental)
+* **Organizations** (Incremental)
+* **Segments** (Incremental)
+* **AdAccounts_Stats_Hourly** (Incremental)
+* **AdAccounts_Stats_Daily** (Incremental)
+* **AdAccounts_Stats_Lifetime** (Full Refresh)
+* **Ads_Stats_Hourly** (Incremental)
+* **Ads_Stats_Daily** (Incremental)
+* **Ads_Stats_Lifetime** (Full Refresh)
+* **AdSquads_Stats_Hourly** (Incremental)
+* **AdSquads_Stats_Daily** (Incremental)
+* **AdSquads_Stats_Lifetime** (Full Refresh)
+* **Campaigns_Stats_Hourly** (Incremental)
+* **Campaigns_Stats_Daily** (Incremental)
+* **Campaigns_Stats_Lifetime** (Full Refresh)
+
