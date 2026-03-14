@@ -1,0 +1,44 @@
+---
+sidebar_position: 11
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-gmail
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+# GMail
+
+## Adding GMail as data source
+
+Do the following to add GMail as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **GMail** icon.
+4. Specify the following details to add GMail. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **OAuth Client ID** | Enter the Client ID for your Google Project. You can obtain this from the [Google Cloud Console](https://console.cloud.google.com/). |
+| **OAuth Client Secret** | Enter the Client Secret for your Google Project. |
+| **Refresh Token** | Provide the OAuth refresh token that allows DataGOL to maintain a persistent connection to your GMail account. |
+| **Include Spam and Trash** | A boolean flag to determine whether messages from the SPAM and TRASH folders should be included in the results. |
+
+5. Click **Submit**.
+
+## Supported sync modes
+
+* Full Refresh - Overwrite
+* Full Refresh - Append
+
+## Supported streams
+
+* **profile**: User profile information (no pagination).
+* **drafts**: All draft messages in the account.
+* **labels**: List of all labels in the account.
+* **labels_details**: Detailed information for each label.
+* **messages**: The content and metadata of all messages.
+* **threads**: Groups of related messages.
+

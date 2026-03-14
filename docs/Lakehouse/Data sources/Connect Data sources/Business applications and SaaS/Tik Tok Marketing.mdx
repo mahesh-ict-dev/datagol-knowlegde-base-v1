@@ -1,0 +1,57 @@
+---
+sidebar_position: 2
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-tik-tok-marketing
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+# TikTok Marketing
+
+## Adding TikTok Marketing as data source
+
+Do the following to add TikTok Marketing as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **TikTok Marketing** icon.
+4. Specify the following details to add TikTok Marketing. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Access Token** | Enter your TikTok Marketing API Access Token. This is required for authentication. |
+| **App ID** | Specify the App ID of your TikTok for Business developer application. |
+| **Secret Key** | Specify the Secret Key associated with your TikTok App ID. |
+| **Include Deleted Data** | A boolean flag to determine whether deleted ads, ad groups, and campaigns should be included in your reports and streams. |
+| **Start Date** | Enter the date in the YYYY-MM-DD format. DataGOL will replicate the data updated on and after this date. If blank, the sync will default to the earliest available data. |
+
+5. Click **Submit**.
+
+
+## Supported sync modes
+
+* Full Refresh - Overwrite
+* Full Refresh - Append
+* Incremental - Append
+
+
+
+## Supported streams
+
+### Regular Streams
+* **Advertiser IDs**: List of advertisers associated with the account.
+* **Ad Accounts**: Details of the ad accounts.
+* **Campaigns**: Details of marketing campaigns.
+* **Ad Groups**: Details of ad groups within campaigns.
+* **Ads**: Individual advertisement details.
+* **Creatives**: Creative assets used in ads.
+* **Audiences**: Information on custom and saved audiences.
+
+### Report Streams (Incremental)
+* **Advertiser Reports**: Performance data aggregated at the advertiser level.
+* **Campaign Reports**: Performance data aggregated at the campaign level.
+* **Ad Group Reports**: Performance data aggregated at the ad group level.
+* **Ad Reports**: Performance data aggregated at the ad level.
+

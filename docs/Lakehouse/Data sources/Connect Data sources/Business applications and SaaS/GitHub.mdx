@@ -1,0 +1,81 @@
+---
+sidebar_position: 10
+tags: [Lakehouse, Data sources]
+Slug: datasources-connect-github
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+# GitHub
+
+## Adding GitHub as data source
+
+Do the following to add GitHub as data source:
+
+1. From the left navigation panel, click **Lakehouse** and then click **Data Sources**.
+2. From the upper right corner of the page, click the **+ New Data Source** button to start the process of adding a new database.
+3. In the **New Data Source** page, click the **GitHub** icon.
+4. Specify the following details to add GitHub. Once you have connected a data source, the system immediately fetches its schema. After this schema retrieval process is complete you can browse and interact with the tables and data.
+
+| Field | Description |
+| ------- | ----------- |
+| **Connection Name** | Enter a unique name for the connection. |
+| **Personal Access Token** | Specify your GitHub Personal Access Token (PAT). You can generate this in your GitHub settings under Developer Settings > Personal Access Tokens. Ensure the token has the necessary scopes to access the repositories. See [Permissions and Tokens](https://docs.airbyte.com/integrations/sources/github#permissions-and-scopes) |
+| **Repositories** | List the repositories you want to sync, using the format `owner/repo` (e.g., `datagol/docs`). Separate multiple repositories with commas. |
+| **Branches** | Specify the branches to sync (e.g., `main, develop`). If left blank, the default branch for each repository will be used. |
+| **API URL** | For GitHub Enterprise, specify your instance's API URL (e.g., `https://github.company.com/api/v3`). For standard GitHub, leave this as the default: `https://api.github.com`. |
+| **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate the data for the last two years. This will apply only to the Incremental streams. |
+
+5. Click **Submit**.
+
+## Supported sync modes
+
+* Full Refresh - Overwrite
+* Full Refresh - Append
+* Incremental Sync - Append
+* Incremental Sync - Append + Deduped
+
+## Supported streams
+
+### Full Refresh Streams
+* Assignees
+* Branches
+* Contributor Activity
+* Collaborators
+* Issue labels
+* Organizations
+* Pull request commits
+* Tags
+* TeamMembers
+* TeamMemberships
+* Teams
+* Users
+* Issue timeline events
+
+### Incremental Streams
+* Comments
+* Commit comment reactions
+* Commit comments
+* Commits
+* Deployments
+* Events
+* Issue comment reactions
+* Issue events
+* Issue milestones
+* Issue reactions
+* Issues
+* Project (Classic) cards
+* Project (Classic) columns
+* Projects (Classic)
+* ProjectsV2
+* Pull request comment reactions
+* Pull request stats
+* Pull requests
+* Releases
+* Repositories
+* Review comments
+* Reviews
+* Stargazers
+* WorkflowJobs
+* WorkflowRuns
+* Workflows
