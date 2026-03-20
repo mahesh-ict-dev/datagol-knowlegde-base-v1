@@ -1,0 +1,29 @@
+---
+title: v1.0.241
+description: v1.0.241 Release notes March 2026
+sidebar_position: 3
+---
+
+**Date released: March 10, 2026**
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## New Features and Enhancements
+
+### Lakehouse
+
+- **Pipeline Job Metrics:** Pipeline jobs now display bytes emitted, giving better visibility into data processing and performance.
+
+### Workbooks
+- **Improved Athena Workbook Stability** Restored smooth "Auto" option selection on Single Select columns in Athena Workbook, while fully retaining the latest Athena performance enhancements.
+
+### Onboarding
+- **New User Welcome Email** New users now receive an automated welcome email upon account creation, providing a direct link to access their DataGOL account. The email introduces role-based guidance — helping both business users and stakeholders get started with DataGOL's AI agents to self-serve insights independently.
+
+
+
+## Bug Fixes
+
+-   **Fixed an issue where nested formulas failed to execute after a recent update that changed column quoting behavior to wrap all column names in double quotes unconditionally.**
+The new quoting logic generated invalid SQL when a formula referenced another formula column, causing the backend to throw an exception.
+Column quoting has been corrected to ensure valid SQL is produced for both base and nested formula references.
