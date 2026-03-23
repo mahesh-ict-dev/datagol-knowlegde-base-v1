@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#2e8555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#2e8555"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.06801772.css">
-<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.67e47cb9.js" defer="defer"></script>
-<script src="/datagol-knowlegde-base-v1/assets/js/main.666091ce.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.ab235fd5.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.9797216d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script>
@@ -50,6 +50,78 @@
 <li><strong>labels_details</strong>: Detailed information for each label.</li>
 <li><strong>messages</strong>: The content and metadata of all messages.</li>
 <li><strong>threads</strong>: Groups of related messages.</li>
-</ul></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/GitHub"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">GitHub</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/Google Analytics"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Google Analytics (GA4)</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-gmail-as-data-source" class="table-of-contents__link toc-highlight">Adding GMail as data source</a></li><li><a href="#supported-sync-modes" class="table-of-contents__link toc-highlight">Supported sync modes</a></li><li><a href="#supported-streams" class="table-of-contents__link toc-highlight">Supported streams</a></li></ul></div></div></div></div></main></div></div></div></div>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="gmail-api-key-generation-guide">GMail API Key Generation Guide<a href="#gmail-api-key-generation-guide" class="hash-link" aria-label="Direct link to GMail API Key Generation Guide" title="Direct link to GMail API Key Generation Guide">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-1-create-google-cloud-project-and-enable-api">Step 1: Create Google Cloud Project and Enable API<a href="#step-1-create-google-cloud-project-and-enable-api" class="hash-link" aria-label="Direct link to Step 1: Create Google Cloud Project and Enable API" title="Direct link to Step 1: Create Google Cloud Project and Enable API">​</a></h3>
+<ol>
+<li>Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a></li>
+<li>Click &quot;Select a project&quot; dropdown at the top</li>
+<li>Click &quot;New Project&quot;</li>
+<li>Enter project name (e.g., &quot;Gmail Integration&quot;)</li>
+<li>Click &quot;Create&quot;</li>
+<li>Wait for project creation to complete</li>
+<li>Enable Gmail API:<!-- -->
+<ul>
+<li>Go to &quot;APIs &amp; Services&quot; &gt; &quot;Library&quot;</li>
+<li>Search for &quot;Gmail API&quot;</li>
+<li>Click on it and click &quot;Enable&quot;</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-2-create-oauth-20-credentials">Step 2: Create OAuth 2.0 Credentials<a href="#step-2-create-oauth-20-credentials" class="hash-link" aria-label="Direct link to Step 2: Create OAuth 2.0 Credentials" title="Direct link to Step 2: Create OAuth 2.0 Credentials">​</a></h3>
+<ol>
+<li>Go to &quot;APIs &amp; Services&quot; &gt; &quot;Credentials&quot;</li>
+<li>Click &quot;Create Credentials&quot; &gt; &quot;OAuth 2.0 Client IDs&quot;</li>
+<li>If prompted, configure OAuth consent screen first:<!-- -->
+<ul>
+<li>Click &quot;Configure Consent Screen&quot;</li>
+<li>Choose &quot;External&quot; (unless using Google Workspace)</li>
+<li>Fill required fields: App name, User support email, Developer contact</li>
+<li>Add your email to &quot;Test users&quot; if app is in testing mode</li>
+<li>Click &quot;Save and Continue&quot; through all steps</li>
+</ul>
+</li>
+<li>Return to &quot;Create Credentials&quot; &gt; &quot;OAuth 2.0 Client IDs&quot;</li>
+<li>Choose &quot;Web application&quot; as application type</li>
+<li>Enter name (e.g., &quot;Gmail Sync&quot;)</li>
+<li>Under &quot;Authorized redirect URIs&quot;, add:</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">https://developers.google.com/oauthplayground</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="8">
+<li>Click &quot;Create&quot;</li>
+<li>Save the Client ID and Client Secret that appear in the popup</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-3-generate-refresh-token">Step 3: Generate Refresh Token<a href="#step-3-generate-refresh-token" class="hash-link" aria-label="Direct link to Step 3: Generate Refresh Token" title="Direct link to Step 3: Generate Refresh Token">​</a></h3>
+<ol>
+<li>Go to <a href="https://developers.google.com/oauthplayground" target="_blank" rel="noopener noreferrer">OAuth 2.0 Playground</a></li>
+<li>Click the gear icon (settings) in top right</li>
+<li>Check &quot;Use your own OAuth credentials&quot;</li>
+<li>Enter your Client ID and Client Secret from Step 2</li>
+<li>Click &quot;Close&quot;</li>
+<li>Select Gmail Scopes:<!-- -->
+<ul>
+<li>In the left panel, find &quot;Gmail API v1&quot;</li>
+<li>Check the box for this scope</li>
+</ul>
+</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">https://www.googleapis.com/auth/gmail.readonly</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="7">
+<li>Click &quot;Authorize APIs&quot; button</li>
+<li>Sign in with your Google account that has the Gmail you want to sync</li>
+<li>Grant permissions when prompted</li>
+<li>You&#x27;ll be redirected back to the playground</li>
+<li>Click &quot;Exchange authorization code for tokens&quot;</li>
+<li>Copy the refresh_token from the response (starts with <code>1//</code>)</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-4-configure-source-on-datagol-using-the-credentials">Step 4: Configure Source on DataGOL using the credentials<a href="#step-4-configure-source-on-datagol-using-the-credentials" class="hash-link" aria-label="Direct link to Step 4: Configure Source on DataGOL using the credentials" title="Direct link to Step 4: Configure Source on DataGOL using the credentials">​</a></h3>
+<ul>
+<li><code>client_id</code>: From Step 2</li>
+<li><code>client_secret</code>: From Step 2</li>
+<li><code>client_refresh_token_2</code> (or <code>refresh_token</code>): From Step 3</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-5-final-credentials-summary">Step 5: Final Credentials Summary<a href="#step-5-final-credentials-summary" class="hash-link" aria-label="Direct link to Step 5: Final Credentials Summary" title="Direct link to Step 5: Final Credentials Summary">​</a></h3>
+<p>You should have:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Client ID: [numbers]-[string].apps.googleusercontent.com</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Client Secret: GOCSPX-[string]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Refresh Token: 1//[long-string]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/GitHub"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">GitHub</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/Google Analytics"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Google Analytics (GA4)</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-gmail-as-data-source" class="table-of-contents__link toc-highlight">Adding GMail as data source</a></li><li><a href="#supported-sync-modes" class="table-of-contents__link toc-highlight">Supported sync modes</a></li><li><a href="#supported-streams" class="table-of-contents__link toc-highlight">Supported streams</a></li><li><a href="#gmail-api-key-generation-guide" class="table-of-contents__link toc-highlight">GMail API Key Generation Guide</a><ul><li><a href="#step-1-create-google-cloud-project-and-enable-api" class="table-of-contents__link toc-highlight">Step 1: Create Google Cloud Project and Enable API</a></li><li><a href="#step-2-create-oauth-20-credentials" class="table-of-contents__link toc-highlight">Step 2: Create OAuth 2.0 Credentials</a></li><li><a href="#step-3-generate-refresh-token" class="table-of-contents__link toc-highlight">Step 3: Generate Refresh Token</a></li><li><a href="#step-4-configure-source-on-datagol-using-the-credentials" class="table-of-contents__link toc-highlight">Step 4: Configure Source on DataGOL using the credentials</a></li><li><a href="#step-5-final-credentials-summary" class="table-of-contents__link toc-highlight">Step 5: Final Credentials Summary</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>

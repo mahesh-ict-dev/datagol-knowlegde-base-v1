@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#2e8555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#2e8555"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.06801772.css">
-<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.67e47cb9.js" defer="defer"></script>
-<script src="/datagol-knowlegde-base-v1/assets/js/main.666091ce.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.ab235fd5.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.9797216d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script>
@@ -45,6 +45,91 @@
 <li><strong>ACL</strong>: Access control lists defining permissions for the calendar.</li>
 <li><strong>Settings</strong>: User settings for the calendar service.</li>
 <li><strong>Free/Busy</strong>: Times when the calendar is blocked (calculated based on events).</li>
-</ul></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/Google Analytics"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Google Analytics (GA4)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/SurveyMonkey"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">SurveyMonkey</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-google-calendar-as-data-source" class="table-of-contents__link toc-highlight">Adding Google Calendar as data source</a></li><li><a href="#supported-streams" class="table-of-contents__link toc-highlight">Supported streams</a></li></ul></div></div></div></div></main></div></div></div></div>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="google-calendar-api-key-generation-guide">Google Calendar API Key Generation Guide<a href="#google-calendar-api-key-generation-guide" class="hash-link" aria-label="Direct link to Google Calendar API Key Generation Guide" title="Direct link to Google Calendar API Key Generation Guide">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-1-create-google-cloud-project-and-enable-api">Step 1: Create Google Cloud Project and Enable API<a href="#step-1-create-google-cloud-project-and-enable-api" class="hash-link" aria-label="Direct link to Step 1: Create Google Cloud Project and Enable API" title="Direct link to Step 1: Create Google Cloud Project and Enable API">​</a></h3>
+<ol>
+<li>Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a></li>
+<li>Click <strong>&quot;Select a project&quot;</strong> dropdown at the top</li>
+<li>Click <strong>&quot;New Project&quot;</strong></li>
+<li>Enter project name (e.g., <code>&quot;Calendar Integration&quot;</code>)</li>
+<li>Click <strong>&quot;Create&quot;</strong></li>
+<li>Wait for project creation to complete</li>
+<li>Enable Google Calendar API:<!-- -->
+<ul>
+<li>Go to <strong>&quot;APIs &amp; Services&quot;</strong> &gt; <strong>&quot;Library&quot;</strong></li>
+<li>Search for <code>&quot;Google Calendar API&quot;</code></li>
+<li>Click on it and click <strong>&quot;Enable&quot;</strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-2-create-oauth-20-credentials">Step 2: Create OAuth 2.0 Credentials<a href="#step-2-create-oauth-20-credentials" class="hash-link" aria-label="Direct link to Step 2: Create OAuth 2.0 Credentials" title="Direct link to Step 2: Create OAuth 2.0 Credentials">​</a></h3>
+<ol>
+<li>Go to <strong>&quot;APIs &amp; Services&quot;</strong> &gt; <strong>&quot;Credentials&quot;</strong></li>
+<li>Click <strong>&quot;Create Credentials&quot;</strong> &gt; <strong>&quot;OAuth 2.0 Client IDs&quot;</strong></li>
+<li>If prompted, configure OAuth consent screen first:<!-- -->
+<ul>
+<li>Click <strong>&quot;Configure Consent Screen&quot;</strong></li>
+<li>Choose <strong>&quot;External&quot;</strong> (unless using Google Workspace)</li>
+<li>Fill required fields: App name, User support email, Developer contact</li>
+<li>Click <strong>&quot;Save and Continue&quot;</strong> through all steps</li>
+</ul>
+</li>
+<li>Return to <strong>&quot;Create Credentials&quot;</strong> &gt; <strong>&quot;OAuth 2.0 Client IDs&quot;</strong></li>
+<li>Choose <strong>&quot;Web application&quot;</strong> as application type</li>
+<li>Enter name (e.g., <code>&quot;Calendar Sync&quot;</code>)</li>
+<li>Under <strong>&quot;Authorized redirect URIs&quot;</strong>, add:</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">https://developers.google.com/oauthplayground</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="8">
+<li>Click <strong>&quot;Create&quot;</strong></li>
+<li>Save the <strong>Client ID</strong> and <strong>Client Secret</strong> that appear in the popup</li>
+</ol>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-3-generate-refresh-token">Step 3: Generate Refresh Token<a href="#step-3-generate-refresh-token" class="hash-link" aria-label="Direct link to Step 3: Generate Refresh Token" title="Direct link to Step 3: Generate Refresh Token">​</a></h3>
+<ol>
+<li>Go to <a href="https://developers.google.com/oauthplayground" target="_blank" rel="noopener noreferrer">OAuth 2.0 Playground</a></li>
+<li>Click the gear icon (settings) in top right</li>
+<li>Check <strong>&quot;Use your own OAuth credentials&quot;</strong></li>
+<li>Enter your <strong>Client ID</strong> and <strong>Client Secret</strong> from Step 2</li>
+<li>Click <strong>&quot;Close&quot;</strong></li>
+<li>Select Calendar Scopes:<!-- -->
+<ul>
+<li>In the left panel, find <strong>&quot;Calendar API v3&quot;</strong></li>
+<li>Check the box for:</li>
+</ul>
+</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">https://www.googleapis.com/auth/calendar.readonly</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="7">
+<li>Click <strong>&quot;Authorize APIs&quot;</strong> button</li>
+<li>Sign in with your Google account</li>
+<li>Grant permissions when prompted</li>
+<li>You&#x27;ll be redirected back to the playground</li>
+<li>Click <strong>&quot;Exchange authorization code for tokens&quot;</strong></li>
+<li>Copy the <code>refresh_token</code> from the response (starts with <code>1//</code>)</li>
+</ol>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-4-get-calendar-id">Step 4: Get Calendar ID<a href="#step-4-get-calendar-id" class="hash-link" aria-label="Direct link to Step 4: Get Calendar ID" title="Direct link to Step 4: Get Calendar ID">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="for-primary-calendar">For Primary Calendar<a href="#for-primary-calendar" class="hash-link" aria-label="Direct link to For Primary Calendar" title="Direct link to For Primary Calendar">​</a></h4>
+<p>Use <code>primary</code> or your Gmail address (e.g., <code>yourname@gmail.com</code>)</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="for-specific-calendar">For Specific Calendar<a href="#for-specific-calendar" class="hash-link" aria-label="Direct link to For Specific Calendar" title="Direct link to For Specific Calendar">​</a></h4>
+<ol>
+<li>Go to <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Google Calendar</a></li>
+<li>Find your calendar in the left sidebar</li>
+<li>Click the three dots (<strong>⋮</strong>) next to the calendar name</li>
+<li>Select <strong>&quot;Settings and sharing&quot;</strong></li>
+<li>Scroll to <strong>&quot;Integrate calendar&quot;</strong> section</li>
+<li>Copy the <strong>Calendar ID</strong> (looks like <code>primary</code> or <code>emailID</code> or <code>abc123@group.calendar.google.com</code>)</li>
+</ol>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-5-configure-source">Step 5: Configure Source<a href="#step-5-configure-source" class="hash-link" aria-label="Direct link to Step 5: Configure Source" title="Direct link to Step 5: Configure Source">​</a></h3>
+<p>Use these credentials while creating source on DataGOL:</p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td><code>client_id</code></td><td>From Step 2</td></tr><tr><td><code>client_secret</code></td><td>From Step 2</td></tr><tr><td><code>refresh_token</code> (or <code>client_refresh_token_2</code>)</td><td>From Step 3</td></tr><tr><td><code>calendar_id</code> (or <code>calendarid</code>)</td><td>From Step 4</td></tr></tbody></table>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-6-final-credentials-summary">Step 6: Final Credentials Summary<a href="#step-6-final-credentials-summary" class="hash-link" aria-label="Direct link to Step 6: Final Credentials Summary" title="Direct link to Step 6: Final Credentials Summary">​</a></h3>
+<p>You should have all four of the following:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Client ID:     [numbers]-[string].apps.googleusercontent.com</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Client Secret: GOCSPX-[string]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Refresh Token: 1//[long-string]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Calendar ID:   primary (or specific calendar ID)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/Google Analytics"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Google Analytics (GA4)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Lakehouse/Data sources/Connect Data sources/Business applications and SaaS/SurveyMonkey"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">SurveyMonkey</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-google-calendar-as-data-source" class="table-of-contents__link toc-highlight">Adding Google Calendar as data source</a></li><li><a href="#supported-streams" class="table-of-contents__link toc-highlight">Supported streams</a></li><li><a href="#google-calendar-api-key-generation-guide" class="table-of-contents__link toc-highlight">Google Calendar API Key Generation Guide</a><ul><li><a href="#step-1-create-google-cloud-project-and-enable-api" class="table-of-contents__link toc-highlight">Step 1: Create Google Cloud Project and Enable API</a></li><li><a href="#step-2-create-oauth-20-credentials" class="table-of-contents__link toc-highlight">Step 2: Create OAuth 2.0 Credentials</a></li><li><a href="#step-3-generate-refresh-token" class="table-of-contents__link toc-highlight">Step 3: Generate Refresh Token</a></li><li><a href="#step-4-get-calendar-id" class="table-of-contents__link toc-highlight">Step 4: Get Calendar ID</a><ul><li><a href="#for-primary-calendar" class="table-of-contents__link toc-highlight">For Primary Calendar</a></li><li><a href="#for-specific-calendar" class="table-of-contents__link toc-highlight">For Specific Calendar</a></li></ul></li><li><a href="#step-5-configure-source" class="table-of-contents__link toc-highlight">Step 5: Configure Source</a></li><li><a href="#step-6-final-credentials-summary" class="table-of-contents__link toc-highlight">Step 6: Final Credentials Summary</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>
