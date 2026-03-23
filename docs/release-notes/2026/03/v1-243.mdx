@@ -1,0 +1,25 @@
+---
+title: v1.0.243
+description: v1.0.243 Release notes March 2026
+sidebar_position: 1
+---
+
+
+**Date released: March 13, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Improved Query Execution for DAVE and DCA agent** Queries run through DAVE and DCA now use the Playground endpoint, removing workbook-specific restrictions and allowing queries to be copied directly into the Playground without modification.
+- **Improved GTM Agent Column Output** The GTM Agent's column output configuration now dynamically structures the response to match the target workbook, ensuring results are consistently formatted and ready for use without manual adjustment.
+- **AI Connectors Manual Re-indexing** Users can now manually trigger re-indexing directly within AI Connectors.
+- **Flexible Agent Configuration** Featured Agents can now be configured to match your team's specific needs — with settings that adapt based on the agent type and are saved per company.
+This makes it easier to customize how agents behave, what tools they use, and how they deliver results, all from a single dedicated settings page.
+
+
+## Bug Fixes
+
+### Playground
+- **Fixed Query Publishing to Workspace** Resolved an issue where publishing a query to a workspace failed due to `queryEditorId` being passed as null.

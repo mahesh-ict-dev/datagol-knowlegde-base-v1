@@ -1,0 +1,147 @@
+---
+slug: column-extraction
+tags: [API, Workbook, Curl]
+sidebar_position : 31
+---
+
+# Column Extraction
+
+The **Column Extraction** feature enables you to automatically extract structured data fields from unstructured sources — such as meeting transcripts, recorded calls, or text documents — using an AI agent. Rather than manually reviewing lengthy content, you can configure an extraction pipeline that pulls specific fields into a structured workbook with minimal effort.
+
+---
+
+## Overview
+
+When unstructured records (e.g., meeting transcripts) are imported into a workbook, the extraction feature allows you to define the fields you want to capture, preview the results, save the configuration for reuse, and run the extraction across multiple records simultaneously.
+### [Watch a Quick Demo](https://www.youtube.com/watch?v=3CbXKtKplUE)
+
+---
+
+## Prerequisites
+
+Before using Column Extraction, ensure the following:
+
+- Your source data (e.g., transcripts) has been imported into a workbook either through import or query.
+- You have at least one record available to extract from.
+- You have access to an existing destination workbook, or you are prepared to create a new one.
+
+---
+
+## Configuring an Extraction
+
+### Step 1: Accessing the Extraction Tool
+
+1. Open your workbook containing the source records.
+2. Select the record(s) you wish to extract from.
+3. Click the **Extract** option from the dropdown menu on the column toolbar.
+
+The extraction panel will open, displaying the selected source record on the **left** and configuration options on the **right**.
+
+
+### Step 2: Choose a Destination Workbook
+
+In the extraction panel, select where the extracted data should be written:
+
+| Option | Description |
+|---|---|
+| **Create a New Workbook** | Generates a new workbook with columns based on the fields you define. |
+| **Use an Existing Workbook** | Maps extracted fields to columns that already exist in a chosen workbook. |
+
+### Step 3: Name the Extraction
+
+Enter a descriptive name for this extraction configuration (e.g., `Financial Extraction`).
+
+> **Note:** Naming the extraction is important. Saved extractions can be reused when new records are added, eliminating the need to reconfigure from scratch each time.
+
+### Step 4: Select an Extraction Mode
+
+Choose the mode that best fits the structure of the data you need to extract:
+
+| Mode | Best For |
+|---|---|
+| **Standard** | Simple, flat fields — such as names, numbers, or single values. |
+| **Advanced** | Nested objects, complex structures, or data requiring a specific output format. |
+
+### Step 5: Define the Fields to Extract
+
+In the prompt input, describe the fields you want the AI agent to extract. For example:
+
+```
+Extract: NRR, gross margin percentage, burn rate, fundraising amount, and lifetime value.
+```
+
+Click **Generate**. The agent will process the prompt and prepare the corresponding extraction fields automatically.
+
+#### Adding Fields Manually
+
+After generation, you can add additional fields at any time:
+
+1. Click **Add a Field**.
+2. Provide a **column name** for the new field.
+3. Enter a **description** to instruct the agent on what to extract.
+4. If using an existing workbook, **map the field** to an existing column.
+
+### Step 6: Set a Primary Key
+
+Select the column to use as the **primary key** for the destination workbook (e.g., an `ID` column). This uniquely identifies each extracted record.
+
+---
+
+### Step 7: Previewing Extraction Results
+
+Before saving and running an extraction, you can validate the output:
+
+1. Click **Preview Results**.
+2. The agent will run the extraction on the currently selected record only.
+3. Review the extracted values in the preview panel to confirm all fields are populating correctly.
+
+> **Tip:** Always preview your extraction on at least one representative record before saving the configuration, especially when working with advanced mode or nested fields.
+
+---
+
+### Step 8: Saving the Extraction Configuration
+
+Once the fields and settings are verified:
+
+1. Confirm or update the **configuration name**.
+2. Choose whether to **store extracted data as JSON** in addition to structured columns.
+   - Enabling this option preserves the raw AI response alongside the structured output.
+   - This is useful if you need to audit or reprocess responses at a later time.
+3. Click **Create** to save the extraction configuration.
+
+---
+
+### Step 9: Running an Extraction
+
+After saving, the extraction is ready to execute:
+
+1. Click **Run**.
+2. Select the records you wish to process.
+3. Review the processing option:
+   - **Process New Cells Only** *(enabled by default)* — Skips records that have already been extracted, preventing duplicate processing.
+4. Click **Run Extraction** to begin.
+
+A **progress screen** will display the status of the extraction job. Once complete, a success notification will appear in the top-right corner of the interface.
+
+---
+
+### Step 10: Viewing Extracted Data
+
+Upon completion:
+
+1. Click **View** in the success notification.
+2. The destination workbook will open, displaying all extracted fields as structured columns across your records.
+
+---
+
+## Reusing a Saved Extraction
+
+Saved extraction configurations are stored and accessible for future use. When new records or transcripts are added to your source workbook:
+
+1. Navigate to the saved extraction configuration.
+2. Click **Run**.
+3. Select the new records (or use **Process New Cells Only** to auto-filter).
+4. Run the extraction — no reconfiguration required.
+
+
+

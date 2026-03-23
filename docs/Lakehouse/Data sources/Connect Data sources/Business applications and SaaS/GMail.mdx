@@ -42,3 +42,78 @@ Do the following to add GMail as data source:
 * **messages**: The content and metadata of all messages.
 * **threads**: Groups of related messages.
 
+## GMail API Key Generation Guide
+ 
+### Step 1: Create Google Cloud Project and Enable API
+ 
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Click "Select a project" dropdown at the top
+3. Click "New Project"
+4. Enter project name (e.g., "Gmail Integration")
+5. Click "Create"
+6. Wait for project creation to complete
+7. Enable Gmail API:
+   - Go to "APIs & Services" > "Library"
+   - Search for "Gmail API"
+   - Click on it and click "Enable"
+ 
+### Step 2: Create OAuth 2.0 Credentials
+ 
+1. Go to "APIs & Services" > "Credentials"
+2. Click "Create Credentials" > "OAuth 2.0 Client IDs"
+3. If prompted, configure OAuth consent screen first:
+   - Click "Configure Consent Screen"
+   - Choose "External" (unless using Google Workspace)
+   - Fill required fields: App name, User support email, Developer contact
+   - Add your email to "Test users" if app is in testing mode
+   - Click "Save and Continue" through all steps
+4. Return to "Create Credentials" > "OAuth 2.0 Client IDs"
+5. Choose "Web application" as application type
+6. Enter name (e.g., "Gmail Sync")
+7. Under "Authorized redirect URIs", add:
+ 
+```
+https://developers.google.com/oauthplayground
+```
+ 
+8. Click "Create"
+9. Save the Client ID and Client Secret that appear in the popup
+ 
+### Step 3: Generate Refresh Token
+ 
+1. Go to [OAuth 2.0 Playground](https://developers.google.com/oauthplayground)
+2. Click the gear icon (settings) in top right
+3. Check "Use your own OAuth credentials"
+4. Enter your Client ID and Client Secret from Step 2
+5. Click "Close"
+6. Select Gmail Scopes:
+   - In the left panel, find "Gmail API v1"
+   - Check the box for this scope
+ 
+```
+https://www.googleapis.com/auth/gmail.readonly
+```
+ 
+7. Click "Authorize APIs" button
+8. Sign in with your Google account that has the Gmail you want to sync
+9. Grant permissions when prompted
+10. You'll be redirected back to the playground
+11. Click "Exchange authorization code for tokens"
+12. Copy the refresh_token from the response (starts with `1//`)
+ 
+### Step 4: Configure Source on DataGOL using the credentials
+ 
+ 
+- `client_id`: From Step 2
+- `client_secret`: From Step 2
+- `client_refresh_token_2` (or `refresh_token`): From Step 3
+
+### Step 5: Final Credentials Summary
+ 
+You should have:
+ 
+```
+Client ID: [numbers]-[string].apps.googleusercontent.com
+Client Secret: GOCSPX-[string]
+Refresh Token: 1//[long-string]
+```
