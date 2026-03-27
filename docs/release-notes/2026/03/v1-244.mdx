@@ -1,0 +1,28 @@
+---
+title: v1.0.244
+description: v1.0.244 Release notes March 2026
+sidebar_position: 1
+---
+
+
+**Date released: March 18, 2026**
+
+## New Features and Enhancements
+### AI
+
+- **Atlassian Agent:** Improved performance by addressing response slowness, resulting in faster query turnaround when working with Jira and Confluence data.
+### Onboarding
+- **Domain-based signup restrictions:** Admins can now restrict who can sign up by configuring an allowed list of email domains. Only users with approved domains can register via self-signup or Google sign-in, while invite-based signups are always permitted regardless of domain. Google sign-in error handling has also been improved for a more consistent experience.
+
+## Bug Fixes
+
+### Lakehouse
+
+- Updated NetSuite JDBC connector to use `NetSuite2.com` as the `ServerDataSource`, replacing the deprecated `NetSuite.com` endpoint.
+
+### AI
+- Resolved multiple stability and response quality issues in the newly launched Atlassian Agent.
+- Fixed several issues in the GTM Agent affecting query execution and output formatting.
+- Eliminated a duplicate entry issue in the Conversation List where the same conversation could appear more than once after certain interactions.
+- Fixed a bug where the connector was not auto-selected after successful OAuth authorization.
+- Resolved an issue causing the Jira Agent to respond slowly. Queries and data retrieval are now significantly faster.
