@@ -6,3 +6,12 @@ sidebar_position: 2
 
 
 **Date released: March 23, 2026**
+
+
+## New Features and Enhancements
+### AI
+- **Python Agent - Auto Approve Mode:** Added an Auto Approve toggle to the Python Agent. When enabled, the agent skips all confirmation prompts, including plan/code review and mid-query clarification requests, and executes end-to-end automatically. When disabled, the existing interactive feedback workflow remains unchanged. This is ideal for trusted, repeatable queries where speed matters more than step-by-step review.
+
+### Workbooks and Workspaces
+- **Workbook timestamps now show seconds and milliseconds:** Timestamp columns in the Workbook now display full precision (`YYYY-MM-DD HH:MM:SS.SSS`), making it easier to distinguish between rapid back-to-back events and true duplicates.
+- **Workbook knowledge graph — entity names now shown upfront:** Node labels in the knowledge graph now display the actual entity name (e.g., "John Doe") instead of the generic type (e.g., "Person"), making relationships between entities immediately clear without needing to click for details.
