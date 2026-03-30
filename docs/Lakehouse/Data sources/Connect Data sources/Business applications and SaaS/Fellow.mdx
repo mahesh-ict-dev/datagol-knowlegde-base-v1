@@ -24,6 +24,8 @@ Do the following to add Fellow as data source:
 | **Subdomain** | Enter your Fellow subdomain (e.g., if your workspace is `company.fellow.app`, enter `company`). |
 | **API Key** | Specify your Fellow API Key. You can generate this in your Fellow workspace settings under User Settings > API. |
 | **Start Date** | Enter the date in the MM-DD-YYYY format. DataGOL will replicate the data updated on and after this date. If this field is blank, DataGOL will replicate data for the last two years. This applies only to incremental streams. |
+| **Super Admin Mode** | Toggle this on to retrieve data on behalf of all users in your DataGOL workspace. When enabled, DataGOL will sync meeting and collaboration data across the entire organization. Leave this off to sync only your own data. |
+| **DataGOL Service Account Token** | Required when Super Admin Mode is enabled. Enter your DataGOL service account token to authorize organization-wide data retrieval. |
 
 5. Click **Submit**.
 

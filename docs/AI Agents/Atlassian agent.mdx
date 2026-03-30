@@ -1,0 +1,125 @@
+---
+sidebar_position : 17
+tags : [AI, AI Agents,]
+slug : atlassian-agent
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+# Atlassian Agent (Jira + Confluence)
+
+## Overview
+A unified AI-powered agent for interacting with Jira issues, sprint progress, and Confluence pages through a single conversational interface.
+
+
+## What is the Atlassian Agent?
+
+The **Atlassian Agent** is a unified AI-powered tool that brings together Jira and Confluence into a single conversational interface. Instead of switching between separate agents, you can now ask questions about Jira issues, track sprint progress, and search or summarize Confluence pages — all in one place. The agent understands your intent and translates natural language into precise actions across both Atlassian products.
+
+<ImagePopup src="/img/agents/atlassian-agent-usecase.png" alt="Atlassian-agent-usecase" caption="Atlassian-agent-usecase"/>
+
+The Atlassian Agent combines Jira and Confluence capabilities to streamline project management and knowledge workflows through conversational AI.
+
+-   **Unified interface:** No need to switch between a Jira agent and a Confluence agent. One conversation handles both products seamlessly.
+
+-   **Natural language understanding:** Ask questions or give commands in plain English — the agent maps your intent to the right Atlassian action automatically.
+
+-   **Jira intelligence:** Query issues, check sprint status, view assignees, filter by priority or label, and get progress summaries across projects.
+
+-   **Confluence knowledge retrieval:** Search spaces, retrieve page content, and get summaries of documentation or meeting notes without leaving the chat.
+
+-   **Cross-product context:** Ask questions that span both tools — for example, link a Jira issue to related Confluence documentation in a single query.
+
+
+## Configuring the Atlassian Agent
+
+
+Setting up the Atlassian Agent requires authorizing your Atlassian account via OAuth 2.0 directly from within the agent interface.
+
+1.  From the DataGOL Home page, navigate to **Agents** in the left sidebar.
+
+2.  Click on **Atlassian Agent** from the list of available agents.
+
+3.  In the chat input area, click the **+** icon to add a data source.
+
+4.  In the connector dropdown, click **Add New Connector**.
+
+    <ImagePopup src="/img/agents/atlassian-add-connector.png" alt="Atlassian add connector" caption="Add a new Atlassian connector"/>
+
+    <ImagePopup src="/img/agents/atlassian-agent.png" alt="Atlassian-agent" caption="Atlassian-agent"/>
+
+5.  Provide a **Connection name** — a descriptive label to identify this connector (e.g., "My Atlassian Workspace").
+
+6.  Click **Connect with Atlassian**. You will be redirected to the Atlassian login page.
+
+7.  Sign in with your Atlassian account credentials once prompted.
+
+8.  Review the permissions requested by DataGOL and click **Accept** to grant access. You will be redirected back to DataGOL automatically.
+
+9.  Once connected, your new Atlassian connector will appear in the connector list. Select it to start chatting.
+
+:::info
+DataGOL uses OAuth 2.0 to connect to Atlassian. No passwords or API tokens are stored — access is authorized securely through Atlassian.
+:::
+
+
+## Using the Atlassian Agent
+
+Once the Atlassian connector is configured, you can start interacting with the agent immediately.
+
+1.  From the DataGOL Home page, navigate to the **Agents** section.
+
+2.  Click on the **Atlassian Agent** from the list of available agents.
+
+3.  Select the Atlassian connector you configured.
+
+4.  In the chat or prompt area, type your questions or commands in natural language.
+
+    -   **Example prompts:**
+
+        -   "List all high-priority issues unassigned in the BACKEND project."
+
+        -   "How many story points are remaining in the current sprint?"
+
+        -   "Find Confluence pages about the data pipeline architecture."
+
+        -   "What did we decide in the last architecture review meeting?"
+
+        -   "Show me all Jira issues linked to the API redesign epic."
+
+5.  The agent will respond with the relevant data from Jira, Confluence, or both — depending on your query. For actions that modify data, a preview will be shown for your review and confirmation before any changes are committed.
+
+By following these steps, you can manage project tasks and access team knowledge through a single, unified conversational interface — without switching between tools.
+
+
+## Other Use Cases
+
+The Atlassian Agent supports a wide range of queries and actions across both Jira and Confluence.
+
+-   **Jira — Retrieve issue and sprint information:**
+
+    -   **Query issues by criteria:** Ask for issues filtered by status, assignee, priority, label, or project.
+        -   _Example prompt:_ "Show me all open bugs assigned to Sarah in the mobile app project."
+
+    -   **Check sprint progress:** Get a summary of the current sprint, including completed, in-progress, and blocked items.
+        -   _Example prompt:_ "What's the status of the current sprint in the PLATFORM project?"
+
+    -   **Look up a specific issue:** Retrieve details about a ticket by its key or description.
+        -   _Example prompt:_ "What's the latest update on PROJ-412?"
+
+-   **Confluence — Search and retrieve documentation:**
+
+    -   **Search pages by keyword or topic:** Find relevant pages across spaces without knowing the exact title.
+        -   _Example prompt:_ "Find the onboarding documentation for new engineers."
+
+    -   **Summarize page content:** Get a concise summary of a long Confluence page.
+        -   _Example prompt:_ "Summarize the Q2 product roadmap page in the Engineering space."
+
+    -   **Retrieve meeting notes:** Look up recent meeting notes by team or date.
+        -   _Example prompt:_ "Get the notes from last week's platform team sync."
+
+-   **Cross-product queries:** Combine Jira and Confluence context in a single question.
+    -   _Example prompt:_ "Is there any Confluence documentation related to the PROJ-301 authentication issue?"
+
+

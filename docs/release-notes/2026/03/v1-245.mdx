@@ -1,0 +1,31 @@
+---
+title: v1.0.245
+description: v1.0.245 Release notes March 2026
+sidebar_position: 3
+---
+
+
+**Date released: March 20, 2026**
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## New Features and Enhancements
+### AI
+
+- **Company-wide thread sharing:** Threads can now be shared at the company level. Once enabled, threads automatically appear in the thread section for all users within the same company domain — no manual sharing required.
+<ImagePopup src="/img/release_notes/2026/2026/March/company_level_thread_sharing.png" alt="Company-thread-sharing" caption="Company-thread-sharing"/>
+
+- **GRC Agent — Source chunk visibility for non-compliant controls:** The GRC Agent now surfaces the exact source and target document chunks behind every non-compliant or partially-compliant control finding. Results are stored directly in your output workbook, making it easier to:
+  - Trace evidence back to the original source
+  - Annotate and review findings in context
+  - Share audit-ready documentation with stakeholders
+
+- **RAG Agent:** Faster, More Accurate Responses: Removed the planning phase from the RAG Agent pipeline. This phase was introducing unnecessary latency and occasionally degrading response accuracy. RAG queries are now faster and more direct.
+
+- **Custom Agent — Public document download control:** Added a new **"Allow Public Document Downloads"** toggle in the Custom Agent settings. When enabled, external users accessing a public agent can download associated documents; when disabled, download options are hidden for public users. Internal and explicitly shared users are unaffected and always retain download access.
+
+## Bug Fixes
+
+### AI
+
+- **Agents now accessible to all users:** Fixed an issue where users without certain permissions were being redirected back to the Home page after submitting a question, causing their message to be lost. Agents are now accessible to all users with no interruptions or redirect loops.
