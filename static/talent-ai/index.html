@@ -1162,6 +1162,8 @@ function modalCandidateDetail(id) {
 }
 
 // ── Matches Table — create once, reuse forever ───────────────────────────────
+// NOTE: 'status' is a reserved/conflicting name in Datagol — use 'match_status' instead
+// Clear stale cached ID: localStorage.removeItem('dg_matches_table')
 let _matchesTableId = localStorage.getItem('dg_matches_table') || null;
 
 async function ensureMatchesTable() {
@@ -1172,58 +1174,70 @@ async function ensureMatchesTable() {
     description: 'Candidate × job shortlist records'
   });
   _matchesTableId = tbl.id || tbl.tableId;
+  if (!_matchesTableId) throw new Error('Matches table creation returned no ID');
   localStorage.setItem('dg_matches_table', _matchesTableId);
-  // Add columns
+  // Add columns — note: avoid 'status' (reserved in Datagol), use 'match_status'
   const cols = [
-    { name: 'candidate_name',  uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Candidate Name' } },
-    { name: 'candidate_email', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Email' } },
-    { name: 'candidate_phone', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Phone' } },
+    { name: 'candidate_name',     uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Candidate Name' } },
+    { name: 'candidate_email',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Email' } },
+    { name: 'candidate_phone',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Phone' } },
     { name: 'candidate_location', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Location' } },
-    { name: 'candidate_skills', uiDataType: 'LONG_TEXT',       uiMetadata: { title: 'Skills' } },
-    { name: 'ai_score',        uiDataType: 'NUMBER',           uiMetadata: { title: 'AI Score' } },
-    { name: 'job_title',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Title' } },
-    { name: 'company',         uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Company' } },
-    { name: 'job_location',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Location' } },
-    { name: 'job_type',        uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Type' } },
-    { name: 'salary_range',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Salary Range' } },
-    { name: 'match_score',     uiDataType: 'NUMBER',           uiMetadata: { title: 'Match Score (%)' } },
-    { name: 'skills_match',    uiDataType: 'NUMBER',           uiMetadata: { title: 'Skills Match (%)' } },
-    { name: 'exp_match',       uiDataType: 'NUMBER',           uiMetadata: { title: 'Experience Match (%)' } },
-    { name: 'status',          uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Status' } },
-    { name: 'matched_at',      uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Matched At' } },
+    { name: 'candidate_skills',   uiDataType: 'LONG_TEXT',        uiMetadata: { title: 'Skills' } },
+    { name: 'ai_score',           uiDataType: 'NUMBER',           uiMetadata: { title: 'AI Score' } },
+    { name: 'job_title',          uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Title' } },
+    { name: 'company',            uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Company' } },
+    { name: 'job_location',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Location' } },
+    { name: 'job_type',           uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Type' } },
+    { name: 'salary_range',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Salary Range' } },
+    { name: 'match_score',        uiDataType: 'NUMBER',           uiMetadata: { title: 'Match Score (%)' } },
+    { name: 'skills_match',       uiDataType: 'NUMBER',           uiMetadata: { title: 'Skills Match (%)' } },
+    { name: 'exp_match',          uiDataType: 'NUMBER',           uiMetadata: { title: 'Experience Match (%)' } },
+    { name: 'match_status',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Match Status' } },
+    { name: 'matched_at',         uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Matched At' } },
   ];
   for (const col of cols) {
-    await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${_matchesTableId}/column`, col).catch(() => {});
+    await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${_matchesTableId}/column`, col)
+      .catch(e => console.warn(`Column '${col.name}' create:`, e.message));
   }
   return _matchesTableId;
 }
 
 async function saveMatchToDatagol(candidate, job, scores) {
   try {
-    const tableId = await ensureMatchesTable();
+    // If the cached table ID is stale/broken, clear it so ensureMatchesTable recreates
+    let tableId;
+    try {
+      tableId = await ensureMatchesTable();
+    } catch (e) {
+      console.warn('ensureMatchesTable failed, clearing cache:', e.message);
+      _matchesTableId = null;
+      localStorage.removeItem('dg_matches_table');
+      tableId = await ensureMatchesTable();
+    }
     await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${tableId}/rows`, {
       cellValues: {
         candidate_name:     candidate.name,
         candidate_email:    candidate.email,
-        candidate_phone:    candidate.phone   || '',
-        candidate_location: candidate.location|| '',
-        candidate_skills:   (candidate.skills || []).join('; '),
-        ai_score:           candidate.score   || 0,
+        candidate_phone:    candidate.phone    || '',
+        candidate_location: candidate.location || '',
+        candidate_skills:   (candidate.skills  || []).join('; '),
+        ai_score:           candidate.score    || 0,
         job_title:          job.title,
-        company:            job.company       || '',
-        job_location:       job.location      || '',
-        job_type:           job.type          || '',
-        salary_range:       job.salary        || '',
-        match_score:        scores?.overall   || 0,
-        skills_match:       scores?.skills    || 0,
-        exp_match:          scores?.exp       || 0,
-        status:             'shortlisted',
+        company:            job.company        || '',
+        job_location:       job.location       || '',
+        job_type:           job.type           || '',
+        salary_range:       job.salary         || '',
+        match_score:        scores?.overall    || 0,
+        skills_match:       scores?.skills     || 0,
+        exp_match:          scores?.exp        || 0,
+        match_status:       'shortlisted',          // NOT 'status' — reserved in Datagol
         matched_at:         new Date().toISOString().slice(0, 10),
       }
     });
     toast(`✓ Match saved — ${candidate.name} × ${job.title}`, 'success');
   } catch (e) {
-    console.warn('saveMatch:', e.message);
+    console.warn('saveMatch error:', e.message);
+    toast(`Match saved locally (sync failed: ${e.message})`, 'info');
   }
 }
 
@@ -2536,6 +2550,20 @@ function afterRender(page) {
 // ============================================================
 // INIT
 // ============================================================
+// One-time migration: clear stale matches table cache (used 'status' column which
+// doesn't exist in Datagol extraction table). New schema uses 'match_status'.
+(function clearStaleMatchesCache() {
+  const cached = localStorage.getItem('dg_matches_table');
+  // If we have a cached table but the flag showing it uses the new schema isn't set,
+  // wipe it so ensureMatchesTable recreates it with the correct columns.
+  if (cached && !localStorage.getItem('dg_matches_table_v2')) {
+    localStorage.removeItem('dg_matches_table');
+    _matchesTableId = null;
+    console.log('[TalentAI] Cleared stale matches table cache — will recreate with correct schema.');
+  }
+  localStorage.setItem('dg_matches_table_v2', '1');
+})();
+
 navigate('dashboard');
 </script>
 </body>
