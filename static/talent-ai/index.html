@@ -825,7 +825,7 @@ function renderMatching() {
         <!-- Actions -->
         <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;min-width:140px;">
           <button class="btn btn-sm ${m.candidate.status==='shortlisted'?'btn-secondary':'btn-primary'}" id="sl-btn-${m.candidate.id}-${m.job.id}"
-            onclick="shortlistCandidate(${m.candidate.id});
+            onclick="shortlistCandidate(${m.candidate.id},${m.job.id});
               const c=state.candidates.find(x=>x.id===${m.candidate.id});
               const b=document.getElementById('sl-btn-${m.candidate.id}-${m.job.id}');
               if(b){b.textContent=c?.status==='shortlisted'?'✓ Shortlisted':'Shortlist';b.className='btn btn-sm '+(c?.status==='shortlisted'?'btn-secondary':'btn-primary');}">
@@ -1161,8 +1161,74 @@ function modalCandidateDetail(id) {
   </div>`;
 }
 
+// ── Matches Table — create once, reuse forever ───────────────────────────────
+let _matchesTableId = localStorage.getItem('dg_matches_table') || null;
+
+async function ensureMatchesTable() {
+  if (_matchesTableId) return _matchesTableId;
+  // Create the table
+  const tbl = await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables`, {
+    title: 'TalentAI — Job Matches', tableType: 'DYNAMIC',
+    description: 'Candidate × job shortlist records'
+  });
+  _matchesTableId = tbl.id || tbl.tableId;
+  localStorage.setItem('dg_matches_table', _matchesTableId);
+  // Add columns
+  const cols = [
+    { name: 'candidate_name',  uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Candidate Name' } },
+    { name: 'candidate_email', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Email' } },
+    { name: 'candidate_phone', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Phone' } },
+    { name: 'candidate_location', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Location' } },
+    { name: 'candidate_skills', uiDataType: 'LONG_TEXT',       uiMetadata: { title: 'Skills' } },
+    { name: 'ai_score',        uiDataType: 'NUMBER',           uiMetadata: { title: 'AI Score' } },
+    { name: 'job_title',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Title' } },
+    { name: 'company',         uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Company' } },
+    { name: 'job_location',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Location' } },
+    { name: 'job_type',        uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Type' } },
+    { name: 'salary_range',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Salary Range' } },
+    { name: 'match_score',     uiDataType: 'NUMBER',           uiMetadata: { title: 'Match Score (%)' } },
+    { name: 'skills_match',    uiDataType: 'NUMBER',           uiMetadata: { title: 'Skills Match (%)' } },
+    { name: 'exp_match',       uiDataType: 'NUMBER',           uiMetadata: { title: 'Experience Match (%)' } },
+    { name: 'status',          uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Status' } },
+    { name: 'matched_at',      uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Matched At' } },
+  ];
+  for (const col of cols) {
+    await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${_matchesTableId}/column`, col).catch(() => {});
+  }
+  return _matchesTableId;
+}
+
+async function saveMatchToDatagol(candidate, job, scores) {
+  try {
+    const tableId = await ensureMatchesTable();
+    await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${tableId}/rows`, {
+      cellValues: {
+        candidate_name:     candidate.name,
+        candidate_email:    candidate.email,
+        candidate_phone:    candidate.phone   || '',
+        candidate_location: candidate.location|| '',
+        candidate_skills:   (candidate.skills || []).join('; '),
+        ai_score:           candidate.score   || 0,
+        job_title:          job.title,
+        company:            job.company       || '',
+        job_location:       job.location      || '',
+        job_type:           job.type          || '',
+        salary_range:       job.salary        || '',
+        match_score:        scores?.overall   || 0,
+        skills_match:       scores?.skills    || 0,
+        exp_match:          scores?.exp       || 0,
+        status:             'shortlisted',
+        matched_at:         new Date().toISOString().slice(0, 10),
+      }
+    });
+    toast(`✓ Match saved — ${candidate.name} × ${job.title}`, 'success');
+  } catch (e) {
+    console.warn('saveMatch:', e.message);
+  }
+}
+
 // ── Shortlist ────────────────────────────────────────────────────────────────
-async function shortlistCandidate(id) {
+async function shortlistCandidate(id, jobId) {
   const c = state.candidates.find(x => x.id === id);
   if (!c) return;
   const newStatus = c.status === 'shortlisted' ? 'reviewed' : 'shortlisted';
@@ -1178,9 +1244,15 @@ async function shortlistCandidate(id) {
   }
   toast(c.status === 'shortlisted' ? `${c.name} added to shortlist!` : `${c.name} removed from shortlist.`, 'success');
 
-  // Persist to Datagol via backend
-  Datagol.updateCandidate(id, { status: newStatus })
-    .catch(e => console.warn('shortlist persist failed:', e.message));
+  // When shortlisting from the matching page, save candidate+job record to matches workbook
+  if (newStatus === 'shortlisted' && jobId) {
+    const j = state.jobs.find(x => x.id == jobId);
+    if (j) {
+      const scores = computeMatchScore(c, j);
+      saveMatchToDatagol(c, j, scores);
+    }
+  }
+  // Note: do NOT call updateCandidate here — 'status' column doesn't exist in extraction table
 }
 
 // ── Schedule Interview ───────────────────────────────────────────────────────
@@ -2050,16 +2122,16 @@ const Datagol = {
   deleteCandidates(ids) { return this.del('/api/candidates', { rowIds: ids }); },
 
   // Update candidate row directly on Datagol (bypasses local proxy)
-  // Maps frontend field names → actual extraction table column names
+  // NOTE: 'status' is NOT a column in the extraction table — never include it here
   updateCandidate(id, updates) {
     const cellValues = {};
-    if (updates.status   != null) cellValues.status       = updates.status;
     if (updates.name     != null) cellValues.full_name    = updates.name;
     if (updates.email    != null) cellValues.email        = updates.email;
     if (updates.phone    != null) cellValues.phone_number = updates.phone;
     if (updates.location != null) cellValues.location     = updates.location;
     if (updates.skills   != null) cellValues.skills       = Array.isArray(updates.skills) ? updates.skills.join('; ') : updates.skills;
     if (updates.education!= null) cellValues.education    = updates.education;
+    if (Object.keys(cellValues).length === 0) return Promise.resolve({ ok: true }); // nothing valid to update
     return this._dg('PUT',
       `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/rows`,
       { id, cellValues }
