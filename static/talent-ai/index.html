@@ -1935,6 +1935,7 @@ const Datagol = {
   listFiles()   { return this.get('/api/files'); },
 
   // ── Candidates — cursor API called directly ───────────────
+  // Cursor response: { rows: [{ id, cellValues: { full_name, email, ... } }] }
   async getCandidates() {
     const raw = await this._dg('POST',
       `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/cursor`,
@@ -1942,36 +1943,39 @@ const Datagol = {
     );
     const rows = raw?.rows || raw?.list || [];
     const candidates = rows
-      .filter(r => r.full_name || r.name || r.email)
-      .map(r => {
-        const skillsRaw = r.skills || '';
+      .filter(row => row.cellValues?.full_name || row.cellValues?.email)
+      .map(row => {
+        const v = row.cellValues;            // all fields live here
+        const rowId = row.id;               // numeric row ID at top level
+
+        const skillsRaw = v.skills || '';
         let role = 'Professional';
-        if (r.work_experience) {
-          const first = r.work_experience.split(';')[0].trim();
+        if (v.work_experience) {
+          const first = v.work_experience.split(';')[0].trim();
           const parts = first.split('|');
           role = parts.length >= 2 ? `${parts[0].trim()} at ${parts[1].trim()}` : first.slice(0, 80);
         }
-        let summary = r.summary || '';
-        if (!summary && r.datagol_extracted_file_data) {
-          try { summary = JSON.parse(r.datagol_extracted_file_data).summary || ''; } catch { /* */ }
+        let summary = v.summary || '';
+        if (!summary && v.datagol_extracted_file_data) {
+          try { summary = JSON.parse(v.datagol_extracted_file_data).summary || ''; } catch { /* */ }
         }
         return {
-          id:             r.noco_f03003fd || r._positiondf31ba1f || r.id,
-          name:           r.full_name || r.name || '—',
-          email:          r.email || '—',
-          phone:          r.phone_number || r.phone || '—',
-          location:       r.location || '—',
+          id:             rowId,
+          name:           v.full_name || v.name || '—',
+          email:          v.email || '—',
+          phone:          v.phone_number || v.phone || '—',
+          location:       v.location || '—',
           role,
-          exp:            parseFloat(r.total_experience) || 0,
-          score:          parseInt(r.ai_scoring || r.ai_score) || 0,
-          status:         r.status || 'new',
+          exp:            parseFloat(v.total_experience) || 0,
+          score:          parseInt(v.ai_scoring || v.ai_score) || 0,
+          status:         v.status || 'new',
           skills:         typeof skillsRaw === 'string'
                             ? skillsRaw.split(/[;,]/).map(s => s.trim()).filter(Boolean)
                             : [],
-          education:      r.education || '—',
+          education:      v.education || '—',
           summary,
-          resumeFileName: r.datagol_extracted_file_url ? r.datagol_extracted_file_url.split('/').pop() : null,
-          _raw: r,  // keep for aiGenerate body
+          resumeFileName: v.datagol_extracted_file_url ? v.datagol_extracted_file_url.split('/').pop() : null,
+          _raw: { ...v, _rowId: rowId },   // include row id for aiGenerate
         };
       });
     return { ok: true, candidates, total: raw?.totalNumberOfRecords || candidates.length };
@@ -1985,7 +1989,8 @@ const Datagol = {
     const results = [];
     for (const c of state.candidates) {
       if (!c._raw) continue;
-      const body = { id: c.id, cellValues: { ...c._raw, job_description: jobDescription || '' }, cellValuesByColumnId: {} };
+      const { _rowId, ...cellVals } = c._raw;
+      const body = { id: c.id, cellValues: { ...cellVals, job_description: jobDescription || '' }, cellValuesByColumnId: {} };
       const r = await this._dg('POST',
         `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/${DG_SCORE_COL}/aiGenerate`,
         body
@@ -2148,33 +2153,52 @@ async function loadFiles() {
   } catch (e) { console.warn('loadFiles:', e.message); }
 }
 
-// ── Poll extraction status via backend ────────────────────────────────────────
+// ── Poll extraction status every 30 s until DONE / FAILED ────────────────────
+// Status API response: { id, status: "IN_PROGRESS"|"DONE"|"FAILED", eventName, eventId }
 async function pollExtractionStatus(requestId, entry, fileName) {
-  const MAX = 36;
+  const INTERVAL_MS = 30_000;   // 30 seconds between polls
+  const MAX_POLLS   = 40;        // give up after 40 × 30 s = 20 minutes
   let n = 0;
   return new Promise(resolve => {
     const iv = setInterval(async () => {
       n++;
       try {
-        const s = await Datagol.pollStatus(requestId);
+        const s  = await Datagol.pollStatus(requestId);
         const st = (s?.status || '').toUpperCase();
-        if (['COMPLETED','SUCCESS','DONE'].includes(st)) {
+
+        if (st === 'DONE' || st === 'COMPLETED' || st === 'SUCCESS') {
           clearInterval(iv);
-          entry.status = 'extracted'; entry.candidate = deriveCandidateName(fileName);
+          entry.status    = 'extracted';
+          entry.candidate = deriveCandidateName(fileName);
           toast(`✓ "${fileName}" extraction complete!`, 'success');
-          // Refresh both — candidates gets new extracted profile, files updates the match
+          if (state.page === 'resumes') renderPage('resumes');
+          // Reload both so candidates table gets the new row and resumes shows matched name
           await loadCandidates();
           await loadFiles();
           resolve();
-        } else if (['FAILED','ERROR'].includes(st) || n >= MAX) {
+
+        } else if (st === 'FAILED' || st === 'ERROR' || n >= MAX_POLLS) {
           clearInterval(iv);
           entry.status = 'failed';
-          toast(n >= MAX ? `Extraction timed out for "${fileName}"` : `Extraction failed for "${fileName}"`, 'error');
+          toast(
+            n >= MAX_POLLS
+              ? `Extraction timed out for "${fileName}" after ${Math.round(n * INTERVAL_MS / 60000)} min`
+              : `Extraction failed for "${fileName}" (status: ${st})`,
+            'error'
+          );
           if (state.page === 'resumes') renderPage('resumes');
           resolve();
+
+        } else {
+          // Still IN_PROGRESS — update UI counter so user knows it's alive
+          entry._pollCount = n;
+          if (state.page === 'resumes') renderPage('resumes');
         }
-      } catch { clearInterval(iv); resolve(); }
-    }, 10000);
+      } catch (err) {
+        console.warn('pollStatus error:', err.message);
+        if (n >= MAX_POLLS) { clearInterval(iv); resolve(); }
+      }
+    }, INTERVAL_MS);
   });
 }
 
