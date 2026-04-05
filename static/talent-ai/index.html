@@ -1835,17 +1835,32 @@ async function simulateUpload() {
 }
 
 async function simulateAIScore() {
-  const sel = document.getElementById('score-job-select');
-  const jobDescription = sel ? sel.value : '';
+  const sel      = document.getElementById('score-job-select');
+  const jobDesc  = sel ? sel.value : '';
   const jobLabel = sel?.options[sel.selectedIndex]?.text || '';
+  const total    = state.candidates.length;
   closeModal();
-  toast(`🤖 Scoring ${state.candidates.length} candidates${jobLabel && jobLabel !== '— Select a job (optional) —' ? ' against "' + jobLabel + '"' : ''}…`, 'info');
+
+  if (!total) { toast('No candidates to score', 'error'); return; }
+
+  const jobCtx = jobLabel && jobLabel !== '— Select a job (optional) —' ? ` against "${jobLabel}"` : '';
+  toast(`🤖 Scoring ${total} candidate${total !== 1 ? 's' : ''}${jobCtx}…`, 'info');
+
   try {
-    const res = await Datagol.runAIScore(jobDescription);
-    toast(`✓ AI scoring complete — ${res.scored ?? state.candidates.length} candidates scored!`, 'success');
-    setTimeout(loadCandidates, 3000);
+    const res = await Datagol.runAIScore(jobDesc, (done, total, name, r) => {
+      const score = r?.cellValues?.ai_scoring;
+      if (score != null) toast(`✓ ${name} — score: ${score}`, 'success');
+    });
+
+    if (res.errors?.length) {
+      res.errors.forEach(e => toast(`⚠ ${e.name}: ${e.error}`, 'error'));
+    }
+    toast(`🎯 AI scoring complete — ${res.scored}/${res.total} candidates scored!`, 'success');
+
+    // Reload from Datagol to persist the scores
+    setTimeout(loadCandidates, 2000);
   } catch (e) {
-    toast(`AI scoring: ${e.message}`, 'error');
+    toast(`AI scoring failed: ${e.message}`, 'error');
   }
 }
 
@@ -1984,20 +1999,46 @@ const Datagol = {
   updateCandidate(id, data) { return this.put(`/api/candidates/${id}`, data); },
   deleteCandidates(ids)     { return this.del('/api/candidates', { rowIds: ids }); },
 
-  // ── AI Scoring — calls aiGenerate directly per candidate ──
-  async runAIScore(jobDescription) {
-    const results = [];
-    for (const c of state.candidates) {
+  // ── AI Scoring — calls aiGenerate per candidate, reads score back into state ──
+  // Request:  POST .../tables/{tableId}/{scoreColId}/aiGenerate
+  //           body: { id: rowId, cellValues: {...candidateFields}, cellValuesByColumnId: {} }
+  // Response: { id, cellValues: { ai_scoring: "8", ...allFields } }
+  async runAIScore(jobDescription, onProgress) {
+    let scored = 0;
+    const errors = [];
+
+    for (let i = 0; i < state.candidates.length; i++) {
+      const c = state.candidates[i];
       if (!c._raw) continue;
+
+      // Strip internal key; send clean cellValues exactly as Datagol expects
       const { _rowId, ...cellVals } = c._raw;
-      const body = { id: c.id, cellValues: { ...cellVals, job_description: jobDescription || '' }, cellValuesByColumnId: {} };
+      // Attach job description as context if a job was selected
+      if (jobDescription) cellVals.job_description = jobDescription;
+
+      const body = { id: c.id, cellValues: cellVals, cellValuesByColumnId: {} };
+
       const r = await this._dg('POST',
         `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/${DG_SCORE_COL}/aiGenerate`,
         body
-      ).catch(e => ({ error: e.message, id: c.id }));
-      results.push(r);
+      ).catch(e => ({ _error: e.message, id: c.id }));
+
+      if (r?._error) {
+        errors.push({ name: c.name, error: r._error });
+      } else {
+        // ── Read score back from response and update state immediately ──
+        const newScore = parseInt(r?.cellValues?.ai_scoring) || 0;
+        state.candidates[i] = { ...c, score: newScore };
+        scored++;
+        // Re-render live so score updates as each candidate finishes
+        if (state.page === 'candidates' || state.page === 'dashboard') renderPage(state.page);
+      }
+
+      // Report progress to caller (e.g. for toast updates)
+      if (onProgress) onProgress(i + 1, state.candidates.length, c.name, r);
     }
-    return { ok: true, scored: results.filter(r => !r.error).length, total: results.length };
+
+    return { ok: true, scored, total: state.candidates.length, errors };
   },
 
   // ── Jobs ──────────────────────────────────────────────────
