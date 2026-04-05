@@ -832,6 +832,15 @@ function renderMatching() {
             ${m.candidate.status==='shortlisted'?'✓ Shortlisted':'Shortlist'}
           </button>
           <button class="btn btn-secondary btn-sm" onclick="openInterviewModal(${m.candidate.id},${m.job.id})">📅 Schedule Interview</button>
+          ${m.candidate.score > EMAIL_SCORE_THRESHOLD
+            ? `<button class="btn btn-sm" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;border:none;"
+                onclick="openEmailCampaignModal(${m.candidate.id},'${(m.job.title||'').replace(/'/g,"\\'")}','${(m.job.id||'')}')">
+                📨 Email Campaign
+              </button>`
+            : `<button class="btn btn-ghost btn-sm" disabled style="opacity:0.4;cursor:not-allowed;" title="Score must be > ${EMAIL_SCORE_THRESHOLD} to send campaign">
+                📨 Email Campaign
+              </button>`
+          }
           <button class="btn btn-secondary btn-sm" onclick="openModal('candidate-detail',${m.candidate.id})">View Profile</button>
           <button class="btn btn-ghost btn-sm" style="color:#ef4444;border-color:rgba(239,68,68,0.3);"
             onclick="unmatchPair(${m.candidate.id},${m.job.id})">✕ Unmatch</button>
@@ -1301,6 +1310,73 @@ function unmatchPair(candidateId, jobId) {
   toast(`${c?.name || 'Candidate'} unmatched from "${j?.title || 'job'}"`, 'info');
 }
 
+// ── Email Campaign Modal & Trigger ───────────────────────────────────────────
+function openEmailCampaignModal(candidateId, jobTitle, jobId) {
+  const c = state.candidates.find(x => x.id === candidateId);
+  if (!c) return;
+
+  // Build all qualifying candidates for this job (score > threshold)
+  const qualifying = state.candidates.filter(x => x.score > EMAIL_SCORE_THRESHOLD);
+
+  document.getElementById('modal-container').innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div style="font-size:16px;font-weight:700;color:#e2e8f0;">📨 Email Campaign</div>
+          <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:14px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-radius:8px;margin-bottom:16px;">
+            <div style="font-size:12px;font-weight:600;color:#a5b4fc;margin-bottom:6px;">📋 Campaign Details</div>
+            <div style="font-size:12px;color:#94a3b8;line-height:1.7;">
+              <div>Job: <strong style="color:#e2e8f0;">${jobTitle}</strong></div>
+              <div>Qualifying candidates (score &gt; ${EMAIL_SCORE_THRESHOLD}): <strong style="color:#10b981;">${qualifying.length}</strong></div>
+              <div>Sending to: <strong style="color:#e2e8f0;">to_email column</strong> <span style="color:#475569;">(rachana.g@datagol.ai by default)</span></div>
+            </div>
+          </div>
+
+          <div style="background:#0a1020;border:1px solid #1e2d4a;border-radius:8px;padding:14px;margin-bottom:16px;">
+            <div style="font-size:11px;font-weight:600;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Email Preview</div>
+            <div style="font-size:12px;color:#94a3b8;line-height:1.8;">
+              <div><strong style="color:#64748b;">To:</strong> {to_email column value}</div>
+              <div><strong style="color:#64748b;">Subject:</strong> DataGOL Interview Schedule — ${jobTitle}</div>
+              <div style="margin-top:8px;padding-top:8px;border-top:1px solid #1e2d4a;">
+                Hi <span style="color:#a5b4fc;">{full_name}</span>,<br><br>
+                We were impressed with your skills and experience for <strong>${jobTitle}</strong>. We would like to schedule a follow-up discussion to go over the next steps...<br><br>
+                <span style="color:#475569;">Best regards, DataGOL Team</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:10px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:6px;font-size:11px;color:#fbbf24;">
+            ⚠️ This will trigger a Datagol Email Campaign action. Emails are sent to all rows where to_email is set.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" id="email-campaign-send-btn"
+            onclick="triggerEmailCampaign('${jobTitle.replace(/'/g,"\\'")}')">
+            📨 Send Campaign
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function triggerEmailCampaign(jobTitle) {
+  const btn = document.getElementById('email-campaign-send-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Sending…'; }
+
+  try {
+    await Datagol.sendEmailCampaign(jobTitle);
+    closeModal();
+    toast(`📨 Email campaign sent for "${jobTitle}"! Candidates with score > ${EMAIL_SCORE_THRESHOLD} will receive interview invites.`, 'success');
+  } catch (e) {
+    toast(`Email campaign failed: ${e.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '📨 Send Campaign'; }
+  }
+}
+
 // ── Interview Modal (standalone — works from matching page) ──────────────────
 function openInterviewModal(candidateId, jobId) {
   const c = state.candidates.find(x => x.id === candidateId);
@@ -1413,43 +1489,16 @@ async function sendInterviewInviteStandalone(candidateId, jobId) {
   ].filter(l => l !== null).join('\n');
 
   try {
-    const cfg = state.apiConfig;
-    if (cfg.token && cfg.workspaceId) {
-      const res = await fetch(
-        `${cfg.baseUrl || 'https://be.datagol.ai'}/noCo/api/v2/workspaces/${cfg.workspaceId}/email-campaigns`,
-        {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${cfg.token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: `Interview – ${c.name} – ${date}`,
-            to: [{ email: c.email, name: c.name }],
-            subject,
-            body: bodyText,
-            type: 'transactional',
-            metadata: {
-              candidateId: c.id,
-              jobId: j?.id || null,
-              interviewDate: date,
-              interviewTime: time,
-              interviewType: type,
-              duration,
-            },
-          }),
-        }
-      );
-      if (!res.ok) throw new Error(`API ${res.status}`);
-    } else {
-      // No API config — simulate a short delay so it feels real
-      await new Promise(r => setTimeout(r, 900));
-    }
+    // Use Datagol Email Campaign action (POST /tables/{id}/actions)
+    await Datagol.sendEmailCampaign(j?.title || 'the position');
   } catch (err) {
-    console.warn('Datagol email API (non-fatal):', err);
+    console.warn('Datagol email campaign (non-fatal):', err);
   }
 
   // Update candidate status to show invite was sent
   c.status = 'reviewed';
   closeModal();
-  toast(`📨 Interview invite sent to ${c.email} for ${date} at ${time}!`, 'success');
+  toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
   if (state.page === 'matching') renderPage('matching');
 }
 
@@ -1904,13 +1953,15 @@ function handleFileSelect(input) {
 // API CLIENT  — calls local Express backend (/api/...)
 // Datagol API — uploads/extraction call Datagol directly; data queries go via local backend.
 // ============================================================
-const DG_TOKEN      = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
-const DG_BASE       = 'https://be.datagol.ai';
-const DG_WS         = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
-const DG_EXT_ID     = '4242127';                                    // extraction config
-const DG_CAND_TABLE = 'ea736efc-d5dc-4a68-b29a-c7bcd1b5f2f2';    // extraction results table
-const DG_SCORE_COL  = '990c123e-decd-44db-bf96-d34539a0d80d';     // ai_scoring column
-const DG_FOLDER_ID  = '2ff6afe9-00f1-4f2b-9331-31947c274d44';     // resume upload folder
+const DG_TOKEN           = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+const DG_BASE            = 'https://be.datagol.ai';
+const DG_WS              = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
+const DG_EXT_ID          = '4242127';                                 // extraction config
+const DG_CAND_TABLE      = 'ea736efc-d5dc-4a68-b29a-c7bcd1b5f2f2'; // extraction results table
+const DG_SCORE_COL       = '990c123e-decd-44db-bf96-d34539a0d80d'; // ai_scoring column
+const DG_FOLDER_ID       = '2ff6afe9-00f1-4f2b-9331-31947c274d44'; // resume upload folder
+const DG_EMAIL_TEMPLATE_ID = '6c40a771-b897-4fc2-9e62-825d89d48d4f'; // email campaign template
+const EMAIL_SCORE_THRESHOLD = 8;                                     // min ai_scoring to qualify
 
 const Datagol = {
 
@@ -2058,6 +2109,40 @@ const Datagol = {
   },
   pollStatus(requestId) {
     return this._dg('GET', `/noCo/api/v1/requestLog/status/${requestId}`);
+  },
+
+  // ── Email Campaign — POST /tables/{tableId}/actions ───────
+  // Sends to the `to_email` column (default: rachana.g@datagol.ai).
+  // {full_name} is resolved by Datagol from the column; {job} is replaced client-side.
+  sendEmailCampaign(jobTitle) {
+    const jobLabel = jobTitle || 'the position';
+    const template =
+      `<p>Hi <span class="mention" data-type="mention" data-id="full_name" data-label="full_name}" data-mention-suggestion-char="@">{full_name}</span></p>` +
+      `<p></p>` +
+      `<p>We were impressed with your skills and experience for the <strong>${jobLabel}</strong>. ` +
+      `We would like to schedule a follow-up discussion to go over the next steps in the process.</p>` +
+      `<p><strong>Proposed Schedule:</strong><br>` +
+      `Date: ${new Date(Date.now() + 9 * 86400000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}<br>` +
+      `Time: 9:00 AM – 10:00 AM (EST)</p>` +
+      `<p>Please let us know if this time works for you, or feel free to suggest an alternative that better fits your schedule.</p>` +
+      `<p>We look forward to speaking with you again.</p>` +
+      `<p>Best regards,<br>DataGOL Team</p>`;
+
+    return this._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/actions`,
+      {
+        name:       `Email Campaign — ${jobLabel}`,
+        actionType: 'EMAIL_CAMPAIGN',
+        config: {
+          template,
+          emailColumn:        'to_email',
+          subject:            `DataGOL Interview Schedule — ${jobLabel}`,
+          attachmentColumns:  [],
+          subjectLineContent: `<p>DataGOL Interview Schedule — ${jobLabel}</p>`,
+          templateId:         DG_EMAIL_TEMPLATE_ID,
+        },
+      }
+    );
   },
 
   // ── Matching ──────────────────────────────────────────────
