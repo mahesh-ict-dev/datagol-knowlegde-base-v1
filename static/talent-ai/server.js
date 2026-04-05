@@ -290,29 +290,49 @@ function requireCandidatesTable(req, res, next) {
 }
 
 // Helper: normalise a cursor row → flat candidate object
-// Actual column names: name, email, phone, total_experience, last_company_worked_at,
-//                      location, education, skills, summary, status,
-//                      resume_file_id, resume_file_name, ai_score
+// Extraction table fields: full_name, email, phone_number, location, skills,
+//   education, work_experience, ai_scoring, noco_f03003fd (row id),
+//   datagol_extracted_file_url, datagol_extracted_file_data (JSON string)
 function rowToCandidate(row) {
+  // Cursor API returns fields at top level (not nested in cellValues)
   const v = row.cellValues || row.values || row;
+
   const skillsRaw = v.skills || '';
+
+  // Parse role + company from work_experience: "Title | Company | Dates | Desc; ..."
+  let role = v.last_company_worked_at || v.current_role || 'Professional';
+  if ((!role || role === 'Professional') && v.work_experience) {
+    const firstEntry = v.work_experience.split(';')[0].trim();
+    const parts = firstEntry.split('|');
+    role = parts.length >= 2
+      ? `${parts[0].trim()} at ${parts[1].trim()}`
+      : firstEntry.slice(0, 80);
+  }
+
+  // Try to extract summary from embedded JSON blob if not a direct column
+  let summary = v.summary || '';
+  if (!summary && v.datagol_extracted_file_data) {
+    try { summary = JSON.parse(v.datagol_extracted_file_data).summary || ''; } catch { /* ignore */ }
+  }
+
   return {
-    id:             row.id,
-    name:           v.name            || v.candidate_name || '—',
-    email:          v.email           || '—',
-    phone:          v.phone           || '—',
-    location:       v.location        || '—',
-    role:           v.last_company_worked_at || v.current_role || 'Professional',
+    id:             v.noco_f03003fd || v._positiondf31ba1f || row.id || 0,
+    name:           v.full_name || v.name || v.candidate_name || '—',
+    email:          v.email || '—',
+    phone:          v.phone_number || v.phone || '—',
+    location:       v.location || '—',
+    role,
     exp:            parseFloat(v.total_experience || v.years_experience) || 0,
-    score:          parseInt(v.ai_score) || 0,
-    status:         v.status          || 'new',
+    score:          parseInt(v.ai_scoring || v.ai_score) || 0,
+    status:         v.status || 'new',
     skills:         typeof skillsRaw === 'string'
-                      ? skillsRaw.split(',').map(s => s.trim()).filter(Boolean)
+                      ? skillsRaw.split(/[;,]/).map(s => s.trim()).filter(Boolean)
                       : (skillsRaw || []),
-    education:      v.education       || '—',
-    summary:        v.summary         || '—',
-    resumeFileId:   v.resume_file_id  || null,
-    resumeFileName: v.resume_file_name || null,
+    education:      v.education || '—',
+    summary,
+    resumeFileId:   v.resume_file_id || null,
+    resumeFileName: v.resume_file_name || (v.datagol_extracted_file_url
+                      ? v.datagol_extracted_file_url.split('/').pop() : null),
   };
 }
 
@@ -322,7 +342,13 @@ app.get('/api/candidates', requireWs, requireCandidatesTable, handle(async (req,
   const pageSize = parseInt(req.query.pageSize) || 200;
   const where    = req.query.where || undefined;
 
-  const body = { requestPageDetails: { pageNumber: page, pageSize } };
+  const body = {
+    dataProvider: 'JDBC',
+    lastCursorValues: {},
+    requestPageDetails: { pageNumber: page, pageSize },
+    sortOptions: [],
+    filterParams: {},
+  };
   if (where) body.whereClause = where;
 
   const data = await dg.post(
@@ -335,7 +361,7 @@ app.get('/api/candidates', requireWs, requireCandidatesTable, handle(async (req,
   // Filter out completely empty rows (system-generated empty rows)
   const candidates = rows
     .map(rowToCandidate)
-    .filter(c => c.name !== '—' || c.email !== '—');
+    .filter(c => c.name !== '—');
 
   res.json({ ok: true, candidates, total: data?.totalNumberOfRecords || candidates.length });
 }));
@@ -399,14 +425,36 @@ app.delete('/api/candidates', requireWs, requireCandidatesTable, handle(async (r
   res.json({ ok: true, data });
 }));
 
-// POST run AI scoring on all candidates
+// POST run AI scoring — calls aiGenerate per candidate with optional job description
 app.post('/api/candidates/ai-score', requireWs, requireCandidatesTable, handle(async (req, res) => {
-  if (!config.aiScoreColumnId) return res.status(400).json({ error: 'AI Score column not configured. Run /api/setup first.' });
-  const data = await dg.post(
-    `/noCo/api/v2/workspaces/${dg.ws()}/tables/${config.candidatesTableId}/column`,
-    { runBulk: true, columnId: config.aiScoreColumnId }
+  const aiScoreColId = config.aiScoreColumnId;
+  if (!aiScoreColId) return res.status(400).json({ error: 'AI Score column not configured. Run /api/setup first.' });
+
+  const { jobDescription, candidateIds } = req.body;
+
+  // Fetch all candidates
+  const candidatesData = await dg.post(
+    `/noCo/api/v2/workspaces/${dg.ws()}/tables/${config.candidatesTableId}/cursor`,
+    { dataProvider: 'JDBC', lastCursorValues: {}, requestPageDetails: { pageNumber: 1, pageSize: 500 }, sortOptions: [], filterParams: {} }
   );
-  res.json({ ok: true, data });
+  const rows = candidatesData?.rows || candidatesData?.list || [];
+
+  const results = [];
+  for (const row of rows) {
+    const v = row.cellValues || row.values || row;
+    const rowId = v.noco_f03003fd || v._positiondf31ba1f || row.id;
+    if (!rowId) continue;
+    if (candidateIds?.length && !candidateIds.includes(rowId)) continue;
+
+    const cellValues = { ...v, job_description: jobDescription || '' };
+    const result = await dg.post(
+      `/noCo/api/v2/workspaces/${dg.ws()}/tables/${config.candidatesTableId}/${aiScoreColId}/aiGenerate`,
+      { id: rowId, cellValues, cellValuesByColumnId: {} }
+    ).catch(e => ({ error: e.message, rowId }));
+    results.push({ rowId, result });
+  }
+
+  res.json({ ok: true, scored: results.filter(r => !r.result?.error).length, total: results.length, results });
 }));
 
 // =============================================================================

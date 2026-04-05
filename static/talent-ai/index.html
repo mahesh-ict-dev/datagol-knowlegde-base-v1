@@ -1454,6 +1454,9 @@ async function sendInterviewInviteStandalone(candidateId, jobId) {
 }
 
 function modalRunAIScore() {
+  const jobOptions = state.jobs.length
+    ? state.jobs.map(j => `<option value="${(j.desc||'').replace(/"/g,'&quot;')}">${j.title}${j.company ? ' — ' + j.company : ''}</option>`).join('')
+    : '<option value="">No job postings loaded yet</option>';
   return `
   <div class="modal-header">
     <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Run AI Scoring</div>
@@ -1462,24 +1465,23 @@ function modalRunAIScore() {
   <div class="modal-body">
     <div style="padding:16px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;margin-bottom:16px;">
       <div style="font-size:13px;font-weight:600;color:#a5b4fc;margin-bottom:4px;">🤖 Datagol AI Generate</div>
-      <div style="font-size:12px;color:#64748b;">This will trigger an AI_GENERATE column computation on your Datagol workbook for all ${state.candidates.length} candidates.</div>
+      <div style="font-size:12px;color:#64748b;">Scores all <strong style="color:#e2e8f0;">${state.candidates.length} candidates</strong> via the Datagol <code>aiGenerate</code> endpoint, using the selected job description as scoring context.</div>
     </div>
     <div class="form-group">
-      <label class="form-label">Scoring Dimensions</label>
-      ${[['Technical Skills', true],['Work Experience', true],['Education', true],['Culture Fit', false],['Communication', false]].map(([l,c])=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;">
-        <input type="checkbox" ${c?'checked':''} style="width:15px;height:15px;accent-color:#6366f1;">
-        <label style="font-size:13px;color:#94a3b8;">${l}</label>
-      </div>`).join('')}
-    </div>
-    <div class="form-group">
-      <label class="form-label">Custom Scoring Prompt (optional)</label>
-      <textarea class="form-input" placeholder="Score this candidate on a scale of 0-100 based on their resume. Consider their technical skills (40%), experience (30%), education (20%), and leadership potential (10%)."></textarea>
+      <label class="form-label">Score Against Job Posting</label>
+      <select class="form-select" id="score-job-select" style="width:100%;margin-bottom:8px;">
+        <option value="">— Select a job (optional) —</option>
+        ${jobOptions}
+      </select>
+      <div style="font-size:11px;color:#475569;">The job description is passed to Datagol's AI scoring column as context for ranking candidates.</div>
     </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-    <button class="btn btn-primary" onclick="simulateAIScore()">Run AI Scoring</button>
+    <button class="btn btn-primary" onclick="simulateAIScore()">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Run AI Scoring
+    </button>
   </div>`;
 }
 
@@ -1833,12 +1835,15 @@ async function simulateUpload() {
 }
 
 async function simulateAIScore() {
+  const sel = document.getElementById('score-job-select');
+  const jobDescription = sel ? sel.value : '';
+  const jobLabel = sel?.options[sel.selectedIndex]?.text || '';
   closeModal();
-  toast('🤖 Running AI scoring via Datagol…', 'info');
+  toast(`🤖 Scoring ${state.candidates.length} candidates${jobLabel && jobLabel !== '— Select a job (optional) —' ? ' against "' + jobLabel + '"' : ''}…`, 'info');
   try {
-    await Datagol.runAIScore();
-    toast('AI scoring triggered! Candidate scores will update in a few seconds.', 'success');
-    setTimeout(loadCandidates, 6000);
+    const res = await Datagol.runAIScore(jobDescription);
+    toast(`✓ AI scoring complete — ${res.scored ?? state.candidates.length} candidates scored!`, 'success');
+    setTimeout(loadCandidates, 3000);
   } catch (e) {
     toast(`AI scoring: ${e.message}`, 'error');
   }
@@ -1884,10 +1889,12 @@ function handleFileSelect(input) {
 // API CLIENT  — calls local Express backend (/api/...)
 // Datagol API — uploads/extraction call Datagol directly; data queries go via local backend.
 // ============================================================
-const DG_TOKEN  = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
-const DG_BASE   = 'https://be.datagol.ai';
-const DG_WS     = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
-const DG_EXT_ID = ''; // set this once extraction config is created via /api/setup
+const DG_TOKEN     = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+const DG_BASE      = 'https://be.datagol.ai';
+const DG_WS        = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
+const DG_EXT_ID    = '4242127';                                    // extraction config
+const DG_CAND_TABLE = 'ea736efc-d5dc-4a68-b29a-c7bcd1b5f2f2';    // extraction results table
+const DG_SCORE_COL  = '990c123e-decd-44db-bf96-d34539a0d80d';     // ai_scoring column
 
 const Datagol = {
 
@@ -1926,12 +1933,66 @@ const Datagol = {
   // ── Files ─────────────────────────────────────────────────
   listFiles()   { return this.get('/api/files'); },
 
-  // ── Candidates ────────────────────────────────────────────
-  getCandidates()           { return this.get('/api/candidates'); },
+  // ── Candidates — cursor API called directly ───────────────
+  async getCandidates() {
+    const raw = await this._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/cursor`,
+      { dataProvider: 'JDBC', lastCursorValues: {}, requestPageDetails: { pageNumber: 1, pageSize: 500 }, sortOptions: [], filterParams: {} }
+    );
+    const rows = raw?.rows || raw?.list || [];
+    const candidates = rows
+      .filter(r => r.full_name || r.name || r.email)
+      .map(r => {
+        const skillsRaw = r.skills || '';
+        let role = 'Professional';
+        if (r.work_experience) {
+          const first = r.work_experience.split(';')[0].trim();
+          const parts = first.split('|');
+          role = parts.length >= 2 ? `${parts[0].trim()} at ${parts[1].trim()}` : first.slice(0, 80);
+        }
+        let summary = r.summary || '';
+        if (!summary && r.datagol_extracted_file_data) {
+          try { summary = JSON.parse(r.datagol_extracted_file_data).summary || ''; } catch { /* */ }
+        }
+        return {
+          id:             r.noco_f03003fd || r._positiondf31ba1f || r.id,
+          name:           r.full_name || r.name || '—',
+          email:          r.email || '—',
+          phone:          r.phone_number || r.phone || '—',
+          location:       r.location || '—',
+          role,
+          exp:            parseFloat(r.total_experience) || 0,
+          score:          parseInt(r.ai_scoring || r.ai_score) || 0,
+          status:         r.status || 'new',
+          skills:         typeof skillsRaw === 'string'
+                            ? skillsRaw.split(/[;,]/).map(s => s.trim()).filter(Boolean)
+                            : [],
+          education:      r.education || '—',
+          summary,
+          resumeFileName: r.datagol_extracted_file_url ? r.datagol_extracted_file_url.split('/').pop() : null,
+          _raw: r,  // keep for aiGenerate body
+        };
+      });
+    return { ok: true, candidates, total: raw?.totalNumberOfRecords || candidates.length };
+  },
   addCandidate(data)        { return this.post('/api/candidates', data); },
   updateCandidate(id, data) { return this.put(`/api/candidates/${id}`, data); },
   deleteCandidates(ids)     { return this.del('/api/candidates', { rowIds: ids }); },
-  runAIScore()              { return this.post('/api/candidates/ai-score'); },
+
+  // ── AI Scoring — calls aiGenerate directly per candidate ──
+  async runAIScore(jobDescription) {
+    const results = [];
+    for (const c of state.candidates) {
+      if (!c._raw) continue;
+      const body = { id: c.id, cellValues: { ...c._raw, job_description: jobDescription || '' }, cellValuesByColumnId: {} };
+      const r = await this._dg('POST',
+        `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/${DG_SCORE_COL}/aiGenerate`,
+        body
+      ).catch(e => ({ error: e.message, id: c.id }));
+      results.push(r);
+    }
+    return { ok: true, scored: results.filter(r => !r.error).length, total: results.length };
+  },
 
   // ── Jobs ──────────────────────────────────────────────────
   getJobs()          { return this.get('/api/jobs'); },
@@ -1942,8 +2003,11 @@ const Datagol = {
   // ── Extraction — calls Datagol directly ───────────────────
   async triggerExtraction(fileId, extractionConfigId) {
     const extId = extractionConfigId || DG_EXT_ID;
-    if (!extId) throw new Error('Extraction config ID not set. Run Setup in Settings first.');
-    return this._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/extraction/${extId}/FILE/${fileId}/run`, {});
+    if (!extId) throw new Error('Extraction config ID not set.');
+    return this._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/extraction/${extId}/FILE/${fileId}/run?extractOnlyNew=false`,
+      {}
+    );
   },
   pollStatus(requestId) {
     return this._dg('GET', `/noCo/api/v1/requestLog/status/${requestId}`);
