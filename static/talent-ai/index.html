@@ -2046,9 +2046,25 @@ const Datagol = {
       });
     return { ok: true, candidates, total: raw?.totalNumberOfRecords || candidates.length };
   },
-  addCandidate(data)        { return this.post('/api/candidates', data); },
-  updateCandidate(id, data) { return this.put(`/api/candidates/${id}`, data); },
-  deleteCandidates(ids)     { return this.del('/api/candidates', { rowIds: ids }); },
+  addCandidate(data)    { return this.post('/api/candidates', data); },
+  deleteCandidates(ids) { return this.del('/api/candidates', { rowIds: ids }); },
+
+  // Update candidate row directly on Datagol (bypasses local proxy)
+  // Maps frontend field names → actual extraction table column names
+  updateCandidate(id, updates) {
+    const cellValues = {};
+    if (updates.status   != null) cellValues.status       = updates.status;
+    if (updates.name     != null) cellValues.full_name    = updates.name;
+    if (updates.email    != null) cellValues.email        = updates.email;
+    if (updates.phone    != null) cellValues.phone_number = updates.phone;
+    if (updates.location != null) cellValues.location     = updates.location;
+    if (updates.skills   != null) cellValues.skills       = Array.isArray(updates.skills) ? updates.skills.join('; ') : updates.skills;
+    if (updates.education!= null) cellValues.education    = updates.education;
+    return this._dg('PUT',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_CAND_TABLE}/rows`,
+      { id, cellValues }
+    );
+  },
 
   // ── AI Scoring — calls aiGenerate per candidate, reads score back into state ──
   // Request:  POST .../tables/{tableId}/{scoreColId}/aiGenerate
@@ -2282,8 +2298,8 @@ async function loadFiles() {
 // ── Poll extraction status every 30 s until DONE / FAILED ────────────────────
 // Status API response: { id, status: "IN_PROGRESS"|"DONE"|"FAILED", eventName, eventId }
 async function pollExtractionStatus(requestId, entry, fileName) {
-  const INTERVAL_MS = 30_000;   // 30 seconds between polls
-  const MAX_POLLS   = 40;        // give up after 40 × 30 s = 20 minutes
+  const INTERVAL_MS = 2_000;    // 2 seconds between polls
+  const MAX_POLLS   = 300;      // give up after 300 × 2 s = 10 minutes
   let n = 0;
   return new Promise(resolve => {
     const iv = setInterval(async () => {
