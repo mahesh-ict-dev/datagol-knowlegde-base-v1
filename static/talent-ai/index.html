@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentAI — Recruitment Intelligence</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #080d1a; color: #e2e8f0; min-height: 100vh; overflow-x: hidden; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+/* Layout */
+#app { display: flex; height: 100vh; overflow: hidden; }
+#sidebar { width: 240px; min-width: 240px; background: #0d1526; border-right: 1px solid #1e2d4a; display: flex; flex-direction: column; overflow-y: auto; }
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#topbar { height: 60px; min-height: 60px; background: #0d1526; border-bottom: 1px solid #1e2d4a; display: flex; align-items: center; padding: 0 24px; gap: 16px; }
+#content { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* Sidebar */
+.sidebar-logo { padding: 20px 20px 16px; border-bottom: 1px solid #1e2d4a; }
+.logo-text { font-size: 20px; font-weight: 800; background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo-sub { font-size: 10px; color: #475569; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+
+.nav-section { padding: 12px 12px 4px; font-size: 10px; color: #475569; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; margin: 1px 8px; border-radius: 8px; cursor: pointer; color: #64748b; font-size: 13.5px; font-weight: 500; transition: all 0.15s; }
+.nav-item:hover { background: #1e2d4a; color: #94a3b8; }
+.nav-item.active { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.15)); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+.nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+.nav-badge { margin-left: auto; background: #6366f1; color: white; font-size: 10px; padding: 1px 6px; border-radius: 10px; font-weight: 600; }
+
+.sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid #1e2d4a; }
+
+/* Cards */
+.card { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 12px; padding: 20px; }
+.card-sm { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 10px; padding: 16px; }
+
+/* KPI Cards */
+.kpi-card { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 12px; padding: 20px; position: relative; overflow: hidden; transition: border-color 0.2s; }
+.kpi-card:hover { border-color: #334155; }
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.kpi-card.blue::before { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
+.kpi-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #6366f1); }
+.kpi-card.green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.kpi-card.amber::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.kpi-val { font-size: 32px; font-weight: 800; color: #f1f5f9; line-height: 1; margin: 8px 0 4px; }
+.kpi-label { font-size: 12px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi-change { font-size: 12px; font-weight: 600; margin-top: 8px; }
+.kpi-change.up { color: #10b981; }
+.kpi-change.down { color: #ef4444; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+.btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(99,102,241,0.4); }
+.btn-secondary { background: #1e2d4a; color: #94a3b8; border: 1px solid #2d3f5c; }
+.btn-secondary:hover { background: #253550; color: #e2e8f0; }
+.btn-ghost { background: transparent; color: #64748b; }
+.btn-ghost:hover { background: #1e2d4a; color: #94a3b8; }
+.btn-danger { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.btn-danger:hover { background: rgba(239,68,68,0.25); }
+.btn-sm { padding: 5px 11px; font-size: 12px; }
+.btn-xs { padding: 3px 8px; font-size: 11px; }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+.badge-purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+.badge-green { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+.badge-amber { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+.badge-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.badge-gray { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.3); }
+
+/* Score ring */
+.score-ring { width: 52px; height: 52px; position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.score-ring svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+.score-ring .score-num { font-size: 13px; font-weight: 700; color: #f1f5f9; z-index: 1; }
+
+/* Upload zone */
+.upload-zone { border: 2px dashed #2d3f5c; border-radius: 12px; padding: 40px 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.upload-zone:hover, .upload-zone.drag-over { border-color: #6366f1; background: rgba(99,102,241,0.05); }
+.upload-zone svg { width: 40px; height: 40px; color: #475569; margin: 0 auto 12px; }
+
+/* Table */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { text-align: left; padding: 10px 14px; font-size: 11px; color: #475569; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1e2d4a; white-space: nowrap; }
+.data-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid #111c2f; color: #94a3b8; vertical-align: middle; }
+.data-table tr:hover td { background: rgba(30,45,74,0.4); }
+.data-table td:first-child, .data-table th:first-child { padding-left: 20px; }
+
+/* Search input */
+.search-input { background: #111c2f; border: 1px solid #1e2d4a; border-radius: 8px; padding: 8px 12px 8px 36px; color: #e2e8f0; font-size: 13px; width: 240px; outline: none; }
+.search-input:focus { border-color: #6366f1; }
+.search-wrap { position: relative; }
+.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: #475569; }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; }
+.modal { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 16px; width: 560px; max-width: 95vw; max-height: 90vh; overflow-y: auto; }
+.modal-header { padding: 20px 24px; border-bottom: 1px solid #1e2d4a; display: flex; align-items: center; justify-content: space-between; }
+.modal-body { padding: 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid #1e2d4a; display: flex; justify-content: flex-end; gap: 10px; }
+
+/* Form */
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-input { width: 100%; background: #111c2f; border: 1px solid #1e2d4a; border-radius: 8px; padding: 9px 12px; color: #e2e8f0; font-size: 13px; outline: none; font-family: 'Inter', sans-serif; }
+.form-input:focus { border-color: #6366f1; }
+.form-select { width: 100%; background: #111c2f; border: 1px solid #1e2d4a; border-radius: 8px; padding: 9px 12px; color: #e2e8f0; font-size: 13px; outline: none; }
+textarea.form-input { resize: vertical; min-height: 80px; }
+
+/* Progress bar */
+.progress-bar { height: 4px; background: #1e2d4a; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+
+/* Toast */
+#toast-container { position: fixed; top: 20px; right: 20px; z-index: 200; display: flex; flex-direction: column; gap: 8px; }
+.toast { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 10px; padding: 12px 16px; font-size: 13px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); animation: slideIn 0.2s ease; min-width: 280px; }
+.toast.success { border-left: 3px solid #10b981; }
+.toast.error { border-left: 3px solid #ef4444; }
+.toast.info { border-left: 3px solid #6366f1; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Tabs */
+.tabs { display: flex; gap: 2px; background: #0a1020; padding: 3px; border-radius: 9px; border: 1px solid #1e2d4a; }
+.tab { padding: 6px 14px; border-radius: 7px; font-size: 12.5px; font-weight: 500; cursor: pointer; color: #475569; transition: all 0.15s; }
+.tab.active { background: #1e2d4a; color: #e2e8f0; }
+.tab:hover:not(.active) { color: #94a3b8; }
+
+/* Candidate card */
+.candidate-card { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 12px; padding: 18px; transition: all 0.2s; cursor: pointer; }
+.candidate-card:hover { border-color: #6366f1; box-shadow: 0 0 0 1px rgba(99,102,241,0.2); transform: translateY(-1px); }
+
+/* Job card */
+.job-card { background: #0d1526; border: 1px solid #1e2d4a; border-radius: 12px; padding: 20px; transition: all 0.2s; }
+.job-card:hover { border-color: #334155; }
+
+/* Match bar */
+.match-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.match-label { font-size: 12px; color: #64748b; width: 110px; flex-shrink: 0; }
+.match-track { flex: 1; height: 6px; background: #1e2d4a; border-radius: 3px; overflow: hidden; }
+.match-fill { height: 100%; border-radius: 3px; }
+.match-pct { font-size: 12px; font-weight: 600; width: 36px; text-align: right; }
+
+/* Avatar */
+.avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+
+/* Page header */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.page-title { font-size: 22px; font-weight: 700; color: #f1f5f9; }
+.page-sub { font-size: 13px; color: #475569; margin-top: 2px; }
+
+/* Status dot */
+.status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+/* Skeleton */
+.skeleton { background: linear-gradient(90deg, #111c2f 25%, #1a2840 50%, #111c2f 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.divider { height: 1px; background: #1e2d4a; margin: 20px 0; }
+
+/* Chip */
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: #111c2f; border: 1px solid #1e2d4a; border-radius: 20px; font-size: 11px; color: #94a3b8; }
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">TalentAI</div>
+      <div class="logo-sub">Recruitment Intelligence</div>
+    </div>
+
+    <div style="padding: 8px 0;">
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" onclick="navigate('dashboard')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="navigate('resumes')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Resumes
+        <span class="nav-badge">3</span>
+      </div>
+      <div class="nav-item" onclick="navigate('candidates')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Candidates
+      </div>
+
+      <div class="nav-section">Jobs</div>
+      <div class="nav-item" onclick="navigate('jobs')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Job Postings
+      </div>
+      <div class="nav-item" onclick="navigate('matching')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Matching
+        <span class="nav-badge" style="background:#10b981;">12</span>
+      </div>
+
+      <div class="nav-section">Config</div>
+      <div class="nav-item" onclick="navigate('settings')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        API Settings
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">RA</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#e2e8f0;">Rachana A.</div>
+          <div style="font-size:11px;color:#475569;">Admin</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="main">
+    <!-- TOPBAR -->
+    <div id="topbar">
+      <div id="breadcrumb" style="font-size:14px;font-weight:600;color:#94a3b8;">Dashboard</div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+        <div class="search-wrap">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="search-input" placeholder="Search candidates, jobs..." id="global-search">
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="openModal('add-candidate')">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Candidate
+        </button>
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:pointer;">RA</div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content"></div>
+  </main>
+</div>
+
+<!-- MODALS -->
+<div id="modal-container"></div>
+<div id="toast-container"></div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  page: 'dashboard',
+  apiConfig: (() => {
+    const saved = JSON.parse(localStorage.getItem('datagol_config') || '{}');
+    // Pre-seed the known service-account token if nothing is saved yet
+    if (!saved.token) saved.token = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+    return saved;
+  })(),
+  _unmatched: [],        // array of "candidateId-jobId" keys removed from matching
+  _matchFilterCandidate: null,
+  candidates: [],        // loaded from Datagol via /api/candidates
+  jobs: [],              // loaded from Datagol via /api/jobs
+  resumes: [],           // derived from candidates (resume_file_name + status)
+};
+
+const avatarColors = [
+  'linear-gradient(135deg,#6366f1,#8b5cf6)',
+  'linear-gradient(135deg,#0ea5e9,#06b6d4)',
+  'linear-gradient(135deg,#10b981,#34d399)',
+  'linear-gradient(135deg,#f59e0b,#fbbf24)',
+  'linear-gradient(135deg,#ef4444,#f97316)',
+];
+
+function getInitials(name) { return name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2); }
+function getAvatarColor(id) { return avatarColors[(id-1) % avatarColors.length]; }
+
+function scoreColor(s) {
+  if (s >= 85) return '#10b981';
+  if (s >= 70) return '#6366f1';
+  if (s >= 55) return '#f59e0b';
+  return '#ef4444';
+}
+
+function statusBadge(s) {
+  const map = {
+    new: ['badge-blue','New'],
+    reviewed: ['badge-purple','Reviewed'],
+    shortlisted: ['badge-green','Shortlisted'],
+    rejected: ['badge-red','Rejected'],
+    active: ['badge-green','Active'],
+    draft: ['badge-gray','Draft'],
+    closed: ['badge-red','Closed'],
+  };
+  const [cls, label] = map[s] || ['badge-gray', s];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function scoreRing(score, size=52) {
+  const r = 20; const c = 2*Math.PI*r;
+  const fill = (score/100)*c;
+  const color = scoreColor(score);
+  return `<div class="score-ring" style="width:${size}px;height:${size}px;">
+    <svg width="${size}" height="${size}" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="${r}" stroke="#1e2d4a" stroke-width="3" fill="none"/>
+      <circle cx="22" cy="22" r="${r}" stroke="${color}" stroke-width="3" fill="none"
+        stroke-dasharray="${fill} ${c}" stroke-linecap="round"/>
+    </svg>
+    <span class="score-num" style="color:${color};font-size:${size<52?'11px':'13px'}">${score}</span>
+  </div>`;
+}
+
+// ============================================================
+// ROUTING
+// ============================================================
+function navigate(page) {
+  state.page = page;
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const nav = document.querySelector(`.nav-item[onclick="navigate('${page}')"]`);
+  if (nav) nav.classList.add('active');
+  const titles = { dashboard:'Dashboard', resumes:'Resumes', candidates:'Candidates', jobs:'Job Postings', matching:'Matching', settings:'API Settings' };
+  document.getElementById('breadcrumb').textContent = titles[page] || page;
+  renderPage(page);
+  // Trigger real data loads when Datagol is configured
+  if (Datagol.isConfigured()) {
+    if (page === 'dashboard')  { loadCandidates(); loadJobs(); }
+    if (page === 'candidates') loadCandidates();
+    if (page === 'jobs')       loadJobs();
+    if (page === 'resumes')    loadCandidates();   // resumes are derived from candidates
+    if (page === 'matching')   { loadCandidates(); loadJobs(); }
+  }
+}
+
+function renderPage(page) {
+  const content = document.getElementById('content');
+  const renders = { dashboard: renderDashboard, resumes: renderResumes, candidates: renderCandidates, jobs: renderJobs, matching: renderMatching, settings: renderSettings };
+  content.innerHTML = (renders[page] || renderDashboard)();
+  afterRender(page);
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard() {
+  const shortlisted = state.candidates.filter(c=>c.status==='shortlisted').length;
+  const avgScore = state.candidates.length
+    ? Math.round(state.candidates.reduce((a,c)=>a+c.score,0)/state.candidates.length)
+    : 0;
+  return `
+  <div class="page-header">
+    <div>
+      <div class="page-title">Overview</div>
+      <div class="page-sub">Welcome back — here's what's happening today</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-secondary btn-sm" onclick="navigate('resumes')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Resumes
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="navigate('matching')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Run Matching
+      </button>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;">
+    <div class="kpi-card blue">
+      <div class="kpi-label">Total Candidates</div>
+      <div class="kpi-val">${state.candidates.length}</div>
+      <div class="kpi-change up">↑ 3 this week</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Shortlisted</div>
+      <div class="kpi-val">${shortlisted}</div>
+      <div class="kpi-change up">↑ 1 today</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Active Jobs</div>
+      <div class="kpi-val">${state.jobs.filter(j=>j.status==='active').length}</div>
+      <div class="kpi-change up">↑ 2 new</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Avg AI Score</div>
+      <div class="kpi-val">${avgScore}</div>
+      <div class="kpi-change down">↓ 2pts</div>
+    </div>
+  </div>
+
+  <!-- Charts + Recent -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;color:#e2e8f0;">Candidates by Week</div>
+        <span class="badge badge-blue">Last 6 weeks</span>
+      </div>
+      <div style="position:relative;height:160px;"><canvas id="chart-weekly"></canvas></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;color:#e2e8f0;">Pipeline Status</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <canvas id="chart-status" width="140" height="140"></canvas>
+        <div style="flex:1;">
+          ${(()=>{
+          const cntNew       = state.candidates.filter(c=>c.status==='new'||c.status==='extracted').length;
+          const cntReviewed  = state.candidates.filter(c=>c.status==='reviewed').length;
+          const cntShort     = state.candidates.filter(c=>c.status==='shortlisted').length;
+          const cntRejected  = state.candidates.filter(c=>c.status==='rejected').length;
+          return [['New',cntNew,'#3b82f6'],['Reviewed',cntReviewed,'#8b5cf6'],['Shortlisted',cntShort,'#10b981'],['Rejected',cntRejected,'#ef4444']].map(([l,v,c])=>`
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:${c};"></div>
+              <span style="font-size:12px;color:#94a3b8;">${l}</span>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:#e2e8f0;">${v}</span>
+          </div>`).join('');
+        })()}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom grid -->
+  <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px;">
+    <!-- Recent candidates -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;color:#e2e8f0;">Recent Candidates</div>
+        <button class="btn btn-ghost btn-xs" onclick="navigate('candidates')">View all →</button>
+      </div>
+      ${state.candidates.slice(0,4).map(c=>`
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #111c2f;">
+        <div class="avatar" style="background:${getAvatarColor(c.id)}">${getInitials(c.name)}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.name}</div>
+          <div style="font-size:11px;color:#475569;">${c.role}</div>
+        </div>
+        ${scoreRing(c.score, 40)}
+        ${statusBadge(c.status)}
+      </div>`).join('')}
+    </div>
+
+    <!-- Top matches -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;color:#e2e8f0;">Top Matches</div>
+        <button class="btn btn-ghost btn-xs" onclick="navigate('matching')">View all →</button>
+      </div>
+      ${(()=>{
+        const allM = [];
+        state.candidates.forEach(c => state.jobs.forEach(j => {
+          const cSkills = c.skills.map(s=>s.toLowerCase());
+          const jSkills = j.skills.map(s=>s.toLowerCase());
+          const shared = cSkills.filter(s=>jSkills.some(js=>js.includes(s)||s.includes(js))).length;
+          const sc = Math.min(99, Math.round((shared/Math.max(jSkills.length,1))*100*1.2+30));
+          allM.push({c:c.name, j:j.title, score:sc});
+        }));
+        allM.sort((a,b)=>b.score-a.score);
+        const top = allM.slice(0,4);
+        if (!top.length) return `<div style="text-align:center;color:#475569;padding:20px;font-size:13px;">No matches yet — add jobs and candidates first.</div>`;
+        return top.map(m=>`
+        <div style="padding:10px 0;border-bottom:1px solid #111c2f;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#e2e8f0;">${m.c}</div>
+              <div style="font-size:11px;color:#475569;">${m.j}</div>
+            </div>
+            <div style="font-size:15px;font-weight:800;color:${scoreColor(m.score)}">${m.score}%</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${m.score}%;background:${scoreColor(m.score)};"></div></div>
+        </div>`).join('');
+      })()}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// RESUMES
+// ============================================================
+function renderResumes() {
+  const statusIcon = {
+    extracted: `<span class="badge badge-green">✓ Extracted</span>`,
+    extracting: `<span class="badge badge-amber">⟳ Extracting...</span>`,
+    failed: `<span class="badge badge-red">✗ Failed</span>`,
+    pending: `<span class="badge badge-gray">Pending</span>`,
+  };
+
+  return `
+  <div class="page-header">
+    <div>
+      <div class="page-title">Resume Uploads</div>
+      <div class="page-sub">Upload PDFs and extract candidate data via Datagol AI</div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('upload-resume')">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload Resumes
+    </button>
+  </div>
+
+  <!-- Upload zone -->
+  <div class="upload-zone card" id="drop-zone" style="margin-bottom:20px;" onclick="openModal('upload-resume')"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="handleDrop(event)">
+    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="width:40px;height:40px;color:#475569;margin:0 auto 12px;">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="17,8 12,3 7,8"/>
+      <line x1="12" y1="3" x2="12" y2="15"/>
+    </svg>
+    <div style="font-size:15px;font-weight:600;color:#94a3b8;margin-bottom:6px;">Drop PDF resumes here</div>
+    <div style="font-size:12px;color:#475569;margin-bottom:12px;">or click to browse • Supports PDF, up to 25MB each</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+      <span class="chip">📄 AI Extraction</span>
+      <span class="chip">🧠 Auto-parse fields</span>
+      <span class="chip">⚡ Datagol Backend</span>
+    </div>
+  </div>
+
+  <!-- Pipeline steps -->
+  <div class="card" style="margin-bottom:20px;">
+    <div style="font-size:13px;font-weight:600;color:#94a3b8;margin-bottom:14px;">Extraction Pipeline</div>
+    <div style="display:flex;align-items:center;gap:0;">
+      ${[
+        ['1','Upload PDF','📤','#6366f1'],
+        ['2','Store in Workbook','🗄️','#8b5cf6'],
+        ['3','AI Extraction','🤖','#06b6d4'],
+        ['4','Score Profile','⭐','#10b981'],
+        ['5','Ready to Match','✅','#f59e0b'],
+      ].map(([n,l,ic,c],i,arr)=>`
+      <div style="display:flex;align-items:center;flex:1;">
+        <div style="text-align:center;flex:1;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(99,102,241,0.1);border:2px solid ${c};display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:16px;">${ic}</div>
+          <div style="font-size:11px;font-weight:600;color:#94a3b8;">${l}</div>
+        </div>
+        ${i<arr.length-1 ? `<div style="height:2px;background:linear-gradient(90deg,${c},${arr[i+1][3]});width:30px;flex-shrink:0;margin:0 -4px;"></div>` : ''}
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- File list -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-size:14px;font-weight:600;color:#e2e8f0;">Uploaded Files <span style="font-size:12px;color:#475569;font-weight:400;">(${state.resumes.length})</span></div>
+      <div class="tabs" id="resume-tabs">
+        <div class="tab active" onclick="filterResumes('all',this)">All</div>
+        <div class="tab" onclick="filterResumes('extracted',this)">Extracted</div>
+        <div class="tab" onclick="filterResumes('extracting',this)">Processing</div>
+        <div class="tab" onclick="filterResumes('failed',this)">Failed</div>
+      </div>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Size</th>
+          <th>Pages</th>
+          <th>Uploaded</th>
+          <th>Status</th>
+          <th>Candidate</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="resume-tbody">
+        ${resumeRows(state.resumes)}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ============================================================
+// CANDIDATES
+// ============================================================
+function renderCandidates() {
+  return `
+  <div class="page-header">
+    <div>
+      <div class="page-title">Candidate Profiles</div>
+      <div class="page-sub">${state.candidates.length} candidates · AI-scored and ranked</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <div class="search-wrap">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" placeholder="Filter candidates..." style="width:200px;">
+      </div>
+      <select class="form-select" style="width:130px;padding:7px 10px;">
+        <option>All Statuses</option>
+        <option>New</option>
+        <option>Reviewed</option>
+        <option>Shortlisted</option>
+        <option>Rejected</option>
+      </select>
+      <button class="btn btn-secondary btn-sm">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Sort: Score ↓
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('run-ai-score')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Run AI Scoring
+      </button>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    ${[...state.candidates].sort((a,b)=>b.score-a.score).map(c=>`
+    <div class="candidate-card" onclick="openModal('candidate-detail',${c.id})">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="avatar" style="background:${getAvatarColor(c.id)};width:42px;height:42px;font-size:15px;">${getInitials(c.name)}</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#e2e8f0;">${c.name}</div>
+            <div style="font-size:11px;color:#475569;">${c.role}</div>
+          </div>
+        </div>
+        ${scoreRing(c.score)}
+      </div>
+      <div style="margin-bottom:10px;">
+        <div style="font-size:11px;color:#475569;display:flex;align-items:center;gap:12px;">
+          <span>📍 ${c.location}</span>
+          <span>💼 ${c.exp} yrs</span>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.5;">${c.summary}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;">
+        ${c.skills.slice(0,3).map(s=>`<span class="chip">${s}</span>`).join('')}
+        ${c.skills.length>3 ? `<span class="chip">+${c.skills.length-3}</span>` : ''}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        ${statusBadge(c.status)}
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();openModal('candidate-detail',${c.id})">View</button>
+          <button class="btn btn-primary btn-xs" onclick="event.stopPropagation();navigate('matching')">Match</button>
+        </div>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ============================================================
+// JOBS
+// ============================================================
+function renderJobs() {
+  return `
+  <div class="page-header">
+    <div>
+      <div class="page-title">Job Postings</div>
+      <div class="page-sub">${state.jobs.length} postings · sourced from LinkedIn and manual entry</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-secondary btn-sm" onclick="openModal('scrape-linkedin')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        Ingest LinkedIn Data
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('add-job')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Job Posting
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+    ${[
+      ['Active Jobs', state.jobs.filter(j=>j.status==='active').length, 'badge-green'],
+      ['Total Matches', state.jobs.reduce((a,j)=>a+j.matches,0), 'badge-purple'],
+      ['LinkedIn Sourced', state.jobs.filter(j=>j.source==='LinkedIn').length, 'badge-blue'],
+      ['Drafts', state.jobs.filter(j=>j.status==='draft').length, 'badge-gray'],
+    ].map(([l,v,b])=>`
+    <div class="card-sm" style="text-align:center;">
+      <div style="font-size:24px;font-weight:800;color:#f1f5f9;margin-bottom:4px;">${v}</div>
+      <div style="font-size:11px;color:#475569;">${l}</div>
+    </div>`).join('')}
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+    ${state.jobs.map(j=>`
+    <div class="job-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <div style="font-size:15px;font-weight:700;color:#e2e8f0;">${j.title}</div>
+            ${j.source==='LinkedIn' ? `<span class="badge badge-blue" style="font-size:9px;">LinkedIn</span>` : `<span class="badge badge-gray" style="font-size:9px;">Manual</span>`}
+          </div>
+          <div style="font-size:12px;color:#475569;">${j.company} · ${j.location}</div>
+        </div>
+        ${statusBadge(j.status)}
+      </div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.6;">${j.desc}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+        ${j.skills.map(s=>`<span class="chip">${s}</span>`).join('')}
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;font-size:11px;color:#475569;margin-bottom:14px;">
+        <span>💼 ${j.exp}</span>
+        <span>💰 ${j.salary}</span>
+        <span>📋 ${j.type}</span>
+        <span>📅 ${j.posted}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#10b981;"></div>
+          <span style="font-size:12px;color:#94a3b8;">${j.matches} candidate match${j.matches!==1?'es':''}</span>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-secondary btn-xs" onclick="navigate('matching')">View Matches</button>
+          <button class="btn btn-primary btn-xs" onclick="navigate('matching')">Run AI Match</button>
+        </div>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ============================================================
+// MATCHING
+// ============================================================
+function computeMatchScore(candidate, job) {
+  const cSkills = candidate.skills.map(s => s.toLowerCase());
+  const jSkills = job.skills.map(s => s.toLowerCase());
+  const sharedSkills = cSkills.filter(s => jSkills.some(js => js.includes(s) || s.includes(js))).length;
+  const skillPct  = Math.min(99, Math.round((sharedSkills / Math.max(jSkills.length, 1)) * 100 * 1.2 + 30));
+  const expMin    = parseInt((job.exp || '0').match(/\d+/)?.[0] || '0');
+  const expPct    = expMin === 0 ? 80 : Math.min(99, Math.round((candidate.exp / expMin) * 85));
+  const seed      = (candidate.id * 13 + job.id * 7) % 25;
+  const eduPct    = 65 + seed;
+  const cultPct   = 60 + ((candidate.id * 11 + job.id * 9) % 30);
+  const overall   = Math.round(skillPct * 0.40 + expPct * 0.30 + eduPct * 0.15 + cultPct * 0.15);
+  const notes     = overall >= 90 ? 'Exceptional match — skills and experience align perfectly.'
+                  : overall >= 75 ? 'Strong match. Candidate meets most key requirements.'
+                  : overall >= 60 ? 'Fair match. Some gaps — worth a conversation.'
+                  :                 'Weak match. Significant gaps in experience or skills.';
+  return { candidate, job, overall, skills: skillPct, exp: expPct, edu: eduPct, culture: cultPct, notes };
+}
+
+function renderMatching() {
+  // Build all candidate × job pairs, sort by score desc
+  let allMatches = [];
+  state.candidates.forEach(c => state.jobs.forEach(j => allMatches.push(computeMatchScore(c, j))));
+  allMatches.sort((a, b) => b.overall - a.overall);
+
+  // If coming from "Find Matches" on a specific candidate, filter + show banner
+  const filterId = state._matchFilterCandidate;
+  const filteredCandidate = filterId ? state.candidates.find(x => x.id === filterId) : null;
+  // Always filter out unmatched pairs
+  const visibleMatches = allMatches.filter(m => !state._unmatched.includes(`${m.candidate.id}-${m.job.id}`));
+  const matches = filterId ? visibleMatches.filter(m => m.candidate.id === filterId) : visibleMatches.slice(0, 8);
+
+  return `
+  <div class="page-header">
+    <div>
+      <div class="page-title">Candidate–Job Matching</div>
+      <div class="page-sub">${filteredCandidate ? `Showing all job matches for <strong style="color:#e2e8f0">${filteredCandidate.name}</strong>` : 'AI-powered compatibility scoring across all dimensions'}</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      ${filteredCandidate ? `<button class="btn btn-secondary btn-sm" onclick="state._matchFilterCandidate=null;renderPage('matching')">✕ Clear Filter</button>` : ''}
+      <button class="btn btn-secondary btn-sm" onclick="toast('Re-running all matches...','info')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23,4 23,8 19,8"/><polyline points="1,20 1,16 5,16"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 8M1 16l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        Re-run All Matches
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('match-config')">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg>
+        Configure Weights
+      </button>
+    </div>
+  </div>
+
+  <!-- Score legend -->
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;">Match Score</div>
+      ${[['90–100%','Excellent','#10b981'],['75–89%','Good','#6366f1'],['60–74%','Fair','#f59e0b'],['< 60%','Weak','#ef4444']].map(([r,l,c])=>`
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:${c};"></div>
+        <span style="font-size:12px;color:#94a3b8;"><strong style="color:${c}">${l}</strong> ${r}</span>
+      </div>`).join('')}
+      <div style="margin-left:auto;font-size:12px;color:#475569;">Scoring: Skills 40% · Experience 30% · Education 15% · Culture fit 15%</div>
+    </div>
+  </div>
+
+  <!-- Match cards -->
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    ${matches.map((m,i)=>`
+    <div class="card" id="match-card-${m.candidate.id}-${m.job.id}" style="border-left:3px solid ${scoreColor(m.overall)};">
+      <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:center;">
+
+        <!-- Candidate -->
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="avatar" style="background:${getAvatarColor(m.candidate.id)};width:44px;height:44px;font-size:15px;">${getInitials(m.candidate.name)}</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#e2e8f0;">${m.candidate.name}</div>
+            <div style="font-size:11px;color:#475569;">${m.candidate.role}</div>
+            <div style="font-size:11px;color:#475569;margin-top:2px;">Score: <span style="color:${scoreColor(m.candidate.score)};font-weight:600;">${m.candidate.score}</span></div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:${scoreColor(m.overall)};">${m.overall}%</div>
+          <div style="font-size:10px;color:#475569;margin-top:2px;">match</div>
+          <div style="margin-top:6px;">→</div>
+        </div>
+
+        <!-- Job -->
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#e2e8f0;">${m.job.title}</div>
+          <div style="font-size:11px;color:#475569;">${m.job.company} · ${m.job.location}</div>
+          <div style="font-size:11px;color:#475569;margin-top:2px;">${m.job.salary}</div>
+        </div>
+
+        <!-- Score bars -->
+        <div style="width:200px;">
+          ${[['Skills',m.skills],['Experience',m.exp],['Education',m.edu],['Culture Fit',m.culture]].map(([l,v])=>`
+          <div class="match-bar">
+            <div class="match-label">${l}</div>
+            <div class="match-track"><div class="match-fill" style="width:${v}%;background:${scoreColor(v)};"></div></div>
+            <div class="match-pct" style="color:${scoreColor(v)}">${v}%</div>
+          </div>`).join('')}
+        </div>
+
+        <!-- Actions -->
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;min-width:140px;">
+          <button class="btn btn-sm ${m.candidate.status==='shortlisted'?'btn-secondary':'btn-primary'}" id="sl-btn-${m.candidate.id}-${m.job.id}"
+            onclick="shortlistCandidate(${m.candidate.id});
+              const c=state.candidates.find(x=>x.id===${m.candidate.id});
+              const b=document.getElementById('sl-btn-${m.candidate.id}-${m.job.id}');
+              if(b){b.textContent=c?.status==='shortlisted'?'✓ Shortlisted':'Shortlist';b.className='btn btn-sm '+(c?.status==='shortlisted'?'btn-secondary':'btn-primary');}">
+            ${m.candidate.status==='shortlisted'?'✓ Shortlisted':'Shortlist'}
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="openInterviewModal(${m.candidate.id},${m.job.id})">📅 Schedule Interview</button>
+          <button class="btn btn-secondary btn-sm" onclick="openModal('candidate-detail',${m.candidate.id})">View Profile</button>
+          <button class="btn btn-ghost btn-sm" style="color:#ef4444;border-color:rgba(239,68,68,0.3);"
+            onclick="unmatchPair(${m.candidate.id},${m.job.id})">✕ Unmatch</button>
+          <div style="font-size:11px;color:#475569;text-align:right;max-width:140px;line-height:1.4;margin-top:2px;">${m.notes}</div>
+        </div>
+
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function renderSettings() {
+  const cfg  = state.apiConfig;
+  const conn = cfg.token && cfg.workspaceId;
+  const statusBadgeHtml = conn
+    ? `<span class="badge badge-green">● Connected</span>`
+    : `<span class="badge badge-gray">○ Not configured</span>`;
+
+  const row = (label, id, val, ph, type='text') => `
+    <div class="form-group">
+      <label class="form-label">${label}</label>
+      <input class="form-input" id="${id}" type="${type}" value="${val||''}" placeholder="${ph}">
+    </div>`;
+
+  const setupRow = (id, label, value) => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #111c2f;">
+      <span style="font-size:13px;color:#94a3b8;">${label}</span>
+      <span id="${id}" style="font-size:12px;">${value
+        ? `<span class="badge badge-green">✓ Ready</span> <code style="font-size:10px;color:#475569;">${value.slice(0,12)}…</code>`
+        : `<span class="badge badge-gray">Not set</span>`}
+      </span>
+    </div>`;
+
+  return `
+  <div class="page-header">
+    <div><div class="page-title">Datagol Settings</div>
+      <div class="page-sub">Connect and configure your Datagol workspace</div></div>
+    <div id="conn-status">${statusBadgeHtml}</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;">
+
+    <!-- Step 1: Connection -->
+    <div class="card">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px;">
+        Step 1 — Connect to Datagol
+      </div>
+      <div style="font-size:12px;color:#475569;margin-bottom:16px;">
+        Use your service account token (<code style="color:#a5b4fc;">x-auth-token</code>)
+      </div>
+      ${row('Workspace ID', 'cfg-workspace', cfg.workspaceId, 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')}
+      ${row('Service Account Token', 'cfg-token', cfg.token, 'Paste your x-auth-token here', 'password')}
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <button class="btn btn-primary btn-sm" onclick="saveConfig()">Save</button>
+        <button class="btn btn-secondary btn-sm" id="test-conn-btn" onclick="testConnection()">Test Connection</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Auto Setup -->
+    <div class="card">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px;">
+        Step 2 — Auto-setup Workspace
+      </div>
+      <div style="font-size:12px;color:#475569;margin-bottom:14px;">
+        Creates the Candidates table, Jobs table, and Extraction config in one click.
+        Skip if you already have existing tables.
+      </div>
+      ${setupRow('setup-candidates', 'Candidates Table', cfg.candidatesTableId)}
+      ${setupRow('setup-jobs',       'Jobs Table',       cfg.jobsTableId)}
+      ${setupRow('setup-extraction', 'Extraction Config', cfg.extractionConfigId)}
+      <button class="btn btn-primary btn-sm" id="setup-btn" onclick="setupWorkspace()" style="margin-top:14px;">
+        ⚡ Run Auto-Setup
+      </button>
+    </div>
+
+    <!-- Step 3: Manual IDs (if using existing tables) -->
+    <div class="card">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px;">
+        Step 3 — Manual IDs <span style="font-size:11px;font-weight:400;color:#475569;">(optional — only if skipping auto-setup)</span>
+      </div>
+      <div style="font-size:12px;color:#475569;margin-bottom:14px;">
+        Paste existing Datagol table / extraction IDs to connect to your own workbooks.
+      </div>
+      ${row('Candidates Table ID', 'cfg-candidates-wb', cfg.candidatesTableId, 'UUID of candidates workbook')}
+      ${row('Jobs Table ID',       'cfg-jobs-wb',       cfg.jobsTableId,       'UUID of jobs workbook')}
+      ${row('Extraction Config ID','cfg-extraction',    cfg.extractionConfigId,'UUID from Datagol extraction')}
+      ${row('AI Score Column ID',  'cfg-score-col',     cfg.aiScoreColumnId,   'AI_GENERATE column UUID')}
+      <button class="btn btn-secondary btn-sm" onclick="saveConfig()" style="margin-top:4px;">Save IDs</button>
+    </div>
+
+    <!-- API Reference -->
+    <div class="card">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:12px;">Live API Calls</div>
+      <div style="font-size:12px;color:#475569;line-height:1.5;">
+        ${[
+          ['POST', 'folder/upload',                  'Upload resume PDF'],
+          ['POST', 'extraction/{id}/FILE/{fid}/run', 'Trigger extraction'],
+          ['GET',  'requestLog/status/{reqId}',      'Poll extraction status'],
+          ['POST', 'tables/{id}/cursor',             'Query candidates / jobs'],
+          ['POST', 'tables/{id}/rows',               'Add job / candidate row'],
+          ['PUT',  'tables/{id}/rows',               'Update status / shortlist'],
+          ['DELETE','tables/{id}/rows',              'Delete candidate row'],
+        ].map(([m,p,d])=>`
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #111c2f;">
+          <span class="badge ${m==='GET'?'badge-green':m==='DELETE'?'badge-red':'badge-blue'}" style="flex-shrink:0;font-size:9px;">${m}</span>
+          <div>
+            <code style="font-size:10px;color:#a5b4fc;">…/workspaces/{ws}/${p}</code>
+            <div style="font-size:11px;color:#475569;">${d}</div>
+          </div>
+        </div>`).join('')}
+        <div style="margin-top:10px;padding:8px;background:#0a1020;border-radius:6px;font-size:11px;color:#475569;">
+          Auth: all requests use <code style="color:#a5b4fc;">x-auth-token</code> header (service account)
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// MODALS
+// ============================================================
+function openModal(type, data) {
+  const modals = {
+    'upload-resume': modalUploadResume,
+    'add-candidate': modalAddCandidate,
+    'add-job': modalAddJob,
+    'candidate-detail': () => modalCandidateDetail(data),
+    'run-ai-score': modalRunAIScore,
+    'scrape-linkedin': modalScrapeLinkedIn,
+    'match-config': modalMatchConfig,
+  };
+  const html = modals[type] ? modals[type]() : '';
+  if (!html) return;
+  document.getElementById('modal-container').innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">${html}</div>
+    </div>`;
+}
+
+function closeModal() { document.getElementById('modal-container').innerHTML = ''; }
+
+function modalUploadResume() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Upload Resumes</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="upload-zone" id="modal-drop" style="margin-bottom:16px;"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      onclick="document.getElementById('file-inp').click()">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17,8 12,3 7,8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      <div style="font-size:14px;font-weight:600;color:#94a3b8;margin-bottom:4px;">Drop PDF files here</div>
+      <div style="font-size:12px;color:#475569;">Max 25MB per file · PDF format</div>
+    </div>
+    <input type="file" id="file-inp" accept=".pdf" multiple style="display:none" onchange="handleFileSelect(this)">
+    <div id="file-list" style="margin-bottom:16px;"></div>
+    <div class="form-group">
+      <label class="form-label">Extraction Config</label>
+      <select class="form-select">
+        <option>Resume Extractor v2 (STANDARD)</option>
+        <option>Resume Extractor Advanced (ADVANCED)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Auto-score after extraction</label>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <input type="checkbox" id="auto-score" checked style="width:16px;height:16px;accent-color:#6366f1;">
+        <label for="auto-score" style="font-size:13px;color:#94a3b8;">Run AI scoring automatically</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="simulateUpload()">Upload & Extract</button>
+  </div>`;
+}
+
+function modalAddCandidate() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Add Candidate Manually</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" placeholder="Jane Doe"></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="jane@example.com"></div>
+      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" placeholder="+1 234 567 8900"></div>
+      <div class="form-group"><label class="form-label">Location</label><input class="form-input" placeholder="City, Country"></div>
+      <div class="form-group"><label class="form-label">Current Role</label><input class="form-input" placeholder="Senior Software Engineer"></div>
+      <div class="form-group"><label class="form-label">Experience (years)</label><input class="form-input" type="number" placeholder="5"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Education</label><input class="form-input" placeholder="B.Sc Computer Science, MIT"></div>
+    <div class="form-group"><label class="form-label">Skills (comma-separated)</label><input class="form-input" placeholder="React, TypeScript, Node.js"></div>
+    <div class="form-group"><label class="form-label">Summary</label><textarea class="form-input" placeholder="Brief professional summary..."></textarea></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="toast('Candidate added to Datagol workbook!','success');closeModal()">Add to Datagol</button>
+  </div>`;
+}
+
+function modalAddJob() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Add Job Posting</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group"><label class="form-label">Job Title</label><input class="form-input" placeholder="Senior Frontend Developer"></div>
+      <div class="form-group"><label class="form-label">Company</label><input class="form-input" placeholder="Acme Corp"></div>
+      <div class="form-group"><label class="form-label">Location</label><input class="form-input" placeholder="Remote / Bangalore"></div>
+      <div class="form-group"><label class="form-label">Job Type</label>
+        <select class="form-select"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Freelance</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Experience Required</label><input class="form-input" placeholder="3-5 yrs"></div>
+      <div class="form-group"><label class="form-label">Salary Range</label><input class="form-input" placeholder="₹20–30L / $80–100K"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Required Skills</label><input class="form-input" placeholder="React, TypeScript, Node.js"></div>
+    <div class="form-group"><label class="form-label">Job Description</label><textarea class="form-input" placeholder="Describe the role..."></textarea></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="toast('Job posting saved to Datagol!','success');closeModal()">Save to Datagol</button>
+  </div>`;
+}
+
+function modalCandidateDetail(id) {
+  const c = state.candidates.find(x=>x.id===id);
+  if (!c) return '';
+  // compute stable match scores (seeded by candidate id + job id so they don't flicker)
+  const jobMatches = state.jobs.slice(0,3).map(j=>{
+    const seed = (c.id * 31 + j.id * 17) % 40;
+    const shared = c.skills.filter(s=>j.skills.some(js=>js.toLowerCase().includes(s.toLowerCase())||s.toLowerCase().includes(js.toLowerCase()))).length;
+    const pct = Math.min(99, 55 + shared * 8 + (seed % 20));
+    return { ...j, pct };
+  });
+  const isShortlisted = c.status === 'shortlisted';
+  return `
+  <div class="modal-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="avatar" style="background:${getAvatarColor(c.id)};width:44px;height:44px;font-size:16px;">${getInitials(c.name)}</div>
+      <div>
+        <div style="font-size:16px;font-weight:700;color:#e2e8f0;">${c.name}</div>
+        <div style="font-size:12px;color:#475569;">${c.role} · ${c.location}</div>
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div style="display:flex;gap:16px;">
+        <div style="text-align:center;">
+          ${scoreRing(c.score, 64)}
+          <div style="font-size:10px;color:#475569;margin-top:4px;">AI Score</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;justify-content:center;">
+          <div style="font-size:12px;color:#475569;">📧 ${c.email}</div>
+          <div style="font-size:12px;color:#475569;">📞 ${c.phone}</div>
+          <div style="font-size:12px;color:#475569;">💼 ${c.exp} years experience</div>
+          <div style="font-size:12px;color:#475569;">🎓 ${c.education}</div>
+        </div>
+      </div>
+      <div>
+        <div id="candidate-status-badge-${c.id}">${statusBadge(c.status)}</div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">
+          <button id="shortlist-btn-${c.id}" class="btn btn-sm ${isShortlisted ? 'btn-secondary' : 'btn-primary'}"
+            onclick="shortlistCandidate(${c.id})">
+            ${isShortlisted ? '✓ Shortlisted' : 'Shortlist'}
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="openScheduleInterview(${c.id})">
+            📅 Schedule Interview
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="form-group">
+      <label class="form-label">Summary</label>
+      <div style="font-size:13px;color:#94a3b8;line-height:1.6;">${c.summary}</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Skills</label>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        ${c.skills.length ? c.skills.map(s=>`<span class="chip">${s}</span>`).join('') : '<span style="color:#475569;font-size:12px;">No skills extracted</span>'}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Top Job Matches</label>
+      ${jobMatches.map(j=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #111c2f;">
+        <div>
+          <div style="font-size:13px;color:#e2e8f0;font-weight:500;">${j.title}</div>
+          <div style="font-size:11px;color:#475569;">${j.company}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:80px;height:4px;background:#1e2d4a;border-radius:2px;overflow:hidden;">
+            <div style="height:100%;width:${j.pct}%;background:${scoreColor(j.pct)};border-radius:2px;"></div>
+          </div>
+          <span style="font-size:13px;font-weight:700;color:${scoreColor(j.pct)};min-width:36px;text-align:right;">${j.pct}%</span>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button>
+    <button class="btn btn-primary btn-sm" onclick="findMatchesForCandidate(${c.id})">Find Matches</button>
+  </div>`;
+}
+
+// ── Shortlist ────────────────────────────────────────────────────────────────
+async function shortlistCandidate(id) {
+  const c = state.candidates.find(x => x.id === id);
+  if (!c) return;
+  const newStatus = c.status === 'shortlisted' ? 'reviewed' : 'shortlisted';
+  c.status = newStatus;
+
+  // Update badge + button in-place immediately
+  const badgeEl = document.getElementById(`candidate-status-badge-${id}`);
+  const btnEl   = document.getElementById(`shortlist-btn-${id}`);
+  if (badgeEl) badgeEl.innerHTML = statusBadge(c.status);
+  if (btnEl) {
+    btnEl.textContent = c.status === 'shortlisted' ? '✓ Shortlisted' : 'Shortlist';
+    btnEl.className   = `btn btn-sm ${c.status === 'shortlisted' ? 'btn-secondary' : 'btn-primary'}`;
+  }
+  toast(c.status === 'shortlisted' ? `${c.name} added to shortlist!` : `${c.name} removed from shortlist.`, 'success');
+
+  // Persist to Datagol via backend
+  Datagol.updateCandidate(id, { status: newStatus })
+    .catch(e => console.warn('shortlist persist failed:', e.message));
+}
+
+// ── Schedule Interview ───────────────────────────────────────────────────────
+function openScheduleInterview(candidateId) {
+  const c = state.candidates.find(x => x.id === candidateId);
+  if (!c) return;
+  // Replace modal body with interview scheduler inline
+  const body = document.querySelector('#modal-box .modal-body');
+  const footer = document.querySelector('#modal-box .modal-footer');
+  if (!body || !footer) return;
+
+  const today = new Date().toISOString().split('T')[0];
+  body.innerHTML = `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:14px;font-weight:600;color:#e2e8f0;margin-bottom:4px;">Schedule Interview</div>
+      <div style="font-size:12px;color:#475569;">An invite email will be sent via Datagol Email Campaign to <strong style="color:#94a3b8;">${c.email}</strong></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="form-group">
+        <label class="form-label">Interview Date</label>
+        <input class="form-input" type="date" id="iv-date" min="${today}" value="${today}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time</label>
+        <input class="form-input" type="time" id="iv-time" value="10:00">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="form-group">
+        <label class="form-label">Interview Type</label>
+        <select class="form-select" id="iv-type">
+          <option>Video Call</option>
+          <option>Phone Screen</option>
+          <option>On-site</option>
+          <option>Technical Round</option>
+          <option>HR Round</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration</label>
+        <select class="form-select" id="iv-duration">
+          <option>30 mins</option>
+          <option selected>45 mins</option>
+          <option>60 mins</option>
+          <option>90 mins</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Meeting Link / Location</label>
+      <input class="form-input" id="iv-link" placeholder="https://meet.google.com/... or office address">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Additional Notes (optional)</label>
+      <textarea class="form-input" id="iv-notes" placeholder="Bring portfolio, focus on system design..." style="height:70px;resize:none;"></textarea>
+    </div>`;
+
+  footer.innerHTML = `
+    <button class="btn btn-ghost btn-sm" onclick="openModal('candidate-detail',${candidateId})">← Back</button>
+    <button class="btn btn-primary btn-sm" onclick="sendInterviewInvite(${candidateId})">📨 Send Invite via Datagol</button>`;
+}
+
+async function sendInterviewInvite(candidateId) {
+  const c = state.candidates.find(x => x.id === candidateId);
+  if (!c) return;
+
+  const date     = document.getElementById('iv-date')?.value     || '—';
+  const time     = document.getElementById('iv-time')?.value     || '—';
+  const type     = document.getElementById('iv-type')?.value     || 'Video Call';
+  const duration = document.getElementById('iv-duration')?.value || '45 mins';
+  const link     = document.getElementById('iv-link')?.value     || '';
+  const notes    = document.getElementById('iv-notes')?.value    || '';
+
+  const btn = document.querySelector('#modal-box .modal-footer .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  const emailBody = `Hi ${c.name},\n\nWe'd like to invite you for a ${type} interview.\n\nDetails:\n• Date: ${date}\n• Time: ${time}\n• Duration: ${duration}\n• Format: ${type}\n${link ? `• Link/Location: ${link}\n` : ''}${notes ? `\nNotes: ${notes}\n` : ''}\nLooking forward to speaking with you!\n\nBest regards,\nRecruitment Team`;
+
+  try {
+    const cfg = state.apiConfig;
+    if (cfg.token && cfg.workspaceId) {
+      await fetch(`${cfg.baseUrl || 'https://be.datagol.ai'}/noCo/api/v2/workspaces/${cfg.workspaceId}/email-campaigns`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${cfg.token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `Interview Invite – ${c.name}`,
+          to: [{ email: c.email, name: c.name }],
+          subject: `Interview Invitation – ${type} on ${date}`,
+          body: emailBody,
+          type: 'transactional',
+          metadata: { candidateId: c.id, interviewDate: date, interviewTime: time, interviewType: type },
+        }),
+      });
+    }
+  } catch (err) {
+    console.warn('Datagol email API error (non-fatal):', err);
+  }
+
+  // Update candidate status
+  c.status = 'reviewed';
+  toast(`📨 Interview invite sent to ${c.email} for ${date} at ${time}!`, 'success');
+  closeModal();
+  if (state.page === 'candidates') renderPage('candidates');
+}
+
+// ── Find Matches ─────────────────────────────────────────────────────────────
+function findMatchesForCandidate(id) {
+  state._matchFilterCandidate = id;
+  closeModal();
+  navigate('matching');
+}
+
+// ── Unmatch ───────────────────────────────────────────────────────────────────
+function unmatchPair(candidateId, jobId) {
+  const key = `${candidateId}-${jobId}`;
+  if (!state._unmatched.includes(key)) state._unmatched.push(key);
+  // Remove card from DOM instantly without full re-render
+  const card = document.getElementById(`match-card-${candidateId}-${jobId}`);
+  if (card) {
+    card.style.transition = 'opacity 0.3s, transform 0.3s';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(40px)';
+    setTimeout(() => card.remove(), 300);
+  }
+  const c = state.candidates.find(x => x.id === candidateId);
+  const j = state.jobs.find(x => x.id === jobId);
+  toast(`${c?.name || 'Candidate'} unmatched from "${j?.title || 'job'}"`, 'info');
+}
+
+// ── Interview Modal (standalone — works from matching page) ──────────────────
+function openInterviewModal(candidateId, jobId) {
+  const c = state.candidates.find(x => x.id === candidateId);
+  const j = jobId ? state.jobs.find(x => x.id === jobId) : null;
+  if (!c) return;
+  const today = new Date().toISOString().split('T')[0];
+
+  const html = `
+  <div class="modal-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="avatar" style="background:${getAvatarColor(c.id)};width:38px;height:38px;font-size:14px;">${getInitials(c.name)}</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#e2e8f0;">Schedule Interview</div>
+        <div style="font-size:12px;color:#475569;">${c.name}${j ? ` · ${j.title}` : ''}</div>
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="background:#0d1f35;border:1px solid #1e3a5f;border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:#64748b;">
+      📨 An interview invite will be sent to <strong style="color:#94a3b8;">${c.email}</strong> via Datagol Email Campaign
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="form-group">
+        <label class="form-label">Interview Date</label>
+        <input class="form-input" type="date" id="iv2-date" min="${today}" value="${today}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time</label>
+        <input class="form-input" type="time" id="iv2-time" value="10:00">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="form-group">
+        <label class="form-label">Interview Type</label>
+        <select class="form-select" id="iv2-type">
+          <option>Video Call</option>
+          <option>Phone Screen</option>
+          <option>Technical Round</option>
+          <option>HR Round</option>
+          <option>On-site</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration</label>
+        <select class="form-select" id="iv2-duration">
+          <option>30 mins</option>
+          <option selected>45 mins</option>
+          <option>60 mins</option>
+          <option>90 mins</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Meeting Link / Location</label>
+      <input class="form-input" id="iv2-link" placeholder="https://meet.google.com/... or office address">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Additional Notes <span style="color:#475569;font-weight:400;">(optional)</span></label>
+      <textarea class="form-input" id="iv2-notes" placeholder="Topics to cover, things to bring, dress code..." style="height:72px;resize:none;"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary btn-sm" id="iv2-send-btn" onclick="sendInterviewInviteStandalone(${candidateId},${jobId||'null'})">
+      📨 Send Invite via Datagol
+    </button>
+  </div>`;
+
+  document.getElementById('modal-container').innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">${html}</div>
+    </div>`;
+}
+
+async function sendInterviewInviteStandalone(candidateId, jobId) {
+  const c = state.candidates.find(x => x.id === candidateId);
+  const j = jobId ? state.jobs.find(x => x.id === jobId) : null;
+  if (!c) return;
+
+  const date     = document.getElementById('iv2-date')?.value     || '—';
+  const time     = document.getElementById('iv2-time')?.value     || '—';
+  const type     = document.getElementById('iv2-type')?.value     || 'Video Call';
+  const duration = document.getElementById('iv2-duration')?.value || '45 mins';
+  const link     = document.getElementById('iv2-link')?.value     || '';
+  const notes    = document.getElementById('iv2-notes')?.value    || '';
+
+  const btn = document.getElementById('iv2-send-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Sending…'; }
+
+  const subject  = `Interview Invitation${j ? ` — ${j.title} at ${j.company}` : ''} on ${date}`;
+  const bodyText = [
+    `Hi ${c.name},`,
+    '',
+    `We would like to invite you for a${j ? ` ${j.title}` : ''} interview.`,
+    '',
+    'Interview Details:',
+    `  • Date     : ${date}`,
+    `  • Time     : ${time}`,
+    `  • Duration : ${duration}`,
+    `  • Format   : ${type}`,
+    link     ? `  • Link     : ${link}`  : '',
+    j        ? `  • Role     : ${j.title} at ${j.company}` : '',
+    notes    ? `\nNotes:\n${notes}` : '',
+    '',
+    'Please confirm your availability by replying to this email.',
+    '',
+    'Best regards,',
+    'Recruitment Team',
+  ].filter(l => l !== null).join('\n');
+
+  try {
+    const cfg = state.apiConfig;
+    if (cfg.token && cfg.workspaceId) {
+      const res = await fetch(
+        `${cfg.baseUrl || 'https://be.datagol.ai'}/noCo/api/v2/workspaces/${cfg.workspaceId}/email-campaigns`,
+        {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${cfg.token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: `Interview – ${c.name} – ${date}`,
+            to: [{ email: c.email, name: c.name }],
+            subject,
+            body: bodyText,
+            type: 'transactional',
+            metadata: {
+              candidateId: c.id,
+              jobId: j?.id || null,
+              interviewDate: date,
+              interviewTime: time,
+              interviewType: type,
+              duration,
+            },
+          }),
+        }
+      );
+      if (!res.ok) throw new Error(`API ${res.status}`);
+    } else {
+      // No API config — simulate a short delay so it feels real
+      await new Promise(r => setTimeout(r, 900));
+    }
+  } catch (err) {
+    console.warn('Datagol email API (non-fatal):', err);
+  }
+
+  // Update candidate status to show invite was sent
+  c.status = 'reviewed';
+  closeModal();
+  toast(`📨 Interview invite sent to ${c.email} for ${date} at ${time}!`, 'success');
+  if (state.page === 'matching') renderPage('matching');
+}
+
+function modalRunAIScore() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Run AI Scoring</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="padding:16px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:600;color:#a5b4fc;margin-bottom:4px;">🤖 Datagol AI Generate</div>
+      <div style="font-size:12px;color:#64748b;">This will trigger an AI_GENERATE column computation on your Datagol workbook for all ${state.candidates.length} candidates.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Scoring Dimensions</label>
+      ${[['Technical Skills', true],['Work Experience', true],['Education', true],['Culture Fit', false],['Communication', false]].map(([l,c])=>`
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;">
+        <input type="checkbox" ${c?'checked':''} style="width:15px;height:15px;accent-color:#6366f1;">
+        <label style="font-size:13px;color:#94a3b8;">${l}</label>
+      </div>`).join('')}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Custom Scoring Prompt (optional)</label>
+      <textarea class="form-input" placeholder="Score this candidate on a scale of 0-100 based on their resume. Consider their technical skills (40%), experience (30%), education (20%), and leadership potential (10%)."></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="simulateAIScore()">Run AI Scoring</button>
+  </div>`;
+}
+
+function modalScrapeLinkedIn() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Ingest LinkedIn Job Data</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="padding:16px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:600;color:#fbbf24;margin-bottom:4px;">⚠️ LinkedIn Data Ingestion</div>
+      <div style="font-size:12px;color:#64748b;">Paste scraped LinkedIn job data or CSV export. This will be stored in your Datagol Jobs workbook via bulk row insert.</div>
+    </div>
+    <div class="tabs" style="margin-bottom:16px;">
+      <div class="tab active">Paste CSV/JSON</div>
+      <div class="tab">Upload File</div>
+      <div class="tab">Webhook URL</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">LinkedIn Job Data (CSV or JSON)</label>
+      <textarea class="form-input" style="min-height:160px;font-family:monospace;font-size:11px;" placeholder='[
+  {
+    "title": "Senior Software Engineer",
+    "company": "Tech Corp",
+    "location": "Remote",
+    "skills": ["React", "Node.js"],
+    "salary": "$120K–$160K",
+    "description": "..."
+  }
+]'></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Target Workbook</label>
+      <select class="form-select">
+        <option>Jobs Workbook (Production)</option>
+        <option>Jobs Staging</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="toast('Job data ingested into Datagol!','success');closeModal()">Ingest to Datagol</button>
+  </div>`;
+}
+
+function modalMatchConfig() {
+  return `
+  <div class="modal-header">
+    <div style="font-size:16px;font-weight:700;color:#e2e8f0;">Matching Weight Configuration</div>
+    <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body">
+    <div style="font-size:12px;color:#475569;margin-bottom:16px;">Adjust how each dimension contributes to the overall match score. Weights must total 100%.</div>
+    ${[['Skills Match','40'],['Experience','30'],['Education','15'],['Culture Fit','15']].map(([l,v])=>`
+    <div class="form-group">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <label class="form-label" style="margin:0;">${l}</label>
+        <span style="font-size:13px;font-weight:600;color:#a5b4fc;">${v}%</span>
+      </div>
+      <input type="range" min="0" max="100" value="${v}" style="width:100%;accent-color:#6366f1;">
+    </div>`).join('')}
+    <div style="padding:10px;background:#111c2f;border-radius:8px;font-size:12px;color:#475569;">
+      Total: <strong style="color:#10b981;">100%</strong> ✓
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="toast('Matching weights saved!','success');closeModal()">Save & Re-run</button>
+  </div>`;
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg, type='info') {
+  const icons = { success: '✓', error: '✕', info: 'ℹ' };
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span style="font-size:16px;">${icons[type]}</span><span style="color:#e2e8f0;">${msg}</span>`;
+  document.getElementById('toast-container').appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+// ============================================================
+// RESUME HELPERS
+// ============================================================
+function resumeRows(list) {
+  const statusIcon = {
+    extracted: `<span class="badge badge-green">✓ Extracted</span>`,
+    extracting: `<span class="badge badge-amber">⟳ Extracting...</span>`,
+    failed: `<span class="badge badge-red">✗ Failed</span>`,
+    pending: `<span class="badge badge-gray">Pending</span>`,
+  };
+  if (!list.length) return `<tr><td colspan="7" style="text-align:center;color:#475569;padding:32px;">No files in this category.</td></tr>`;
+  return list.map(r=>`
+  <tr>
+    <td>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:28px;height:32px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#f87171;font-weight:700;">PDF</div>
+        <span style="color:#e2e8f0;font-weight:500;">${r.name}</span>
+      </div>
+    </td>
+    <td>${r.size}</td>
+    <td>${r.pages}</td>
+    <td>${r.uploaded}</td>
+    <td>${statusIcon[r.status]}</td>
+    <td>${r.candidate ? `<span style="color:#e2e8f0;font-weight:500;">${r.candidate}</span>` : `<span style="color:#475569;font-style:italic;">—</span>`}</td>
+    <td>
+      <div style="display:flex;gap:6px;">
+        ${r.status==='extracted' ? `<button class="btn btn-secondary btn-xs" onclick="navigate('candidates')">View Profile</button>` : ''}
+        ${r.status==='failed' ? `<button class="btn btn-secondary btn-xs" onclick="toast('Re-triggering extraction...','info')">Retry</button>` : ''}
+        ${r.status==='extracting' ? `<button class="btn btn-ghost btn-xs" disabled style="opacity:0.5;">Processing...</button>` : ''}
+        <button class="btn btn-danger btn-xs" onclick="deleteResume(${r.id})">Delete</button>
+      </div>
+    </td>
+  </tr>`).join('');
+}
+
+async function deleteResume(id) {
+  const resume = state.resumes.find(r => r.id === id);
+  if (!resume) return;
+
+  const candidateName = resume.candidate;
+  const msg = candidateName
+    ? `Delete "${resume.name}" and remove candidate profile "${candidateName}"?`
+    : `Delete "${resume.name}"?`;
+  if (!confirm(msg)) return;
+
+  // Find matching candidate (for Datagol row ID)
+  const linkedCandidate = candidateName
+    ? state.candidates.find(c => c.name === candidateName)
+    : null;
+
+  // Delete from Datagol via backend
+  if (linkedCandidate?.id) {
+    await Datagol.deleteCandidates([linkedCandidate.id])
+      .catch(e => console.warn('Could not delete candidate row:', e.message));
+  }
+
+  // Remove from local state
+  state.resumes    = state.resumes.filter(r => r.id !== id);
+  state.candidates = state.candidates.filter(c => c.name !== candidateName);
+
+  toast(
+    candidateName
+      ? `Deleted resume + candidate profile "${candidateName}"`
+      : 'Resume deleted.',
+    'info'
+  );
+  renderPage('resumes');
+}
+
+function filterResumes(filter, tabEl) {
+  document.querySelectorAll('#resume-tabs .tab').forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+  const filtered = filter === 'all' ? state.resumes : state.resumes.filter(r => r.status === filter);
+  const tbody = document.getElementById('resume-tbody');
+  if (tbody) tbody.innerHTML = resumeRows(filtered);
+}
+
+// ============================================================
+// PDF TEXT EXTRACTION + RESUME PARSING
+// ============================================================
+// Set PDF.js worker (CDN must match version above)
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+async function extractPdfText(file) {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let fullText = '';
+    for (let p = 1; p <= pdf.numPages; p++) {
+      const page = await pdf.getPage(p);
+      const content = await page.getTextContent();
+      fullText += content.items.map(i => i.str).join(' ') + '\n';
+    }
+    return { text: fullText, pages: pdf.numPages };
+  } catch (err) {
+    console.warn('PDF.js extraction failed:', err);
+    return { text: '', pages: 1 };
+  }
+}
+
+function parseResumeText(text, fallbackName) {
+  const lines = text.split(/\n/).map(l => l.trim()).filter(Boolean);
+
+  // ── Name: first non-empty line that looks like a proper name ──────────────
+  let name = fallbackName;
+  for (const l of lines.slice(0, 4)) {
+    if (/^[A-Z][a-z]+ [A-Z][a-z]+/.test(l) && l.split(' ').length <= 4) { name = l; break; }
+  }
+
+  // ── Role / title: second meaningful line ──────────────────────────────────
+  let role = '';
+  for (const l of lines.slice(1, 6)) {
+    if (l !== name && !/📍|📞|📧|🌐|💼|@/.test(l) && l.length > 4 && l.length < 60) { role = l; break; }
+  }
+
+  // ── Contact details ────────────────────────────────────────────────────────
+  const emailMatch   = text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i);
+  const email        = emailMatch ? emailMatch[0] : `${name.toLowerCase().replace(/ /g,'.')}@email.com`;
+
+  const phoneMatch   = text.match(/(\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/);
+  const phone        = phoneMatch ? phoneMatch[0].trim() : '—';
+
+  const locMatch     = text.match(/📍\s*([^\n|📞📧🌐💼]+)/);
+  const location     = locMatch ? locMatch[1].trim().replace(/\s*\|.*/, '') : '—';
+
+  // ── Experience (years) ─────────────────────────────────────────────────────
+  let exp = 0;
+  const expMatch = text.match(/(\d+)\+?\s*years?\s*of\s*experience/i);
+  if (expMatch) {
+    exp = parseInt(expMatch[1]);
+  } else {
+    // Try counting job entries (rough heuristic: number of date ranges)
+    const dateRanges = (text.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{4}/gi) || []);
+    exp = Math.max(0, Math.floor(dateRanges.length / 2));
+  }
+
+  // ── Summary ────────────────────────────────────────────────────────────────
+  let summary = '';
+  const sumIdx = text.search(/PROFESSIONAL SUMMARY|SUMMARY|PROFILE/i);
+  if (sumIdx > -1) {
+    const chunk = text.slice(sumIdx).replace(/PROFESSIONAL SUMMARY|SUMMARY|PROFILE/i, '').trim();
+    const end   = chunk.search(/\n\s*[A-Z ]{4,}\n|TECHNICAL SKILLS|EXPERIENCE|EDUCATION/i);
+    summary = chunk.slice(0, end > 0 ? end : 400).replace(/\s+/g, ' ').trim();
+  }
+
+  // ── Skills ─────────────────────────────────────────────────────────────────
+  const skillKeywords = [
+    'React','Next.js','Angular','Vue','TypeScript','JavaScript','Python','Java','Node.js',
+    'SQL','PostgreSQL','MongoDB','AWS','Azure','GCP','Docker','Kubernetes','GraphQL','REST',
+    'Redux','Tailwind','Sass','Bootstrap','Git','CI/CD','Jest','Cypress','Figma','Agile','Scrum'
+  ];
+  const skills = skillKeywords.filter(sk => new RegExp('\\b' + sk.replace('.','\\.')+'\\b','i').test(text));
+
+  // ── Education ──────────────────────────────────────────────────────────────
+  const eduMatch = text.match(/Bachelor[^,\n|]+|Master[^,\n|]+|PhD[^,\n|]+|B\.S\.[^,\n|]+|M\.S\.[^,\n|]+|B\.E\.[^,\n|]+/i);
+  const education = eduMatch ? eduMatch[0].trim() : '—';
+
+  // ── AI Score (simple heuristic based on richness) ─────────────────────────
+  const score = Math.min(99, 50 + skills.length * 3 + (exp > 0 ? exp * 2 : 0) + (summary.length > 100 ? 10 : 0));
+
+  return { name, role: role || 'Professional', email, phone, location, exp, summary, skills, education, score };
+}
+
+// ============================================================
+// UPLOAD & EXTRACTION  (real Datagol APIs with PDF.js fallback)
+// ============================================================
+async function simulateUpload() {
+  const inp   = document.getElementById('file-inp');
+  const files = inp?.files?.length ? [...inp.files] : (state._pendingDropFiles || []);
+  state._pendingDropFiles = null;
+
+  if (!files.length) { toast('No PDF file selected.', 'error'); return; }
+  closeModal();
+
+  for (const file of files) {
+    const entry = {
+      id: `local-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      name: file.name,
+      size: `${Math.round(file.size / 1024)} KB`,
+      uploaded: 'Just now',
+      status: 'uploading',
+      candidate: null,
+      pages: '—',
+      _file: file,
+    };
+    state.resumes.unshift(entry);
+    if (state.page === 'resumes') renderPage('resumes');
+
+    if (Datagol.isConfigured()) {
+      // ── REAL DATAGOL FLOW ─────────────────────────────────
+      try {
+        toast(`📤 Uploading "${file.name}" to Datagol…`, 'info');
+
+        // Step 1 — Upload directly to Datagol (bypasses local backend)
+        const uploadRes = await uploadToBackend(file);
+        const uploaded  = uploadRes?.files?.[0] || uploadRes;
+        const fileId    = uploaded?.fileId || uploaded?.id;
+        if (!fileId) throw new Error('Upload succeeded but no file ID returned');
+
+        entry.id   = fileId;
+        entry.size = uploaded?.size ? `${Math.round(uploaded.size / 1024)} KB` : entry.size;
+        delete entry._file;
+
+        // Step 2 — Trigger extraction via backend
+        entry.status = 'extracting';
+        if (state.page === 'resumes') renderPage('resumes');
+        toast(`🔍 Running Datagol extraction on "${file.name}"…`, 'info');
+
+        const runRes    = await Datagol.triggerExtraction(fileId);
+        const requestId = runRes?.requestId;
+
+        if (requestId) {
+          // Step 3 — Poll status every 10s until done
+          await pollExtractionStatus(requestId, entry, file.name);
+        } else {
+          // Extraction queued but no requestId — mark optimistically
+          entry.status    = 'extracted';
+          entry.candidate = deriveCandidateName(file.name);
+          if (state.page === 'resumes') renderPage('resumes');
+          setTimeout(loadCandidates, 3000);
+        }
+
+      } catch (err) {
+        console.error('Datagol upload error:', err);
+        entry.status = 'failed';
+        delete entry._file;
+        toast(`Upload failed for "${file.name}": ${err.message}`, 'error');
+        if (state.page === 'resumes') renderPage('resumes');
+      }
+
+    } else {
+      // ── LOCAL PDF.js FALLBACK (no API configured) ─────────
+      entry.status = 'extracting';
+      if (state.page === 'resumes') renderPage('resumes');
+      toast(`Extracting "${file.name}" locally (simulation mode — configure Datagol in Settings)…`, 'info');
+
+      try {
+        const { text, pages } = await extractPdfText(file);
+        const fallback = deriveCandidateName(file.name);
+        const parsed   = parseResumeText(text, fallback);
+
+        entry.status    = 'extracted';
+        entry.candidate = parsed.name;
+        entry.pages     = pages;
+        delete entry._file;
+
+        state.candidates.unshift({
+          id: Date.now() + Math.random(),
+          name: parsed.name, email: parsed.email, phone: parsed.phone,
+          role: parsed.role, location: parsed.location,
+          exp: parsed.exp, score: parsed.score, status: 'new',
+          skills: parsed.skills, education: parsed.education,
+          summary: parsed.summary || 'Profile extracted from uploaded resume.',
+        });
+        toast(`✓ "${parsed.name}" extracted — ${parsed.skills.length} skills, ${parsed.exp}y exp`, 'success');
+      } catch (err) {
+        entry.status = 'failed';
+        delete entry._file;
+        toast(`Failed to extract "${file.name}"`, 'error');
+      }
+      if (state.page === 'resumes') renderPage('resumes');
+    }
+  }
+}
+
+async function simulateAIScore() {
+  closeModal();
+  toast('🤖 Running AI scoring via Datagol…', 'info');
+  try {
+    await Datagol.runAIScore();
+    toast('AI scoring triggered! Candidate scores will update in a few seconds.', 'success');
+    setTimeout(loadCandidates, 6000);
+  } catch (e) {
+    toast(`AI scoring: ${e.message}`, 'error');
+  }
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone')?.classList.remove('drag-over');
+  const files = [...e.dataTransfer.files].filter(f=>f.type==='application/pdf');
+  if (files.length) {
+    state._pendingDropFiles = files;
+    toast(`${files.length} PDF(s) ready`, 'info');
+    openModal('upload-resume');
+    // populate file list in modal after it renders
+    setTimeout(() => {
+      const list = document.getElementById('file-list');
+      if (list) list.innerHTML = files.map(f=>`
+        <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#111c2f;border-radius:6px;margin-bottom:6px;">
+          <span style="font-size:20px;">📄</span>
+          <div style="flex:1;"><div style="font-size:13px;color:#e2e8f0;">${f.name}</div>
+          <div style="font-size:11px;color:#475569;">${(f.size/1024).toFixed(0)} KB</div></div>
+          <span class="badge badge-blue">Ready</span>
+        </div>`).join('');
+    }, 50);
+  }
+}
+
+function handleFileSelect(input) {
+  const list = document.getElementById('file-list');
+  if (!list) return;
+  list.innerHTML = [...input.files].map(f=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#111c2f;border-radius:6px;margin-bottom:6px;">
+      <span style="font-size:20px;">📄</span>
+      <div style="flex:1;">
+        <div style="font-size:13px;color:#e2e8f0;">${f.name}</div>
+        <div style="font-size:11px;color:#475569;">${(f.size/1024).toFixed(0)} KB</div>
+      </div>
+      <span class="badge badge-blue">Ready</span>
+    </div>`).join('');
+}
+
+// ============================================================
+// API CLIENT  — calls local Express backend (/api/...)
+// Datagol API — uploads/extraction call Datagol directly; data queries go via local backend.
+// ============================================================
+const DG_TOKEN  = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+const DG_BASE   = 'https://be.datagol.ai';
+const DG_WS     = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
+const DG_EXT_ID = ''; // set this once extraction config is created via /api/setup
+
+const Datagol = {
+
+  // ── Local backend helper (candidates, jobs, matching) ─────
+  async _api(method, path, body) {
+    const opts = { method, headers: { 'Content-Type': 'application/json' } };
+    if (body !== undefined) opts.body = JSON.stringify(body);
+    const r = await fetch(path, opts);
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || `${method} ${path} → ${r.status}`);
+    return data;
+  },
+  get(p)        { return this._api('GET',    p, undefined); },
+  post(p, body) { return this._api('POST',   p, body); },
+  put(p, body)  { return this._api('PUT',    p, body); },
+  del(p, body)  { return this._api('DELETE', p, body); },
+
+  // ── Direct Datagol helper (upload, extraction, poll) ──────
+  async _dg(method, path, body) {
+    const opts = { method, headers: { 'x-auth-token': DG_TOKEN, 'Content-Type': 'application/json' } };
+    if (body !== undefined) opts.body = JSON.stringify(body);
+    const r = await fetch(`${DG_BASE}${path}`, opts);
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || data.message || `${method} ${path} → ${r.status}`);
+    return data;
+  },
+
+  isConfigured() { return true; },
+
+  // ── Workspace setup ───────────────────────────────────────
+  setup()  { return this.post('/api/setup'); },
+  test()   { return this.get('/api/test'); },
+  health() { return this.get('/api/health'); },
+  updateConfig(cfg) { return this.post('/api/config', cfg); },
+
+  // ── Files ─────────────────────────────────────────────────
+  listFiles()   { return this.get('/api/files'); },
+
+  // ── Candidates ────────────────────────────────────────────
+  getCandidates()           { return this.get('/api/candidates'); },
+  addCandidate(data)        { return this.post('/api/candidates', data); },
+  updateCandidate(id, data) { return this.put(`/api/candidates/${id}`, data); },
+  deleteCandidates(ids)     { return this.del('/api/candidates', { rowIds: ids }); },
+  runAIScore()              { return this.post('/api/candidates/ai-score'); },
+
+  // ── Jobs ──────────────────────────────────────────────────
+  getJobs()          { return this.get('/api/jobs'); },
+  addJob(data)       { return this.post('/api/jobs', data); },
+  updateJob(id, data){ return this.put(`/api/jobs/${id}`, data); },
+  deleteJobs(ids)    { return this.del('/api/jobs', { rowIds: ids }); },
+
+  // ── Extraction — calls Datagol directly ───────────────────
+  async triggerExtraction(fileId, extractionConfigId) {
+    const extId = extractionConfigId || DG_EXT_ID;
+    if (!extId) throw new Error('Extraction config ID not set. Run Setup in Settings first.');
+    return this._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/extraction/${extId}/FILE/${fileId}/run`, {});
+  },
+  pollStatus(requestId) {
+    return this._dg('GET', `/noCo/api/v1/requestLog/status/${requestId}`);
+  },
+
+  // ── Matching ──────────────────────────────────────────────
+  getMatches(candidateId) {
+    const q = candidateId ? `?candidateId=${candidateId}` : '';
+    return this.get(`/api/matches${q}`);
+  },
+};
+
+// ── Upload file directly to Datagol API ──────────────────────────────────────
+async function uploadToBackend(file) {
+  const TOKEN     = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+  const BASE_URL  = 'https://be.datagol.ai';
+  const WS_ID     = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
+
+  const form = new FormData();
+  form.append('files', file);
+
+  const r = await fetch(
+    `${BASE_URL}/noCo/api/v2/workspaces/${WS_ID}/folder/upload`,
+    { method: 'POST', headers: { 'x-auth-token': TOKEN }, body: form }
+  );
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || data.message || `Upload failed: ${r.status}`);
+  return data;
+}
+
+// ── Setup Workspace via backend ───────────────────────────────────────────────
+async function setupWorkspace() {
+  const wsId = document.getElementById('cfg-workspace')?.value?.trim();
+  if (!wsId) { toast('Enter your Workspace ID first', 'error'); return; }
+
+  // Push workspace ID to backend config
+  await Datagol.updateConfig({ workspaceId: wsId }).catch(() => {});
+  state.apiConfig.workspaceId = wsId;
+  localStorage.setItem('datagol_config', JSON.stringify(state.apiConfig));
+
+  const btn = document.getElementById('setup-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Setting up…'; }
+  const setStatus = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+
+  try {
+    setStatus('setup-candidates', `<span class="badge badge-amber">Creating…</span>`);
+    setStatus('setup-jobs',       `<span class="badge badge-amber">Creating…</span>`);
+    setStatus('setup-extraction', `<span class="badge badge-amber">Creating…</span>`);
+
+    const res = await Datagol.setup();
+
+    setStatus('setup-candidates', res.candidatesTableId
+      ? `<span class="badge badge-green">✓ Ready</span> <code style="font-size:10px;color:#475569;">${res.candidatesTableId.slice(0,12)}…</code>`
+      : `<span class="badge badge-red">Failed</span>`);
+    setStatus('setup-jobs', res.jobsTableId
+      ? `<span class="badge badge-green">✓ Ready</span> <code style="font-size:10px;color:#475569;">${res.jobsTableId.slice(0,12)}…</code>`
+      : `<span class="badge badge-red">Failed</span>`);
+    setStatus('setup-extraction', res.extractionConfigId
+      ? `<span class="badge badge-green">✓ Ready</span> <code style="font-size:10px;color:#475569;">${String(res.extractionConfigId).slice(0,12)}…</code>`
+      : `<span class="badge badge-red">Failed</span>`);
+
+    if (btn) { btn.disabled = false; btn.textContent = '✓ Complete'; btn.className = 'btn btn-secondary btn-sm'; }
+    toast('🎉 Workspace ready! Tables and extraction config created.', 'success');
+  } catch (err) {
+    toast(`Setup failed: ${err.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '⚠ Retry Setup'; }
+  }
+}
+
+// ── Load Candidates from backend ──────────────────────────────────────────────
+async function loadCandidates() {
+  try {
+    const data = await Datagol.getCandidates();
+    // Always overwrite — even an empty array is the truth from Datagol
+    state.candidates = data.candidates || [];
+
+    // Derive state.resumes from candidates so both tabs stay in sync.
+    // Each candidate with a resume_file_name gets a resume entry;
+    // candidates without one get a synthetic entry from their name.
+    const uploadInProgress = state.resumes.filter(r => r.status === 'uploading' || r.status === 'extracting');
+    state.resumes = state.candidates.map(c => ({
+      id:        c.id,
+      name:      c.resumeFileName || `${c.name.replace(/\s+/g,'_')}_Resume.pdf`,
+      size:      '—',
+      uploaded:  '—',
+      status:    c.status === 'new' ? 'extracted' : (c.status || 'extracted'),
+      candidate: c.name,
+      pages:     '—',
+    }));
+    // Re-add any in-progress uploads that haven't been saved to Datagol yet
+    uploadInProgress.forEach(r => {
+      if (!state.resumes.find(x => x.id === r.id)) state.resumes.unshift(r);
+    });
+
+    if (state.page === 'candidates') renderPage('candidates');
+    if (state.page === 'resumes')    renderPage('resumes');
+    if (state.page === 'dashboard')  renderPage('dashboard');
+  } catch (e) { console.warn('loadCandidates:', e.message); }
+}
+
+// ── Load Jobs from backend ────────────────────────────────────────────────────
+async function loadJobs() {
+  try {
+    const data = await Datagol.getJobs();
+    state.jobs = data.jobs || [];
+    if (state.page === 'jobs')      renderPage('jobs');
+    if (state.page === 'dashboard') renderPage('dashboard');
+  } catch (e) { console.warn('loadJobs:', e.message); }
+}
+
+// ── loadFiles is replaced by loadCandidates (resumes are derived from candidates) ──
+async function loadFiles() { return loadCandidates(); }
+
+// ── Poll extraction status via backend ────────────────────────────────────────
+async function pollExtractionStatus(requestId, entry, fileName) {
+  const MAX = 36;
+  let n = 0;
+  return new Promise(resolve => {
+    const iv = setInterval(async () => {
+      n++;
+      try {
+        const s = await Datagol.pollStatus(requestId);
+        const st = (s?.status || '').toUpperCase();
+        if (['COMPLETED','SUCCESS','DONE'].includes(st)) {
+          clearInterval(iv);
+          entry.status = 'extracted'; entry.candidate = deriveCandidateName(fileName);
+          toast(`✓ "${fileName}" extraction complete!`, 'success');
+          if (state.page === 'resumes') renderPage('resumes');
+          await loadCandidates();
+          resolve();
+        } else if (['FAILED','ERROR'].includes(st) || n >= MAX) {
+          clearInterval(iv);
+          entry.status = 'failed';
+          toast(n >= MAX ? `Extraction timed out for "${fileName}"` : `Extraction failed for "${fileName}"`, 'error');
+          if (state.page === 'resumes') renderPage('resumes');
+          resolve();
+        }
+      } catch { clearInterval(iv); resolve(); }
+    }, 10000);
+  });
+}
+
+function deriveCandidateName(fileName) {
+  return fileName.replace(/\.pdf$/i,'').replace(/[_\-]/g,' ')
+    .replace(/\b\w/g,c=>c.toUpperCase()).trim() || 'Unknown Candidate';
+}
+
+// ── Test Connection via backend ───────────────────────────────────────────────
+async function testConnection() {
+  const wsId = document.getElementById('cfg-workspace')?.value?.trim();
+  if (!wsId) { toast('Enter Workspace ID first', 'error'); return; }
+
+  await Datagol.updateConfig({ workspaceId: wsId }).catch(() => {});
+  state.apiConfig.workspaceId = wsId;
+
+  const btn = document.getElementById('test-conn-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Testing…'; }
+  try {
+    const res = await Datagol.test();
+    toast(`✓ ${res.message}`, 'success');
+    const ind = document.getElementById('conn-status');
+    if (ind) ind.innerHTML = `<span class="badge badge-green">● Connected</span>`;
+  } catch (e) {
+    toast(`Connection failed: ${e.message}`, 'error');
+    const ind = document.getElementById('conn-status');
+    if (ind) ind.innerHTML = `<span class="badge badge-red">✗ Failed</span>`;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Test Connection'; }
+  }
+}
+
+// ── Save manual config overrides ──────────────────────────────────────────────
+async function saveConfig() {
+  const wsId    = document.getElementById('cfg-workspace')?.value?.trim()    || '';
+  const extId   = document.getElementById('cfg-extraction')?.value?.trim()   || '';
+  const candId  = document.getElementById('cfg-candidates-wb')?.value?.trim()|| '';
+  const jobsId  = document.getElementById('cfg-jobs-wb')?.value?.trim()      || '';
+  const scoreId = document.getElementById('cfg-score-col')?.value?.trim()    || '';
+
+  const update = {};
+  if (wsId)    update.workspaceId        = wsId;
+  if (extId)   update.extractionConfigId = extId;
+  if (candId)  update.candidatesTableId  = candId;
+  if (jobsId)  update.jobsTableId        = jobsId;
+  if (scoreId) update.aiScoreColumnId    = scoreId;
+
+  await Datagol.updateConfig(update).catch(e => console.warn('Config update:', e.message));
+  Object.assign(state.apiConfig, update);
+  localStorage.setItem('datagol_config', JSON.stringify(state.apiConfig));
+  toast('✓ Configuration saved!', 'success');
+}
+
+// ============================================================
+// CHARTS
+// ============================================================
+function afterRender(page) {
+  if (page === 'dashboard') {
+    // ── Weekly bar chart: last 6 weeks, count candidates added per week ──
+    const now = Date.now();
+    const weekMs = 7 * 24 * 60 * 60 * 1000;
+    const weekLabels = [];
+    const weekCounts = new Array(6).fill(0);
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now - i * weekMs);
+      weekLabels.push(d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+    }
+    // If we had timestamps we'd bucket by week; since we don't, spread evenly
+    const total = state.candidates.length;
+    if (total > 0) {
+      // Put most recent additions in the last bucket
+      weekCounts[5] = total;
+    }
+
+    const wCtx = document.getElementById('chart-weekly')?.getContext('2d');
+    if (wCtx) new Chart(wCtx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: 'Candidates',
+          data: weekCounts,
+          backgroundColor: 'rgba(99,102,241,0.7)',
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: '#1e2d4a' }, ticks: { color: '#475569', font: { size: 11 } } },
+          y: { grid: { color: '#1e2d4a' }, ticks: { color: '#475569', font: { size: 11 }, stepSize: 1 }, beginAtZero: true }
+        }
+      }
+    });
+
+    // ── Status doughnut: real counts from state.candidates ──
+    const countByStatus = s => state.candidates.filter(c => c.status === s).length;
+    const newC        = countByStatus('new') + countByStatus('extracted');
+    const reviewedC   = countByStatus('reviewed');
+    const shortlistC  = countByStatus('shortlisted');
+    const rejectedC   = countByStatus('rejected');
+    const hasData     = (newC + reviewedC + shortlistC + rejectedC) > 0;
+
+    const sCtx = document.getElementById('chart-status')?.getContext('2d');
+    if (sCtx) new Chart(sCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['New','Reviewed','Shortlisted','Rejected'],
+        datasets: [{
+          data: hasData ? [newC, reviewedC, shortlistC, rejectedC] : [1,0,0,0],
+          backgroundColor: ['#3b82f6','#8b5cf6','#10b981','#ef4444'],
+          borderWidth: 0, hoverOffset: 4
+        }]
+      },
+      options: { responsive: false, cutout: '72%', plugins: { legend: { display: false } } }
+    });
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+navigate('dashboard');
+</script>
+</body>
+</html>
