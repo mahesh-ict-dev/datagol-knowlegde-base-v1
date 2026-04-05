@@ -331,7 +331,7 @@ function navigate(page) {
     if (page === 'dashboard')  { loadCandidates(); loadJobs(); }
     if (page === 'candidates') loadCandidates();
     if (page === 'jobs')       loadJobs();
-    if (page === 'resumes')    loadCandidates();   // resumes are derived from candidates
+    if (page === 'resumes')    { loadCandidates(); loadFiles(); }  // candidates needed for matching
     if (page === 'matching')   { loadCandidates(); loadJobs(); }
   }
 }
@@ -1762,14 +1762,14 @@ async function simulateUpload() {
       try {
         toast(`📤 Uploading "${file.name}" to Datagol…`, 'info');
 
-        // Step 1 — Upload directly to Datagol (bypasses local backend)
-        const uploadRes = await uploadToBackend(file);
-        const uploaded  = uploadRes?.files?.[0] || uploadRes;
-        const fileId    = uploaded?.fileId || uploaded?.id;
+        // Step 1 — Upload directly to Datagol into the resume folder (parentId param)
+        const uploaded = await uploadToBackend(file);
+        // Response fields: id (UUID), name, byteSize, parentId, type
+        const fileId = uploaded?.id;
         if (!fileId) throw new Error('Upload succeeded but no file ID returned');
 
         entry.id   = fileId;
-        entry.size = uploaded?.size ? `${Math.round(uploaded.size / 1024)} KB` : entry.size;
+        entry.size = uploaded?.byteSize ? `${Math.round(uploaded.byteSize / 1024)} KB` : entry.size;
         delete entry._file;
 
         // Step 2 — Trigger extraction via backend
@@ -1889,12 +1889,13 @@ function handleFileSelect(input) {
 // API CLIENT  — calls local Express backend (/api/...)
 // Datagol API — uploads/extraction call Datagol directly; data queries go via local backend.
 // ============================================================
-const DG_TOKEN     = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
-const DG_BASE      = 'https://be.datagol.ai';
-const DG_WS        = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
-const DG_EXT_ID    = '4242127';                                    // extraction config
+const DG_TOKEN      = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
+const DG_BASE       = 'https://be.datagol.ai';
+const DG_WS         = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
+const DG_EXT_ID     = '4242127';                                    // extraction config
 const DG_CAND_TABLE = 'ea736efc-d5dc-4a68-b29a-c7bcd1b5f2f2';    // extraction results table
 const DG_SCORE_COL  = '990c123e-decd-44db-bf96-d34539a0d80d';     // ai_scoring column
+const DG_FOLDER_ID  = '2ff6afe9-00f1-4f2b-9331-31947c274d44';     // resume upload folder
 
 const Datagol = {
 
@@ -2020,22 +2021,20 @@ const Datagol = {
   },
 };
 
-// ── Upload file directly to Datagol API ──────────────────────────────────────
+// ── Upload file directly to Datagol API (deposited into DG_FOLDER_ID) ───────
 async function uploadToBackend(file) {
-  const TOKEN     = '87a5a1993724174cdac4044749c4469e7cda50bb769bd916cbe22f697380b07c';
-  const BASE_URL  = 'https://be.datagol.ai';
-  const WS_ID     = '45935d2c-f2ec-47a0-8141-7a3caa3b9cdc';
-
   const form = new FormData();
   form.append('files', file);
 
   const r = await fetch(
-    `${BASE_URL}/noCo/api/v2/workspaces/${WS_ID}/folder/upload`,
-    { method: 'POST', headers: { 'x-auth-token': TOKEN }, body: form }
+    `${DG_BASE}/noCo/api/v2/workspaces/${DG_WS}/folder/upload?parentId=${DG_FOLDER_ID}`,
+    { method: 'POST', headers: { 'x-auth-token': DG_TOKEN }, body: form }
   );
   const data = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(data.error || data.message || `Upload failed: ${r.status}`);
-  return data;
+  // Response is an array — return first file entry
+  const uploaded = Array.isArray(data) ? data[0] : data;
+  return uploaded;
 }
 
 // ── Setup Workspace via backend ───────────────────────────────────────────────
@@ -2077,34 +2076,18 @@ async function setupWorkspace() {
   }
 }
 
-// ── Load Candidates from backend ──────────────────────────────────────────────
+// ── Load Candidates from Datagol cursor API ───────────────────────────────────
 async function loadCandidates() {
   try {
     const data = await Datagol.getCandidates();
-    // Always overwrite — even an empty array is the truth from Datagol
     state.candidates = data.candidates || [];
 
-    // Derive state.resumes from candidates so both tabs stay in sync.
-    // Each candidate with a resume_file_name gets a resume entry;
-    // candidates without one get a synthetic entry from their name.
-    const uploadInProgress = state.resumes.filter(r => r.status === 'uploading' || r.status === 'extracting');
-    state.resumes = state.candidates.map(c => ({
-      id:        c.id,
-      name:      c.resumeFileName || `${c.name.replace(/\s+/g,'_')}_Resume.pdf`,
-      size:      '—',
-      uploaded:  '—',
-      status:    c.status === 'new' ? 'extracted' : (c.status || 'extracted'),
-      candidate: c.name,
-      pages:     '—',
-    }));
-    // Re-add any in-progress uploads that haven't been saved to Datagol yet
-    uploadInProgress.forEach(r => {
-      if (!state.resumes.find(x => x.id === r.id)) state.resumes.unshift(r);
-    });
-
     if (state.page === 'candidates') renderPage('candidates');
-    if (state.page === 'resumes')    renderPage('resumes');
     if (state.page === 'dashboard')  renderPage('dashboard');
+    if (state.page === 'matching')   renderPage('matching');
+
+    // If resumes tab is open, refresh to re-match files ↔ candidates
+    if (state.page === 'resumes') loadFiles();
   } catch (e) { console.warn('loadCandidates:', e.message); }
 }
 
@@ -2118,8 +2101,52 @@ async function loadJobs() {
   } catch (e) { console.warn('loadJobs:', e.message); }
 }
 
-// ── loadFiles is replaced by loadCandidates (resumes are derived from candidates) ──
-async function loadFiles() { return loadCandidates(); }
+// ── Load Resumes from Datagol folder API ─────────────────────────────────────
+async function loadFiles() {
+  try {
+    // GET /folder returns a tree; our uploads sit inside DG_FOLDER_ID
+    const raw = await Datagol._dg('GET', `/noCo/api/v2/workspaces/${DG_WS}/folder`);
+
+    let files = [];
+    if (Array.isArray(raw)) {
+      // Look for our folder node and read its children
+      const folderNode = raw.find(f => f.id === DG_FOLDER_ID);
+      if (folderNode?.children?.length) {
+        files = folderNode.children.filter(f => !f.isFolder);
+      } else {
+        // Flat list — all items with matching parentId are our files
+        const flat = raw.filter(f => !f.isFolder && f.parentId === DG_FOLDER_ID);
+        files = flat.length ? flat : raw.filter(f => !f.isFolder);
+      }
+    }
+
+    // Keep any uploads currently in progress (not yet saved to Datagol)
+    const inProgress = state.resumes.filter(r => r.status === 'uploading' || r.status === 'extracting');
+
+    state.resumes = files.map(f => {
+      // Match to a candidate via datagol_extracted_file_url ending in file id, or filename
+      const candidate = state.candidates.find(c =>
+        c._raw?.datagol_extracted_file_url?.endsWith(f.id) || c.resumeFileName === f.name
+      );
+      return {
+        id:        f.id,
+        name:      f.name,
+        size:      f.byteSize ? `${Math.round(f.byteSize / 1024)} KB` : '—',
+        uploaded:  f.createDate ? new Date(f.createDate).toLocaleDateString() : '—',
+        status:    candidate ? 'extracted' : 'uploaded',
+        candidate: candidate ? candidate.name : null,
+        pages:     '—',
+      };
+    });
+
+    // Re-add in-progress uploads not yet in folder
+    inProgress.forEach(r => {
+      if (!state.resumes.find(x => x.id === r.id)) state.resumes.unshift(r);
+    });
+
+    if (state.page === 'resumes') renderPage('resumes');
+  } catch (e) { console.warn('loadFiles:', e.message); }
+}
 
 // ── Poll extraction status via backend ────────────────────────────────────────
 async function pollExtractionStatus(requestId, entry, fileName) {
@@ -2135,8 +2162,9 @@ async function pollExtractionStatus(requestId, entry, fileName) {
           clearInterval(iv);
           entry.status = 'extracted'; entry.candidate = deriveCandidateName(fileName);
           toast(`✓ "${fileName}" extraction complete!`, 'success');
-          if (state.page === 'resumes') renderPage('resumes');
+          // Refresh both — candidates gets new extracted profile, files updates the match
           await loadCandidates();
+          await loadFiles();
           resolve();
         } else if (['FAILED','ERROR'].includes(st) || n >= MAX) {
           clearInterval(iv);
