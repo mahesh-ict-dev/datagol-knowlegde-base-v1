@@ -1346,16 +1346,33 @@ async function sendInterviewInvite(candidateId) {
   const btn = document.querySelector('#modal-box .modal-footer .btn-primary');
   if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
-  // Fire EMAIL_CAMPAIGN on the Matches workbook (has to_email column → rachana.g@datagol.ai)
+  // Step 1 — Insert row with to_email so campaign has a recipient
   try {
-    const matchesTableId = await ensureMatchesTable();
-    await Datagol.sendInterviewCampaignFromMatches(matchesTableId, null, {
+    await Datagol._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_MATCHES_TABLE}/rows`,
+      { cellValues: {
+          full_name:    c.name,
+          job_title:    '',
+          to_email:     'rachana.g@datagol.ai',
+          match_status: 'interview_scheduled',
+          matched_at:   new Date().toISOString().slice(0, 10),
+        }
+      }
+    );
+  } catch (rowErr) {
+    console.warn('[TalentAI] Row insert before campaign failed:', rowErr.message);
+  }
+
+  // Step 2 — Fire EMAIL_CAMPAIGN
+  try {
+    const result = await Datagol.sendInterviewCampaignFromMatches(DG_MATCHES_TABLE, null, {
       date, time, type, duration, link, notes
     });
-    toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
+    console.log('[TalentAI] Email campaign response:', result);
+    toast(`📨 Interview invite sent to rachana.g@datagol.ai for ${date} at ${time}!`, 'success');
   } catch (err) {
-    console.warn('Datagol interview campaign error:', err);
-    toast(`Campaign triggered (check Datagol for delivery status)`, 'info');
+    console.error('[TalentAI] Email campaign error:', err.message);
+    toast(`Campaign error: ${err.message}`, 'error');
   }
 
   // Update local status
@@ -1545,37 +1562,38 @@ async function sendInterviewInviteStandalone(candidateId, jobId) {
   const btn = document.getElementById('iv2-send-btn');
   if (btn) { btn.disabled = true; btn.textContent = '⏳ Sending…'; }
 
-  const subject  = `Interview Invitation${j ? ` — ${j.title} at ${j.company}` : ''} on ${date}`;
-  const bodyText = [
-    `Hi ${c.name},`,
-    '',
-    `We would like to invite you for a${j ? ` ${j.title}` : ''} interview.`,
-    '',
-    'Interview Details:',
-    `  • Date     : ${date}`,
-    `  • Time     : ${time}`,
-    `  • Duration : ${duration}`,
-    `  • Format   : ${type}`,
-    link     ? `  • Link     : ${link}`  : '',
-    j        ? `  • Role     : ${j.title} at ${j.company}` : '',
-    notes    ? `\nNotes:\n${notes}` : '',
-    '',
-    'Please confirm your availability by replying to this email.',
-    '',
-    'Best regards,',
-    'Recruitment Team',
-  ].filter(l => l !== null).join('\n');
-
-  // Fire EMAIL_CAMPAIGN on the Matches workbook (has to_email column → rachana.g@datagol.ai)
+  // Step 1 — Insert a fresh row into the matches table with to_email populated.
+  //           This guarantees the email campaign has at least one recipient, regardless
+  //           of whether the candidate was shortlisted before or what old rows look like.
   try {
-    const matchesTableId = await ensureMatchesTable();
-    await Datagol.sendInterviewCampaignFromMatches(matchesTableId, j?.title || 'the position', {
+    await Datagol._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_MATCHES_TABLE}/rows`,
+      { cellValues: {
+          full_name:    c.name,                       // {full_name} merge field in email template
+          job_title:    j?.title   || '',              // {job_title} merge field in email template
+          to_email:     'rachana.g@datagol.ai',        // recipient — campaign reads this column
+          company:      j?.company || '',
+          match_status: 'interview_scheduled',
+          matched_at:   new Date().toISOString().slice(0, 10),
+        }
+      }
+    );
+    console.log('[TalentAI] Match row inserted with to_email before campaign.');
+  } catch (rowErr) {
+    console.warn('[TalentAI] Row insert before campaign failed (continuing anyway):', rowErr.message);
+  }
+
+  // Step 2 — Fire EMAIL_CAMPAIGN on the Matches workbook.
+  //           The campaign loops all rows with a valid to_email and sends the template.
+  try {
+    const result = await Datagol.sendInterviewCampaignFromMatches(DG_MATCHES_TABLE, j?.title || 'the position', {
       date, time, type, duration, link, notes
     });
-    toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
+    console.log('[TalentAI] Email campaign response:', result);
+    toast(`📨 Interview invite sent to rachana.g@datagol.ai for ${date} at ${time}!`, 'success');
   } catch (err) {
-    console.warn('Datagol interview campaign error:', err);
-    toast(`Campaign triggered (check Datagol for delivery status)`, 'info');
+    console.error('[TalentAI] Email campaign error:', err.message, err);
+    toast(`Campaign error: ${err.message}`, 'error');
   }
 
   // Update local status
