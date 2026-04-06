@@ -1166,40 +1166,28 @@ function modalCandidateDetail(id) {
 // _matchesTableId resolved lazily — DG_MATCHES_TABLE const is defined further down the file
 let _matchesTableId = null;
 
+// Columns we need in the matches workbook for email merge + row data
+const MATCHES_REQUIRED_COLS = [
+  { name: 'full_name',      uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Full Name' } },
+  { name: 'job_title',      uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Title' } },
+  { name: 'company',        uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Company' } },
+  { name: 'match_status',   uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Match Status' } },
+  { name: 'matched_at',     uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Matched At' } },
+  // to_email already exists in the table (user created it with default rachana.g@datagol.ai)
+];
+let _matchesColsCreated = false;
+
 async function ensureMatchesTable() {
-  // Always use the hardcoded matches table (DG_MATCHES_TABLE defined in constants block)
   if (!_matchesTableId) _matchesTableId = DG_MATCHES_TABLE;
-  return _matchesTableId;
-  // Create the table
-  const tbl = await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables`, {
-    title: 'TalentAI — Job Matches', tableType: 'DYNAMIC',
-    description: 'Candidate × job shortlist records'
-  });
-  _matchesTableId = tbl.id || tbl.tableId;
-  if (!_matchesTableId) throw new Error('Matches table creation returned no ID');
-  localStorage.setItem('dg_matches_table', _matchesTableId);
-  // Add columns — note: avoid 'status' (reserved in Datagol), use 'match_status'
-  const cols = [
-    { name: 'candidate_name',     uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Candidate Name' } },
-    { name: 'candidate_email',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Email' } },
-    { name: 'candidate_phone',    uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Phone' } },
-    { name: 'candidate_location', uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Location' } },
-    { name: 'candidate_skills',   uiDataType: 'LONG_TEXT',        uiMetadata: { title: 'Skills' } },
-    { name: 'ai_score',           uiDataType: 'NUMBER',           uiMetadata: { title: 'AI Score' } },
-    { name: 'job_title',          uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Title' } },
-    { name: 'company',            uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Company' } },
-    { name: 'job_location',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Location' } },
-    { name: 'job_type',           uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Job Type' } },
-    { name: 'salary_range',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Salary Range' } },
-    { name: 'match_score',        uiDataType: 'NUMBER',           uiMetadata: { title: 'Match Score (%)' } },
-    { name: 'skills_match',       uiDataType: 'NUMBER',           uiMetadata: { title: 'Skills Match (%)' } },
-    { name: 'exp_match',          uiDataType: 'NUMBER',           uiMetadata: { title: 'Experience Match (%)' } },
-    { name: 'match_status',       uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Match Status' } },
-    { name: 'matched_at',         uiDataType: 'SINGLE_LINE_TEXT', uiMetadata: { title: 'Matched At' } },
-  ];
-  for (const col of cols) {
-    await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${_matchesTableId}/column`, col)
-      .catch(e => console.warn(`Column '${col.name}' create:`, e.message));
+  // Create any missing columns (idempotent — errors mean column already exists)
+  if (!_matchesColsCreated) {
+    for (const col of MATCHES_REQUIRED_COLS) {
+      await Datagol._dg('POST',
+        `/noCo/api/v2/workspaces/${DG_WS}/tables/${_matchesTableId}/column`, col
+      ).catch(() => {}); // ignore "already exists" errors
+    }
+    _matchesColsCreated = true;
+    console.log('[TalentAI] Matches table columns ensured.');
   }
   return _matchesTableId;
 }
@@ -1216,26 +1204,16 @@ async function saveMatchToDatagol(candidate, job, scores) {
       localStorage.removeItem('dg_matches_table');
       tableId = await ensureMatchesTable();
     }
+    // Only send columns that exist in the matches table (to_email was user-created;
+    // full_name, job_title, company, match_status, matched_at created by ensureMatchesTable)
     await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${tableId}/rows`, {
       cellValues: {
-        full_name:          candidate.name,           // merge field used in email template
-        candidate_name:     candidate.name,
-        candidate_email:    candidate.email,
-        to_email:           'rachana.g@datagol.ai',   // explicit — Datagol default may not apply
-        candidate_phone:    candidate.phone    || '',
-        candidate_location: candidate.location || '',
-        candidate_skills:   (candidate.skills  || []).join('; '),
-        ai_score:           candidate.score    || 0,
-        job_title:          job.title,                // merge field used in email template
-        company:            job.company        || '',
-        job_location:       job.location       || '',
-        job_type:           job.type           || '',
-        salary_range:       job.salary         || '',
-        match_score:        scores?.overall    || 0,
-        skills_match:       scores?.skills     || 0,
-        exp_match:          scores?.exp        || 0,
-        match_status:       'shortlisted',
-        matched_at:         new Date().toISOString().slice(0, 10),
+        full_name:    candidate.name,
+        job_title:    job.title,
+        company:      job.company     || '',
+        to_email:     'rachana.g@datagol.ai',
+        match_status: 'shortlisted',
+        matched_at:   new Date().toISOString().slice(0, 10),
       }
     });
     toast(`✓ Match saved — ${candidate.name} × ${job.title}`, 'success');
