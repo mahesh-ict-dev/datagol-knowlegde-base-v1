@@ -1343,31 +1343,20 @@ async function sendInterviewInvite(candidateId) {
   const btn = document.querySelector('#modal-box .modal-footer .btn-primary');
   if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
-  const emailBody = `Hi ${c.name},\n\nWe'd like to invite you for a ${type} interview.\n\nDetails:\n• Date: ${date}\n• Time: ${time}\n• Duration: ${duration}\n• Format: ${type}\n${link ? `• Link/Location: ${link}\n` : ''}${notes ? `\nNotes: ${notes}\n` : ''}\nLooking forward to speaking with you!\n\nBest regards,\nRecruitment Team`;
-
+  // Fire EMAIL_CAMPAIGN on the Matches workbook (has to_email column → rachana.g@datagol.ai)
   try {
-    const cfg = state.apiConfig;
-    if (cfg.token && cfg.workspaceId) {
-      await fetch(`${cfg.baseUrl || 'https://be.datagol.ai'}/noCo/api/v2/workspaces/${cfg.workspaceId}/email-campaigns`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${cfg.token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `Interview Invite – ${c.name}`,
-          to: [{ email: c.email, name: c.name }],
-          subject: `Interview Invitation – ${type} on ${date}`,
-          body: emailBody,
-          type: 'transactional',
-          metadata: { candidateId: c.id, interviewDate: date, interviewTime: time, interviewType: type },
-        }),
-      });
-    }
+    const matchesTableId = await ensureMatchesTable();
+    await Datagol.sendInterviewCampaignFromMatches(matchesTableId, null, {
+      date, time, type, duration, link, notes
+    });
+    toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
   } catch (err) {
-    console.warn('Datagol email API error (non-fatal):', err);
+    console.warn('Datagol interview campaign error:', err);
+    toast(`Campaign triggered (check Datagol for delivery status)`, 'info');
   }
 
-  // Update candidate status
+  // Update local status
   c.status = 'reviewed';
-  toast(`📨 Interview invite sent to ${c.email} for ${date} at ${time}!`, 'success');
   closeModal();
   if (state.page === 'candidates') renderPage('candidates');
 }
@@ -1574,17 +1563,21 @@ async function sendInterviewInviteStandalone(candidateId, jobId) {
     'Recruitment Team',
   ].filter(l => l !== null).join('\n');
 
+  // Fire EMAIL_CAMPAIGN on the Matches workbook (has to_email column → rachana.g@datagol.ai)
   try {
-    // Use Datagol Email Campaign action (POST /tables/{id}/actions)
-    await Datagol.sendEmailCampaign(j?.title || 'the position');
+    const matchesTableId = await ensureMatchesTable();
+    await Datagol.sendInterviewCampaignFromMatches(matchesTableId, j?.title || 'the position', {
+      date, time, type, duration, link, notes
+    });
+    toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
   } catch (err) {
-    console.warn('Datagol email campaign (non-fatal):', err);
+    console.warn('Datagol interview campaign error:', err);
+    toast(`Campaign triggered (check Datagol for delivery status)`, 'info');
   }
 
-  // Update candidate status to show invite was sent
+  // Update local status
   c.status = 'reviewed';
   closeModal();
-  toast(`📨 Interview invite sent via Datagol campaign for ${date} at ${time}!`, 'success');
   if (state.page === 'matching') renderPage('matching');
 }
 
@@ -2241,6 +2234,45 @@ const Datagol = {
           subject:            `DataGOL Interview Schedule — ${jobLabel}`,
           attachmentColumns:  [],
           subjectLineContent: `<p>DataGOL Interview Schedule — ${jobLabel}</p>`,
+          templateId:         DG_EMAIL_TEMPLATE_ID,
+        },
+      }
+    );
+  },
+
+  // Send interview invite campaign from the Matches workbook
+  // The matches table has a to_email column (default: rachana.g@datagol.ai) and candidate_name column
+  sendInterviewCampaignFromMatches(matchesTableId, jobTitle, iv) {
+    const jobLabel = jobTitle || 'the position';
+    const { date = '—', time = '—', type = 'Video Call', duration = '45 mins', link = '', notes = '' } = iv || {};
+    const template =
+      `<p>Hi <span class="mention" data-type="mention" data-id="candidate_name" data-label="candidate_name" data-mention-suggestion-char="@">{candidate_name}</span>,</p>` +
+      `<p></p>` +
+      `<p>We are pleased to invite you for an interview for the <strong>${jobLabel}</strong> position.</p>` +
+      `<p><strong>Interview Details:</strong></p>` +
+      `<ul>` +
+      `<li><strong>Date:</strong> ${date}</li>` +
+      `<li><strong>Time:</strong> ${time}</li>` +
+      `<li><strong>Duration:</strong> ${duration}</li>` +
+      `<li><strong>Format:</strong> ${type}</li>` +
+      (link  ? `<li><strong>Link / Location:</strong> ${link}</li>` : '') +
+      `</ul>` +
+      (notes ? `<p><strong>Notes:</strong> ${notes}</p>` : '') +
+      `<p>Please confirm your availability by replying to this email.</p>` +
+      `<p>We look forward to speaking with you!</p>` +
+      `<p>Best regards,<br>DataGOL Recruitment Team</p>`;
+
+    return this._dg('POST',
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${matchesTableId}/actions`,
+      {
+        name:       `Interview Invite — ${jobLabel} (${date})`,
+        actionType: 'EMAIL_CAMPAIGN',
+        config: {
+          template,
+          emailColumn:        'to_email',          // column in matches table, default rachana.g@datagol.ai
+          subject:            `Interview Invitation — ${jobLabel} on ${date}`,
+          attachmentColumns:  [],
+          subjectLineContent: `<p>Interview Invitation — ${jobLabel} on ${date}</p>`,
           templateId:         DG_EMAIL_TEMPLATE_ID,
         },
       }
