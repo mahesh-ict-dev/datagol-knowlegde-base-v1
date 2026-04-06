@@ -1163,12 +1163,13 @@ function modalCandidateDetail(id) {
 
 // ── Matches Table — create once, reuse forever ───────────────────────────────
 // NOTE: 'status' is a reserved/conflicting name in Datagol — use 'match_status' instead
-// Matches table is now hardcoded as DG_MATCHES_TABLE constant — no lazy creation needed
-let _matchesTableId = DG_MATCHES_TABLE;
+// _matchesTableId resolved lazily — DG_MATCHES_TABLE const is defined further down the file
+let _matchesTableId = null;
 
 async function ensureMatchesTable() {
-  // Always return the known matches table — DG_MATCHES_TABLE is set in constants
-  if (_matchesTableId) return _matchesTableId;
+  // Always use the hardcoded matches table (DG_MATCHES_TABLE defined in constants block)
+  if (!_matchesTableId) _matchesTableId = DG_MATCHES_TABLE;
+  return _matchesTableId;
   // Create the table
   const tbl = await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables`, {
     title: 'TalentAI — Job Matches', tableType: 'DYNAMIC',
@@ -2610,19 +2611,8 @@ function afterRender(page) {
 // ============================================================
 // INIT
 // ============================================================
-// One-time migration: clear stale matches table cache (used 'status' column which
-// doesn't exist in Datagol extraction table). New schema uses 'match_status'.
-(function clearStaleMatchesCache() {
-  const cached = localStorage.getItem('dg_matches_table');
-  // If we have a cached table but the flag showing it uses the new schema isn't set,
-  // wipe it so ensureMatchesTable recreates it with the correct columns.
-  if (cached && !localStorage.getItem('dg_matches_table_v2')) {
-    localStorage.removeItem('dg_matches_table');
-    _matchesTableId = null;
-    console.log('[TalentAI] Cleared stale matches table cache — will recreate with correct schema.');
-  }
-  localStorage.setItem('dg_matches_table_v2', '1');
-})();
+// Ensure _matchesTableId always points to the hardcoded matches table
+_matchesTableId = DG_MATCHES_TABLE;
 
 navigate('dashboard');
 </script>
