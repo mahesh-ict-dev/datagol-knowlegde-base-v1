@@ -1163,10 +1163,11 @@ function modalCandidateDetail(id) {
 
 // ── Matches Table — create once, reuse forever ───────────────────────────────
 // NOTE: 'status' is a reserved/conflicting name in Datagol — use 'match_status' instead
-// Clear stale cached ID: localStorage.removeItem('dg_matches_table')
-let _matchesTableId = localStorage.getItem('dg_matches_table') || null;
+// Matches table is now hardcoded as DG_MATCHES_TABLE constant — no lazy creation needed
+let _matchesTableId = DG_MATCHES_TABLE;
 
 async function ensureMatchesTable() {
+  // Always return the known matches table — DG_MATCHES_TABLE is set in constants
   if (_matchesTableId) return _matchesTableId;
   // Create the table
   const tbl = await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables`, {
@@ -1216,13 +1217,15 @@ async function saveMatchToDatagol(candidate, job, scores) {
     }
     await Datagol._dg('POST', `/noCo/api/v2/workspaces/${DG_WS}/tables/${tableId}/rows`, {
       cellValues: {
+        full_name:          candidate.name,           // merge field used in email template
         candidate_name:     candidate.name,
         candidate_email:    candidate.email,
+        to_email:           'rachana.g@datagol.ai',   // explicit — Datagol default may not apply
         candidate_phone:    candidate.phone    || '',
         candidate_location: candidate.location || '',
         candidate_skills:   (candidate.skills  || []).join('; '),
         ai_score:           candidate.score    || 0,
-        job_title:          job.title,
+        job_title:          job.title,                // merge field used in email template
         company:            job.company        || '',
         job_location:       job.location       || '',
         job_type:           job.type           || '',
@@ -1230,7 +1233,7 @@ async function saveMatchToDatagol(candidate, job, scores) {
         match_score:        scores?.overall    || 0,
         skills_match:       scores?.skills     || 0,
         exp_match:          scores?.exp        || 0,
-        match_status:       'shortlisted',          // NOT 'status' — reserved in Datagol
+        match_status:       'shortlisted',
         matched_at:         new Date().toISOString().slice(0, 10),
       }
     });
@@ -2039,7 +2042,9 @@ const DG_EXT_ID          = '4242127';                                 // extract
 const DG_CAND_TABLE      = 'ea736efc-d5dc-4a68-b29a-c7bcd1b5f2f2'; // extraction results table
 const DG_SCORE_COL       = '990c123e-decd-44db-bf96-d34539a0d80d'; // ai_scoring column
 const DG_FOLDER_ID       = '2ff6afe9-00f1-4f2b-9331-31947c274d44'; // resume upload folder
-const DG_EMAIL_TEMPLATE_ID = '6c40a771-b897-4fc2-9e62-825d89d48d4f'; // email campaign template
+const DG_EMAIL_TEMPLATE_ID       = '6c40a771-b897-4fc2-9e62-825d89d48d4f'; // candidates table email template
+const DG_MATCHES_TABLE           = '0d39a525-5984-488f-a200-f2eca095e756'; // Job Matches workbook (has to_email col)
+const DG_MATCHES_EMAIL_TEMPLATE_ID = '5f0ee435-2eb7-41fb-9fd3-8492a9a9e74a'; // matches workbook email template
 const EMAIL_SCORE_THRESHOLD = 8;                                     // min ai_scoring to qualify
 
 const Datagol = {
@@ -2240,40 +2245,45 @@ const Datagol = {
     );
   },
 
-  // Send interview invite campaign from the Matches workbook
-  // The matches table has a to_email column (default: rachana.g@datagol.ai) and candidate_name column
+  // Send interview invite campaign from the Matches workbook (DG_MATCHES_TABLE)
+  // Uses {full_name} and {job_title} merge fields — columns that exist in the matches table
+  // to_email column in matches table has default rachana.g@datagol.ai
   sendInterviewCampaignFromMatches(matchesTableId, jobTitle, iv) {
-    const jobLabel = jobTitle || 'the position';
     const { date = '—', time = '—', type = 'Video Call', duration = '45 mins', link = '', notes = '' } = iv || {};
     const template =
-      `<p>Hi <span class="mention" data-type="mention" data-id="candidate_name" data-label="candidate_name" data-mention-suggestion-char="@">{candidate_name}</span>,</p>` +
+      `<p>Hi <span class="mention" data-type="mention" data-id="full_name" data-label="full_name}" data-mention-suggestion-char="@">{full_name}</span>,</p>` +
       `<p></p>` +
-      `<p>We are pleased to invite you for an interview for the <strong>${jobLabel}</strong> position.</p>` +
-      `<p><strong>Interview Details:</strong></p>` +
-      `<ul>` +
-      `<li><strong>Date:</strong> ${date}</li>` +
-      `<li><strong>Time:</strong> ${time}</li>` +
-      `<li><strong>Duration:</strong> ${duration}</li>` +
-      `<li><strong>Format:</strong> ${type}</li>` +
-      (link  ? `<li><strong>Link / Location:</strong> ${link}</li>` : '') +
-      `</ul>` +
+      `<p>We are pleased to invite you for an interview for the ` +
+      `<span class="mention" data-type="mention" data-id="job_title" data-label="job_title}" data-mention-suggestion-char="@">{job_title}</span> position.</p>` +
+      `<p><strong>Interview Details:</strong><br>` +
+      `Date: ${date}<br>` +
+      `Time: ${time}<br>` +
+      `Duration: ${duration}<br>` +
+      `Format: ${type}` +
+      (link  ? `<br>Link / Location: ${link}` : '') +
+      `</p>` +
       (notes ? `<p><strong>Notes:</strong> ${notes}</p>` : '') +
       `<p>Please confirm your availability by replying to this email.</p>` +
       `<p>We look forward to speaking with you!</p>` +
       `<p>Best regards,<br>DataGOL Recruitment Team</p>`;
 
+    const subjectLineContent =
+      `<p>Interview Invitation — ` +
+      `<span class="mention" data-type="mention" data-id="job_title" data-label="job_title}" data-mention-suggestion-char="@">{job_title}</span>` +
+      ` on ${date}</p>`;
+
     return this._dg('POST',
-      `/noCo/api/v2/workspaces/${DG_WS}/tables/${matchesTableId}/actions`,
+      `/noCo/api/v2/workspaces/${DG_WS}/tables/${DG_MATCHES_TABLE}/actions`,
       {
-        name:       `Interview Invite — ${jobLabel} (${date})`,
+        name:       `Interview Invite — {job_title} (${date})`,
         actionType: 'EMAIL_CAMPAIGN',
         config: {
           template,
-          emailColumn:        'to_email',          // column in matches table, default rachana.g@datagol.ai
-          subject:            `Interview Invitation — ${jobLabel} on ${date}`,
+          emailColumn:        'to_email',               // col in matches table → rachana.g@datagol.ai
+          subject:            `Interview Invitation — {job_title} on ${date}`,
           attachmentColumns:  [],
-          subjectLineContent: `<p>Interview Invitation — ${jobLabel} on ${date}</p>`,
-          templateId:         DG_EMAIL_TEMPLATE_ID,
+          subjectLineContent,
+          templateId:         DG_MATCHES_EMAIL_TEMPLATE_ID,  // 5f0ee435 — matches workbook template
         },
       }
     );
