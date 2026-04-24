@@ -10,7 +10,7 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 The RAG Agent is designed to answer user questions using knowledge extracted from unstructured documents (like manuals, reports, or résumés) you provide. It is AI-powered and designed to understand and answer questions based on the content of unstructured documents. You can ask questions across your uploaded documents, workspace files, or indexed knowledge sources. The agent reads, retrieves, and summarizes intelligently. It excels at document understanding and providing contextual answers by retrieving relevant information from a knowledge base of uploaded files. 
 
-<ImagePopup src="/img/agents/rag-agent.png" alt="rag-agent" caption="RAG agent"/>
+<ImagePopup src="/img/agents/rag-new-intro.png" alt="rag-agent-new" caption="RAG agent New"/>
 
 The RAG agent enhances your ability to quickly extract information from documents with the following key capabilities:
 
@@ -43,7 +43,7 @@ The RAG agent configuration primarily involves uploading and indexing your docum
 
 1.  **Select a workspace**: Navigate to the **Explore** section and select the RAG agent. You will then choose an existing workspace where your documents are stored or create a new one.
 
-	<ImagePopup src="/img/agents/rag-select-workspace.png" alt="rag-select-workspace" caption="RAG Select Workspace"/>
+	<ImagePopup src="/img/agents/rag-new-configure.png" alt="rag-select-workspace" caption="RAG Select Workspace"/>
     
 2.  **Upload documents**: Within your chosen workspace, go to the **Documents** section. You can upload various file types, such as PDFs, Word documents, CSVs, and XML files.
     
@@ -75,17 +75,31 @@ Once your documents are indexed, you can start asking questions to the RAG agent
 
 You can select specific documents and folders to guide the agent and narrow its focus, ensuring your results are based on the exact information you need.
 
-1.  **Click "Add Context":** In the RAG Agent UI, click the new **Add context** option. This opens a selector showing all content in your current workspace.
+1.  **Click "+ icon":** In the RAG Agent UI, click the new **+** icon. This opens a selector showing all workspaces containing documents.
 
-	<ImagePopup src="/img/AI/rag-agent-add-context.png" alt="*actions library" caption="*rag-agent-add-context" />  
+	<ImagePopup src="/img/agents/rag-new-ds.png" alt="*actions library" caption="*rag-agent-add-context" />  
     
 2.	**Select your sources:**
     
-    -   You can choose any **folder** or **AI-ready document**.
-        
-    -   Documents that are not yet processed or are incompatible file types will be grayed out and cannot be selected.
- 
+    -   You can choose any **AI-ready document**.
+    
+:::note
+Please ensure all documents are marked as **AI Ready** before selecting them in the datasource dropdown. Documents that are not yet indexed will not be available for selection and may affect your agent's ability to retrieve accurate responses. You can do this by checking the documents status from the **Document Index Settings** option mentioned below.
+:::
+
+
 3.   **Query the agent:** When you submit your question, the RAG Agent will use the documents you selected as a primary source of information, leading to more focused and relevant answers.
 
     
+## Document Indexing Settings – Workspace
 
+Users can now manage and monitor the indexing status of all workspace documents directly from the Documents tab. The new **Documents Indexing Settings** panel gives full visibility into what's AI-ready and what still needs to be processed — so you always know exactly what your RAG agent can and cannot answer questions about.
+
+## What's New
+
+- **Indexing Status Overview** – See the overall indexing progress at a glance, including the percentage of files indexed and the last indexed timestamp.
+- **Incremental Index** – Process only newly added or updated documents, keeping your index current without a full reprocess.
+- **Full Reindex** – Reprocess all documents in your workspace to ensure the AI search index is completely up to date.
+- **File-Level Status Visibility** – Browse and search individual files to see whether each document is **AI Ready** or still pending — so you know exactly what your RAG agent can reference when answering questions.
+
+<ImagePopup src="/img/agents/doc-index-settings.png" alt="doc-index-settings" caption="Document Index Settings"/>

@@ -1,0 +1,24 @@
+---
+title: v1.0.252
+description: v1.0.252 Release notes April 2026
+sidebar_position: 1
+---
+
+
+**Date released: April 03, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Claude Sonnet 4.6 Now Available in Python Agent:** Anthropic's Claude Sonnet 4.6 model has been added to the Python Agent's LLM configuration options. Users can now select Claude Sonnet 4.6 when setting up or configuring their Python-based agents.
+
+### Security
+
+- **Security Patch** A set of security alerts identified on April 2, 2026 have been reviewed and resolved in this release.
+
+### Lakehouse
+
+- **DataGOL columns** are now automatically included when copying data into the warehouse. Users can expect consistent column naming aligned with DataGOL conventions across all copied datasets.
+- **Automatic Backend Retry for REST Pipelines:** The backend now automatically initiates a single retry when a REST pipeline run fails, reducing manual intervention for common failure scenarios. Each failed run gets exactly one backend-created retry, with safeguards to prevent duplicate retries if a user has already triggered one. In orchestrated pipelines, downstream jobs are triggered only after the retried run completes successfully.
