@@ -6,7 +6,7 @@ slug : custom-agent
 
 import ImagePopup from '@site/src/components/ImagePopup';
 
-## What is Custom agent?
+## What is Custom Agent?
 
 The Custom agent provides a flexible framework to create and configure your own AI agents tailored to specific needs. It allows you to define the agent's behavior, knowledge sources, and even its appearance, giving you significant control over its functionality.
 
@@ -75,3 +75,69 @@ Once your Custom agent is configured and saved or published, users can interact 
 -   **Within the platform**: Select your Custom agent from the **Explore** section. You can then ask questions, and the agent will respond based on the content of its configured workspaces and websites, adhering to the system prompt and instructions you've set.
     
 -   **On your website**: If you have published the agent and embedded its script, it will appear as an interactive element (e.g., a chat popup) on your website. Users can then ask questions related to your website's content or the specific knowledge you have provided.
+
+
+## What's New
+
+---
+
+### 🎨 Charts and Dashboards Now Available in Custom Agent
+
+The **Frontend Design Skill** has been integrated into the Custom Agent, enabling users to generate charts and dashboards directly from their data queries.
+
+#### Feature Highlights
+
+- Ask the Custom Agent to visualize data and receive fully rendered charts and dashboards inline
+- Visual insights are generated based on natural language queries — no manual configuration required
+- Brings rich data visualization capabilities into the core agent experience
+
+#### How to Use
+
+Simply ask the Custom Agent to create a chart or dashboard as part of your query. For example:
+- *"Show me a bar chart of sales by region"*
+- *"Create a dashboard summarizing this month's usage metrics"*
+
+#### Notes
+
+- This feature is available to all Custom Agent users
+- Chart and dashboard output is powered by the Frontend Design Skill
+
+<ImagePopup src="/img/agents/custom-agent/custom_agent_fe_skill.png" alt="custom agent front end skill" caption="custom agent FE skill"/>
+
+---
+
+### 🛠️ Skill Library — Add Customized Skills to Your Agent
+
+Users can now add **customized skills** directly to the Custom Agent through the **Skill Library**, unlocking greater intelligence and flexibility tailored to specific workflows.
+
+#### Sample Skills
+
+- 🧮 **calc** — Perform calculations and data processing based on certain customized logic on the data
+- 📊 **chart** — Generate responsive, production-ready charts using Chart.js and Bootstrap. Create clear, responsive charts with design thinking built in.
+- 📋 **dashboard-builder** — Compose full dashboards from data queries showcasing KPIs
+
+#### How to Use
+
+1. Navigate to the **Advanced** section within your Custom Agent settings and click **Add Skill**
+2. Within the Skill library modal, use **Upload .md** option to browse and upload for the skill you need, alternatively you can also use **Write Manually** option to write down the skills.
+3. Select and attach it to your agent
+4. The agent will immediately leverage the skill for relevant queries
+
+#### Managing Skills
+
+Each skill in the library can be managed via the **⋮ (three-dot menu)** on the skill card:
+
+- **Edit Inline** — Modify the skill content directly within the library
+- **Replace** — Swap the skill file with an updated version
+- **Download** — Export the skill as a `.md` file
+- **Delete** — Remove the skill from the library
+
+#### Notes
+
+- Skills can be written manually or uploaded as `.md` files via the Skill Library
+- Multiple skills can be combined to create a more powerful, specialized agent
+- Available to all Custom Agent users
+
+<ImagePopup src="/img/agents/custom-agent/add-skill-option.png" alt="add skill" caption="add skill"/>
+
+<ImagePopup src="/img/agents/custom-agent/manage-skill-library.png" alt="manage skill" caption="manage skill"/>
