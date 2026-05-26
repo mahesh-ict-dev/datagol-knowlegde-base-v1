@@ -335,7 +335,7 @@ Workbooks offer a rich set of column types designed to capture and manage your d
 
 ### Creating **AI Generate** column
 
-AI Generate is a feature that allows you to create a new column in a workbook and populate it with AI-generated content based on a prompt. This prompt can reference other columns in the same workbook, allowing the AI to generate content that is specific to each row. You can also enable web access to allow the AI to gather information from the internet to inform its generation.
+AI Generate is a feature that allows you to populate a column with AI-generated content based on a prompt. This prompt can reference other columns in the same workbook, allowing the AI to generate content that is specific to each row. You can also enable web access to allow the AI to gather information from the internet to inform its generation.
 
 The AI Generate feature leverages AI to perform tasks like research, summarization, or content creation that is contextually relevant to the data within their workbook, using prompts that can dynamically adapt to each row's information.
 
@@ -349,21 +349,22 @@ Do the following to create an AI Generate column
     
 4.  Enter a unique name for the column. This name will be displayed in the header.
     
-5.  Select **AI Generate** from the list.
+5.  Select the required type of column from the list. 
+
+6.  Click on **AI Generate** next to the Settings option and click on **Enable**.
     
-    <ImagePopup src="/img/image-20250508-083300.png" alt="Workbook columns1" caption="Workbook columns1" /> 
+    <ImagePopup src="/img/ai_generate_new.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
-6.  Write a prompt that instructs the AI on what kind of information to generate. This prompt can include placeholders (indicated by curly braces `{}`) that reference existing columns in the workbook. For example, the prompt could be **“**_**Research on**_ `{company name}`  _**which has website**_ `{company website}` _**and identify the company founder and company motives.**_**"**  
+7.  Write a prompt that instructs the AI on what kind of information to generate. This prompt can include placeholders (indicated by curly braces `{}`) that reference existing columns in the workbook. For example, the prompt could be **“**_**Research on**_ `{company name}`  _**which has website**_ `{company website}` _**and identify the company founder and company motives.**_**"**  
     
-    <ImagePopup src="/img/image-20250508-091819.png" alt="Workbook columns1" caption="Workbook columns1" /> 
+    <ImagePopup src="/img/ai_generate_enabled.png" alt="Workbook columns1" caption="Workbook columns1" /> 
     
-7.  Turn the **Web Access** toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).
+8.  Turn the **Internet Search** toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).
     
-8.  From Style select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.
+9.  Select your most preferred **AI model** from the drop down list.
+10.  Click **Create**.
     
-9.  Click **Create**.
-    
-10.  Click the AI Generate icon to view the results of your query in each row.
+11.  Click the AI Generate icon to view the results of your query in each row.
     
     <ImagePopup src="/img/image-20250508-091241.png" alt="Workbook columns1" caption="Workbook columns1" /> 
       
@@ -371,6 +372,22 @@ Do the following to create an AI Generate column
     For each row, it replaces the placeholders in the prompt with the corresponding values from the specified columns. It then uses the prompt (and web access, if enabled) to generate the requested information. The generated content appears in the new **AI Generate** column for each row.
     
      <ImagePopup src="/img/image-20250508-090807.png" alt="Workbook columns1" caption="Workbook columns1" />  
+
+
+#### Bulk AI Generate
+
+
+1. Click the **dropdown arrow** on the column header in which the AI Generate is enabled.
+2. Select **AI Generate** from the menu.
+3. In the dialog, **select all rows** or choose specific rows to process. You can also add certain filter conditions and select specific rows as necessary
+4. Click **Generate**.
+
+Rows will be processed and updated **asynchronously** — results will appear as each row completes.
+
+<ImagePopup src="/img/ai_generate_all_rows_1.png" alt="ai generate columns1" caption="ai generate columns1" />  
+
+<ImagePopup src="/img/ai_generate_all_rows_2.png" alt="ai generate columns1" caption="ai generate columns1" />  
+
 
 **Example:**
 
