@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#2e8555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#2e8555"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.7b3a6bda.css">
-<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.d5b9679f.js" defer="defer"></script>
-<script src="/datagol-knowlegde-base-v1/assets/js/main.d2a6ec5c.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.7749da4b.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.a7c180cc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script>
@@ -485,7 +485,7 @@
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="creating-ai-generate-column">Creating <strong>AI Generate</strong> column<a href="#creating-ai-generate-column" class="hash-link" aria-label="Direct link to creating-ai-generate-column" title="Direct link to creating-ai-generate-column">​</a></h3>
-<p>AI Generate is a feature that allows you to create a new column in a workbook and populate it with AI-generated content based on a prompt. This prompt can reference other columns in the same workbook, allowing the AI to generate content that is specific to each row. You can also enable web access to allow the AI to gather information from the internet to inform its generation.</p>
+<p>AI Generate is a feature that allows you to populate a column with AI-generated content based on a prompt. This prompt can reference other columns in the same workbook, allowing the AI to generate content that is specific to each row. You can also enable web access to allow the AI to gather information from the internet to inform its generation.</p>
 <p>The AI Generate feature leverages AI to perform tasks like research, summarization, or content creation that is contextually relevant to the data within their workbook, using prompts that can dynamically adapt to each row&#x27;s information.</p>
 <p>Do the following to create an AI Generate column</p>
 <ol>
@@ -502,18 +502,21 @@
 <p>Enter a unique name for the column. This name will be displayed in the header.</p>
 </li>
 <li>
-<p>Select <strong>AI Generate</strong> from the list.</p>
-<img src="/datagol-knowlegde-base-v1/img/image-20250508-083300.png" alt="Workbook columns1" style="cursor:pointer">
+<p>Select the required type of column from the list.</p>
+</li>
+<li>
+<p>Click on <strong>AI Generate</strong> next to the Settings option and click on <strong>Enable</strong>.</p>
+<img src="/datagol-knowlegde-base-v1/img/ai_generate_new.png" alt="Workbook columns1" style="cursor:pointer">
 </li>
 <li>
 <p>Write a prompt that instructs the AI on what kind of information to generate. This prompt can include placeholders (indicated by curly braces <code>{}</code>) that reference existing columns in the workbook. For example, the prompt could be <strong>“</strong><em><strong>Research on</strong></em> <code>{company name}</code>  <em><strong>which has website</strong></em> <code>{company website}</code> <em><strong>and identify the company founder and company motives.</strong></em><strong>&quot;</strong></p>
-<img src="/datagol-knowlegde-base-v1/img/image-20250508-091819.png" alt="Workbook columns1" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/ai_generate_enabled.png" alt="Workbook columns1" style="cursor:pointer">
 </li>
 <li>
-<p>Turn the <strong>Web Access</strong> toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).</p>
+<p>Turn the <strong>Internet Search</strong> toggle to specify if the prompt requires the AI to access information from the internet (like visiting a company website).</p>
 </li>
 <li>
-<p>From Style select a color to mark the column header separately with that selected color. Click the Include cells to mark the complete column with the same color.</p>
+<p>Select your most preferred <strong>AI model</strong> from the drop down list.</p>
 </li>
 <li>
 <p>Click <strong>Create</strong>.</p>
@@ -526,6 +529,16 @@
 <p>Once the prompt is set, the AI processes each row in the workbook.<br>
 <!-- -->For each row, it replaces the placeholders in the prompt with the corresponding values from the specified columns. It then uses the prompt (and web access, if enabled) to generate the requested information. The generated content appears in the new <strong>AI Generate</strong> column for each row.</p>
 <img src="/datagol-knowlegde-base-v1/img/image-20250508-090807.png" alt="Workbook columns1" style="cursor:pointer">
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="bulk-ai-generate">Bulk AI Generate<a href="#bulk-ai-generate" class="hash-link" aria-label="Direct link to Bulk AI Generate" title="Direct link to Bulk AI Generate">​</a></h4>
+<ol>
+<li>Click the <strong>dropdown arrow</strong> on the column header in which the AI Generate is enabled.</li>
+<li>Select <strong>AI Generate</strong> from the menu.</li>
+<li>In the dialog, <strong>select all rows</strong> or choose specific rows to process. You can also add certain filter conditions and select specific rows as necessary</li>
+<li>Click <strong>Generate</strong>.</li>
+</ol>
+<p>Rows will be processed and updated <strong>asynchronously</strong> — results will appear as each row completes.</p>
+<img src="/datagol-knowlegde-base-v1/img/ai_generate_all_rows_1.png" alt="ai generate columns1" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/ai_generate_all_rows_2.png" alt="ai generate columns1" style="cursor:pointer">
 <p><strong>Example:</strong></p>
 <p>Create an <strong>AI Generate</strong> column called <strong>Credit Card Type Information</strong> and write the following prompt:</p>
 <p><em><strong>&quot;Provide some details about</strong></em> <code>{credit_card_type}</code> <em><strong>and their business trends.</strong></em></p>
@@ -695,6 +708,6 @@
 <li>
 <p>Click <strong>Submit.</strong></p>
 </li>
-</ol></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Workbooks/viewing-and-editing-row-details-in-a-form"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Viewing and editing row details in a form</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Workbooks/workbook-api-reference"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Workbook API reference</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-a-column" class="table-of-contents__link toc-highlight">Adding a column</a></li><li><a href="#creating-single-line-text-column" class="table-of-contents__link toc-highlight">Creating Single line text column</a></li><li><a href="#creating-link-column" class="table-of-contents__link toc-highlight">Creating <strong>Link</strong> column</a></li><li><a href="#creating-lookup-column" class="table-of-contents__link toc-highlight">Creating <strong>Lookup</strong> column</a></li><li><a href="#creating-long-text-column" class="table-of-contents__link toc-highlight">Creating <strong>Long Text</strong> column</a></li><li><a href="#creating-checkbox-column" class="table-of-contents__link toc-highlight">Creating <strong>Checkbox</strong> column</a></li><li><a href="#creating-multiple-select-column" class="table-of-contents__link toc-highlight">Creating <strong>Multiple Select</strong> column</a></li><li><a href="#creating-single-select-column" class="table-of-contents__link toc-highlight">Creating <strong>Single Select</strong> column</a></li><li><a href="#creating-date-column" class="table-of-contents__link toc-highlight">Creating <strong>Date</strong> column</a></li><li><a href="#creating-email-column" class="table-of-contents__link toc-highlight">Creating <strong>Email</strong> column</a></li><li><a href="#creating-url-column" class="table-of-contents__link toc-highlight">Creating <strong>URL</strong> column</a></li><li><a href="#creating-phone-number-column" class="table-of-contents__link toc-highlight">Creating <strong>Phone Number</strong> column</a></li><li><a href="#creating-number-column" class="table-of-contents__link toc-highlight">Creating <strong>Number</strong> column</a></li><li><a href="#creating-user-column" class="table-of-contents__link toc-highlight">Creating <strong>User</strong> column</a></li><li><a href="#creating-ai-generate-column" class="table-of-contents__link toc-highlight">Creating <strong>AI Generate</strong> column</a></li><li><a href="#creating-formula-column" class="table-of-contents__link toc-highlight">Creating Formula column</a><ul><li><a href="#adding-formula-in-workbook" class="table-of-contents__link toc-highlight">Adding Formula in Workbook</a></li><li><a href="#generating-formula-with-ai-assist" class="table-of-contents__link toc-highlight">Generating formula with AI assist</a></li></ul></li><li><a href="#create-button-column" class="table-of-contents__link toc-highlight">Create Button column</a><ul><li><a href="#create-jira-connector" class="table-of-contents__link toc-highlight">Create Jira connector</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
+</ol></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/Workbooks/viewing-and-editing-row-details-in-a-form"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Viewing and editing row details in a form</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/Workbooks/workbook-api-reference"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Workbook API reference</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adding-a-column" class="table-of-contents__link toc-highlight">Adding a column</a></li><li><a href="#creating-single-line-text-column" class="table-of-contents__link toc-highlight">Creating Single line text column</a></li><li><a href="#creating-link-column" class="table-of-contents__link toc-highlight">Creating <strong>Link</strong> column</a></li><li><a href="#creating-lookup-column" class="table-of-contents__link toc-highlight">Creating <strong>Lookup</strong> column</a></li><li><a href="#creating-long-text-column" class="table-of-contents__link toc-highlight">Creating <strong>Long Text</strong> column</a></li><li><a href="#creating-checkbox-column" class="table-of-contents__link toc-highlight">Creating <strong>Checkbox</strong> column</a></li><li><a href="#creating-multiple-select-column" class="table-of-contents__link toc-highlight">Creating <strong>Multiple Select</strong> column</a></li><li><a href="#creating-single-select-column" class="table-of-contents__link toc-highlight">Creating <strong>Single Select</strong> column</a></li><li><a href="#creating-date-column" class="table-of-contents__link toc-highlight">Creating <strong>Date</strong> column</a></li><li><a href="#creating-email-column" class="table-of-contents__link toc-highlight">Creating <strong>Email</strong> column</a></li><li><a href="#creating-url-column" class="table-of-contents__link toc-highlight">Creating <strong>URL</strong> column</a></li><li><a href="#creating-phone-number-column" class="table-of-contents__link toc-highlight">Creating <strong>Phone Number</strong> column</a></li><li><a href="#creating-number-column" class="table-of-contents__link toc-highlight">Creating <strong>Number</strong> column</a></li><li><a href="#creating-user-column" class="table-of-contents__link toc-highlight">Creating <strong>User</strong> column</a></li><li><a href="#creating-ai-generate-column" class="table-of-contents__link toc-highlight">Creating <strong>AI Generate</strong> column</a><ul><li><a href="#bulk-ai-generate" class="table-of-contents__link toc-highlight">Bulk AI Generate</a></li></ul></li><li><a href="#creating-formula-column" class="table-of-contents__link toc-highlight">Creating Formula column</a><ul><li><a href="#adding-formula-in-workbook" class="table-of-contents__link toc-highlight">Adding Formula in Workbook</a></li><li><a href="#generating-formula-with-ai-assist" class="table-of-contents__link toc-highlight">Generating formula with AI assist</a></li></ul></li><li><a href="#create-button-column" class="table-of-contents__link toc-highlight">Create Button column</a><ul><li><a href="#create-jira-connector" class="table-of-contents__link toc-highlight">Create Jira connector</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>
