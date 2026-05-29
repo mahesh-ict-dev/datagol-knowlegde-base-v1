@@ -84,7 +84,56 @@ To make the parameter functional, do the following:
 
  <ImagePopup src="/img/param.png" alt="parameters" caption="parameters" />
 
+## Dynamic Parameters
 
+Dynamic Parameters create dropdown filters whose options are automatically populated from a SQL query. As new values are added to your data, the dropdown updates automatically.
+
+### 1 How to Create
+
+1. Open the Visualizer and navigate to your workbook.
+2. Create a new Parameter from the **Parameters** section.
+3. Set **Parameter Type** to **Dynamic Options (SQL-Driven Dropdown)**.
+4. Configure:
+   - **Parameter Name:** Display name (e.g., "Country").
+   - **Parameter Key:** Reference key for formulas (e.g., "Country").
+   - **Value Type:** Data type (e.g., Text).
+5. Enter the SQL Query for distinct values:
+
+```sql
+select distinct Country from application_connection_read.table_782542d9 order by Country
+```
+
+6. Set a **Default Value** and optionally enable **Allow Multiple Values**.
+7. Toggle **Show on Dashboards** if it should appear on dashboard pages.
+8. Click **Save**.
+
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param1.png" alt="dynamic_param1" caption="dynamic_param1" />
+
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param2.png" alt="dynamic_param2" caption="dynamic_param2" />
+
+### 2 Using in Formulas
+
+Reference dynamic parameters in formula columns with double-curly-brace syntax.
+
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param3.png" alt="dynamic_param3" caption="dynamic_param3" />
+
+### 3 Result on Dashboard
+
+The parameter appears as a dropdown filter. Users select values and all referencing widgets update in real time.
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param4.png" alt="dynamic_param4" caption="dynamic_param4" />
+
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param5.png" alt="dynamic_param5" caption="dynamic_param5" />
+
+### 4 Reordering Parameters
+
+Control the display order of parameters on dashboard pages:
+
+- **Go to Dashboard Page Settings** (gear icon).
+- **Open Manage Parameters.**
+- **Drag and drop** parameters into your desired order.
+- **Toggle visibility** on/off as needed, then **Save**.
+
+<ImagePopup src="/img/BI_capabilities_combinations/dynamic_param6.png" alt="dynamic_param6" caption="dynamic_param6" />
 
 
 

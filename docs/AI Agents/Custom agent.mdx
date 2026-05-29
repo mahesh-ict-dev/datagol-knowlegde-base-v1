@@ -59,13 +59,11 @@ The process of configuring a Custom agent involves both creation and detailed se
 
 	- 	**Tools & Capabilities:** Configure MCP servers and other tools for your agent. 
 
-		<ImagePopup src="/img/agents/custom-agent/custom-agent-tool-capabilities.png" alt="custom agent new" caption="custom agent new"/>
-
-
 			-	To make your agent useful, you must give it a source of truth. Scroll to the **Workspaces** section. Select the workspace containing your documents. The agent will now be able to search these documents and provide **citations** (links to the exact source) in its responses.
 			- 	Select the required Connectors. You can also click the **New Connector** button and create new credentials for the reviewed and recommended tools.
 			-	Add Model Context Protocol (MCP)servers that provide additional capabilities to your agent.
 			- 	Turn on the **Web Search** button to enable web search and browser capabilities for your agent to access live internet information.
+			<ImagePopup src="/img/AI/new_mcp_image.png" alt="New MCP image" caption="New MCP image"/>
 
 
 ### **Using the Custom agent**
@@ -141,3 +139,56 @@ Each skill in the library can be managed via the **⋮ (three-dot menu)** on the
 <ImagePopup src="/img/agents/custom-agent/add-skill-option.png" alt="add skill" caption="add skill"/>
 
 <ImagePopup src="/img/agents/custom-agent/manage-skill-library.png" alt="manage skill" caption="manage skill"/>
+
+
+### Add Workspace MCP Server to Custom Agents
+
+Users can now configure Workspace MCP server directly within Custom Agent settings for enhanced workspace-level integrations and data access.
+
+#### Copy MCP URL from Workspace
+
+Workspaces now expose a **Copy MCP URL** option directly from the three-dot menu, opening a modal that displays the full MCP-compatible URL alongside all workbooks contained in that workspace.
+
+#### How to use it
+
+1. Navigate to your workspace list and click the **⋮** (three-dot) menu on any workspace card.
+2. Select **Copy MCP URL** from the dropdown.
+3. In the modal that opens, review the workbooks included and the auto-generated **MCP Slug**.
+4. Click the copy icon next to the **MCP URL** field and paste it into your MCP client.
+<ImagePopup src="/img/release_notes/2026/2026/April/ws_mcp1.png" alt="WS MCP URL" caption="WS MCP URL" />
+<ImagePopup src="/img/release_notes/2026/2026/April/ws_mcp2.png" alt="WS MCP URLs" caption="WS MCP URLs" />
+
+#### Steps to Configure a Workspace MCP Server to a Custom Agent
+
+1. Go to **Custom Agent**
+2. Edit the agent **Settings**
+3. Navigate to the **MCP** section
+4. Click **Add MCP Server**
+5. Select **Custom Server**
+6. Enter the **Display Name**
+7. Paste the MCP endpoint in the **Server URL**
+8. Click **Add MCP Server**
+
+Once configured, the Custom Agent can query workbooks available within the connected workspace MCP and provide contextual answers across workspace data sources.
+
+
+<ImagePopup src="/img/AI/ws_map_panel.png" alt="WS MCP agent" caption="WS MCP agent" />
+
+
+
+### Custom Agent - File Attachments:
+
+Attach Files to Chat and Ask Questions About Them Users can now attach files directly to a Custom Agent chat session and ask questions about the file's contents. This enables document-driven conversations without requiring the file to be pre-loaded into a workbook or data source.
+
+
+#### Steps to Configure
+1. Go to **Custom Agent**
+2. Edit the agent **Settings**
+3. Navigate to the **Advanced** section
+4. Scroll down to the **Chat Interface** section where you will find **File Settings**
+5. Enable the **File Upload** toggle 
+6. Click on **Save Changes**
+
+
+<ImagePopup src="/img/AI/file_upload_config.png" alt="File upload config" caption="File upload" />
+<ImagePopup src="/img/AI/file_attached.png" alt="File upload" caption="File uploads" />
