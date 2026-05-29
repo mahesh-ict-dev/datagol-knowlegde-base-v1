@@ -1,0 +1,21 @@
+---
+title: v1.0.264
+description: v1.0.264 Release notes April 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+**Date released: April 29, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+
+- **Agent File Attachments:** File Preview API for Agent File Attachments A dedicated file preview API has been introduced for the Agent File Attachment feature. This isolates the downloadable instance of an attached file, improving how attached files are accessed and previewed within the agent chat context.
+- **Custom Agent - Google Drive Connector:** Custom Agent with Google Drive Connector Custom Agents can now be connected to Google Drive as a data source. This allows agents to access and query content stored in Google Drive directly, enabling knowledge retrieval workflows that leverage existing Drive documents without requiring manual imports or re-uploads.
+<ImagePopup src="/img/release_notes/2026/2026/April/connector.png" alt="Google Drive Connector" caption="Google Drive Connector" />
+- **RAG V2 API Integration for Google Drive Connector Indexing:** The in-house RAG V2 pipeline has been integrated to handle indexing of content sourced through the Google Drive Connector. This ensures that Google Drive-connected documents are indexed and retrievable through the same performant, in-house retrieval infrastructure introduced for other connector types, replacing any dependency on legacy indexing paths for Drive content.
+<ImagePopup src="/img/release_notes/2026/2026/April/connector_sync.png" alt="Google Drive Connector Sync" caption="Google Drive Connector Sync" />

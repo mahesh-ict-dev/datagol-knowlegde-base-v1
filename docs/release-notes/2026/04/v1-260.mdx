@@ -1,0 +1,18 @@
+---
+title: v1.0.260
+description: v1.0.260 Release notes April 2026
+sidebar_position: 6
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: April 21, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+
+- **File Preview API for Agent File Attachments:** A dedicated file preview API has been introduced for the Agent File Attachment feature. This isolates the downloadable instance of an attached file, improving how attached files are accessed and previewed within the agent chat context.
+- **Retry Middleware for Provider Exceptions and Rate Limiting:** A new retry middleware layer has been added to the Custom Agent to automatically handle provider-level exceptions and rate limiting. This provides a more robust, infrastructure-level safety net that intercepts and retries failed LLM calls transparently, improving overall agent stability and reliability under load.
+- **Duplicate Primary Dataframe Loading at Session Startup:** Fixed a bug where the primary workbook's dataframe was being loaded twice during Python Agent session initialization. The duplicate fetch caused unnecessary data retrieval operations, increased startup latency, and redundant resource usage. The session now correctly loads the primary dataset once, while auxiliary workbook loading continues to run in parallel as expected.

@@ -1,0 +1,27 @@
+---
+title: v1.0.259
+description: v1.0.259 Release notes April 2026
+sidebar_position: 7
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: April 20, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Custom Agent - File Attachments:** Attach Files to Chat and Ask Questions About Them Users can now attach files directly to a Custom Agent chat session and ask questions about the file's contents. This enables document-driven conversations without requiring the file to be pre-loaded into a workbook or data source.
+
+<ImagePopup src="/img/AI/file_upload_config.png" alt="File upload config" caption="File upload" />
+<ImagePopup src="/img/AI/file_attached.png" alt="File upload" caption="File uploads" />
+
+- **Custom Agent - Automated File Parsing:** The Read Complete File tool now includes an automated parser that activates when needed. Previously, file content handling required manual configuration; the agent can now automatically determine the appropriate parsing approach based on the file type, improving reliability when working with file-based data.
+- **Custom Agent - Automatic Retry on Rate Limiting and Interruptions:** The Custom Agent now automatically retries when it encounters rate limiting or other transient interruptions from the underlying LLM provider. This improves agent reliability during high-load periods and reduces the need for users to manually re-run queries that were interrupted.
+
+
+
+## Bug Fixes
+- Agent No Longer Stops Mid-Response Fixed an issue where the Custom Agent would intermittently stop generating a response partway through, leaving incomplete outputs. Responses are now delivered in full consistently.
+- Skills Not Being Read by LocalShellBackend Resolved a bug where Agent Skills were not being picked up when the Custom Agent ran against the LocalShellBackend. Skills are now correctly loaded and applied in all execution environments.
