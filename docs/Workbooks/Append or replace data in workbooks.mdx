@@ -33,3 +33,31 @@ To append or replace data in a workbook, do the following:
     <ImagePopup src="/img/append-or-replace-data-workbooks/Append-and-replace.gif" alt="Links-and-Joins" caption="Links and Joins" />
 
 4. Click **Append/Replace**.
+
+
+## What's New
+ 
+### Links & Joins — Comma-Separated Multi-Value Matching on Import
+ 
+Previously, importing data into a workbook with a lookup column only matched the first value in a cell — any additional comma-separated values were silently dropped, and if no exact match was found, the cell was left blank.
+With this enhancement, the system now splits imported cell values by comma and matches each one individually against the linked workbook, populating all matched entries into the lookup column in a single cell.
+ 
+**The use case this solves:**
+ 
+Consider you have a **People** workbook and a **Projects** workbook where Projects has a lookup column linked to People. When you import a CSV into Projects where a cell contains multiple names (e.g. `John Doe, Alice, Mark`), the system now resolves each name against the People workbook and populates all matched entries — instead of only the first match.
+ 
+**How to use it:**
+ 
+1. Set up a workbook with a **link column** pointing to another workbook (e.g. Projects → People).
+2. Go to **Settings → Append** and upload your import file.
+3. Map the import column to the lookup field and select the matching column in the linked workbook.
+4. On import, any comma-separated values in that column are each matched individually against the linked workbook.
+5. All matched entries are populated into the lookup cell — supporting one-to-many matches in a single row.
+
+**What stays the same:**
+- The lookup column type remains a **string/text field** — it is not converted to multi-select.
+- Existing formulas and lookups built on top of this column continue to work as before.
+
+**Known limitations:**
+- Applies to data imported via the **Append** workflow — not to manual row entry.
+- Only values that find an exact match in the linked workbook are populated; unmatched values are skipped.
