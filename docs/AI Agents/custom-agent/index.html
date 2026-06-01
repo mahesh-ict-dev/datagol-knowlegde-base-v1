@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#2e8555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#2e8555"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.7b3a6bda.css">
-<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.7749da4b.js" defer="defer"></script>
-<script src="/datagol-knowlegde-base-v1/assets/js/main.a7c180cc.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.20c2d3a4.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.1f10e77c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script>
@@ -87,13 +87,13 @@
 </li>
 <li>
 <p><strong>Tools &amp; Capabilities:</strong> Configure MCP servers and other tools for your agent.</p>
-<img src="/datagol-knowlegde-base-v1/img/agents/custom-agent/custom-agent-tool-capabilities.png" alt="custom agent new" style="cursor:pointer">
 <ul>
 <li>To make your agent useful, you must give it a source of truth. Scroll to the <strong>Workspaces</strong> section. Select the workspace containing your documents. The agent will now be able to search these documents and provide <strong>citations</strong> (links to the exact source) in its responses.</li>
 <li>Select the required Connectors. You can also click the <strong>New Connector</strong> button and create new credentials for the reviewed and recommended tools.</li>
 <li>Add Model Context Protocol (MCP)servers that provide additional capabilities to your agent.</li>
 <li>Turn on the <strong>Web Search</strong> button to enable web search and browser capabilities for your agent to access live internet information.</li>
 </ul>
+<img src="/datagol-knowlegde-base-v1/img/AI/new_mcp_image.png" alt="New MCP image" style="cursor:pointer">
 </li>
 </ul>
 </li>
@@ -161,6 +161,45 @@
 <li>Available to all Custom Agent users</li>
 </ul>
 <img src="/datagol-knowlegde-base-v1/img/agents/custom-agent/add-skill-option.png" alt="add skill" style="cursor:pointer">
-<img src="/datagol-knowlegde-base-v1/img/agents/custom-agent/manage-skill-library.png" alt="manage skill" style="cursor:pointer"></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/AI Agents/business-intelligence-BI-agent-Chart-agent"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Business Intelligence (BI) agent - (Chart agent)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/AI Agents/creating-sharing-custom-agent"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Creating and sharing Custom agent publicly</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-is-custom-agent" class="table-of-contents__link toc-highlight">What is Custom Agent?</a><ul><li><a href="#configuring-and-creating-the-custom-agent" class="table-of-contents__link toc-highlight"><strong>Configuring and creating the Custom agent</strong></a></li><li><a href="#using-the-custom-agent" class="table-of-contents__link toc-highlight"><strong>Using the Custom agent</strong></a></li></ul></li><li><a href="#whats-new" class="table-of-contents__link toc-highlight">What&#39;s New</a><ul><li><a href="#-charts-and-dashboards-now-available-in-custom-agent" class="table-of-contents__link toc-highlight">🎨 Charts and Dashboards Now Available in Custom Agent</a><ul><li><a href="#feature-highlights" class="table-of-contents__link toc-highlight">Feature Highlights</a></li><li><a href="#how-to-use" class="table-of-contents__link toc-highlight">How to Use</a></li><li><a href="#notes" class="table-of-contents__link toc-highlight">Notes</a></li></ul></li><li><a href="#️-skill-library--add-customized-skills-to-your-agent" class="table-of-contents__link toc-highlight">🛠️ Skill Library — Add Customized Skills to Your Agent</a><ul><li><a href="#sample-skills" class="table-of-contents__link toc-highlight">Sample Skills</a></li><li><a href="#how-to-use-1" class="table-of-contents__link toc-highlight">How to Use</a></li><li><a href="#managing-skills" class="table-of-contents__link toc-highlight">Managing Skills</a></li><li><a href="#notes-1" class="table-of-contents__link toc-highlight">Notes</a></li></ul></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
+<img src="/datagol-knowlegde-base-v1/img/agents/custom-agent/manage-skill-library.png" alt="manage skill" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="add-workspace-mcp-server-to-custom-agents">Add Workspace MCP Server to Custom Agents<a href="#add-workspace-mcp-server-to-custom-agents" class="hash-link" aria-label="Direct link to Add Workspace MCP Server to Custom Agents" title="Direct link to Add Workspace MCP Server to Custom Agents">​</a></h3>
+<p>Users can now configure Workspace MCP server directly within Custom Agent settings for enhanced workspace-level integrations and data access.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="copy-mcp-url-from-workspace">Copy MCP URL from Workspace<a href="#copy-mcp-url-from-workspace" class="hash-link" aria-label="Direct link to Copy MCP URL from Workspace" title="Direct link to Copy MCP URL from Workspace">​</a></h4>
+<p>Workspaces now expose a <strong>Copy MCP URL</strong> option directly from the three-dot menu, opening a modal that displays the full MCP-compatible URL alongside all workbooks contained in that workspace.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-use-it">How to use it<a href="#how-to-use-it" class="hash-link" aria-label="Direct link to How to use it" title="Direct link to How to use it">​</a></h4>
+<ol>
+<li>Navigate to your workspace list and click the <strong>⋮</strong> (three-dot) menu on any workspace card.</li>
+<li>Select <strong>Copy MCP URL</strong> from the dropdown.</li>
+<li>In the modal that opens, review the workbooks included and the auto-generated <strong>MCP Slug</strong>.</li>
+<li>Click the copy icon next to the <strong>MCP URL</strong> field and paste it into your MCP client.</li>
+</ol>
+<img src="/datagol-knowlegde-base-v1/img/release_notes/2026/2026/April/ws_mcp1.png" alt="WS MCP URL" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/release_notes/2026/2026/April/ws_mcp2.png" alt="WS MCP URLs" style="cursor:pointer">
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="steps-to-configure-a-workspace-mcp-server-to-a-custom-agent">Steps to Configure a Workspace MCP Server to a Custom Agent<a href="#steps-to-configure-a-workspace-mcp-server-to-a-custom-agent" class="hash-link" aria-label="Direct link to Steps to Configure a Workspace MCP Server to a Custom Agent" title="Direct link to Steps to Configure a Workspace MCP Server to a Custom Agent">​</a></h4>
+<ol>
+<li>Go to <strong>Custom Agent</strong></li>
+<li>Edit the agent <strong>Settings</strong></li>
+<li>Navigate to the <strong>MCP</strong> section</li>
+<li>Click <strong>Add MCP Server</strong></li>
+<li>Select <strong>Custom Server</strong></li>
+<li>Enter the <strong>Display Name</strong></li>
+<li>Paste the MCP endpoint in the <strong>Server URL</strong></li>
+<li>Click <strong>Add MCP Server</strong></li>
+</ol>
+<p>Once configured, the Custom Agent can query workbooks available within the connected workspace MCP and provide contextual answers across workspace data sources.</p>
+<img src="/datagol-knowlegde-base-v1/img/AI/ws_map_panel.png" alt="WS MCP agent" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custom-agent---file-attachments">Custom Agent - File Attachments:<a href="#custom-agent---file-attachments" class="hash-link" aria-label="Direct link to Custom Agent - File Attachments:" title="Direct link to Custom Agent - File Attachments:">​</a></h3>
+<p>Attach Files to Chat and Ask Questions About Them Users can now attach files directly to a Custom Agent chat session and ask questions about the file&#x27;s contents. This enables document-driven conversations without requiring the file to be pre-loaded into a workbook or data source.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="steps-to-configure">Steps to Configure<a href="#steps-to-configure" class="hash-link" aria-label="Direct link to Steps to Configure" title="Direct link to Steps to Configure">​</a></h4>
+<ol>
+<li>Go to <strong>Custom Agent</strong></li>
+<li>Edit the agent <strong>Settings</strong></li>
+<li>Navigate to the <strong>Advanced</strong> section</li>
+<li>Scroll down to the <strong>Chat Interface</strong> section where you will find <strong>File Settings</strong></li>
+<li>Enable the <strong>File Upload</strong> toggle</li>
+<li>Click on <strong>Save Changes</strong></li>
+</ol>
+<img src="/datagol-knowlegde-base-v1/img/AI/file_upload_config.png" alt="File upload config" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/AI/file_attached.png" alt="File upload" style="cursor:pointer"></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/AI Agents/business-intelligence-BI-agent-Chart-agent"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Business Intelligence (BI) agent - (Chart agent)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/AI Agents/creating-sharing-custom-agent"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Creating and sharing Custom agent publicly</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-is-custom-agent" class="table-of-contents__link toc-highlight">What is Custom Agent?</a><ul><li><a href="#configuring-and-creating-the-custom-agent" class="table-of-contents__link toc-highlight"><strong>Configuring and creating the Custom agent</strong></a></li><li><a href="#using-the-custom-agent" class="table-of-contents__link toc-highlight"><strong>Using the Custom agent</strong></a></li></ul></li><li><a href="#whats-new" class="table-of-contents__link toc-highlight">What&#39;s New</a><ul><li><a href="#-charts-and-dashboards-now-available-in-custom-agent" class="table-of-contents__link toc-highlight">🎨 Charts and Dashboards Now Available in Custom Agent</a><ul><li><a href="#feature-highlights" class="table-of-contents__link toc-highlight">Feature Highlights</a></li><li><a href="#how-to-use" class="table-of-contents__link toc-highlight">How to Use</a></li><li><a href="#notes" class="table-of-contents__link toc-highlight">Notes</a></li></ul></li><li><a href="#️-skill-library--add-customized-skills-to-your-agent" class="table-of-contents__link toc-highlight">🛠️ Skill Library — Add Customized Skills to Your Agent</a><ul><li><a href="#sample-skills" class="table-of-contents__link toc-highlight">Sample Skills</a></li><li><a href="#how-to-use-1" class="table-of-contents__link toc-highlight">How to Use</a></li><li><a href="#managing-skills" class="table-of-contents__link toc-highlight">Managing Skills</a></li><li><a href="#notes-1" class="table-of-contents__link toc-highlight">Notes</a></li></ul></li><li><a href="#add-workspace-mcp-server-to-custom-agents" class="table-of-contents__link toc-highlight">Add Workspace MCP Server to Custom Agents</a><ul><li><a href="#copy-mcp-url-from-workspace" class="table-of-contents__link toc-highlight">Copy MCP URL from Workspace</a></li><li><a href="#how-to-use-it" class="table-of-contents__link toc-highlight">How to use it</a></li><li><a href="#steps-to-configure-a-workspace-mcp-server-to-a-custom-agent" class="table-of-contents__link toc-highlight">Steps to Configure a Workspace MCP Server to a Custom Agent</a></li></ul></li><li><a href="#custom-agent---file-attachments" class="table-of-contents__link toc-highlight">Custom Agent - File Attachments:</a><ul><li><a href="#steps-to-configure" class="table-of-contents__link toc-highlight">Steps to Configure</a></li></ul></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>

@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#2e8555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#2e8555"><link rel="stylesheet" href="/datagol-knowlegde-base-v1/assets/css/styles.7b3a6bda.css">
-<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.7749da4b.js" defer="defer"></script>
-<script src="/datagol-knowlegde-base-v1/assets/js/main.a7c180cc.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/runtime~main.20c2d3a4.js" defer="defer"></script>
+<script src="/datagol-knowlegde-base-v1/assets/js/main.1f10e77c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script>
@@ -85,6 +85,46 @@ For example, If you have want to specify the default value as year, you can sele
 <ul>
 <li>Identify the Parameter on dashboard page</li>
 </ul>
-<img src="/datagol-knowlegde-base-v1/img/param.png" alt="parameters" style="cursor:pointer"></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/category/formulas-and-parameters"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Formulas and Parameters</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/BI Analytics/Formulas &amp; Parameters/LOD Expressions"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Level Of Detail (LOD) Expressions</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#key-characteristics-of-parameters" class="table-of-contents__link toc-highlight">Key characteristics of parameters</a></li><li><a href="#creating-a-parameter" class="table-of-contents__link toc-highlight">Creating a parameter</a></li><li><a href="#implementing-a-parameter" class="table-of-contents__link toc-highlight">Implementing a parameter</a></li><li><a href="#using-parameters-on-dashboards" class="table-of-contents__link toc-highlight">Using parameters on dashboards</a></li></ul></div></div></div></div></main></div></div></div></div>
+<img src="/datagol-knowlegde-base-v1/img/param.png" alt="parameters" style="cursor:pointer">
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="dynamic-parameters">Dynamic Parameters<a href="#dynamic-parameters" class="hash-link" aria-label="Direct link to Dynamic Parameters" title="Direct link to Dynamic Parameters">​</a></h2>
+<p>Dynamic Parameters create dropdown filters whose options are automatically populated from a SQL query. As new values are added to your data, the dropdown updates automatically.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-how-to-create">1 How to Create<a href="#1-how-to-create" class="hash-link" aria-label="Direct link to 1 How to Create" title="Direct link to 1 How to Create">​</a></h3>
+<ol>
+<li>Open the Visualizer and navigate to your workbook.</li>
+<li>Create a new Parameter from the <strong>Parameters</strong> section.</li>
+<li>Set <strong>Parameter Type</strong> to <strong>Dynamic Options (SQL-Driven Dropdown)</strong>.</li>
+<li>Configure:<!-- -->
+<ul>
+<li><strong>Parameter Name:</strong> Display name (e.g., &quot;Country&quot;).</li>
+<li><strong>Parameter Key:</strong> Reference key for formulas (e.g., &quot;Country&quot;).</li>
+<li><strong>Value Type:</strong> Data type (e.g., Text).</li>
+</ul>
+</li>
+<li>Enter the SQL Query for distinct values:</li>
+</ol>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">select</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">distinct</span><span class="token plain"> Country </span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> application_connection_read</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">table_782542d9 </span><span class="token keyword" style="color:#00009f">order</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">by</span><span class="token plain"> Country</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="6">
+<li>Set a <strong>Default Value</strong> and optionally enable <strong>Allow Multiple Values</strong>.</li>
+<li>Toggle <strong>Show on Dashboards</strong> if it should appear on dashboard pages.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param1.png" alt="dynamic_param1" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param2.png" alt="dynamic_param2" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-using-in-formulas">2 Using in Formulas<a href="#2-using-in-formulas" class="hash-link" aria-label="Direct link to 2 Using in Formulas" title="Direct link to 2 Using in Formulas">​</a></h3>
+<p>Reference dynamic parameters in formula columns with double-curly-brace syntax.</p>
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param3.png" alt="dynamic_param3" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-result-on-dashboard">3 Result on Dashboard<a href="#3-result-on-dashboard" class="hash-link" aria-label="Direct link to 3 Result on Dashboard" title="Direct link to 3 Result on Dashboard">​</a></h3>
+<p>The parameter appears as a dropdown filter. Users select values and all referencing widgets update in real time.</p>
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param4.png" alt="dynamic_param4" style="cursor:pointer">
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param5.png" alt="dynamic_param5" style="cursor:pointer">
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-reordering-parameters">4 Reordering Parameters<a href="#4-reordering-parameters" class="hash-link" aria-label="Direct link to 4 Reordering Parameters" title="Direct link to 4 Reordering Parameters">​</a></h3>
+<p>Control the display order of parameters on dashboard pages:</p>
+<ul>
+<li><strong>Go to Dashboard Page Settings</strong> (gear icon).</li>
+<li><strong>Open Manage Parameters.</strong></li>
+<li><strong>Drag and drop</strong> parameters into your desired order.</li>
+<li><strong>Toggle visibility</strong> on/off as needed, then <strong>Save</strong>.</li>
+</ul>
+<img src="/datagol-knowlegde-base-v1/img/BI_capabilities_combinations/dynamic_param6.png" alt="dynamic_param6" style="cursor:pointer"></div><div style="margin-top:2rem;text-align:center"><p>Was this helpful?</p><button style="margin-right:10px;font-size:24px;cursor:pointer">👍</button><button style="font-size:24px;cursor:pointer">👎</button></div><div id="giscus-container" style="margin-top:2rem"></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/datagol-knowlegde-base-v1/docs/category/formulas-and-parameters"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Formulas and Parameters</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/datagol-knowlegde-base-v1/docs/BI Analytics/Formulas &amp; Parameters/LOD Expressions"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Level Of Detail (LOD) Expressions</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#key-characteristics-of-parameters" class="table-of-contents__link toc-highlight">Key characteristics of parameters</a></li><li><a href="#creating-a-parameter" class="table-of-contents__link toc-highlight">Creating a parameter</a></li><li><a href="#implementing-a-parameter" class="table-of-contents__link toc-highlight">Implementing a parameter</a></li><li><a href="#using-parameters-on-dashboards" class="table-of-contents__link toc-highlight">Using parameters on dashboards</a></li><li><a href="#dynamic-parameters" class="table-of-contents__link toc-highlight">Dynamic Parameters</a><ul><li><a href="#1-how-to-create" class="table-of-contents__link toc-highlight">1 How to Create</a></li><li><a href="#2-using-in-formulas" class="table-of-contents__link toc-highlight">2 Using in Formulas</a></li><li><a href="#3-result-on-dashboard" class="table-of-contents__link toc-highlight">3 Result on Dashboard</a></li><li><a href="#4-reordering-parameters" class="table-of-contents__link toc-highlight">4 Reordering Parameters</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>
