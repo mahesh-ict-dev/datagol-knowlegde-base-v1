@@ -1,0 +1,53 @@
+---
+title: v1.0.263
+description: v1.0.263 Release notes April 2026
+sidebar_position: 3
+---
+
+
+**Date released: April 27, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Smarter Conversation Navigation in the Agent Side Panel:** Agent conversations are now grouped by time — Today, Yesterday, Last 7 Days, and Older — replacing the previous flat list.
+This makes it much easier to find and return to past conversations, especially as your history grows.
+- **Delete Confirmation Now Requires Name Entry:** Deleting a workspace or workbook now requires you to type the item name before the action is enabled, with a clear warning about permanent deletion.
+This extra step prevents accidental data loss and gives you a moment to confirm you're deleting the right thing.
+
+### GTM Agent Is Now Personalized Per User
+
+Each user can now configure their own GTM agent prompt, output settings, and instruction rules independently.
+This means your GTM agent setup no longer affects or gets overwritten by teammates' configurations.
+
+### Stop a Python Agent Mid-Execution
+
+You can now stop a running Python (Data Science) agent execution at any time using the new stop control.
+This gives you more control when a query is taking too long or you need to adjust your approach.
+
+### BI
+
+- **Role-Based Access for External Dashboard Sharing:** You can now assign **Viewer** or **Editor** permissions when sharing dashboards externally, giving editors the ability to pin and unpin pages collaboratively. This reduces dependency on the original dashboard owner and enables faster, team-driven dashboard maintenance.
+
+### Connectors and Integrations
+- **Guided Setup Templates for HubSpot, Google Calendar, and Gmail:** When you connect HubSpot, Google Calendar, or Gmail, you can now choose a pre-built template to automatically set up your analytics — pipelines, workbook, and dashboard — in one guided flow. A live progress tracker keeps you informed at every step, so you go from connected to insights without any manual configuration.
+- **HubSpot Now Generally Available:** The HubSpot connector has officially graduated from Alpha and is now fully available on the platform. You can connect HubSpot with confidence knowing it's a stable, supported integration ready for everyday use.
+- **Seamless Connector Reconnection When Access Expires:** If a connected data source needs to be re-authorized, DataGOL now detects this automatically and prompts you to reconnect — right where you're working.
+Your existing connector and its settings are preserved throughout the process, so nothing needs to be reconfigured after reconnecting.
+
+
+
+
+## Bug Fixes
+
+### Active Connector Now Visible on HubSpot Agent Threads
+
+Fixed an issue where the selected data source wasn't shown on HubSpot agent threads, leaving it unclear which connector was active.
+The connector indicator now appears correctly so you always know what's powering your agent.
+
+### Consistent Agent Ordering Across Explore and Side Nav
+
+Agents were appearing in a different order on the Explore page versus the side navigation — this is now fixed.
+Both views reflect the same ordering, so navigating between them is no longer disorienting.

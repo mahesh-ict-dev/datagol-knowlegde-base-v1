@@ -1,0 +1,16 @@
+---
+title: v1.0.267
+description: v1.0.267 Release notes May 2026
+sidebar_position: 7
+---
+
+
+**Date released: May 6, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Custom Agent - Security:** Shell Command Security for Custom Agents Security hardening has been applied to shell command execution within Custom Agents. Potentially harmful operations have been restricted, including commands related to user addition, unauthorized file reads, and other dangerous system-level instructions. Custom Agents executing shell tools will now block or sanitize these categories of commands, reducing the risk of unintended system access or data exposure during agent execution.
+- **Custom Agent - Reliability:** Model Retry Middleware for Custom Agents A retry middleware layer has been introduced for model calls within Custom Agents. When a model call fails due to transient errors, the middleware automatically retries the request, improving the overall reliability and resilience of Custom Agent execution without requiring any changes from the user or agent configuration.

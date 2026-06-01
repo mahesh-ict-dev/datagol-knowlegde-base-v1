@@ -1,0 +1,36 @@
+---
+title: v1.0.257
+description: v1.0.257 Release notes April 2026
+sidebar_position: 9
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: April 15, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Python Agent - Groq Model & Analysis Levels:** Added Groq model support with configurable analysis levels (Fast, Moderate, Deep) and company-level API key management for flexible performance and integration control.
+<ImagePopup src="/img/release_notes/2026/2026/April/groq_models.png" alt="Groq Model" caption="Groq Model" />
+
+
+### Workspace & Workbooks 
+- **Workspace Level MCP Support:** Extended MCP support from workbook to workspace level, allowing centralized setup and easier integration of workspace MCPs with Custom Agents.
+<ImagePopup src="/img/release_notes/2026/2026/April/ws_mcp1.png" alt="WS MCP URL" caption="WS MCP URL" />
+
+<ImagePopup src="/img/release_notes/2026/2026/April/ws_mcp2.png" alt="WS MCP URLs" caption="WS MCP URLs" />
+
+- **Workbook Duplication Enhancements:** Enabled workbook duplication with or without data copy, ensuring tables, columns, folders, and views are correctly replicated. All workbook types (dynamic, static, hybrid) are treated as dynamic after duplication for consistency.
+<ImagePopup src="/img/release_notes/2026/2026/April/ws_duplicate.png" alt="WS Duplicate" caption="WS Duplicate" />
+
+
+### Lakehouse:
+
+- **Google Spaces Connector:** Enabled seamless setup for Google Spaces integration, allowing users to connect their account and automatically ingest messages, spaces, members, and reactions.
+
+
+## Bug Fixes
+
+- **Agent Skill Unique Name Validation:** Fix Resolved a bug where the uniqueness constraint on Agent Skill names was not being correctly enforced. Skills now correctly prevent duplicate names within the same company scope.

@@ -1,0 +1,26 @@
+---
+title: v1.0.256
+description: v1.0.256 Release notes April 2026
+sidebar_position: 10
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: April 09, 2026**
+
+
+## New Features and Enhancements
+
+- **Custom Agent – Skills:** Introduced Skills support for Custom Agents, enabling reusable instruction sets that can be created in the UI or uploaded as Markdown files and shared across the organization for use by multiple agents.
+<ImagePopup src="/img/release_notes/2026/2026/April/Skills.png" alt="Skills" caption="Skills" />
+
+- **Custom Agent - Model Selection:** Enhanced Custom Agents to allow different LLM models per subagent, providing finer-grained control beyond the previous agent-level model selection.
+<ImagePopup src="/img/release_notes/2026/2026/April/sub_agent_model.png" alt="Sub Agent Model" caption="Sub Agent Model" />
+
+- **Custom Agent - Image Responses:** Added a configuration toggle in Custom Agents to enable or disable image inclusion in responses, allowing users to switch between image-supported and text-only outputs with saved preferences.
+
+<ImagePopup src="/img/release_notes/2026/2026/April/custom_agent_image.png" alt="Custom Agent Image" caption="Custom Agent Image" />
+
+
+## Bug Fixes
+- **Custom Agent:** Fixed an issue where MCP tools configured at the main agent level were not being picked up during execution, ensuring proper tool usage.
+- **Atlassian Agent:** Resolved multiple issues in the Atlassian Agent, improving overall stability and reliability of Atlassian-related workflows.

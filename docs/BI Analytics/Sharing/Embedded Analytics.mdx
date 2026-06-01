@@ -217,6 +217,51 @@ If **required parameters** (`authToken`, `userId`, `filterColumnName`) are missi
 - Set an **expiry** on `authToken` values to reduce misuse risk.
 - External auth servers should implement **robust validation** and rate limiting.
 
+## Whats New
+
+## Embedded Dashboards
+
+DataGOL dashboards can now be embedded into external applications and websites, surfacing analytics inside your own product without requiring users to log into DataGOL.
+
+### 1. Embedding Modes
+
+- **Direct URL (IFrame)** — Embed the URL in an `<iframe>` tag.
+- **JavaScript Widget** — Load the embed script for dynamic control.
+- **Data Attributes** — Simple HTML-only, zero-JavaScript approach.
+- **React / Next.js** — Import as a React component.
+
+### 2 Getting the Embed Code
+
+- Open **Embed Configuration** from dashboard settings.
+- Setup the Security and embedded columns.
+- Select your integration method from the tabs.
+- Copy the code snippet.
+
+**Detailed documentation on Embedded Dashboards:**
+[External Embedding for Dashboard Pages](https://docs.google.com/document/d/1P3sHGEzfpJvmr5jQkzh5PPYwKDxMuRR9l9ky0L0aiyE/edit?tab=t.0)
+
+<ImagePopup src="/img/BI_capabilities_combinations/embedded_config.png" alt="config-embedded" caption="config-embedded" />
+
+### 3. Theming for Embedded Dashboards
+
+Customize the visual appearance of embedded dashboards using the Theme Editor to match your product's branding.
+
+#### How to Access
+
+- **Open your dashboard** in the editor.
+- **Click the settings icon** in the top toolbar.
+- **Select Theme Editor** from the dropdown.
+<ImagePopup src="/img/BI_capabilities_combinations/theme_editor.png" alt="theme-editor" caption="theme-editor" />
+
+#### Theme Editor Options
+
+The Theme Editor lets you customize tile titles, header backgrounds, title colors, font sizes, font weights, and subtitles. You can update an existing theme or create a new one.
+
+:::note [Note]
+Theming is currently only available for Embedded Dashboards.
+:::
+<ImagePopup src="/img/BI_capabilities_combinations/theme.png" alt="theme" caption="theme" />
+
 
 ## Contact and support
 

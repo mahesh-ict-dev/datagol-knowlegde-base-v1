@@ -1,0 +1,35 @@
+---
+title: v1.0.253
+description: v1.0.253 Release notes April 2026
+sidebar_position: 13
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: April 06, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **New HubSpot Agent:** Launched HubSpot Agent in Alpha, providing early access to HubSpot-native AI automation capabilities within the platform.
+<ImagePopup src="/img/release_notes/2026/2026/April/new_hs_agent.png" alt="HS agent" caption="HS Agent" />
+
+### Workbooks
+
+- **PDF Template Generation for Attachment Columns:** Added support for PDF generation using attachment column templates. Users can now upload document templates, configure dynamic output file naming, and generate PDFs for single or bulk records through dedicated APIs. Bulk PDF generation supports asynchronous processing with request status tracking for improved scalability and monitoring.
+
+### Platform
+
+- **Centralized Help Center:** Added a new in-platform Help Center with unified access to documentation, walkthroughs, webinars, and support resources. Enhanced search capabilities and categorized learning sections enable users to find relevant guidance and product information faster.
+<ImagePopup src="/img/release_notes/2026/2026/April/help2.png" alt="Help Icon" caption="Help Icon" />
+<ImagePopup src="/img/release_notes/2026/2026/April/helpcenter.png" alt="Help Pannel" caption="Help Pannel" />
+
+- **Global Announcement Banner:** Added a platform-wide announcement banner for time-sensitive updates like webinars and product news, with optional links, dismiss persistence, and automatic expiry support.
+<ImagePopup src="/img/release_notes/2026/2026/April/banner.png" alt="Banner" caption="Global banner" />
+
+## Bug Fixes
+- Fixed a slowness issue in the HubSpot Agent, resulting in faster execution and improved responsiveness for HubSpot workflows.
+- Resolved a CSS leakage issue in Custom Agent HTML responses that was impacting surrounding page styles.
+- Fixed Mongo ingestion issues in multicatalog where NULL values inside nested structures caused void type resolution failures. Added recursive traversal support for complex structs, arrays, and deeply nested fields.
+
