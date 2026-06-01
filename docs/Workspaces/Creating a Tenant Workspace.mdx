@@ -1,0 +1,47 @@
+---
+sidebar_position: 15
+tags: [Workbooks, Workspace]
+slug : create-tenant-workspace
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+## Tenant Workspace
+
+A new Tenant Workspace feature allows platform users to create isolated, filtered workspaces from a master dynamic workbook — enabling multi-tenant data access where each tenant sees only their own data within the same workbook.
+Users can select a source workbook, a filter column, and one or more filter values to auto-generate a tenant workspace that is scoped to only the matching rows, with full bi-directional sync so changes in the master or tenant workspace are immediately reflected in the other.
+
+
+**When to Use**
+
+You have a single dynamic workbook with data across multiple customers — but each customer should only see their own rows, not everyone else's.
+Tenant Workspace solves this by letting you spin up isolated, filtered workspaces from a master workbook, one per tenant, where each workspace is scoped to only that tenant's data — no duplication, no separate tables, no manual filtering.
+ 
+**How it works:**
+- Select a source workbook, a filter column (e.g. Customer ID), and the filter value for each tenant
+- A new workspace is automatically created with only the matching rows visible
+- Multiple tenant workspaces can be created at once across one or more workbooks
+
+**Once created:**
+- Widgets and dashboards inside the tenant workspace reflect only that tenant's filtered data
+- Tenant users can add, edit, and delete rows — changes sync back to the master workbook in real time
+- New columns added to the master workbook automatically appear in all tenant workspaces
+- Tenant users cannot add or delete columns — column structure is controlled at the master level
+
+**Known limitations:**
+- Available for dynamic workbooks only
+- If a tenant knows the underlying connection name, they can bypass the filter via a direct playground query and see all rows
+- Filter value selection is limited to columns with fewer than 8,000 unique values
+
+
+## How to Create a Tenant Workspace
+ 
+1. Navigate to your workspace and click the **three-dot menu (⋮)** at the top right.
+2. Select **"Create Tenant Workspace"** from the dropdown.
+3. In the modal that opens, enter a **Tenant Workspace Name**.
+4. Under **Source Workbooks**, select one or more workbooks you want to replicate into the tenant workspace.
+5. For each selected workbook, choose the **filter column** and the **filter value** to scope the tenant's data (e.g. `payment_type` = `CASH`).
+6. Click **Publish** — the tenant workspace is created automatically with only the filtered data visible.
+
+<ImagePopup src="/img/workspaces/tenant_ws.png" alt="Tenant Workspace" caption="Tenant Workspace" />
+
+<ImagePopup src="/img/workspaces/tenant-wb-selection.png" alt="Tenant Workbook Selection" caption="Tenant Workbook Selection" />
