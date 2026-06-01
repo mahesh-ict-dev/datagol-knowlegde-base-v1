@@ -1,0 +1,18 @@
+---
+title: v1.0.266
+description: v1.0.266 Release notes May 2026
+sidebar_position: 8
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: May 5, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Custom Agent - Google Cloud Integration:** Google Cloud Company Keys Support has been added for Google Cloud company-level keys, enabling organizations to configure and manage their own Google Cloud credentials at the company level. This allows Custom Agents and platform integrations that rely on Google Cloud services to authenticate using company-owned keys rather than shared or default credentials, improving security, accountability, and isolation across tenants.
+<ImagePopup src="/img/release_notes/2026/2026/May/google_cloud_key.png" alt="google cloud key" caption="google cloud key" />
+
+- **MongoDB Queries Now Run via Spark in Playground:** When running queries in the Playground, MongoDB connections are now routed through Spark instead of JDBC. This ensures reliable query execution for MongoDB data sources.

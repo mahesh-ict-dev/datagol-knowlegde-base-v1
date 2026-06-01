@@ -1,0 +1,17 @@
+---
+title: v1.0.272
+description: v1.0.272 Release notes May 2026
+sidebar_position: 2
+---
+
+
+**Date released: May 14, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+
+- **Custom Agent - Google Spaces Connector:** A new Google Spaces Connector enables Custom Agents to connect to and query Google Spaces conversations via OAuth, syncing messages, thread replies, and full conversation history with both historical and incremental sync support. Individual messages and full thread conversations are treated as distinct retrieval chunks, agent responses include citation links back to the source message or conversation, and date-based filtering is available for synced content. Sync history is tracked with cancellation support, thread-level operations (rename, share, open in new tab, delete) are available, and the connector handles large messages and lengthy thread conversations.
+- **Metadata Filters for Google Drive Connector:** Search precision within the Google Drive Connector has been improved through the addition of metadata filtering. Previously, searches relied solely on the user's query text. Now, searches also incorporate file name, record ID, last updated date, and source URL as metadata. For follow-up questions within a conversation, results are automatically narrowed to the same source document via record ID filtering, ensuring contextual continuity across multi-turn queries.

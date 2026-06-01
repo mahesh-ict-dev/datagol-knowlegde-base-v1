@@ -1,0 +1,17 @@
+---
+title: v1.0.268
+description: v1.0.268 Release notes May 2026
+sidebar_position: 6
+---
+
+
+**Date released: May 7, 2026**
+
+
+## New Features and Enhancements
+
+### AI
+
+- **Workbook RAG:** The workbook knowledge base indexing pipeline has been fully migrated from the external Onyx API to a new in-house RAG pipeline, with the legacy Onyx dependency fully removed. The UI now detects existing connectors and surfaces the right CTA — "Start Indexing" or "Reindex Workbook" — along with live indexing progress, run status, errors, and retry states. Once indexed, workbooks can be attached as a knowledge source to an agent, and reindexing after changes updates the knowledge base content immediately.
+- **Toggle to Show/Hide Execution Data in Agent Chat Responses (Custom Agents Only):** A configurable toggle has been added to Custom Agent settings to control whether execution data is rendered inline in chat responses, addressing user confusion where execution data was misinterpreted as errors or broken behavior. Located under Custom Agent > Advanced Tab > Chat Interface, the toggle defaults to ON (preserving existing behavior) and when turned OFF, hides execution data from the chat UI while keeping it accessible internally for debugging. Applies only to Custom Agents — Featured Agents always show execution data — and the setting persists per agent with full backward compatibility for existing agents.
+- **Streaming Continue Option When Connection Interrupte:** A continue option has been introduced for AI streaming responses when a connection is interrupted mid-stream. Users can now resume a response without restarting the entire interaction, improving reliability and experience during unstable network conditions.
