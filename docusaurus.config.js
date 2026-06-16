@@ -11,12 +11,12 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Production URL - uncomment for production deployment
-  //url: 'https://docs.datagol.ai',
- // baseUrl: '/',
+  url: 'https://docs.datagol.ai',
+  baseUrl: '/',
   
   // Development URL - comment out for production
-   url: 'https://mahesh-ict-dev.github.io',
-   baseUrl: '/datagol-knowlegde-base-v1/',
+  // url: 'https://mahesh-ict-dev.github.io',
+  // baseUrl: '/datagol-knowlegde-base-v1/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -149,9 +149,42 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
+		// RIGHT SIDE — API Button
+    {
+      href: 'https://api-docs.datagol.ai/introduction',
+      label: 'API',
+      position: 'right',
+      className: 'navbar-api-btn',
+    },
+
+    // RIGHT SIDE — PRIMARY CTA
+    {
+      href: 'https://www.datagol.ai/',
+      label: 'Visit DataGOL',
+      position: 'right',
+      className: 'navbar-cta-btn',
+    },
+
+/*		  {
+    label: 'Guides',
+    position: 'left',
+    items: [
+      {
+        label: 'API Guide',
+        href: 'https://api-docs.datagol.ai/introduction',
+      }
+    ],
+  },
+
+  {
+    to: 'https://www.datagol.ai/',
+    label: 'Visit DataGOL',
+    position: 'right',
+  }, */
+/*
           {
-            to: '/blog',
-            label: 'Blog',
+            href: 'https://api-docs.datagol.ai/introduction',
+            label: 'API Guide',
             position: 'left',
           },
           //{to: 'https://app.datagol.ai', label: 'Visit DataGOL', position: 'right'},
@@ -161,7 +194,7 @@ const config = {
           //    label: 'DataGOL',
           //    position: 'right',
           //  },
-          // Performance: Add search bar
+          // Performance: Add search bar */
           {
             type: 'search',
             position: 'right',
@@ -317,7 +350,7 @@ const config = {
     
     plugins: [
       './src/plugins/iframe-permissions-plugin.js',
-      /*
+      
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
@@ -327,13 +360,15 @@ const config = {
           indexPages: true,
           docsRouteBasePath: '/docs',
           language: ['en'],
+	  // Add this to keep search bar always visible	
+          hideSearchBarWithNoSearchContext: false,		
           // Performance optimizations for search
           searchResultLimits: 8,
           searchResultContextMaxLength: 50,
           explicitSearchResultPath: true,
         },
       ],
-      */
+      
       
       // PWA Plugin for offline support
       [

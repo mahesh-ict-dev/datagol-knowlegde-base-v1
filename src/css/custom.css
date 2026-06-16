@@ -21,6 +21,7 @@
   --ifm-color-primary-lighter: #9261e5;
   --ifm-color-primary-lightest: #a57ff1;
   --ifm-code-font-size: 95%;
+  --ifm-navbar-height: 60px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -498,14 +499,474 @@ If you want to make only certain links italic, add a class in your Markdown usin
   border-color: #3e3e3e;
 }
 
+/* API Button (Secondary) */
+.navbar-api-btn {
+  background-color: #eef2ff;
+  color: #4338ca !important;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+/* Visit DataGOL (Primary CTA) */
+.navbar-cta-btn {
+  background-color: #6366f1;
+  color: white !important;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+/* ============================================
+   GLOBAL — No hamburger, ever
+   ============================================ */
+.navbar__toggle {
+  display: none !important;
+}
+
+.navbar-sidebar,
+.navbar-sidebar__backdrop {
+  display: none !important;
+}
+
+.navbar__inner {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__items {
+  display: flex !important;
+  align-items: center;
+}
+
+.navbar__items--right {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.navbar__brand {
+  display: flex !important;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar__logo,
+.navbar__logo img {
+  display: flex !important;
+}
+
+/* Search always icon only — hide input and ctrl+K hint */
+.navbar__search {
+  width: auto !important;
+  min-width: auto !important;
+  flex-shrink: 0;
+}
+
+.navbar__search-input {
+  display: none !important;
+}
+
+/* ============================================
+   DESKTOP — 1025px and above
+   Full search bar visible
+   ============================================ */
+@media (min-width: 1025px) {
+  .navbar__search-input {
+    display: block !important;
+    width: 250px !important;
+    height: 38px !important;
+    font-size: 15px !important;
+  }
+
+  .navbar-api-btn {
+    font-size: 14px !important;
+    padding: 6px 12px !important;
+  }
+
+  .navbar-cta-btn {
+    font-size: 14px !important;
+    padding: 6px 14px !important;
+  }
+}
+
+/* ============================================
+   TABLET — 600px to 1024px
+   Compact buttons, search icon only
+   ============================================ */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .navbar__link {
+    font-size: 12px !important;
+    padding: 0 6px !important;
+  }
+
+  .navbar-api-btn {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    margin-left: 3px !important;
+  }
+
+  .navbar-cta-btn {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    margin-left: 3px !important;
+  }
+}
+
+/* ============================================
+   MOBILE — below 600px
+   Hide Documentation link, keep everything else
+   ============================================ */
+@media (max-width: 599px) {
+
+  /* Hide Documentation nav link — logo serves as home */
+  .navbar__item.navbar__link[href*="intro"],
+  .navbar__items--left .navbar__link:not(.navbar__brand) {
+    display: none !important;
+  }
+
+  .navbar__link {
+    font-size: 11px !important;
+    padding: 0 3px !important;
+  }
+
+  .navbar-api-btn {
+    font-size: 9px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
+  }
+
+  .navbar-cta-btn {
+    font-size: 9px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
+  }
+}
+
+/* ============================================
+   INFIMA OVERRIDE — fixes navbar on all screens
+   Infima hides .navbar__item below 996px
+   We override that here permanently
+   ============================================ */
+
+@media (max-width: 996px) {
+  .navbar__item {
+    display: flex !important;
+  }
+
+  .navbar__toggle {
+    display: none !important;
+  }
+
+  .navbar__items {
+    display: flex !important;
+  }
+
+  .navbar__items--right {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .navbar__inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-api-btn,
+  .navbar-cta-btn {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    margin-left: 3px !important;
+    white-space: nowrap;
+  }
+
+  .navbar__search-input {
+    display: none !important;
+    width: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__item {
+    display: flex !important;
+  }
+
+  .navbar-api-btn,
+  .navbar-cta-btn {
+    font-size: 9px !important;
+    padding: 3px 5px !important;
+    margin-left: 1px !important;
+  }
+}
+/* ============================================
+   FINAL FIX — Override Infima's mobile hiding
+   Infima sets .navbar__item { display: none }
+   at max-width: 996px — we override it here
+   ============================================ */
+@media (max-width: 996px) {
+  .navbar__item {
+    display: inline-flex !important;
+  }
+
+  .navbar__items {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .navbar__items--right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  .navbar__inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .navbar__toggle {
+    display: none !important;
+  }
+
+  .navbar__search-input {
+    width: 9rem !important;
+  }
+}
+
+/* Tablet — compact sizing */
 @media (max-width: 768px) {
-  .auth-flow-diagram {
-    flex-direction: column;
-    gap: 1rem;
+  .navbar__link {
+    font-size: 12px !important;
+    padding: 0 4px !important;
   }
-  
-  .security-tips,
-  .next-steps {
-    grid-template-columns: 1fr;
+
+  .navbar-api-btn {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
   }
+
+  .navbar-cta-btn {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
+  }
+
+  .navbar__search-input {
+    display: none !important;
+  }
+}
+
+/* Mobile — hide logo text, keep icon */
+@media (max-width: 480px) {
+  .navbar__title {
+    display: none !important;
+  }
+
+  .navbar__link:not(.navbar-api-btn):not(.navbar-cta-btn) {
+    display: none !important;
+  }
+
+  .navbar-api-btn {
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+  }
+
+  .navbar-cta-btn {
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+  }
+}
+/* Hide ctrl+K keyboard shortcut hint */
+.searchBarContainer_NW3z kbd,
+.searchBarContainer_NW3z .searchBarHotKeyContainer,
+[class*="searchBarContainer"] kbd,
+[class*="hotKey"],
+.navbar__search kbd {
+  display: none !important;
+}
+
+/* Collapse search to icon only on tablets/mobile */
+@media (max-width: 996px) {
+  [class*="searchBarContainer"] {
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
+  [class*="searchInput"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    display: none !important;
+  }
+
+  [class*="searchBarLoadingRing"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 996px) {
+  .navbar__items--right {
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+  }
+
+  .navbar-api-btn {
+    display: inline-flex !important;
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .navbar-cta-btn {
+    display: inline-flex !important;
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    margin-left: 2px !important;
+    flex-shrink: 0 !important;
+  }
+}
+kbd, [class*="searchBarHotKey"] {
+  display: none !important;
+}
+
+@media (max-width: 540px) {
+  .navbar-api-btn {
+    display: inline-flex !important;
+    flex-shrink: 0 !important;
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+  }
+}
+
+/* Force search container visible on all screen sizes */
+@media (max-width: 996px) {
+  [class*="searchBarContainer"],
+  [class*="navbarSearchContainer"] {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  [class*="searchInput"] {
+    display: none !important;
+  }
+
+  [class*="loadingRing"] {
+    display: none !important;
+  }
+
+  /* Show only the search icon button */
+  .navbar__search {
+    display: flex !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide ctrl+K hint */
+  kbd {
+    display: none !important;
+  }
+}
+/* Fix search container positioning — stops it overlapping buttons */
+.navbarSearchContainer_Bca1 {
+  position: relative !important;
+  right: auto !important;
+}
+
+/* Force search visible on tablets as icon only */
+@media (max-width: 996px) {
+  .navbarSearchContainer_Bca1 {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    margin-left: 4px !important;
+    padding: 0 !important;
+  }
+
+  .searchBarContainer_NW3z {
+    margin-left: 0 !important;
+  }
+
+  /* Hide search hint (ctrl+K) */
+  .searchHintContainer_Pkmr {
+    display: none !important;
+  }
+}
+
+/* Mobile — keep search icon visible */
+@media (max-width: 599px) {
+  .navbarSearchContainer_Bca1 {
+    display: flex !important;
+    flex-shrink: 0 !important;
+  }
+}
+navbarSearchContainer_Bca1:empty { display:none }
+/* Search icon fix — target the actual rendered class */
+.navbar__search {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+}
+
+.searchBarContainer_NW3z {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  margin-left: 4px !important;
+}
+
+/* Hide search input text, show only the search icon area */
+@media (max-width: 1024px) {
+  .navbar__search-input {
+    display: none !important;
+  }
+
+  .searchHintContainer_Pkmr {
+    display: none !important;
+  }
+
+  /* Keep the search container visible but compact */
+  .navbar__search {
+    width: 32px !important;
+    height: 32px !important;
+    overflow: visible !important;
+  }
+
+  .searchBarContainer_NW3z {
+    width: 32px !important;
+    overflow: visible !important;
+    cursor: pointer !important;
+  }
+}
+
+/* Fix absolute positioning that hides behind buttons */
+.navbarSearchContainer_Bca1 {
+  position: relative !important;
+  right: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+.navbarSearchContainer_Bca1:empty {
+  display: flex !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
 }
