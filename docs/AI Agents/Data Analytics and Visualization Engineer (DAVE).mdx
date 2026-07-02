@@ -1,0 +1,150 @@
+---
+sidebar_position : 1
+tags : [AI, AI Agents,]
+slug : data-analytics-visualization-engineer
+---
+
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+
+## What is D.A.V.E.?
+
+Meet **D.A.V.E.** (Data Analytics and Visualization Engineer) — an intelligent AI agent that understands your questions in plain language and automatically decides the best way to answer them: through SQL-powered analysis or interactive visualizations.
+
+Traditionally, getting an answer from your data means one of two paths: writing a SQL query yourself, or manually configuring a chart and dragging it onto a dashboard. D.A.V.E. removes both of those steps. You simply ask a question the way you'd ask a colleague, and D.A.V.E. determines whether the best answer is a direct insight, a table, or a chart — then delivers it.
+
+This creates a seamless, conversational analytics experience where the technical work happens invisibly in the background, and you stay focused on the business question in front of you.
+
+**Quick watch:** [See D.A.V.E. in action →](https://www.loom.com/share/14903be5bd4b4b42acebca508c7a157c)
+
+## Key Capabilities
+
+### 1. Natural Language Data Analysis
+
+D.A.V.E. writes SQL queries on the fly to explore your data and generate accurate, relevant responses — all from a plain-language question. There's no need to know table names, join logic, or SQL syntax.
+
+> **Example:** Ask *"What were our top 5 performing campaigns last quarter by conversion rate?"* and D.A.V.E. identifies the right tables, constructs the query, runs it, and returns a clear answer — in seconds, without you writing a single line of code.
+
+> **Example:** Ask *"Which regions saw a drop in revenue compared to last month?"* and D.A.V.E. compares the relevant time periods automatically and surfaces the regions that declined, along with the percentage change.
+
+### 2. Human-in-the-Loop Transparency
+
+D.A.V.E. doesn't operate as a black box. It shows its reasoning step-by-step — the logic it followed, the data it queried, and how it arrived at the final answer. This keeps a human in the loop at every stage, so users can verify the approach, catch any misunderstanding early, and build trust in the results over time.
+
+> **Example:** If you ask *"Why did signups spike in March?"*, D.A.V.E. will show you the intermediate steps it took (e.g., checking marketing spend, checking campaign launches, checking seasonal patterns) rather than just returning a single unexplained conclusion.
+
+### 3. Instant Visualizations, No Manual Dashboard Building
+
+Skip the manual process of configuring widgets, choosing chart types, and placing them on a dashboard. Ask D.A.V.E. a question in natural language, and it generates the right visualization automatically — then you can pin it directly to your dashboard of choice.
+
+> **Example:** Ask *"Show me monthly signups trend for 2026"* and D.A.V.E. returns a line chart instantly, ready to pin.
+
+> **Example:** Ask *"Compare Q1 and Q2 revenue by product category"* and D.A.V.E. returns a grouped bar chart, giving you a dashboard-ready visual without opening a chart builder.
+
+What used to take multiple manual steps — selecting a widget type, configuring axes, applying filters, formatting — now takes a single question. This lets teams build out full dashboards within minutes rather than hours.
+
+### 4. On-the-Fly Formula & Derived Column Creation
+ 
+D.A.V.E. can calculate new metrics on demand by deriving them from existing columns in your workbook — without you writing a formula or adding a calculated column yourself. Just ask for the metric in plain language, and D.A.V.E. figures out the underlying calculation and applies it.
+ 
+> **Example:** Ask *"What's the month-over-month growth rate in revenue?"* and D.A.V.E. derives the growth percentage from your raw monthly revenue figures automatically, even though "growth rate" doesn't exist as a column in your data.
+ 
+This means users aren't limited to whatever fields already exist in a workbook — D.A.V.E. can compute ratios, differences, percentages, and other derived metrics in real time, based on what the question requires.
+
+### 5. Analysis & Key Takeaways, Not Just Raw Output
+ 
+D.A.V.E. doesn't stop at handing back a number, table, or chart. Alongside the result, it surfaces analysis and key takeaways — highlighting what stands out, what changed, and what it might mean — so users can move straight to a decision instead of having to interpret the data themselves.
+ 
+> **Example:** Ask *"How did our revenue trend this quarter?"* and D.A.V.E. doesn't just return the chart — it adds a takeaway like *"Revenue grew steadily through the quarter, with a notable 18% jump in November driven primarily by ClearSky Logistics."*
+ 
+This turns D.A.V.E. from a reporting tool into a decision-support tool — surfacing the "so what" behind the numbers, so users can act quickly instead of spending time analyzing the output themselves.
+
+### 6. Memory Layer for Context-Aware Answers
+
+Add a Memory Layer so D.A.V.E. understands your business terminology, shortcuts, and definitions — making every answer more personalized, consistent, and accurate over time. This is covered in detail below.
+
+
+
+## What is the Memory Layer?
+
+The Memory Layer lets you teach D.A.V.E. extra context and knowledge about your data, so it interprets your questions the way your business actually thinks and talks about them — instead of relying only on raw table and column names.
+
+Without memory, D.A.V.E. only knows what's explicitly described in your workbooks and columns. With memory, you can layer on business-specific shorthand, definitions, and relationships that make conversations faster and answers more precise.
+
+There are two types of memory:
+
+| Type | Scope | Example |
+|---|---|---|
+| **User-Level Memory** | Applies only to the individual user who created it | Applies only to the individual user who created it | Define "My Sales KPIs" = Monthly Revenue, Pipeline Coverage, Win Rate, Average Deal Size, and Quota Attainment for the North America Enterprise Sales team. The next time the user asks, "How are my sales KPIs looking this month?", D.A.V.E. automatically knows which metrics to retrieve without requiring the user to redefine them.
+| **Company-Level Memory** | Applies to every user across the organization | Add a shared glossary entry like "MRR" = Monthly Recurring Revenue, calculated as active subscriptions × average contract value. Every user who asks D.A.V.E. about "MRR" — regardless of team or role — gets a consistent answer based on the same definition. |
+
+**Additional examples of what you might add to memory:**
+
+- A regional sales lead adds a user-level memory: "My Territory" = Northeast and Mid-Atlantic accounts.
+- The company adds a company-level memory: "Fiscal Year" starts in February, not January — ensuring D.A.V.E. calculates all fiscal-year metrics correctly for every user.
+- A marketing analyst adds: "Key Channels" = Paid Search, Paid Social, and Email — so any question about "key channel performance" automatically scopes to those three.
+
+### Who can add memory?
+
+Only users with **Co-Pilot Admin access** can add entries to the Memory Layer. This ensures definitions stay accurate and consistent, and prevents conflicting or outdated context from being introduced.
+
+
+
+## Memory Layer vs. Workbook Description
+
+D.A.V.E. draws on three sources of context to answer your questions:
+
+1. **Workbook descriptions** — high-level context about what a given workbook contains
+2. **Column descriptions** — field-level definitions within a workbook
+3. **Memory Layer entries** — business terminology, shortcuts, and definitions layered on top
+
+All three are used when D.A.V.E. formulates an answer. However, we recommend centralizing your definitions, terminology, and business context in the **Memory Layer** rather than spreading it across individual workbook and column descriptions.
+
+**Why centralize in the Memory Layer?**
+
+- **Easier maintenance** — update a definition once, and it applies everywhere it's referenced, rather than hunting through multiple workbooks.
+- **Consistency** — company-level memory ensures every user gets the same answer to the same question, regardless of which workbook they're querying from.
+- **Visibility** — memory entries are easier to review and audit as a single source of truth, compared to descriptions scattered across many workbooks and columns.
+
+
+
+## How to Access D.A.V.E.
+
+1. From the Home page, go to the **Agents** section in the left-hand navigation.
+2. Click **Explore**.
+3. Select the **D.A.V.E.** agent card.
+4. Use the **+** option to select the workbook you want to analyze.
+5. Ask your question in natural language.
+
+That's it — no setup, no configuration. Once a workbook is selected, D.A.V.E. is ready to answer.
+
+
+
+## Example Use Cases
+
+- **Marketing:** *"How did our Q2 email campaigns perform compared to Q1?"* — get a side-by-side comparison chart without building it manually.
+- **Sales:** *"Which reps closed the most deals this month?"* — get a ranked list pulled directly from your CRM data.
+- **Operations:** *"Show me ticket resolution time trends over the last 6 months."* — get a trend line ready to pin to your ops dashboard.
+- **Finance:** *"What's our MRR growth rate quarter over quarter?"* — with a company-level memory definition for "MRR," every finance team member gets the same calculation, every time.
+
+
+
+## Frequently Asked Questions
+
+**Does D.A.V.E. replace the need for a data analyst?**
+
+No — D.A.V.E. is designed to accelerate day-to-day analytics and free up analysts' time for deeper, more strategic work, not to replace their judgment on complex or ambiguous questions.
+
+**Can memory be edited or removed after it's added?**
+
+Yes, Co-Pilot Admins can update or remove memory entries as business definitions evolve.
+
+**What happens if a memory definition conflicts with a workbook description?**
+
+D.A.V.E. considers all available context; however, keeping definitions centralized in the Memory Layer (as recommended above) minimizes the chance of conflicting information.
+
+**Is company-level memory visible to all users?**
+
+Company-level memory is applied for all users when answering questions, ensuring consistent terminology across the organization.
+

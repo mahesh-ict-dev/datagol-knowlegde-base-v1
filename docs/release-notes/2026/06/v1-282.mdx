@@ -1,0 +1,22 @@
+---
+title: v1.0.282
+description: v1.0.282 Release notes June 2026
+sidebar_position: 3
+---
+
+
+**Date released: June 5, 2026**
+
+## Enhancements
+### AI
+
+Dave Agent — Enhanced Analysis & Visualizations
+
+- **DAVE Fixes:** The Dave agent now delivers smarter insights with improved charting, better support for multiple data sources, and new cohort analysis capabilities. These enhancements provide more accurate visualizations and a richer analytics experience.
+- **Agent Streaming — Automatic Session Recovery:** AI conversations now continue seamlessly even if you refresh the page or switch tabs. Ongoing responses automatically reconnect, ensuring you never lose progress while an agent is working.
+- **SQL Agent — Improved Multi-Data Source Support:** The SQL Agent now works more effectively across multiple connected data sources, automatically selecting the appropriate configuration for your queries. This improves reliability and provides a smoother experience when working with complex workspaces.
+
+
+### Playground
+- The SQL Playground now supports no-copy workbook references in queries without requiring users to manually inline their SQL definitions. Previously, workbooks without a physical table (no-copy workbooks) could not be referenced directly in a playground query, forcing users to copy-paste the underlying SQL definition as a CTE manually. The backend now automatically detects no-copy workbook references, recursively expands them into CTEs in dependency order, and prepends the WITH block to the query before execution.
+

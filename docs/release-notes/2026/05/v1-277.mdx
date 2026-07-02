@@ -1,0 +1,16 @@
+---
+title: v1.0.277
+description: v1.0.277 Release notes May 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+**Date released: May 28, 2026**
+
+
+## Enhancements
+
+### Workbook
+- **Formula Computation On the fly:** All formula columns are now computed in real time via CTE at query time, replacing the previous UPDATE-based evaluation that triggered on every row change. This eliminates stale formula values, removes the overhead of physical column writes on each update, and ensures formula results are always accurate and up to date.
+- **Backend Performance Improvements:** Optimized data loading for tables with relationships to eliminate unnecessary processing, delivering faster response times and improved stability for large datasets.

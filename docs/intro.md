@@ -8,7 +8,8 @@ sidebar_position: 1
 :::tip[**Welcome to DataGOL Documentation Hub**]
 :::
 
-​​DataGOL is an **AI-powered Business Agility platform which brings Data, AI, and Applications under one roof**. Empowering every team with simple, affordable, and easy-to-use data tools that drive growth. The DataGOL platform eliminates complexity, integrates seamlessly with existing systems, and delivers quick, measurable results, enabling businesses to harness the power of data like large enterprises — without the need for big budgets or specialized skills.
+
+DataGOL is an **AI-native Data and Agents platform**. DataGOL helps teams launch governed AI agents on enterprise data in days, not months. DataGOL does this by providing the infrastructure to launch AI agents—combining the unified data stack, context management, and agentic capabilities into a single platform that enables organizations to deploy AI internally and build AI-native products externally. It has two main components - AgentOS and DataOS. DataOS enables agentic creation of semantic data model and context both from structured and unstructured data. AgentOS is a composable AI platform, which sits on top of DataOS and accelerates creation of Agents using multi-agent orchestration. Agents can be embedded in client's products as well. With DataGOL, in just a few weeks, you can unify your data sources, automate complex data management workflows and build AI agents tailored to specific business needs.
 
 This introduction page orients you to the entire doc set and suggests where to start, whether you are a data engineer wiring up sources, an analyst building dashboards, or a product team embedding AI‑powered insights in your app.
 
