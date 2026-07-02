@@ -219,18 +219,18 @@ If **required parameters** (`authToken`, `userId`, `filterColumnName`) are missi
 
 ## Whats New
 
-## Embedded Dashboards
+## 1. Embedded Dashboards
 
 DataGOL dashboards can now be embedded into external applications and websites, surfacing analytics inside your own product without requiring users to log into DataGOL.
 
-### 1. Embedding Modes
+### 1.1 Embedding Modes
 
 - **Direct URL (IFrame)** — Embed the URL in an `<iframe>` tag.
 - **JavaScript Widget** — Load the embed script for dynamic control.
 - **Data Attributes** — Simple HTML-only, zero-JavaScript approach.
 - **React / Next.js** — Import as a React component.
 
-### 2 Getting the Embed Code
+### 1.2 Getting the Embed Code
 
 - Open **Embed Configuration** from dashboard settings.
 - Setup the Security and embedded columns.
@@ -242,7 +242,7 @@ DataGOL dashboards can now be embedded into external applications and websites, 
 
 <ImagePopup src="/img/BI_capabilities_combinations/embedded_config.png" alt="config-embedded" caption="config-embedded" />
 
-### 3. Theming for Embedded Dashboards
+### 1.3 Theming for Embedded Dashboards
 
 Customize the visual appearance of embedded dashboards using the Theme Editor to match your product's branding.
 
@@ -262,6 +262,13 @@ Theming is currently only available for Embedded Dashboards.
 :::
 <ImagePopup src="/img/BI_capabilities_combinations/theme.png" alt="theme" caption="theme" />
 
+
+### 2. Multi-Page External Dashboard Embedding
+
+DataGOL now supports embedding multiple dashboard pages from a workspace together via the External Dashboard option. 
+Previously, only a single dashboard page could be embedded at a time. With this update, you can bundle multiple pages into one external dashboard link, allowing end users to navigate between pages within the embedded view , just as they would inside DataGOL. This is ideal for client-facing portals or internal tools where users need access to several related dashboards without switching between separate embed links.
+
+<ImagePopup src="/img/BI_capabilities_combinations/embed_ext_dashboard.png" alt="embed ext dashboard" caption="embed ext dashboard" />
 
 ## Contact and support
 

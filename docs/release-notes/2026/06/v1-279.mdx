@@ -1,0 +1,22 @@
+---
+title: v1.0.279
+description: v1.0.279 Release notes June 2026
+sidebar_position: 5
+---
+
+
+**Date released: June 2, 2026**
+
+
+## Enhancements
+
+### AI
+
+- **Custom Agents - Conversational Skill Updates:** Users can now instruct a Custom Agent to revise and update any of its attached skills directly within the conversation — without leaving the agent thread. If a user invokes a skill and is unsatisfied with its behavior or output, they can describe their expectations in natural language within the same thread or a new one. The agent will autonomously rewrite the skill and apply the update accordingly. This closes the loop between skill usage and skill improvement, enabling a self-refining agent experience.
+
+
+## Bug Fixes
+
+- Resolved an issue where Custom Agents were incorrectly refusing to generate downloadable files (PDF, CSV, XLSX, HTML reports) even when file generation was the expected behavior. Previously, users had to explicitly override the agent's refusal to get it to produce the file. The agent now generates requested files without requiring user intervention.
+- Fixed a connector status issue introduced during the GCS-to-S3 migration. When both GCS and S3 connectors coexisted during the transition, the workspace file status was incorrectly being sourced from S3 instead of GCS. The fix establishes GCS as the preferred connector in such cases, ensuring accurate status reporting.
+- Resolved an authentication bug affecting Anthropic models used within AI Generate columns. The fix ensures proper credential handling so that Anthropic models authenticate correctly during AI Generate execution.

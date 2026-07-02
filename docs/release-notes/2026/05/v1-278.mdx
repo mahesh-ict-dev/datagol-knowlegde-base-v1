@@ -1,0 +1,25 @@
+---
+title: v1.0.278
+description: v1.0.278 Release notes May 2026
+sidebar_position: 1
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+
+**Date released: May 28, 2026**
+
+
+## Enhancements
+
+###AI
+- **Enhanced Skill Management:** AI services can now seamlessly upload and update skills, making skill management more efficient and automated. This enhancement provides a consistent and streamlined experience for maintaining skills across the platform.
+
+### Workbook
+
+- **Configurable Web Search Providers for AI Generate:** Users can now select their preferred web search provider (Perplexity, Tavily, or Parallel Web Systems) when using AI Generate with web access enabled. The platform securely sends only the selected provider's API key to the AI service and adds support for configuring Parallel Web Systems credentials.
+
+<ImagePopup src="/img/release_notes/2026/2026/May/ai-generate-provider.png" alt="AI Generate Provider" caption="AI Generate Provider" />
+- **AI Generate - Image URL Support:** Deployed AI Generate columns can now interpret and analyze images referenced by URL. Users can include URLs that point directly to image files within their AI prompts, and the AI engine will fetch and read the image content as part of the generation process. This enables richer, visually-aware AI responses — for example, extracting data from product images, reading charts or diagrams, or describing visual content — all without needing to upload the image separately.
+
+## Bug Fix
+- Resolved a configuration issue that caused not all AI models to be visible in AI Generate settings. The models are now correctly exposed and selectable across environments following a configuration update.
