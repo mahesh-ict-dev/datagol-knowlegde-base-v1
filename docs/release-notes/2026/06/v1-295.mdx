@@ -1,0 +1,17 @@
+---
+title: v1.0.295
+description: v1.0.295 Release notes June 2026
+sidebar_position: 1
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: June 30, 2026**
+
+
+## Enhancements
+
+### AI
+- **Agent Scheduling:** Custom Agents can now be scheduled to run automatically. Each scheduled execution creates its own conversation, runs the agent via a managed workflow, and records the outcome — including status (Running, Completed, or Failed) and any error details. A paginated API is available to list and filter run history per agent.
+
+## Bug Fix
+- Resolved an issue with incorrect date handling in the SFTP connector that could cause data to load with wrong date values.

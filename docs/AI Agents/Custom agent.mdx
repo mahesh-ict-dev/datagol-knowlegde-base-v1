@@ -192,3 +192,28 @@ Attach Files to Chat and Ask Questions About Them Users can now attach files dir
 
 <ImagePopup src="/img/AI/file_upload_config.png" alt="File upload config" caption="File upload" />
 <ImagePopup src="/img/AI/file_attached.png" alt="File upload" caption="File uploads" />
+
+
+### Connect Custom Agents to Your Favorite Tools
+
+Custom Agents can now connect directly to the tools your team already uses. Configure and authenticate MCP connectors — including Google Workspace (Gmail, Calendar, Drive), Confluence, Jira, Fellow, PostHog, and more — right from the agent setup screen, so your agents can pull in and act on real data from your connected apps.
+
+You can add connectors in two ways:
+- **From a Custom Agent:** open the agent configuration, go to **MCP → Add an MCP → Integration**
+<ImagePopup src="/img/AI/ca_mcp.png" alt="ca mcp" caption="ca mcp" />
+<ImagePopup src="/img/AI/ca_integrations.png" alt="ca integrations" caption="ca integrations" />
+- **From AI settings:** go to **AI → Customize → MCP → Browse Integrations**
+<ImagePopup src="/img/Customize_mcp.png" alt="Customize MCP" caption="Customize MCP" />
+<ImagePopup src="/img/AI/Customize_integrations.png" alt="Customize Integrations" caption="Customize Integrations" />
+
+### Private MCP Connectors by Default
+
+MCP connectors are now private by default, visible and editable only by the teammate who created them. This gives each person clear ownership over their own configurations and prevents accidental changes from others on the team.
+
+### Granular MCP Tool Permissions for Custom Agents
+
+Admins can now control exactly which tools a Custom Agent is allowed to use from each connected MCP connector. Individual tools — such as sending emails, creating Jira issues, or uploading files — can be toggled on or off directly from the agent configuration UI. Changes take effect immediately on the next user message with no server restart required. This makes it easy to restrict agents to read-only operations, block destructive actions, or enforce compliance boundaries across any combination of connected services.
+Steps to control Tool permissions:
+
+- **From AI settings:** go to **AI → Customize → MCP → Click on a specific MCP Connector**
+<ImagePopup src="/img/release_notes/2026/2026/June/mcp_tools.png" alt="mcp tools" caption="mcp tools" />

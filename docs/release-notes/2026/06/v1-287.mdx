@@ -1,0 +1,22 @@
+---
+title: v1.0.287
+description: v1.0.287 Release notes June 2026
+sidebar_position: 9
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: June 12, 2026**
+
+
+## Enhancements
+### AI
+
+- [Connect Custom Agents to Your Favorite Tools](/docs/AI%20Agents/custom-agent#connect-custom-agents-to-your-favorite-tools)
+Configure and authenticate MCP connectors directly from the agent setup screen and assign them to your Custom Agents. Integrate with Google Workspace (Gmail, Calendar, Drive), Confluence, Jira, Fellow, PostHog, and many other supported platforms, allowing agents to retrieve and use information from your connected applications. MCP connectors are now private by default. Only the user who created a connector can see or modify it, giving each team member clear ownership over their own configurations and preventing accidental changes by others.
+<ImagePopup src="/img/release_notes/2026/2026/June/mcp.png" alt="MCP" caption="MCP" />
+
+
+
+## Bug Fixes
+- Fixed a navigation issue where clicking "Deny" during OAuth2.1 authorization for an MCP connector redirected users to the connector page instead of the Settings page. Users are now returned to the correct location.
+- Resolved intermittent "unhandled errors" that occasionally appeared during conversations with Custom Agents.

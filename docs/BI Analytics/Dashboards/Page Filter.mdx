@@ -165,3 +165,34 @@ Dashboard filters are specific to each user. If you select a set of filters, log
     <ImagePopup src="/img/filters-delete.png" alt="/img/delete-filter" caption="delete-filter" />
 
 2. Click the delete icon and then click the **Remove** button to confirm.
+
+
+## What's New
+
+### Folder-Level Filtering for Knowledge Analytics
+
+You can now filter all knowledge analytics by folder, search for any folder in your content hierarchy and instantly see usage data for everything inside it, including all subfolders and articles beneath it.
+
+#### How It Works
+
+- Type any folder name into the search bar to find it
+- Results show the full folder path (e.g. Customer Service > Team Lead > Outbound) so you can distinguish between folders that share the same name
+- Select a folder to filter all dashboard metrics to that content area
+- Analytics update instantly: views, searches, top articles, and engagement all scoped to your selected folder
+ <ImagePopup src="/img/filter_tree.png" alt="/img/Filter Tree" caption="Filter Tree" />
+
+Applying the Folder filter selection to the dashboard:
+ <ImagePopup src="/img/doc_filter.png" alt="Document Filter" caption="Document Filter" />
+  <ImagePopup src="/img/doc_tree.png" alt="Document Tree" caption="Document Tree" />
+
+#### What's Resolved
+
+- Articles that exist in multiple folder locations are now tracked correctly — no duplicate counts, no missing events
+- Folders with identical names across different parts of the hierarchy are clearly disambiguated using full breadcrumb paths
+- Usage history is preserved accurately even when articles have been moved between folders
+
+#### Impact
+
+- Department and team leads can now monitor their own content performance independently
+- Content gaps and underperforming articles are easier to identify at a granular level
+- Works seamlessly across knowledge bases with 25,000+ articles, no performance impact

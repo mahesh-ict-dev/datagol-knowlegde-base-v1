@@ -97,9 +97,20 @@ Users can now manage and monitor the indexing status of all workspace documents 
 
 ## What's New
 
-- **Indexing Status Overview** – See the overall indexing progress at a glance, including the percentage of files indexed and the last indexed timestamp.
-- **Incremental Index** – Process only newly added or updated documents, keeping your index current without a full reprocess.
-- **Full Reindex** – Reprocess all documents in your workspace to ensure the AI search index is completely up to date.
-- **File-Level Status Visibility** – Browse and search individual files to see whether each document is **AI Ready** or still pending — so you know exactly what your RAG agent can reference when answering questions.
+### 1. Indexing Status Overview
+See the overall indexing progress at a glance, including the percentage of files indexed and the last indexed timestamp.
+### 2. Incremental Index
+Process only newly added or updated documents, keeping your index current without a full reprocess.
+### 3. Full Reindex
+Reprocess all documents in your workspace to ensure the AI search index is completely up to date.
+### 4. File-Level Status Visibility
+Browse and search individual files to see whether each document is **AI Ready** or still pending — so you know exactly what your RAG agent can reference when answering questions.
 
 <ImagePopup src="/img/agents/doc-index-settings.png" alt="doc-index-settings" caption="Document Index Settings"/>
+
+
+### 5. Audio & Video Files Now Supported in Workspace Documents
+You can now upload .mp3 and .mp4 files to Workspace Documents and query their contents just like any other document. Audio files are transcribed automatically, and video files have their audio extracted and transcribed — all using the Whisper speech-to-text model. The resulting transcripts are chunked, embedded, and indexed for semantic search, so you can ask natural language questions against meetings, recordings, and any spoken content in your workspace.
+
+<ImagePopup src="/img/release_notes/2026/2026/June/audio_video_index.png" alt="audio video Support" caption="audio video Support" />
+<ImagePopup src="/img/release_notes/2026/2026/June/audio_chat.png" alt="Chat" caption="Chat" />

@@ -1,0 +1,23 @@
+---
+title: v1.0.301
+description: v1.0.301 Release notes July 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 9, 2026**
+
+## Enhancements
+### AI
+- **Long-Term Memory for Custom Agents:** Custom Agents now have access to a search_memory tool powered by mem0, enabling retrieval of stored memories across three scopes: user-level, company-level, and agent-level. The agent proactively applies relevant memories — such as preferred output formats, response style, or domain rules — to improve the quality and consistency of its responses across conversations.
+
+- **Memory Search Scope Isolation Fixed:** search results were not being filtered by scope (allowing cross-user memory leakage), agent ID updates were not persisted on memory records, and scope transitions (e.g., user → company) failed silently. All three are now fixed — memory search is fully isolated by scope, updates persist correctly, and scope transitions perform a proper delete-and-recreate.
+
+#### Agent UI & UX Fixes
+
+Several usability improvements to the Agents page:
+
+- The message input box no longer disappears when switching between active threads.
+- Citation cards no longer overflow when the citation description is long.
+- Opening Knowledge Source links from the Agent Builder no longer triggers an unwanted "Leave page?" confirmation dialog.
+- The Generated Files/Datasets section has been redesigned with a clearer, more clickable layout.

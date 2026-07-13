@@ -1,0 +1,21 @@
+---
+title: v1.0.300
+description: v1.0.300 Release notes July 2026
+sidebar_position: 3
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 8, 2026**
+
+
+## Enhancements
+### Workspaces & Workbooks
+#### Auto Join — Optional Whitespace Trimming
+A new "Trim white space" option is now available on each Auto Join condition. Enabled by default, it trims leading and trailing whitespace from values before comparison — preserving the existing behaviour. You can disable it per condition when exact-match comparison (including whitespace) is needed. The setting takes effect only after saving the Auto Join configuration; existing joins are not automatically changed.
+
+#### Email Column Improvements
+Two improvements to Email columns in workbooks:
+
+- **Comma-separated emails now display correctly** — cells containing multiple email addresses separated by commas are parsed and rendered cleanly, with no overlap or broken display.
+- **Email columns can now be mapped during Append/Replace** — a mismatch between backend storage types (VARCHAR(255) vs TEXT) previously prevented Email columns from appearing as mapping options. The mapping now compares logical column types, so Email-to-Email mapping works as expected.
+
