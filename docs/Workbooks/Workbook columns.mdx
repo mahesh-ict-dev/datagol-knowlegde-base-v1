@@ -372,6 +372,19 @@ Do the following to create an AI Generate column
     
      <ImagePopup src="/img/image-20250508-090807.png" alt="Workbook columns1" caption="Workbook columns1" />  
 
+#### Workbook Data Enrichment with DataBar
+ Workbooks now support DataBar-powered enrichment, allowing you to enrich your data using providers like Google Maps, Diffbot, and People Data Labs directly within your workbook. Map inputs, select output fields, and run enrichments on individual rows, selected rows, or the full workbook.
+ To use this feature, click the **AI Enrichment** column in your workbook.
+
+:::note[Note]
+To use DataBar AI Enrichment, you must configure the required DataBar API key(s). You can add them from **Company Settings**.
+:::
+<ImagePopup src="/img/release_notes/2026/2026/June/AI_enrich_db.png" alt="AI Enrich databar" caption="AI Enrich databar" />
+<ImagePopup src="/img/release_notes/2026/2026/June/databar1.png" alt="databar1" caption="databar1" />
+<ImagePopup src="/img/release_notes/2026/2026/June/databar2.png" alt="databar2" caption="databar2" />
+
+
+
 
 #### Bulk AI Generate
 
@@ -484,7 +497,10 @@ Furthermore, you can verify the compatibility of the generated formula with the 
 6.  Click **Use this** button. The formula is added.
 
      <ImagePopup src="/img/image-20250508-095152.png" alt="Workbook columns1" caption="Workbook columns1" /> 
- 
+
+:::note[Note]
+Formula columns that reference lookup columns are now calculated dynamically at runtime instead of being stored in the database. Formulas that do not reference any lookup columns continue to be stored as before. This ensures your computed values always stay accurate as linked data changes, without any extra manual refresh.
+ :::
 ### Create Button column
 
 You can directly generate Jira tickets from the workbooks using the **Button** data type. This feature allows for column mapping to Jira fields, and supports both individual and bulk issue creation, streamlining workflows and enhancing traceability. To create Jira tickets directly from the workbook, do the following:

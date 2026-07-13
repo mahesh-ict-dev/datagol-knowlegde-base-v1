@@ -1,0 +1,16 @@
+---
+title: v1.0.296
+description: v1.0.296 Release notes July 2026
+sidebar_position: 7
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 2, 2026**
+
+
+## Enhancements
+### Platform
+- **More Reliable Sign-Up & OTP Verification:** OTPs for sign-up and MFA flows are now stored in the database instead of the Redis cache, eliminating verification failures that occurred when the cache was restarted during an active session. The registration event flow has also been made fully asynchronous for improved reliability. New company registrations now automatically provision default whitelisted data sources, removing the need for manual setup after sign-up.
+
+### Lakehouse
+- **Pipeline List Loads Faster:** The get-all pipelines query has been optimised to batch-fetch workbook and workspace details in a single query instead of making individual database calls per pipeline. This eliminates an N+1 query pattern and significantly improves load times for accounts with many pipelines.

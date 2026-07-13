@@ -1,0 +1,17 @@
+---
+title: v1.0.294
+description: v1.0.294 Release notes June 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: June 24, 2026**
+
+
+## Enhancements
+
+### AI
+- **Bulk Operations for Workbook & Workspace MCPs:** MCP tools for workbooks and workspaces now support bulk create and bulk update operations, making it possible to manage large numbers of records in a single call. Each item in a bulk request is individually validated, and errors are surfaced per-item without blocking the rest of the batch. Column creation via workbook MCP has also been fixed to ensure new columns are always created with the correct name, type, and position.
+
+### Workspaces & Workbooks
+- **Smarter Formula Columns in Dynamic Workbooks:** Formula columns that reference lookup columns are now calculated dynamically at runtime instead of being stored in the database. Formulas that do not reference any lookup columns continue to be stored as before. This ensures your computed values always stay accurate as linked data changes, without any extra manual refresh.

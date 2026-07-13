@@ -1,0 +1,21 @@
+---
+title: v1.0.289
+description: v1.0.289 Release notes June 2026
+sidebar_position: 7
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: June 16, 2026**
+
+
+## Enhancements
+### Lakehouse
+
+- **Scheduled Schema Sync:** Your data sources now stay in sync automatically — no more discovering broken pipelines or broken charts after a schema change. The platform now runs schema synchronization twice daily, detecting new tables, added or removed columns, and data type changes, then updating metadata accordingly. Existing pipelines continue running uninterrupted for non-breaking changes, and sync logs are available for visibility into what changed and when.
+<ImagePopup src="/img/lakehouse/sync_schema.png" alt="sync schema" caption="sync schema" />
+<ImagePopup src="/img/lakehouse/schedule_sync_Schema.png" alt="schedule sync Schema" caption="schedule sync Schema" />
+
+
+
+### Workspaces & Workbooks
+- **"Has Any Of" Join Condition for Dynamic Workbooks:** A new join operator — Has Any Of — is now available when linking two Dynamic Workbooks. It lets you match a single value against a delimiter-separated list stored in another column (for example, matching "Jane Smith" against "John Doe, Jane Smith, Bob Lee"). The delimiter is configurable, and whitespace around each value is trimmed automatically, making it easy to join on multi-value text fields without any custom SQL.

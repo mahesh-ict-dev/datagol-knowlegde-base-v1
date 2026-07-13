@@ -1,0 +1,22 @@
+---
+title: v1.0.297
+description: v1.0.297 Release notes July 2026
+sidebar_position: 6
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 2, 2026**
+
+
+## Enhancements
+### AI
+- **Human-in-the-Loop Approval for MCP Tool Execution:** Admins can now configure individual MCP tools to require user approval before the agent executes them — a new NEEDS_APPROVAL permission level sits between ALLOW and BLOCKED. When a tool requires approval, the agent pauses and presents the user with the proposed action and its parameters. The user can approve (execute as-is), reject (cancel cleanly), modify parameters (agent re-calls with updated args and triggers a new approval), or ask a completely different question (pending approval is silently skipped). Changes take effect immediately with no server restart needed.
+
+### BI & Dashboards
+- **Improved the dynamic parameter experience on dashboards:** Parameter width is now wider, selected values appear at the top of the list for quick visibility, and label rendering issues for single-value dynamic parameters have been fixed.
+- [Folder Structure & Filter for Dashboard Navigation](/docs/BI%20Analytics/Dashboards/Page%20Filter#folder-level-filtering-for-knowledge-analytics) A folder-based structure with breadcrumb navigation and a folder filter is now available in the dashboard browser, making it easier to organise and locate dashboards across large collections.
+
+
+## Bug Fixes
+- Fixed an issue where Drill Down V3 on draft widgets ignored any widget-level filters configured on the source widget. Drill-down results now correctly inherit and apply all widget-level filters.
+- Resolved an issue where page-level filters took precedence over drill-down selections on widgets. Drill-down filters now apply correctly.

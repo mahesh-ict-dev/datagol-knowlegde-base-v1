@@ -1,0 +1,26 @@
+---
+title: v1.0.288
+description: v1.0.288 Release notes June 2026
+sidebar_position: 8
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: June 15, 2026**
+
+
+## Enhancements
+### AI
+
+- **D.A.V.E. Agent — Smarter, More Reliable Chart Rendering:** D.A.V.E. now generates charts in a single step instead of two, eliminating an entire class of errors where data was fetched but never visualised, or the wrong dataset was charted. Conversations are also more consistent across long sessions and after resuming — agent rules now persist through compaction and session restores. Additional improvements include more reliable heatmap routing, cleaner table formatting with auto-frozen first columns on wide tables, and hardened handling of large query results that previously caused widget rendering failures.
+- **Skill Editing Restricted to Agent Owner:** Only the owner or creator of a Custom Agent can now create, update, or delete its Skills. Users without ownership permissions will see a clear error message if they attempt to make changes, ensuring your agent's behavior stays under your control.
+
+
+### BI
+- [Timezone Localization](/docs/BI%20Analytics/Dashboards/Time%20Zone%20Localization#timezone-localization-date-format-respects-user-timezone) Date Format Respects User Timezone:** Date and time formatting across the platform now automatically respects each user's configured timezone settings, ensuring information is displayed in their local time.
+<ImagePopup src="/img/release_notes/2026/2026/June/time_zone_localization.png" alt="time zone localization" caption="time zone localization" />
+- [Type-Ahead Search on Dashboard Parameters](/docs/BI%20Analytics/Formulas%20&%20Parameters/Parameters#type-ahead-search-for-parameters) Dashboard parameter controls now include a search box, making it faster to find the right value in long lists without having to scroll through every option.
+<ImagePopup src="/img/release_notes/2026/2026/June/type-ahead-param.png" alt="Type Ahead Param" caption="Type Ahead Param" />
+
+## Bug Fixes
+- Resolved an issue where shared agents could use an incorrect default LLM model instead of the configured one. Shared agents now consistently use the selected model for all users, ensuring reliable and consistent AI responses.
+- Fixed an issue where the Save button became hidden after adding new Allowed Hosts in the dashboard embedding configuration modal. Changes can now be saved without issue.

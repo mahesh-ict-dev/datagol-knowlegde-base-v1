@@ -1,0 +1,17 @@
+---
+title: v1.0.299
+description: v1.0.299 Release notes July 2026
+sidebar_position: 4
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 7, 2026**
+
+
+## Enhancements
+### Workspaces & Workbooks
+- **Databar Enrichment — Selected Output Columns:** When configuring a Databar enrichment, you can now control exactly which output fields are written back to your workbook, giving you finer-grained control over which enriched data columns are created.
+
+### Bug Fixes
+- Resolved a bug where uni-directional BelongsTo and reverse HasMany workbook link operations failed silently due to an incorrect source column ID being stored. Linking, de-linking, and retrieving linked records now works correctly across all relationship types.
+- Fixed an issue where agents querying warehouse-backed workbooks (BigQuery, Snowflake, Athena, Redshift, MySQL, SQL Server) always defaulted to Spark SQL instead of generating queries in the correct dialect. Each engine now receives properly targeted SQL.
