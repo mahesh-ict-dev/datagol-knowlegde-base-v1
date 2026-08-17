@@ -1,0 +1,36 @@
+---
+title: v1.0.312
+description: v1.0.312 Release notes August 2026
+sidebar_position: 7
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 3, 2026**
+
+
+## Enhancements
+### AI
+- **D.A.V.E. Charts & Widgets Now Render Inside Custom Agents:** When D.A.V.E. is invoked from a Custom Agent with workbooks connected via MCP, charts and data tables now render directly in the agent response — the same way they do in a standalone D.A.V.E. session. You can pin those visualizations straight to a dashboard without leaving the conversation.
+ 
+<ImagePopup src="/img/release_notes/2026/2026/August/dave-in-ca.png" alt="DAVE in Custom Agent" caption="DAVE in Custom Agent" />
+
+- **Download Skills from the Skill Page:** Skills can now be downloaded directly from the skill page as a plain-text file, named using the standard DataGOL convention. You can save any skill locally for reference, reuse, or offline access without copying content manually.
+<ImagePopup src="/img/release_notes/2026/2026/August/download-skill.png" alt="download skill" caption="download skill" />
+
+- **Featured Agents Now Available in Analytics Filters:** The Agent Cost and Trace analytics pages now include Featured Agents — such as D.A.V.E. — alongside Custom Agents in the filter options. You can analyze usage, costs, and execution traces across every agent type from a single view.
+
+
+### Workspaces & Workbooks
+
+- **Self-Referencing Link Columns in Workbooks:** You can now create link columns that point back to the same workbook, making it easy to model hierarchical relationships — such as tasks and subtasks, parent and child records, or org chart reporting lines — without needing a separate workbook or manual workarounds.
+<ImagePopup src="/img/release_notes/2026/2026/August/workbook-link.jpeg" alt="workbook link" caption="workbook link" />
+
+### Apps
+
+- **Seamless Navigation Between DataGOL and Apps:** Apps now open directly within the DataGOL platform, so the experience feels native rather than disconnected. A lightweight DataGOL header slides in when you hover near the top of the screen, giving you a quick way to return to the main application without disrupting your workspace.
+- **Secure Token Passing for Embedded Apps:** Embedded Apps now receive the authenticated DataGOL session token automatically from the parent window, using a standardized and secure script that is included in every generated App. Individual Apps no longer need to implement their own authentication logic, keeping behavior consistent and reducing setup effort.
+
+## Bug Fixes
+
+- Resolved several issues with link and lookup columns: lookup values no longer persist after the source record is deleted; expanded lookup views now display values correctly; creating an auto-join link column no longer throws a duplicate table error; and adding multiple records to a many-to-one link column no longer returns a bad request error.
+- Fixed an issue where publishing a No-Copy Postgres workbook containing a JSON or JSONB column caused the UI to break after publish. Affected workbooks now display correctly.

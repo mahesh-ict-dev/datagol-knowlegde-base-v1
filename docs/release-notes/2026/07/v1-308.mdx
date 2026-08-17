@@ -1,0 +1,24 @@
+---
+title: v1.0.308
+description: v1.0.308 Release notes July 2026
+sidebar_position: 4
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 24, 2026**
+
+## Enhancements
+
+### BI and Dashboards
+
+- **Row Limit Option for Table Widgets:** Dashboard table widgets now support an optional row limit setting, letting you cap the number of rows displayed at creation time. This improves performance for large datasets while keeping drill-down into historical data available.
+- **Cohort Widget Enhancements:** Formula columns in cohort widgets now support percentage formatting, and percentage-based metrics are aggregated correctly. Drill-down from weekly retention metrics is also now available, showing exactly which users returned or churned in any given week.
+
+### AI 
+- **Custom Agent: Smarter Workbook & Tool Routing:** Custom Agents now include a workbook catalog in their system context, enabling accurate cross-workbook routing and preventing unnecessary fan-out to unrelated tools. D.A.V.E. sub-agents now run on the same model selected for the parent agent and no longer restate answers already streamed to the user.
+
+## Bug Fixes
+- Resolved several issues with page-level and linked filters: the Reset button now correctly restores defaults, Apply works on the first click, the Include operator no longer switches to Equal unexpectedly, and linked filters correctly surface values from the configured base workbook.
+- Fixed an issue where drilling down on a widget grouped by weekly date applied the date range in reverse order, returning no results. Drill-downs now use the correct chronological start-to-end date range.
+- Date columns with NULL values now display as blank instead of showing the Unix epoch date 1970-01-01.
+- Resolved an issue where the Show as Table option displayed incorrect column names and inaccurate cumulative count values.

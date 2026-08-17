@@ -1,0 +1,22 @@
+---
+title: v1.0.317
+description: v1.0.317 Release notes August 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 12, 2026**
+
+
+## Enhancements
+
+### AI
+
+- **D.A.V.E. Now Queries All Workspaces Bound to an Agent:** When a Custom Agent has workbooks from multiple workspaces, D.A.V.E. now queries all of them — not just the first one it found. Previously, workbooks from additional workspaces were silently dropped, causing the agent to fail or return incomplete answers. All connected workbooks are now reachable.
+
+- **Long-Running D.A.V.E. Queries No Longer Time Out Prematurely:** D.A.V.E. queries that take a long time to execute — such as those running large Spark jobs — no longer get cut off by a fixed 15-minute wall-clock deadline. The timeout is now activity-based, so queries are only terminated when there is genuine silence from the upstream, not just because they are taking time.
+
+## Bug Fixes 
+- Fixed an issue where D.A.V.E. failures — such as timeouts or upstream errors — were returned as ordinary assistant text and treated as successful responses. Errors are now correctly flagged, shown to the user with a friendly message, and never folded into the agent's analysis as if they were data.
+- Fixed an issue where HTML content returned by a Custom Agent took up far more vertical space than the actual content, leaving large blank areas in the chat. The HTML container now sizes itself to fit its content, with scrolling available for very large responses.
+- Resolved synchronization issues with the Projects sidebar in AppX, ensuring the navigation state stays consistent and up to date.

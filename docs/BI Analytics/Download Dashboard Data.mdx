@@ -1,0 +1,150 @@
+--
+sidebar_position: 19
+tags: [BI, Downloads, User Guide]
+Slug: downloading-dashboard-data-from-datagol
+---
+ 
+import ImagePopup from '@site/src/components/ImagePopup';
+ 
+ 
+# Downloading Dashboard Data from DataGOL
+ 
+## USER GUIDE
+ 
+### Downloading Data from DataGOL
+
+ 
+**Data Download options:**
+ 
+| Option | Where to find it | Works on | How you get it |
+| ------ | ----------------- | -------- | --------------- |
+| 1 Export raw data | Right-click widget → Show Raw/Full Data | Regular & External | Email link |
+| 2 Show as Table download | Right-click widget → Show as Table → ↓ | All dashboards | Instant CSV or email link |
+| 3 Table widget download | ↓ icon at bottom-left of any Table widget | All dashboards | Instant CSV or email link |
+| 4 Embedded page-level export | Page-level export icon (top of page) | Embedded only | Email link |
+ 
+---
+ 
+## Option 1 — Export Raw Data
+ 
+*Widget-level · Regular & External dashboards · Full underlying dataset*
+ 
+Raw data is the complete, unaggregated dataset behind a widget — every row the chart was built from, with all current filters applied. Delivered by email because datasets can be very large.
+ 
+**1. Right-click any widget**
+ 
+Hover over the chart and right-click (or click the ⋯ menu). A context menu appears with Filters, Data, and Alerts sections.
+ 
+<ImagePopup>Right-click the widget to reveal data options. The highlighted section shows Show Raw/Full Data, Show Point Data, and Show as Table.</ImagePopup>
+ 
+**2. Click "Show Raw/Full Data"**
+ 
+Opens a table view of the raw records. Filters active on the dashboard or widget carry over automatically.
+ 
+**3. Click the download icon and confirm the export**
+ 
+A modal confirms your active filters and starts a background export. You don't need to keep the tab open.
+ 
+<ImagePopup>The export modal shows your active filters (read-only) and starts processing in the background.</ImagePopup>
+ 
+**4. Check your email : twice**
+ 
+You'll get an immediate confirmation email when the export starts, then a secure download link once ready. Links expire in 7 days.
+ 
+:::info
+Filters in the export modal are read-only. To change the export scope, close the modal, update your dashboard or widget filters, then reopen the export.
+:::
+ 
+---
+ 
+## Option 2 — Show as Table
+ 
+*Widget-level · All dashboard types · Aggregated data in table form*
+ 
+"Show as Table" renders the widget data as a structured table — the aggregated values the chart is built on, not every raw record underneath.
+ 
+**1. Right-click and choose "Show as Table" or "Show Point Data"**
+ 
+Both open a table panel beneath the widget. Current filters apply automatically. Row count shows in the top-left corner.
+ 
+**2. Click the ↓ download icon (bottom-left)**
+ 
+Opens the same download modal as the Table widget : instant CSV file download
+ 
+<ImagePopup>Parameterized data shown as a table — 16 rows. The ↓ icon at bottom-left triggers the download modal.</ImagePopup>
+ 
+---
+ 
+## Option 3 — Table Widget Download
+ 
+*All dashboard types · Two download modes: instant or full*
+ 
+Table-type widgets (and drill-down views that produce a table) have a dedicated ↓ download icon in the bottom-left corner. Clicking it gives you two options.
+ 
+**1. Find the ↓ icon at the bottom-left of the table**
+ 
+The total filtered row count shows at the top-left. The download icon is always visible at the bottom-left.
+ 
+<ImagePopup>Table widget with 35,159 filtered rows. The ↓ download icon at the bottom-left opens the download modal.</ImagePopup>
+ 
+**2. Choose your download mode**
+ 
+A modal shows two options — pick the one that fits:
+ 
+**⚡ Download loaded rows (CSV)**
+Downloads immediately. Up to 1,000 rows per page, max 10,000 rows total. No email needed.
+ 
+**📧 Export full dataset (email)**
+Exports all rows — no limit. Processed server-side and emailed. Row count shown before you confirm.
+ 
+<ImagePopup>The modal shows the exact row count for each option. Here: 1K instant vs 35.16K full export.</ImagePopup>
+ 
+---
+ 
+## 🔗 Embedded Dashboards
+ 
+*Mostly the same as regular dashboards — with one key difference for raw data*
+ 
+When accessing DataGOL embedded inside another application, the experience is nearly identical — with one key difference: raw data exports work from a page-level icon rather than from individual widgets.
+ 
+**1. Click the page-level export icon**
+ 
+Look for the export icon at the top of the embedded dashboard page. This opens the Request Data Export modal.
+ 
+**2. Fill in the three required fields**
+ 
+Unlike widget-level exports that auto-carry filters, this modal requires you to define scope manually:
+ 
+→ **Which dataset?** Choose from the searchable dropdown
+→ **Where should we send it?** Enter your email address
+→ **Which rows do you need?** Add at least one filter, including a mandatory date range
+ 
+<ImagePopup>The embedded export modal. All three fields must be completed before Request export activates.</ImagePopup>
+ 
+**3. Request the export**
+ 
+Click Request export — confirmation email arrives immediately, download link follows once ready. Links expire after 7 days.
+ 
+:::warning
+Date filter is mandatory for embedded exports. If the dataset contains a date column, a date range must be added before the export will run. Quick presets (Last 7 Days, This Month, etc.) are available.
+:::
+ 
+### Show as Table & Table widget — same as regular dashboards
+ 
+Show as Table and Table widget downloads work identically on embedded dashboards. The only addition: the full dataset export also asks for your email address directly in the modal.
+ 
+<ImagePopup>Embedded dashboard table download modal — same two options, with an email field added to the full export option.</ImagePopup>
+ 
+---
+ 
+## Limits & Good to Know
+ 
+*Row limits, expiry, and a few things worth keeping in mind*
+ 
+| Topic | Detail |
+| ----- | ------ |
+| Instant CSV row limit on table widget | Up to 10,000 rows (loads 1,000 at a time as you scroll). Only rows already loaded on screen are included. |
+| Download link expiry | Secure links expire after 7 days. Re-run the export if your link has expired. |
+| Timestamps in exports | Raw data exports use UTC. Table widget downloads respect your configured dashboard timezone. |
+| Changing filters before export | Filters in the export modal are read-only. Close the modal, adjust your dashboard filters, then restart the export. |
+ 

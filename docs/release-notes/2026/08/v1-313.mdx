@@ -1,0 +1,26 @@
+---
+title: v1.0.313
+description: v1.0.313 Release notes August 2026
+sidebar_position: 6
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 5, 2026**
+
+
+## Enhancements
+
+### AI
+
+- **OCR Support for Scanned PDFs in File Upload:** Custom Agents can now extract and index text from scanned or faxed PDFs that contain no text layer. Pages without readable text are automatically processed using OCR, so your agent can reference the full content of image-based documents — not just digitally created ones.
+### Workspaces & Workbooks
+
+- **Multi-Select Filter Operators Redesigned:** Filtering on multi-select columns is now accurate and intuitive. The old Contains and Does Not Contain operators — which incorrectly matched values as a combined string — have been replaced with Has Any Of, Has None Of, and a new Is Exactly operator. Each selected option is now evaluated independently, so filters return the right records regardless of value order or how many options a cell contains.
+
+### AppX
+- **App Version History (AppX):** AppX now tracks version history for published applications, giving teams visibility into what changed across releases and the ability to reference or recover earlier versions when needed.
+
+
+## Bug Fixes
+
+- Fixed a high-priority bug where applying a multi-select filter on a JDBC-backed workbook caused a 400 Bad Request error, making the filtered view completely unusable. Filtered views now load correctly.
