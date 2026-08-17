@@ -1,0 +1,19 @@
+---
+title: v1.0.309
+description: v1.0.309 Release notes July 2026
+sidebar_position: 3
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 28, 2026**
+
+## Enhancements
+
+### AI
+
+- **Skill Version History:** Custom Agent skills now maintain a full version history. Every save creates a new version, and you can view the complete timeline, download any previous version, or recover from a bad update without losing earlier configurations.
+<ImagePopup src="/img/knowledge-base-connectors/version-history.png" alt="version history" caption="version history" />
+<ImagePopup src="/img/knowledge-base-connectors/compare-versions" alt="compare versions" caption="compare versions" />
+
+
+- **Smarter Workbook Indexing for AI Knowledge Base:** Column descriptions are now included when indexing workbooks into the Knowledge Base, giving the AI richer context for more accurate answers. Cell values are also trimmed of extra whitespace before indexing for cleaner embeddings.

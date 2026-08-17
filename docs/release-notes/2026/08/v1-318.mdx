@@ -1,0 +1,22 @@
+---
+title: v1.0.318
+description: v1.0.318 Release notes August 2026
+sidebar_position: 1
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: August 13, 2026**
+
+
+## Enhancements
+## AI
+- **Document Processing Jobs Now Run via Queue:** Parsing, classification, and extraction workflows for documents are now processed through a managed jobs queue with heartbeat monitoring and deterministic workflow IDs. Stuck jobs are detected and terminated within minutes rather than running indefinitely, and duplicate processing on retry is prevented automatically.
+
+
+## Bug Fixes
+
+- Fixed an issue where agents with many MCP tools connected could silently lose access to workbook write operations — such as adding or updating rows — due to tool selection pruning. Write tools are now always available, and for agents connected to many workbooks, the available write capacity is distributed fairly rather than front-loaded.
+- Fixed a high-priority issue where creating a page-level filter on a dashboard resulted in a blank filter name and the filter not appearing on the dashboard at all. Filters now save and display correctly after configuration.
+- Fixed an issue where the Python Agent failed on ETL workbooks (MV + Last Mile) because it was still pointing to the old S3 storage location after the GCP migration. The agent now reads Parquet files from GCS correctly using per-company storage keys.
+- Fixed a race condition where completing a warehouse pipeline could leave a brief window during which concurrent pipelines reading from the same BigQuery table would fail with a "table not found" error. The external table is now recreated immediately after being dropped, closing that gap.
+

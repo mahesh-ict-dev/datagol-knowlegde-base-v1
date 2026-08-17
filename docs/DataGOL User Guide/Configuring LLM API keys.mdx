@@ -1,0 +1,76 @@
+---
+sidebar_position: 8
+tags: [User, Teams, Roles]
+slug: configuring-DataGOL-with-LLM-APIs-Keys
+---
+
+# API Keys & Model Provider Credentials (Company → Keys)
+ 
+The **Keys** tab (under **Company** settings, alongside **General**, **Security**, and **Models**) is where you connect your own API credentials for third-party AI services and model providers. Adding your own keys lets you use custom models, enable real-time web search for agents, and manage your own usage/billing limits instead of relying on shared defaults.
+ 
+Each provider card shows a **edit** icon to update credentials and a **delete** icon to remove them. Fields with `--` are not yet configured.
+ 
+---
+ 
+## AI Services & Internet Search
+ 
+Connect services like Tavily, Perplexity, or Parallel Web Systems to enable real-time internet search and retrieval capabilities for your agents. These services enhance agent responses with up-to-date information from the web.
+ 
+| Provider | Fields |
+|---|---|
+| **Tavily Settings** | `API Key` |
+| **Perplexity Settings** | `API Key` |
+| **Parallel Web Systems** | `API Key` |
+| **Databar Settings** | `API Key` |
+ 
+---
+ 
+## LLM Model Settings
+ 
+Connect your own OpenAI, Anthropic, Gemini, or other model provider credentials to use custom models or manage your own usage limits.
+ 
+| Provider | Fields |
+|---|---|
+| **OpenAI Settings** | `API Key` |
+| **Anthropic Settings** | `API Key` |
+| **Gemini Settings** | `API Key` |
+| **Groq Settings** | `API Key` |
+| **OpenRouter Settings** | `API Key` |
+| **Together AI Settings** | `API Key` |
+| **Vertex AI Settings** | `Service Account Credentials`, `Project ID`, `Location` |
+| **Amazon Bedrock Settings** | `AWS Access Key`, `AWS Secret Key`, `AWS Region` |
+ 
+### Notes on multi-field providers
+- **Vertex AI** requires a Google Cloud **Service Account Credentials** file/JSON, plus your **Project ID** and **Location** (region) for the Vertex AI resources.
+- **Amazon Bedrock** requires standard AWS credentials: **AWS Access Key**, **AWS Secret Key**, and the **AWS Region** where Bedrock is provisioned.
+---
+ 
+## Managing Keys
+ 
+- **Edit (pencil icon)** — opens the field(s) for that provider to add or update credentials
+- **Delete (trash icon)** — removes the stored credentials for that provider
+- Configured keys display as masked characters (e.g. `********`) for security; unconfigured fields show `--`
+ 
+
+ ## Models Tab (Company → Models)
+ 
+View the available LLM models and providers configured for your company. These models can be used for all new agents.
+ 
+Each model card shows the model name, provider (e.g. OpenAI, Anthropic, Gemini, VertexAI, AWS Bedrock, OpenRouter, Together AI), a short description, and a status icon in the top-right corner:
+ 
+| Icon | Meaning |
+|---|---|
+| ✅ **Green checkmark** | Model is already enabled and ready to use in agents |
+| 🔑 **Key icon + "Key required"** | Model needs an API key/credential before it can be enabled — go to the **Keys** tab and add the corresponding provider's credentials first |
+| ➕ **Plus icon** | Model is available and can be enabled directly — click it to turn the model on |
+ 
+### Enabling a model that requires a key
+1. Go to **Company → Keys**
+2. Add the API key (or credentials) for that model's provider (e.g. VertexAI, AWS Bedrock, Together AI — see sections above)
+3. Return to **Company → Models**
+4. The model's icon will change from 🔑 **Key required** to ➕ **Plus** (enable) — click it to activate
+5. Click **Save Changes** to apply
+### Enabling a model that doesn't require a key
+- If the model shows a ➕ **Plus** icon directly (no "Key required" label), it's ready to enable with no extra setup — just click it and **Save Changes**
+Use the **Search Models** bar to quickly find a specific model by name.
+ 

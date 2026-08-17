@@ -1,0 +1,26 @@
+---
+title: v1.0.311
+description: v1.0.311 Release notes July 2026
+sidebar_position: 1
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 31, 2026**
+
+## Enhancements
+
+### Lakehouse
+
+- **Google Ads Connector:** You can now connect Google Ads as a data source and sync campaign performance data directly into workbooks — no more manual CSV exports. Full ETL support enables automated, repeatable performance marketing analytics on ad spend and campaign performance.
+- **Deduplication Pipeline: APPEND Mode for Iceberg:** The deduplication pipeline now supports APPEND writes for Iceberg warehouse tables, enabling incremental ingestion without introducing duplicate records.
+
+### BI & Dashboards
+- **Historical Data Downloads from Dashboards:** You can now download historical data directly from dashboard widgets, pulling from the data warehouse rather than the workbook layer. This removes the prior retention limitation, supports large date ranges, and delivers results asynchronously via a secure email link in CSV format.
+
+
+## Bug Fixes
+- Resolved three security issues identified during a backend audit: two internal endpoints that skipped token validation now correctly enforce it, and data source credentials are now always masked in API responses regardless of query parameters. No user-facing flows or API contracts were changed.
+- Resolved an error causing dashboards with multiple widgets backed by the same BigQuery table to fail with "too many table update operations." The platform now checks whether an external table exists using a metadata read rather than a DDL operation, avoiding BigQuery's rate limit entirely.
+- Third-party embedded dashboards now support table data downloads scoped to tenant filters and caller-supplied conditions. Requests are handled asynchronously and results are delivered to the requester's email as a secure CSV link.
+- Data source names are now checked for uniqueness across all tenants at creation time, preventing naming conflicts at the storage layer. Existing sources and system-created sources are unaffected.
+- Resolved several reliability issues: upstream failures no longer appear as assistant messages, authentication now works correctly for cookie-only sessions and after token refresh, and cached agent instances no longer use expired tokens across requests.

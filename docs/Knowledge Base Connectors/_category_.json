@@ -1,0 +1,8 @@
+{
+  "label": "Knowledge Base Connectors",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Knowledge Base for your AI agents"
+  }
+}

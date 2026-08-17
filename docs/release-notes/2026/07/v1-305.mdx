@@ -1,0 +1,25 @@
+---
+title: v1.0.305
+description: v1.0.305 Release notes July 2026
+sidebar_position: 7
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 17, 2026**
+
+## Enhancements
+
+
+### AI
+- **D.A.V.E. Improvements for Custom Agents:** Custom Agents backed by large workbooks (1,000+ records) now automatically route SQL queries through D.A.V.E., ensuring more accurate results at scale. Query responses return only data and analysis — no unwanted charts or widgets generated alongside.
+<ImagePopup src="/img/knowledge-base-connectors/dave-within-custom.png" alt="dave within custom agent" caption="dave within custom agent" />
+
+### Workspaces & Workbooks
+- **Static ↔ Dynamic Workbook Linking:** Link columns can now connect static and dynamic workbooks in both directions. Previously only dynamic-to-dynamic and dynamic-to-hybrid links were supported, requiring workarounds for common reference-data relationships.
+
+### BI & Dashboards
+- **Enhanced PDF Export for BI Dashboards:** The Print/Export PDF functionality for dashboards has been enhanced with better formatting, improved layout consistency, and more reliable output across different dashboard configurations.
+<ImagePopup src="/img/knowledge-base-connectors/export-as-pdf.png" alt="export as pdf" caption="export as pdf" />
+
+## Bug Fixes
+- Resolved several issues affecting the behavior and reliability of custom skills within D.A.V.E.-powered agents.

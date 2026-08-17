@@ -1,0 +1,23 @@
+---
+title: v1.0.310
+description: v1.0.310 Release notes July 2026
+sidebar_position: 2
+---
+import ImagePopup from '@site/src/components/ImagePopup';
+
+**Date released: July 30, 2026**
+
+## Enhancements
+
+### Lakehouse
+
+- **Gmail & Google Calendar Datasources: One-Click OAuth:** Adding Gmail or Google Calendar as a data source no longer requires manually entering OAuth credentials. A Connect button now opens the same authorization flow used on the Connectors page — authorize once and you're done.
+
+### Workspaces & Workbooks
+- **Comments Indicator Always Visible on Workbook Rows:** Rows with existing comments now display a persistent indicator by default, so you can spot commented rows at a glance without hovering over each one.
+- **Self-Referencing Link Columns Within a Workbook:** Link columns now support referencing records within the same workbook, enabling hierarchical relationships like tasks and subtasks, parent and child records, or organizational hierarchies — all within a single workbook.
+
+## Bug Fixes
+- Fixed an issue where opening a workspace briefly showed "Workspace unavailable" while the workspace list finished loading. The current workspace now resolves immediately and appears in the header without the delay.
+- Fixed a crash on the Data Sources page when a connection had no name. The page now loads normally and displays a fallback label for unnamed connections.
+- Significantly reduced load times for the pipelines page on large accounts. Redundant data was removed from API responses and N+1 database query patterns were replaced with batched lookups, cutting latency substantially.

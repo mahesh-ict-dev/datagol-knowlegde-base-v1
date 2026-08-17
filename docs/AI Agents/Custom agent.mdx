@@ -217,3 +217,72 @@ Steps to control Tool permissions:
 
 - **From AI settings:** go to **AI → Customize → MCP → Click on a specific MCP Connector**
 <ImagePopup src="/img/release_notes/2026/2026/June/mcp_tools.png" alt="mcp tools" caption="mcp tools" />
+
+
+### D.A.V.E. Improvements for Custom Agents
+
+Custom Agents can now use **D.A.V.E. for large-scale data analysis**, providing more accurate and reliable query results when working with large workbooks.
+
+#### Enable D.A.V.E. for Your Custom Agent
+
+To enable this capability:
+
+1. Open your **Custom Agent**.
+2. Navigate to **Tools**.
+3. Select **Enable D.A.V.E.**.
+4. Save your agent configuration.
+
+Once enabled, D.A.V.E. automatically handles SQL-based queries for large workbooks, particularly those containing **1,000+ records**.
+
+#### Improved Query Handling at Scale
+
+When a Custom Agent is connected to a large workbook, queries that require SQL are automatically routed through D.A.V.E. This helps the agent efficiently process larger datasets and return more accurate results without requiring users to manually configure SQL logic.
+
+#### Data-Focused Responses
+
+With D.A.V.E. enabled, query responses are focused on the **requested data and analysis**. The agent does not automatically generate charts, widgets, or other visualizations alongside the response unless they are specifically requested.
+
+This provides a cleaner experience for data-heavy questions and makes it easier to focus on the insights that matter.
+
+> **Example:** Ask your Custom Agent, *"Which customers had the highest revenue in the last quarter?"* The agent returns the relevant data and analysis without automatically adding an accompanying chart or widget.
+
+<ImagePopup src="/img/knowledge-base-connectors/dave-within-custom.png" alt="dave within custom agent" caption="dave within custom agent" />
+
+
+### Version History
+ 
+#### Viewing skill version history
+ 
+Every time a skill is edited and saved, DataGOL automatically creates a new version, so you can track changes over time and revert or compare versions as needed.
+ 
+Do the following to view a skill's version history:
+ 
+1. From the left navigation panel, click **AI** and then click **Customize**.
+2. Click **Skills**.
+3. Click the desired skill to open it.
+4. Click the **version history** icon next to the skill name.
+The **Version History** panel opens on the right, showing:
+ 
+| Element | Description |
+| ------- | ----------- |
+| **Version count** | Total number of saved versions for the skill. |
+| **Today / Previous 30 days** | Versions are grouped by when they were saved. |
+| **Version label** | Each version is labeled (e.g., v1, v2) along with the date and time it was saved. |
+| **Current** | The version currently marked Current is the one actively in use. |
+
+<ImagePopup src="/img/knowledge-base-connectors/version-history.png" alt="version history" caption="version history" />
+
+
+ 
+#### Comparing versions
+ 
+1. From the **Version History** panel, click **Compare versions**.
+2. Under **Base**, select the version you want to compare from.
+3. Under **Compare to**, select the version you want to compare against (defaults to the current version).
+4. Review the side-by-side diff view:
+   - Lines removed from the base version are highlighted in red.
+   - Lines added in the compared version are highlighted in green.
+5. Click **Close** to exit the comparison view.
+
+<ImagePopup src="/img/knowledge-base-connectors/compare-versions" alt="compare versions" caption="compare versions" />
+ 
