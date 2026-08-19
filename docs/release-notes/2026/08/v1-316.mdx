@@ -3,6 +3,7 @@ title: v1.0.316
 description: v1.0.316 Release notes August 2026
 sidebar_position: 3
 ---
+
 import ImagePopup from '@site/src/components/ImagePopup';
 
 **Date released: August 11, 2026**
@@ -12,9 +13,7 @@ import ImagePopup from '@site/src/components/ImagePopup';
 
 ### BI
 
-- **Scheduled PDF Delivery for Dashboards:** You can now schedule automated PDF delivery of a dashboard or individual widget to your email on a recurring basis. Configure the recipient list, frequency, delivery time, and relative date range — such as "last 7 days" — and DataGOL will generate and send the report automatically at the scheduled time.
-<ImagePopup src="/img/release_notes/2026/2026/August/schedule-pdf.png" alt="schedule pdf" caption="schedule pdf" />
-
+- [Scheduled PDF Delivery for Dashboards](/docs/BI%20Analytics/schedule-dashboard) You can now schedule automated PDF delivery of a dashboard or individual widget to your email on a recurring basis. Configure the recipient list, frequency, delivery time, and relative date range — such as "last 7 days" — and DataGOL will generate and send the report automatically at the scheduled time. 
 - **Faster BigQuery Queries via Result Caching:** BigQuery's built-in result cache is now fully utilized. Previously, query names were randomly generated on every request, making each query appear unique even when the filters and parameters were identical. Queries are now generated deterministically, so repeated requests return cached results faster and at lower cost.
 
 ### Platform
